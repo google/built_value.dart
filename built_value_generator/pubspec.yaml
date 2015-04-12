@@ -1,0 +1,20 @@
+name: built_value_generator
+version: 0.0.1
+description: >
+  Value types with builders. This library is the dev dependency.
+authors:
+- David Morgan <davidmorgan@google.com>
+homepage: https://github.com/google/built_value.dart
+
+environment:
+  sdk: '>=1.12.0-dev.5.10 <2.0.0'
+
+dependencies:
+  analyzer: '>=0.26.1 <1.0.0'
+  built_collection: '^1.0.0'
+  built_value: '^0.0.1'
+  source_gen: '>=0.4.3 <1.0.0'
+  quiver: '>=0.21.0 <0.22.0'
+
+dev_dependencies:
+  test: any
