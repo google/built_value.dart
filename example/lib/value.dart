@@ -15,11 +15,15 @@ part 'value.g.dart';
 /// fields declared as abstract getters. Finally, it must have a particular
 /// constructor and factory, as shown here.
 abstract class Value implements Built<Value, ValueBuilder> {
+  static final int youCanHaveStaticFields = 3;
+
   int get anInt;
   String get aString;
   @nullable Object get anObject;
   int get aDefaultInt;
   BuiltList<int> get listOfInt;
+
+  int get youCanWriteDerivedGetters => anInt + aDefaultInt;
 
   Value._();
   factory Value([updates(ValueBuilder b)]) = _$Value;
@@ -41,4 +45,9 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 
   ValueBuilder._();
   factory ValueBuilder() = _$ValueBuilder;
+
+  set youCanWriteExtraSetters(int value) {
+    anInt = value;
+    aDefaultInt = value;
+  }
 }

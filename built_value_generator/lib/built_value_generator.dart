@@ -130,8 +130,9 @@ class BuiltValueGenerator extends Generator {
   List<FieldElement> getFields(ClassElement classElement) {
     final result = <FieldElement>[];
     for (final field in classElement.fields) {
-      if (!field.isStatic && field.getter.isAbstract ||
-          field.getter.isSynthetic) result.add(field);
+      if (!field.isStatic &&
+          (field.getter.isAbstract || field.getter.isSynthetic)) result
+          .add(field);
     }
     return result;
   }
@@ -142,7 +143,7 @@ class BuiltValueGenerator extends Generator {
       return result;
     }
     for (final field in classElement.fields) {
-      if (!field.isStatic) result.add(field);
+      if (!field.isStatic && field.getter != null) result.add(field);
     }
     return result;
   }
