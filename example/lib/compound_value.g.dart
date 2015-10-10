@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-10-10T18:36:55.864Z
+// 2015-10-10T22:28:56.051Z
 
-part of second_value;
+part of compound_value;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
