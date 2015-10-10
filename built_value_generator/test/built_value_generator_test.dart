@@ -141,7 +141,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   factory ValueBuilder() = _\$ValueBuilder;
   int foo;
 }'''),
-          contains("TODO: Make field foo an abstract getter"));
+          contains("TODO: Make field foo a getter"));
     });
 
     test('suggests builder fields must be getters', () async {
