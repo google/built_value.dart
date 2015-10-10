@@ -20,6 +20,7 @@ class BuiltValueGenerator extends Generator {
       return null;
     }
     final classElement = element as ClassElement;
+    final className = classElement.displayName;
 
     // TODO(davidmorgan): more exact type check.
     if (!classElement.allSupertypes
@@ -39,7 +40,7 @@ class BuiltValueGenerator extends Generator {
     final errors = concat([
       checkPart(classElement),
       checkValueClass(classElement),
-      checkBuilderClass(builderClassElement),
+      checkBuilderClass(className, builderClassElement),
       checkFields(fields, builderFields),
     ]);
 
@@ -49,7 +50,7 @@ class BuiltValueGenerator extends Generator {
           todo: errors.join(' '));
     }
 
-    return generateCode(classElement.displayName, fields, builderFields);
+    return generateCode(className, fields, builderFields);
   }
 
   Iterable<String> checkPart(ClassElement classElement) {
@@ -91,9 +92,10 @@ class BuiltValueGenerator extends Generator {
     return result;
   }
 
-  Iterable<String> checkBuilderClass(ClassElement classElement) {
+  Iterable<String> checkBuilderClass(
+      String className, ClassElement classElement) {
     if (classElement == null) {
-      return <String>['Add abstract class ValueBuilder'];
+      return <String>['Add abstract class ${className}Builder'];
     }
 
     final result = <String>[];
@@ -128,7 +130,8 @@ class BuiltValueGenerator extends Generator {
   List<FieldElement> getFields(ClassElement classElement) {
     final result = <FieldElement>[];
     for (final field in classElement.fields) {
-      if (!field.isStatic) result.add(field);
+      if (!field.isStatic && field.getter.isAbstract ||
+          field.getter.isSynthetic) result.add(field);
     }
     return result;
   }
@@ -148,13 +151,15 @@ class BuiltValueGenerator extends Generator {
       Iterable<FieldElement> fields, Iterable<FieldElement> builderFields) {
     final result = <String>[];
     var checkFieldTypes = true;
+
     for (final field in fields) {
       final fieldName = field.displayName;
-      if (field.getter == null || !field.getter.isAbstract) {
+      if (field.getter == null || field.getter.isSynthetic) {
         checkFieldTypes = false;
-        result.add('Make field $fieldName an abstract getter');
+        result.add('Make field $fieldName a getter');
       }
     }
+
     for (final field in builderFields) {
       final fieldName = field.displayName;
       if (field.getter == null ||
