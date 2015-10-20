@@ -222,9 +222,13 @@ class BuiltValueGenerator extends Generator {
       result.writeln('final $fieldType $fieldName;');
     }
 
-    result.write('_\$$className._({');
-    result.write(fieldNames.map((name) => 'this.$name').join(', '));
-    result.write('}) : super._() {');
+    if (fieldNames.isEmpty) {
+      result.write('_\$$className._() : super._() {');
+    } else {
+      result.write('_\$$className._({');
+      result.write(fieldNames.map((name) => 'this.$name').join(', '));
+      result.write('}) : super._() {');
+    }
     for (final fieldName in fieldNames) {
       if (!nullableFieldNames.contains(fieldName)) {
         result.writeln(
