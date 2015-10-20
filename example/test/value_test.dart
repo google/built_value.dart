@@ -29,11 +29,10 @@ void main() {
         ..aString = ''), throws);
     });
 
-    test('nullable fields default to null', () {
-      final value = new Value((b) => b
-        ..anInt = 0
-        ..aString = '');
-      expect(value.anObject, isNull);
+    test('does custom validation', () {
+      expect(() => new Value((b) => b
+        ..anInt = 7
+        ..aString = ''), throws);
     });
 
     test('fields can be set via build constructor', () {

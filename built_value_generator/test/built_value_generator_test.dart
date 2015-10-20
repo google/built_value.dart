@@ -39,8 +39,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
     });
 
     test('suggests to add constructor to value class', () async {
-      expect(
-          await generate('''library value;
+      expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value extends Built<Value, ValueBuilder> {
@@ -49,9 +48,26 @@ abstract class Value extends Built<Value, ValueBuilder> {
 abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
+}'''), contains("TODO: Make class have exactly one constructor: Value._();"));
+    });
+
+    test('allows code in constructor of value class', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._() {
+    print("hi");
+  }
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
 }'''),
-          contains(
-              "TODO: Make class have exactly one constructor: Value._();"));
+          isNot(contains(
+              "TODO: Make class have exactly one constructor: Value._();")));
     });
 
     test('suggests to add factory to value class', () async {
@@ -127,8 +143,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
     });
 
     test('suggests value fields must be getters', () async {
-      expect(
-          await generate('''library value;
+      expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value extends Built<Value, ValueBuilder> {
@@ -140,13 +155,11 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   int foo;
-}'''),
-          contains("TODO: Make field foo a getter"));
+}'''), contains("TODO: Make field foo a getter"));
     });
 
     test('suggests builder fields must be getters', () async {
-      expect(
-          await generate('''library value;
+      expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value extends Built<Value, ValueBuilder> {
@@ -158,13 +171,11 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   int get foo;
-}'''),
-          contains("TODO: Make builder field foo a normal field"));
+}'''), contains("TODO: Make builder field foo a normal field"));
     });
 
     test('suggests builder fields must be in sync', () async {
-      expect(
-          await generate('''library value;
+      expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value extends Built<Value, ValueBuilder> {
@@ -175,13 +186,11 @@ abstract class Value extends Built<Value, ValueBuilder> {
 abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
-}'''),
-          contains("TODO: Make builder have exactly these fields: foo"));
+}'''), contains("TODO: Make builder have exactly these fields: foo"));
     });
 
     test('suggests builder fields must be same type', () async {
-      expect(
-          await generate('''library value;
+      expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value extends Built<Value, ValueBuilder> {
@@ -193,8 +202,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   String foo;
-}'''),
-          contains("TODO: Make builder field foo have type int"));
+}'''), contains("TODO: Make builder field foo have type int"));
     });
   });
 }
