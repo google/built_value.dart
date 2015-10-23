@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-10-10T22:28:56.051Z
+// 2015-10-23T11:16:09.169Z
 
 part of compound_value;
 
@@ -44,12 +44,12 @@ class _$CompoundValueBuilder extends CompoundValueBuilder {
   }
 
   void replace(CompoundValue other) {
-    super.value = other.value.toBuilder();
+    super.value = other.value?.toBuilder();
   }
 
   void update(updates(CompoundValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
-  CompoundValue build() => new _$CompoundValue._(value: value.build());
+  CompoundValue build() => new _$CompoundValue._(value: value?.build());
 }

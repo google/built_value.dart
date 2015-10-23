@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.4
+
+- Support @nullable for fields using builders.
+- Fix constraints for source_gen.
+
 ## 0.0.3
 
 - Allow static fields in value class.
