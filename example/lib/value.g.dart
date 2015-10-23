@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-10-20T16:25:48.706Z
+// 2015-10-23T11:23:05.802Z
 
 part of value;
 
@@ -14,12 +14,14 @@ class _$Value extends Value {
   final Object anObject;
   final int aDefaultInt;
   final BuiltList<int> listOfInt;
+  final BuiltSet<String> setOfString;
   _$Value._(
       {this.anInt,
       this.aString,
       this.anObject,
       this.aDefaultInt,
-      this.listOfInt})
+      this.listOfInt,
+      this.setOfString})
       : super._() {
     if (anInt == null) throw new ArgumentError('null anInt');
     if (aString == null) throw new ArgumentError('null aString');
@@ -37,11 +39,13 @@ class _$Value extends Value {
         aString == other.aString &&
         anObject == other.anObject &&
         aDefaultInt == other.aDefaultInt &&
-        listOfInt == other.listOfInt;
+        listOfInt == other.listOfInt &&
+        setOfString == other.setOfString;
   }
 
   int get hashCode {
-    return hashObjects([anInt, aString, anObject, aDefaultInt, listOfInt]);
+    return hashObjects(
+        [anInt, aString, anObject, aDefaultInt, listOfInt, setOfString]);
   }
 
   String toString() {
@@ -51,6 +55,7 @@ class _$Value extends Value {
         'anObject=${anObject.toString()}\n'
         'aDefaultInt=${aDefaultInt.toString()}\n'
         'listOfInt=${listOfInt.toString()}\n'
+        'setOfString=${setOfString.toString()}\n'
         '}';
   }
 }
@@ -86,12 +91,18 @@ class _$ValueBuilder extends ValueBuilder {
     super.listOfInt = listOfInt;
   }
 
+  SetBuilder<String> get setOfString => super.setOfString;
+  void set setOfString(SetBuilder<String> setOfString) {
+    super.setOfString = setOfString;
+  }
+
   void replace(Value other) {
     super.anInt = other.anInt;
     super.aString = other.aString;
     super.anObject = other.anObject;
     super.aDefaultInt = other.aDefaultInt;
-    super.listOfInt = other.listOfInt.toBuilder();
+    super.listOfInt = other.listOfInt?.toBuilder();
+    super.setOfString = other.setOfString?.toBuilder();
   }
 
   void update(updates(ValueBuilder b)) {
@@ -103,5 +114,6 @@ class _$ValueBuilder extends ValueBuilder {
       aString: aString,
       anObject: anObject,
       aDefaultInt: aDefaultInt,
-      listOfInt: listOfInt.build());
+      listOfInt: listOfInt?.build(),
+      setOfString: setOfString?.build());
 }

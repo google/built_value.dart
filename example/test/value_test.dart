@@ -2,6 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:built_collection/built_collection.dart';
 import 'package:example/value.dart';
 import 'package:test/test.dart';
 
@@ -71,6 +72,14 @@ void main() {
       expect(value.listOfInt, [1, 2, 3]);
     });
 
+    test('nullable builders can be updated', () {
+      final value = new Value((b) => b
+        ..anInt = 1
+        ..aString = 'two'
+        ..setOfString = new SetBuilder<String>(['1', '2', '3']));
+      expect(value.setOfString, ['1', '2', '3']);
+    });
+
     test('compares equal when equal', () {
       final value1 = new Value((b) => b
         ..anInt = 0
@@ -122,6 +131,7 @@ aString=
 anObject=null
 aDefaultInt=7
 listOfInt=[]
+setOfString=null
 }''');
     });
   });

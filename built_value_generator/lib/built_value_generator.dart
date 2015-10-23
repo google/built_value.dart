@@ -304,7 +304,7 @@ class BuiltValueGenerator extends Generator {
     result.writeln('void replace(${className} other) {');
     result.writeln((fieldNames.map((name) {
       return buildableFieldNames.contains(name)
-          ? 'super.$name = other.$name.toBuilder();'
+          ? 'super.$name = other.$name?.toBuilder();'
           : 'super.$name = other.$name;';
     })).join('\n'));
     result.writeln('}');
@@ -316,7 +316,7 @@ class BuiltValueGenerator extends Generator {
       final fieldName = field.displayName;
 
       return buildableFieldNames.contains(fieldName)
-          ? '$fieldName: $fieldName.build()'
+          ? '$fieldName: $fieldName?.build()'
           : '$fieldName: $fieldName';
     }).join(', '));
     result.write(');');
