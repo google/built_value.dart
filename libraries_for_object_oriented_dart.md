@@ -1,8 +1,13 @@
 # Libraries for Object Oriented Dart
 
+## Introduction
+
 Dart is a modern object oriented language; it's powerful and expressive. But,
 there are a few areas where implementing a good object oriented design is harder
 than it needs to be.
+
+
+## Overview
 
 Libraries for Object Oriented Dart contains four powerful libraries that help
 translate object oriented designs into implementations with minimum overhead,
@@ -16,11 +21,19 @@ freeing developers to focus on the task at hand.
   
 * [built_value.dart](https://github.com/google/built_value.dart#built-values-for-dart)
   provides immutable "value types".
+
+For those familiar with Java, these provide equivalent functionality to
+standard Java enums,
+[Immutable Collections](https://github.com/google/guava/wiki/ImmutableCollectionsExplained)
+and
+[AutoValues](https://github.com/google/auto/tree/master/value#autovalue).
+
+The fourth library provides something with no direct equivalent in Java:
   
 * [built_json.dart](https://github.com/google/built_json.dart#built-json-for-dart)
-  provides dynamic, flexible serialization for the other three libraries.
+  provides dynamic, flexible JSON serialization for the other three libraries.
 
-And, to complete the package:
+To complete the package, we'll make the whole stack compatible with Java:
 
 * Built JSON for Java will provide compatible serialization for Java,
   mapping Enum Classes to standard Java enums, Built Collections to
@@ -29,13 +42,13 @@ And, to complete the package:
 
 
   
-# Current Status
+## Current Status
 
 * [enum_class.dart](https://github.com/google/enum_class.dart#enum-classes-for-dart)
   is alpha but relatively stable.
   
 * [built_collection.dart](https://github.com/google/built_collection.dart#built-collections-for-dart)
-  is stable and ready to use.
+  is stable and production ready.
   
 * [built_value.dart](https://github.com/google/built_value.dart#built-values-for-dart)
   is alpha and likely to change.
@@ -43,4 +56,20 @@ And, to complete the package:
 * [built_json.dart](https://github.com/google/built_json.dart#built-json-for-dart)
   is pre-alpha and will change.
   
-* Built JSON for Java is not yet released.
+* Built JSON for Java is not yet started.
+
+
+## Origins
+
+The team at Google behind AdWords for video, part of the
+[AdWords UI](adwords.google.com), was an early user of the Dart language.
+During that work the team built tools that provided much of the same
+functionality as the Libraries for Object Oriented Dart and used them as the
+basis for a substantial rewrite of their corner of AdWords.
+
+Libraries for Object Oriented Dart consists of rewrites of these tools suitable
+for open sourcing. So, the ideas are well proven, but the code is at various
+states of readiness.
+
+If a library is marked "production ready" above that means it has replaced its
+Google-internal equivalent and is therefore well used.
