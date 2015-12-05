@@ -9,7 +9,7 @@ translate object oriented designs into implementations with minimum overhead,
 freeing developers to focus on the task at hand.
 
 * [enum_class.dart](https://github.com/google/enum_class.dart#enum-classes-for-dart)
-  provides enums with the power of classes.
+  provides classes with enum features.
   
 * [built_collection.dart](https://github.com/google/built_collection.dart#built-collections-for-dart)
   provides immutable, type safe collections.
