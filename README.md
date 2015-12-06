@@ -5,6 +5,19 @@
 Built Values provides immutable "value types" for Dart and is part of
 [Libraries for Object Oriented Dart](https://github.com/google/built_value.dart/blob/master/libraries_for_object_oriented_dart.md#libraries-for-object-oriented-dart).
 
+## Value Types
+
+Value types are, for our purposes, classes that are considered
+interchangeable if their fields have the same values.
+
+Common examples include `Date`, `Money` and `Url`. Most code introduces
+its own value types. For example, every web app probably has some
+version of `Account` and `User`.
+
+Value types are very commonly sent by RPC and/or stored for later
+retrieval.
+
+
 ## Motivation
 
 The problems that led to the creation of the Built Value library have
@@ -13,14 +26,20 @@ in the context of
 [AutoValue](https://github.com/google/auto/tree/master/value#autovalue)
 for Java.
 
-In short: value types are useful almost everywhere but take far too much
-work to define. Any time you find yourself implementing `equals`,
-`hashCode` and `toString` -- or, worse, wishing someone had -- it's
-likely you have a value type.
+In short: creating and maintaining value types by hand requires a lot of
+boilerplate. It's boring to write, and if you make a mistake, you very
+likely create a bug that's hard to track down.
+
+Any solution for value types needs to allow them to participate in object
+oriented design. `Date`, for example, is the right place for code that
+does simple date manipulation.
 
 [AutoValue](https://github.com/google/auto/tree/master/value#autovalue)
 solves the problem for Java with code generation, and Built Values does
-the same for Dart.
+the same for Dart. The boilerplate is generated for you, leaving you to
+specify which fields you need and to add code for the behaviour of the
+class.
+
 
 ## Examples
 
