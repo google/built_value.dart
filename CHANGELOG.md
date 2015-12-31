@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5
+
+- Fix for changes to analyzer library.
+
 ## 0.0.4
 
 - Support @nullable for fields using builders.
