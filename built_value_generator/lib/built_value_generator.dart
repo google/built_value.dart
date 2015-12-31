@@ -131,8 +131,8 @@ class BuiltValueGenerator extends Generator {
     final result = <FieldElement>[];
     for (final field in classElement.fields) {
       if (!field.isStatic &&
-          (field.getter.isAbstract || field.getter.isSynthetic)) result
-          .add(field);
+          (field.getter.isAbstract || field.getter.isSynthetic))
+        result.add(field);
     }
     return result;
   }
@@ -207,7 +207,7 @@ class BuiltValueGenerator extends Generator {
     final fieldNames = fields.map((field) => field.displayName);
 
     final nullableFields = fields.where((field) => field.getter.metadata.any(
-        (metadata) => metadata.evaluationResult.value.value == 'nullable'));
+        (metadata) => metadata.constantValue.toStringValue() == 'nullable'));
     final nullableFieldNames = nullableFields.map((field) => field.displayName);
 
     final buildableFields = builderFields.where(
@@ -306,7 +306,8 @@ class BuiltValueGenerator extends Generator {
       return buildableFieldNames.contains(name)
           ? 'super.$name = other.$name?.toBuilder();'
           : 'super.$name = other.$name;';
-    })).join('\n'));
+    }))
+        .join('\n'));
     result.writeln('}');
 
     result.writeln('void update(updates(${className}Builder b)) {'

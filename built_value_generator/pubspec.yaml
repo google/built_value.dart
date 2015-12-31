@@ -1,5 +1,5 @@
 name: built_value_generator
-version: 0.0.4
+version: 0.0.5
 description: >
   Value types with builders. This library is the dev dependency.
 authors:
@@ -10,9 +10,9 @@ environment:
   sdk: '>=1.12.0-dev.5.10 <2.0.0'
 
 dependencies:
-  analyzer: '>=0.26.1 <1.0.0'
+  analyzer: '>=0.27.1 <0.28.0'
   built_collection: '^1.0.0'
-  built_value: '^0.0.4'
+  built_value: '^0.0.5'
   source_gen: '>=0.4.3 <0.5.0'
   quiver: '>=0.21.0 <0.22.0'
 
