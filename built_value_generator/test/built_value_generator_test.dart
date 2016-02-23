@@ -204,6 +204,22 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   String foo;
 }'''), contains("TODO: Make builder field foo have type int"));
     });
+
+    test('ignores setters', () async {
+      expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  set foo(int foo) => print(foo);
+}
+abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+  set foo(int foo) => print(foo);
+}'''), isNot(contains('TODO')));
+    });
   });
 }
 
