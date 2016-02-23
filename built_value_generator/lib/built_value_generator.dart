@@ -84,9 +84,9 @@ class BuiltValueGenerator extends Generator {
         'factory $name([updates(${name}Builder b)]) = _\$$name;';
     final factories =
         classElement.constructors.where((constructor) => constructor.isFactory);
-    if (factories.length != 1 ||
-        factories.single.computeNode().toSource() != expectedFactory) {
-      result.add('Make class have exactly one factory: $expectedFactory');
+    if (!factories.any(
+        (factory) => factory.computeNode().toSource() == expectedFactory)) {
+      result.add('Make class have factory: $expectedFactory');
     }
 
     return result;
