@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.6
+
+- Move null checks to "build" method for compatibility with Strong Mode
+  analyzer.
+
 ## 0.0.5
 
 - Fix for changes to analyzer library.

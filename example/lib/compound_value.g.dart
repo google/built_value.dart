@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-10-23T11:16:09.169Z
+// 2016-02-23T09:45:43.602Z
 
 part of compound_value;
 
@@ -37,12 +37,6 @@ class _$CompoundValue extends CompoundValue {
 
 class _$CompoundValueBuilder extends CompoundValueBuilder {
   _$CompoundValueBuilder() : super._();
-  ValueBuilder get value => super.value;
-  void set value(ValueBuilder value) {
-    if (value == null) throw new ArgumentError('null value');
-    super.value = value;
-  }
-
   void replace(CompoundValue other) {
     super.value = other.value?.toBuilder();
   }
@@ -51,5 +45,8 @@ class _$CompoundValueBuilder extends CompoundValueBuilder {
     if (updates != null) updates(this);
   }
 
-  CompoundValue build() => new _$CompoundValue._(value: value?.build());
+  CompoundValue build() {
+    if (value == null) throw new ArgumentError('null value');
+    return new _$CompoundValue._(value: value?.build());
+  }
 }

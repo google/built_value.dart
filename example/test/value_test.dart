@@ -20,7 +20,7 @@ void main() {
         ..aString = '').aDefaultInt, 7);
     });
 
-    test('throws on null for non-nullable fields', () {
+    test('throws on null for non-nullable fields on build', () {
       expect(() => new Value(), throws);
     });
 

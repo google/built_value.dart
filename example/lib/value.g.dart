@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// 2015-12-31T10:50:47.601071Z
+// 2016-02-23T09:45:43.590Z
 
 part of value;
 
@@ -62,40 +62,6 @@ class _$Value extends Value {
 
 class _$ValueBuilder extends ValueBuilder {
   _$ValueBuilder() : super._();
-  int get anInt => super.anInt;
-  void set anInt(int anInt) {
-    if (anInt == null) throw new ArgumentError('null anInt');
-    super.anInt = anInt;
-  }
-
-  String get aString => super.aString;
-  void set aString(String aString) {
-    if (aString == null) throw new ArgumentError('null aString');
-    super.aString = aString;
-  }
-
-  Object get anObject => super.anObject;
-  void set anObject(Object anObject) {
-    super.anObject = anObject;
-  }
-
-  int get aDefaultInt => super.aDefaultInt;
-  void set aDefaultInt(int aDefaultInt) {
-    if (aDefaultInt == null) throw new ArgumentError('null aDefaultInt');
-    super.aDefaultInt = aDefaultInt;
-  }
-
-  ListBuilder<int> get listOfInt => super.listOfInt;
-  void set listOfInt(ListBuilder<int> listOfInt) {
-    if (listOfInt == null) throw new ArgumentError('null listOfInt');
-    super.listOfInt = listOfInt;
-  }
-
-  SetBuilder<String> get setOfString => super.setOfString;
-  void set setOfString(SetBuilder<String> setOfString) {
-    super.setOfString = setOfString;
-  }
-
   void replace(Value other) {
     super.anInt = other.anInt;
     super.aString = other.aString;
@@ -109,11 +75,17 @@ class _$ValueBuilder extends ValueBuilder {
     if (updates != null) updates(this);
   }
 
-  Value build() => new _$Value._(
-      anInt: anInt,
-      aString: aString,
-      anObject: anObject,
-      aDefaultInt: aDefaultInt,
-      listOfInt: listOfInt?.build(),
-      setOfString: setOfString?.build());
+  Value build() {
+    if (anInt == null) throw new ArgumentError('null anInt');
+    if (aString == null) throw new ArgumentError('null aString');
+    if (aDefaultInt == null) throw new ArgumentError('null aDefaultInt');
+    if (listOfInt == null) throw new ArgumentError('null listOfInt');
+    return new _$Value._(
+        anInt: anInt,
+        aString: aString,
+        anObject: anObject,
+        aDefaultInt: aDefaultInt,
+        listOfInt: listOfInt?.build(),
+        setOfString: setOfString?.build());
+  }
 }
