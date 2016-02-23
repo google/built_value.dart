@@ -4,6 +4,7 @@
 
 - Move null checks to "build" method for compatibility with Strong Mode
   analyzer.
+- Allow (and ignore) setters.
 
 ## 0.0.5
 
