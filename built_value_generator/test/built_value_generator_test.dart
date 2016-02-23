@@ -82,7 +82,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''),
-          contains("TODO: Make class have exactly one factory: "
+          contains("TODO: Make class have factory: "
               "factory Value([updates(ValueBuilder b)]) = _\$Value;"));
     });
 

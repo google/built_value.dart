@@ -14,6 +14,12 @@ void main() {
         ..aString = '');
     });
 
+    test('can be instantiated via custom factory', () {
+      expect(new Value.fromCustomFactory(), new Value((b) => b
+        ..anInt = 1
+        ..aString = 'two'));
+    });
+
     test('has defaults', () {
       expect(new Value((b) => b
         ..anInt = 0

@@ -5,6 +5,7 @@
 - Move null checks to "build" method for compatibility with Strong Mode
   analyzer.
 - Allow (and ignore) setters.
+- Allow custom factories on value classes.
 
 ## 0.0.5
 

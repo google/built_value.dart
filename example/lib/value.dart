@@ -34,6 +34,10 @@ abstract class Value implements Built<Value, ValueBuilder> {
     if (anInt == 7) throw 'anInt may not be 7';
   }
   factory Value([updates(ValueBuilder b)]) = _$Value;
+
+  factory Value.fromCustomFactory() => new Value((b) => b
+    ..anInt = 1
+    ..aString = 'two');
 }
 
 /// The builder class must implement [Builder]. It must be abstract, and have
