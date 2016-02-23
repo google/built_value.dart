@@ -131,8 +131,8 @@ class BuiltValueGenerator extends Generator {
     final result = <FieldElement>[];
     for (final field in classElement.fields) {
       if (!field.isStatic &&
-          (field.getter.isAbstract || field.getter.isSynthetic))
-        result.add(field);
+          (field.getter.isAbstract || field.getter.isSynthetic)) result
+          .add(field);
     }
     return result;
   }
@@ -287,32 +287,25 @@ class BuiltValueGenerator extends Generator {
     result.writeln();
     result.writeln('_\$${className}Builder() : super._();');
 
-    for (final field in builderFields) {
-      final fieldName = field.displayName;
-      final fieldType = field.getter.returnType.displayName;
-      result.writeln('$fieldType get $fieldName => super.$fieldName;');
-      result.writeln('void set $fieldName($fieldType $fieldName) {');
-      if (!nullableFieldNames.contains(fieldName)) {
-        result.writeln(
-            "if ($fieldName == null) throw new ArgumentError('null $fieldName');");
-      }
-      result.writeln('super.$fieldName = $fieldName;');
-      result.writeln('}');
-      result.writeln();
-    }
-
     result.writeln('void replace(${className} other) {');
     result.writeln((fieldNames.map((name) {
       return buildableFieldNames.contains(name)
           ? 'super.$name = other.$name?.toBuilder();'
           : 'super.$name = other.$name;';
-    }))
-        .join('\n'));
+    })).join('\n'));
     result.writeln('}');
 
     result.writeln('void update(updates(${className}Builder b)) {'
         ' if (updates != null) updates(this); }');
-    result.writeln('$className build() => new _\$$className._(');
+    result.writeln('$className build() {');
+    for (final field in builderFields) {
+      final fieldName = field.displayName;
+      if (!nullableFieldNames.contains(fieldName)) {
+        result.writeln("if ($fieldName == null) "
+            "throw new ArgumentError('null $fieldName');");
+      }
+    }
+    result.writeln('return new _\$$className._(');
     result.write(builderFields.map((field) {
       final fieldName = field.displayName;
 
@@ -321,6 +314,7 @@ class BuiltValueGenerator extends Generator {
           : '$fieldName: $fieldName';
     }).join(', '));
     result.write(');');
+    result.writeln('}');
     result.writeln('}');
 
     return result.toString();
