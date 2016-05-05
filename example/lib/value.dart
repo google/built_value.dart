@@ -21,10 +21,12 @@ abstract class Value implements Built<Value, ValueBuilder> {
 
   int get anInt;
   String get aString;
-  @nullable Object get anObject;
+  @nullable
+  Object get anObject;
   int get aDefaultInt;
   BuiltList<int> get listOfInt;
-  @nullable BuiltSet<String> get setOfString;
+  @nullable
+  BuiltSet<String> get setOfString;
 
   int get youCanWriteDerivedGetters => anInt + aDefaultInt;
 
@@ -48,10 +50,12 @@ abstract class Value implements Built<Value, ValueBuilder> {
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   int anInt;
   String aString;
-  @nullable Object anObject;
+  @nullable
+  Object anObject;
   int aDefaultInt = 7;
   ListBuilder<int> listOfInt = new ListBuilder<int>();
-  @nullable SetBuilder<String> setOfString;
+  @nullable
+  SetBuilder<String> setOfString;
 
   ValueBuilder._();
   factory ValueBuilder() = _$ValueBuilder;

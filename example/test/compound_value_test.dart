@@ -12,9 +12,11 @@ void main() {
     });
 
     test('allows nested updates', () {
-      expect(new CompoundValue((b) => b.value
-        ..anInt = 1
-        ..anObject = 2).value.anInt, 1);
+      expect(
+          new CompoundValue((b) => b.value
+            ..anInt = 1
+            ..anObject = 2).value.anInt,
+          1);
     });
   });
 }
