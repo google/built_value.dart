@@ -132,8 +132,9 @@ class BuiltValueGenerator extends Generator {
     for (final field in classElement.fields) {
       if (!field.isStatic &&
           field.getter != null &&
-          (field.getter.isAbstract || field.getter.isSynthetic)) result
-          .add(field);
+          (field.getter.isAbstract || field.getter.isSynthetic)) {
+        result.add(field);
+      }
     }
     return result;
   }
@@ -293,7 +294,8 @@ class BuiltValueGenerator extends Generator {
       return buildableFieldNames.contains(name)
           ? 'super.$name = other.$name?.toBuilder();'
           : 'super.$name = other.$name;';
-    })).join('\n'));
+    }))
+        .join('\n'));
     result.writeln('}');
 
     result.writeln('void update(updates(${className}Builder b)) {'

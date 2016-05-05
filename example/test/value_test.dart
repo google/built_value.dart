@@ -15,15 +15,19 @@ void main() {
     });
 
     test('can be instantiated via custom factory', () {
-      expect(new Value.fromCustomFactory(), new Value((b) => b
-        ..anInt = 1
-        ..aString = 'two'));
+      expect(
+          new Value.fromCustomFactory(),
+          new Value((b) => b
+            ..anInt = 1
+            ..aString = 'two'));
     });
 
     test('has defaults', () {
-      expect(new Value((b) => b
-        ..anInt = 0
-        ..aString = '').aDefaultInt, 7);
+      expect(
+          new Value((b) => b
+            ..anInt = 0
+            ..aString = '').aDefaultInt,
+          7);
     });
 
     test('throws on null for non-nullable fields on build', () {
@@ -31,15 +35,19 @@ void main() {
     });
 
     test('throws on wrong type assign', () {
-      expect(() => new Value((b) => b
-        ..anInt = '0'
-        ..aString = ''), throws);
+      expect(
+          () => new Value((b) => b
+            ..anInt = '0'
+            ..aString = ''),
+          throws);
     });
 
     test('does custom validation', () {
-      expect(() => new Value((b) => b
-        ..anInt = 7
-        ..aString = ''), throws);
+      expect(
+          () => new Value((b) => b
+            ..anInt = 7
+            ..aString = ''),
+          throws);
     });
 
     test('fields can be set via build constructor', () {
