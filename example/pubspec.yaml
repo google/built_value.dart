@@ -1,5 +1,5 @@
 name: example
-version: 0.0.6
+version: 0.1.0
 description: >
   Just an example, not for publishing.
 authors:
@@ -11,8 +11,8 @@ environment:
 
 dependencies:
   built_collection: '^1.0.0'
-  built_value: '^0.0.6'
+  built_value: '^0.1.0'
 
 dev_dependencies:
-  built_value_generator: '^0.0.6'
+  built_value_generator: '^0.1.0'
   test: any
