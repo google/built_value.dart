@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0
+
+ - Upgrade to source_gen 0.5.0.
+ - Breaking change; see example for required changes to build.dart.
+
 ## 0.0.6
 
 - Move null checks to "build" method for compatibility with Strong Mode

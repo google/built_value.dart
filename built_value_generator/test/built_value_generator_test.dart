@@ -3,8 +3,9 @@
 // license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:io';
 
+import 'package:build/build.dart';
+import 'package:build_test/build_test.dart';
 import 'package:built_value_generator/built_value_generator.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
@@ -225,24 +226,24 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 
 // Test setup.
 
+final String pkgName = 'pkg';
+final PackageGraph packageGraph =
+    new PackageGraph.fromRoot(new PackageNode(pkgName, null, null, null));
+
+final PhaseGroup phaseGroup = new PhaseGroup.singleAction(
+    new GeneratorBuilder([new BuiltValueGenerator()]),
+    new InputSet(pkgName, const ['lib/*.dart']));
+
 Future<String> generate(String source) async {
-  final tempDir =
-      Directory.systemTemp.createTempSync('built_value_generator.dart.');
-  final packageDir = new Directory(tempDir.path + '/packages')..createSync();
-  final builtValueDir = new Directory(packageDir.path + '/built_value')
-    ..createSync();
-  final builtValueFile = new File(builtValueDir.path + '/built_value.dart')
-    ..createSync();
-  builtValueFile.writeAsStringSync(builtValueSource);
+  final srcs = <String, String>{
+    'built_value|lib/built_value.dart': builtValueSource,
+    '$pkgName|lib/value.dart': source,
+  };
 
-  final libDir = new Directory(tempDir.path + '/lib')..createSync();
-  final sourceFile = new File(libDir.path + '/value.dart');
-  sourceFile.writeAsStringSync(source);
-
-  await build([], [new BuiltValueGenerator()],
-      projectPath: tempDir.path, librarySearchPaths: <String>['lib']);
-  final outputFile = new File(libDir.path + '/value.g.dart');
-  return outputFile.existsSync() ? outputFile.readAsStringSync() : '';
+  final writer = new InMemoryAssetWriter();
+  await testPhases(phaseGroup, srcs,
+      packageGraph: packageGraph, writer: writer);
+  return writer.assets[new AssetId(pkgName, 'lib/value.g.dart')]?.value;
 }
 
 const String builtValueSource = r'''

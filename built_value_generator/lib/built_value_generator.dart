@@ -5,17 +5,19 @@
 library built_value_generator;
 
 import 'dart:async';
+
+import 'package:analyzer/dart/element/element.dart';
+import 'package:build/build.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:quiver/iterables.dart' show concat;
-
-import 'package:analyzer/src/generated/element.dart';
 import 'package:source_gen/source_gen.dart';
 
 /// Generator for Built Values.
 ///
 /// See <https://github.com/google/built_value.dart/tree/master/example>
 class BuiltValueGenerator extends Generator {
-  Future<String> generate(Element element) async {
+  @override
+  Future<String> generate(Element element, BuildStep buildStep) async {
     if (element is! ClassElement) {
       return null;
     }
@@ -70,14 +72,17 @@ class BuiltValueGenerator extends Generator {
       result.add('Make class abstract');
     }
 
-    final expectedConstructor = '$name._();';
+    final expectedConstructor = '$name._()';
     final constructors = classElement.constructors
         .where((constructor) => !constructor.isFactory);
     if (constructors.length != 1 ||
         constructors.single.isSynthetic ||
-        constructors.single.computeNode().toSource() != expectedConstructor) {
-      result
-          .add('Make class have exactly one constructor: $expectedConstructor');
+        !(constructors.single
+            .computeNode()
+            .toSource()
+            .startsWith(expectedConstructor))) {
+      result.add(
+          'Make class have exactly one constructor: $expectedConstructor;');
     }
 
     final expectedFactory =
