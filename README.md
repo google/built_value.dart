@@ -1,5 +1,5 @@
 # Built Values for Dart
-
+[![Build Status](https://travis-ci.org/google/built_value.dart.svg?branch=master)](https://travis-ci.org/google/built_value.dart)
 ## Introduction
 
 Built Values provides immutable "value types" for Dart and is part of
