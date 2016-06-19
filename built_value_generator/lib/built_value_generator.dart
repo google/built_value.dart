@@ -47,9 +47,7 @@ class BuiltValueGenerator extends Generator {
     ]);
 
     if (errors.isNotEmpty) {
-      throw new InvalidGenerationSourceError(
-          'Please make changes to use built_value.',
-          todo: errors.join(' '));
+      throw _makeError(errors);
     }
 
     return generateCode(className, fields, builderFields);
@@ -69,7 +67,7 @@ class BuiltValueGenerator extends Generator {
     final name = classElement.displayName;
 
     if (!classElement.isAbstract) {
-      result.add('Make class abstract');
+      result.add('Make class abstract.');
     }
 
     final expectedConstructor = '$name._()';
@@ -100,7 +98,7 @@ class BuiltValueGenerator extends Generator {
   Iterable<String> checkBuilderClass(
       String className, ClassElement classElement) {
     if (classElement == null) {
-      return <String>['Add abstract class ${className}Builder'];
+      return <String>['Add abstract class: ${className}Builder'];
     }
 
     final result = <String>[];
@@ -164,7 +162,7 @@ class BuiltValueGenerator extends Generator {
       final fieldName = field.displayName;
       if (field.getter == null || field.getter.isSynthetic) {
         checkFieldTypes = false;
-        result.add('Make field $fieldName a getter');
+        result.add('Make field $fieldName a getter.');
       }
     }
 
@@ -174,7 +172,7 @@ class BuiltValueGenerator extends Generator {
           field.getter.isAbstract ||
           !field.getter.isSynthetic) {
         checkFieldTypes = false;
-        result.add('Make builder field $fieldName a normal field');
+        result.add('Make builder field $fieldName a normal field.');
       }
     }
 
@@ -199,7 +197,7 @@ class BuiltValueGenerator extends Generator {
             fieldType.replaceAll('Built', '') !=
                 builderFieldType.replaceAll('Builder', '')) {
           result.add(
-              'Make builder field ${field.displayName} have type $fieldType');
+              'Make builder field ${field.displayName} have type: $fieldType');
         }
       }
     }
@@ -326,5 +324,15 @@ class BuiltValueGenerator extends Generator {
     result.writeln('}');
 
     return result.toString();
+  }
+
+  InvalidGenerationSourceError _makeError(Iterable<String> todos) {
+    final message = new StringBuffer(
+        'Please make the following changes to use built_value:\n');
+    for (var i = 0; i != todos.length; ++i) {
+      message.write('\n${i + 1}. ${todos.elementAt(i)}');
+    }
+
+    return new InvalidGenerationSourceError(message.toString());
   }
 }
