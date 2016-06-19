@@ -1,0 +1,11 @@
+
+language: dart
+dart: stable
+script:
+  - cd built_value_generator
+  - pub get
+  - pub run test
+  - cd ../example
+  - pub get
+  - pub run tool/build.dart
+  - pub run test
