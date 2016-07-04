@@ -45,7 +45,7 @@ To complete the package, we'll make the whole stack compatible with Java:
 ## Current Status
 
 * [enum_class.dart](https://github.com/google/enum_class.dart#enum-classes-for-dart)
-  is alpha but relatively stable.
+  is stable and production ready.
   
 * [built_collection.dart](https://github.com/google/built_collection.dart#built-collections-for-dart)
   is stable and production ready.
