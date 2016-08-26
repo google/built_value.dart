@@ -52,6 +52,19 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 }'''), contains("1. Make class have exactly one constructor: Value._();"));
     });
 
+    test('suggests to add constructor when there is synthetic constructor',
+        () async {
+      expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+}
+abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''), contains("1. Make class have exactly one constructor: Value._();"));
+    });
+
     test('allows code in constructor of value class', () async {
       expect(
           await generate('''library value;
@@ -122,6 +135,22 @@ abstract class Value extends Built<Value, ValueBuilder> {
 }
 abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains("1. Make builder class "
+              "have exactly one constructor: ValueBuilder._();"));
+    });
+
+    test('suggests constructor for builder class with synthetic constructor',
+        () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 }'''),
           contains("1. Make builder class "
               "have exactly one constructor: ValueBuilder._();"));

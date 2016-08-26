@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Refactor generator to split into logical classes.
+
 ## 0.1.1
 
 - Improve error output on failure to generate.
