@@ -50,12 +50,12 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
           .map((constructor) => constructor.computeNode().toSource()))
       ..valueClassFactories.replace(classElement.constructors
           .where((constructor) => constructor.isFactory)
-          .map((factory) => factory.computeNode().toSource()));
+          .map((factory) => factory.computeNode().toSource()))
+      ..fields.replace(
+          SourceField.fromClassElements(classElement, builderClassElement));
 
     if (hasBuilder) {
       result
-        ..fields.replace(
-            SourceField.fromClassElements(classElement, builderClassElement))
         ..builderClassIsAbstract = builderClassElement.isAbstract
         ..builderClassConstructors.replace(builderClassElement.constructors
             .where((constructor) =>
@@ -127,10 +127,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
 
   Iterable<String> _checkBuilderClass() {
     final result = <String>[];
-
-    if (!hasBuilder) {
-      return <String>['Add abstract class: ${name}Builder'];
-    }
+    if (!hasBuilder) return result;
 
     if (!builderClassIsAbstract) {
       result.add('Make builder class abstract.');
@@ -154,6 +151,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
   }
 
   Iterable<String> _checkFieldList() {
+    if (!hasBuilder) return <String>[];
     return fields.any((field) => !field.builderFieldExists)
         ? [
             'Make builder have exactly these fields: ' +
@@ -172,6 +170,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
     for (final field in fields) {
       result.writeln('final ${field.type} ${field.name};');
     }
+    result.writeln();
 
     if (fields.isEmpty) {
       result.write('_\$$name._() : super._() {');
@@ -184,14 +183,25 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
       result.writeln("if (${field.name} == null) "
           "throw new ArgumentError('null ${field.name}');");
     }
-    result.write('}');
+    result.writeln('}');
+    result.writeln();
 
     result.writeln('factory _\$$name([updates(${name}Builder b)]) '
         '=> (new ${name}Builder()..update(updates)).build();');
+    result.writeln();
+
     result.writeln('$name rebuild(updates(${name}Builder b)) '
         '=> (toBuilder()..update(updates)).build();');
-    result.writeln('_\$${name}Builder toBuilder() '
-        '=> new _\$${name}Builder()..replace(this);');
+    result.writeln();
+
+    if (hasBuilder) {
+      result.writeln('_\$${name}Builder toBuilder() '
+          '=> new _\$${name}Builder()..replace(this);');
+    } else {
+      result.writeln('${name}Builder toBuilder() '
+          '=> new ${name}Builder()..replace(this);');
+    }
+    result.writeln();
 
     result.writeln('bool operator==(other) {');
     result.writeln('  if (other is! $name) return false;');
@@ -205,6 +215,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
       result.writeln(';');
     }
     result.writeln('}');
+    result.writeln();
 
     result.writeln('int get hashCode {');
     if (fields.length == 0) {
@@ -215,6 +226,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
       result.writeln(']);');
     }
     result.writeln('}');
+    result.writeln();
 
     result.writeln('String toString() {');
     if (fields.length == 0) {
@@ -222,35 +234,54 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
     } else {
       result.writeln("return '$name {'");
       result.writeln(fields
-          .map((field) => "'${field.name}=\${${field.name}.toString()}\\n'")
+          .map((field) => "'${field.name}=\${${field.name}.toString()},\\n'")
           .join(''));
       result.writeln("'}'");
       result.writeln(';');
     }
     result.writeln('}');
+    result.writeln();
 
     result.writeln('}');
 
-    result.writeln('class _\$${name}Builder extends ${name}Builder {');
-    result.writeln();
-    result.writeln('_\$${name}Builder() : super._();');
+    if (hasBuilder) {
+      result.writeln('class _\$${name}Builder extends ${name}Builder {');
+      result.writeln('_\$${name}Builder() : super._();');
+    } else {
+      result.writeln(
+          'class ${name}Builder implements Builder<$name, ${name}Builder>{');
+      result.writeln('${name}Builder();');
+    }
+
+    if (!hasBuilder) {
+      for (final field in fields) {
+        // Nested builders are initialized to an empty builder, unless the
+        // field is nullable.
+        if (field.isNestedBuilder && !field.isNullable) {
+          result.writeln('${field.typeInBuilder} ${field.name} = new ${field.typeInBuilder}();');
+        } else {
+          result.writeln('${field.typeInBuilder} ${field.name};');
+        }
+      }
+      result.writeln();
+    }
 
     result.writeln('void replace(${name} other) {');
     result.writeln((fields.map((field) {
+      final superOrThis = hasBuilder ? 'super' : 'this';
       return field.isNestedBuilder
-          ? 'super.${field.name} = other.${field.name}?.toBuilder();'
-          : 'super.${field.name} = other.${field.name};';
+          ? '$superOrThis.${field.name} = other.${field.name}?.toBuilder();'
+          : '$superOrThis.${field.name} = other.${field.name};';
     }))
         .join('\n'));
     result.writeln('}');
+    result.writeln();
 
     result.writeln('void update(updates(${name}Builder b)) {'
         ' if (updates != null) updates(this); }');
+    result.writeln();
+
     result.writeln('$name build() {');
-    for (final field in fields.where((field) => !field.isNullable)) {
-      result.writeln("if (${field.name} == null) "
-          "throw new ArgumentError('null ${field.name}');");
-    }
     result.writeln('return new _\$$name._(');
     result.write(fields.map((field) {
       return field.isNestedBuilder

@@ -16,6 +16,7 @@ class _$SourceField extends SourceField {
   final bool builderFieldIsNormalField;
   final String typeInBuilder;
   final bool isNestedBuilder;
+
   _$SourceField._(
       {this.name,
       this.type,
@@ -34,14 +35,19 @@ class _$SourceField extends SourceField {
       throw new ArgumentError('null builderFieldExists');
     if (builderFieldIsNormalField == null)
       throw new ArgumentError('null builderFieldIsNormalField');
+    if (typeInBuilder == null) throw new ArgumentError('null typeInBuilder');
     if (isNestedBuilder == null)
       throw new ArgumentError('null isNestedBuilder');
   }
+
   factory _$SourceField([updates(SourceFieldBuilder b)]) =>
       (new SourceFieldBuilder()..update(updates)).build();
+
   SourceField rebuild(updates(SourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
+
   _$SourceFieldBuilder toBuilder() => new _$SourceFieldBuilder()..replace(this);
+
   bool operator ==(other) {
     if (other is! SourceField) return false;
     return name == other.name &&
@@ -69,14 +75,14 @@ class _$SourceField extends SourceField {
 
   String toString() {
     return 'SourceField {'
-        'name=${name.toString()}\n'
-        'type=${type.toString()}\n'
-        'isGetter=${isGetter.toString()}\n'
-        'isNullable=${isNullable.toString()}\n'
-        'builderFieldExists=${builderFieldExists.toString()}\n'
-        'builderFieldIsNormalField=${builderFieldIsNormalField.toString()}\n'
-        'typeInBuilder=${typeInBuilder.toString()}\n'
-        'isNestedBuilder=${isNestedBuilder.toString()}\n'
+        'name=${name.toString()},\n'
+        'type=${type.toString()},\n'
+        'isGetter=${isGetter.toString()},\n'
+        'isNullable=${isNullable.toString()},\n'
+        'builderFieldExists=${builderFieldExists.toString()},\n'
+        'builderFieldIsNormalField=${builderFieldIsNormalField.toString()},\n'
+        'typeInBuilder=${typeInBuilder.toString()},\n'
+        'isNestedBuilder=${isNestedBuilder.toString()},\n'
         '}';
   }
 }
@@ -99,16 +105,6 @@ class _$SourceFieldBuilder extends SourceFieldBuilder {
   }
 
   SourceField build() {
-    if (name == null) throw new ArgumentError('null name');
-    if (type == null) throw new ArgumentError('null type');
-    if (isGetter == null) throw new ArgumentError('null isGetter');
-    if (isNullable == null) throw new ArgumentError('null isNullable');
-    if (builderFieldExists == null)
-      throw new ArgumentError('null builderFieldExists');
-    if (builderFieldIsNormalField == null)
-      throw new ArgumentError('null builderFieldIsNormalField');
-    if (isNestedBuilder == null)
-      throw new ArgumentError('null isNestedBuilder');
     return new _$SourceField._(
         name: name,
         type: type,
