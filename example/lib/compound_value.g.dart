@@ -8,36 +8,48 @@ part of compound_value;
 // **************************************************************************
 
 class _$CompoundValue extends CompoundValue {
-  final Value value;
-  _$CompoundValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError('null value');
+  final SimpleValue simpleValue;
+  final ValidatedValue validatedValue;
+
+  _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
+    if (simpleValue == null) throw new ArgumentError('null simpleValue');
   }
+
   factory _$CompoundValue([updates(CompoundValueBuilder b)]) =>
       (new CompoundValueBuilder()..update(updates)).build();
+
   CompoundValue rebuild(updates(CompoundValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
-  _$CompoundValueBuilder toBuilder() =>
-      new _$CompoundValueBuilder()..replace(this);
+
+  CompoundValueBuilder toBuilder() => new CompoundValueBuilder()..replace(this);
+
   bool operator ==(other) {
     if (other is! CompoundValue) return false;
-    return value == other.value;
+    return simpleValue == other.simpleValue &&
+        validatedValue == other.validatedValue;
   }
 
   int get hashCode {
-    return hashObjects([value]);
+    return hashObjects([simpleValue, validatedValue]);
   }
 
   String toString() {
     return 'CompoundValue {'
-        'value=${value.toString()}\n'
+        'simpleValue=${simpleValue.toString()},\n'
+        'validatedValue=${validatedValue.toString()},\n'
         '}';
   }
 }
 
-class _$CompoundValueBuilder extends CompoundValueBuilder {
-  _$CompoundValueBuilder() : super._();
+class CompoundValueBuilder
+    implements Builder<CompoundValue, CompoundValueBuilder> {
+  CompoundValueBuilder();
+  SimpleValueBuilder simpleValue = new SimpleValueBuilder();
+  ValidatedValueBuilder validatedValue;
+
   void replace(CompoundValue other) {
-    super.value = other.value?.toBuilder();
+    this.simpleValue = other.simpleValue?.toBuilder();
+    this.validatedValue = other.validatedValue?.toBuilder();
   }
 
   void update(updates(CompoundValueBuilder b)) {
@@ -45,7 +57,8 @@ class _$CompoundValueBuilder extends CompoundValueBuilder {
   }
 
   CompoundValue build() {
-    if (value == null) throw new ArgumentError('null value');
-    return new _$CompoundValue._(value: value?.build());
+    return new _$CompoundValue._(
+        simpleValue: simpleValue?.build(),
+        validatedValue: validatedValue?.build());
   }
 }
