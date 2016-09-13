@@ -48,12 +48,11 @@ abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
     if (builderFieldExists) {
       result
         ..builderFieldExists = true
-        ..builderFieldIsNormalField = builderFieldElement != null &&
-            builderFieldElement.getter != null &&
+        ..builderFieldIsNormalField = builderFieldElement.getter != null &&
             !builderFieldElement.getter.isAbstract &&
             builderFieldElement.getter.isSynthetic
-        ..typeInBuilder = builderFieldElement?.getter?.returnType?.displayName
-        ..isNestedBuilder = builderFieldElement?.getter?.returnType?.displayName
+        ..typeInBuilder = builderFieldElement.getter?.returnType?.displayName
+        ..isNestedBuilder = builderFieldElement.getter?.returnType?.displayName
                 ?.contains('Builder') ??
             false;
     } else {

@@ -23,7 +23,6 @@ abstract class ValueWithCode
   String get youCanWriteDerivedGetters => anInt.toString() + aString;
 
   ValueWithCode._();
-
   factory ValueWithCode([updates(ValueWithCodeBuilder b)]) = _$ValueWithCode;
 
   factory ValueWithCode.fromCustomFactory(int anInt) =>
