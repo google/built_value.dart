@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.3
+
+- Generate builder if it's not written by hand.
+- Make toString append commas for improved clarity.
+- Improve examples and tests.
+- Fix double null checking.
+
 ## 0.1.2
 
 - Refactor generator to split into logical classes.

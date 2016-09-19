@@ -100,16 +100,6 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
               "factory Value([updates(ValueBuilder b)]) = _\$Value;"));
     });
 
-    test('suggests to add builder class', () async {
-      expect(await generate('''library value;
-import 'package:built_value/built_value.dart';
-part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
-  Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
-}'''), contains("1. Add abstract class: ValueBuilder"));
-    });
-
     test('suggests to make builder class abstract', () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';

@@ -19,6 +19,7 @@ class _$SourceClass extends SourceClass {
   final bool builderClassIsAbstract;
   final BuiltList<String> builderClassConstructors;
   final BuiltList<String> builderClassFactories;
+
   _$SourceClass._(
       {this.name,
       this.hasBuilder,
@@ -51,11 +52,15 @@ class _$SourceClass extends SourceClass {
     if (builderClassFactories == null)
       throw new ArgumentError('null builderClassFactories');
   }
+
   factory _$SourceClass([updates(SourceClassBuilder b)]) =>
       (new SourceClassBuilder()..update(updates)).build();
+
   SourceClass rebuild(updates(SourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
+
   _$SourceClassBuilder toBuilder() => new _$SourceClassBuilder()..replace(this);
+
   bool operator ==(other) {
     if (other is! SourceClass) return false;
     return name == other.name &&
@@ -89,17 +94,17 @@ class _$SourceClass extends SourceClass {
 
   String toString() {
     return 'SourceClass {'
-        'name=${name.toString()}\n'
-        'hasBuilder=${hasBuilder.toString()}\n'
-        'fields=${fields.toString()}\n'
-        'partStatement=${partStatement.toString()}\n'
-        'hasPartStatement=${hasPartStatement.toString()}\n'
-        'valueClassIsAbstract=${valueClassIsAbstract.toString()}\n'
-        'valueClassConstructors=${valueClassConstructors.toString()}\n'
-        'valueClassFactories=${valueClassFactories.toString()}\n'
-        'builderClassIsAbstract=${builderClassIsAbstract.toString()}\n'
-        'builderClassConstructors=${builderClassConstructors.toString()}\n'
-        'builderClassFactories=${builderClassFactories.toString()}\n'
+        'name=${name.toString()},\n'
+        'hasBuilder=${hasBuilder.toString()},\n'
+        'fields=${fields.toString()},\n'
+        'partStatement=${partStatement.toString()},\n'
+        'hasPartStatement=${hasPartStatement.toString()},\n'
+        'valueClassIsAbstract=${valueClassIsAbstract.toString()},\n'
+        'valueClassConstructors=${valueClassConstructors.toString()},\n'
+        'valueClassFactories=${valueClassFactories.toString()},\n'
+        'builderClassIsAbstract=${builderClassIsAbstract.toString()},\n'
+        'builderClassConstructors=${builderClassConstructors.toString()},\n'
+        'builderClassFactories=${builderClassFactories.toString()},\n'
         '}';
   }
 }
@@ -126,24 +131,6 @@ class _$SourceClassBuilder extends SourceClassBuilder {
   }
 
   SourceClass build() {
-    if (name == null) throw new ArgumentError('null name');
-    if (hasBuilder == null) throw new ArgumentError('null hasBuilder');
-    if (fields == null) throw new ArgumentError('null fields');
-    if (partStatement == null) throw new ArgumentError('null partStatement');
-    if (hasPartStatement == null)
-      throw new ArgumentError('null hasPartStatement');
-    if (valueClassIsAbstract == null)
-      throw new ArgumentError('null valueClassIsAbstract');
-    if (valueClassConstructors == null)
-      throw new ArgumentError('null valueClassConstructors');
-    if (valueClassFactories == null)
-      throw new ArgumentError('null valueClassFactories');
-    if (builderClassIsAbstract == null)
-      throw new ArgumentError('null builderClassIsAbstract');
-    if (builderClassConstructors == null)
-      throw new ArgumentError('null builderClassConstructors');
-    if (builderClassFactories == null)
-      throw new ArgumentError('null builderClassFactories');
     return new _$SourceClass._(
         name: name,
         hasBuilder: hasBuilder,

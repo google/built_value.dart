@@ -5,10 +5,19 @@
 library built_value_generator.source_field;
 
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
 part 'source_field.g.dart';
+
+BuiltSet<String> _builtCollectionNames = new BuiltSet<String>([
+  'BuiltList',
+  'BuiltListMultimap',
+  'BuiltMap',
+  'BuiltSet',
+  'BuiltSetMultimap',
+]);
 
 abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
   String get name;
@@ -17,7 +26,6 @@ abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
   bool get isNullable;
   bool get builderFieldExists;
   bool get builderFieldIsNormalField;
-  @nullable
   String get typeInBuilder;
   bool get isNestedBuilder;
 
@@ -26,22 +34,35 @@ abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
 
   factory SourceField.fromFieldElements(
       FieldElement fieldElement, FieldElement builderFieldElement) {
-    return new SourceField((b) => b
+    final result = new SourceFieldBuilder();
+    final builderFieldExists = builderFieldElement != null;
+    final type = fieldElement.getter.returnType.displayName;
+    result
       ..name = fieldElement.displayName
-      ..type = fieldElement.getter.returnType.displayName
-      ..typeInBuilder = builderFieldElement?.getter?.returnType?.displayName
+      ..type = type
       ..isGetter =
           fieldElement.getter != null && !fieldElement.getter.isSynthetic
       ..isNullable = fieldElement.getter.metadata.any(
-          (metadata) => metadata.constantValue.toStringValue() == 'nullable')
-      ..builderFieldExists = builderFieldElement != null
-      ..builderFieldIsNormalField = builderFieldElement != null &&
-          builderFieldElement.getter != null &&
-          !builderFieldElement.getter.isAbstract &&
-          builderFieldElement.getter.isSynthetic
-      ..isNestedBuilder = builderFieldElement?.getter?.returnType?.displayName
-              ?.contains('Builder') ??
-          false);
+          (metadata) => metadata.constantValue.toStringValue() == 'nullable');
+
+    if (builderFieldExists) {
+      result
+        ..builderFieldExists = true
+        ..builderFieldIsNormalField = builderFieldElement.getter != null &&
+            !builderFieldElement.getter.isAbstract &&
+            builderFieldElement.getter.isSynthetic
+        ..typeInBuilder = builderFieldElement.getter?.returnType?.displayName
+        ..isNestedBuilder = builderFieldElement.getter?.returnType?.displayName
+                ?.contains('Builder') ??
+            false;
+    } else {
+      result
+        ..builderFieldExists = false
+        ..builderFieldIsNormalField = true
+        ..typeInBuilder = _toBuilderType(fieldElement.getter.returnType)
+        ..isNestedBuilder = _needsNestedBuilder(fieldElement.getter.returnType);
+    }
+    return result.build();
   }
 
   static BuiltList<SourceField> fromClassElements(
@@ -52,12 +73,40 @@ abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
       if (!field.isStatic &&
           field.getter != null &&
           (field.getter.isAbstract || field.getter.isSynthetic)) {
-        final builderField = builderClassElement.getField(field.name);
+        final builderField = builderClassElement?.getField(field.name);
         result.add(new SourceField.fromFieldElements(field, builderField));
       }
     }
 
     return result.build();
+  }
+
+  static bool _needsNestedBuilder(DartType type) {
+    return _isBuiltValue(type) || _isBuiltCollection(type);
+  }
+
+  static bool _isBuiltValue(DartType type) {
+    if (type.element is! ClassElement) return false;
+    return (type.element as ClassElement)
+        .allSupertypes
+        .any((interfaceType) => interfaceType.name == 'Built');
+  }
+
+  static bool _isBuiltCollection(DartType type) {
+    return _builtCollectionNames
+        .any((name) => type.displayName.startsWith('${name}<'));
+  }
+
+  static String _toBuilderType(DartType type) {
+    if (_isBuiltCollection(type)) {
+      return type.displayName
+          .replaceFirst('Built', '')
+          .replaceFirst('<', 'Builder<');
+    } else if (_isBuiltValue(type)) {
+      return '${type.displayName}Builder';
+    } else {
+      return type.displayName;
+    }
   }
 
   Iterable<String> computeErrors() {
