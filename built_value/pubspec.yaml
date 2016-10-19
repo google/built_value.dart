@@ -1,5 +1,5 @@
 name: built_value
-version: 0.1.4
+version: 0.1.5
 description: >
   Value types with builders. This library is the runtime dependency.
 authors:
@@ -10,4 +10,4 @@ environment:
   sdk: '>=1.8.0 <2.0.0'
 
 dependencies:
-  quiver: '>=0.21.0 <0.22.0'
+  quiver: '>=0.21.0 <0.24.0'
