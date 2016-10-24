@@ -51,10 +51,10 @@ To complete the package, we'll make the whole stack compatible with Java:
   is stable and production ready.
   
 * [built_value.dart](https://github.com/google/built_value.dart#built-values-for-dart)
-  is alpha and likely to change.
+  is ready for use but may be missing features.
   
 * [built_json.dart](https://github.com/google/built_json.dart#built-json-for-dart)
-  is pre-alpha and will change.
+  is ready for use but may be missing features.
   
 * Built JSON for Java is not yet started.
 
