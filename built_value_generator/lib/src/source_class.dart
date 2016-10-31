@@ -15,7 +15,9 @@ part 'source_class.g.dart';
 
 abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
   String get name;
+  String get builtParameters;
   bool get hasBuilder;
+  String get builderParameters;
   BuiltList<SourceField> get fields;
 
   String get partStatement;
@@ -40,6 +42,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
     final result = new SourceClassBuilder();
     result
       ..name = name
+      ..builtParameters = _getBuildParameters(classElement)
       ..hasBuilder = hasBuilder
       ..partStatement = _getPartStatement(classElement)
       ..hasPartStatement = _getHasPartStatement(classElement)
@@ -56,6 +59,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
 
     if (hasBuilder) {
       result
+        ..builderParameters = _getBuilderParameters(builderClassElement)
         ..builderClassIsAbstract = builderClassElement.isAbstract
         ..builderClassConstructors.replace(builderClassElement.constructors
             .where((constructor) =>
@@ -67,6 +71,24 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
     }
 
     return result.build();
+  }
+
+  static String _getBuildParameters(ClassElement classElement) {
+    return classElement.allSupertypes
+        .where((interfaceType) => interfaceType.name == 'Built')
+        .single
+        .typeArguments
+        .map((element) => element.displayName)
+        .join(', ');
+  }
+
+  static String _getBuilderParameters(ClassElement classElement) {
+    return classElement.allSupertypes
+        .where((interfaceType) => interfaceType.name == 'Builder')
+        .single
+        .typeArguments
+        .map((element) => element.displayName)
+        .join(', ');
   }
 
   static String _getPartStatement(ClassElement classElement) {
@@ -108,6 +130,12 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
       result.add('Make class abstract.');
     }
 
+    final expectedBuildParameters = '$name, ${name}Builder';
+    if (builtParameters != expectedBuildParameters) {
+      result.add('Make class implement Built<$expectedBuildParameters>. '
+          'Currently: Built<$builtParameters>');
+    }
+
     final expectedConstructor = '$name._()';
     if (valueClassConstructors.length != 1 ||
         !(valueClassConstructors.single.startsWith(expectedConstructor))) {
@@ -131,6 +159,12 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
 
     if (!builderClassIsAbstract) {
       result.add('Make builder class abstract.');
+    }
+
+    final expectedBuilderParameters = '$name, ${name}Builder';
+    if (builderParameters != expectedBuilderParameters) {
+      result.add('Make builder class implement Builder<$expectedBuilderParameters>. '
+          'Currently: Builder<$builderParameters>');
     }
 
     final expectedConstructor = '${name}Builder._()';
@@ -258,7 +292,8 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
         // Nested builders are initialized to an empty builder, unless the
         // field is nullable.
         if (field.isNestedBuilder && !field.isNullable) {
-          result.writeln('${field.typeInBuilder} ${field.name} = new ${field.typeInBuilder}();');
+          result.writeln(
+              '${field.typeInBuilder} ${field.name} = new ${field.typeInBuilder}();');
         } else {
           result.writeln('${field.typeInBuilder} ${field.name};');
         }
@@ -299,7 +334,9 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
 abstract class SourceClassBuilder
     implements Builder<SourceClass, SourceClassBuilder> {
   String name;
+  String builtParameters;
   bool hasBuilder;
+  String builderParameters = '';
   ListBuilder<SourceField> fields = new ListBuilder<SourceField>();
 
   String partStatement;

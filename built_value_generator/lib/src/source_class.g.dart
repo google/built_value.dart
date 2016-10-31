@@ -9,7 +9,9 @@ part of built_value_generator.source_class;
 
 class _$SourceClass extends SourceClass {
   final String name;
+  final String builtParameters;
   final bool hasBuilder;
+  final String builderParameters;
   final BuiltList<SourceField> fields;
   final String partStatement;
   final bool hasPartStatement;
@@ -22,7 +24,9 @@ class _$SourceClass extends SourceClass {
 
   _$SourceClass._(
       {this.name,
+      this.builtParameters,
       this.hasBuilder,
+      this.builderParameters,
       this.fields,
       this.partStatement,
       this.hasPartStatement,
@@ -34,7 +38,11 @@ class _$SourceClass extends SourceClass {
       this.builderClassFactories})
       : super._() {
     if (name == null) throw new ArgumentError('null name');
+    if (builtParameters == null)
+      throw new ArgumentError('null builtParameters');
     if (hasBuilder == null) throw new ArgumentError('null hasBuilder');
+    if (builderParameters == null)
+      throw new ArgumentError('null builderParameters');
     if (fields == null) throw new ArgumentError('null fields');
     if (partStatement == null) throw new ArgumentError('null partStatement');
     if (hasPartStatement == null)
@@ -64,7 +72,9 @@ class _$SourceClass extends SourceClass {
   bool operator ==(other) {
     if (other is! SourceClass) return false;
     return name == other.name &&
+        builtParameters == other.builtParameters &&
         hasBuilder == other.hasBuilder &&
+        builderParameters == other.builderParameters &&
         fields == other.fields &&
         partStatement == other.partStatement &&
         hasPartStatement == other.hasPartStatement &&
@@ -79,7 +89,9 @@ class _$SourceClass extends SourceClass {
   int get hashCode {
     return hashObjects([
       name,
+      builtParameters,
       hasBuilder,
+      builderParameters,
       fields,
       partStatement,
       hasPartStatement,
@@ -95,7 +107,9 @@ class _$SourceClass extends SourceClass {
   String toString() {
     return 'SourceClass {'
         'name=${name.toString()},\n'
+        'builtParameters=${builtParameters.toString()},\n'
         'hasBuilder=${hasBuilder.toString()},\n'
+        'builderParameters=${builderParameters.toString()},\n'
         'fields=${fields.toString()},\n'
         'partStatement=${partStatement.toString()},\n'
         'hasPartStatement=${hasPartStatement.toString()},\n'
@@ -113,7 +127,9 @@ class _$SourceClassBuilder extends SourceClassBuilder {
   _$SourceClassBuilder() : super._();
   void replace(SourceClass other) {
     super.name = other.name;
+    super.builtParameters = other.builtParameters;
     super.hasBuilder = other.hasBuilder;
+    super.builderParameters = other.builderParameters;
     super.fields = other.fields?.toBuilder();
     super.partStatement = other.partStatement;
     super.hasPartStatement = other.hasPartStatement;
@@ -133,7 +149,9 @@ class _$SourceClassBuilder extends SourceClassBuilder {
   SourceClass build() {
     return new _$SourceClass._(
         name: name,
+        builtParameters: builtParameters,
         hasBuilder: hasBuilder,
+        builderParameters: builderParameters,
         fields: fields?.build(),
         partStatement: partStatement,
         hasPartStatement: hasPartStatement,

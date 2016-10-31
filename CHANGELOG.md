@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6 (not yet released)
+
+- Add checking for correct type arguments for Built and Builder interfaces.
+
 ## 0.1.5
 
 - Allow quiver 0.23.
