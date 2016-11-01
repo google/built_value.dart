@@ -39,6 +39,23 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 }'''), contains("1. Make class abstract."));
     });
 
+    test('suggests correct Built type parameters', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Foo, Bar> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Make class implement Built<Value, ValueBuilder>. '
+              'Currently: Built<dynamic, dynamic>'));
+    });
+
     test('suggests to add constructor to value class', () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
@@ -112,6 +129,24 @@ class ValueBuilder extends Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains("1. Make builder class abstract"));
+    });
+
+    test('suggests correct Builder type parameters', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder extends Builder<Foo, Bar> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains(
+              '1. Make builder class implement Builder<Value, ValueBuilder>. '
+              'Currently: Builder<dynamic, dynamic>'));
     });
 
     test('suggests to add constructor to builder class', () async {
