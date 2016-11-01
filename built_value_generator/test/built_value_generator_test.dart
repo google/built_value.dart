@@ -275,6 +275,23 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   set foo(int foo) => print(foo);
 }'''), isNot(contains('TODO')));
     });
+
+    test('generates empty constructor with semicolon not braces', () async {
+      final generated = await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}
+''');
+      expect(generated, isNot(contains('super._() {}')));
+      expect(generated, contains('super._();'));
+    });
   });
 }
 
