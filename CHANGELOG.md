@@ -3,6 +3,7 @@
 ## 0.1.6 (not yet released)
 
 - Add checking for correct type arguments for Built and Builder interfaces.
+- Generate empty constructor with semicolon instead of {}.
 
 ## 0.1.5
 

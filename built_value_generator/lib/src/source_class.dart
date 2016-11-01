@@ -207,17 +207,23 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
     result.writeln();
 
     if (fields.isEmpty) {
-      result.write('_\$$name._() : super._() {');
+      result.write('_\$$name._() : super._()');
     } else {
       result.write('_\$$name._({');
       result.write(fields.map((field) => 'this.${field.name}').join(', '));
-      result.write('}) : super._() {');
+      result.write('}) : super._()');
     }
-    for (final field in fields.where((field) => !field.isNullable)) {
-      result.writeln("if (${field.name} == null) "
-          "throw new ArgumentError('null ${field.name}');");
+    final requiredFields = fields.where((field) => !field.isNullable);
+    if (requiredFields.isEmpty){
+      result.writeln(';');
+    } else {
+      result.writeln('{');
+      for (final field in requiredFields) {
+        result.writeln("if (${field.name} == null) "
+            "throw new ArgumentError('null ${field.name}');");
+      }
+      result.writeln('}');
     }
-    result.writeln('}');
     result.writeln();
 
     result.writeln('factory _\$$name([updates(${name}Builder b)]) '
