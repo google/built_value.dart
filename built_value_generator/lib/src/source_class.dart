@@ -259,9 +259,11 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
     if (fields.length == 0) {
       result.writeln('return ${name.hashCode};');
     } else {
-      result.writeln('return hashObjects([');
-      result.write(fields.map((field) => field.name).join(', '));
-      result.writeln(']);');
+      result.writeln(r'return $jf(');
+      result.writeln(r'$jc(' * fields.length);
+      result.writeln('0, ');
+      result.write(fields.map((field) => '${field.name}.hashCode').join('), '));
+      result.writeln('));');
     }
     result.writeln('}');
     result.writeln();

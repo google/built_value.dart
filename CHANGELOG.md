@@ -6,6 +6,7 @@
 - Generate empty constructor with semicolon instead of {}.
 - Use ArgumentError.notNull for null errors.
 - Reject dynamic fields.
+- Add simple benchmark for hashing. Improve hashing performance.
 
 ## 0.1.5
 

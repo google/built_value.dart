@@ -31,11 +31,11 @@ class _$Collections extends Collections {
       this.nullableListMultimap,
       this.nullableSetMultimap})
       : super._() {
-    if (list == null) throw new ArgumentError('null list');
-    if (set == null) throw new ArgumentError('null set');
-    if (map == null) throw new ArgumentError('null map');
-    if (listMultimap == null) throw new ArgumentError('null listMultimap');
-    if (setMultimap == null) throw new ArgumentError('null setMultimap');
+    if (list == null) throw new ArgumentError.notNull('list');
+    if (set == null) throw new ArgumentError.notNull('set');
+    if (map == null) throw new ArgumentError.notNull('map');
+    if (listMultimap == null) throw new ArgumentError.notNull('listMultimap');
+    if (setMultimap == null) throw new ArgumentError.notNull('setMultimap');
   }
 
   factory _$Collections([updates(CollectionsBuilder b)]) =>
@@ -61,18 +61,22 @@ class _$Collections extends Collections {
   }
 
   int get hashCode {
-    return hashObjects([
-      list,
-      set,
-      map,
-      listMultimap,
-      setMultimap,
-      nullableList,
-      nullableSet,
-      nullableMap,
-      nullableListMultimap,
-      nullableSetMultimap
-    ]);
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc($jc($jc(0, list.hashCode), set.hashCode),
+                                    map.hashCode),
+                                listMultimap.hashCode),
+                            setMultimap.hashCode),
+                        nullableList.hashCode),
+                    nullableSet.hashCode),
+                nullableMap.hashCode),
+            nullableListMultimap.hashCode),
+        nullableSetMultimap.hashCode));
   }
 
   String toString() {
