@@ -240,6 +240,17 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 }'''), contains("1. Make field foo a getter."));
     });
 
+    test('rejects unresolved fields', () async {
+      expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  NotFound get foo;
+}'''), contains("1. Make field foo have non-dynamic type."));
+    });
+
     test('suggests builder fields must be getters', () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';

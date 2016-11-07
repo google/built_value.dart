@@ -116,6 +116,10 @@ abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
       result.add('Make field $name a getter.');
     }
 
+    if (type == 'dynamic') {
+      result.add('Make field $name have non-dynamic type.');
+    }
+
     if (builderFieldExists &&
         type != typeInBuilder &&
         // TODO(davidmorgan): smarter check for builder types.

@@ -5,6 +5,7 @@
 - Add checking for correct type arguments for Built and Builder interfaces.
 - Generate empty constructor with semicolon instead of {}.
 - Use ArgumentError.notNull for null errors.
+- Reject dynamic fields.
 
 ## 0.1.5
 
