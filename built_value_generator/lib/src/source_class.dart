@@ -7,6 +7,7 @@ library built_value_generator.source_class;
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value_generator/src/built_parameters_visitor.dart';
 import 'package:built_value_generator/src/source_field.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
@@ -42,7 +43,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
     final result = new SourceClassBuilder();
     result
       ..name = name
-      ..builtParameters = _getBuildParameters(classElement)
+      ..builtParameters = _getBuiltParameters(classElement)
       ..hasBuilder = hasBuilder
       ..partStatement = _getPartStatement(classElement)
       ..hasPartStatement = _getHasPartStatement(classElement)
@@ -73,13 +74,10 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
     return result.build();
   }
 
-  static String _getBuildParameters(ClassElement classElement) {
-    return classElement.allSupertypes
-        .where((interfaceType) => interfaceType.name == 'Built')
-        .single
-        .typeArguments
-        .map((element) => element.displayName)
-        .join(', ');
+  static String _getBuiltParameters(ClassElement classElement) {
+    final visitor = new BuiltParametersVisitor();
+    classElement.computeNode().accept(visitor);
+    return visitor.result;
   }
 
   static String _getBuilderParameters(ClassElement classElement) {
