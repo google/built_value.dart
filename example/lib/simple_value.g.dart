@@ -12,7 +12,7 @@ class _$SimpleValue extends SimpleValue {
   final String aString;
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError('null anInt');
+    if (anInt == null) throw new ArgumentError.notNull('anInt');
   }
 
   factory _$SimpleValue([updates(SimpleValueBuilder b)]) =>
@@ -29,7 +29,7 @@ class _$SimpleValue extends SimpleValue {
   }
 
   int get hashCode {
-    return hashObjects([anInt, aString]);
+    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
   }
 
   String toString() {

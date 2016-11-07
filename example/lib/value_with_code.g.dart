@@ -12,7 +12,7 @@ class _$ValueWithCode extends ValueWithCode {
   final String aString;
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError('null anInt');
+    if (anInt == null) throw new ArgumentError.notNull('anInt');
   }
 
   factory _$ValueWithCode([updates(ValueWithCodeBuilder b)]) =>
@@ -29,7 +29,7 @@ class _$ValueWithCode extends ValueWithCode {
   }
 
   int get hashCode {
-    return hashObjects([anInt, aString]);
+    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
   }
 
   String toString() {

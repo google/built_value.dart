@@ -8,6 +8,3 @@ homepage: https://github.com/google/built_value.dart
 
 environment:
   sdk: '>=1.8.0 <2.0.0'
-
-dependencies:
-  quiver: '>=0.21.0 <0.24.0'
