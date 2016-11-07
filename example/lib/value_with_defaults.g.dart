@@ -12,7 +12,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
   final String aString;
 
   _$ValueWithDefaults._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError('null anInt');
+    if (anInt == null) throw new ArgumentError.notNull('anInt');
   }
 
   factory _$ValueWithDefaults([updates(ValueWithDefaultsBuilder b)]) =>
@@ -30,7 +30,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
   }
 
   int get hashCode {
-    return hashObjects([anInt, aString]);
+    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
   }
 
   String toString() {

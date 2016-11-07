@@ -4,6 +4,7 @@
 
 import 'package:example/compound_value.dart';
 import 'package:example/validated_value.dart';
+import 'package:quiver/core.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -27,6 +28,15 @@ void main() {
             ..validatedValue = new ValidatedValueBuilder()
             ..validatedValue.anInt = 2).validatedValue.anInt,
           2);
+    });
+
+    test('hash matches quiver hash', () {
+      final value = new CompoundValue((b) => b
+        ..simpleValue.anInt = 1
+        ..simpleValue.aString = 'two');
+
+      expect(value.hashCode,
+          hashObjects([value.simpleValue, value.validatedValue]));
     });
   });
 }

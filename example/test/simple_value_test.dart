@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:example/simple_value.dart';
+import 'package:quiver/core.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -59,6 +60,13 @@ void main() {
         ..anInt = 1
         ..aString = '');
       expect(value1, isNot(equals(value2)));
+    });
+
+    test('hash matches quiver hash', () {
+      final value = new SimpleValue((b) => b
+        ..anInt = 73
+        ..aString = 'seventythree');
+      expect(value.hashCode, hashObjects([value.anInt, value.aString]));
     });
 
     test('hashes equal when equal', () {

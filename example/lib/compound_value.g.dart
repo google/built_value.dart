@@ -12,7 +12,7 @@ class _$CompoundValue extends CompoundValue {
   final ValidatedValue validatedValue;
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
-    if (simpleValue == null) throw new ArgumentError('null simpleValue');
+    if (simpleValue == null) throw new ArgumentError.notNull('simpleValue');
   }
 
   factory _$CompoundValue([updates(CompoundValueBuilder b)]) =>
@@ -30,7 +30,7 @@ class _$CompoundValue extends CompoundValue {
   }
 
   int get hashCode {
-    return hashObjects([simpleValue, validatedValue]);
+    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
   }
 
   String toString() {

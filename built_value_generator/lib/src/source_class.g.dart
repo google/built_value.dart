@@ -87,21 +87,30 @@ class _$SourceClass extends SourceClass {
   }
 
   int get hashCode {
-    return hashObjects([
-      name,
-      builtParameters,
-      hasBuilder,
-      builderParameters,
-      fields,
-      partStatement,
-      hasPartStatement,
-      valueClassIsAbstract,
-      valueClassConstructors,
-      valueClassFactories,
-      builderClassIsAbstract,
-      builderClassConstructors,
-      builderClassFactories
-    ]);
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc(
+                                        $jc(
+                                            $jc(
+                                                $jc($jc(0, name.hashCode),
+                                                    builtParameters.hashCode),
+                                                hasBuilder.hashCode),
+                                            builderParameters.hashCode),
+                                        fields.hashCode),
+                                    partStatement.hashCode),
+                                hasPartStatement.hashCode),
+                            valueClassIsAbstract.hashCode),
+                        valueClassConstructors.hashCode),
+                    valueClassFactories.hashCode),
+                builderClassIsAbstract.hashCode),
+            builderClassConstructors.hashCode),
+        builderClassFactories.hashCode));
   }
 
   String toString() {

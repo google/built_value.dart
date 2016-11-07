@@ -61,16 +61,18 @@ class _$SourceField extends SourceField {
   }
 
   int get hashCode {
-    return hashObjects([
-      name,
-      type,
-      isGetter,
-      isNullable,
-      builderFieldExists,
-      builderFieldIsNormalField,
-      typeInBuilder,
-      isNestedBuilder
-    ]);
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc($jc($jc(0, name.hashCode), type.hashCode),
+                            isGetter.hashCode),
+                        isNullable.hashCode),
+                    builderFieldExists.hashCode),
+                builderFieldIsNormalField.hashCode),
+            typeInBuilder.hashCode),
+        isNestedBuilder.hashCode));
   }
 
   String toString() {
