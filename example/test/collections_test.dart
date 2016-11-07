@@ -4,6 +4,7 @@
 
 import 'package:built_collection/built_collection.dart';
 import 'package:example/collections.dart';
+import 'package:quiver/core.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -69,6 +70,30 @@ void main() {
       expect(collections.nullableSetMultimap.toMap(), {
         'six': [false]
       });
+    });
+
+    test('hash matches quiver hash', () {
+      final collections = new Collections((b) => b
+        ..list.add(1)
+        ..set.add('two')
+        ..map['three'] = 4
+        ..listMultimap.add(5, true)
+        ..setMultimap.add('six', false));
+
+      expect(
+          collections.hashCode,
+          hashObjects([
+            collections.list,
+            collections.set,
+            collections.map,
+            collections.listMultimap,
+            collections.setMultimap,
+            collections.nullableList,
+            collections.nullableSet,
+            collections.nullableMap,
+            collections.nullableListMultimap,
+            collections.nullableSetMultimap,
+          ]));
     });
   });
 }

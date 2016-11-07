@@ -12,7 +12,7 @@ class _$ValidatedValue extends ValidatedValue {
   final String aString;
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError('null anInt');
+    if (anInt == null) throw new ArgumentError.notNull('anInt');
   }
 
   factory _$ValidatedValue([updates(ValidatedValueBuilder b)]) =>
@@ -30,7 +30,7 @@ class _$ValidatedValue extends ValidatedValue {
   }
 
   int get hashCode {
-    return hashObjects([anInt, aString]);
+    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
   }
 
   String toString() {
