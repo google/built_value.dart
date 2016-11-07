@@ -53,7 +53,34 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   factory ValueBuilder() = _\$ValueBuilder;
 }'''),
           contains('1. Make class implement Built<Value, ValueBuilder>. '
-              'Currently: Built<dynamic, dynamic>'));
+              'Currently: Built<Foo, Bar>'));
+    });
+
+    test('suggests correct Built type parameters for implements', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Foo, Bar> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Make class implement Built<Value, ValueBuilder>. '
+              'Currently: Built<Foo, Bar>'));
+    });
+
+    test('handles unresolved Built type parameters', () async {
+      expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}'''), isNot(contains('1.')));
     });
 
     test('suggests to add constructor to value class', () async {
@@ -273,7 +300,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   set foo(int foo) => print(foo);
-}'''), isNot(contains('TODO')));
+}'''), isNot(contains('1.')));
     });
 
     test('generates empty constructor with semicolon not braces', () async {
