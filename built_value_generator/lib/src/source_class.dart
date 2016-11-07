@@ -218,7 +218,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
       result.writeln('{');
       for (final field in requiredFields) {
         result.writeln("if (${field.name} == null) "
-            "throw new ArgumentError('null ${field.name}');");
+            "throw new ArgumentError.notNull('${field.name}');");
       }
       result.writeln('}');
     }
