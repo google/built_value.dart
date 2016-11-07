@@ -27,17 +27,17 @@ class _$SourceField extends SourceField {
       this.typeInBuilder,
       this.isNestedBuilder})
       : super._() {
-    if (name == null) throw new ArgumentError('null name');
-    if (type == null) throw new ArgumentError('null type');
-    if (isGetter == null) throw new ArgumentError('null isGetter');
-    if (isNullable == null) throw new ArgumentError('null isNullable');
+    if (name == null) throw new ArgumentError.notNull('name');
+    if (type == null) throw new ArgumentError.notNull('type');
+    if (isGetter == null) throw new ArgumentError.notNull('isGetter');
+    if (isNullable == null) throw new ArgumentError.notNull('isNullable');
     if (builderFieldExists == null)
-      throw new ArgumentError('null builderFieldExists');
+      throw new ArgumentError.notNull('builderFieldExists');
     if (builderFieldIsNormalField == null)
-      throw new ArgumentError('null builderFieldIsNormalField');
-    if (typeInBuilder == null) throw new ArgumentError('null typeInBuilder');
+      throw new ArgumentError.notNull('builderFieldIsNormalField');
+    if (typeInBuilder == null) throw new ArgumentError.notNull('typeInBuilder');
     if (isNestedBuilder == null)
-      throw new ArgumentError('null isNestedBuilder');
+      throw new ArgumentError.notNull('isNestedBuilder');
   }
 
   factory _$SourceField([updates(SourceFieldBuilder b)]) =>

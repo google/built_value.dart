@@ -37,28 +37,28 @@ class _$SourceClass extends SourceClass {
       this.builderClassConstructors,
       this.builderClassFactories})
       : super._() {
-    if (name == null) throw new ArgumentError('null name');
+    if (name == null) throw new ArgumentError.notNull('name');
     if (builtParameters == null)
-      throw new ArgumentError('null builtParameters');
-    if (hasBuilder == null) throw new ArgumentError('null hasBuilder');
+      throw new ArgumentError.notNull('builtParameters');
+    if (hasBuilder == null) throw new ArgumentError.notNull('hasBuilder');
     if (builderParameters == null)
-      throw new ArgumentError('null builderParameters');
-    if (fields == null) throw new ArgumentError('null fields');
-    if (partStatement == null) throw new ArgumentError('null partStatement');
+      throw new ArgumentError.notNull('builderParameters');
+    if (fields == null) throw new ArgumentError.notNull('fields');
+    if (partStatement == null) throw new ArgumentError.notNull('partStatement');
     if (hasPartStatement == null)
-      throw new ArgumentError('null hasPartStatement');
+      throw new ArgumentError.notNull('hasPartStatement');
     if (valueClassIsAbstract == null)
-      throw new ArgumentError('null valueClassIsAbstract');
+      throw new ArgumentError.notNull('valueClassIsAbstract');
     if (valueClassConstructors == null)
-      throw new ArgumentError('null valueClassConstructors');
+      throw new ArgumentError.notNull('valueClassConstructors');
     if (valueClassFactories == null)
-      throw new ArgumentError('null valueClassFactories');
+      throw new ArgumentError.notNull('valueClassFactories');
     if (builderClassIsAbstract == null)
-      throw new ArgumentError('null builderClassIsAbstract');
+      throw new ArgumentError.notNull('builderClassIsAbstract');
     if (builderClassConstructors == null)
-      throw new ArgumentError('null builderClassConstructors');
+      throw new ArgumentError.notNull('builderClassConstructors');
     if (builderClassFactories == null)
-      throw new ArgumentError('null builderClassFactories');
+      throw new ArgumentError.notNull('builderClassFactories');
   }
 
   factory _$SourceClass([updates(SourceClassBuilder b)]) =>
