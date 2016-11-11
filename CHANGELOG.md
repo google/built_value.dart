@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.6 (not yet released)
+## 0.1.6
 
 - Add checking for correct type arguments for Built and Builder interfaces.
 - Generate empty constructor with semicolon instead of {}.
