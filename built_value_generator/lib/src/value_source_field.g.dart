@@ -4,10 +4,10 @@ part of built_value_generator.source_field;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: abstract class SourceField
+// Target: abstract class ValueSourceField
 // **************************************************************************
 
-class _$SourceField extends SourceField {
+class _$ValueSourceField extends ValueSourceField {
   final String name;
   final String type;
   final bool isGetter;
@@ -17,7 +17,7 @@ class _$SourceField extends SourceField {
   final String typeInBuilder;
   final bool isNestedBuilder;
 
-  _$SourceField._(
+  _$ValueSourceField._(
       {this.name,
       this.type,
       this.isGetter,
@@ -40,16 +40,17 @@ class _$SourceField extends SourceField {
       throw new ArgumentError.notNull('isNestedBuilder');
   }
 
-  factory _$SourceField([updates(SourceFieldBuilder b)]) =>
-      (new SourceFieldBuilder()..update(updates)).build();
+  factory _$ValueSourceField([updates(ValueSourceFieldBuilder b)]) =>
+      (new ValueSourceFieldBuilder()..update(updates)).build();
 
-  SourceField rebuild(updates(SourceFieldBuilder b)) =>
+  ValueSourceField rebuild(updates(ValueSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
-  _$SourceFieldBuilder toBuilder() => new _$SourceFieldBuilder()..replace(this);
+  _$ValueSourceFieldBuilder toBuilder() =>
+      new _$ValueSourceFieldBuilder()..replace(this);
 
   bool operator ==(other) {
-    if (other is! SourceField) return false;
+    if (other is! ValueSourceField) return false;
     return name == other.name &&
         type == other.type &&
         isGetter == other.isGetter &&
@@ -76,7 +77,7 @@ class _$SourceField extends SourceField {
   }
 
   String toString() {
-    return 'SourceField {'
+    return 'ValueSourceField {'
         'name=${name.toString()},\n'
         'type=${type.toString()},\n'
         'isGetter=${isGetter.toString()},\n'
@@ -89,9 +90,9 @@ class _$SourceField extends SourceField {
   }
 }
 
-class _$SourceFieldBuilder extends SourceFieldBuilder {
-  _$SourceFieldBuilder() : super._();
-  void replace(SourceField other) {
+class _$ValueSourceFieldBuilder extends ValueSourceFieldBuilder {
+  _$ValueSourceFieldBuilder() : super._();
+  void replace(ValueSourceField other) {
     super.name = other.name;
     super.type = other.type;
     super.isGetter = other.isGetter;
@@ -102,12 +103,12 @@ class _$SourceFieldBuilder extends SourceFieldBuilder {
     super.isNestedBuilder = other.isNestedBuilder;
   }
 
-  void update(updates(SourceFieldBuilder b)) {
+  void update(updates(ValueSourceFieldBuilder b)) {
     if (updates != null) updates(this);
   }
 
-  SourceField build() {
-    return new _$SourceField._(
+  ValueSourceField build() {
+    return new _$ValueSourceField._(
         name: name,
         type: type,
         isGetter: isGetter,

@@ -1,10 +1,14 @@
 name: built_value
-version: 0.1.6
+version: 0.2.0
 description: >
-  Value types with builders. This library is the runtime dependency.
+  Value types with builders, Dart classes as enums. This library is the runtime
+  dependency.
 authors:
 - David Morgan <davidmorgan@google.com>
 homepage: https://github.com/google/built_value.dart
 
 environment:
   sdk: '>=1.8.0 <2.0.0'
+
+dev_dependencies:
+  test: any

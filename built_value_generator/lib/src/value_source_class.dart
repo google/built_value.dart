@@ -8,18 +8,19 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/built_parameters_visitor.dart';
-import 'package:built_value_generator/src/source_field.dart';
+import 'package:built_value_generator/src/value_source_field.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
-part 'source_class.g.dart';
+part 'value_source_class.g.dart';
 
-abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
+abstract class ValueSourceClass
+    implements Built<ValueSourceClass, ValueSourceClassBuilder> {
   String get name;
   String get builtParameters;
   bool get hasBuilder;
   String get builderParameters;
-  BuiltList<SourceField> get fields;
+  BuiltList<ValueSourceField> get fields;
 
   String get partStatement;
   bool get hasPartStatement;
@@ -32,15 +33,16 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
   BuiltList<String> get builderClassConstructors;
   BuiltList<String> get builderClassFactories;
 
-  SourceClass._();
-  factory SourceClass([updates(SourceClassBuilder b)]) = _$SourceClass;
+  ValueSourceClass._();
+  factory ValueSourceClass([updates(ValueSourceClassBuilder b)]) =
+      _$ValueSourceClass;
 
-  factory SourceClass.fromClassElement(ClassElement classElement) {
+  factory ValueSourceClass.fromClassElement(ClassElement classElement) {
     final name = classElement.displayName;
     final builderClassElement = classElement.library.getType(name + 'Builder');
     final hasBuilder = builderClassElement != null;
 
-    final result = new SourceClassBuilder();
+    final result = new ValueSourceClassBuilder();
     result
       ..name = name
       ..builtParameters = _getBuiltParameters(classElement)
@@ -55,8 +57,8 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
       ..valueClassFactories.replace(classElement.constructors
           .where((constructor) => constructor.isFactory)
           .map((factory) => factory.computeNode().toSource()))
-      ..fields.replace(
-          SourceField.fromClassElements(classElement, builderClassElement));
+      ..fields.replace(ValueSourceField.fromClassElements(
+          classElement, builderClassElement));
 
     if (hasBuilder) {
       result
@@ -161,7 +163,8 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
 
     final expectedBuilderParameters = '$name, ${name}Builder';
     if (builderParameters != expectedBuilderParameters) {
-      result.add('Make builder class implement Builder<$expectedBuilderParameters>. '
+      result.add(
+          'Make builder class implement Builder<$expectedBuilderParameters>. '
           'Currently: Builder<$builderParameters>');
     }
 
@@ -212,7 +215,7 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
       result.write('}) : super._()');
     }
     final requiredFields = fields.where((field) => !field.isNullable);
-    if (requiredFields.isEmpty){
+    if (requiredFields.isEmpty) {
       result.writeln(';');
     } else {
       result.writeln('{');
@@ -337,13 +340,13 @@ abstract class SourceClass implements Built<SourceClass, SourceClassBuilder> {
   }
 }
 
-abstract class SourceClassBuilder
-    implements Builder<SourceClass, SourceClassBuilder> {
+abstract class ValueSourceClassBuilder
+    implements Builder<ValueSourceClass, ValueSourceClassBuilder> {
   String name;
   String builtParameters;
   bool hasBuilder;
   String builderParameters = '';
-  ListBuilder<SourceField> fields = new ListBuilder<SourceField>();
+  ListBuilder<ValueSourceField> fields = new ListBuilder<ValueSourceField>();
 
   String partStatement;
   bool hasPartStatement;
@@ -356,8 +359,8 @@ abstract class SourceClassBuilder
   ListBuilder<String> builderClassConstructors = new ListBuilder<String>();
   ListBuilder<String> builderClassFactories = new ListBuilder<String>();
 
-  SourceClassBuilder._();
-  factory SourceClassBuilder() = _$SourceClassBuilder;
+  ValueSourceClassBuilder._();
+  factory ValueSourceClassBuilder() = _$ValueSourceClassBuilder;
 }
 
 InvalidGenerationSourceError _makeError(Iterable<String> todos) {

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Merged enum_class and enum_class_generator into built_value and
+  built_value_generator. These are intended to be used together, and make
+  more sense as a single package.
+
 ## 0.1.6
 
 - Add checking for correct type arguments for Built and Builder interfaces.

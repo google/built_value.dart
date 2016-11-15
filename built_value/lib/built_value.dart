@@ -9,7 +9,7 @@ library built_value;
 /// Then use built_value_generator.dart code generation functionality to
 /// provide the rest of the implementation.
 ///
-/// See <https://github.com/google/built_value.dart/tree/master/example>
+/// See https://github.com/google/built_value.dart/tree/master/example
 abstract class Built<V extends Built<V, B>, B extends Builder<V, B>> {
   /// Rebuilds the instance.
   ///
@@ -57,6 +57,21 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
 //
 // Fields marked with this annotation are allowed to be null.
 const String nullable = 'nullable';
+
+/// Enum Class base class.
+///
+/// Extend this class then use the built_value.dart code generation
+/// functionality to provide the rest of the implementation.
+///
+/// See https://github.com/google/built_value.dart/tree/master/example
+class EnumClass {
+  final String name;
+
+  const EnumClass(this.name);
+
+  @override
+  String toString() => name;
+}
 
 /// For use by generated code in calculating hash codes. Do not use directly.
 int $jc(int hash, int value) {
