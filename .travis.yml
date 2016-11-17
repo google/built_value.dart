@@ -2,7 +2,10 @@
 language: dart
 dart: stable
 script:
-  - cd built_value_generator
+  - cd built_value
+  - pub get
+  - pub run test
+  - cd ../built_value_generator
   - pub get
   - pub run test
   - cd ../example

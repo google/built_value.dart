@@ -4,15 +4,15 @@ part of built_value_generator.source_class;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: abstract class SourceClass
+// Target: abstract class ValueSourceClass
 // **************************************************************************
 
-class _$SourceClass extends SourceClass {
+class _$ValueSourceClass extends ValueSourceClass {
   final String name;
   final String builtParameters;
   final bool hasBuilder;
   final String builderParameters;
-  final BuiltList<SourceField> fields;
+  final BuiltList<ValueSourceField> fields;
   final String partStatement;
   final bool hasPartStatement;
   final bool valueClassIsAbstract;
@@ -22,7 +22,7 @@ class _$SourceClass extends SourceClass {
   final BuiltList<String> builderClassConstructors;
   final BuiltList<String> builderClassFactories;
 
-  _$SourceClass._(
+  _$ValueSourceClass._(
       {this.name,
       this.builtParameters,
       this.hasBuilder,
@@ -61,16 +61,17 @@ class _$SourceClass extends SourceClass {
       throw new ArgumentError.notNull('builderClassFactories');
   }
 
-  factory _$SourceClass([updates(SourceClassBuilder b)]) =>
-      (new SourceClassBuilder()..update(updates)).build();
+  factory _$ValueSourceClass([updates(ValueSourceClassBuilder b)]) =>
+      (new ValueSourceClassBuilder()..update(updates)).build();
 
-  SourceClass rebuild(updates(SourceClassBuilder b)) =>
+  ValueSourceClass rebuild(updates(ValueSourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
-  _$SourceClassBuilder toBuilder() => new _$SourceClassBuilder()..replace(this);
+  _$ValueSourceClassBuilder toBuilder() =>
+      new _$ValueSourceClassBuilder()..replace(this);
 
   bool operator ==(other) {
-    if (other is! SourceClass) return false;
+    if (other is! ValueSourceClass) return false;
     return name == other.name &&
         builtParameters == other.builtParameters &&
         hasBuilder == other.hasBuilder &&
@@ -114,7 +115,7 @@ class _$SourceClass extends SourceClass {
   }
 
   String toString() {
-    return 'SourceClass {'
+    return 'ValueSourceClass {'
         'name=${name.toString()},\n'
         'builtParameters=${builtParameters.toString()},\n'
         'hasBuilder=${hasBuilder.toString()},\n'
@@ -132,9 +133,9 @@ class _$SourceClass extends SourceClass {
   }
 }
 
-class _$SourceClassBuilder extends SourceClassBuilder {
-  _$SourceClassBuilder() : super._();
-  void replace(SourceClass other) {
+class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
+  _$ValueSourceClassBuilder() : super._();
+  void replace(ValueSourceClass other) {
     super.name = other.name;
     super.builtParameters = other.builtParameters;
     super.hasBuilder = other.hasBuilder;
@@ -151,12 +152,12 @@ class _$SourceClassBuilder extends SourceClassBuilder {
     super.builderClassFactories = other.builderClassFactories?.toBuilder();
   }
 
-  void update(updates(SourceClassBuilder b)) {
+  void update(updates(ValueSourceClassBuilder b)) {
     if (updates != null) updates(this);
   }
 
-  SourceClass build() {
-    return new _$SourceClass._(
+  ValueSourceClass build() {
+    return new _$ValueSourceClass._(
         name: name,
         builtParameters: builtParameters,
         hasBuilder: hasBuilder,

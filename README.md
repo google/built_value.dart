@@ -2,7 +2,8 @@
 [![Build Status](https://travis-ci.org/google/built_value.dart.svg?branch=master)](https://travis-ci.org/google/built_value.dart)
 ## Introduction
 
-Built Values provides immutable "value types" for Dart and is part of
+Built Values provides immutable "value types" and Enum Classes for Dart and 
+is part of the
 [Libraries for Object Oriented Dart](https://github.com/google/built_value.dart/blob/master/libraries_for_object_oriented_dart.md#libraries-for-object-oriented-dart).
 
 ## Value Types
@@ -16,9 +17,6 @@ version of `Account` and `User`.
 
 Value types are very commonly sent by RPC and/or stored for later
 retrieval.
-
-
-## Motivation
 
 The problems that led to the creation of the Built Value library have
 been [discussed at great length](https://docs.google.com/presentation/d/14u_h-lMn7f1rXE1nDiLX0azS3IkgjGl5uxp5jGJ75RE/edit)
@@ -40,12 +38,27 @@ the same for Dart. The boilerplate is generated for you, leaving you to
 specify which fields you need and to add code for the behaviour of the
 class.
 
+## Enum Class
+
+Enum Classes provide classes with enum features.
+
+Enums are very helpful in modelling the real world: whenever there are a
+small fixed set of options, an enum is a natural choice. For an object
+oriented design, though, enums need to be classes. Dart falls short here,
+so Enum Classes provide what's missing!
+
+Design:
+
+* Constants have `name` and `toString`, can be used in `switch` statements,
+  and are real classes that can hold code and implement interfaces
+* Generated `values` method that returns all the enum values in a `BuiltSet` (immutable set)
+* Generated `valueOf` method that takes a `String`
 
 ## Examples
 
 See
 [this example](https://github.com/google/built_value.dart/tree/master/example)
-for a full project with a `build.dart` and some example value types.
+for a full project with a `build.dart`, some example value types and an enum.
 
 ## Features and bugs
 

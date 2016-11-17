@@ -9,18 +9,15 @@ than it needs to be.
 
 ## Overview
 
-Libraries for Object Oriented Dart contains four powerful libraries that help
+Libraries for Object Oriented Dart contains three powerful libraries that help
 translate object oriented designs into implementations with minimum overhead,
 freeing developers to focus on the task at hand.
-
-* [enum_class.dart](https://github.com/google/enum_class.dart#enum-classes-for-dart)
-  provides classes with enum features.
-  
+ 
 * [built_collection.dart](https://github.com/google/built_collection.dart#built-collections-for-dart)
   provides immutable, type safe collections.
   
 * [built_value.dart](https://github.com/google/built_value.dart#built-values-for-dart)
-  provides immutable "value types".
+  provides immutable "value types" and classes with enum features.
 
 For those familiar with Java, these provide equivalent functionality to
 standard Java enums,
@@ -28,10 +25,10 @@ standard Java enums,
 and
 [AutoValues](https://github.com/google/auto/tree/master/value#autovalue).
 
-The fourth library provides something with no direct equivalent in Java:
+The third library provides something with no direct equivalent in Java:
   
 * [built_json.dart](https://github.com/google/built_json.dart#built-json-for-dart)
-  provides dynamic, flexible JSON serialization for the other three libraries.
+  provides dynamic, flexible JSON serialization for the other two libraries.
 
 To complete the package, we'll make the whole stack compatible with Java:
 
@@ -43,10 +40,7 @@ To complete the package, we'll make the whole stack compatible with Java:
 
   
 ## Current Status
-
-* [enum_class.dart](https://github.com/google/enum_class.dart#enum-classes-for-dart)
-  is stable and production ready.
-  
+ 
 * [built_collection.dart](https://github.com/google/built_collection.dart#built-collections-for-dart)
   is stable and production ready.
   

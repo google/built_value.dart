@@ -9,7 +9,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
-part 'source_field.g.dart';
+part 'value_source_field.g.dart';
 
 BuiltSet<String> _builtCollectionNames = new BuiltSet<String>([
   'BuiltList',
@@ -19,7 +19,8 @@ BuiltSet<String> _builtCollectionNames = new BuiltSet<String>([
   'BuiltSetMultimap',
 ]);
 
-abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
+abstract class ValueSourceField
+    implements Built<ValueSourceField, ValueSourceFieldBuilder> {
   String get name;
   String get type;
   bool get isGetter;
@@ -29,12 +30,13 @@ abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
   String get typeInBuilder;
   bool get isNestedBuilder;
 
-  SourceField._();
-  factory SourceField([updates(SourceFieldBuilder b)]) = _$SourceField;
+  ValueSourceField._();
+  factory ValueSourceField([updates(ValueSourceFieldBuilder b)]) =
+      _$ValueSourceField;
 
-  factory SourceField.fromFieldElements(
+  factory ValueSourceField.fromFieldElements(
       FieldElement fieldElement, FieldElement builderFieldElement) {
-    final result = new SourceFieldBuilder();
+    final result = new ValueSourceFieldBuilder();
     final builderFieldExists = builderFieldElement != null;
     final type = fieldElement.getter.returnType.displayName;
     result
@@ -65,16 +67,16 @@ abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
     return result.build();
   }
 
-  static BuiltList<SourceField> fromClassElements(
+  static BuiltList<ValueSourceField> fromClassElements(
       ClassElement classElement, ClassElement builderClassElement) {
-    final result = new ListBuilder<SourceField>();
+    final result = new ListBuilder<ValueSourceField>();
 
     for (final field in classElement.fields) {
       if (!field.isStatic &&
           field.getter != null &&
           (field.getter.isAbstract || field.getter.isSynthetic)) {
         final builderField = builderClassElement?.getField(field.name);
-        result.add(new SourceField.fromFieldElements(field, builderField));
+        result.add(new ValueSourceField.fromFieldElements(field, builderField));
       }
     }
 
@@ -136,8 +138,8 @@ abstract class SourceField implements Built<SourceField, SourceFieldBuilder> {
   }
 }
 
-abstract class SourceFieldBuilder
-    implements Builder<SourceField, SourceFieldBuilder> {
+abstract class ValueSourceFieldBuilder
+    implements Builder<ValueSourceField, ValueSourceFieldBuilder> {
   String name;
   String type;
   bool isGetter;
@@ -147,6 +149,6 @@ abstract class SourceFieldBuilder
   String typeInBuilder;
   bool isNestedBuilder;
 
-  SourceFieldBuilder._();
-  factory SourceFieldBuilder() = _$SourceFieldBuilder;
+  ValueSourceFieldBuilder._();
+  factory ValueSourceFieldBuilder() = _$ValueSourceFieldBuilder;
 }
