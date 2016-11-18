@@ -1,0 +1,38 @@
+body {
+  overflow-y: scroll;
+}
+
+.input:focus {
+  outline: 0;
+}
+
+.screen {
+  background-color: black;
+  color: gray;
+  padding: 0px;
+  width: 48em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text {
+  width: 100%;
+  font-family: Ariel, sans-serif;
+  font-size: 16px;
+}
+
+.local {
+  color: green;
+}
+
+.input {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  font-family: Ariel, sans-serif;
+  font-size: 16px;
+  background-color: black;
+  color: green;
+  border-style: none;
+  width: 100%;
+}

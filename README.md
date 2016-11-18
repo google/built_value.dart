@@ -2,9 +2,10 @@
 [![Build Status](https://travis-ci.org/google/built_value.dart.svg?branch=master)](https://travis-ci.org/google/built_value.dart)
 ## Introduction
 
-Built Values provides immutable "value types" and Enum Classes for Dart and 
-is part of the
-[Libraries for Object Oriented Dart](https://github.com/google/built_value.dart/blob/master/libraries_for_object_oriented_dart.md#libraries-for-object-oriented-dart).
+Built Values provides immutable "value types" and Enum Classes. It uses
+[Built Collections]
+(https://github.com/google/built_collection.dart#built-collections-for-dart)
+and provides JSON serialization.
 
 ## Value Types
 
@@ -53,6 +54,56 @@ Design:
   and are real classes that can hold code and implement interfaces
 * Generated `values` method that returns all the enum values in a `BuiltSet` (immutable set)
 * Generated `valueOf` method that takes a `String`
+
+## Serialization
+
+Built Values comes with JSON serialization support which allows you to
+serialize a complete data model of Built Values, Enum Classes and
+Built Collections. The [chat example]
+(https://github.com/google/built_value.dart/tree/master/chat_example) shows 
+how easy this makes building a full application with Dart on the server and
+client.
+
+Here are the major features of the serialization support:
+
+It _fully supports object oriented design_: any object model that you can 
+design can be serialized, including full use of generics and interfaces.
+Some other libraries require concrete types or do not fully support generics.
+
+It _allows different object oriented models over the same data_. For
+example, in a client server application, it's likely that the client and server
+want different functionality from their data model. So, they are allowed to have
+different classes that map to the same data. Most other libraries enforce a 1:1
+mapping between classes and types on the wire.
+
+It _requires well behaved types_. They must be immutable, can use
+interface but not concrete inheritance, must have predictable nullability,
+`hashCode`, `equals` and `toString`. In fact, they must be Enum Classes, Built
+Collections or Built Values. Some other libraries allow badly behaved types to
+be serialized.
+
+It _supports changes to the data model_. Optional fields can be added or
+removed, and fields can be switched from optional to required, allowing your
+data model to evolve without breaking compatbility. Some other libraries break
+compatability on any change to any serializable class.
+
+It's _modular_. Each endpoint can choose which classes to know about;
+for example, you can have multiple clients that each know about only a subset of
+the classes the server knows. Most other libraries are monolithic, requiring all
+endpoints to know all types.
+
+It's _multi language_. Support will be come first for Dart, Java and
+Java/GWT. Many other libraries support a single language only.
+
+It _has first class support for validation_ via Built Values. An important 
+part of a powerful data model is ensuring it's valid, so classes can make
+guarantees about what they can do. Other libraries also support validation
+but usually in a less prominent way.
+
+It's _pluggable_. Arbitrary extensions can be added to give 
+custom JSON serialization for your own types. This could be used to
+interoperate with other tools or to add hand coded high performance serializers
+for specific classes. Some other libraries are not so extensible.
 
 ## Examples
 

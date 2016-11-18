@@ -4,6 +4,151 @@ part of collections;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
+// Target: library collections
+// **************************************************************************
+
+Serializer<Collections> _$collectionsSerializer = new _$CollectionsSerializer();
+
+class _$CollectionsSerializer implements StructuredSerializer<Collections> {
+  final Iterable<Type> types = const [Collections, _$Collections];
+  final String wireName = 'Collections';
+
+  @override
+  Iterable serialize(Serializers serializers, Collections object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = [
+      'list',
+      serializers.serialize(object.list,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(int)])),
+      'set',
+      serializers.serialize(object.set,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(String)])),
+      'map',
+      serializers.serialize(object.map,
+          specifiedType: const FullType(
+              BuiltMap, const [const FullType(String), const FullType(int)])),
+      'listMultimap',
+      serializers.serialize(object.listMultimap,
+          specifiedType: const FullType(BuiltListMultimap,
+              const [const FullType(int), const FullType(bool)])),
+      'setMultimap',
+      serializers.serialize(object.setMultimap,
+          specifiedType: const FullType(BuiltSetMultimap,
+              const [const FullType(String), const FullType(bool)])),
+    ];
+    if (object.nullableList != null) {
+      result.add('nullableList');
+      result.add(serializers.serialize(object.nullableList,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(int)])));
+    }
+    if (object.nullableSet != null) {
+      result.add('nullableSet');
+      result.add(serializers.serialize(object.nullableSet,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(String)])));
+    }
+    if (object.nullableMap != null) {
+      result.add('nullableMap');
+      result.add(serializers.serialize(object.nullableMap,
+          specifiedType: const FullType(
+              BuiltMap, const [const FullType(String), const FullType(int)])));
+    }
+    if (object.nullableListMultimap != null) {
+      result.add('nullableListMultimap');
+      result.add(serializers.serialize(object.nullableListMultimap,
+          specifiedType: const FullType(BuiltListMultimap,
+              const [const FullType(int), const FullType(bool)])));
+    }
+    if (object.nullableSetMultimap != null) {
+      result.add('nullableSetMultimap');
+      result.add(serializers.serialize(object.nullableSetMultimap,
+          specifiedType: const FullType(BuiltSetMultimap,
+              const [const FullType(String), const FullType(bool)])));
+    }
+
+    return result;
+  }
+
+  @override
+  Collections deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new CollectionsBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'list':
+            result.list.replace(serializers.deserialize(value,
+                specifiedType:
+                    const FullType(BuiltList, const [const FullType(int)])));
+            break;
+          case 'set':
+            result.set.replace(serializers.deserialize(value,
+                specifiedType:
+                    const FullType(BuiltSet, const [const FullType(String)])));
+            break;
+          case 'map':
+            result.map.replace(serializers.deserialize(value,
+                specifiedType: const FullType(BuiltMap,
+                    const [const FullType(String), const FullType(int)])));
+            break;
+          case 'listMultimap':
+            result.listMultimap.replace(serializers.deserialize(value,
+                specifiedType: const FullType(BuiltListMultimap,
+                    const [const FullType(int), const FullType(bool)])));
+            break;
+          case 'setMultimap':
+            result.setMultimap.replace(serializers.deserialize(value,
+                specifiedType: const FullType(BuiltSetMultimap,
+                    const [const FullType(String), const FullType(bool)])));
+            break;
+          case 'nullableList':
+            result.nullableList.replace(serializers.deserialize(value,
+                specifiedType:
+                    const FullType(BuiltList, const [const FullType(int)])));
+            break;
+          case 'nullableSet':
+            result.nullableSet.replace(serializers.deserialize(value,
+                specifiedType:
+                    const FullType(BuiltSet, const [const FullType(String)])));
+            break;
+          case 'nullableMap':
+            result.nullableMap.replace(serializers.deserialize(value,
+                specifiedType: const FullType(BuiltMap,
+                    const [const FullType(String), const FullType(int)])));
+            break;
+          case 'nullableListMultimap':
+            result.nullableListMultimap.replace(serializers.deserialize(value,
+                specifiedType: const FullType(BuiltListMultimap,
+                    const [const FullType(int), const FullType(bool)])));
+            break;
+          case 'nullableSetMultimap':
+            result.nullableSetMultimap.replace(serializers.deserialize(value,
+                specifiedType: const FullType(BuiltSetMultimap,
+                    const [const FullType(String), const FullType(bool)])));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
 // Target: abstract class Collections
 // **************************************************************************
 

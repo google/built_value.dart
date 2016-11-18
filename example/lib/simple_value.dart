@@ -5,6 +5,7 @@
 library simple_value;
 
 import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 
 part 'simple_value.g.dart';
 
@@ -14,6 +15,13 @@ part 'simple_value.g.dart';
 /// fields declared as abstract getters. Finally, it must have a particular
 /// constructor and factory, as shown here.
 abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
+  /// Example of how to make a built_value type serializable.
+  ///
+  /// Declare a static final [Serializer] field called `serializer`.
+  /// The built_value code generator will provide the implementation. You need
+  /// to do this for every type you want to serialize.
+  static final Serializer<SimpleValue> serializer = _$simpleValueSerializer;
+
   int get anInt;
 
   // Only fields marked @nullable can hold null.
