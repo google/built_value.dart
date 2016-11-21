@@ -297,12 +297,24 @@ abstract class ValueSourceClass
 
     if (!hasBuilder) {
       for (final field in fields) {
-        // Nested builders are initialized to an empty builder, unless the
-        // field is nullable.
         if (field.isNestedBuilder && !field.isNullable) {
+          // Nested builders for non-nullables are initialized to an empty
+          // builder.
           result.writeln(
               '${field.typeInBuilder} ${field.name} = new ${field.typeInBuilder}();');
+        } else if (field.isNestedBuilder) {
+          // Nested builders for nullables have a getter that initializes an
+          // empty builder on access.
+          result.writeln('${field.typeInBuilder} _${field.name};');
+          result.writeln(
+              'set ${field.name}(${field.typeInBuilder} ${field.name}) '
+              '=> _${field.name} = ${field.name};');
+          result.writeln('${field.typeInBuilder} get ${field.name} {');
+          result.writeln('_${field.name} ??= new ${field.typeInBuilder}();');
+          result.writeln('  return _${field.name};');
+          result.writeln('}');
         } else {
+          // Nullables are initialized to null.
           result.writeln('${field.typeInBuilder} ${field.name};');
         }
       }
@@ -328,7 +340,7 @@ abstract class ValueSourceClass
     result.writeln('return new _\$$name._(');
     result.write(fields.map((field) {
       return field.isNestedBuilder
-          ? '${field.name}: ${field.name}?.build()'
+          ? '${field.name}: ${field.isNullable ? '_' : ''}${field.name}?.build()'
           : '${field.name}: ${field.name}';
     }).join(', '));
     result.write(');');

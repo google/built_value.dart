@@ -249,11 +249,46 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
       new ListMultimapBuilder<int, bool>();
   SetMultimapBuilder<String, bool> setMultimap =
       new SetMultimapBuilder<String, bool>();
-  ListBuilder<int> nullableList;
-  SetBuilder<String> nullableSet;
-  MapBuilder<String, int> nullableMap;
-  ListMultimapBuilder<int, bool> nullableListMultimap;
-  SetMultimapBuilder<String, bool> nullableSetMultimap;
+  ListBuilder<int> _nullableList;
+  set nullableList(ListBuilder<int> nullableList) =>
+      _nullableList = nullableList;
+  ListBuilder<int> get nullableList {
+    _nullableList ??= new ListBuilder<int>();
+    return _nullableList;
+  }
+
+  SetBuilder<String> _nullableSet;
+  set nullableSet(SetBuilder<String> nullableSet) => _nullableSet = nullableSet;
+  SetBuilder<String> get nullableSet {
+    _nullableSet ??= new SetBuilder<String>();
+    return _nullableSet;
+  }
+
+  MapBuilder<String, int> _nullableMap;
+  set nullableMap(MapBuilder<String, int> nullableMap) =>
+      _nullableMap = nullableMap;
+  MapBuilder<String, int> get nullableMap {
+    _nullableMap ??= new MapBuilder<String, int>();
+    return _nullableMap;
+  }
+
+  ListMultimapBuilder<int, bool> _nullableListMultimap;
+  set nullableListMultimap(
+          ListMultimapBuilder<int, bool> nullableListMultimap) =>
+      _nullableListMultimap = nullableListMultimap;
+  ListMultimapBuilder<int, bool> get nullableListMultimap {
+    _nullableListMultimap ??= new ListMultimapBuilder<int, bool>();
+    return _nullableListMultimap;
+  }
+
+  SetMultimapBuilder<String, bool> _nullableSetMultimap;
+  set nullableSetMultimap(
+          SetMultimapBuilder<String, bool> nullableSetMultimap) =>
+      _nullableSetMultimap = nullableSetMultimap;
+  SetMultimapBuilder<String, bool> get nullableSetMultimap {
+    _nullableSetMultimap ??= new SetMultimapBuilder<String, bool>();
+    return _nullableSetMultimap;
+  }
 
   void replace(Collections other) {
     this.list = other.list?.toBuilder();
@@ -279,10 +314,10 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
         map: map?.build(),
         listMultimap: listMultimap?.build(),
         setMultimap: setMultimap?.build(),
-        nullableList: nullableList?.build(),
-        nullableSet: nullableSet?.build(),
-        nullableMap: nullableMap?.build(),
-        nullableListMultimap: nullableListMultimap?.build(),
-        nullableSetMultimap: nullableSetMultimap?.build());
+        nullableList: _nullableList?.build(),
+        nullableSet: _nullableSet?.build(),
+        nullableMap: _nullableMap?.build(),
+        nullableListMultimap: _nullableListMultimap?.build(),
+        nullableSetMultimap: _nullableSetMultimap?.build());
   }
 }
