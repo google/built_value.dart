@@ -28,8 +28,8 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   SerializerSourceClass rebuild(updates(SerializerSourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
-  _$SerializerSourceClassBuilder toBuilder() =>
-      new _$SerializerSourceClassBuilder()..replace(this);
+  SerializerSourceClassBuilder toBuilder() =>
+      new SerializerSourceClassBuilder()..replace(this);
 
   bool operator ==(other) {
     if (other is! SerializerSourceClass) return false;
@@ -56,13 +56,45 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   }
 }
 
-class _$SerializerSourceClassBuilder extends SerializerSourceClassBuilder {
-  _$SerializerSourceClassBuilder() : super._();
+class SerializerSourceClassBuilder
+    implements Builder<SerializerSourceClass, SerializerSourceClassBuilder> {
+  SerializerSourceClass _$v;
+
+  String _name;
+  String get name => _name;
+  set name(String name) => _$writableBuilder._name = name;
+
+  bool _isBuiltValue;
+  bool get isBuiltValue => _isBuiltValue;
+  set isBuiltValue(bool isBuiltValue) =>
+      _$writableBuilder._isBuiltValue = isBuiltValue;
+
+  bool _isEnumClass;
+  bool get isEnumClass => _isEnumClass;
+  set isEnumClass(bool isEnumClass) =>
+      _$writableBuilder._isEnumClass = isEnumClass;
+
+  ListBuilder<SerializerSourceField> _fields;
+  ListBuilder<SerializerSourceField> get fields =>
+      _$writableBuilder._fields ??= new ListBuilder<SerializerSourceField>();
+  set fields(ListBuilder<SerializerSourceField> fields) =>
+      _$writableBuilder._fields = fields;
+
+  SerializerSourceClassBuilder();
+
+  SerializerSourceClassBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _name = _$v.name;
+      _isBuiltValue = _$v.isBuiltValue;
+      _isEnumClass = _$v.isEnumClass;
+      _fields = _$v.fields?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(SerializerSourceClass other) {
-    super.name = other.name;
-    super.isBuiltValue = other.isBuiltValue;
-    super.isEnumClass = other.isEnumClass;
-    super.fields = other.fields?.toBuilder();
+    _$v = other;
   }
 
   void update(updates(SerializerSourceClassBuilder b)) {
@@ -70,10 +102,13 @@ class _$SerializerSourceClassBuilder extends SerializerSourceClassBuilder {
   }
 
   SerializerSourceClass build() {
-    return new _$SerializerSourceClass._(
-        name: name,
-        isBuiltValue: isBuiltValue,
-        isEnumClass: isEnumClass,
-        fields: fields?.build());
+    final result = _$v ??
+        new _$SerializerSourceClass._(
+            name: name,
+            isBuiltValue: isBuiltValue,
+            isEnumClass: isEnumClass,
+            fields: fields?.build());
+    replace(result);
+    return result;
   }
 }

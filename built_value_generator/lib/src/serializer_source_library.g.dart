@@ -54,11 +54,50 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
 }
 
 class _$SerializerSourceLibraryBuilder extends SerializerSourceLibraryBuilder {
+  SerializerSourceLibrary _$v;
+
+  bool get hasSerializers => super.hasSerializers;
+  set hasSerializers(bool hasSerializers) {
+    _$writableBuilder;
+    super.hasSerializers = hasSerializers;
+  }
+
+  SetBuilder<SerializerSourceClass> get sourceClasses {
+    _$writableBuilder;
+    return super.sourceClasses ??= new SetBuilder<SerializerSourceClass>();
+  }
+
+  set sourceClasses(SetBuilder<SerializerSourceClass> sourceClasses) {
+    _$writableBuilder;
+    super.sourceClasses = sourceClasses;
+  }
+
+  SetBuilder<SerializerSourceClass> get transitiveSourceClasses {
+    _$writableBuilder;
+    return super.transitiveSourceClasses ??=
+        new SetBuilder<SerializerSourceClass>();
+  }
+
+  set transitiveSourceClasses(
+      SetBuilder<SerializerSourceClass> transitiveSourceClasses) {
+    _$writableBuilder;
+    super.transitiveSourceClasses = transitiveSourceClasses;
+  }
+
   _$SerializerSourceLibraryBuilder() : super._();
+
+  SerializerSourceLibraryBuilder get _$writableBuilder {
+    if (_$v != null) {
+      super.hasSerializers = _$v.hasSerializers;
+      super.sourceClasses = _$v.sourceClasses?.toBuilder();
+      super.transitiveSourceClasses = _$v.transitiveSourceClasses?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(SerializerSourceLibrary other) {
-    super.hasSerializers = other.hasSerializers;
-    super.sourceClasses = other.sourceClasses?.toBuilder();
-    super.transitiveSourceClasses = other.transitiveSourceClasses?.toBuilder();
+    _$v = other;
   }
 
   void update(updates(SerializerSourceLibraryBuilder b)) {
@@ -66,9 +105,12 @@ class _$SerializerSourceLibraryBuilder extends SerializerSourceLibraryBuilder {
   }
 
   SerializerSourceLibrary build() {
-    return new _$SerializerSourceLibrary._(
-        hasSerializers: hasSerializers,
-        sourceClasses: sourceClasses?.build(),
-        transitiveSourceClasses: transitiveSourceClasses?.build());
+    final result = _$v ??
+        new _$SerializerSourceLibrary._(
+            hasSerializers: hasSerializers,
+            sourceClasses: sourceClasses?.build(),
+            transitiveSourceClasses: transitiveSourceClasses?.build());
+    replace(result);
+    return result;
   }
 }

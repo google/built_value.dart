@@ -8,6 +8,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:meta/meta.dart';
 
 part 'serializer_source_field.g.dart';
 
@@ -128,10 +129,15 @@ abstract class SerializerSourceField
 
 abstract class SerializerSourceFieldBuilder
     implements Builder<SerializerSourceField, SerializerSourceFieldBuilder> {
+  @virtual
   bool isSerializable;
+  @virtual
   bool isNullable = false;
+  @virtual
   String name = '';
+  @virtual
   String type = '';
+  @virtual
   bool builderFieldUsesNestedBuilder = false;
 
   factory SerializerSourceFieldBuilder() = _$SerializerSourceFieldBuilder;

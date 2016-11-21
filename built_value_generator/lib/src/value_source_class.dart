@@ -9,6 +9,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/built_parameters_visitor.dart';
 import 'package:built_value_generator/src/value_source_field.dart';
+import 'package:meta/meta.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -288,50 +289,113 @@ abstract class ValueSourceClass
 
     if (hasBuilder) {
       result.writeln('class _\$${name}Builder extends ${name}Builder {');
-      result.writeln('_\$${name}Builder() : super._();');
     } else {
       result.writeln(
           'class ${name}Builder implements Builder<$name, ${name}Builder>{');
+    }
+
+    // Builder holds a reference to a value, copies from it lazily.
+    result.writeln('$name _\$v;');
+    result.writeln('');
+
+    if (hasBuilder) {
+      for (final field in fields) {
+        final type = field.type;
+        final typeInBuilder = field.typeInBuilder;
+        final name = field.name;
+
+        if (field.isNestedBuilder) {
+          result.writeln('$typeInBuilder get $name {'
+              '_\$writableBuilder;'
+              'return super.$name ??= new $typeInBuilder();'
+              '}');
+          result.writeln('set $name($typeInBuilder $name) {'
+              '_\$writableBuilder;'
+              'super.$name = $name;'
+              '}');
+        } else {
+          result.writeln('$type get $name => super.$name;');
+          result.writeln('set $name($type $name) {'
+              '_\$writableBuilder;'
+              'super.$name = $name;'
+              '}');
+        }
+        result.writeln();
+      }
+    } else {
+      for (final field in fields) {
+        final type = field.type;
+        final typeInBuilder = field.typeInBuilder;
+        final name = field.name;
+
+        if (field.isNestedBuilder) {
+          result.writeln('$typeInBuilder _$name;');
+          result.writeln('$typeInBuilder get $name =>'
+              '_\$writableBuilder._$name ??= new $typeInBuilder();');
+          result.writeln('set $name($typeInBuilder $name) =>'
+              '_\$writableBuilder._$name = $name;');
+        } else {
+          result.writeln('$type _$name;');
+          result.writeln('$type get $name => _$name;');
+          result.writeln('set $name($type $name) =>'
+              '_\$writableBuilder._$name = $name;');
+        }
+        result.writeln();
+      }
+    }
+    result.writeln();
+
+    if (hasBuilder) {
+      result.writeln('_\$${name}Builder() : super._();');
+    } else {
       result.writeln('${name}Builder();');
     }
+    result.writeln();
 
-    if (!hasBuilder) {
-      for (final field in fields) {
-        // Nested builders are initialized to an empty builder, unless the
-        // field is nullable.
-        if (field.isNestedBuilder && !field.isNullable) {
-          result.writeln(
-              '${field.typeInBuilder} ${field.name} = new ${field.typeInBuilder}();');
-        } else {
-          result.writeln('${field.typeInBuilder} ${field.name};');
-        }
+    // Getter for "this" that does lazy copying if needed.
+    result.writeln('${name}Builder get _\$writableBuilder {');
+    result.writeln('if (_\$v != null) {');
+    for (final field in fields) {
+      final name = field.name;
+      final nameInBuilder = hasBuilder ? 'super.$name' : '_$name';
+      if (field.isNestedBuilder) {
+        result.writeln('$nameInBuilder = _\$v.$name?.toBuilder();');
+      } else {
+        result.writeln('$nameInBuilder = _\$v.$name;');
       }
-      result.writeln();
     }
+    result.writeln('_\$v = null;');
+    result.writeln('}');
+    result.writeln('return this;');
+    result.writeln('}');
 
     result.writeln('void replace(${name} other) {');
-    result.writeln((fields.map((field) {
-      final superOrThis = hasBuilder ? 'super' : 'this';
-      return field.isNestedBuilder
-          ? '$superOrThis.${field.name} = other.${field.name}?.toBuilder();'
-          : '$superOrThis.${field.name} = other.${field.name};';
-    }))
-        .join('\n'));
+    result.writeln('_\$v = other;');
     result.writeln('}');
-    result.writeln();
 
     result.writeln('void update(updates(${name}Builder b)) {'
         ' if (updates != null) updates(this); }');
     result.writeln();
 
     result.writeln('$name build() {');
-    result.writeln('return new _\$$name._(');
+    result.writeln('final result = _\$v ?? ');
+    result.writeln('new _\$$name._(');
     result.write(fields.map((field) {
-      return field.isNestedBuilder
-          ? '${field.name}: ${field.name}?.build()'
-          : '${field.name}: ${field.name}';
+      final name = field.name;
+      if (!field.isNestedBuilder) return '$name: $name';
+      // If not nullable, go via the public accessor, which instantiates
+      // if needed.
+      if (!field.isNullable) return '$name: $name?.build()';
+      // Otherwise access the private field: in super if there's a manually
+      // maintaned builder, otherwise here.
+      return hasBuilder
+          ? '$name: super.$name?.build()'
+          : '$name: _$name?.build()';
     }).join(', '));
-    result.write(');');
+    result.writeln(');');
+    // Set _$v to the built value, so it will be lazily copied if needed.
+    result.writeln('replace(result);');
+    result.writeln('return result;');
     result.writeln('}');
     result.writeln('}');
 
@@ -341,21 +405,34 @@ abstract class ValueSourceClass
 
 abstract class ValueSourceClassBuilder
     implements Builder<ValueSourceClass, ValueSourceClassBuilder> {
+  @virtual
   String name;
+  @virtual
   String builtParameters;
+  @virtual
   bool hasBuilder;
+  @virtual
   String builderParameters = '';
+  @virtual
   ListBuilder<ValueSourceField> fields = new ListBuilder<ValueSourceField>();
 
+  @virtual
   String partStatement;
+  @virtual
   bool hasPartStatement;
 
+  @virtual
   bool valueClassIsAbstract;
+  @virtual
   ListBuilder<String> valueClassConstructors = new ListBuilder<String>();
+  @virtual
   ListBuilder<String> valueClassFactories = new ListBuilder<String>();
 
+  @virtual
   bool builderClassIsAbstract = true;
+  @virtual
   ListBuilder<String> builderClassConstructors = new ListBuilder<String>();
+  @virtual
   ListBuilder<String> builderClassFactories = new ListBuilder<String>();
 
   ValueSourceClassBuilder._();

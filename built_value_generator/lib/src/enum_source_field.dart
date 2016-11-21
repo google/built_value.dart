@@ -7,6 +7,7 @@ library built_value_generator.enum_source_field;
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/src/list.dart';
 import 'package:built_value/built_value.dart';
+import 'package:meta/meta.dart';
 
 part 'enum_source_field.g.dart';
 
@@ -67,16 +68,4 @@ abstract class EnumSourceField
 
     return result;
   }
-}
-
-abstract class EnumSourceFieldBuilder
-    implements Builder<EnumSourceField, EnumSourceFieldBuilder> {
-  String name;
-  String type;
-  String generatedIdentifier;
-  bool isConst;
-  bool isStatic;
-
-  EnumSourceFieldBuilder._();
-  factory EnumSourceFieldBuilder() = _$EnumSourceFieldBuilder;
 }

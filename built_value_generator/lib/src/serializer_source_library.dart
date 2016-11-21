@@ -9,6 +9,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/library_elements.dart';
 import 'package:built_value_generator/src/serializer_source_class.dart';
+import 'package:meta/meta.dart';
 
 part 'serializer_source_library.g.dart';
 
@@ -80,9 +81,12 @@ abstract class SerializerSourceLibrary
 abstract class SerializerSourceLibraryBuilder
     implements
         Builder<SerializerSourceLibrary, SerializerSourceLibraryBuilder> {
+  @virtual
   bool hasSerializers = false;
+  @virtual
   SetBuilder<SerializerSourceClass> sourceClasses =
       new SetBuilder<SerializerSourceClass>();
+  @virtual
   SetBuilder<SerializerSourceClass> transitiveSourceClasses =
       new SetBuilder<SerializerSourceClass>();
 

@@ -8,6 +8,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/serializer_source_field.dart';
+import 'package:meta/meta.dart';
 
 part 'serializer_source_class.g.dart';
 
@@ -197,16 +198,4 @@ case '${field.name}':
     }
     return result;
   }
-}
-
-abstract class SerializerSourceClassBuilder
-    implements Builder<SerializerSourceClass, SerializerSourceClassBuilder> {
-  String name;
-  bool isBuiltValue;
-  bool isEnumClass;
-  ListBuilder<SerializerSourceField> fields =
-      new ListBuilder<SerializerSourceField>();
-
-  factory SerializerSourceClassBuilder() = _$SerializerSourceClassBuilder;
-  SerializerSourceClassBuilder._();
 }

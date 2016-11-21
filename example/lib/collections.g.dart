@@ -241,31 +241,90 @@ class _$Collections extends Collections {
 }
 
 class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
+  Collections _$v;
+
+  ListBuilder<int> _list;
+  ListBuilder<int> get list =>
+      _$writableBuilder._list ??= new ListBuilder<int>();
+  set list(ListBuilder<int> list) => _$writableBuilder._list = list;
+
+  SetBuilder<String> _set;
+  SetBuilder<String> get set =>
+      _$writableBuilder._set ??= new SetBuilder<String>();
+  set set(SetBuilder<String> set) => _$writableBuilder._set = set;
+
+  MapBuilder<String, int> _map;
+  MapBuilder<String, int> get map =>
+      _$writableBuilder._map ??= new MapBuilder<String, int>();
+  set map(MapBuilder<String, int> map) => _$writableBuilder._map = map;
+
+  ListMultimapBuilder<int, bool> _listMultimap;
+  ListMultimapBuilder<int, bool> get listMultimap =>
+      _$writableBuilder._listMultimap ??= new ListMultimapBuilder<int, bool>();
+  set listMultimap(ListMultimapBuilder<int, bool> listMultimap) =>
+      _$writableBuilder._listMultimap = listMultimap;
+
+  SetMultimapBuilder<String, bool> _setMultimap;
+  SetMultimapBuilder<String, bool> get setMultimap =>
+      _$writableBuilder._setMultimap ??= new SetMultimapBuilder<String, bool>();
+  set setMultimap(SetMultimapBuilder<String, bool> setMultimap) =>
+      _$writableBuilder._setMultimap = setMultimap;
+
+  ListBuilder<int> _nullableList;
+  ListBuilder<int> get nullableList =>
+      _$writableBuilder._nullableList ??= new ListBuilder<int>();
+  set nullableList(ListBuilder<int> nullableList) =>
+      _$writableBuilder._nullableList = nullableList;
+
+  SetBuilder<String> _nullableSet;
+  SetBuilder<String> get nullableSet =>
+      _$writableBuilder._nullableSet ??= new SetBuilder<String>();
+  set nullableSet(SetBuilder<String> nullableSet) =>
+      _$writableBuilder._nullableSet = nullableSet;
+
+  MapBuilder<String, int> _nullableMap;
+  MapBuilder<String, int> get nullableMap =>
+      _$writableBuilder._nullableMap ??= new MapBuilder<String, int>();
+  set nullableMap(MapBuilder<String, int> nullableMap) =>
+      _$writableBuilder._nullableMap = nullableMap;
+
+  ListMultimapBuilder<int, bool> _nullableListMultimap;
+  ListMultimapBuilder<int, bool> get nullableListMultimap =>
+      _$writableBuilder._nullableListMultimap ??=
+          new ListMultimapBuilder<int, bool>();
+  set nullableListMultimap(
+          ListMultimapBuilder<int, bool> nullableListMultimap) =>
+      _$writableBuilder._nullableListMultimap = nullableListMultimap;
+
+  SetMultimapBuilder<String, bool> _nullableSetMultimap;
+  SetMultimapBuilder<String, bool> get nullableSetMultimap =>
+      _$writableBuilder._nullableSetMultimap ??=
+          new SetMultimapBuilder<String, bool>();
+  set nullableSetMultimap(
+          SetMultimapBuilder<String, bool> nullableSetMultimap) =>
+      _$writableBuilder._nullableSetMultimap = nullableSetMultimap;
+
   CollectionsBuilder();
-  ListBuilder<int> list = new ListBuilder<int>();
-  SetBuilder<String> set = new SetBuilder<String>();
-  MapBuilder<String, int> map = new MapBuilder<String, int>();
-  ListMultimapBuilder<int, bool> listMultimap =
-      new ListMultimapBuilder<int, bool>();
-  SetMultimapBuilder<String, bool> setMultimap =
-      new SetMultimapBuilder<String, bool>();
-  ListBuilder<int> nullableList;
-  SetBuilder<String> nullableSet;
-  MapBuilder<String, int> nullableMap;
-  ListMultimapBuilder<int, bool> nullableListMultimap;
-  SetMultimapBuilder<String, bool> nullableSetMultimap;
+
+  CollectionsBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _list = _$v.list?.toBuilder();
+      _set = _$v.set?.toBuilder();
+      _map = _$v.map?.toBuilder();
+      _listMultimap = _$v.listMultimap?.toBuilder();
+      _setMultimap = _$v.setMultimap?.toBuilder();
+      _nullableList = _$v.nullableList?.toBuilder();
+      _nullableSet = _$v.nullableSet?.toBuilder();
+      _nullableMap = _$v.nullableMap?.toBuilder();
+      _nullableListMultimap = _$v.nullableListMultimap?.toBuilder();
+      _nullableSetMultimap = _$v.nullableSetMultimap?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(Collections other) {
-    this.list = other.list?.toBuilder();
-    this.set = other.set?.toBuilder();
-    this.map = other.map?.toBuilder();
-    this.listMultimap = other.listMultimap?.toBuilder();
-    this.setMultimap = other.setMultimap?.toBuilder();
-    this.nullableList = other.nullableList?.toBuilder();
-    this.nullableSet = other.nullableSet?.toBuilder();
-    this.nullableMap = other.nullableMap?.toBuilder();
-    this.nullableListMultimap = other.nullableListMultimap?.toBuilder();
-    this.nullableSetMultimap = other.nullableSetMultimap?.toBuilder();
+    _$v = other;
   }
 
   void update(updates(CollectionsBuilder b)) {
@@ -273,16 +332,19 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
   }
 
   Collections build() {
-    return new _$Collections._(
-        list: list?.build(),
-        set: set?.build(),
-        map: map?.build(),
-        listMultimap: listMultimap?.build(),
-        setMultimap: setMultimap?.build(),
-        nullableList: nullableList?.build(),
-        nullableSet: nullableSet?.build(),
-        nullableMap: nullableMap?.build(),
-        nullableListMultimap: nullableListMultimap?.build(),
-        nullableSetMultimap: nullableSetMultimap?.build());
+    final result = _$v ??
+        new _$Collections._(
+            list: list?.build(),
+            set: set?.build(),
+            map: map?.build(),
+            listMultimap: listMultimap?.build(),
+            setMultimap: setMultimap?.build(),
+            nullableList: _nullableList?.build(),
+            nullableSet: _nullableSet?.build(),
+            nullableMap: _nullableMap?.build(),
+            nullableListMultimap: _nullableListMultimap?.build(),
+            nullableSetMultimap: _nullableSetMultimap?.build());
+    replace(result);
+    return result;
   }
 }

@@ -42,13 +42,29 @@ class _$ValueWithCode extends ValueWithCode {
 
 class ValueWithCodeBuilder
     implements Builder<ValueWithCode, ValueWithCodeBuilder> {
+  ValueWithCode _$v;
+
+  int _anInt;
+  int get anInt => _anInt;
+  set anInt(int anInt) => _$writableBuilder._anInt = anInt;
+
+  String _aString;
+  String get aString => _aString;
+  set aString(String aString) => _$writableBuilder._aString = aString;
+
   ValueWithCodeBuilder();
-  int anInt;
-  String aString;
+
+  ValueWithCodeBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _anInt = _$v.anInt;
+      _aString = _$v.aString;
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(ValueWithCode other) {
-    this.anInt = other.anInt;
-    this.aString = other.aString;
+    _$v = other;
   }
 
   void update(updates(ValueWithCodeBuilder b)) {
@@ -56,6 +72,8 @@ class ValueWithCodeBuilder
   }
 
   ValueWithCode build() {
-    return new _$ValueWithCode._(anInt: anInt, aString: aString);
+    final result = _$v ?? new _$ValueWithCode._(anInt: anInt, aString: aString);
+    replace(result);
+    return result;
   }
 }

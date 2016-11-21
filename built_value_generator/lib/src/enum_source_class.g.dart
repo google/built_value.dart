@@ -37,8 +37,8 @@ class _$EnumSourceClass extends EnumSourceClass {
   EnumSourceClass rebuild(updates(EnumSourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
-  _$EnumSourceClassBuilder toBuilder() =>
-      new _$EnumSourceClassBuilder()..replace(this);
+  EnumSourceClassBuilder toBuilder() =>
+      new EnumSourceClassBuilder()..replace(this);
 
   bool operator ==(other) {
     if (other is! EnumSourceClass) return false;
@@ -77,16 +77,63 @@ class _$EnumSourceClass extends EnumSourceClass {
   }
 }
 
-class _$EnumSourceClassBuilder extends EnumSourceClassBuilder {
-  _$EnumSourceClassBuilder() : super._();
+class EnumSourceClassBuilder
+    implements Builder<EnumSourceClass, EnumSourceClassBuilder> {
+  EnumSourceClass _$v;
+
+  String _name;
+  String get name => _name;
+  set name(String name) => _$writableBuilder._name = name;
+
+  ListBuilder<EnumSourceField> _fields;
+  ListBuilder<EnumSourceField> get fields =>
+      _$writableBuilder._fields ??= new ListBuilder<EnumSourceField>();
+  set fields(ListBuilder<EnumSourceField> fields) =>
+      _$writableBuilder._fields = fields;
+
+  ListBuilder<String> _constructors;
+  ListBuilder<String> get constructors =>
+      _$writableBuilder._constructors ??= new ListBuilder<String>();
+  set constructors(ListBuilder<String> constructors) =>
+      _$writableBuilder._constructors = constructors;
+
+  String _valuesIdentifier;
+  String get valuesIdentifier => _valuesIdentifier;
+  set valuesIdentifier(String valuesIdentifier) =>
+      _$writableBuilder._valuesIdentifier = valuesIdentifier;
+
+  String _valueOfIdentifier;
+  String get valueOfIdentifier => _valueOfIdentifier;
+  set valueOfIdentifier(String valueOfIdentifier) =>
+      _$writableBuilder._valueOfIdentifier = valueOfIdentifier;
+
+  bool _usesMixin;
+  bool get usesMixin => _usesMixin;
+  set usesMixin(bool usesMixin) => _$writableBuilder._usesMixin = usesMixin;
+
+  String _mixinDeclaration;
+  String get mixinDeclaration => _mixinDeclaration;
+  set mixinDeclaration(String mixinDeclaration) =>
+      _$writableBuilder._mixinDeclaration = mixinDeclaration;
+
+  EnumSourceClassBuilder();
+
+  EnumSourceClassBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _name = _$v.name;
+      _fields = _$v.fields?.toBuilder();
+      _constructors = _$v.constructors?.toBuilder();
+      _valuesIdentifier = _$v.valuesIdentifier;
+      _valueOfIdentifier = _$v.valueOfIdentifier;
+      _usesMixin = _$v.usesMixin;
+      _mixinDeclaration = _$v.mixinDeclaration;
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(EnumSourceClass other) {
-    super.name = other.name;
-    super.fields = other.fields?.toBuilder();
-    super.constructors = other.constructors?.toBuilder();
-    super.valuesIdentifier = other.valuesIdentifier;
-    super.valueOfIdentifier = other.valueOfIdentifier;
-    super.usesMixin = other.usesMixin;
-    super.mixinDeclaration = other.mixinDeclaration;
+    _$v = other;
   }
 
   void update(updates(EnumSourceClassBuilder b)) {
@@ -94,13 +141,16 @@ class _$EnumSourceClassBuilder extends EnumSourceClassBuilder {
   }
 
   EnumSourceClass build() {
-    return new _$EnumSourceClass._(
-        name: name,
-        fields: fields?.build(),
-        constructors: constructors?.build(),
-        valuesIdentifier: valuesIdentifier,
-        valueOfIdentifier: valueOfIdentifier,
-        usesMixin: usesMixin,
-        mixinDeclaration: mixinDeclaration);
+    final result = _$v ??
+        new _$EnumSourceClass._(
+            name: name,
+            fields: fields?.build(),
+            constructors: constructors?.build(),
+            valuesIdentifier: valuesIdentifier,
+            valueOfIdentifier: valueOfIdentifier,
+            usesMixin: usesMixin,
+            mixinDeclaration: mixinDeclaration);
+    replace(result);
+    return result;
   }
 }

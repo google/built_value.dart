@@ -42,10 +42,33 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 }
 
 class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
+  ValueWithDefaults _$v;
+
+  int get anInt => super.anInt;
+  set anInt(int anInt) {
+    _$writableBuilder;
+    super.anInt = anInt;
+  }
+
+  String get aString => super.aString;
+  set aString(String aString) {
+    _$writableBuilder;
+    super.aString = aString;
+  }
+
   _$ValueWithDefaultsBuilder() : super._();
+
+  ValueWithDefaultsBuilder get _$writableBuilder {
+    if (_$v != null) {
+      super.anInt = _$v.anInt;
+      super.aString = _$v.aString;
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(ValueWithDefaults other) {
-    super.anInt = other.anInt;
-    super.aString = other.aString;
+    _$v = other;
   }
 
   void update(updates(ValueWithDefaultsBuilder b)) {
@@ -53,6 +76,9 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   }
 
   ValueWithDefaults build() {
-    return new _$ValueWithDefaults._(anInt: anInt, aString: aString);
+    final result =
+        _$v ?? new _$ValueWithDefaults._(anInt: anInt, aString: aString);
+    replace(result);
+    return result;
   }
 }

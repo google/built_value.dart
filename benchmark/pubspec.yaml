@@ -1,7 +1,7 @@
-name: example
+name: benchmark
 version: 0.4.0
 description: >
-  Just an example, not for publishing.
+  Benchmark, not for publishing.
 authors:
 - David Morgan <davidmorgan@google.com>
 homepage: https://github.com/google/built_value.dart
@@ -10,11 +10,12 @@ environment:
   sdk: '>=1.8.0 <2.0.0'
 
 dependencies:
-  meta: '^1.0.0'
+  browser: any
   built_collection: '^1.0.0'
 #  built_value: '^0.4.0'
   built_value:
     path: ../built_value
+
 
 dev_dependencies:
   build: '^0.4.0'

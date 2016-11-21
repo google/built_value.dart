@@ -5,6 +5,7 @@
 library value_with_defaults;
 
 import 'package:built_value/built_value.dart';
+import 'package:meta/meta.dart';
 
 part 'value_with_defaults.g.dart';
 
@@ -33,8 +34,11 @@ abstract class ValueWithDefaults
 /// and implementing interfaces.
 abstract class ValueWithDefaultsBuilder
     implements Builder<ValueWithDefaults, ValueWithDefaultsBuilder> {
+  @virtual
   int anInt = 7;
+
   @nullable
+  @virtual
   String aString;
 
   ValueWithDefaultsBuilder._();
