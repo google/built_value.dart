@@ -6,6 +6,7 @@
   built_value_generator. These are intended to be used together, and make
   more sense as a single package.
 - Fix generation when class extends multiple interfaces.
+- Add serialization of BuiltListMultimap and BuiltSetMultimap.
 
 ## 0.2.0
 

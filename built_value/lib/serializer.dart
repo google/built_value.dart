@@ -4,8 +4,10 @@
 
 import 'src/bool_serializer.dart';
 import 'src/built_json_serializers.dart';
+import 'src/built_list_multimap_serializer.dart';
 import 'src/built_list_serializer.dart';
 import 'src/built_map_serializer.dart';
+import 'src/built_set_multimap_serializer.dart';
 import 'src/built_set_serializer.dart';
 import 'src/double_serializer.dart';
 import 'src/int_serializer.dart';
@@ -22,8 +24,10 @@ abstract class Serializers {
     return (new SerializersBuilder()
           ..add(new BoolSerializer())
           ..add(new BuiltListSerializer())
+          ..add(new BuiltListMultimapSerializer())
           ..add(new BuiltMapSerializer())
           ..add(new BuiltSetSerializer())
+          ..add(new BuiltSetMultimapSerializer())
           ..add(new DoubleSerializer())
           ..add(new IntSerializer())
           ..add(new StringSerializer()))
