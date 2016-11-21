@@ -1,5 +1,5 @@
 name: built_value
-version: 0.2.0
+version: 0.2.1
 description: >
   Value types with builders, Dart classes as enums. This library is the runtime
   dependency.

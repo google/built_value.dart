@@ -16,8 +16,10 @@ class BuiltParametersVisitor extends RecursiveAstVisitor {
 
   @override
   void visitImplementsClause(ImplementsClause implementsClause) {
-    result ??=
-        _extractParameters('implements Built<', implementsClause.toString());
+    for (final interface in implementsClause.interfaces) {
+      result ??=
+          _extractParameters('Built<', interface.toString());
+    }
   }
 
   /// If [[code]] starts with [[prefix]] then strips it off, strips off the

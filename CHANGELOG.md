@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 (unreleased)
+
+- Fix generation when class extends multiple interfaces.
+
 ## 0.2.0
 
 - Merged enum_class and enum_class_generator into built_value and
