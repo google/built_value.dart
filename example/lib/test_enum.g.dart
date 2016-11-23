@@ -65,3 +65,22 @@ final BuiltSet<SecondTestEnum> _$vls = new BuiltSet<SecondTestEnum>(const [
   _$n,
   _$definitely,
 ]);
+
+Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
+
+class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
+  final Iterable<Type> types = const [TestEnum];
+  final String wireName = 'TestEnum';
+
+  @override
+  Object serialize(Serializers serializers, TestEnum object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return object.name;
+  }
+
+  @override
+  TestEnum deserialize(Serializers serializers, Object serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    return TestEnum.valueOf(serialized);
+  }
+}

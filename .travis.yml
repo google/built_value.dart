@@ -12,3 +12,7 @@ script:
   - pub get
   - pub run tool/build.dart
   - pub run test
+  - cd ../chat_example
+  - pub get
+  - pub run tool/build.dart
+  - pub run test

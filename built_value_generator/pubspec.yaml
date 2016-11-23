@@ -1,8 +1,8 @@
 name: built_value_generator
-version: 0.2.1
+version: 0.3.0
 description: >
-  Value types with builders, Dart classes as enums. This library is the dev
-  dependency.
+  Value types with builders, Dart classes as enums, and serialization.
+  This library is the dev dependency.
 authors:
 - David Morgan <davidmorgan@google.com>
 homepage: https://github.com/google/built_value.dart
@@ -14,7 +14,7 @@ dependencies:
   analyzer: '>=0.28.0 <0.29.0'
   build: '^0.4.0'
   built_collection: '^1.0.0'
-#  built_value: '^0.2.1'
+  #built_value: '^0.3.0'
   built_value:
     path: ../built_value
   source_gen: '>=0.5.0+03 <0.6.0'

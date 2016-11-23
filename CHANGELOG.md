@@ -1,7 +1,10 @@
 # Changelog
 
-## 0.2.1 (unreleased)
+## 0.3.0
 
+- Merged built_json and built_json_generator into built_value and
+  built_value_generator. These are intended to be used together, and make
+  more sense as a single package.
 - Fix generation when class extends multiple interfaces.
 
 ## 0.2.0

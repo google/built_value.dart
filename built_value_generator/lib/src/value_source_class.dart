@@ -146,8 +146,7 @@ abstract class ValueSourceClass
     final expectedFactory =
         'factory $name([updates(${name}Builder b)]) = _\$$name;';
     if (!valueClassFactories.any((factory) => factory == expectedFactory)) {
-      result.add(
-          'Make class have factory: $expectedFactory');
+      result.add('Make class have factory: $expectedFactory');
     }
 
     return result;

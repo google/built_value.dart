@@ -9,7 +9,7 @@ than it needs to be.
 
 ## Overview
 
-Libraries for Object Oriented Dart contains three powerful libraries that help
+Libraries for Object Oriented Dart contains two powerful libraries that help
 translate object oriented designs into implementations with minimum overhead,
 freeing developers to focus on the task at hand.
  
@@ -17,18 +17,14 @@ freeing developers to focus on the task at hand.
   provides immutable, type safe collections.
   
 * [built_value.dart](https://github.com/google/built_value.dart#built-values-for-dart)
-  provides immutable "value types" and classes with enum features.
+  provides immutable "value types", classes with enum features and
+  serialization.
 
 For those familiar with Java, these provide equivalent functionality to
 standard Java enums,
 [Immutable Collections](https://github.com/google/guava/wiki/ImmutableCollectionsExplained)
 and
 [AutoValues](https://github.com/google/auto/tree/master/value#autovalue).
-
-The third library provides something with no direct equivalent in Java:
-  
-* [built_json.dart](https://github.com/google/built_json.dart#built-json-for-dart)
-  provides dynamic, flexible JSON serialization for the other two libraries.
 
 To complete the package, we'll make the whole stack compatible with Java:
 
@@ -37,7 +33,6 @@ To complete the package, we'll make the whole stack compatible with Java:
   [Immutable Collections](https://github.com/google/guava/wiki/ImmutableCollectionsExplained)
   and Built Values to [AutoValues](https://github.com/google/auto/tree/master/value#autovalue).
 
-
   
 ## Current Status
  
@@ -45,9 +40,6 @@ To complete the package, we'll make the whole stack compatible with Java:
   is stable and production ready.
   
 * [built_value.dart](https://github.com/google/built_value.dart#built-values-for-dart)
-  is ready for use but may be missing features.
-  
-* [built_json.dart](https://github.com/google/built_json.dart#built-json-for-dart)
   is ready for use but may be missing features.
   
 * Built JSON for Java is not yet started.

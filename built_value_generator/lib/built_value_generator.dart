@@ -8,8 +8,9 @@ import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:built_value_generator/src/value_source_class.dart';
 import 'package:built_value_generator/src/enum_source_library.dart';
+import 'package:built_value_generator/src/value_source_class.dart';
+import 'package:built_value_generator/src/serializer_source_library.dart';
 import 'package:source_gen/source_gen.dart';
 
 /// Generator for Enum Class and Built Values.
@@ -21,7 +22,17 @@ class BuiltValueGenerator extends Generator {
     if (element is ClassElement && ValueSourceClass.needsBuiltValue(element)) {
       return new ValueSourceClass.fromClassElement(element).generateCode();
     } else if (element is LibraryElement) {
-      return new EnumSourceLibrary.fromLibraryElement(element).generateCode();
+      final enumCode =
+          new EnumSourceLibrary.fromLibraryElement(element).generateCode();
+
+      final serializerSourceLibrary =
+          SerializerSourceLibrary.fromLibraryElement(element);
+      if (serializerSourceLibrary.needsBuiltJson ||
+          serializerSourceLibrary.hasSerializers) {
+        return (enumCode ?? '') + '\n' + serializerSourceLibrary.generate();
+      } else {
+        return enumCode;
+      }
     } else {
       return null;
     }

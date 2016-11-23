@@ -5,8 +5,9 @@
 library compound_value;
 
 import 'package:built_value/built_value.dart';
-
+import 'package:built_value/serializer.dart';
 import 'package:example/validated_value.dart';
+
 import 'simple_value.dart';
 
 part 'compound_value.g.dart';
@@ -17,6 +18,13 @@ part 'compound_value.g.dart';
 /// represented as nested builders.
 abstract class CompoundValue
     implements Built<CompoundValue, CompoundValueBuilder> {
+  /// Example of how to make a built_value type serializable.
+  ///
+  /// Declare a static final [Serializers] field called `serializer`.
+  /// The built_value code generator will provide the implementation. You need
+  /// to do this for every type you want to serialize.
+  static final Serializer<CompoundValue> serializer = _$compoundValueSerializer;
+
   SimpleValue get simpleValue;
   @nullable
   ValidatedValue get validatedValue;

@@ -4,6 +4,68 @@ part of compound_value;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
+// Target: library compound_value
+// **************************************************************************
+
+Serializer<CompoundValue> _$compoundValueSerializer =
+    new _$CompoundValueSerializer();
+
+class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
+  final Iterable<Type> types = const [CompoundValue, _$CompoundValue];
+  final String wireName = 'CompoundValue';
+
+  @override
+  Iterable serialize(Serializers serializers, CompoundValue object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = [
+      'simpleValue',
+      serializers.serialize(object.simpleValue,
+          specifiedType: const FullType(SimpleValue)),
+    ];
+    if (object.validatedValue != null) {
+      result.add('validatedValue');
+      result.add(serializers.serialize(object.validatedValue,
+          specifiedType: const FullType(ValidatedValue)));
+    }
+
+    return result;
+  }
+
+  @override
+  CompoundValue deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new CompoundValueBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'simpleValue':
+            result.simpleValue.replace(serializers.deserialize(value,
+                specifiedType: const FullType(SimpleValue)));
+            break;
+          case 'validatedValue':
+            result.validatedValue.replace(serializers.deserialize(value,
+                specifiedType: const FullType(ValidatedValue)));
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
 // Target: abstract class CompoundValue
 // **************************************************************************
 

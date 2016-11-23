@@ -1,0 +1,24 @@
+name: chat_example
+version: 0.3.0
+description: >
+  Just an example, not for publishing.
+authors:
+- David Morgan <davidmorgan@google.com>
+homepage: https://github.com/google/built_value.dart
+
+environment:
+  sdk: '>=1.8.0 <2.0.0'
+
+dependencies:
+  built_collection: '^1.0.0'
+#  built_value: '^0.3.0'
+  built_value:
+    path: ../built_value
+  package_resolver: ^1.0.0
+  route: '>=0.4.6'
+
+dev_dependencies:
+#  built_value_generator: '^0.3.0'
+  built_value_generator:
+    path: ../built_value_generator
+  test: any
