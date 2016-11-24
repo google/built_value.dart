@@ -25,6 +25,14 @@ Serializers _$serializers = (new Serializers().toBuilder()
               BuiltMap, const [const FullType(String), const FullType(int)]),
           () => new MapBuilder<String, int>())
       ..addBuilderFactory(
+          const FullType(BuiltListMultimap,
+              const [const FullType(int), const FullType(bool)]),
+          () => new ListMultimapBuilder<int, bool>())
+      ..addBuilderFactory(
+          const FullType(BuiltSetMultimap,
+              const [const FullType(String), const FullType(bool)]),
+          () => new SetMultimapBuilder<String, bool>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())
       ..addBuilderFactory(
@@ -34,5 +42,13 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(
               BuiltMap, const [const FullType(String), const FullType(int)]),
           () => new MapBuilder<String, int>())
+      ..addBuilderFactory(
+          const FullType(BuiltListMultimap,
+              const [const FullType(int), const FullType(bool)]),
+          () => new ListMultimapBuilder<int, bool>())
+      ..addBuilderFactory(
+          const FullType(BuiltSetMultimap,
+              const [const FullType(String), const FullType(bool)]),
+          () => new SetMultimapBuilder<String, bool>())
       ..add(SimpleValue.serializer))
     .build();

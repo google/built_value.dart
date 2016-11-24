@@ -24,8 +24,10 @@ abstract class SerializerSourceField
   static final BuiltMap<String, String> typesWithBuilder =
       new BuiltMap<String, String>({
     'BuiltList': 'ListBuilder',
+    'BuiltListMultimap': 'ListMultimapBuilder',
     'BuiltMap': 'MapBuilder',
     'BuiltSet': 'SetBuilder',
+    'BuiltSetMultimap': 'SetMultimapBuilder',
   });
 
   bool get isSerializable;
