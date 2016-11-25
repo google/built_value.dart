@@ -2,10 +2,14 @@
 [![Build Status](https://travis-ci.org/google/built_value.dart.svg?branch=master)](https://travis-ci.org/google/built_value.dart)
 ## Introduction
 
-Built Values provides immutable "value types" and Enum Classes. It uses
-[Built Collections]
-(https://github.com/google/built_collection.dart#built-collections-for-dart)
-and provides JSON serialization.
+Built Values provides:
+
+- Immutable value types;
+- EnumClass, classes that behave like enums;
+- JSON serialization.
+
+It uses [built_collection]
+(https://github.com/google/built_collection.dart#built-collections-for-dart).
 
 ## Value Types
 
@@ -20,7 +24,8 @@ Value types are very commonly sent by RPC and/or stored for later
 retrieval.
 
 The problems that led to the creation of the Built Value library have
-been [discussed at great length](https://docs.google.com/presentation/d/14u_h-lMn7f1rXE1nDiLX0azS3IkgjGl5uxp5jGJ75RE/edit)
+been [discussed at great length]
+(https://docs.google.com/presentation/d/14u_h-lMn7f1rXE1nDiLX0azS3IkgjGl5uxp5jGJ75RE/edit)
 in the context of
 [AutoValue](https://github.com/google/auto/tree/master/value#autovalue)
 for Java.
@@ -50,10 +55,10 @@ so Enum Classes provide what's missing!
 
 Design:
 
-* Constants have `name` and `toString`, can be used in `switch` statements,
+- Constants have `name` and `toString`, can be used in `switch` statements,
   and are real classes that can hold code and implement interfaces
-* Generated `values` method that returns all the enum values in a `BuiltSet` (immutable set)
-* Generated `valueOf` method that takes a `String`
+- Generated `values` method that returns all the enum values in a `BuiltSet` (immutable set)
+- Generated `valueOf` method that takes a `String`
 
 ## Serialization
 
@@ -107,9 +112,18 @@ for specific classes. Some other libraries are not so extensible.
 
 ## Examples
 
-See
-[this example](https://github.com/google/built_value.dart/tree/master/example)
-for a full project with a `build.dart`, some example value types and an enum.
+Simple examples are
+[here](https://github.com/google/built_value.dart/tree/master/example). Note
+[build.dart]
+(https://github.com/google/built_value.dart/blob/master/example/tool/build.dart)
+which does a one-off build, and
+[watch.dart]
+(https://github.com/google/built_value.dart/blob/master/example/tool/watch.dart)
+which watches for changes and updates generated code automatically.
+
+For an end to end example see the [chat example]
+(https://github.com/google/built_value.dart/tree/master/chat_example), which was
+[demoed](https://www.youtube.com/watch?v=TMeJxWltoVo) at the Dart Summit 2016.
 
 ## Features and bugs
 
