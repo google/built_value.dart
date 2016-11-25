@@ -8,8 +8,37 @@ Built Values provides:
 - EnumClass, classes that behave like enums;
 - JSON serialization.
 
-It uses [built_collection]
+Immutable collections are from [built_collection]
 (https://github.com/google/built_collection.dart#built-collections-for-dart).
+
+## Examples
+
+For an end to end example see the [chat example]
+(https://github.com/google/built_value.dart/tree/master/chat_example), which was
+[demoed](https://www.youtube.com/watch?v=TMeJxWltoVo) at the Dart Summit 2016.
+The [data model]
+(https://github.com/google/built_value.dart/blob/master/chat_example/lib/data_model/data_model.dart),
+used both client and server side, uses value types, enums and serialization from
+built_value.
+
+Simple examples are
+[here](https://github.com/google/built_value.dart/tree/master/example):
+[value type]
+(https://github.com/google/built_value.dart/blob/master/example/lib/simple_value.dart)
+and [usage]
+(https://github.com/google/built_value.dart/blob/master/example/test/simple_value_test.dart),
+[enum class]
+(https://github.com/google/built_value.dart/blob/master/example/lib/test_enum.dart),
+[serialization]
+(https://github.com/google/built_value.dart/blob/master/example/test/collections_serializer_test.dart).
+
+Codegen is triggered via either a
+[build.dart]
+(https://github.com/google/built_value.dart/blob/master/example/tool/build.dart)
+to do a one-off build or a
+[watch.dart]
+(https://github.com/google/built_value.dart/blob/master/example/tool/watch.dart)
+to continuously watch your source and update generated output.
 
 ## Value Types
 
@@ -109,21 +138,6 @@ It's _pluggable_. Arbitrary extensions can be added to give
 custom JSON serialization for your own types. This could be used to
 interoperate with other tools or to add hand coded high performance serializers
 for specific classes. Some other libraries are not so extensible.
-
-## Examples
-
-Simple examples are
-[here](https://github.com/google/built_value.dart/tree/master/example). Note
-[build.dart]
-(https://github.com/google/built_value.dart/blob/master/example/tool/build.dart)
-which does a one-off build, and
-[watch.dart]
-(https://github.com/google/built_value.dart/blob/master/example/tool/watch.dart)
-which watches for changes and updates generated code automatically.
-
-For an end to end example see the [chat example]
-(https://github.com/google/built_value.dart/tree/master/chat_example), which was
-[demoed](https://www.youtube.com/watch?v=TMeJxWltoVo) at the Dart Summit 2016.
 
 ## Features and bugs
 
