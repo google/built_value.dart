@@ -16,10 +16,6 @@ void main() {
       expect(() => new SimpleValue(), throws);
     });
 
-    test('throws on wrong type assign', () {
-      expect(() => new SimpleValue((b) => b..anInt = '0'), throws);
-    });
-
     test('fields can be set via build constructor', () {
       final value = new SimpleValue((b) => b
         ..anInt = 1

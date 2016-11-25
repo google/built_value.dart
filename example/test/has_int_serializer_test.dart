@@ -7,7 +7,6 @@ import 'package:built_collection/built_collection.dart';
 import 'package:example/has_int.dart';
 import 'package:example/serializers.dart';
 import 'package:test/test.dart';
-import 'package:example/simple_value.dart';
 
 void main() {
   group('HasInt', () {
