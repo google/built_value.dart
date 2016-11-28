@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0
+
+- Add benchmark for updating deeply nested data structures.
+- Make builders copy lazily. This makes updates to deeply nested structures
+  much faster: only the classes on the path to the update are copied, instead
+  of the entire tree.
+- Breaking change: if you hand-code the builder then you must mark the fields
+  @virtual so they can be overriden in the generated code.
+- Auto-create nested nullable builders when they're accessed. Fixes
+  deserialization with nested nullable builder.
+
 ## 0.3.0
 
 - Merged built_json and built_json_generator into built_value and

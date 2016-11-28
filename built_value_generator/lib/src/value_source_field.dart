@@ -8,6 +8,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:meta/meta.dart';
 
 part 'value_source_field.g.dart';
 
@@ -136,19 +137,4 @@ abstract class ValueSourceField
 
     return result;
   }
-}
-
-abstract class ValueSourceFieldBuilder
-    implements Builder<ValueSourceField, ValueSourceFieldBuilder> {
-  String name;
-  String type;
-  bool isGetter;
-  bool isNullable;
-  bool builderFieldExists;
-  bool builderFieldIsNormalField;
-  String typeInBuilder;
-  bool isNestedBuilder;
-
-  ValueSourceFieldBuilder._();
-  factory ValueSourceFieldBuilder() = _$ValueSourceFieldBuilder;
 }

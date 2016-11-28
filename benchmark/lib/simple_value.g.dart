@@ -4,66 +4,6 @@ part of simple_value;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library simple_value
-// **************************************************************************
-
-Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
-
-class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
-  final Iterable<Type> types = const [SimpleValue, _$SimpleValue];
-  final String wireName = 'SimpleValue';
-
-  @override
-  Iterable serialize(Serializers serializers, SimpleValue object,
-      {FullType specifiedType: FullType.unspecified}) {
-    final result = [
-      'anInt',
-      serializers.serialize(object.anInt, specifiedType: const FullType(int)),
-    ];
-    if (object.aString != null) {
-      result.add('aString');
-      result.add(serializers.serialize(object.aString,
-          specifiedType: const FullType(String)));
-    }
-
-    return result;
-  }
-
-  @override
-  SimpleValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
-    final result = new SimpleValueBuilder();
-
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'anInt':
-            result.anInt = serializers.deserialize(value,
-                specifiedType: const FullType(int));
-            break;
-          case 'aString':
-            result.aString = serializers.deserialize(value,
-                specifiedType: const FullType(String));
-            break;
-        }
-      }
-    }
-
-    return result.build();
-  }
-}
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
 // Target: abstract class SimpleValue
 // **************************************************************************
 
@@ -73,6 +13,7 @@ class _$SimpleValue extends SimpleValue {
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (aString == null) throw new ArgumentError.notNull('aString');
   }
 
   factory _$SimpleValue([updates(SimpleValueBuilder b)]) =>

@@ -105,13 +105,29 @@ class _$ValidatedValue extends ValidatedValue {
 
 class ValidatedValueBuilder
     implements Builder<ValidatedValue, ValidatedValueBuilder> {
+  ValidatedValue _$v;
+
+  int _anInt;
+  int get anInt => _anInt;
+  set anInt(int anInt) => _$writableBuilder._anInt = anInt;
+
+  String _aString;
+  String get aString => _aString;
+  set aString(String aString) => _$writableBuilder._aString = aString;
+
   ValidatedValueBuilder();
-  int anInt;
-  String aString;
+
+  ValidatedValueBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _anInt = _$v.anInt;
+      _aString = _$v.aString;
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(ValidatedValue other) {
-    this.anInt = other.anInt;
-    this.aString = other.aString;
+    _$v = other;
   }
 
   void update(updates(ValidatedValueBuilder b)) {
@@ -119,6 +135,9 @@ class ValidatedValueBuilder
   }
 
   ValidatedValue build() {
-    return new _$ValidatedValue._(anInt: anInt, aString: aString);
+    final result =
+        _$v ?? new _$ValidatedValue._(anInt: anInt, aString: aString);
+    replace(result);
+    return result;
   }
 }

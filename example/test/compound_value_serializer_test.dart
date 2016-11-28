@@ -2,11 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// TODO(davidmorgan): fix deserialization for @nullable nested builder.
-// https://github.com/google/built_json.dart/issues/40
-void main() {}
-
-/*
 import 'package:example/compound_value.dart';
 import 'package:example/serializers.dart';
 import 'package:example/validated_value.dart';
@@ -43,4 +38,3 @@ void main() {
     });
   });
 }
-*/

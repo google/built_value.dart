@@ -69,13 +69,54 @@ class _$SerializerSourceField extends SerializerSourceField {
 }
 
 class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
+  SerializerSourceField _$v;
+
+  bool get isSerializable => super.isSerializable;
+  set isSerializable(bool isSerializable) {
+    _$writableBuilder;
+    super.isSerializable = isSerializable;
+  }
+
+  bool get isNullable => super.isNullable;
+  set isNullable(bool isNullable) {
+    _$writableBuilder;
+    super.isNullable = isNullable;
+  }
+
+  String get name => super.name;
+  set name(String name) {
+    _$writableBuilder;
+    super.name = name;
+  }
+
+  String get type => super.type;
+  set type(String type) {
+    _$writableBuilder;
+    super.type = type;
+  }
+
+  bool get builderFieldUsesNestedBuilder => super.builderFieldUsesNestedBuilder;
+  set builderFieldUsesNestedBuilder(bool builderFieldUsesNestedBuilder) {
+    _$writableBuilder;
+    super.builderFieldUsesNestedBuilder = builderFieldUsesNestedBuilder;
+  }
+
   _$SerializerSourceFieldBuilder() : super._();
+
+  SerializerSourceFieldBuilder get _$writableBuilder {
+    if (_$v != null) {
+      super.isSerializable = _$v.isSerializable;
+      super.isNullable = _$v.isNullable;
+      super.name = _$v.name;
+      super.type = _$v.type;
+      super.builderFieldUsesNestedBuilder = _$v.builderFieldUsesNestedBuilder;
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(SerializerSourceField other) {
-    super.isSerializable = other.isSerializable;
-    super.isNullable = other.isNullable;
-    super.name = other.name;
-    super.type = other.type;
-    super.builderFieldUsesNestedBuilder = other.builderFieldUsesNestedBuilder;
+    _$v = other;
   }
 
   void update(updates(SerializerSourceFieldBuilder b)) {
@@ -83,11 +124,14 @@ class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
   }
 
   SerializerSourceField build() {
-    return new _$SerializerSourceField._(
-        isSerializable: isSerializable,
-        isNullable: isNullable,
-        name: name,
-        type: type,
-        builderFieldUsesNestedBuilder: builderFieldUsesNestedBuilder);
+    final result = _$v ??
+        new _$SerializerSourceField._(
+            isSerializable: isSerializable,
+            isNullable: isNullable,
+            name: name,
+            type: type,
+            builderFieldUsesNestedBuilder: builderFieldUsesNestedBuilder);
+    replace(result);
+    return result;
   }
 }

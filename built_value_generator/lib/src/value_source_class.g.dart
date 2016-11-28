@@ -134,22 +134,131 @@ class _$ValueSourceClass extends ValueSourceClass {
 }
 
 class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
+  ValueSourceClass _$v;
+
+  String get name => super.name;
+  set name(String name) {
+    _$writableBuilder;
+    super.name = name;
+  }
+
+  String get builtParameters => super.builtParameters;
+  set builtParameters(String builtParameters) {
+    _$writableBuilder;
+    super.builtParameters = builtParameters;
+  }
+
+  bool get hasBuilder => super.hasBuilder;
+  set hasBuilder(bool hasBuilder) {
+    _$writableBuilder;
+    super.hasBuilder = hasBuilder;
+  }
+
+  String get builderParameters => super.builderParameters;
+  set builderParameters(String builderParameters) {
+    _$writableBuilder;
+    super.builderParameters = builderParameters;
+  }
+
+  ListBuilder<ValueSourceField> get fields {
+    _$writableBuilder;
+    return super.fields ??= new ListBuilder<ValueSourceField>();
+  }
+
+  set fields(ListBuilder<ValueSourceField> fields) {
+    _$writableBuilder;
+    super.fields = fields;
+  }
+
+  String get partStatement => super.partStatement;
+  set partStatement(String partStatement) {
+    _$writableBuilder;
+    super.partStatement = partStatement;
+  }
+
+  bool get hasPartStatement => super.hasPartStatement;
+  set hasPartStatement(bool hasPartStatement) {
+    _$writableBuilder;
+    super.hasPartStatement = hasPartStatement;
+  }
+
+  bool get valueClassIsAbstract => super.valueClassIsAbstract;
+  set valueClassIsAbstract(bool valueClassIsAbstract) {
+    _$writableBuilder;
+    super.valueClassIsAbstract = valueClassIsAbstract;
+  }
+
+  ListBuilder<String> get valueClassConstructors {
+    _$writableBuilder;
+    return super.valueClassConstructors ??= new ListBuilder<String>();
+  }
+
+  set valueClassConstructors(ListBuilder<String> valueClassConstructors) {
+    _$writableBuilder;
+    super.valueClassConstructors = valueClassConstructors;
+  }
+
+  ListBuilder<String> get valueClassFactories {
+    _$writableBuilder;
+    return super.valueClassFactories ??= new ListBuilder<String>();
+  }
+
+  set valueClassFactories(ListBuilder<String> valueClassFactories) {
+    _$writableBuilder;
+    super.valueClassFactories = valueClassFactories;
+  }
+
+  bool get builderClassIsAbstract => super.builderClassIsAbstract;
+  set builderClassIsAbstract(bool builderClassIsAbstract) {
+    _$writableBuilder;
+    super.builderClassIsAbstract = builderClassIsAbstract;
+  }
+
+  ListBuilder<String> get builderClassConstructors {
+    _$writableBuilder;
+    return super.builderClassConstructors ??= new ListBuilder<String>();
+  }
+
+  set builderClassConstructors(ListBuilder<String> builderClassConstructors) {
+    _$writableBuilder;
+    super.builderClassConstructors = builderClassConstructors;
+  }
+
+  ListBuilder<String> get builderClassFactories {
+    _$writableBuilder;
+    return super.builderClassFactories ??= new ListBuilder<String>();
+  }
+
+  set builderClassFactories(ListBuilder<String> builderClassFactories) {
+    _$writableBuilder;
+    super.builderClassFactories = builderClassFactories;
+  }
+
   _$ValueSourceClassBuilder() : super._();
+
+  ValueSourceClassBuilder get _$writableBuilder {
+    if (_$v != null) {
+      super.name = _$v.name;
+      super.builtParameters = _$v.builtParameters;
+      super.hasBuilder = _$v.hasBuilder;
+      super.builderParameters = _$v.builderParameters;
+      super.fields = _$v.fields?.toBuilder();
+      super.partStatement = _$v.partStatement;
+      super.hasPartStatement = _$v.hasPartStatement;
+      super.valueClassIsAbstract = _$v.valueClassIsAbstract;
+      super.valueClassConstructors = _$v.valueClassConstructors?.toBuilder();
+      super.valueClassFactories = _$v.valueClassFactories?.toBuilder();
+      super.builderClassIsAbstract = _$v.builderClassIsAbstract;
+      super.builderClassConstructors =
+          _$v.builderClassConstructors?.toBuilder();
+      super.builderClassFactories = _$v.builderClassFactories?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(ValueSourceClass other) {
-    super.name = other.name;
-    super.builtParameters = other.builtParameters;
-    super.hasBuilder = other.hasBuilder;
-    super.builderParameters = other.builderParameters;
-    super.fields = other.fields?.toBuilder();
-    super.partStatement = other.partStatement;
-    super.hasPartStatement = other.hasPartStatement;
-    super.valueClassIsAbstract = other.valueClassIsAbstract;
-    super.valueClassConstructors = other.valueClassConstructors?.toBuilder();
-    super.valueClassFactories = other.valueClassFactories?.toBuilder();
-    super.builderClassIsAbstract = other.builderClassIsAbstract;
-    super.builderClassConstructors =
-        other.builderClassConstructors?.toBuilder();
-    super.builderClassFactories = other.builderClassFactories?.toBuilder();
+    _$v = other;
   }
 
   void update(updates(ValueSourceClassBuilder b)) {
@@ -157,19 +266,22 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
   }
 
   ValueSourceClass build() {
-    return new _$ValueSourceClass._(
-        name: name,
-        builtParameters: builtParameters,
-        hasBuilder: hasBuilder,
-        builderParameters: builderParameters,
-        fields: fields?.build(),
-        partStatement: partStatement,
-        hasPartStatement: hasPartStatement,
-        valueClassIsAbstract: valueClassIsAbstract,
-        valueClassConstructors: valueClassConstructors?.build(),
-        valueClassFactories: valueClassFactories?.build(),
-        builderClassIsAbstract: builderClassIsAbstract,
-        builderClassConstructors: builderClassConstructors?.build(),
-        builderClassFactories: builderClassFactories?.build());
+    final result = _$v ??
+        new _$ValueSourceClass._(
+            name: name,
+            builtParameters: builtParameters,
+            hasBuilder: hasBuilder,
+            builderParameters: builderParameters,
+            fields: fields?.build(),
+            partStatement: partStatement,
+            hasPartStatement: hasPartStatement,
+            valueClassIsAbstract: valueClassIsAbstract,
+            valueClassConstructors: valueClassConstructors?.build(),
+            valueClassFactories: valueClassFactories?.build(),
+            builderClassIsAbstract: builderClassIsAbstract,
+            builderClassConstructors: builderClassConstructors?.build(),
+            builderClassFactories: builderClassFactories?.build());
+    replace(result);
+    return result;
   }
 }

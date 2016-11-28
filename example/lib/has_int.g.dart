@@ -142,10 +142,33 @@ class _$ValueWithInt extends ValueWithInt {
 }
 
 class _$ValueWithIntBuilder extends ValueWithIntBuilder {
+  ValueWithInt _$v;
+
+  int get anInt => super.anInt;
+  set anInt(int anInt) {
+    _$writableBuilder;
+    super.anInt = anInt;
+  }
+
+  String get note => super.note;
+  set note(String note) {
+    _$writableBuilder;
+    super.note = note;
+  }
+
   _$ValueWithIntBuilder() : super._();
+
+  ValueWithIntBuilder get _$writableBuilder {
+    if (_$v != null) {
+      super.anInt = _$v.anInt;
+      super.note = _$v.note;
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(ValueWithInt other) {
-    super.anInt = other.anInt;
-    super.note = other.note;
+    _$v = other;
   }
 
   void update(updates(ValueWithIntBuilder b)) {
@@ -153,6 +176,8 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
   }
 
   ValueWithInt build() {
-    return new _$ValueWithInt._(anInt: anInt, note: note);
+    final result = _$v ?? new _$ValueWithInt._(anInt: anInt, note: note);
+    replace(result);
+    return result;
   }
 }

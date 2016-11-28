@@ -35,8 +35,8 @@ class _$EnumSourceField extends EnumSourceField {
   EnumSourceField rebuild(updates(EnumSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
-  _$EnumSourceFieldBuilder toBuilder() =>
-      new _$EnumSourceFieldBuilder()..replace(this);
+  EnumSourceFieldBuilder toBuilder() =>
+      new EnumSourceFieldBuilder()..replace(this);
 
   bool operator ==(other) {
     if (other is! EnumSourceField) return false;
@@ -67,14 +67,47 @@ class _$EnumSourceField extends EnumSourceField {
   }
 }
 
-class _$EnumSourceFieldBuilder extends EnumSourceFieldBuilder {
-  _$EnumSourceFieldBuilder() : super._();
+class EnumSourceFieldBuilder
+    implements Builder<EnumSourceField, EnumSourceFieldBuilder> {
+  EnumSourceField _$v;
+
+  String _name;
+  String get name => _name;
+  set name(String name) => _$writableBuilder._name = name;
+
+  String _type;
+  String get type => _type;
+  set type(String type) => _$writableBuilder._type = type;
+
+  String _generatedIdentifier;
+  String get generatedIdentifier => _generatedIdentifier;
+  set generatedIdentifier(String generatedIdentifier) =>
+      _$writableBuilder._generatedIdentifier = generatedIdentifier;
+
+  bool _isConst;
+  bool get isConst => _isConst;
+  set isConst(bool isConst) => _$writableBuilder._isConst = isConst;
+
+  bool _isStatic;
+  bool get isStatic => _isStatic;
+  set isStatic(bool isStatic) => _$writableBuilder._isStatic = isStatic;
+
+  EnumSourceFieldBuilder();
+
+  EnumSourceFieldBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _name = _$v.name;
+      _type = _$v.type;
+      _generatedIdentifier = _$v.generatedIdentifier;
+      _isConst = _$v.isConst;
+      _isStatic = _$v.isStatic;
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(EnumSourceField other) {
-    super.name = other.name;
-    super.type = other.type;
-    super.generatedIdentifier = other.generatedIdentifier;
-    super.isConst = other.isConst;
-    super.isStatic = other.isStatic;
+    _$v = other;
   }
 
   void update(updates(EnumSourceFieldBuilder b)) {
@@ -82,11 +115,14 @@ class _$EnumSourceFieldBuilder extends EnumSourceFieldBuilder {
   }
 
   EnumSourceField build() {
-    return new _$EnumSourceField._(
-        name: name,
-        type: type,
-        generatedIdentifier: generatedIdentifier,
-        isConst: isConst,
-        isStatic: isStatic);
+    final result = _$v ??
+        new _$EnumSourceField._(
+            name: name,
+            type: type,
+            generatedIdentifier: generatedIdentifier,
+            isConst: isConst,
+            isStatic: isStatic);
+    replace(result);
+    return result;
   }
 }

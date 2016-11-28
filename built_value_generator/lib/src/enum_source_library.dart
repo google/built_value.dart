@@ -7,8 +7,9 @@ library built_value_generator.enum_source_library;
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/library_elements.dart';
 import 'package:built_value_generator/src/enum_source_class.dart';
+import 'package:built_value_generator/src/library_elements.dart';
+import 'package:meta/meta.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -90,17 +91,6 @@ abstract class EnumSourceLibrary
 
     return result;
   }
-}
-
-abstract class EnumSourceLibraryBuilder
-    implements Builder<EnumSourceLibrary, EnumSourceLibraryBuilder> {
-  String name;
-  String fileName;
-  String source;
-  ListBuilder<EnumSourceClass> classes = new ListBuilder<EnumSourceClass>();
-
-  EnumSourceLibraryBuilder._();
-  factory EnumSourceLibraryBuilder() = _$EnumSourceLibraryBuilder;
 }
 
 InvalidGenerationSourceError _makeError(Iterable<String> todos) {

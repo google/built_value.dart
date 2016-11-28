@@ -27,8 +27,8 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
   EnumSourceLibrary rebuild(updates(EnumSourceLibraryBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
-  _$EnumSourceLibraryBuilder toBuilder() =>
-      new _$EnumSourceLibraryBuilder()..replace(this);
+  EnumSourceLibraryBuilder toBuilder() =>
+      new EnumSourceLibraryBuilder()..replace(this);
 
   bool operator ==(other) {
     if (other is! EnumSourceLibrary) return false;
@@ -54,13 +54,43 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
   }
 }
 
-class _$EnumSourceLibraryBuilder extends EnumSourceLibraryBuilder {
-  _$EnumSourceLibraryBuilder() : super._();
+class EnumSourceLibraryBuilder
+    implements Builder<EnumSourceLibrary, EnumSourceLibraryBuilder> {
+  EnumSourceLibrary _$v;
+
+  String _name;
+  String get name => _name;
+  set name(String name) => _$writableBuilder._name = name;
+
+  String _fileName;
+  String get fileName => _fileName;
+  set fileName(String fileName) => _$writableBuilder._fileName = fileName;
+
+  String _source;
+  String get source => _source;
+  set source(String source) => _$writableBuilder._source = source;
+
+  ListBuilder<EnumSourceClass> _classes;
+  ListBuilder<EnumSourceClass> get classes =>
+      _$writableBuilder._classes ??= new ListBuilder<EnumSourceClass>();
+  set classes(ListBuilder<EnumSourceClass> classes) =>
+      _$writableBuilder._classes = classes;
+
+  EnumSourceLibraryBuilder();
+
+  EnumSourceLibraryBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _name = _$v.name;
+      _fileName = _$v.fileName;
+      _source = _$v.source;
+      _classes = _$v.classes?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(EnumSourceLibrary other) {
-    super.name = other.name;
-    super.fileName = other.fileName;
-    super.source = other.source;
-    super.classes = other.classes?.toBuilder();
+    _$v = other;
   }
 
   void update(updates(EnumSourceLibraryBuilder b)) {
@@ -68,10 +98,13 @@ class _$EnumSourceLibraryBuilder extends EnumSourceLibraryBuilder {
   }
 
   EnumSourceLibrary build() {
-    return new _$EnumSourceLibrary._(
-        name: name,
-        fileName: fileName,
-        source: source,
-        classes: classes?.build());
+    final result = _$v ??
+        new _$EnumSourceLibrary._(
+            name: name,
+            fileName: fileName,
+            source: source,
+            classes: classes?.build());
+    replace(result);
+    return result;
   }
 }

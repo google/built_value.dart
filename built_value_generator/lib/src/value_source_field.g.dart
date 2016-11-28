@@ -46,8 +46,8 @@ class _$ValueSourceField extends ValueSourceField {
   ValueSourceField rebuild(updates(ValueSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
-  _$ValueSourceFieldBuilder toBuilder() =>
-      new _$ValueSourceFieldBuilder()..replace(this);
+  ValueSourceFieldBuilder toBuilder() =>
+      new ValueSourceFieldBuilder()..replace(this);
 
   bool operator ==(other) {
     if (other is! ValueSourceField) return false;
@@ -90,17 +90,65 @@ class _$ValueSourceField extends ValueSourceField {
   }
 }
 
-class _$ValueSourceFieldBuilder extends ValueSourceFieldBuilder {
-  _$ValueSourceFieldBuilder() : super._();
+class ValueSourceFieldBuilder
+    implements Builder<ValueSourceField, ValueSourceFieldBuilder> {
+  ValueSourceField _$v;
+
+  String _name;
+  String get name => _name;
+  set name(String name) => _$writableBuilder._name = name;
+
+  String _type;
+  String get type => _type;
+  set type(String type) => _$writableBuilder._type = type;
+
+  bool _isGetter;
+  bool get isGetter => _isGetter;
+  set isGetter(bool isGetter) => _$writableBuilder._isGetter = isGetter;
+
+  bool _isNullable;
+  bool get isNullable => _isNullable;
+  set isNullable(bool isNullable) => _$writableBuilder._isNullable = isNullable;
+
+  bool _builderFieldExists;
+  bool get builderFieldExists => _builderFieldExists;
+  set builderFieldExists(bool builderFieldExists) =>
+      _$writableBuilder._builderFieldExists = builderFieldExists;
+
+  bool _builderFieldIsNormalField;
+  bool get builderFieldIsNormalField => _builderFieldIsNormalField;
+  set builderFieldIsNormalField(bool builderFieldIsNormalField) =>
+      _$writableBuilder._builderFieldIsNormalField = builderFieldIsNormalField;
+
+  String _typeInBuilder;
+  String get typeInBuilder => _typeInBuilder;
+  set typeInBuilder(String typeInBuilder) =>
+      _$writableBuilder._typeInBuilder = typeInBuilder;
+
+  bool _isNestedBuilder;
+  bool get isNestedBuilder => _isNestedBuilder;
+  set isNestedBuilder(bool isNestedBuilder) =>
+      _$writableBuilder._isNestedBuilder = isNestedBuilder;
+
+  ValueSourceFieldBuilder();
+
+  ValueSourceFieldBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _name = _$v.name;
+      _type = _$v.type;
+      _isGetter = _$v.isGetter;
+      _isNullable = _$v.isNullable;
+      _builderFieldExists = _$v.builderFieldExists;
+      _builderFieldIsNormalField = _$v.builderFieldIsNormalField;
+      _typeInBuilder = _$v.typeInBuilder;
+      _isNestedBuilder = _$v.isNestedBuilder;
+      _$v = null;
+    }
+    return this;
+  }
+
   void replace(ValueSourceField other) {
-    super.name = other.name;
-    super.type = other.type;
-    super.isGetter = other.isGetter;
-    super.isNullable = other.isNullable;
-    super.builderFieldExists = other.builderFieldExists;
-    super.builderFieldIsNormalField = other.builderFieldIsNormalField;
-    super.typeInBuilder = other.typeInBuilder;
-    super.isNestedBuilder = other.isNestedBuilder;
+    _$v = other;
   }
 
   void update(updates(ValueSourceFieldBuilder b)) {
@@ -108,14 +156,17 @@ class _$ValueSourceFieldBuilder extends ValueSourceFieldBuilder {
   }
 
   ValueSourceField build() {
-    return new _$ValueSourceField._(
-        name: name,
-        type: type,
-        isGetter: isGetter,
-        isNullable: isNullable,
-        builderFieldExists: builderFieldExists,
-        builderFieldIsNormalField: builderFieldIsNormalField,
-        typeInBuilder: typeInBuilder,
-        isNestedBuilder: isNestedBuilder);
+    final result = _$v ??
+        new _$ValueSourceField._(
+            name: name,
+            type: type,
+            isGetter: isGetter,
+            isNullable: isNullable,
+            builderFieldExists: builderFieldExists,
+            builderFieldIsNormalField: builderFieldIsNormalField,
+            typeInBuilder: typeInBuilder,
+            isNestedBuilder: isNestedBuilder);
+    replace(result);
+    return result;
   }
 }

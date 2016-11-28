@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 
 import 'package:example/compound_value.dart';
-import 'package:example/validated_value.dart';
 import 'package:quiver/core.dart';
 import 'package:test/test.dart';
 
@@ -25,7 +24,6 @@ void main() {
       expect(
           new CompoundValue((b) => b
             ..simpleValue.anInt = 1
-            ..validatedValue = new ValidatedValueBuilder()
             ..validatedValue.anInt = 2).validatedValue.anInt,
           2);
     });

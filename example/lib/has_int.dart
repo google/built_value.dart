@@ -8,6 +8,7 @@ library has_int;
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:meta/meta.dart';
 
 part 'has_int.g.dart';
 
@@ -46,7 +47,9 @@ abstract class ValueWithInt
 /// Builder class for [ValueWithInt].
 abstract class ValueWithIntBuilder
     implements Builder<ValueWithInt, ValueWithIntBuilder> {
+  @virtual
   int anInt;
+  @virtual
   String note;
 
   ValueWithIntBuilder._();

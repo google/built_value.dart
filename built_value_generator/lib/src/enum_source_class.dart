@@ -9,6 +9,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/enum_source_field.dart';
 import 'package:quiver/iterables.dart';
+import 'package:meta/meta.dart';
 
 part 'enum_source_class.g.dart';
 
@@ -188,18 +189,4 @@ abstract class EnumSourceClass
 
     return result.toString();
   }
-}
-
-abstract class EnumSourceClassBuilder
-    implements Builder<EnumSourceClass, EnumSourceClassBuilder> {
-  EnumSourceClassBuilder._();
-  factory EnumSourceClassBuilder() = _$EnumSourceClassBuilder;
-
-  String name;
-  ListBuilder<EnumSourceField> fields = new ListBuilder<EnumSourceField>();
-  ListBuilder<String> constructors = new ListBuilder<String>();
-  String valuesIdentifier;
-  String valueOfIdentifier;
-  bool usesMixin;
-  String mixinDeclaration;
 }

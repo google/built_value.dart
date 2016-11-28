@@ -105,13 +105,33 @@ class _$CompoundValue extends CompoundValue {
 
 class CompoundValueBuilder
     implements Builder<CompoundValue, CompoundValueBuilder> {
+  CompoundValue _$v;
+
+  SimpleValueBuilder _simpleValue;
+  SimpleValueBuilder get simpleValue =>
+      _$writableBuilder._simpleValue ??= new SimpleValueBuilder();
+  set simpleValue(SimpleValueBuilder simpleValue) =>
+      _$writableBuilder._simpleValue = simpleValue;
+
+  ValidatedValueBuilder _validatedValue;
+  ValidatedValueBuilder get validatedValue =>
+      _$writableBuilder._validatedValue ??= new ValidatedValueBuilder();
+  set validatedValue(ValidatedValueBuilder validatedValue) =>
+      _$writableBuilder._validatedValue = validatedValue;
+
   CompoundValueBuilder();
-  SimpleValueBuilder simpleValue = new SimpleValueBuilder();
-  ValidatedValueBuilder validatedValue;
+
+  CompoundValueBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _simpleValue = _$v.simpleValue?.toBuilder();
+      _validatedValue = _$v.validatedValue?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(CompoundValue other) {
-    this.simpleValue = other.simpleValue?.toBuilder();
-    this.validatedValue = other.validatedValue?.toBuilder();
+    _$v = other;
   }
 
   void update(updates(CompoundValueBuilder b)) {
@@ -119,8 +139,11 @@ class CompoundValueBuilder
   }
 
   CompoundValue build() {
-    return new _$CompoundValue._(
-        simpleValue: simpleValue?.build(),
-        validatedValue: validatedValue?.build());
+    final result = _$v ??
+        new _$CompoundValue._(
+            simpleValue: simpleValue?.build(),
+            validatedValue: _validatedValue?.build());
+    replace(result);
+    return result;
   }
 }

@@ -2,7 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:built_collection/built_collection.dart';
 import 'package:example/collections.dart';
 import 'package:quiver/core.dart';
 import 'package:test/test.dart';
@@ -50,11 +49,6 @@ void main() {
 
     test('can be set from null via builder', () {
       final collections = new Collections((b) => b
-        ..nullableList = new ListBuilder<int>()
-        ..nullableSet = new SetBuilder<String>()
-        ..nullableMap = new MapBuilder<String, int>()
-        ..nullableListMultimap = new ListMultimapBuilder<int, bool>()
-        ..nullableSetMultimap = new SetMultimapBuilder<String, bool>()
         ..nullableList.add(1)
         ..nullableSet.add('two')
         ..nullableMap['three'] = 4
