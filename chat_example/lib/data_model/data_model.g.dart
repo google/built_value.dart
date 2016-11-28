@@ -503,13 +503,31 @@ class _$Chat extends Chat {
 }
 
 class ChatBuilder implements Builder<Chat, ChatBuilder> {
+  Chat _$v;
+
+  String _text;
+  String get text => _text;
+  set text(String text) => _$writableBuilder._text = text;
+
+  SetBuilder<String> _targets;
+  SetBuilder<String> get targets =>
+      _$writableBuilder._targets ??= new SetBuilder<String>();
+  set targets(SetBuilder<String> targets) =>
+      _$writableBuilder._targets = targets;
+
   ChatBuilder();
-  String text;
-  SetBuilder<String> targets = new SetBuilder<String>();
+
+  ChatBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _text = _$v.text;
+      _targets = _$v.targets?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(Chat other) {
-    this.text = other.text;
-    this.targets = other.targets?.toBuilder();
+    _$v = other;
   }
 
   void update(updates(ChatBuilder b)) {
@@ -517,7 +535,9 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   }
 
   Chat build() {
-    return new _$Chat._(text: text, targets: targets?.build());
+    final result = _$v ?? new _$Chat._(text: text, targets: targets?.build());
+    replace(result);
+    return result;
   }
 }
 
@@ -561,13 +581,29 @@ class _$Login extends Login {
 }
 
 class LoginBuilder implements Builder<Login, LoginBuilder> {
+  Login _$v;
+
+  String _username;
+  String get username => _username;
+  set username(String username) => _$writableBuilder._username = username;
+
+  String _password;
+  String get password => _password;
+  set password(String password) => _$writableBuilder._password = password;
+
   LoginBuilder();
-  String username;
-  String password;
+
+  LoginBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _username = _$v.username;
+      _password = _$v.password;
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(Login other) {
-    this.username = other.username;
-    this.password = other.password;
+    _$v = other;
   }
 
   void update(updates(LoginBuilder b)) {
@@ -575,7 +611,9 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   }
 
   Login build() {
-    return new _$Login._(username: username, password: password);
+    final result = _$v ?? new _$Login._(username: username, password: password);
+    replace(result);
+    return result;
   }
 }
 
@@ -619,13 +657,29 @@ class _$Status extends Status {
 }
 
 class StatusBuilder implements Builder<Status, StatusBuilder> {
+  Status _$v;
+
+  String _message;
+  String get message => _message;
+  set message(String message) => _$writableBuilder._message = message;
+
+  StatusType _type;
+  StatusType get type => _type;
+  set type(StatusType type) => _$writableBuilder._type = type;
+
   StatusBuilder();
-  String message;
-  StatusType type;
+
+  StatusBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _message = _$v.message;
+      _type = _$v.type;
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(Status other) {
-    this.message = other.message;
-    this.type = other.type;
+    _$v = other;
   }
 
   void update(updates(StatusBuilder b)) {
@@ -633,7 +687,9 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   }
 
   Status build() {
-    return new _$Status._(message: message, type: type);
+    final result = _$v ?? new _$Status._(message: message, type: type);
+    replace(result);
+    return result;
   }
 }
 
@@ -674,11 +730,26 @@ class _$ListUsers extends ListUsers {
 }
 
 class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
+  ListUsers _$v;
+
+  SetBuilder<StatusType> _statusTypes;
+  SetBuilder<StatusType> get statusTypes =>
+      _$writableBuilder._statusTypes ??= new SetBuilder<StatusType>();
+  set statusTypes(SetBuilder<StatusType> statusTypes) =>
+      _$writableBuilder._statusTypes = statusTypes;
+
   ListUsersBuilder();
-  SetBuilder<StatusType> statusTypes = new SetBuilder<StatusType>();
+
+  ListUsersBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _statusTypes = _$v.statusTypes?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(ListUsers other) {
-    this.statusTypes = other.statusTypes?.toBuilder();
+    _$v = other;
   }
 
   void update(updates(ListUsersBuilder b)) {
@@ -686,7 +757,9 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
   }
 
   ListUsers build() {
-    return new _$ListUsers._(statusTypes: statusTypes?.build());
+    final result = _$v ?? new _$ListUsers._(statusTypes: statusTypes?.build());
+    replace(result);
+    return result;
   }
 }
 
@@ -736,15 +809,34 @@ class _$ShowChat extends ShowChat {
 }
 
 class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
+  ShowChat _$v;
+
+  String _username;
+  String get username => _username;
+  set username(String username) => _$writableBuilder._username = username;
+
+  bool _private;
+  bool get private => _private;
+  set private(bool private) => _$writableBuilder._private = private;
+
+  String _text;
+  String get text => _text;
+  set text(String text) => _$writableBuilder._text = text;
+
   ShowChatBuilder();
-  String username;
-  bool private;
-  String text;
+
+  ShowChatBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _username = _$v.username;
+      _private = _$v.private;
+      _text = _$v.text;
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(ShowChat other) {
-    this.username = other.username;
-    this.private = other.private;
-    this.text = other.text;
+    _$v = other;
   }
 
   void update(updates(ShowChatBuilder b)) {
@@ -752,7 +844,10 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   }
 
   ShowChat build() {
-    return new _$ShowChat._(username: username, private: private, text: text);
+    final result = _$v ??
+        new _$ShowChat._(username: username, private: private, text: text);
+    replace(result);
+    return result;
   }
 }
 
@@ -796,13 +891,30 @@ class _$Welcome extends Welcome {
 }
 
 class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
+  Welcome _$v;
+
+  ListBuilder<Response> _log;
+  ListBuilder<Response> get log =>
+      _$writableBuilder._log ??= new ListBuilder<Response>();
+  set log(ListBuilder<Response> log) => _$writableBuilder._log = log;
+
+  String _message;
+  String get message => _message;
+  set message(String message) => _$writableBuilder._message = message;
+
   WelcomeBuilder();
-  ListBuilder<Response> log = new ListBuilder<Response>();
-  String message;
+
+  WelcomeBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _log = _$v.log?.toBuilder();
+      _message = _$v.message;
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(Welcome other) {
-    this.log = other.log?.toBuilder();
-    this.message = other.message;
+    _$v = other;
   }
 
   void update(updates(WelcomeBuilder b)) {
@@ -810,7 +922,9 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   }
 
   Welcome build() {
-    return new _$Welcome._(log: log?.build(), message: message);
+    final result = _$v ?? new _$Welcome._(log: log?.build(), message: message);
+    replace(result);
+    return result;
   }
 }
 
@@ -853,11 +967,26 @@ class _$ListUsersResponse extends ListUsersResponse {
 
 class ListUsersResponseBuilder
     implements Builder<ListUsersResponse, ListUsersResponseBuilder> {
+  ListUsersResponse _$v;
+
+  MapBuilder<String, Status> _statuses;
+  MapBuilder<String, Status> get statuses =>
+      _$writableBuilder._statuses ??= new MapBuilder<String, Status>();
+  set statuses(MapBuilder<String, Status> statuses) =>
+      _$writableBuilder._statuses = statuses;
+
   ListUsersResponseBuilder();
-  MapBuilder<String, Status> statuses = new MapBuilder<String, Status>();
+
+  ListUsersResponseBuilder get _$writableBuilder {
+    if (_$v != null) {
+      _statuses = _$v.statuses?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
 
   void replace(ListUsersResponse other) {
-    this.statuses = other.statuses?.toBuilder();
+    _$v = other;
   }
 
   void update(updates(ListUsersResponseBuilder b)) {
@@ -865,6 +994,9 @@ class ListUsersResponseBuilder
   }
 
   ListUsersResponse build() {
-    return new _$ListUsersResponse._(statuses: statuses?.build());
+    final result =
+        _$v ?? new _$ListUsersResponse._(statuses: statuses?.build());
+    replace(result);
+    return result;
   }
 }
