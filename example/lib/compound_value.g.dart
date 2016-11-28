@@ -107,7 +107,13 @@ class CompoundValueBuilder
     implements Builder<CompoundValue, CompoundValueBuilder> {
   CompoundValueBuilder();
   SimpleValueBuilder simpleValue = new SimpleValueBuilder();
-  ValidatedValueBuilder validatedValue;
+  ValidatedValueBuilder _validatedValue;
+  set validatedValue(ValidatedValueBuilder validatedValue) =>
+      _validatedValue = validatedValue;
+  ValidatedValueBuilder get validatedValue {
+    _validatedValue ??= new ValidatedValueBuilder();
+    return _validatedValue;
+  }
 
   void replace(CompoundValue other) {
     this.simpleValue = other.simpleValue?.toBuilder();
@@ -121,6 +127,6 @@ class CompoundValueBuilder
   CompoundValue build() {
     return new _$CompoundValue._(
         simpleValue: simpleValue?.build(),
-        validatedValue: validatedValue?.build());
+        validatedValue: _validatedValue?.build());
   }
 }

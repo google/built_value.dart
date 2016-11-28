@@ -50,11 +50,6 @@ void main() {
 
     test('can be set from null via builder', () {
       final collections = new Collections((b) => b
-        ..nullableList = new ListBuilder<int>()
-        ..nullableSet = new SetBuilder<String>()
-        ..nullableMap = new MapBuilder<String, int>()
-        ..nullableListMultimap = new ListMultimapBuilder<int, bool>()
-        ..nullableSetMultimap = new SetMultimapBuilder<String, bool>()
         ..nullableList.add(1)
         ..nullableSet.add('two')
         ..nullableMap['three'] = 4

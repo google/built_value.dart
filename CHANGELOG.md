@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+- Auto-create nested nullable builders when they're accessed. Fixes deserialization with nested nullable builder.
+
 ## 0.3.0
 
 - Merged built_json and built_json_generator into built_value and
