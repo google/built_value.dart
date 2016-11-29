@@ -1,0 +1,20 @@
+#!/bin/bash --
+# Copyright (c) 2016, Google Inc. Please see the AUTHORS file for details.
+# All rights reserved. Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+if [ $# -ne 0 ]; then
+  echo "Usage: tool/use_local_deps"
+  echo
+  echo "Changes dependencies to use local paths."
+fi
+
+for pubspec in */pubspec.yaml; do
+  # Update dependencies.
+  sed -i -e \
+      's/.*\(built_value: .*\)/# \1\n  built_value:\n    path: ..\/built_value/' \
+      $pubspec
+  sed -i -e \
+      's/.*\(built_value_generator: .*\)/# \1\n  built_value_generator:\n    path: ..\/built_value_generator/' \
+      $pubspec
+done
