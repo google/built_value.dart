@@ -7,7 +7,6 @@ library built_value_generator.enum_source_field;
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/src/list.dart';
 import 'package:built_value/built_value.dart';
-import 'package:meta/meta.dart';
 
 part 'enum_source_field.g.dart';
 

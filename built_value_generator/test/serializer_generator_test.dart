@@ -436,6 +436,23 @@ class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
 }
 '''));
     });
+
+    test('does not crash for incorrect builder getter', () async {
+      expect(await generate(r'''
+library value;
+
+import 'package:test_support/test_support.dart';
+
+abstract class Value implements Built<Value, ValueBuilder> {
+  static final Serializer<Value> serializer = _$serializer;
+  bool get aBool;
+}
+
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  set aBool(bool aBool);
+}
+'''), contains('Serializer<Value>'));
+    });
   });
 }
 

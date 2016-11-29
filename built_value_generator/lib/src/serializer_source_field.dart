@@ -58,13 +58,17 @@ abstract class SerializerSourceField
       result.name = fieldElement.displayName;
       result.type = fieldElement.getter.returnType.displayName;
 
+      final builderFieldElementIsValid =
+          (builderFieldElement?.getter?.isAbstract ?? false) &&
+              !builderFieldElement.isStatic;
+
       // If the builder is present, check it to determine whether a nested
       // builder is needed. Otherwise, use the same logic as built_value when
       // it decides whether to use a nested builder.
-      result.builderFieldUsesNestedBuilder = builderFieldElement == null
-          ? _needsNestedBuilder(fieldElement.getter.returnType)
-          : fieldElement.getter.returnType.displayName !=
-              builderFieldElement.getter.returnType.displayName;
+      result.builderFieldUsesNestedBuilder = builderFieldElementIsValid
+          ? fieldElement.getter.returnType.displayName !=
+              builderFieldElement.getter.returnType.displayName
+          : _needsNestedBuilder(fieldElement.getter.returnType);
     }
 
     return result.build();

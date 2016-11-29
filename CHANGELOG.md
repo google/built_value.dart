@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1
+
+- Fix some analyzer hints.
+- Fix exception from serializer generator if builder field is incorrect.
+
 ## 0.4.0
 
 - Add benchmark for updating deeply nested data structures.
