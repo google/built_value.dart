@@ -1,0 +1,35 @@
+#!/bin/bash --
+# Copyright (c) 2016, Google Inc. Please see the AUTHORS file for details.
+# All rights reserved. Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+if [ $# -ne 1 ]; then
+  echo "Usage: tool/set_version <version>"
+  echo
+  echo "Updates pubspecs to specified version."
+fi
+
+version=$1
+
+for pubspec in */pubspec.yaml; do
+  # Remove any "path" imports.
+  cat $pubspec \
+      | grep -v 'path:' \
+      | egrep -v 'built_value:$' \
+      | egrep -v 'built_value_generator:$' \
+      > pubspec.tmp
+
+  # Update versions.
+  sed -i -e \
+      "s#^version: .*#version: $version#" \
+      pubspec.tmp
+
+  # Update dependencies.
+  sed -i -e \
+      "s#.*built_value: .*#  built_value: ^$version#" \
+      pubspec.tmp
+  sed -i -e \
+      "s#.*built_value_generator: .*#  built_value_generator: ^$version#" \
+      pubspec.tmp
+  mv pubspec.tmp $pubspec
+done
