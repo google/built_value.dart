@@ -21,16 +21,15 @@ void benchmarkNestedRebuilds() {
   for (var depth = 0; depth != 10; ++depth) {
     final value = new Node((b) => _buildNested(b, depth));
 
-    _benchmark('nested rebuild $depth',
-        () {
-          final topBuilder = value.toBuilder();
-          var leafBuilder = topBuilder;
-          for (int i = 0; i != depth; ++i) {
-            leafBuilder = leafBuilder.left;
-          }
-          leafBuilder.label = 'updatedLeaf';
-          topBuilder.build();
-        });
+    _benchmark('nested rebuild $depth', () {
+      final topBuilder = value.toBuilder();
+      var leafBuilder = topBuilder;
+      for (int i = 0; i != depth; ++i) {
+        leafBuilder = leafBuilder.left;
+      }
+      leafBuilder.label = 'updatedLeaf';
+      topBuilder.build();
+    });
   }
 }
 
