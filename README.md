@@ -11,6 +11,9 @@ Built Values provides:
 Immutable collections are from [built_collection]
 (https://github.com/google/built_collection.dart#built-collections-for-dart).
 
+You can read more about built_value [on medium]
+(https://medium.com/@davidmorgan_14314/darts-built-value-for-immutable-object-models-83e2497922d4#.48dyezxcl).
+
 ## Examples
 
 For an end to end example see the [chat example]
