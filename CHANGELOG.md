@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2
+
+- Fix lints.
+- Allow "updates" in value type factory to have explicit void return type.
+
 ## 0.4.1
 
 - Fix some analyzer hints.
