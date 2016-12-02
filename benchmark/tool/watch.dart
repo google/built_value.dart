@@ -9,7 +9,7 @@ import 'package:built_value_generator/built_value_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 Future main(List<String> args) async {
-  await watch(
+  watch(
       new PhaseGroup.singleAction(
           new GeneratorBuilder([new BuiltValueGenerator()]),
           new InputSet('benchmark', const ['lib/*.dart'])),

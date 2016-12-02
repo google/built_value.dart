@@ -12,7 +12,9 @@ Serializer<ValidatedValue> _$validatedValueSerializer =
 
 class _$ValidatedValueSerializer
     implements StructuredSerializer<ValidatedValue> {
+  @override
   final Iterable<Type> types = const [ValidatedValue, _$ValidatedValue];
+  @override
   final String wireName = 'ValidatedValue';
 
   @override
@@ -70,31 +72,38 @@ class _$ValidatedValueSerializer
 // **************************************************************************
 
 class _$ValidatedValue extends ValidatedValue {
+  @override
   final int anInt;
+  @override
   final String aString;
+
+  factory _$ValidatedValue([updates(ValidatedValueBuilder b)]) =>
+      (new ValidatedValueBuilder()..update(updates)).build();
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
   }
 
-  factory _$ValidatedValue([updates(ValidatedValueBuilder b)]) =>
-      (new ValidatedValueBuilder()..update(updates)).build();
-
+  @override
   ValidatedValue rebuild(updates(ValidatedValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   ValidatedValueBuilder toBuilder() =>
       new ValidatedValueBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! ValidatedValue) return false;
     return anInt == other.anInt && aString == other.aString;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
   }
 
+  @override
   String toString() {
     return 'ValidatedValue {'
         'anInt=${anInt.toString()},\n'
@@ -126,14 +135,17 @@ class ValidatedValueBuilder
     return this;
   }
 
+  @override
   void replace(ValidatedValue other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ValidatedValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   ValidatedValue build() {
     final result =
         _$v ?? new _$ValidatedValue._(anInt: anInt, aString: aString);

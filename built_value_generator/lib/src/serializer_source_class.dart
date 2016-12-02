@@ -58,7 +58,7 @@ abstract class SerializerSourceClass
   bool get needsBuiltJson => isBuiltValue || isEnumClass;
 
   String generateTransitiveSerializerAdder() {
-    return '..add(${name}.serializer)';
+    return '..add($name.serializer)';
   }
 
   String generateBuilderFactoryAdders() {
@@ -80,7 +80,9 @@ abstract class SerializerSourceClass
     if (isBuiltValue) {
       return '''
 class _\$${name}Serializer implements StructuredSerializer<$name> {
+  @override
   final Iterable<Type> types = const [$name, _\$$name];
+  @override
   final String wireName = '$name';
 
   @override
@@ -120,7 +122,9 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
     } else if (isEnumClass) {
       return '''
 class _\$${name}Serializer implements PrimitiveSerializer<$name> {
+  @override
   final Iterable<Type> types = const [$name];
+  @override
   final String wireName = '$name';
 
   @override
@@ -132,7 +136,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   @override
   $name deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    return ${name}.valueOf(serialized);
+    return $name.valueOf(serialized);
   }
 }
 ''';

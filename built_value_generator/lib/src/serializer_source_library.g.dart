@@ -8,9 +8,16 @@ part of built_value_generator.source_library;
 // **************************************************************************
 
 class _$SerializerSourceLibrary extends SerializerSourceLibrary {
+  @override
   final bool hasSerializers;
+  @override
   final BuiltSet<SerializerSourceClass> sourceClasses;
+  @override
   final BuiltSet<SerializerSourceClass> transitiveSourceClasses;
+
+  factory _$SerializerSourceLibrary(
+          [updates(SerializerSourceLibraryBuilder b)]) =>
+      (new SerializerSourceLibraryBuilder()..update(updates)).build();
 
   _$SerializerSourceLibrary._(
       {this.hasSerializers, this.sourceClasses, this.transitiveSourceClasses})
@@ -22,28 +29,29 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
       throw new ArgumentError.notNull('transitiveSourceClasses');
   }
 
-  factory _$SerializerSourceLibrary(
-          [updates(SerializerSourceLibraryBuilder b)]) =>
-      (new SerializerSourceLibraryBuilder()..update(updates)).build();
-
+  @override
   SerializerSourceLibrary rebuild(updates(SerializerSourceLibraryBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   _$SerializerSourceLibraryBuilder toBuilder() =>
       new _$SerializerSourceLibraryBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! SerializerSourceLibrary) return false;
     return hasSerializers == other.hasSerializers &&
         sourceClasses == other.sourceClasses &&
         transitiveSourceClasses == other.transitiveSourceClasses;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc($jc(0, hasSerializers.hashCode), sourceClasses.hashCode),
         transitiveSourceClasses.hashCode));
   }
 
+  @override
   String toString() {
     return 'SerializerSourceLibrary {'
         'hasSerializers=${hasSerializers.toString()},\n'
@@ -56,28 +64,34 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
 class _$SerializerSourceLibraryBuilder extends SerializerSourceLibraryBuilder {
   SerializerSourceLibrary _$v;
 
+  @override
   bool get hasSerializers => super.hasSerializers;
+  @override
   set hasSerializers(bool hasSerializers) {
     _$writableBuilder;
     super.hasSerializers = hasSerializers;
   }
 
+  @override
   SetBuilder<SerializerSourceClass> get sourceClasses {
     _$writableBuilder;
     return super.sourceClasses ??= new SetBuilder<SerializerSourceClass>();
   }
 
+  @override
   set sourceClasses(SetBuilder<SerializerSourceClass> sourceClasses) {
     _$writableBuilder;
     super.sourceClasses = sourceClasses;
   }
 
+  @override
   SetBuilder<SerializerSourceClass> get transitiveSourceClasses {
     _$writableBuilder;
     return super.transitiveSourceClasses ??=
         new SetBuilder<SerializerSourceClass>();
   }
 
+  @override
   set transitiveSourceClasses(
       SetBuilder<SerializerSourceClass> transitiveSourceClasses) {
     _$writableBuilder;
@@ -96,14 +110,17 @@ class _$SerializerSourceLibraryBuilder extends SerializerSourceLibraryBuilder {
     return this;
   }
 
+  @override
   void replace(SerializerSourceLibrary other) {
     _$v = other;
   }
 
+  @override
   void update(updates(SerializerSourceLibraryBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   SerializerSourceLibrary build() {
     final result = _$v ??
         new _$SerializerSourceLibrary._(

@@ -8,7 +8,9 @@ import 'package:built_value/serializer.dart';
 class BuiltSetMultimapSerializer
     implements StructuredSerializer<BuiltSetMultimap> {
   final bool structured = true;
+  @override
   final Iterable<Type> types = new BuiltSet<Type>([BuiltSetMultimap]);
+  @override
   final String wireName = 'setMultimap';
 
   @override
@@ -52,7 +54,7 @@ class BuiltSetMultimapSerializer
         ? FullType.unspecified
         : specifiedType.parameters[1];
 
-    SetMultimapBuilder result = isUnderspecified
+    final SetMultimapBuilder result = isUnderspecified
         ? new SetMultimapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as SetMultimapBuilder;
     if (result == null) {

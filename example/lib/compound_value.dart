@@ -29,6 +29,6 @@ abstract class CompoundValue
   @nullable
   ValidatedValue get validatedValue;
 
-  CompoundValue._();
   factory CompoundValue([updates(CompoundValueBuilder b)]) = _$CompoundValue;
+  CompoundValue._();
 }

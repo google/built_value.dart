@@ -11,7 +11,9 @@ Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
 
 class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
+  @override
   final Iterable<Type> types = const [CompoundValue, _$CompoundValue];
+  @override
   final String wireName = 'CompoundValue';
 
   @override
@@ -70,31 +72,38 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
 // **************************************************************************
 
 class _$CompoundValue extends CompoundValue {
+  @override
   final SimpleValue simpleValue;
+  @override
   final ValidatedValue validatedValue;
+
+  factory _$CompoundValue([updates(CompoundValueBuilder b)]) =>
+      (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
     if (simpleValue == null) throw new ArgumentError.notNull('simpleValue');
   }
 
-  factory _$CompoundValue([updates(CompoundValueBuilder b)]) =>
-      (new CompoundValueBuilder()..update(updates)).build();
-
+  @override
   CompoundValue rebuild(updates(CompoundValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   CompoundValueBuilder toBuilder() => new CompoundValueBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! CompoundValue) return false;
     return simpleValue == other.simpleValue &&
         validatedValue == other.validatedValue;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
   }
 
+  @override
   String toString() {
     return 'CompoundValue {'
         'simpleValue=${simpleValue.toString()},\n'
@@ -130,14 +139,17 @@ class CompoundValueBuilder
     return this;
   }
 
+  @override
   void replace(CompoundValue other) {
     _$v = other;
   }
 
+  @override
   void update(updates(CompoundValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   CompoundValue build() {
     final result = _$v ??
         new _$CompoundValue._(

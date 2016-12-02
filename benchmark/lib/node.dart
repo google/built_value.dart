@@ -18,6 +18,6 @@ abstract class Node implements Built<Node, NodeBuilder> {
   @nullable
   Node get right;
 
-  Node._();
   factory Node([updates(NodeBuilder b)]) = _$Node;
+  Node._();
 }

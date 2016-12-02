@@ -10,7 +10,7 @@ import 'package:chat_example/client/display.dart';
 import 'package:chat_example/data_model/data_model.dart';
 import 'package:chat_example/data_model/serializers.dart';
 
-typedef CommandRunner(String command);
+typedef void CommandRunner(String command);
 
 /// Client-side logic for built_value chat example.
 class Client {

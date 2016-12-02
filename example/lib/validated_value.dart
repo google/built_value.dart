@@ -26,9 +26,9 @@ abstract class ValidatedValue
   @nullable
   String get aString;
 
-  ValidatedValue._() {
-    if (anInt == 7) throw 'anInt may not be 7';
-  }
-
   factory ValidatedValue([updates(ValidatedValueBuilder b)]) = _$ValidatedValue;
+
+  ValidatedValue._() {
+    if (anInt == 7) throw new StateError('anInt may not be 7');
+  }
 }

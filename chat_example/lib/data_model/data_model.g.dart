@@ -66,7 +66,9 @@ Serializer<ListUsersResponse> _$listUsersResponseSerializer =
     new _$ListUsersResponseSerializer();
 
 class _$ChatSerializer implements StructuredSerializer<Chat> {
+  @override
   final Iterable<Type> types = const [Chat, _$Chat];
+  @override
   final String wireName = 'Chat';
 
   @override
@@ -119,7 +121,9 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
 }
 
 class _$LoginSerializer implements StructuredSerializer<Login> {
+  @override
   final Iterable<Type> types = const [Login, _$Login];
+  @override
   final String wireName = 'Login';
 
   @override
@@ -171,7 +175,9 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
 }
 
 class _$StatusSerializer implements StructuredSerializer<Status> {
+  @override
   final Iterable<Type> types = const [Status, _$Status];
+  @override
   final String wireName = 'Status';
 
   @override
@@ -223,7 +229,9 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
 }
 
 class _$StatusTypeSerializer implements PrimitiveSerializer<StatusType> {
+  @override
   final Iterable<Type> types = const [StatusType];
+  @override
   final String wireName = 'StatusType';
 
   @override
@@ -240,7 +248,9 @@ class _$StatusTypeSerializer implements PrimitiveSerializer<StatusType> {
 }
 
 class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
+  @override
   final Iterable<Type> types = const [ListUsers, _$ListUsers];
+  @override
   final String wireName = 'ListUsers';
 
   @override
@@ -287,7 +297,9 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
 }
 
 class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
+  @override
   final Iterable<Type> types = const [LoginResponse];
+  @override
   final String wireName = 'LoginResponse';
 
   @override
@@ -304,7 +316,9 @@ class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
 }
 
 class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
+  @override
   final Iterable<Type> types = const [ShowChat, _$ShowChat];
+  @override
   final String wireName = 'ShowChat';
 
   @override
@@ -362,7 +376,9 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
 }
 
 class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
+  @override
   final Iterable<Type> types = const [Welcome, _$Welcome];
+  @override
   final String wireName = 'Welcome';
 
   @override
@@ -417,7 +433,9 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
 
 class _$ListUsersResponseSerializer
     implements StructuredSerializer<ListUsersResponse> {
+  @override
   final Iterable<Type> types = const [ListUsersResponse, _$ListUsersResponse];
+  @override
   final String wireName = 'ListUsersResponse';
 
   @override
@@ -469,31 +487,38 @@ class _$ListUsersResponseSerializer
 // **************************************************************************
 
 class _$Chat extends Chat {
+  @override
   final String text;
+  @override
   final BuiltSet<String> targets;
+
+  factory _$Chat([updates(ChatBuilder b)]) =>
+      (new ChatBuilder()..update(updates)).build();
 
   _$Chat._({this.text, this.targets}) : super._() {
     if (text == null) throw new ArgumentError.notNull('text');
     if (targets == null) throw new ArgumentError.notNull('targets');
   }
 
-  factory _$Chat([updates(ChatBuilder b)]) =>
-      (new ChatBuilder()..update(updates)).build();
-
+  @override
   Chat rebuild(updates(ChatBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   ChatBuilder toBuilder() => new ChatBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! Chat) return false;
     return text == other.text && targets == other.targets;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, text.hashCode), targets.hashCode));
   }
 
+  @override
   String toString() {
     return 'Chat {'
         'text=${text.toString()},\n'
@@ -526,14 +551,17 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
     return this;
   }
 
+  @override
   void replace(Chat other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ChatBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   Chat build() {
     final result = _$v ?? new _$Chat._(text: text, targets: targets?.build());
     replace(result);
@@ -547,31 +575,38 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
 // **************************************************************************
 
 class _$Login extends Login {
+  @override
   final String username;
+  @override
   final String password;
+
+  factory _$Login([updates(LoginBuilder b)]) =>
+      (new LoginBuilder()..update(updates)).build();
 
   _$Login._({this.username, this.password}) : super._() {
     if (username == null) throw new ArgumentError.notNull('username');
     if (password == null) throw new ArgumentError.notNull('password');
   }
 
-  factory _$Login([updates(LoginBuilder b)]) =>
-      (new LoginBuilder()..update(updates)).build();
-
+  @override
   Login rebuild(updates(LoginBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   LoginBuilder toBuilder() => new LoginBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! Login) return false;
     return username == other.username && password == other.password;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, username.hashCode), password.hashCode));
   }
 
+  @override
   String toString() {
     return 'Login {'
         'username=${username.toString()},\n'
@@ -602,14 +637,17 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
     return this;
   }
 
+  @override
   void replace(Login other) {
     _$v = other;
   }
 
+  @override
   void update(updates(LoginBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   Login build() {
     final result = _$v ?? new _$Login._(username: username, password: password);
     replace(result);
@@ -623,31 +661,38 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
 // **************************************************************************
 
 class _$Status extends Status {
+  @override
   final String message;
+  @override
   final StatusType type;
+
+  factory _$Status([updates(StatusBuilder b)]) =>
+      (new StatusBuilder()..update(updates)).build();
 
   _$Status._({this.message, this.type}) : super._() {
     if (message == null) throw new ArgumentError.notNull('message');
     if (type == null) throw new ArgumentError.notNull('type');
   }
 
-  factory _$Status([updates(StatusBuilder b)]) =>
-      (new StatusBuilder()..update(updates)).build();
-
+  @override
   Status rebuild(updates(StatusBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   StatusBuilder toBuilder() => new StatusBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! Status) return false;
     return message == other.message && type == other.type;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, message.hashCode), type.hashCode));
   }
 
+  @override
   String toString() {
     return 'Status {'
         'message=${message.toString()},\n'
@@ -678,14 +723,17 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
     return this;
   }
 
+  @override
   void replace(Status other) {
     _$v = other;
   }
 
+  @override
   void update(updates(StatusBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   Status build() {
     final result = _$v ?? new _$Status._(message: message, type: type);
     replace(result);
@@ -699,29 +747,35 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
 // **************************************************************************
 
 class _$ListUsers extends ListUsers {
+  @override
   final BuiltSet<StatusType> statusTypes;
+
+  factory _$ListUsers([updates(ListUsersBuilder b)]) =>
+      (new ListUsersBuilder()..update(updates)).build();
 
   _$ListUsers._({this.statusTypes}) : super._() {
     if (statusTypes == null) throw new ArgumentError.notNull('statusTypes');
   }
 
-  factory _$ListUsers([updates(ListUsersBuilder b)]) =>
-      (new ListUsersBuilder()..update(updates)).build();
-
+  @override
   ListUsers rebuild(updates(ListUsersBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   ListUsersBuilder toBuilder() => new ListUsersBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! ListUsers) return false;
     return statusTypes == other.statusTypes;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(0, statusTypes.hashCode));
   }
 
+  @override
   String toString() {
     return 'ListUsers {'
         'statusTypes=${statusTypes.toString()},\n'
@@ -748,14 +802,17 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
     return this;
   }
 
+  @override
   void replace(ListUsers other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ListUsersBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   ListUsers build() {
     final result = _$v ?? new _$ListUsers._(statusTypes: statusTypes?.build());
     replace(result);
@@ -769,9 +826,15 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 // **************************************************************************
 
 class _$ShowChat extends ShowChat {
+  @override
   final String username;
+  @override
   final bool private;
+  @override
   final String text;
+
+  factory _$ShowChat([updates(ShowChatBuilder b)]) =>
+      (new ShowChatBuilder()..update(updates)).build();
 
   _$ShowChat._({this.username, this.private, this.text}) : super._() {
     if (username == null) throw new ArgumentError.notNull('username');
@@ -779,26 +842,28 @@ class _$ShowChat extends ShowChat {
     if (text == null) throw new ArgumentError.notNull('text');
   }
 
-  factory _$ShowChat([updates(ShowChatBuilder b)]) =>
-      (new ShowChatBuilder()..update(updates)).build();
-
+  @override
   ShowChat rebuild(updates(ShowChatBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   ShowChatBuilder toBuilder() => new ShowChatBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! ShowChat) return false;
     return username == other.username &&
         private == other.private &&
         text == other.text;
   }
 
+  @override
   int get hashCode {
     return $jf(
         $jc($jc($jc(0, username.hashCode), private.hashCode), text.hashCode));
   }
 
+  @override
   String toString() {
     return 'ShowChat {'
         'username=${username.toString()},\n'
@@ -835,14 +900,17 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
     return this;
   }
 
+  @override
   void replace(ShowChat other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ShowChatBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   ShowChat build() {
     final result = _$v ??
         new _$ShowChat._(username: username, private: private, text: text);
@@ -857,31 +925,38 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
 // **************************************************************************
 
 class _$Welcome extends Welcome {
+  @override
   final BuiltList<Response> log;
+  @override
   final String message;
+
+  factory _$Welcome([updates(WelcomeBuilder b)]) =>
+      (new WelcomeBuilder()..update(updates)).build();
 
   _$Welcome._({this.log, this.message}) : super._() {
     if (log == null) throw new ArgumentError.notNull('log');
     if (message == null) throw new ArgumentError.notNull('message');
   }
 
-  factory _$Welcome([updates(WelcomeBuilder b)]) =>
-      (new WelcomeBuilder()..update(updates)).build();
-
+  @override
   Welcome rebuild(updates(WelcomeBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   WelcomeBuilder toBuilder() => new WelcomeBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! Welcome) return false;
     return log == other.log && message == other.message;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, log.hashCode), message.hashCode));
   }
 
+  @override
   String toString() {
     return 'Welcome {'
         'log=${log.toString()},\n'
@@ -913,14 +988,17 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
     return this;
   }
 
+  @override
   void replace(Welcome other) {
     _$v = other;
   }
 
+  @override
   void update(updates(WelcomeBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   Welcome build() {
     final result = _$v ?? new _$Welcome._(log: log?.build(), message: message);
     replace(result);
@@ -934,30 +1012,36 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
 // **************************************************************************
 
 class _$ListUsersResponse extends ListUsersResponse {
+  @override
   final BuiltMap<String, Status> statuses;
+
+  factory _$ListUsersResponse([updates(ListUsersResponseBuilder b)]) =>
+      (new ListUsersResponseBuilder()..update(updates)).build();
 
   _$ListUsersResponse._({this.statuses}) : super._() {
     if (statuses == null) throw new ArgumentError.notNull('statuses');
   }
 
-  factory _$ListUsersResponse([updates(ListUsersResponseBuilder b)]) =>
-      (new ListUsersResponseBuilder()..update(updates)).build();
-
+  @override
   ListUsersResponse rebuild(updates(ListUsersResponseBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   ListUsersResponseBuilder toBuilder() =>
       new ListUsersResponseBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! ListUsersResponse) return false;
     return statuses == other.statuses;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(0, statuses.hashCode));
   }
 
+  @override
   String toString() {
     return 'ListUsersResponse {'
         'statuses=${statuses.toString()},\n'
@@ -985,14 +1069,17 @@ class ListUsersResponseBuilder
     return this;
   }
 
+  @override
   void replace(ListUsersResponse other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ListUsersResponseBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   ListUsersResponse build() {
     final result =
         _$v ?? new _$ListUsersResponse._(statuses: statuses?.build());

@@ -7,7 +7,9 @@ import 'package:built_value/serializer.dart';
 
 class IntSerializer implements PrimitiveSerializer<int> {
   final bool structured = false;
+  @override
   final Iterable<Type> types = new BuiltList<Type>([int]);
+  @override
   final String wireName = 'int';
 
   @override

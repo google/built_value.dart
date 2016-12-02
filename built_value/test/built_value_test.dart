@@ -5,7 +5,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:test/test.dart';
 
-main() {
+void main() {
   group('EnumClass', () {
     test('can be used in switch', () {
       final yes = YesNoEnum.yes;

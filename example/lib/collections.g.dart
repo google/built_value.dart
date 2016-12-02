@@ -10,7 +10,9 @@ part of collections;
 Serializer<Collections> _$collectionsSerializer = new _$CollectionsSerializer();
 
 class _$CollectionsSerializer implements StructuredSerializer<Collections> {
+  @override
   final Iterable<Type> types = const [Collections, _$Collections];
+  @override
   final String wireName = 'Collections';
 
   @override
@@ -153,16 +155,29 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
 // **************************************************************************
 
 class _$Collections extends Collections {
+  @override
   final BuiltList<int> list;
+  @override
   final BuiltSet<String> set;
+  @override
   final BuiltMap<String, int> map;
+  @override
   final BuiltListMultimap<int, bool> listMultimap;
+  @override
   final BuiltSetMultimap<String, bool> setMultimap;
+  @override
   final BuiltList<int> nullableList;
+  @override
   final BuiltSet<String> nullableSet;
+  @override
   final BuiltMap<String, int> nullableMap;
+  @override
   final BuiltListMultimap<int, bool> nullableListMultimap;
+  @override
   final BuiltSetMultimap<String, bool> nullableSetMultimap;
+
+  factory _$Collections([updates(CollectionsBuilder b)]) =>
+      (new CollectionsBuilder()..update(updates)).build();
 
   _$Collections._(
       {this.list,
@@ -183,15 +198,15 @@ class _$Collections extends Collections {
     if (setMultimap == null) throw new ArgumentError.notNull('setMultimap');
   }
 
-  factory _$Collections([updates(CollectionsBuilder b)]) =>
-      (new CollectionsBuilder()..update(updates)).build();
-
+  @override
   Collections rebuild(updates(CollectionsBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   CollectionsBuilder toBuilder() => new CollectionsBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! Collections) return false;
     return list == other.list &&
         set == other.set &&
@@ -205,6 +220,7 @@ class _$Collections extends Collections {
         nullableSetMultimap == other.nullableSetMultimap;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(
         $jc(
@@ -224,6 +240,7 @@ class _$Collections extends Collections {
         nullableSetMultimap.hashCode));
   }
 
+  @override
   String toString() {
     return 'Collections {'
         'list=${list.toString()},\n'
@@ -323,14 +340,17 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
     return this;
   }
 
+  @override
   void replace(Collections other) {
     _$v = other;
   }
 
+  @override
   void update(updates(CollectionsBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   Collections build() {
     final result = _$v ??
         new _$Collections._(

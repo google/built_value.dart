@@ -19,9 +19,9 @@ abstract class ValueWithDefaults
   @nullable
   String get aString;
 
-  ValueWithDefaults._();
   factory ValueWithDefaults([updates(ValueWithDefaultsBuilder b)]) =
       _$ValueWithDefaults;
+  ValueWithDefaults._();
 }
 
 /// The builder class must implement [Builder]. It must be abstract, and have
@@ -41,6 +41,6 @@ abstract class ValueWithDefaultsBuilder
   @virtual
   String aString;
 
-  ValueWithDefaultsBuilder._();
   factory ValueWithDefaultsBuilder() = _$ValueWithDefaultsBuilder;
+  ValueWithDefaultsBuilder._();
 }

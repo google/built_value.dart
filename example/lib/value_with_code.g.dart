@@ -8,30 +8,37 @@ part of value_with_code;
 // **************************************************************************
 
 class _$ValueWithCode extends ValueWithCode {
+  @override
   final int anInt;
+  @override
   final String aString;
+
+  factory _$ValueWithCode([updates(ValueWithCodeBuilder b)]) =>
+      (new ValueWithCodeBuilder()..update(updates)).build();
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
   }
 
-  factory _$ValueWithCode([updates(ValueWithCodeBuilder b)]) =>
-      (new ValueWithCodeBuilder()..update(updates)).build();
-
+  @override
   ValueWithCode rebuild(updates(ValueWithCodeBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   ValueWithCodeBuilder toBuilder() => new ValueWithCodeBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! ValueWithCode) return false;
     return anInt == other.anInt && aString == other.aString;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
   }
 
+  @override
   String toString() {
     return 'ValueWithCode {'
         'anInt=${anInt.toString()},\n'
@@ -63,14 +70,17 @@ class ValueWithCodeBuilder
     return this;
   }
 
+  @override
   void replace(ValueWithCode other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ValueWithCodeBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   ValueWithCode build() {
     final result = _$v ?? new _$ValueWithCode._(anInt: anInt, aString: aString);
     replace(result);

@@ -8,7 +8,9 @@ import 'package:built_value/serializer.dart';
 class BuiltListMultimapSerializer
     implements StructuredSerializer<BuiltListMultimap> {
   final bool structured = true;
+  @override
   final Iterable<Type> types = new BuiltList<Type>([BuiltListMultimap]);
+  @override
   final String wireName = 'listMultimap';
 
   @override
@@ -53,7 +55,7 @@ class BuiltListMultimapSerializer
         ? FullType.unspecified
         : specifiedType.parameters[1];
 
-    ListMultimapBuilder result = isUnderspecified
+    final ListMultimapBuilder result = isUnderspecified
         ? new ListMultimapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as ListMultimapBuilder;
     if (result == null) {

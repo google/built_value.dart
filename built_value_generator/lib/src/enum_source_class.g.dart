@@ -8,13 +8,23 @@ part of built_value_generator.enum_source_class;
 // **************************************************************************
 
 class _$EnumSourceClass extends EnumSourceClass {
+  @override
   final String name;
+  @override
   final BuiltList<EnumSourceField> fields;
+  @override
   final BuiltList<String> constructors;
+  @override
   final String valuesIdentifier;
+  @override
   final String valueOfIdentifier;
+  @override
   final bool usesMixin;
+  @override
   final String mixinDeclaration;
+
+  factory _$EnumSourceClass([updates(EnumSourceClassBuilder b)]) =>
+      (new EnumSourceClassBuilder()..update(updates)).build();
 
   _$EnumSourceClass._(
       {this.name,
@@ -31,16 +41,16 @@ class _$EnumSourceClass extends EnumSourceClass {
     if (usesMixin == null) throw new ArgumentError.notNull('usesMixin');
   }
 
-  factory _$EnumSourceClass([updates(EnumSourceClassBuilder b)]) =>
-      (new EnumSourceClassBuilder()..update(updates)).build();
-
+  @override
   EnumSourceClass rebuild(updates(EnumSourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   EnumSourceClassBuilder toBuilder() =>
       new EnumSourceClassBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! EnumSourceClass) return false;
     return name == other.name &&
         fields == other.fields &&
@@ -51,6 +61,7 @@ class _$EnumSourceClass extends EnumSourceClass {
         mixinDeclaration == other.mixinDeclaration;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(
         $jc(
@@ -64,6 +75,7 @@ class _$EnumSourceClass extends EnumSourceClass {
         mixinDeclaration.hashCode));
   }
 
+  @override
   String toString() {
     return 'EnumSourceClass {'
         'name=${name.toString()},\n'
@@ -132,14 +144,17 @@ class EnumSourceClassBuilder
     return this;
   }
 
+  @override
   void replace(EnumSourceClass other) {
     _$v = other;
   }
 
+  @override
   void update(updates(EnumSourceClassBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   EnumSourceClass build() {
     final result = _$v ??
         new _$EnumSourceClass._(

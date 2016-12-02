@@ -8,19 +8,35 @@ part of built_value_generator.source_class;
 // **************************************************************************
 
 class _$ValueSourceClass extends ValueSourceClass {
+  @override
   final String name;
+  @override
   final String builtParameters;
+  @override
   final bool hasBuilder;
+  @override
   final String builderParameters;
+  @override
   final BuiltList<ValueSourceField> fields;
+  @override
   final String partStatement;
+  @override
   final bool hasPartStatement;
+  @override
   final bool valueClassIsAbstract;
+  @override
   final BuiltList<String> valueClassConstructors;
+  @override
   final BuiltList<String> valueClassFactories;
+  @override
   final bool builderClassIsAbstract;
+  @override
   final BuiltList<String> builderClassConstructors;
+  @override
   final BuiltList<String> builderClassFactories;
+
+  factory _$ValueSourceClass([updates(ValueSourceClassBuilder b)]) =>
+      (new ValueSourceClassBuilder()..update(updates)).build();
 
   _$ValueSourceClass._(
       {this.name,
@@ -61,16 +77,16 @@ class _$ValueSourceClass extends ValueSourceClass {
       throw new ArgumentError.notNull('builderClassFactories');
   }
 
-  factory _$ValueSourceClass([updates(ValueSourceClassBuilder b)]) =>
-      (new ValueSourceClassBuilder()..update(updates)).build();
-
+  @override
   ValueSourceClass rebuild(updates(ValueSourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   _$ValueSourceClassBuilder toBuilder() =>
       new _$ValueSourceClassBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! ValueSourceClass) return false;
     return name == other.name &&
         builtParameters == other.builtParameters &&
@@ -87,6 +103,7 @@ class _$ValueSourceClass extends ValueSourceClass {
         builderClassFactories == other.builderClassFactories;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(
         $jc(
@@ -114,6 +131,7 @@ class _$ValueSourceClass extends ValueSourceClass {
         builderClassFactories.hashCode));
   }
 
+  @override
   String toString() {
     return 'ValueSourceClass {'
         'name=${name.toString()},\n'
@@ -136,99 +154,125 @@ class _$ValueSourceClass extends ValueSourceClass {
 class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
   ValueSourceClass _$v;
 
+  @override
   String get name => super.name;
+  @override
   set name(String name) {
     _$writableBuilder;
     super.name = name;
   }
 
+  @override
   String get builtParameters => super.builtParameters;
+  @override
   set builtParameters(String builtParameters) {
     _$writableBuilder;
     super.builtParameters = builtParameters;
   }
 
+  @override
   bool get hasBuilder => super.hasBuilder;
+  @override
   set hasBuilder(bool hasBuilder) {
     _$writableBuilder;
     super.hasBuilder = hasBuilder;
   }
 
+  @override
   String get builderParameters => super.builderParameters;
+  @override
   set builderParameters(String builderParameters) {
     _$writableBuilder;
     super.builderParameters = builderParameters;
   }
 
+  @override
   ListBuilder<ValueSourceField> get fields {
     _$writableBuilder;
     return super.fields ??= new ListBuilder<ValueSourceField>();
   }
 
+  @override
   set fields(ListBuilder<ValueSourceField> fields) {
     _$writableBuilder;
     super.fields = fields;
   }
 
+  @override
   String get partStatement => super.partStatement;
+  @override
   set partStatement(String partStatement) {
     _$writableBuilder;
     super.partStatement = partStatement;
   }
 
+  @override
   bool get hasPartStatement => super.hasPartStatement;
+  @override
   set hasPartStatement(bool hasPartStatement) {
     _$writableBuilder;
     super.hasPartStatement = hasPartStatement;
   }
 
+  @override
   bool get valueClassIsAbstract => super.valueClassIsAbstract;
+  @override
   set valueClassIsAbstract(bool valueClassIsAbstract) {
     _$writableBuilder;
     super.valueClassIsAbstract = valueClassIsAbstract;
   }
 
+  @override
   ListBuilder<String> get valueClassConstructors {
     _$writableBuilder;
     return super.valueClassConstructors ??= new ListBuilder<String>();
   }
 
+  @override
   set valueClassConstructors(ListBuilder<String> valueClassConstructors) {
     _$writableBuilder;
     super.valueClassConstructors = valueClassConstructors;
   }
 
+  @override
   ListBuilder<String> get valueClassFactories {
     _$writableBuilder;
     return super.valueClassFactories ??= new ListBuilder<String>();
   }
 
+  @override
   set valueClassFactories(ListBuilder<String> valueClassFactories) {
     _$writableBuilder;
     super.valueClassFactories = valueClassFactories;
   }
 
+  @override
   bool get builderClassIsAbstract => super.builderClassIsAbstract;
+  @override
   set builderClassIsAbstract(bool builderClassIsAbstract) {
     _$writableBuilder;
     super.builderClassIsAbstract = builderClassIsAbstract;
   }
 
+  @override
   ListBuilder<String> get builderClassConstructors {
     _$writableBuilder;
     return super.builderClassConstructors ??= new ListBuilder<String>();
   }
 
+  @override
   set builderClassConstructors(ListBuilder<String> builderClassConstructors) {
     _$writableBuilder;
     super.builderClassConstructors = builderClassConstructors;
   }
 
+  @override
   ListBuilder<String> get builderClassFactories {
     _$writableBuilder;
     return super.builderClassFactories ??= new ListBuilder<String>();
   }
 
+  @override
   set builderClassFactories(ListBuilder<String> builderClassFactories) {
     _$writableBuilder;
     super.builderClassFactories = builderClassFactories;
@@ -257,14 +301,17 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
     return this;
   }
 
+  @override
   void replace(ValueSourceClass other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ValueSourceClassBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   ValueSourceClass build() {
     final result = _$v ??
         new _$ValueSourceClass._(

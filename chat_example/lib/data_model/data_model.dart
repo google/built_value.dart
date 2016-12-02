@@ -24,8 +24,8 @@ abstract class Chat implements Built<Chat, ChatBuilder>, Command {
   /// Set of usernames to send the chat to, or empty to send to everyone.
   BuiltSet<String> get targets;
 
-  Chat._();
   factory Chat([updates(ChatBuilder b)]) = _$Chat;
+  Chat._();
 }
 
 /// Logs in.
@@ -34,8 +34,8 @@ abstract class Login implements Built<Login, LoginBuilder>, Command {
   String get username;
   String get password;
 
-  Login._();
   factory Login([updates(LoginBuilder b)]) = _$Login;
+  Login._();
 }
 
 /// User status: online, away or offline, and a message.
@@ -46,8 +46,8 @@ abstract class Status implements Built<Status, StatusBuilder>, Command {
   String get message;
   StatusType get type;
 
-  Status._();
   factory Status([updates(StatusBuilder b)]) = _$Status;
+  Status._();
 }
 
 /// User status: online, away or offline.
@@ -72,8 +72,8 @@ abstract class ListUsers
   /// Set of statuses to filter by.
   BuiltSet<StatusType> get statusTypes;
 
-  ListUsers._();
   factory ListUsers([updates(ListUsersBuilder b)]) = _$ListUsers;
+  ListUsers._();
 }
 
 /// Classes sent from server to client.
@@ -121,8 +121,8 @@ abstract class ShowChat implements Built<ShowChat, ShowChatBuilder>, Response {
   /// Message text.
   String get text;
 
-  ShowChat._();
   factory ShowChat([updates(ShowChatBuilder b)]) = _$ShowChat;
+  ShowChat._();
 
   @override
   String render() => '$username${private ? " (private)" : ""}: $text';
@@ -135,8 +135,8 @@ abstract class Welcome implements Built<Welcome, WelcomeBuilder>, Response {
 
   String get message;
 
-  Welcome._();
   factory Welcome([updates(WelcomeBuilder b)]) = _$Welcome;
+  Welcome._();
 
   @override
   String render() =>
@@ -152,9 +152,9 @@ abstract class ListUsersResponse
   /// Map from username to status.
   BuiltMap<String, Status> get statuses;
 
-  ListUsersResponse._();
   factory ListUsersResponse([updates(ListUsersResponseBuilder b)]) =
       _$ListUsersResponse;
+  ListUsersResponse._();
 
   @override
   String render() {

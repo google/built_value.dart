@@ -35,7 +35,9 @@ Serializer<ValueWithInt> _$valueWithIntSerializer =
 Serializer<EnumWithInt> _$enumWithIntSerializer = new _$EnumWithIntSerializer();
 
 class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
+  @override
   final Iterable<Type> types = const [ValueWithInt, _$ValueWithInt];
+  @override
   final String wireName = 'ValueWithInt';
 
   @override
@@ -85,7 +87,9 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
 }
 
 class _$EnumWithIntSerializer implements PrimitiveSerializer<EnumWithInt> {
+  @override
   final Iterable<Type> types = const [EnumWithInt];
+  @override
   final String wireName = 'EnumWithInt';
 
   @override
@@ -107,32 +111,39 @@ class _$EnumWithIntSerializer implements PrimitiveSerializer<EnumWithInt> {
 // **************************************************************************
 
 class _$ValueWithInt extends ValueWithInt {
+  @override
   final int anInt;
+  @override
   final String note;
+
+  factory _$ValueWithInt([updates(ValueWithIntBuilder b)]) =>
+      (new ValueWithIntBuilder()..update(updates)).build();
 
   _$ValueWithInt._({this.anInt, this.note}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
     if (note == null) throw new ArgumentError.notNull('note');
   }
 
-  factory _$ValueWithInt([updates(ValueWithIntBuilder b)]) =>
-      (new ValueWithIntBuilder()..update(updates)).build();
-
+  @override
   ValueWithInt rebuild(updates(ValueWithIntBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   _$ValueWithIntBuilder toBuilder() =>
       new _$ValueWithIntBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! ValueWithInt) return false;
     return anInt == other.anInt && note == other.note;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, anInt.hashCode), note.hashCode));
   }
 
+  @override
   String toString() {
     return 'ValueWithInt {'
         'anInt=${anInt.toString()},\n'
@@ -144,13 +155,17 @@ class _$ValueWithInt extends ValueWithInt {
 class _$ValueWithIntBuilder extends ValueWithIntBuilder {
   ValueWithInt _$v;
 
+  @override
   int get anInt => super.anInt;
+  @override
   set anInt(int anInt) {
     _$writableBuilder;
     super.anInt = anInt;
   }
 
+  @override
   String get note => super.note;
+  @override
   set note(String note) {
     _$writableBuilder;
     super.note = note;
@@ -167,14 +182,17 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
     return this;
   }
 
+  @override
   void replace(ValueWithInt other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ValueWithIntBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   ValueWithInt build() {
     final result = _$v ?? new _$ValueWithInt._(anInt: anInt, note: note);
     replace(result);

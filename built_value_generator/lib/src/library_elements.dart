@@ -32,12 +32,12 @@ class _GetClassesVisitor extends SimpleElementVisitor {
   final List<ClassElement> classElements = new List<ClassElement>();
 
   @override
-  visitClassElement(ClassElement element) {
+  void visitClassElement(ClassElement element) {
     classElements.add(element);
   }
 
   @override
-  visitCompilationUnitElement(CompilationUnitElement element) {
+  void visitCompilationUnitElement(CompilationUnitElement element) {
     element.visitChildren(this);
   }
 }

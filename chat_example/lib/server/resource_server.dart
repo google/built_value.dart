@@ -8,7 +8,7 @@ import 'dart:io';
 import 'package:package_resolver/package_resolver.dart';
 import 'package:route/server.dart';
 
-typedef SocketReceiver(WebSocket webSocket);
+typedef void SocketReceiver(WebSocket webSocket);
 
 /// Serves static resources for the built_value chat example.
 ///

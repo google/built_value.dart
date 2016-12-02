@@ -24,6 +24,7 @@ abstract class HasInt {
 ///
 /// To be serializable it must use built_value or enum_class.
 abstract class WrongHasInt implements HasInt {
+  @override
   int anInt = 4;
 }
 
@@ -39,9 +40,8 @@ abstract class ValueWithInt
 
   String get note;
 
-  ValueWithInt._();
-
   factory ValueWithInt([updates(ValueWithIntBuilder b)]) = _$ValueWithInt;
+  ValueWithInt._();
 }
 
 /// Builder class for [ValueWithInt].
@@ -52,9 +52,8 @@ abstract class ValueWithIntBuilder
   @virtual
   String note;
 
-  ValueWithIntBuilder._();
-
   factory ValueWithIntBuilder() = _$ValueWithIntBuilder;
+  ValueWithIntBuilder._();
 }
 
 /// Example [HasInt] that is serializable because it uses enum_class.
