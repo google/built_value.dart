@@ -83,6 +83,16 @@ abstract class Value implements Built<Value, ValueBuilder>, Object {
 }'''), isNot(contains('1.')));
     });
 
+    test('allows updates to have return type', () async {
+      expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder>, Object {
+  Value._();
+  factory Value([void updates(ValueBuilder b)]) = _\$Value;
+}'''), isNot(contains('1.')));
+    });
+
     test('handles unresolved Built type parameters', () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
