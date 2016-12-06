@@ -1,5 +1,5 @@
 name: chat_example
-version: 0.4.1
+version: 0.4.2
 description: >
   Just an example, not for publishing.
 authors:
@@ -11,16 +11,12 @@ environment:
 
 dependencies:
   built_collection: '^1.0.0'
-# built_value: ^0.4.1
-  built_value:
-    path: ../built_value
+  built_value: ^0.4.2
   package_resolver: ^1.0.0
   route: '>=0.4.6'
 
 dev_dependencies:
   build: '^0.4.0'
-# built_value_generator: ^0.4.1
-  built_value_generator:
-    path: ../built_value_generator
+  built_value_generator: ^0.4.2
   source_gen: '>=0.5.0+03 <0.6.0'
   test: any
