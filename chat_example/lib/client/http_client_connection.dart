@@ -24,8 +24,10 @@ class HttpClientConnection implements ClientConnection {
     });
   }
 
+  @override
   Stream<String> get dataFromServer => _streamController.stream;
 
+  @override
   void sendToServer(String data) {
     _websocket.send(data);
   }

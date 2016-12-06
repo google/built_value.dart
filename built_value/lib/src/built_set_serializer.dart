@@ -7,7 +7,9 @@ import 'package:built_value/serializer.dart';
 
 class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
   final bool structured = true;
+  @override
   final Iterable<Type> types = new BuiltList<Type>([BuiltSet]);
+  @override
   final String wireName = 'set';
 
   @override
@@ -37,7 +39,7 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
     final elementType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];
-    SetBuilder result = isUnderspecified
+    final SetBuilder result = isUnderspecified
         ? new SetBuilder<Object>()
         : serializers.newBuilder(specifiedType) as SetBuilder;
     if (result == null) {

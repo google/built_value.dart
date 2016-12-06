@@ -72,7 +72,7 @@ class BuiltJsonSerializers implements Serializers {
 
       final serializer = _wireNameToSerializer[wireName];
       if (serializer == null) {
-        throw new StateError("No serializer for '${wireName}'.");
+        throw new StateError("No serializer for '$wireName'.");
       }
 
       if (serializer is StructuredSerializer) {
@@ -148,6 +148,7 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
       this._typeNameToSerializer,
       this._builderFactories);
 
+  @override
   void add(Serializer serializer) {
     if (serializer is! StructuredSerializer &&
         serializer is! PrimitiveSerializer) {
@@ -162,10 +163,12 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
     }
   }
 
+  @override
   void addBuilderFactory(FullType types, Function function) {
     _builderFactories[types] = function;
   }
 
+  @override
   Serializers build() {
     return new BuiltJsonSerializers._(
         _typeToSerializer.build(),

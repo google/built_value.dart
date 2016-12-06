@@ -30,9 +30,9 @@ abstract class ValueSourceField
   String get typeInBuilder;
   bool get isNestedBuilder;
 
-  ValueSourceField._();
   factory ValueSourceField([updates(ValueSourceFieldBuilder b)]) =
       _$ValueSourceField;
+  ValueSourceField._();
 
   factory ValueSourceField.fromFieldElements(
       FieldElement fieldElement, FieldElement builderFieldElement) {
@@ -96,7 +96,7 @@ abstract class ValueSourceField
 
   static bool _isBuiltCollection(DartType type) {
     return _builtCollectionNames
-        .any((name) => type.displayName.startsWith('${name}<'));
+        .any((name) => type.displayName.startsWith('$name<'));
   }
 
   static String _toBuilderType(DartType type) {

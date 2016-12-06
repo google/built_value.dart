@@ -8,14 +8,25 @@ part of built_value_generator.source_field;
 // **************************************************************************
 
 class _$ValueSourceField extends ValueSourceField {
+  @override
   final String name;
+  @override
   final String type;
+  @override
   final bool isGetter;
+  @override
   final bool isNullable;
+  @override
   final bool builderFieldExists;
+  @override
   final bool builderFieldIsNormalField;
+  @override
   final String typeInBuilder;
+  @override
   final bool isNestedBuilder;
+
+  factory _$ValueSourceField([updates(ValueSourceFieldBuilder b)]) =>
+      (new ValueSourceFieldBuilder()..update(updates)).build();
 
   _$ValueSourceField._(
       {this.name,
@@ -40,16 +51,16 @@ class _$ValueSourceField extends ValueSourceField {
       throw new ArgumentError.notNull('isNestedBuilder');
   }
 
-  factory _$ValueSourceField([updates(ValueSourceFieldBuilder b)]) =>
-      (new ValueSourceFieldBuilder()..update(updates)).build();
-
+  @override
   ValueSourceField rebuild(updates(ValueSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   ValueSourceFieldBuilder toBuilder() =>
       new ValueSourceFieldBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! ValueSourceField) return false;
     return name == other.name &&
         type == other.type &&
@@ -61,6 +72,7 @@ class _$ValueSourceField extends ValueSourceField {
         isNestedBuilder == other.isNestedBuilder;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(
         $jc(
@@ -76,6 +88,7 @@ class _$ValueSourceField extends ValueSourceField {
         isNestedBuilder.hashCode));
   }
 
+  @override
   String toString() {
     return 'ValueSourceField {'
         'name=${name.toString()},\n'
@@ -147,14 +160,17 @@ class ValueSourceFieldBuilder
     return this;
   }
 
+  @override
   void replace(ValueSourceField other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ValueSourceFieldBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   ValueSourceField build() {
     final result = _$v ??
         new _$ValueSourceField._(

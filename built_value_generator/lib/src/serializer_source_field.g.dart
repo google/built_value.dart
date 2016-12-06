@@ -8,11 +8,19 @@ part of built_value_generator.source_field;
 // **************************************************************************
 
 class _$SerializerSourceField extends SerializerSourceField {
+  @override
   final bool isSerializable;
+  @override
   final bool isNullable;
+  @override
   final String name;
+  @override
   final String type;
+  @override
   final bool builderFieldUsesNestedBuilder;
+
+  factory _$SerializerSourceField([updates(SerializerSourceFieldBuilder b)]) =>
+      (new SerializerSourceFieldBuilder()..update(updates)).build();
 
   _$SerializerSourceField._(
       {this.isSerializable,
@@ -30,16 +38,16 @@ class _$SerializerSourceField extends SerializerSourceField {
       throw new ArgumentError.notNull('builderFieldUsesNestedBuilder');
   }
 
-  factory _$SerializerSourceField([updates(SerializerSourceFieldBuilder b)]) =>
-      (new SerializerSourceFieldBuilder()..update(updates)).build();
-
+  @override
   SerializerSourceField rebuild(updates(SerializerSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   _$SerializerSourceFieldBuilder toBuilder() =>
       new _$SerializerSourceFieldBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! SerializerSourceField) return false;
     return isSerializable == other.isSerializable &&
         isNullable == other.isNullable &&
@@ -48,6 +56,7 @@ class _$SerializerSourceField extends SerializerSourceField {
         builderFieldUsesNestedBuilder == other.builderFieldUsesNestedBuilder;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(
         $jc(
@@ -57,6 +66,7 @@ class _$SerializerSourceField extends SerializerSourceField {
         builderFieldUsesNestedBuilder.hashCode));
   }
 
+  @override
   String toString() {
     return 'SerializerSourceField {'
         'isSerializable=${isSerializable.toString()},\n'
@@ -71,31 +81,41 @@ class _$SerializerSourceField extends SerializerSourceField {
 class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
   SerializerSourceField _$v;
 
+  @override
   bool get isSerializable => super.isSerializable;
+  @override
   set isSerializable(bool isSerializable) {
     _$writableBuilder;
     super.isSerializable = isSerializable;
   }
 
+  @override
   bool get isNullable => super.isNullable;
+  @override
   set isNullable(bool isNullable) {
     _$writableBuilder;
     super.isNullable = isNullable;
   }
 
+  @override
   String get name => super.name;
+  @override
   set name(String name) {
     _$writableBuilder;
     super.name = name;
   }
 
+  @override
   String get type => super.type;
+  @override
   set type(String type) {
     _$writableBuilder;
     super.type = type;
   }
 
+  @override
   bool get builderFieldUsesNestedBuilder => super.builderFieldUsesNestedBuilder;
+  @override
   set builderFieldUsesNestedBuilder(bool builderFieldUsesNestedBuilder) {
     _$writableBuilder;
     super.builderFieldUsesNestedBuilder = builderFieldUsesNestedBuilder;
@@ -115,14 +135,17 @@ class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
     return this;
   }
 
+  @override
   void replace(SerializerSourceField other) {
     _$v = other;
   }
 
+  @override
   void update(updates(SerializerSourceFieldBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   SerializerSourceField build() {
     final result = _$v ??
         new _$SerializerSourceField._(

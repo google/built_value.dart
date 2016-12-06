@@ -8,10 +8,17 @@ part of built_value_generator.source_class;
 // **************************************************************************
 
 class _$SerializerSourceClass extends SerializerSourceClass {
+  @override
   final String name;
+  @override
   final bool isBuiltValue;
+  @override
   final bool isEnumClass;
+  @override
   final BuiltList<SerializerSourceField> fields;
+
+  factory _$SerializerSourceClass([updates(SerializerSourceClassBuilder b)]) =>
+      (new SerializerSourceClassBuilder()..update(updates)).build();
 
   _$SerializerSourceClass._(
       {this.name, this.isBuiltValue, this.isEnumClass, this.fields})
@@ -22,16 +29,16 @@ class _$SerializerSourceClass extends SerializerSourceClass {
     if (fields == null) throw new ArgumentError.notNull('fields');
   }
 
-  factory _$SerializerSourceClass([updates(SerializerSourceClassBuilder b)]) =>
-      (new SerializerSourceClassBuilder()..update(updates)).build();
-
+  @override
   SerializerSourceClass rebuild(updates(SerializerSourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   SerializerSourceClassBuilder toBuilder() =>
       new SerializerSourceClassBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! SerializerSourceClass) return false;
     return name == other.name &&
         isBuiltValue == other.isBuiltValue &&
@@ -39,6 +46,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
         fields == other.fields;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(
         $jc($jc($jc(0, name.hashCode), isBuiltValue.hashCode),
@@ -46,6 +54,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
         fields.hashCode));
   }
 
+  @override
   String toString() {
     return 'SerializerSourceClass {'
         'name=${name.toString()},\n'
@@ -93,14 +102,17 @@ class SerializerSourceClassBuilder
     return this;
   }
 
+  @override
   void replace(SerializerSourceClass other) {
     _$v = other;
   }
 
+  @override
   void update(updates(SerializerSourceClassBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   SerializerSourceClass build() {
     final result = _$v ??
         new _$SerializerSourceClass._(

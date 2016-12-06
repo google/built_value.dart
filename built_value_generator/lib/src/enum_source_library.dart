@@ -21,9 +21,9 @@ abstract class EnumSourceLibrary
   String get source;
   BuiltList<EnumSourceClass> get classes;
 
-  EnumSourceLibrary._();
   factory EnumSourceLibrary([updates(EnumSourceLibraryBuilder b)]) =
       _$EnumSourceLibrary;
+  EnumSourceLibrary._();
 
   factory EnumSourceLibrary.fromLibraryElement(LibraryElement libraryElement) {
     final result = new EnumSourceLibraryBuilder()

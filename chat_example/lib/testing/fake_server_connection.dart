@@ -6,7 +6,7 @@ import 'dart:async';
 
 import 'package:chat_example/server/server_connection.dart';
 
-/// Fake [ClientConnection] that exposes stream controllers.
+/// Fake [ServerConnection] that exposes stream controllers.
 class FakeServerConnection implements ServerConnection {
   final StreamController<String> toClientStreamController =
       new StreamController<String>(sync: true);

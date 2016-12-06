@@ -69,7 +69,9 @@ final BuiltSet<SecondTestEnum> _$vls = new BuiltSet<SecondTestEnum>(const [
 Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
+  @override
   final Iterable<Type> types = const [TestEnum];
+  @override
   final String wireName = 'TestEnum';
 
   @override

@@ -8,31 +8,38 @@ part of value_with_defaults;
 // **************************************************************************
 
 class _$ValueWithDefaults extends ValueWithDefaults {
+  @override
   final int anInt;
+  @override
   final String aString;
+
+  factory _$ValueWithDefaults([updates(ValueWithDefaultsBuilder b)]) =>
+      (new ValueWithDefaultsBuilder()..update(updates)).build();
 
   _$ValueWithDefaults._({this.anInt, this.aString}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
   }
 
-  factory _$ValueWithDefaults([updates(ValueWithDefaultsBuilder b)]) =>
-      (new ValueWithDefaultsBuilder()..update(updates)).build();
-
+  @override
   ValueWithDefaults rebuild(updates(ValueWithDefaultsBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   _$ValueWithDefaultsBuilder toBuilder() =>
       new _$ValueWithDefaultsBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! ValueWithDefaults) return false;
     return anInt == other.anInt && aString == other.aString;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
   }
 
+  @override
   String toString() {
     return 'ValueWithDefaults {'
         'anInt=${anInt.toString()},\n'
@@ -44,13 +51,17 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   ValueWithDefaults _$v;
 
+  @override
   int get anInt => super.anInt;
+  @override
   set anInt(int anInt) {
     _$writableBuilder;
     super.anInt = anInt;
   }
 
+  @override
   String get aString => super.aString;
+  @override
   set aString(String aString) {
     _$writableBuilder;
     super.aString = aString;
@@ -67,14 +78,17 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
     return this;
   }
 
+  @override
   void replace(ValueWithDefaults other) {
     _$v = other;
   }
 
+  @override
   void update(updates(ValueWithDefaultsBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   ValueWithDefaults build() {
     final result =
         _$v ?? new _$ValueWithDefaults._(anInt: anInt, aString: aString);

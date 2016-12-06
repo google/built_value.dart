@@ -25,9 +25,9 @@ abstract class EnumSourceClass
   @nullable
   String get mixinDeclaration;
 
-  EnumSourceClass._();
   factory EnumSourceClass([updates(EnumSourceClassBuilder b)]) =
       _$EnumSourceClass;
+  EnumSourceClass._();
 
   factory EnumSourceClass.fromClassElement(ClassElement classElement) {
     final name = classElement.displayName;

@@ -8,10 +8,17 @@ part of built_value_generator.enum_source_library;
 // **************************************************************************
 
 class _$EnumSourceLibrary extends EnumSourceLibrary {
+  @override
   final String name;
+  @override
   final String fileName;
+  @override
   final String source;
+  @override
   final BuiltList<EnumSourceClass> classes;
+
+  factory _$EnumSourceLibrary([updates(EnumSourceLibraryBuilder b)]) =>
+      (new EnumSourceLibraryBuilder()..update(updates)).build();
 
   _$EnumSourceLibrary._({this.name, this.fileName, this.source, this.classes})
       : super._() {
@@ -21,16 +28,16 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
     if (classes == null) throw new ArgumentError.notNull('classes');
   }
 
-  factory _$EnumSourceLibrary([updates(EnumSourceLibraryBuilder b)]) =>
-      (new EnumSourceLibraryBuilder()..update(updates)).build();
-
+  @override
   EnumSourceLibrary rebuild(updates(EnumSourceLibraryBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   EnumSourceLibraryBuilder toBuilder() =>
       new EnumSourceLibraryBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! EnumSourceLibrary) return false;
     return name == other.name &&
         fileName == other.fileName &&
@@ -38,12 +45,14 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
         classes == other.classes;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(
         $jc($jc($jc(0, name.hashCode), fileName.hashCode), source.hashCode),
         classes.hashCode));
   }
 
+  @override
   String toString() {
     return 'EnumSourceLibrary {'
         'name=${name.toString()},\n'
@@ -89,14 +98,17 @@ class EnumSourceLibraryBuilder
     return this;
   }
 
+  @override
   void replace(EnumSourceLibrary other) {
     _$v = other;
   }
 
+  @override
   void update(updates(EnumSourceLibraryBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   EnumSourceLibrary build() {
     final result = _$v ??
         new _$EnumSourceLibrary._(

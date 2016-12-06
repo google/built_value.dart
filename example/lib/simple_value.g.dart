@@ -10,7 +10,9 @@ part of simple_value;
 Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
+  @override
   final Iterable<Type> types = const [SimpleValue, _$SimpleValue];
+  @override
   final String wireName = 'SimpleValue';
 
   @override
@@ -68,30 +70,37 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
 // **************************************************************************
 
 class _$SimpleValue extends SimpleValue {
+  @override
   final int anInt;
+  @override
   final String aString;
+
+  factory _$SimpleValue([updates(SimpleValueBuilder b)]) =>
+      (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
   }
 
-  factory _$SimpleValue([updates(SimpleValueBuilder b)]) =>
-      (new SimpleValueBuilder()..update(updates)).build();
-
+  @override
   SimpleValue rebuild(updates(SimpleValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   SimpleValueBuilder toBuilder() => new SimpleValueBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! SimpleValue) return false;
     return anInt == other.anInt && aString == other.aString;
   }
 
+  @override
   int get hashCode {
     return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
   }
 
+  @override
   String toString() {
     return 'SimpleValue {'
         'anInt=${anInt.toString()},\n'
@@ -122,14 +131,17 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
     return this;
   }
 
+  @override
   void replace(SimpleValue other) {
     _$v = other;
   }
 
+  @override
   void update(updates(SimpleValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   SimpleValue build() {
     final result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
     replace(result);

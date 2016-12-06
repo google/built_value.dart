@@ -8,11 +8,19 @@ part of built_value_generator.enum_source_field;
 // **************************************************************************
 
 class _$EnumSourceField extends EnumSourceField {
+  @override
   final String name;
+  @override
   final String type;
+  @override
   final String generatedIdentifier;
+  @override
   final bool isConst;
+  @override
   final bool isStatic;
+
+  factory _$EnumSourceField([updates(EnumSourceFieldBuilder b)]) =>
+      (new EnumSourceFieldBuilder()..update(updates)).build();
 
   _$EnumSourceField._(
       {this.name,
@@ -29,16 +37,16 @@ class _$EnumSourceField extends EnumSourceField {
     if (isStatic == null) throw new ArgumentError.notNull('isStatic');
   }
 
-  factory _$EnumSourceField([updates(EnumSourceFieldBuilder b)]) =>
-      (new EnumSourceFieldBuilder()..update(updates)).build();
-
+  @override
   EnumSourceField rebuild(updates(EnumSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
+  @override
   EnumSourceFieldBuilder toBuilder() =>
       new EnumSourceFieldBuilder()..replace(this);
 
-  bool operator ==(other) {
+  @override
+  bool operator ==(dynamic other) {
     if (other is! EnumSourceField) return false;
     return name == other.name &&
         type == other.type &&
@@ -47,6 +55,7 @@ class _$EnumSourceField extends EnumSourceField {
         isStatic == other.isStatic;
   }
 
+  @override
   int get hashCode {
     return $jf($jc(
         $jc(
@@ -56,6 +65,7 @@ class _$EnumSourceField extends EnumSourceField {
         isStatic.hashCode));
   }
 
+  @override
   String toString() {
     return 'EnumSourceField {'
         'name=${name.toString()},\n'
@@ -106,14 +116,17 @@ class EnumSourceFieldBuilder
     return this;
   }
 
+  @override
   void replace(EnumSourceField other) {
     _$v = other;
   }
 
+  @override
   void update(updates(EnumSourceFieldBuilder b)) {
     if (updates != null) updates(this);
   }
 
+  @override
   EnumSourceField build() {
     final result = _$v ??
         new _$EnumSourceField._(

@@ -7,7 +7,9 @@ import 'package:built_value/serializer.dart';
 
 class BuiltListSerializer implements StructuredSerializer<BuiltList> {
   final bool structured = true;
+  @override
   final Iterable<Type> types = new BuiltList<Type>([BuiltList]);
+  @override
   final String wireName = 'list';
 
   @override
@@ -38,7 +40,7 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
         ? FullType.unspecified
         : specifiedType.parameters[0];
 
-    ListBuilder result = isUnderspecified
+    final ListBuilder result = isUnderspecified
         ? new ListBuilder<Object>()
         : serializers.newBuilder(specifiedType) as ListBuilder;
     if (result == null) {

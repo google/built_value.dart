@@ -28,6 +28,6 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
   @nullable
   String get aString;
 
-  SimpleValue._();
   factory SimpleValue([updates(SimpleValueBuilder b)]) = _$SimpleValue;
+  SimpleValue._();
 }

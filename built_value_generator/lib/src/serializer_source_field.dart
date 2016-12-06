@@ -127,7 +127,7 @@ abstract class SerializerSourceField
 
   static bool _isBuiltCollection(DartType type) {
     return _builtCollectionNames
-        .any((name) => type.displayName.startsWith('${name}<'));
+        .any((name) => type.displayName.startsWith('$name<'));
   }
 }
 

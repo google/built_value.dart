@@ -103,7 +103,9 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 Serializer<Value> _$valueSerializer = new _$ValueSerializer();
 
 class _$ValueSerializer implements StructuredSerializer<Value> {
+  @override
   final Iterable<Type> types = const [Value, _$Value];
+  @override
   final String wireName = 'Value';
 
   @override
@@ -191,7 +193,9 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 Serializer<Value> _$valueSerializer = new _$ValueSerializer();
 
 class _$ValueSerializer implements StructuredSerializer<Value> {
+  @override
   final Iterable<Type> types = const [Value, _$Value];
+  @override
   final String wireName = 'Value';
 
   @override
@@ -275,7 +279,9 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 Serializer<Value> _$valueSerializer = new _$ValueSerializer();
 
 class _$ValueSerializer implements StructuredSerializer<Value> {
+  @override
   final Iterable<Type> types = const [Value, _$Value];
+  @override
   final String wireName = 'Value';
 
   @override
@@ -350,7 +356,9 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 Serializer<Value> _$valueSerializer = new _$ValueSerializer();
 
 class _$ValueSerializer implements StructuredSerializer<Value> {
+  @override
   final Iterable<Type> types = const [Value, _$Value];
+  @override
   final String wireName = 'Value';
 
   @override
@@ -419,7 +427,9 @@ abstract class TestEnum extends EnumClass {
 Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
+  @override
   final Iterable<Type> types = const [TestEnum];
+  @override
   final String wireName = 'TestEnum';
 
   @override

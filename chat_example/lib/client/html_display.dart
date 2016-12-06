@@ -20,12 +20,14 @@ class HtmlDisplay implements Display {
     add('Welcome to the built_value chat example. For help, type /help.');
   }
 
+  @override
   void addLocal(String text) {
     _element.innerHtml +=
         '<div class="local">${_htmlEscape.convert(text)}</div>';
     window.scrollTo(0, document.body.scrollHeight);
   }
 
+  @override
   void add(String text) {
     _element.innerHtml +=
         '${_htmlEscape.convert(text).replaceAll('\n', '<br>')}<br>';

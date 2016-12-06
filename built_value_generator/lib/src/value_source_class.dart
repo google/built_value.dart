@@ -34,9 +34,9 @@ abstract class ValueSourceClass
   BuiltList<String> get builderClassConstructors;
   BuiltList<String> get builderClassFactories;
 
-  ValueSourceClass._();
   factory ValueSourceClass([updates(ValueSourceClassBuilder b)]) =
       _$ValueSourceClass;
+  ValueSourceClass._();
 
   factory ValueSourceClass.fromClassElement(ClassElement classElement) {
     final name = classElement.displayName;
@@ -203,8 +203,13 @@ abstract class ValueSourceClass
 
     result.writeln('class _\$$name extends $name {');
     for (final field in fields) {
+      result.writeln('@override');
       result.writeln('final ${field.type} ${field.name};');
     }
+    result.writeln();
+
+    result.writeln('factory _\$$name([updates(${name}Builder b)]) '
+        '=> (new ${name}Builder()..update(updates)).build();');
     result.writeln();
 
     if (fields.isEmpty) {
@@ -227,14 +232,12 @@ abstract class ValueSourceClass
     }
     result.writeln();
 
-    result.writeln('factory _\$$name([updates(${name}Builder b)]) '
-        '=> (new ${name}Builder()..update(updates)).build();');
-    result.writeln();
-
+    result.writeln('@override');
     result.writeln('$name rebuild(updates(${name}Builder b)) '
         '=> (toBuilder()..update(updates)).build();');
     result.writeln();
 
+    result.writeln('@override');
     if (hasBuilder) {
       result.writeln('_\$${name}Builder toBuilder() '
           '=> new _\$${name}Builder()..replace(this);');
@@ -244,7 +247,8 @@ abstract class ValueSourceClass
     }
     result.writeln();
 
-    result.writeln('bool operator==(other) {');
+    result.writeln('@override');
+    result.writeln('bool operator==(dynamic other) {');
     result.writeln('  if (other is! $name) return false;');
     if (fields.length == 0) {
       result.writeln('return true;');
@@ -258,6 +262,7 @@ abstract class ValueSourceClass
     result.writeln('}');
     result.writeln();
 
+    result.writeln('@override');
     result.writeln('int get hashCode {');
     if (fields.length == 0) {
       result.writeln('return ${name.hashCode};');
@@ -271,6 +276,7 @@ abstract class ValueSourceClass
     result.writeln('}');
     result.writeln();
 
+    result.writeln('@override');
     result.writeln('String toString() {');
     if (fields.length == 0) {
       result.writeln("return '$name {}';");
@@ -305,16 +311,20 @@ abstract class ValueSourceClass
         final name = field.name;
 
         if (field.isNestedBuilder) {
+          result.writeln('@override');
           result.writeln('$typeInBuilder get $name {'
               '_\$writableBuilder;'
               'return super.$name ??= new $typeInBuilder();'
               '}');
+          result.writeln('@override');
           result.writeln('set $name($typeInBuilder $name) {'
               '_\$writableBuilder;'
               'super.$name = $name;'
               '}');
         } else {
+          result.writeln('@override');
           result.writeln('$type get $name => super.$name;');
+          result.writeln('@override');
           result.writeln('set $name($type $name) {'
               '_\$writableBuilder;'
               'super.$name = $name;'
@@ -369,14 +379,17 @@ abstract class ValueSourceClass
     result.writeln('return this;');
     result.writeln('}');
 
-    result.writeln('void replace(${name} other) {');
+    result.writeln('@override');
+    result.writeln('void replace($name other) {');
     result.writeln('_\$v = other;');
     result.writeln('}');
 
+    result.writeln('@override');
     result.writeln('void update(updates(${name}Builder b)) {'
         ' if (updates != null) updates(this); }');
     result.writeln();
 
+    result.writeln('@override');
     result.writeln('$name build() {');
     result.writeln('final result = _\$v ?? ');
     result.writeln('new _\$$name._(');
@@ -435,8 +448,8 @@ abstract class ValueSourceClassBuilder
   @virtual
   ListBuilder<String> builderClassFactories = new ListBuilder<String>();
 
-  ValueSourceClassBuilder._();
   factory ValueSourceClassBuilder() = _$ValueSourceClassBuilder;
+  ValueSourceClassBuilder._();
 }
 
 InvalidGenerationSourceError _makeError(Iterable<String> todos) {

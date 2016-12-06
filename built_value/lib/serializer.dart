@@ -90,7 +90,7 @@ abstract class SerializersBuilder {
 /// available.
 class FullType {
   // An unspecified type.
-  static const unspecified = const FullType(null);
+  static const FullType unspecified = const FullType(null);
 
   /// The root of the type.
   final Type root;

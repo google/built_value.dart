@@ -8,7 +8,9 @@ import 'package:built_value/serializer.dart';
 // TODO(davidmorgan): support special values.
 class DoubleSerializer implements PrimitiveSerializer<double> {
   final bool structured = false;
+  @override
   final Iterable<Type> types = new BuiltList<Type>([double]);
+  @override
   final String wireName = 'double';
 
   @override
