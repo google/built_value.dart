@@ -261,69 +261,65 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
   Collections _$v;
 
   ListBuilder<int> _list;
-  ListBuilder<int> get list =>
-      _$writableBuilder._list ??= new ListBuilder<int>();
-  set list(ListBuilder<int> list) => _$writableBuilder._list = list;
+  ListBuilder<int> get list => _$this._list ??= new ListBuilder<int>();
+  set list(ListBuilder<int> list) => _$this._list = list;
 
   SetBuilder<String> _set;
-  SetBuilder<String> get set =>
-      _$writableBuilder._set ??= new SetBuilder<String>();
-  set set(SetBuilder<String> set) => _$writableBuilder._set = set;
+  SetBuilder<String> get set => _$this._set ??= new SetBuilder<String>();
+  set set(SetBuilder<String> set) => _$this._set = set;
 
   MapBuilder<String, int> _map;
   MapBuilder<String, int> get map =>
-      _$writableBuilder._map ??= new MapBuilder<String, int>();
-  set map(MapBuilder<String, int> map) => _$writableBuilder._map = map;
+      _$this._map ??= new MapBuilder<String, int>();
+  set map(MapBuilder<String, int> map) => _$this._map = map;
 
   ListMultimapBuilder<int, bool> _listMultimap;
   ListMultimapBuilder<int, bool> get listMultimap =>
-      _$writableBuilder._listMultimap ??= new ListMultimapBuilder<int, bool>();
+      _$this._listMultimap ??= new ListMultimapBuilder<int, bool>();
   set listMultimap(ListMultimapBuilder<int, bool> listMultimap) =>
-      _$writableBuilder._listMultimap = listMultimap;
+      _$this._listMultimap = listMultimap;
 
   SetMultimapBuilder<String, bool> _setMultimap;
   SetMultimapBuilder<String, bool> get setMultimap =>
-      _$writableBuilder._setMultimap ??= new SetMultimapBuilder<String, bool>();
+      _$this._setMultimap ??= new SetMultimapBuilder<String, bool>();
   set setMultimap(SetMultimapBuilder<String, bool> setMultimap) =>
-      _$writableBuilder._setMultimap = setMultimap;
+      _$this._setMultimap = setMultimap;
 
   ListBuilder<int> _nullableList;
   ListBuilder<int> get nullableList =>
-      _$writableBuilder._nullableList ??= new ListBuilder<int>();
+      _$this._nullableList ??= new ListBuilder<int>();
   set nullableList(ListBuilder<int> nullableList) =>
-      _$writableBuilder._nullableList = nullableList;
+      _$this._nullableList = nullableList;
 
   SetBuilder<String> _nullableSet;
   SetBuilder<String> get nullableSet =>
-      _$writableBuilder._nullableSet ??= new SetBuilder<String>();
+      _$this._nullableSet ??= new SetBuilder<String>();
   set nullableSet(SetBuilder<String> nullableSet) =>
-      _$writableBuilder._nullableSet = nullableSet;
+      _$this._nullableSet = nullableSet;
 
   MapBuilder<String, int> _nullableMap;
   MapBuilder<String, int> get nullableMap =>
-      _$writableBuilder._nullableMap ??= new MapBuilder<String, int>();
+      _$this._nullableMap ??= new MapBuilder<String, int>();
   set nullableMap(MapBuilder<String, int> nullableMap) =>
-      _$writableBuilder._nullableMap = nullableMap;
+      _$this._nullableMap = nullableMap;
 
   ListMultimapBuilder<int, bool> _nullableListMultimap;
   ListMultimapBuilder<int, bool> get nullableListMultimap =>
-      _$writableBuilder._nullableListMultimap ??=
-          new ListMultimapBuilder<int, bool>();
+      _$this._nullableListMultimap ??= new ListMultimapBuilder<int, bool>();
   set nullableListMultimap(
           ListMultimapBuilder<int, bool> nullableListMultimap) =>
-      _$writableBuilder._nullableListMultimap = nullableListMultimap;
+      _$this._nullableListMultimap = nullableListMultimap;
 
   SetMultimapBuilder<String, bool> _nullableSetMultimap;
   SetMultimapBuilder<String, bool> get nullableSetMultimap =>
-      _$writableBuilder._nullableSetMultimap ??=
-          new SetMultimapBuilder<String, bool>();
+      _$this._nullableSetMultimap ??= new SetMultimapBuilder<String, bool>();
   set nullableSetMultimap(
           SetMultimapBuilder<String, bool> nullableSetMultimap) =>
-      _$writableBuilder._nullableSetMultimap = nullableSetMultimap;
+      _$this._nullableSetMultimap = nullableSetMultimap;
 
   CollectionsBuilder();
 
-  CollectionsBuilder get _$writableBuilder {
+  CollectionsBuilder get _$this {
     if (_$v != null) {
       _list = _$v.list?.toBuilder();
       _set = _$v.set?.toBuilder();

@@ -70,28 +70,26 @@ class SerializerSourceClassBuilder
   SerializerSourceClass _$v;
 
   String _name;
-  String get name => _name;
-  set name(String name) => _$writableBuilder._name = name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
 
   bool _isBuiltValue;
-  bool get isBuiltValue => _isBuiltValue;
-  set isBuiltValue(bool isBuiltValue) =>
-      _$writableBuilder._isBuiltValue = isBuiltValue;
+  bool get isBuiltValue => _$this._isBuiltValue;
+  set isBuiltValue(bool isBuiltValue) => _$this._isBuiltValue = isBuiltValue;
 
   bool _isEnumClass;
-  bool get isEnumClass => _isEnumClass;
-  set isEnumClass(bool isEnumClass) =>
-      _$writableBuilder._isEnumClass = isEnumClass;
+  bool get isEnumClass => _$this._isEnumClass;
+  set isEnumClass(bool isEnumClass) => _$this._isEnumClass = isEnumClass;
 
   ListBuilder<SerializerSourceField> _fields;
   ListBuilder<SerializerSourceField> get fields =>
-      _$writableBuilder._fields ??= new ListBuilder<SerializerSourceField>();
+      _$this._fields ??= new ListBuilder<SerializerSourceField>();
   set fields(ListBuilder<SerializerSourceField> fields) =>
-      _$writableBuilder._fields = fields;
+      _$this._fields = fields;
 
   SerializerSourceClassBuilder();
 
-  SerializerSourceClassBuilder get _$writableBuilder {
+  SerializerSourceClassBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
       _isBuiltValue = _$v.isBuiltValue;

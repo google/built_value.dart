@@ -156,24 +156,32 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
   ValueWithInt _$v;
 
   @override
-  int get anInt => super.anInt;
+  int get anInt {
+    _$this;
+    return super.anInt;
+  }
+
   @override
   set anInt(int anInt) {
-    _$writableBuilder;
+    _$this;
     super.anInt = anInt;
   }
 
   @override
-  String get note => super.note;
+  String get note {
+    _$this;
+    return super.note;
+  }
+
   @override
   set note(String note) {
-    _$writableBuilder;
+    _$this;
     super.note = note;
   }
 
   _$ValueWithIntBuilder() : super._();
 
-  ValueWithIntBuilder get _$writableBuilder {
+  ValueWithIntBuilder get _$this {
     if (_$v != null) {
       super.anInt = _$v.anInt;
       super.note = _$v.note;

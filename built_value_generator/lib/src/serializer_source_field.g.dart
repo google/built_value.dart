@@ -82,48 +82,68 @@ class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
   SerializerSourceField _$v;
 
   @override
-  bool get isSerializable => super.isSerializable;
+  bool get isSerializable {
+    _$this;
+    return super.isSerializable;
+  }
+
   @override
   set isSerializable(bool isSerializable) {
-    _$writableBuilder;
+    _$this;
     super.isSerializable = isSerializable;
   }
 
   @override
-  bool get isNullable => super.isNullable;
+  bool get isNullable {
+    _$this;
+    return super.isNullable;
+  }
+
   @override
   set isNullable(bool isNullable) {
-    _$writableBuilder;
+    _$this;
     super.isNullable = isNullable;
   }
 
   @override
-  String get name => super.name;
+  String get name {
+    _$this;
+    return super.name;
+  }
+
   @override
   set name(String name) {
-    _$writableBuilder;
+    _$this;
     super.name = name;
   }
 
   @override
-  String get type => super.type;
+  String get type {
+    _$this;
+    return super.type;
+  }
+
   @override
   set type(String type) {
-    _$writableBuilder;
+    _$this;
     super.type = type;
   }
 
   @override
-  bool get builderFieldUsesNestedBuilder => super.builderFieldUsesNestedBuilder;
+  bool get builderFieldUsesNestedBuilder {
+    _$this;
+    return super.builderFieldUsesNestedBuilder;
+  }
+
   @override
   set builderFieldUsesNestedBuilder(bool builderFieldUsesNestedBuilder) {
-    _$writableBuilder;
+    _$this;
     super.builderFieldUsesNestedBuilder = builderFieldUsesNestedBuilder;
   }
 
   _$SerializerSourceFieldBuilder() : super._();
 
-  SerializerSourceFieldBuilder get _$writableBuilder {
+  SerializerSourceFieldBuilder get _$this {
     if (_$v != null) {
       super.isSerializable = _$v.isSerializable;
       super.isNullable = _$v.isNullable;

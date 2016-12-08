@@ -52,20 +52,20 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
   Node _$v;
 
   String _label;
-  String get label => _label;
-  set label(String label) => _$writableBuilder._label = label;
+  String get label => _$this._label;
+  set label(String label) => _$this._label = label;
 
   NodeBuilder _left;
-  NodeBuilder get left => _$writableBuilder._left ??= new NodeBuilder();
-  set left(NodeBuilder left) => _$writableBuilder._left = left;
+  NodeBuilder get left => _$this._left ??= new NodeBuilder();
+  set left(NodeBuilder left) => _$this._left = left;
 
   NodeBuilder _right;
-  NodeBuilder get right => _$writableBuilder._right ??= new NodeBuilder();
-  set right(NodeBuilder right) => _$writableBuilder._right = right;
+  NodeBuilder get right => _$this._right ??= new NodeBuilder();
+  set right(NodeBuilder right) => _$this._right = right;
 
   NodeBuilder();
 
-  NodeBuilder get _$writableBuilder {
+  NodeBuilder get _$this {
     if (_$v != null) {
       _label = _$v.label;
       _left = _$v.left?.toBuilder();

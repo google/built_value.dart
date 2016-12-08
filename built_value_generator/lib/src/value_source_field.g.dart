@@ -108,44 +108,44 @@ class ValueSourceFieldBuilder
   ValueSourceField _$v;
 
   String _name;
-  String get name => _name;
-  set name(String name) => _$writableBuilder._name = name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
 
   String _type;
-  String get type => _type;
-  set type(String type) => _$writableBuilder._type = type;
+  String get type => _$this._type;
+  set type(String type) => _$this._type = type;
 
   bool _isGetter;
-  bool get isGetter => _isGetter;
-  set isGetter(bool isGetter) => _$writableBuilder._isGetter = isGetter;
+  bool get isGetter => _$this._isGetter;
+  set isGetter(bool isGetter) => _$this._isGetter = isGetter;
 
   bool _isNullable;
-  bool get isNullable => _isNullable;
-  set isNullable(bool isNullable) => _$writableBuilder._isNullable = isNullable;
+  bool get isNullable => _$this._isNullable;
+  set isNullable(bool isNullable) => _$this._isNullable = isNullable;
 
   bool _builderFieldExists;
-  bool get builderFieldExists => _builderFieldExists;
+  bool get builderFieldExists => _$this._builderFieldExists;
   set builderFieldExists(bool builderFieldExists) =>
-      _$writableBuilder._builderFieldExists = builderFieldExists;
+      _$this._builderFieldExists = builderFieldExists;
 
   bool _builderFieldIsNormalField;
-  bool get builderFieldIsNormalField => _builderFieldIsNormalField;
+  bool get builderFieldIsNormalField => _$this._builderFieldIsNormalField;
   set builderFieldIsNormalField(bool builderFieldIsNormalField) =>
-      _$writableBuilder._builderFieldIsNormalField = builderFieldIsNormalField;
+      _$this._builderFieldIsNormalField = builderFieldIsNormalField;
 
   String _typeInBuilder;
-  String get typeInBuilder => _typeInBuilder;
+  String get typeInBuilder => _$this._typeInBuilder;
   set typeInBuilder(String typeInBuilder) =>
-      _$writableBuilder._typeInBuilder = typeInBuilder;
+      _$this._typeInBuilder = typeInBuilder;
 
   bool _isNestedBuilder;
-  bool get isNestedBuilder => _isNestedBuilder;
+  bool get isNestedBuilder => _$this._isNestedBuilder;
   set isNestedBuilder(bool isNestedBuilder) =>
-      _$writableBuilder._isNestedBuilder = isNestedBuilder;
+      _$this._isNestedBuilder = isNestedBuilder;
 
   ValueSourceFieldBuilder();
 
-  ValueSourceFieldBuilder get _$writableBuilder {
+  ValueSourceFieldBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
       _type = _$v.type;

@@ -65,28 +65,32 @@ class _$SerializerSourceLibraryBuilder extends SerializerSourceLibraryBuilder {
   SerializerSourceLibrary _$v;
 
   @override
-  bool get hasSerializers => super.hasSerializers;
+  bool get hasSerializers {
+    _$this;
+    return super.hasSerializers;
+  }
+
   @override
   set hasSerializers(bool hasSerializers) {
-    _$writableBuilder;
+    _$this;
     super.hasSerializers = hasSerializers;
   }
 
   @override
   SetBuilder<SerializerSourceClass> get sourceClasses {
-    _$writableBuilder;
+    _$this;
     return super.sourceClasses ??= new SetBuilder<SerializerSourceClass>();
   }
 
   @override
   set sourceClasses(SetBuilder<SerializerSourceClass> sourceClasses) {
-    _$writableBuilder;
+    _$this;
     super.sourceClasses = sourceClasses;
   }
 
   @override
   SetBuilder<SerializerSourceClass> get transitiveSourceClasses {
-    _$writableBuilder;
+    _$this;
     return super.transitiveSourceClasses ??=
         new SetBuilder<SerializerSourceClass>();
   }
@@ -94,13 +98,13 @@ class _$SerializerSourceLibraryBuilder extends SerializerSourceLibraryBuilder {
   @override
   set transitiveSourceClasses(
       SetBuilder<SerializerSourceClass> transitiveSourceClasses) {
-    _$writableBuilder;
+    _$this;
     super.transitiveSourceClasses = transitiveSourceClasses;
   }
 
   _$SerializerSourceLibraryBuilder() : super._();
 
-  SerializerSourceLibraryBuilder get _$writableBuilder {
+  SerializerSourceLibraryBuilder get _$this {
     if (_$v != null) {
       super.hasSerializers = _$v.hasSerializers;
       super.sourceClasses = _$v.sourceClasses?.toBuilder();

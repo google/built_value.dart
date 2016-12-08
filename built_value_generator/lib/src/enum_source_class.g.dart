@@ -94,43 +94,42 @@ class EnumSourceClassBuilder
   EnumSourceClass _$v;
 
   String _name;
-  String get name => _name;
-  set name(String name) => _$writableBuilder._name = name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
 
   ListBuilder<EnumSourceField> _fields;
   ListBuilder<EnumSourceField> get fields =>
-      _$writableBuilder._fields ??= new ListBuilder<EnumSourceField>();
-  set fields(ListBuilder<EnumSourceField> fields) =>
-      _$writableBuilder._fields = fields;
+      _$this._fields ??= new ListBuilder<EnumSourceField>();
+  set fields(ListBuilder<EnumSourceField> fields) => _$this._fields = fields;
 
   ListBuilder<String> _constructors;
   ListBuilder<String> get constructors =>
-      _$writableBuilder._constructors ??= new ListBuilder<String>();
+      _$this._constructors ??= new ListBuilder<String>();
   set constructors(ListBuilder<String> constructors) =>
-      _$writableBuilder._constructors = constructors;
+      _$this._constructors = constructors;
 
   String _valuesIdentifier;
-  String get valuesIdentifier => _valuesIdentifier;
+  String get valuesIdentifier => _$this._valuesIdentifier;
   set valuesIdentifier(String valuesIdentifier) =>
-      _$writableBuilder._valuesIdentifier = valuesIdentifier;
+      _$this._valuesIdentifier = valuesIdentifier;
 
   String _valueOfIdentifier;
-  String get valueOfIdentifier => _valueOfIdentifier;
+  String get valueOfIdentifier => _$this._valueOfIdentifier;
   set valueOfIdentifier(String valueOfIdentifier) =>
-      _$writableBuilder._valueOfIdentifier = valueOfIdentifier;
+      _$this._valueOfIdentifier = valueOfIdentifier;
 
   bool _usesMixin;
-  bool get usesMixin => _usesMixin;
-  set usesMixin(bool usesMixin) => _$writableBuilder._usesMixin = usesMixin;
+  bool get usesMixin => _$this._usesMixin;
+  set usesMixin(bool usesMixin) => _$this._usesMixin = usesMixin;
 
   String _mixinDeclaration;
-  String get mixinDeclaration => _mixinDeclaration;
+  String get mixinDeclaration => _$this._mixinDeclaration;
   set mixinDeclaration(String mixinDeclaration) =>
-      _$writableBuilder._mixinDeclaration = mixinDeclaration;
+      _$this._mixinDeclaration = mixinDeclaration;
 
   EnumSourceClassBuilder();
 
-  EnumSourceClassBuilder get _$writableBuilder {
+  EnumSourceClassBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
       _fields = _$v.fields?.toBuilder();

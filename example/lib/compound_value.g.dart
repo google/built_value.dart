@@ -118,19 +118,19 @@ class CompoundValueBuilder
 
   SimpleValueBuilder _simpleValue;
   SimpleValueBuilder get simpleValue =>
-      _$writableBuilder._simpleValue ??= new SimpleValueBuilder();
+      _$this._simpleValue ??= new SimpleValueBuilder();
   set simpleValue(SimpleValueBuilder simpleValue) =>
-      _$writableBuilder._simpleValue = simpleValue;
+      _$this._simpleValue = simpleValue;
 
   ValidatedValueBuilder _validatedValue;
   ValidatedValueBuilder get validatedValue =>
-      _$writableBuilder._validatedValue ??= new ValidatedValueBuilder();
+      _$this._validatedValue ??= new ValidatedValueBuilder();
   set validatedValue(ValidatedValueBuilder validatedValue) =>
-      _$writableBuilder._validatedValue = validatedValue;
+      _$this._validatedValue = validatedValue;
 
   CompoundValueBuilder();
 
-  CompoundValueBuilder get _$writableBuilder {
+  CompoundValueBuilder get _$this {
     if (_$v != null) {
       _simpleValue = _$v.simpleValue?.toBuilder();
       _validatedValue = _$v.validatedValue?.toBuilder();

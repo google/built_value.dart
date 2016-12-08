@@ -155,132 +155,164 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
   ValueSourceClass _$v;
 
   @override
-  String get name => super.name;
+  String get name {
+    _$this;
+    return super.name;
+  }
+
   @override
   set name(String name) {
-    _$writableBuilder;
+    _$this;
     super.name = name;
   }
 
   @override
-  String get builtParameters => super.builtParameters;
+  String get builtParameters {
+    _$this;
+    return super.builtParameters;
+  }
+
   @override
   set builtParameters(String builtParameters) {
-    _$writableBuilder;
+    _$this;
     super.builtParameters = builtParameters;
   }
 
   @override
-  bool get hasBuilder => super.hasBuilder;
+  bool get hasBuilder {
+    _$this;
+    return super.hasBuilder;
+  }
+
   @override
   set hasBuilder(bool hasBuilder) {
-    _$writableBuilder;
+    _$this;
     super.hasBuilder = hasBuilder;
   }
 
   @override
-  String get builderParameters => super.builderParameters;
+  String get builderParameters {
+    _$this;
+    return super.builderParameters;
+  }
+
   @override
   set builderParameters(String builderParameters) {
-    _$writableBuilder;
+    _$this;
     super.builderParameters = builderParameters;
   }
 
   @override
   ListBuilder<ValueSourceField> get fields {
-    _$writableBuilder;
+    _$this;
     return super.fields ??= new ListBuilder<ValueSourceField>();
   }
 
   @override
   set fields(ListBuilder<ValueSourceField> fields) {
-    _$writableBuilder;
+    _$this;
     super.fields = fields;
   }
 
   @override
-  String get partStatement => super.partStatement;
+  String get partStatement {
+    _$this;
+    return super.partStatement;
+  }
+
   @override
   set partStatement(String partStatement) {
-    _$writableBuilder;
+    _$this;
     super.partStatement = partStatement;
   }
 
   @override
-  bool get hasPartStatement => super.hasPartStatement;
+  bool get hasPartStatement {
+    _$this;
+    return super.hasPartStatement;
+  }
+
   @override
   set hasPartStatement(bool hasPartStatement) {
-    _$writableBuilder;
+    _$this;
     super.hasPartStatement = hasPartStatement;
   }
 
   @override
-  bool get valueClassIsAbstract => super.valueClassIsAbstract;
+  bool get valueClassIsAbstract {
+    _$this;
+    return super.valueClassIsAbstract;
+  }
+
   @override
   set valueClassIsAbstract(bool valueClassIsAbstract) {
-    _$writableBuilder;
+    _$this;
     super.valueClassIsAbstract = valueClassIsAbstract;
   }
 
   @override
   ListBuilder<String> get valueClassConstructors {
-    _$writableBuilder;
+    _$this;
     return super.valueClassConstructors ??= new ListBuilder<String>();
   }
 
   @override
   set valueClassConstructors(ListBuilder<String> valueClassConstructors) {
-    _$writableBuilder;
+    _$this;
     super.valueClassConstructors = valueClassConstructors;
   }
 
   @override
   ListBuilder<String> get valueClassFactories {
-    _$writableBuilder;
+    _$this;
     return super.valueClassFactories ??= new ListBuilder<String>();
   }
 
   @override
   set valueClassFactories(ListBuilder<String> valueClassFactories) {
-    _$writableBuilder;
+    _$this;
     super.valueClassFactories = valueClassFactories;
   }
 
   @override
-  bool get builderClassIsAbstract => super.builderClassIsAbstract;
+  bool get builderClassIsAbstract {
+    _$this;
+    return super.builderClassIsAbstract;
+  }
+
   @override
   set builderClassIsAbstract(bool builderClassIsAbstract) {
-    _$writableBuilder;
+    _$this;
     super.builderClassIsAbstract = builderClassIsAbstract;
   }
 
   @override
   ListBuilder<String> get builderClassConstructors {
-    _$writableBuilder;
+    _$this;
     return super.builderClassConstructors ??= new ListBuilder<String>();
   }
 
   @override
   set builderClassConstructors(ListBuilder<String> builderClassConstructors) {
-    _$writableBuilder;
+    _$this;
     super.builderClassConstructors = builderClassConstructors;
   }
 
   @override
   ListBuilder<String> get builderClassFactories {
-    _$writableBuilder;
+    _$this;
     return super.builderClassFactories ??= new ListBuilder<String>();
   }
 
   @override
   set builderClassFactories(ListBuilder<String> builderClassFactories) {
-    _$writableBuilder;
+    _$this;
     super.builderClassFactories = builderClassFactories;
   }
 
   _$ValueSourceClassBuilder() : super._();
 
-  ValueSourceClassBuilder get _$writableBuilder {
+  ValueSourceClassBuilder get _$this {
     if (_$v != null) {
       super.name = _$v.name;
       super.builtParameters = _$v.builtParameters;

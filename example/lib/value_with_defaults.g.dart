@@ -52,24 +52,32 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   ValueWithDefaults _$v;
 
   @override
-  int get anInt => super.anInt;
+  int get anInt {
+    _$this;
+    return super.anInt;
+  }
+
   @override
   set anInt(int anInt) {
-    _$writableBuilder;
+    _$this;
     super.anInt = anInt;
   }
 
   @override
-  String get aString => super.aString;
+  String get aString {
+    _$this;
+    return super.aString;
+  }
+
   @override
   set aString(String aString) {
-    _$writableBuilder;
+    _$this;
     super.aString = aString;
   }
 
   _$ValueWithDefaultsBuilder() : super._();
 
-  ValueWithDefaultsBuilder get _$writableBuilder {
+  ValueWithDefaultsBuilder get _$this {
     if (_$v != null) {
       super.anInt = _$v.anInt;
       super.aString = _$v.aString;
