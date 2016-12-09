@@ -10,5 +10,10 @@ void main() {
     test('has defaults', () {
       expect(new ValueWithDefaults().anInt, 7);
     });
+
+    test('builder exposes values via getters', () {
+      final builder = new ValueWithDefaults((b) => b..anInt = 12).toBuilder();
+      expect(builder.anInt, 12);
+    });
   });
 }

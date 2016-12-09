@@ -38,6 +38,13 @@ void main() {
       new SimpleValueBuilder();
     });
 
+    test('builder exposes values via getters', () {
+      final builder = new SimpleValue((b) => b
+        ..anInt = 0
+        ..aString = '').toBuilder();
+      expect(builder.anInt, 0);
+    });
+
     test('compares equal when equal', () {
       final value1 = new SimpleValue((b) => b
         ..anInt = 0

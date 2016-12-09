@@ -82,29 +82,29 @@ class EnumSourceFieldBuilder
   EnumSourceField _$v;
 
   String _name;
-  String get name => _name;
-  set name(String name) => _$writableBuilder._name = name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
 
   String _type;
-  String get type => _type;
-  set type(String type) => _$writableBuilder._type = type;
+  String get type => _$this._type;
+  set type(String type) => _$this._type = type;
 
   String _generatedIdentifier;
-  String get generatedIdentifier => _generatedIdentifier;
+  String get generatedIdentifier => _$this._generatedIdentifier;
   set generatedIdentifier(String generatedIdentifier) =>
-      _$writableBuilder._generatedIdentifier = generatedIdentifier;
+      _$this._generatedIdentifier = generatedIdentifier;
 
   bool _isConst;
-  bool get isConst => _isConst;
-  set isConst(bool isConst) => _$writableBuilder._isConst = isConst;
+  bool get isConst => _$this._isConst;
+  set isConst(bool isConst) => _$this._isConst = isConst;
 
   bool _isStatic;
-  bool get isStatic => _isStatic;
-  set isStatic(bool isStatic) => _$writableBuilder._isStatic = isStatic;
+  bool get isStatic => _$this._isStatic;
+  set isStatic(bool isStatic) => _$this._isStatic = isStatic;
 
   EnumSourceFieldBuilder();
 
-  EnumSourceFieldBuilder get _$writableBuilder {
+  EnumSourceFieldBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
       _type = _$v.type;

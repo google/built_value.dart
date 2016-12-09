@@ -52,16 +52,16 @@ class ValueWithCodeBuilder
   ValueWithCode _$v;
 
   int _anInt;
-  int get anInt => _anInt;
-  set anInt(int anInt) => _$writableBuilder._anInt = anInt;
+  int get anInt => _$this._anInt;
+  set anInt(int anInt) => _$this._anInt = anInt;
 
   String _aString;
-  String get aString => _aString;
-  set aString(String aString) => _$writableBuilder._aString = aString;
+  String get aString => _$this._aString;
+  set aString(String aString) => _$this._aString = aString;
 
   ValueWithCodeBuilder();
 
-  ValueWithCodeBuilder get _$writableBuilder {
+  ValueWithCodeBuilder get _$this {
     if (_$v != null) {
       _anInt = _$v.anInt;
       _aString = _$v.aString;

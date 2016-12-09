@@ -316,20 +316,23 @@ abstract class ValueSourceClass
         if (field.isNestedBuilder) {
           result.writeln('@override');
           result.writeln('$typeInBuilder get $name {'
-              '_\$writableBuilder;'
+              '_\$this;'
               'return super.$name ??= new $typeInBuilder();'
               '}');
           result.writeln('@override');
           result.writeln('set $name($typeInBuilder $name) {'
-              '_\$writableBuilder;'
+              '_\$this;'
               'super.$name = $name;'
               '}');
         } else {
           result.writeln('@override');
-          result.writeln('$type get $name => super.$name;');
+          result.writeln('$typeInBuilder get $name {'
+              '_\$this;'
+              'return super.$name;'
+              '}');
           result.writeln('@override');
           result.writeln('set $name($type $name) {'
-              '_\$writableBuilder;'
+              '_\$this;'
               'super.$name = $name;'
               '}');
         }
@@ -344,14 +347,14 @@ abstract class ValueSourceClass
         if (field.isNestedBuilder) {
           result.writeln('$typeInBuilder _$name;');
           result.writeln('$typeInBuilder get $name =>'
-              '_\$writableBuilder._$name ??= new $typeInBuilder();');
+              '_\$this._$name ??= new $typeInBuilder();');
           result.writeln('set $name($typeInBuilder $name) =>'
-              '_\$writableBuilder._$name = $name;');
+              '_\$this._$name = $name;');
         } else {
           result.writeln('$type _$name;');
-          result.writeln('$type get $name => _$name;');
+          result.writeln('$type get $name => _\$this._$name;');
           result.writeln('set $name($type $name) =>'
-              '_\$writableBuilder._$name = $name;');
+              '_\$this._$name = $name;');
         }
         result.writeln();
       }
@@ -366,7 +369,7 @@ abstract class ValueSourceClass
     result.writeln();
 
     // Getter for "this" that does lazy copying if needed.
-    result.writeln('${name}Builder get _\$writableBuilder {');
+    result.writeln('${name}Builder get _\$this {');
     result.writeln('if (_\$v != null) {');
     for (final field in fields) {
       final name = field.name;

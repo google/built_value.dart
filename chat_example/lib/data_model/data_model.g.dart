@@ -531,18 +531,17 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   Chat _$v;
 
   String _text;
-  String get text => _text;
-  set text(String text) => _$writableBuilder._text = text;
+  String get text => _$this._text;
+  set text(String text) => _$this._text = text;
 
   SetBuilder<String> _targets;
   SetBuilder<String> get targets =>
-      _$writableBuilder._targets ??= new SetBuilder<String>();
-  set targets(SetBuilder<String> targets) =>
-      _$writableBuilder._targets = targets;
+      _$this._targets ??= new SetBuilder<String>();
+  set targets(SetBuilder<String> targets) => _$this._targets = targets;
 
   ChatBuilder();
 
-  ChatBuilder get _$writableBuilder {
+  ChatBuilder get _$this {
     if (_$v != null) {
       _text = _$v.text;
       _targets = _$v.targets?.toBuilder();
@@ -619,16 +618,16 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   Login _$v;
 
   String _username;
-  String get username => _username;
-  set username(String username) => _$writableBuilder._username = username;
+  String get username => _$this._username;
+  set username(String username) => _$this._username = username;
 
   String _password;
-  String get password => _password;
-  set password(String password) => _$writableBuilder._password = password;
+  String get password => _$this._password;
+  set password(String password) => _$this._password = password;
 
   LoginBuilder();
 
-  LoginBuilder get _$writableBuilder {
+  LoginBuilder get _$this {
     if (_$v != null) {
       _username = _$v.username;
       _password = _$v.password;
@@ -705,16 +704,16 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   Status _$v;
 
   String _message;
-  String get message => _message;
-  set message(String message) => _$writableBuilder._message = message;
+  String get message => _$this._message;
+  set message(String message) => _$this._message = message;
 
   StatusType _type;
-  StatusType get type => _type;
-  set type(StatusType type) => _$writableBuilder._type = type;
+  StatusType get type => _$this._type;
+  set type(StatusType type) => _$this._type = type;
 
   StatusBuilder();
 
-  StatusBuilder get _$writableBuilder {
+  StatusBuilder get _$this {
     if (_$v != null) {
       _message = _$v.message;
       _type = _$v.type;
@@ -788,13 +787,13 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 
   SetBuilder<StatusType> _statusTypes;
   SetBuilder<StatusType> get statusTypes =>
-      _$writableBuilder._statusTypes ??= new SetBuilder<StatusType>();
+      _$this._statusTypes ??= new SetBuilder<StatusType>();
   set statusTypes(SetBuilder<StatusType> statusTypes) =>
-      _$writableBuilder._statusTypes = statusTypes;
+      _$this._statusTypes = statusTypes;
 
   ListUsersBuilder();
 
-  ListUsersBuilder get _$writableBuilder {
+  ListUsersBuilder get _$this {
     if (_$v != null) {
       _statusTypes = _$v.statusTypes?.toBuilder();
       _$v = null;
@@ -877,20 +876,20 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   ShowChat _$v;
 
   String _username;
-  String get username => _username;
-  set username(String username) => _$writableBuilder._username = username;
+  String get username => _$this._username;
+  set username(String username) => _$this._username = username;
 
   bool _private;
-  bool get private => _private;
-  set private(bool private) => _$writableBuilder._private = private;
+  bool get private => _$this._private;
+  set private(bool private) => _$this._private = private;
 
   String _text;
-  String get text => _text;
-  set text(String text) => _$writableBuilder._text = text;
+  String get text => _$this._text;
+  set text(String text) => _$this._text = text;
 
   ShowChatBuilder();
 
-  ShowChatBuilder get _$writableBuilder {
+  ShowChatBuilder get _$this {
     if (_$v != null) {
       _username = _$v.username;
       _private = _$v.private;
@@ -969,17 +968,16 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   Welcome _$v;
 
   ListBuilder<Response> _log;
-  ListBuilder<Response> get log =>
-      _$writableBuilder._log ??= new ListBuilder<Response>();
-  set log(ListBuilder<Response> log) => _$writableBuilder._log = log;
+  ListBuilder<Response> get log => _$this._log ??= new ListBuilder<Response>();
+  set log(ListBuilder<Response> log) => _$this._log = log;
 
   String _message;
-  String get message => _message;
-  set message(String message) => _$writableBuilder._message = message;
+  String get message => _$this._message;
+  set message(String message) => _$this._message = message;
 
   WelcomeBuilder();
 
-  WelcomeBuilder get _$writableBuilder {
+  WelcomeBuilder get _$this {
     if (_$v != null) {
       _log = _$v.log?.toBuilder();
       _message = _$v.message;
@@ -1055,13 +1053,13 @@ class ListUsersResponseBuilder
 
   MapBuilder<String, Status> _statuses;
   MapBuilder<String, Status> get statuses =>
-      _$writableBuilder._statuses ??= new MapBuilder<String, Status>();
+      _$this._statuses ??= new MapBuilder<String, Status>();
   set statuses(MapBuilder<String, Status> statuses) =>
-      _$writableBuilder._statuses = statuses;
+      _$this._statuses = statuses;
 
   ListUsersResponseBuilder();
 
-  ListUsersResponseBuilder get _$writableBuilder {
+  ListUsersResponseBuilder get _$this {
     if (_$v != null) {
       _statuses = _$v.statuses?.toBuilder();
       _$v = null;

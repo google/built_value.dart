@@ -68,26 +68,26 @@ class EnumSourceLibraryBuilder
   EnumSourceLibrary _$v;
 
   String _name;
-  String get name => _name;
-  set name(String name) => _$writableBuilder._name = name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
 
   String _fileName;
-  String get fileName => _fileName;
-  set fileName(String fileName) => _$writableBuilder._fileName = fileName;
+  String get fileName => _$this._fileName;
+  set fileName(String fileName) => _$this._fileName = fileName;
 
   String _source;
-  String get source => _source;
-  set source(String source) => _$writableBuilder._source = source;
+  String get source => _$this._source;
+  set source(String source) => _$this._source = source;
 
   ListBuilder<EnumSourceClass> _classes;
   ListBuilder<EnumSourceClass> get classes =>
-      _$writableBuilder._classes ??= new ListBuilder<EnumSourceClass>();
+      _$this._classes ??= new ListBuilder<EnumSourceClass>();
   set classes(ListBuilder<EnumSourceClass> classes) =>
-      _$writableBuilder._classes = classes;
+      _$this._classes = classes;
 
   EnumSourceLibraryBuilder();
 
-  EnumSourceLibraryBuilder get _$writableBuilder {
+  EnumSourceLibraryBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
       _fileName = _$v.fileName;
