@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3
+
+- Fix builder getters to be available before a set is used.
+
 ## 0.4.2
 
 - Fix lints.
