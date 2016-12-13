@@ -3,73 +3,36 @@
 // license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:io';
 
-import 'package:package_resolver/package_resolver.dart';
-import 'package:route/server.dart';
+import 'package:shelf/shelf.dart';
+import 'package:shelf/shelf_io.dart' as io;
+import 'package:shelf_proxy/shelf_proxy.dart';
+import 'package:shelf_web_socket/shelf_web_socket.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
-typedef void SocketReceiver(WebSocket webSocket);
+typedef void SocketReceiver(WebSocketChannel webSocket);
 
-/// Serves static resources for the built_value chat example.
+/// Resource server for the built_value chat example.
 ///
-/// Also, accepts web socket connections.
+/// Proxies to pub serve for most requests. Accepts web socket connections.
 class ResourceServer {
   /// Serves resources, passing new sockets to [socketReceiver].
   Future start(SocketReceiver socketReceiver) async {
-    final server = await HttpServer.bind('localhost', 26199);
-    print('Serving at localhost:26199.');
-    final router = new Router(server);
-    router.serve('/').listen((request) {
-      request.response
-        ..statusCode = HttpStatus.OK
-        ..headers.contentType =
-            new ContentType('text', 'html', charset: 'utf-8')
-        ..write(new File('web/index.html').readAsStringSync())
-        ..close();
+    final cascade = new Cascade()
+        // Web socket handler will do nothing for non-websocket requests, so
+        // just add it in the cascade at the top.
+        .add(webSocketHandler(socketReceiver))
+        // Anything else goes to pub serve.
+        .add(proxyHandler(Uri.parse('http://localhost:8080')))
+        // If that didn't work, must be a problem with pub serve.
+        .add((_) {
+      print('Request failed. Check pub serve output for errors.');
+      return new Response.notFound('');
     });
 
-    router.serve('/main.dart').listen((request) {
-      request.response
-        ..statusCode = HttpStatus.OK
-        ..headers.contentType =
-            new ContentType('application', 'dart', charset: 'utf-8')
-        ..write(new File('web/main.dart').readAsStringSync())
-        ..close();
+    await io.serve(cascade.handler, 'localhost', 26199).then((server) {
+      print('Serving at http://${server.address.host}:${server.port}. Please '
+          'also run pub serve on port 8080.');
     });
-
-    router.serve(new RegExp(r'.*\.dart$')).listen((request) async {
-      var path = request.uri.path;
-
-      if (path.startsWith('/packages/')) {
-        final package = path
-            .replaceFirst('/packages/', '')
-            .replaceFirst(new RegExp('/.*'), '');
-        final resolved = await PackageResolver.current.packagePath(package);
-        path = resolved + '/lib' + path.replaceFirst('/packages/$package', '');
-      } else {
-        path = '.$path';
-      }
-
-      request.response
-        ..statusCode = HttpStatus.OK
-        ..headers.contentType =
-            new ContentType('application', 'dart', charset: 'utf-8')
-        ..write(new File(path).readAsStringSync())
-        ..close();
-    });
-
-    router.serve('/main.css').listen((request) {
-      request.response
-        ..statusCode = HttpStatus.OK
-        ..headers.contentType = new ContentType('text', 'css', charset: 'utf-8')
-        ..write(new File('web/main.css').readAsStringSync())
-        ..close();
-    });
-
-    router
-        .serve('/ws')
-        .transform(
-            new WebSocketTransformer(compression: CompressionOptions.OFF))
-        .listen(socketReceiver);
   }
 }

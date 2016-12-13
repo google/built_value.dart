@@ -3,21 +3,21 @@
 // license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:io';
 
 import 'package:chat_example/server/server_connection.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 /// [ServerConnection] using a web socket.
 class HttpServerConnection implements ServerConnection {
-  final WebSocket _webSocket;
+  final WebSocketChannel _webSocketChannel;
   final StreamController<String> _streamController =
       new StreamController<String>();
 
   @override
   String username;
 
-  HttpServerConnection(this._webSocket) {
-    _webSocket.listen((data) {
+  HttpServerConnection(this._webSocketChannel) {
+    _webSocketChannel.stream.listen((data) {
       _streamController.add(data);
     });
   }
@@ -27,11 +27,11 @@ class HttpServerConnection implements ServerConnection {
 
   @override
   void sendToClient(String data) {
-    _webSocket.add(data);
+    _webSocketChannel.sink.add(data);
   }
 
   @override
   void close() {
-    _webSocket.close();
+    _webSocketChannel.sink.close();
   }
 }
