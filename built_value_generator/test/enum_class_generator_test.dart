@@ -675,14 +675,10 @@ abstract class TestEnumMixin = Object with _$TestEnumMixin;
 // Test setup.
 
 final String pkgName = 'pkg';
-final PackageGraph packageGraph =
-    new PackageGraph.fromRoot(new PackageNode(pkgName, null, null, null));
 
 // Recreate BuiltValueGenerator for each test because we repeatedly create
 // enums with the same name in the same library, which will clash.
-PhaseGroup get phaseGroup => new PhaseGroup.singleAction(
-    new GeneratorBuilder([new BuiltValueGenerator()]),
-    new InputSet(pkgName, const ['lib/*.dart']));
+Builder get builder => new GeneratorBuilder([new BuiltValueGenerator()]);
 
 Future<String> generate(String source) async {
   final srcs = <String, String>{
@@ -691,8 +687,7 @@ Future<String> generate(String source) async {
   };
 
   final writer = new InMemoryAssetWriter();
-  await testPhases(phaseGroup, srcs,
-      packageGraph: packageGraph, writer: writer);
+  await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
   return writer.assets[new AssetId(pkgName, 'lib/test_enum.g.dart')]?.value;
 }
 
@@ -704,8 +699,7 @@ Future<String> generateTwo(String source, String source2) async {
   };
 
   final writer = new InMemoryAssetWriter();
-  await testPhases(phaseGroup, srcs,
-      packageGraph: packageGraph, writer: writer);
+  await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
   return writer.assets[new AssetId(pkgName, 'lib/test_enum.g.dart')]?.value +
       writer.assets[new AssetId(pkgName, 'lib/test_enum_two.g.dart')]?.value;
 }
