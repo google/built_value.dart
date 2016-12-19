@@ -9,7 +9,8 @@ import 'package:built_value/built_value.dart';
 part 'memoization.g.dart';
 
 /// Example of how to use [memoize].
-abstract class DerivedValue implements Built<DerivedValue, DerivedValueBuilder> {
+abstract class DerivedValue
+    implements Built<DerivedValue, DerivedValueBuilder> {
   int get anInt;
 
   /// This getter is marked [memoize], so it will be called at most once. The

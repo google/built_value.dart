@@ -10,6 +10,7 @@ import 'package:example/collections.dart';
 import 'package:example/compound_value.dart';
 import 'package:example/has_int.dart';
 import 'package:example/test_enum.dart';
+import 'package:example/generics.dart';
 import 'package:example/simple_value.dart';
 import 'package:example/validated_value.dart';
 

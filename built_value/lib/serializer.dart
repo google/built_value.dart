@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:built_collection/built_collection.dart';
+import 'package:quiver/core.dart';
 import 'src/bool_serializer.dart';
 import 'src/built_json_serializers.dart';
 import 'src/built_list_multimap_serializer.dart';
@@ -30,7 +32,24 @@ abstract class Serializers {
           ..add(new BuiltSetMultimapSerializer())
           ..add(new DoubleSerializer())
           ..add(new IntSerializer())
-          ..add(new StringSerializer()))
+          ..add(new StringSerializer())
+          ..addBuilderFactory(
+              const FullType(BuiltList, const [FullType.object]),
+              () => new ListBuilder<Object>())
+          ..addBuilderFactory(
+              const FullType(
+                  BuiltListMultimap, const [FullType.object, FullType.object]),
+              () => new ListMultimapBuilder<Object, Object>())
+          ..addBuilderFactory(
+              const FullType(
+                  BuiltMap, const [FullType.object, FullType.object]),
+              () => new MapBuilder<Object, Object>())
+          ..addBuilderFactory(const FullType(BuiltSet, const [FullType.object]),
+              () => new SetBuilder<Object>())
+          ..addBuilderFactory(
+              const FullType(
+                  BuiltSetMultimap, const [FullType.object, FullType.object]),
+              () => new SetMultimapBuilder<Object, Object>()))
         .build();
   }
 
@@ -63,12 +82,14 @@ abstract class Serializers {
   /// `ListBuilder<int, String>`. This helps serializers to instantiate with
   /// correct generic type parameters.
   ///
-  /// May return null if no matching builder factory has been added. In this
-  /// case the serializer should throw a [StateError].
+  /// Throws a [StateError] if no matching builder factory has been added.
   Object newBuilder(FullType fullType);
 
   /// Whether a builder for [fullType] is available via [newBuilder].
   bool hasBuilder(FullType fullType);
+
+  /// Throws if a builder for [fullType] is not available via [newBuilder].
+  void expectBuilder(FullType fullType);
 
   SerializersBuilder toBuilder();
 }
@@ -89,8 +110,11 @@ abstract class SerializersBuilder {
 /// May also be [unspecified], indicating that no type information is
 /// available.
 class FullType {
-  // An unspecified type.
+  /// An unspecified type.
   static const FullType unspecified = const FullType(null);
+
+  /// The [Object] type.
+  static const FullType object = const FullType(Object);
 
   /// The root of the type.
   final Type root;
@@ -101,6 +125,23 @@ class FullType {
   const FullType(this.root, [this.parameters = const []]);
 
   bool get isUnspecified => identical(root, null);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! FullType) return false;
+    if (root != other.root) return false;
+    if (parameters.length != other.parameters.length) return false;
+    for (var i = 0; i != parameters.length; ++i) {
+      if (parameters[i] != other.parameters[i]) return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    return hash2(root, hashObjects(parameters));
+  }
 
   @override
   String toString() => isUnspecified

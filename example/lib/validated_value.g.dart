@@ -52,11 +52,11 @@ class _$ValidatedValueSerializer
         switch (key as String) {
           case 'anInt':
             result.anInt = serializers.deserialize(value,
-                specifiedType: const FullType(int));
+                specifiedType: const FullType(int)) as dynamic;
             break;
           case 'aString':
             result.aString = serializers.deserialize(value,
-                specifiedType: const FullType(String));
+                specifiedType: const FullType(String)) as dynamic;
             break;
         }
       }

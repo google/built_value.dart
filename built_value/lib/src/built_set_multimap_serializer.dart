@@ -18,6 +18,7 @@ class BuiltSetMultimapSerializer
       {FullType specifiedType: FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
 
     final keyType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
@@ -25,10 +26,6 @@ class BuiltSetMultimapSerializer
     final valueType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[1];
-
-    if (!isUnderspecified && !serializers.hasBuilder(specifiedType)) {
-      throw new StateError('No builder for $specifiedType, cannot serialize.');
-    }
 
     final result = <Object>[];
     for (final key in builtSetMultimap.keys) {
@@ -57,10 +54,6 @@ class BuiltSetMultimapSerializer
     final SetMultimapBuilder result = isUnderspecified
         ? new SetMultimapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as SetMultimapBuilder;
-    if (result == null) {
-      throw new StateError(
-          'No builder for $specifiedType, cannot deserialize.');
-    }
 
     if (serialized.length % 2 == 1) {
       throw new ArgumentError('odd length');

@@ -106,7 +106,17 @@ class BuiltJsonSerializers implements Serializers {
   @override
   Object newBuilder(FullType fullType) {
     final builderFactory = _builderFactories[fullType];
-    return builderFactory == null ? null : builderFactory();
+    if (builderFactory == null) {
+      throw new StateError('No builder for $fullType.');
+    }
+    return builderFactory();
+  }
+
+  @override
+  void expectBuilder(FullType fullType) {
+    if (!hasBuilder(fullType)) {
+      throw new StateError('No builder for $fullType.');
+    }
   }
 
   @override
