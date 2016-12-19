@@ -105,7 +105,9 @@ abstract class ValueSourceField
           .replaceFirst('Built', '')
           .replaceFirst('<', 'Builder<');
     } else if (_isBuiltValue(type)) {
-      return '${type.displayName}Builder';
+      return type.displayName.contains('<')
+          ? type.displayName.replaceFirst('<', 'Builder<')
+          : '${type}Builder';
     } else {
       return type.displayName;
     }

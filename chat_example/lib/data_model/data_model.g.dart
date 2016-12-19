@@ -105,12 +105,12 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
         switch (key as String) {
           case 'text':
             result.text = serializers.deserialize(value,
-                specifiedType: const FullType(String));
+                specifiedType: const FullType(String)) as dynamic;
             break;
           case 'targets':
             result.targets.replace(serializers.deserialize(value,
-                specifiedType:
-                    const FullType(BuiltSet, const [const FullType(String)])));
+                specifiedType: const FullType(
+                    BuiltSet, const [const FullType(String)])) as dynamic);
             break;
         }
       }
@@ -160,11 +160,11 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
         switch (key as String) {
           case 'username':
             result.username = serializers.deserialize(value,
-                specifiedType: const FullType(String));
+                specifiedType: const FullType(String)) as dynamic;
             break;
           case 'password':
             result.password = serializers.deserialize(value,
-                specifiedType: const FullType(String));
+                specifiedType: const FullType(String)) as dynamic;
             break;
         }
       }
@@ -214,11 +214,11 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
         switch (key as String) {
           case 'message':
             result.message = serializers.deserialize(value,
-                specifiedType: const FullType(String));
+                specifiedType: const FullType(String)) as dynamic;
             break;
           case 'type':
             result.type = serializers.deserialize(value,
-                specifiedType: const FullType(StatusType));
+                specifiedType: const FullType(StatusType)) as dynamic;
             break;
         }
       }
@@ -286,7 +286,7 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
           case 'statusTypes':
             result.statusTypes.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
-                    BuiltSet, const [const FullType(StatusType)])));
+                    BuiltSet, const [const FullType(StatusType)])) as dynamic);
             break;
         }
       }
@@ -357,15 +357,15 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
         switch (key as String) {
           case 'username':
             result.username = serializers.deserialize(value,
-                specifiedType: const FullType(String));
+                specifiedType: const FullType(String)) as dynamic;
             break;
           case 'private':
             result.private = serializers.deserialize(value,
-                specifiedType: const FullType(bool));
+                specifiedType: const FullType(bool)) as dynamic;
             break;
           case 'text':
             result.text = serializers.deserialize(value,
-                specifiedType: const FullType(String));
+                specifiedType: const FullType(String)) as dynamic;
             break;
         }
       }
@@ -417,11 +417,11 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
           case 'log':
             result.log.replace(serializers.deserialize(value,
                 specifiedType: const FullType(
-                    BuiltList, const [const FullType(Response)])));
+                    BuiltList, const [const FullType(Response)])) as dynamic);
             break;
           case 'message':
             result.message = serializers.deserialize(value,
-                specifiedType: const FullType(String));
+                specifiedType: const FullType(String)) as dynamic;
             break;
         }
       }
@@ -470,8 +470,10 @@ class _$ListUsersResponseSerializer
         switch (key as String) {
           case 'statuses':
             result.statuses.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltMap,
-                    const [const FullType(String), const FullType(Status)])));
+                specifiedType: const FullType(BuiltMap, const [
+                  const FullType(String),
+                  const FullType(Status)
+                ])) as dynamic);
             break;
         }
       }

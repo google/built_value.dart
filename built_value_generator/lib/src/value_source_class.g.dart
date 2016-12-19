@@ -11,6 +11,10 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   final String name;
   @override
+  final BuiltList<String> genericParameters;
+  @override
+  final BuiltList<String> genericBounds;
+  @override
   final String builtParameters;
   @override
   final bool hasBuilder;
@@ -42,6 +46,8 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   _$ValueSourceClass._(
       {this.name,
+      this.genericParameters,
+      this.genericBounds,
       this.builtParameters,
       this.hasBuilder,
       this.builderParameters,
@@ -57,6 +63,9 @@ class _$ValueSourceClass extends ValueSourceClass {
       this.memoizedGetters})
       : super._() {
     if (name == null) throw new ArgumentError.notNull('name');
+    if (genericParameters == null)
+      throw new ArgumentError.notNull('genericParameters');
+    if (genericBounds == null) throw new ArgumentError.notNull('genericBounds');
     if (builtParameters == null)
       throw new ArgumentError.notNull('builtParameters');
     if (hasBuilder == null) throw new ArgumentError.notNull('hasBuilder');
@@ -94,6 +103,8 @@ class _$ValueSourceClass extends ValueSourceClass {
   bool operator ==(dynamic other) {
     if (other is! ValueSourceClass) return false;
     return name == other.name &&
+        genericParameters == other.genericParameters &&
+        genericBounds == other.genericBounds &&
         builtParameters == other.builtParameters &&
         hasBuilder == other.hasBuilder &&
         builderParameters == other.builderParameters &&
@@ -124,7 +135,16 @@ class _$ValueSourceClass extends ValueSourceClass {
                                             $jc(
                                                 $jc(
                                                     $jc(
-                                                        $jc(0, name.hashCode),
+                                                        $jc(
+                                                            $jc(
+                                                                $jc(
+                                                                    0,
+                                                                    name
+                                                                        .hashCode),
+                                                                genericParameters
+                                                                    .hashCode),
+                                                            genericBounds
+                                                                .hashCode),
                                                         builtParameters
                                                             .hashCode),
                                                     hasBuilder.hashCode),
@@ -145,6 +165,8 @@ class _$ValueSourceClass extends ValueSourceClass {
   String toString() {
     return 'ValueSourceClass {'
         'name=${name.toString()},\n'
+        'genericParameters=${genericParameters.toString()},\n'
+        'genericBounds=${genericBounds.toString()},\n'
         'builtParameters=${builtParameters.toString()},\n'
         'hasBuilder=${hasBuilder.toString()},\n'
         'builderParameters=${builderParameters.toString()},\n'
@@ -175,6 +197,30 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
   set name(String name) {
     _$this;
     super.name = name;
+  }
+
+  @override
+  ListBuilder<String> get genericParameters {
+    _$this;
+    return super.genericParameters ??= new ListBuilder<String>();
+  }
+
+  @override
+  set genericParameters(ListBuilder<String> genericParameters) {
+    _$this;
+    super.genericParameters = genericParameters;
+  }
+
+  @override
+  ListBuilder<String> get genericBounds {
+    _$this;
+    return super.genericBounds ??= new ListBuilder<String>();
+  }
+
+  @override
+  set genericBounds(ListBuilder<String> genericBounds) {
+    _$this;
+    super.genericBounds = genericBounds;
   }
 
   @override
@@ -338,6 +384,8 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
   ValueSourceClassBuilder get _$this {
     if (_$v != null) {
       super.name = _$v.name;
+      super.genericParameters = _$v.genericParameters?.toBuilder();
+      super.genericBounds = _$v.genericBounds?.toBuilder();
       super.builtParameters = _$v.builtParameters;
       super.hasBuilder = _$v.hasBuilder;
       super.builderParameters = _$v.builderParameters;
@@ -372,6 +420,8 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
     final result = _$v ??
         new _$ValueSourceClass._(
             name: name,
+            genericParameters: genericParameters?.build(),
+            genericBounds: genericBounds?.build(),
             builtParameters: builtParameters,
             hasBuilder: hasBuilder,
             builderParameters: builderParameters,

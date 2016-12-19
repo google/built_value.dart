@@ -74,26 +74,40 @@ abstract class SerializerSourceField
     return result.build();
   }
 
-  String generateFullType() {
-    return _generateFullType(type);
+  String generateFullType([BuiltSet<String> classGenericParameters]) {
+    return _generateFullType(
+        type, classGenericParameters ?? new BuiltSet<String>());
   }
 
-  bool get needsBuilder => typesWithBuilder.containsKey(_getBareType(type));
+  bool get needsBuilder => type.contains('<');
 
   String generateBuilder() {
-    return 'new ${typesWithBuilder[_getBareType(type)]}<${_getGenerics(type)}>()';
+    final bareType = _getBareType(type);
+    if (typesWithBuilder.containsKey(bareType)) {
+      return 'new ${typesWithBuilder[bareType]}<${_getGenerics(type)}>()';
+    } else {
+      return 'new ${bareType}Builder<${_getGenerics(type)}>()';
+    }
   }
 
-  static String _generateFullType(String type) {
+  static String _generateFullType(
+      String type, BuiltSet<String> classGenericParameters) {
     // TODO(davidmorgan): support more than one level of nesting.
     final bareType = _getBareType(type);
     final generics = _getGenerics(type);
     final genericItems = generics.split(', ');
 
     if (generics.isEmpty) {
+      if (classGenericParameters.contains(bareType)) return 'p$bareType';
       return 'const FullType($bareType)';
     } else {
-      return 'const FullType($bareType, const [${genericItems.map(_generateFullType).join(', ')}])';
+      final parameterFullTypes = genericItems
+          .map((item) => _generateFullType(item, classGenericParameters))
+          .join(', ');
+      final canUseConst = parameterFullTypes.startsWith('const ');
+      final constOrNew = canUseConst ? 'const' : 'new';
+      final constOrEmpty = canUseConst ? 'const' : '';
+      return '$constOrNew FullType($bareType, $constOrEmpty [$parameterFullTypes])';
     }
   }
 

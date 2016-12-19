@@ -19,6 +19,8 @@ part 'value_source_class.g.dart';
 abstract class ValueSourceClass
     implements Built<ValueSourceClass, ValueSourceClassBuilder> {
   String get name;
+  BuiltList<String> get genericParameters;
+  BuiltList<String> get genericBounds;
   String get builtParameters;
   bool get hasBuilder;
   String get builderParameters;
@@ -49,6 +51,8 @@ abstract class ValueSourceClass
     final result = new ValueSourceClassBuilder();
     result
       ..name = name
+      ..genericParameters.replace(_getGenericParameters(classElement))
+      ..genericBounds.replace(_getGenericBounds(classElement))
       ..builtParameters = _getBuiltParameters(classElement)
       ..hasBuilder = hasBuilder
       ..partStatement = _getPartStatement(classElement)
@@ -80,6 +84,14 @@ abstract class ValueSourceClass
 
     return result.build();
   }
+
+  static BuiltList<String> _getGenericParameters(ClassElement classElement) =>
+      new BuiltList<String>(classElement.typeParameters
+          .map((element) => element.computeNode().toString()));
+
+  static BuiltList<String> _getGenericBounds(ClassElement classElement) =>
+      new BuiltList<String>(classElement.typeParameters
+          .map((element) => (element.bound ?? '').toString()));
 
   static String _getBuiltParameters(ClassElement classElement) {
     final visitor = new BuiltParametersVisitor();
@@ -135,7 +147,7 @@ abstract class ValueSourceClass
       result.add('Make class abstract.');
     }
 
-    final expectedBuildParameters = '$name, ${name}Builder';
+    final expectedBuildParameters = '$name$_generics, ${name}Builder$_generics';
     if (builtParameters != expectedBuildParameters) {
       result.add('Make class implement Built<$expectedBuildParameters>. '
           'Currently: Built<$builtParameters>');
@@ -149,9 +161,9 @@ abstract class ValueSourceClass
     }
 
     final expectedFactory =
-        'factory $name([updates(${name}Builder b)]) = _\$$name;';
+        'factory $name([updates(${name}Builder$_generics b)]) = _\$$name$_generics;';
     final alternativeExpectedFactory =
-        'factory $name([void updates(${name}Builder b)]) = _\$$name;';
+        'factory $name([void updates(${name}Builder$_generics b)]) = _\$$name$_generics;';
     if (!valueClassFactories.any((factory) =>
         factory == expectedFactory || factory == alternativeExpectedFactory)) {
       result.add('Make class have factory: $expectedFactory');
@@ -202,13 +214,26 @@ abstract class ValueSourceClass
         : [];
   }
 
+  String get _generics =>
+      genericParameters.isEmpty ? '' : '<' + genericParameters.join(', ') + '>';
+
+  String get _boundedGenerics => genericParameters.isEmpty
+      ? ''
+      : '<' +
+          zip(<Iterable>[genericParameters, genericBounds]).map((zipped) {
+            final parameter = zipped[0];
+            final bound = zipped[1];
+            return bound.isEmpty ? parameter : '$parameter extends $bound';
+          }).join(', ') +
+          '>';
+
   String generateCode() {
     final errors = _computeErrors();
     if (errors.isNotEmpty) throw _makeError(errors);
 
     final result = new StringBuffer();
 
-    result.writeln('class _\$$name extends $name {');
+    result.writeln('class _\$$name$_boundedGenerics extends $name$_generics {');
     for (final field in fields) {
       result.writeln('@override');
       result.writeln('final ${field.type} ${field.name};');
@@ -218,8 +243,8 @@ abstract class ValueSourceClass
     }
     result.writeln();
 
-    result.writeln('factory _\$$name([updates(${name}Builder b)]) '
-        '=> (new ${name}Builder()..update(updates)).build();');
+    result.writeln('factory _\$$name([updates(${name}Builder$_generics b)]) '
+        '=> (new ${name}Builder$_generics()..update(updates)).build();');
     result.writeln();
 
     if (fields.isEmpty) {
@@ -252,17 +277,18 @@ abstract class ValueSourceClass
     }
 
     result.writeln('@override');
-    result.writeln('$name rebuild(updates(${name}Builder b)) '
-        '=> (toBuilder()..update(updates)).build();');
+    result
+        .writeln('$name$_generics rebuild(updates(${name}Builder$_generics b)) '
+            '=> (toBuilder()..update(updates)).build();');
     result.writeln();
 
     result.writeln('@override');
     if (hasBuilder) {
-      result.writeln('_\$${name}Builder toBuilder() '
-          '=> new _\$${name}Builder()..replace(this);');
+      result.writeln('_\$${name}Builder$_generics toBuilder() '
+          '=> new _\$${name}Builder$_generics()..replace(this);');
     } else {
-      result.writeln('${name}Builder toBuilder() '
-          '=> new ${name}Builder()..replace(this);');
+      result.writeln('${name}Builder$_generics toBuilder() '
+          '=> new ${name}Builder$_generics()..replace(this);');
     }
     result.writeln();
 
@@ -313,14 +339,15 @@ abstract class ValueSourceClass
     result.writeln('}');
 
     if (hasBuilder) {
-      result.writeln('class _\$${name}Builder extends ${name}Builder {');
+      result.writeln(
+          'class _\$${name}Builder$_boundedGenerics extends ${name}Builder$_generics {');
     } else {
       result.writeln(
-          'class ${name}Builder implements Builder<$name, ${name}Builder>{');
+          'class ${name}Builder$_boundedGenerics implements Builder<$name$_generics, ${name}Builder$_generics>{');
     }
 
     // Builder holds a reference to a value, copies from it lazily.
-    result.writeln('$name _\$v;');
+    result.writeln('$name$_generics _\$v;');
     result.writeln('');
 
     if (hasBuilder) {
@@ -378,14 +405,26 @@ abstract class ValueSourceClass
     result.writeln();
 
     if (hasBuilder) {
-      result.writeln('_\$${name}Builder() : super._();');
+      result.writeln('_\$${name}Builder() : super._()');
     } else {
-      result.writeln('${name}Builder();');
+      result.writeln('${name}Builder()');
+    }
+    // If there are generic parameters, check they are not "dynamic".
+    if (genericParameters.isEmpty) {
+      result.writeln(';');
+    } else {
+      result.writeln('{');
+      for (final genericParameter in genericParameters) {
+        result.writeln(
+            'if ($genericParameter == dynamic) throw new ArgumentError.value('
+            "'dynamic', '$genericParameter');");
+      }
+      result.writeln('}');
     }
     result.writeln();
 
     // Getter for "this" that does lazy copying if needed.
-    result.writeln('${name}Builder get _\$this {');
+    result.writeln('${name}Builder$_generics get _\$this {');
     result.writeln('if (_\$v != null) {');
     for (final field in fields) {
       final name = field.name;
@@ -402,19 +441,19 @@ abstract class ValueSourceClass
     result.writeln('}');
 
     result.writeln('@override');
-    result.writeln('void replace($name other) {');
+    result.writeln('void replace($name$_generics other) {');
     result.writeln('_\$v = other;');
     result.writeln('}');
 
     result.writeln('@override');
-    result.writeln('void update(updates(${name}Builder b)) {'
+    result.writeln('void update(updates(${name}Builder$_generics b)) {'
         ' if (updates != null) updates(this); }');
     result.writeln();
 
     result.writeln('@override');
-    result.writeln('$name build() {');
+    result.writeln('$name$_generics build() {');
     result.writeln('final result = _\$v ?? ');
-    result.writeln('new _\$$name._(');
+    result.writeln('new _\$$name$_generics._(');
     result.write(fields.map((field) {
       final name = field.name;
       if (!field.isNestedBuilder) return '$name: $name';
@@ -442,6 +481,10 @@ abstract class ValueSourceClassBuilder
     implements Builder<ValueSourceClass, ValueSourceClassBuilder> {
   @virtual
   String name;
+  @virtual
+  ListBuilder<String> genericParameters = new ListBuilder<String>();
+  @virtual
+  ListBuilder<String> genericBounds = new ListBuilder<String>();
   @virtual
   String builtParameters;
   @virtual

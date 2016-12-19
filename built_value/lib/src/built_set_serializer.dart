@@ -17,14 +17,11 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
       {FullType specifiedType: FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
 
     final elementType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];
-
-    if (!isUnderspecified && !serializers.hasBuilder(specifiedType)) {
-      throw new StateError('No builder for $specifiedType, cannot serialize.');
-    }
 
     return builtSet
         .map((item) => serializers.serialize(item, specifiedType: elementType));
@@ -42,10 +39,7 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
     final SetBuilder result = isUnderspecified
         ? new SetBuilder<Object>()
         : serializers.newBuilder(specifiedType) as SetBuilder;
-    if (result == null) {
-      throw new StateError(
-          'No builder for $specifiedType, cannot deserialize.');
-    }
+
     result.addAll(serialized.map(
         (item) => serializers.deserialize(item, specifiedType: elementType)));
     return result.build();
