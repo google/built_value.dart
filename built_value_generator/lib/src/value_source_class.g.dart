@@ -34,6 +34,8 @@ class _$ValueSourceClass extends ValueSourceClass {
   final BuiltList<String> builderClassConstructors;
   @override
   final BuiltList<String> builderClassFactories;
+  @override
+  final BuiltList<MemoizedGetter> memoizedGetters;
 
   factory _$ValueSourceClass([updates(ValueSourceClassBuilder b)]) =>
       (new ValueSourceClassBuilder()..update(updates)).build();
@@ -51,7 +53,8 @@ class _$ValueSourceClass extends ValueSourceClass {
       this.valueClassFactories,
       this.builderClassIsAbstract,
       this.builderClassConstructors,
-      this.builderClassFactories})
+      this.builderClassFactories,
+      this.memoizedGetters})
       : super._() {
     if (name == null) throw new ArgumentError.notNull('name');
     if (builtParameters == null)
@@ -75,6 +78,8 @@ class _$ValueSourceClass extends ValueSourceClass {
       throw new ArgumentError.notNull('builderClassConstructors');
     if (builderClassFactories == null)
       throw new ArgumentError.notNull('builderClassFactories');
+    if (memoizedGetters == null)
+      throw new ArgumentError.notNull('memoizedGetters');
   }
 
   @override
@@ -100,7 +105,8 @@ class _$ValueSourceClass extends ValueSourceClass {
         valueClassFactories == other.valueClassFactories &&
         builderClassIsAbstract == other.builderClassIsAbstract &&
         builderClassConstructors == other.builderClassConstructors &&
-        builderClassFactories == other.builderClassFactories;
+        builderClassFactories == other.builderClassFactories &&
+        memoizedGetters == other.memoizedGetters;
   }
 
   @override
@@ -116,19 +122,23 @@ class _$ValueSourceClass extends ValueSourceClass {
                                     $jc(
                                         $jc(
                                             $jc(
-                                                $jc($jc(0, name.hashCode),
-                                                    builtParameters.hashCode),
-                                                hasBuilder.hashCode),
-                                            builderParameters.hashCode),
-                                        fields.hashCode),
-                                    partStatement.hashCode),
-                                hasPartStatement.hashCode),
-                            valueClassIsAbstract.hashCode),
-                        valueClassConstructors.hashCode),
-                    valueClassFactories.hashCode),
-                builderClassIsAbstract.hashCode),
-            builderClassConstructors.hashCode),
-        builderClassFactories.hashCode));
+                                                $jc(
+                                                    $jc(
+                                                        $jc(0, name.hashCode),
+                                                        builtParameters
+                                                            .hashCode),
+                                                    hasBuilder.hashCode),
+                                                builderParameters.hashCode),
+                                            fields.hashCode),
+                                        partStatement.hashCode),
+                                    hasPartStatement.hashCode),
+                                valueClassIsAbstract.hashCode),
+                            valueClassConstructors.hashCode),
+                        valueClassFactories.hashCode),
+                    builderClassIsAbstract.hashCode),
+                builderClassConstructors.hashCode),
+            builderClassFactories.hashCode),
+        memoizedGetters.hashCode));
   }
 
   @override
@@ -147,6 +157,7 @@ class _$ValueSourceClass extends ValueSourceClass {
         'builderClassIsAbstract=${builderClassIsAbstract.toString()},\n'
         'builderClassConstructors=${builderClassConstructors.toString()},\n'
         'builderClassFactories=${builderClassFactories.toString()},\n'
+        'memoizedGetters=${memoizedGetters.toString()},\n'
         '}';
   }
 }
@@ -310,6 +321,18 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
     super.builderClassFactories = builderClassFactories;
   }
 
+  @override
+  ListBuilder<MemoizedGetter> get memoizedGetters {
+    _$this;
+    return super.memoizedGetters ??= new ListBuilder<MemoizedGetter>();
+  }
+
+  @override
+  set memoizedGetters(ListBuilder<MemoizedGetter> memoizedGetters) {
+    _$this;
+    super.memoizedGetters = memoizedGetters;
+  }
+
   _$ValueSourceClassBuilder() : super._();
 
   ValueSourceClassBuilder get _$this {
@@ -328,6 +351,7 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
       super.builderClassConstructors =
           _$v.builderClassConstructors?.toBuilder();
       super.builderClassFactories = _$v.builderClassFactories?.toBuilder();
+      super.memoizedGetters = _$v.memoizedGetters?.toBuilder();
       _$v = null;
     }
     return this;
@@ -359,7 +383,8 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
             valueClassFactories: valueClassFactories?.build(),
             builderClassIsAbstract: builderClassIsAbstract,
             builderClassConstructors: builderClassConstructors?.build(),
-            builderClassFactories: builderClassFactories?.build());
+            builderClassFactories: builderClassFactories?.build(),
+            memoizedGetters: memoizedGetters?.build());
     replace(result);
     return result;
   }

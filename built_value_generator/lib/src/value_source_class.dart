@@ -8,6 +8,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/built_parameters_visitor.dart';
+import 'package:built_value_generator/src/memoized_getter.dart';
 import 'package:built_value_generator/src/value_source_field.dart';
 import 'package:meta/meta.dart';
 import 'package:quiver/iterables.dart';
@@ -34,6 +35,8 @@ abstract class ValueSourceClass
   BuiltList<String> get builderClassConstructors;
   BuiltList<String> get builderClassFactories;
 
+  BuiltList<MemoizedGetter> get memoizedGetters;
+
   factory ValueSourceClass([updates(ValueSourceClassBuilder b)]) =
       _$ValueSourceClass;
   ValueSourceClass._();
@@ -58,8 +61,9 @@ abstract class ValueSourceClass
       ..valueClassFactories.replace(classElement.constructors
           .where((constructor) => constructor.isFactory)
           .map((factory) => factory.computeNode().toSource()))
-      ..fields.replace(ValueSourceField.fromClassElements(
-          classElement, builderClassElement));
+      ..fields.replace(
+          ValueSourceField.fromClassElements(classElement, builderClassElement))
+      ..memoizedGetters.replace(MemoizedGetter.fromClassElement(classElement));
 
     if (hasBuilder) {
       result
@@ -209,6 +213,9 @@ abstract class ValueSourceClass
       result.writeln('@override');
       result.writeln('final ${field.type} ${field.name};');
     }
+    for (final memoizedGetter in memoizedGetters) {
+      result.writeln('${memoizedGetter.returnType} __${memoizedGetter.name};');
+    }
     result.writeln();
 
     result.writeln('factory _\$$name([updates(${name}Builder b)]) '
@@ -234,6 +241,15 @@ abstract class ValueSourceClass
       result.writeln('}');
     }
     result.writeln();
+
+    for (final memoizedGetter in memoizedGetters) {
+      result.writeln('@override');
+      result.writeln(
+          '${memoizedGetter.returnType} get ${memoizedGetter.name} =>');
+      result.writeln(
+          '__${memoizedGetter.name} ??= super.${memoizedGetter.name};');
+      result.writeln();
+    }
 
     result.writeln('@override');
     result.writeln('$name rebuild(updates(${name}Builder b)) '
@@ -453,6 +469,10 @@ abstract class ValueSourceClassBuilder
   ListBuilder<String> builderClassConstructors = new ListBuilder<String>();
   @virtual
   ListBuilder<String> builderClassFactories = new ListBuilder<String>();
+
+  @virtual
+  ListBuilder<MemoizedGetter> memoizedGetters =
+      new ListBuilder<MemoizedGetter>();
 
   factory ValueSourceClassBuilder() = _$ValueSourceClassBuilder;
   ValueSourceClassBuilder._();

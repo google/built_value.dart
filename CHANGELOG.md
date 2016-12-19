@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1
+
+- Add @memoized. Annotate getters on built_value classes with @memoized
+  to memoize their result. That means it's computed on first access then
+  stored in the instance.
+
 ## 0.5.0
 
 - Update dependency on analyzer, build, quiver.
