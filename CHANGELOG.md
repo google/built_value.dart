@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0
+
+- Update dependency on analyzer, build, quiver.
+- Breaking change: your build.dart and watch.dart now need to import
+  build_runner/build_runner.dart instead of build/build.dart.
+
 ## 0.4.3
 
 - Fix builder getters to be available before a set is used.

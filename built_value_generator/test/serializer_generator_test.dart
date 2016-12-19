@@ -469,12 +469,8 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 // Test setup.
 
 final String pkgName = 'pkg';
-final PackageGraph packageGraph =
-    new PackageGraph.fromRoot(new PackageNode(pkgName, null, null, null));
 
-final PhaseGroup phaseGroup = new PhaseGroup.singleAction(
-    new GeneratorBuilder([new BuiltValueGenerator()]),
-    new InputSet(pkgName, const ['lib/*.dart']));
+final Builder builder = new GeneratorBuilder([new BuiltValueGenerator()]);
 
 Future<String> generate(String source) async {
   final srcs = <String, String>{
@@ -483,8 +479,7 @@ Future<String> generate(String source) async {
   };
 
   final writer = new InMemoryAssetWriter();
-  await testPhases(phaseGroup, srcs,
-      packageGraph: packageGraph, writer: writer);
+  await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
   return writer.assets[new AssetId(pkgName, 'lib/value.g.dart')]?.value ?? '';
 }
 
