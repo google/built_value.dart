@@ -28,4 +28,9 @@ class TestUser {
   void expectNoMatch(Pattern pattern) {
     expect(_display.text, isNot(anyElement(matches(pattern))));
   }
+
+  /// Checks local text for this user.
+  void expectLocalMatch(Pattern pattern) {
+    expect(_display.localText, anyElement(matches(pattern)));
+  }
 }

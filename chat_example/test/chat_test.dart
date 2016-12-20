@@ -40,7 +40,21 @@ void main() {
     });
   });
 
+  group('help', () {
+    test('echoes locally', () async {
+      environment.newUser()
+        ..type('/help')
+        ..expectLocalMatch(r'/help');
+    });
+  });
+
   group('login', () {
+    test('echoes without password', () async {
+      environment.newUser()
+        ..type('/login Alice letmein')
+        ..expectLocalMatch(r'/login Alice \*\*\*\*\*\*\*\*');
+    });
+
     test('announces success to self', () async {
       final alice = environment.newUser();
 
@@ -75,6 +89,12 @@ void main() {
   });
 
   group('list', () {
+    test('echoes locally', () async {
+      environment.newUser()
+        ..type('/list')
+        ..expectLocalMatch(r'/list');
+    });
+
     test('shows online users', () async {
       final alice = environment.newUser()..type('/login Alice letmein');
       environment.newUser()..type('/login Bob letmein');
@@ -90,6 +110,12 @@ Bob
   });
 
   group('status', () {
+    test('echoes locally', () async {
+      environment.newUser()
+        ..type('/status Waiting around.')
+        ..expectLocalMatch(r'/status Waiting around\.');
+    });
+
     test('changes message in user list', () async {
       final alice = environment.newUser()..type('/login Alice letmein');
 
@@ -104,6 +130,12 @@ Alice Waiting around.
   });
 
   group('away', () {
+    test('echoes locally', () async {
+      environment.newUser()
+        ..type('/away Not here.')
+        ..expectLocalMatch(r'/away Not here\.');
+    });
+
     test('changes message in user list', () async {
       final alice = environment.newUser()..type('/login Alice letmein');
 
@@ -118,6 +150,12 @@ Alice Not here.
   });
 
   group('quit', () {
+    test('echoes locally', () async {
+      environment.newUser()
+        ..type('/quit Gone.')
+        ..expectLocalMatch(r'/quit Gone\.');
+    });
+
     test('removes from online list', () async {
       final alice = environment.newUser()..type('/login Alice letmein');
       final bob = environment.newUser()..type('/login Bob letmein');
@@ -142,6 +180,12 @@ Bob
   });
 
   group('tell', () {
+    test('echoes locally', () async {
+      environment.newUser()
+        ..type('/tell someone something.')
+        ..expectLocalMatch(r'/tell someone something.');
+    });
+
     test('goes to a single user', () async {
       final alice = environment.newUser()..type('/login Alice letmein');
       final bob = environment.newUser()..type('/login Bob letmein');

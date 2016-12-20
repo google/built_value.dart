@@ -64,13 +64,15 @@ class Client {
   }
 
   void _runAway(String command) {
+    _display.addLocal(command);
     _send(new Status((b) => b
       ..message = command.substring('/away '.length)
       ..type = StatusType.away));
   }
 
   void _runHelp(String command) {
-    _display.add('''Commands:
+    _display.addLocal(command);
+    _display.addLocal('''Commands:
 
 /away <message> -- sets away message
 /help -- for help
@@ -104,7 +106,6 @@ class Client {
   }
 
   void _runStatus(String command) {
-    _display.addLocal(command);
     _display.addLocal(command);
     _send(new Status((b) => b
       ..message = command.substring('/status '.length)
