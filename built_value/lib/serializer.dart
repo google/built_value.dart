@@ -94,6 +94,16 @@ abstract class Serializers {
   SerializersBuilder toBuilder();
 }
 
+abstract class SerializerPlugin {
+  Object beforeSerialize(Object object, FullType specifiedType);
+
+  Object afterSerialize(Object object, FullType specifiedType);
+
+  Object beforeDeserialize(Object object, FullType specifiedType);
+
+  Object afterDeserialize(Object object, FullType specifiedType);
+}
+
 /// Builder for [Serializers].
 abstract class SerializersBuilder {
   factory SerializersBuilder() = BuiltJsonSerializersBuilder;
@@ -101,6 +111,8 @@ abstract class SerializersBuilder {
   void add(Serializer serializer);
 
   void addBuilderFactory(FullType specifiedType, Function function);
+
+  void addPlugin(SerializerPlugin plugin);
 
   Serializers build();
 }
