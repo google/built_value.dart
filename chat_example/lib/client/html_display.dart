@@ -22,8 +22,8 @@ class HtmlDisplay implements Display {
 
   @override
   void addLocal(String text) {
-    _element.innerHtml +=
-        '<div class="local">${_htmlEscape.convert(text)}</div>';
+    _element.innerHtml += '<div class="local">'
+        '${_htmlEscape.convert(text).replaceAll('\n', '<br>')}</div>';
     window.scrollTo(0, document.body.scrollHeight);
   }
 

@@ -7,6 +7,7 @@ import 'package:chat_example/client/display.dart';
 /// Fake [Display] that stores added text.
 class FakeDisplay implements Display {
   List<String> text = <String>[];
+  List<String> localText = <String>[];
 
   @override
   void add(String text) {
@@ -14,5 +15,7 @@ class FakeDisplay implements Display {
   }
 
   @override
-  void addLocal(String text) {}
+  void addLocal(String text) {
+    this.localText.add(text);
+  }
 }
