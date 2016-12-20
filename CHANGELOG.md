@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+
+- Add support for "standard" JSON via PrettyPlugin. 
+
 ## 0.5.0
 
 - Update dependency on analyzer, build, quiver.

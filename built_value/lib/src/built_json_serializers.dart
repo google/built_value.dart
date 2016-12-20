@@ -22,12 +22,28 @@ class BuiltJsonSerializers implements Serializers {
 
   final BuiltMap<FullType, Function> _builderFactories;
 
+  final BuiltList<SerializerPlugin> _plugins;
+
   BuiltJsonSerializers._(this._typeToSerializer, this._wireNameToSerializer,
-      this._typeNameToSerializer, this._builderFactories);
+      this._typeNameToSerializer, this._builderFactories, this._plugins);
 
   @override
   Object serialize(Object object,
       {FullType specifiedType: FullType.unspecified}) {
+    var transformedObject = object;
+    for (final plugin in _plugins) {
+      transformedObject =
+          plugin.beforeSerialize(transformedObject, specifiedType);
+    }
+    var result = _serialize(transformedObject, specifiedType);
+    for (final plugin in _plugins) {
+      result =
+          plugin.afterSerialize(result, specifiedType);
+    }
+    return result;
+  }
+
+  Object _serialize(Object object, FullType specifiedType) {
     if (specifiedType.isUnspecified) {
       final serializer = _getSerializerByType(object.runtimeType);
       if (serializer == null) {
@@ -67,6 +83,19 @@ class BuiltJsonSerializers implements Serializers {
   @override
   Object deserialize(Object object,
       {FullType specifiedType: FullType.unspecified}) {
+    var transformedObject = object;
+    for (final plugin in _plugins) {
+      transformedObject =
+          plugin.beforeDeserialize(transformedObject, specifiedType);
+    }
+    var result = _deserialize(transformedObject, specifiedType);
+    for (final plugin in _plugins) {
+      result = plugin.afterDeserialize(result, specifiedType);
+    }
+    return result;
+  }
+
+  Object _deserialize(Object object, FullType specifiedType) {
     if (specifiedType.isUnspecified) {
       final wireName = (object as List).first;
 
@@ -120,7 +149,8 @@ class BuiltJsonSerializers implements Serializers {
         _typeToSerializer.toBuilder(),
         _wireNameToSerializer.toBuilder(),
         _typeNameToSerializer.toBuilder(),
-        _builderFactories.toBuilder());
+        _builderFactories.toBuilder(),
+        _plugins.toBuilder());
   }
 
   Serializer _getSerializerByType(Type type) {
@@ -140,13 +170,16 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   MapBuilder<FullType, Function> _builderFactories =
       new MapBuilder<FullType, Function>();
 
+  ListBuilder<SerializerPlugin> _plugins = new ListBuilder<SerializerPlugin>();
+
   BuiltJsonSerializersBuilder();
 
   BuiltJsonSerializersBuilder._(
       this._typeToSerializer,
       this._wireNameToSerializer,
       this._typeNameToSerializer,
-      this._builderFactories);
+      this._builderFactories,
+      this._plugins);
 
   @override
   void add(Serializer serializer) {
@@ -169,12 +202,18 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   }
 
   @override
+  void addPlugin(SerializerPlugin plugin) {
+    _plugins.add(plugin);
+  }
+
+  @override
   Serializers build() {
     return new BuiltJsonSerializers._(
         _typeToSerializer.build(),
         _wireNameToSerializer.build(),
         _typeNameToSerializer.build(),
-        _builderFactories.build());
+        _builderFactories.build(),
+        _plugins.build());
   }
 }
 
