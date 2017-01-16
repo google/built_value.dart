@@ -8,12 +8,11 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
-      ..add(TestEnum.serializer)
-      ..add(ValidatedValue.serializer)
-      ..add(SimpleValue.serializer)
       ..add(CompoundValue.serializer)
+      ..add(TestEnum.serializer)
       ..add(ValueWithInt.serializer)
       ..add(EnumWithInt.serializer)
+      ..add(ValidatedValue.serializer)
       ..add(Collections.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
@@ -64,5 +63,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(
               CollectionGenericValue, const [const FullType(String)]),
-          () => new CollectionGenericValueBuilder<String>()))
+          () => new CollectionGenericValueBuilder<String>())
+      ..add(SimpleValue.serializer))
     .build();
