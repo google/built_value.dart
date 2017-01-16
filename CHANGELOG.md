@@ -5,6 +5,7 @@
 - Add @memoized. Annotate getters on built_value classes with @memoized
   to memoize their result. That means it's computed on first access then
   stored in the instance.
+- Support generics, in value types and in serialization.
 
 ## 0.5.0
 

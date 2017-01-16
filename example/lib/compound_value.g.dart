@@ -52,11 +52,11 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
         switch (key as String) {
           case 'simpleValue':
             result.simpleValue.replace(serializers.deserialize(value,
-                specifiedType: const FullType(SimpleValue)));
+                specifiedType: const FullType(SimpleValue)) as dynamic);
             break;
           case 'validatedValue':
             result.validatedValue.replace(serializers.deserialize(value,
-                specifiedType: const FullType(ValidatedValue)));
+                specifiedType: const FullType(ValidatedValue)) as dynamic);
             break;
         }
       }

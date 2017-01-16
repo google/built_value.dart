@@ -72,11 +72,11 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
         switch (key as String) {
           case 'anInt':
             result.anInt = serializers.deserialize(value,
-                specifiedType: const FullType(int));
+                specifiedType: const FullType(int)) as dynamic;
             break;
           case 'note':
             result.note = serializers.deserialize(value,
-                specifiedType: const FullType(String));
+                specifiedType: const FullType(String)) as dynamic;
             break;
         }
       }

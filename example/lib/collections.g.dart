@@ -93,53 +93,67 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
         switch (key as String) {
           case 'list':
             result.list.replace(serializers.deserialize(value,
-                specifiedType:
-                    const FullType(BuiltList, const [const FullType(int)])));
+                    specifiedType:
+                        const FullType(BuiltList, const [const FullType(int)]))
+                as dynamic);
             break;
           case 'set':
             result.set.replace(serializers.deserialize(value,
-                specifiedType:
-                    const FullType(BuiltSet, const [const FullType(String)])));
+                specifiedType: const FullType(
+                    BuiltSet, const [const FullType(String)])) as dynamic);
             break;
           case 'map':
             result.map.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltMap,
-                    const [const FullType(String), const FullType(int)])));
+                specifiedType: const FullType(BuiltMap, const [
+                  const FullType(String),
+                  const FullType(int)
+                ])) as dynamic);
             break;
           case 'listMultimap':
             result.listMultimap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltListMultimap,
-                    const [const FullType(int), const FullType(bool)])));
+                specifiedType: const FullType(BuiltListMultimap, const [
+                  const FullType(int),
+                  const FullType(bool)
+                ])) as dynamic);
             break;
           case 'setMultimap':
             result.setMultimap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltSetMultimap,
-                    const [const FullType(String), const FullType(bool)])));
+                specifiedType: const FullType(BuiltSetMultimap, const [
+                  const FullType(String),
+                  const FullType(bool)
+                ])) as dynamic);
             break;
           case 'nullableList':
             result.nullableList.replace(serializers.deserialize(value,
-                specifiedType:
-                    const FullType(BuiltList, const [const FullType(int)])));
+                    specifiedType:
+                        const FullType(BuiltList, const [const FullType(int)]))
+                as dynamic);
             break;
           case 'nullableSet':
             result.nullableSet.replace(serializers.deserialize(value,
-                specifiedType:
-                    const FullType(BuiltSet, const [const FullType(String)])));
+                specifiedType: const FullType(
+                    BuiltSet, const [const FullType(String)])) as dynamic);
             break;
           case 'nullableMap':
             result.nullableMap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltMap,
-                    const [const FullType(String), const FullType(int)])));
+                specifiedType: const FullType(BuiltMap, const [
+                  const FullType(String),
+                  const FullType(int)
+                ])) as dynamic);
             break;
           case 'nullableListMultimap':
             result.nullableListMultimap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltListMultimap,
-                    const [const FullType(int), const FullType(bool)])));
+                specifiedType: const FullType(BuiltListMultimap, const [
+                  const FullType(int),
+                  const FullType(bool)
+                ])) as dynamic);
             break;
           case 'nullableSetMultimap':
             result.nullableSetMultimap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltSetMultimap,
-                    const [const FullType(String), const FullType(bool)])));
+                specifiedType: const FullType(BuiltSetMultimap, const [
+                  const FullType(String),
+                  const FullType(bool)
+                ])) as dynamic);
             break;
         }
       }

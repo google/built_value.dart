@@ -8,11 +8,12 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
-      ..add(CompoundValue.serializer)
       ..add(TestEnum.serializer)
+      ..add(ValidatedValue.serializer)
+      ..add(SimpleValue.serializer)
+      ..add(CompoundValue.serializer)
       ..add(ValueWithInt.serializer)
       ..add(EnumWithInt.serializer)
-      ..add(ValidatedValue.serializer)
       ..add(Collections.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
@@ -50,5 +51,18 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType(bool)]),
           () => new SetMultimapBuilder<String, bool>())
-      ..add(SimpleValue.serializer))
+      ..add(GenericValue.serializer)
+      ..add(BoundGenericValue.serializer)
+      ..add(CollectionGenericValue.serializer)
+      ..add(GenericContainer.serializer)
+      ..addBuilderFactory(
+          const FullType(GenericValue, const [const FullType(String)]),
+          () => new GenericValueBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BoundGenericValue, const [const FullType(double)]),
+          () => new BoundGenericValueBuilder<double>())
+      ..addBuilderFactory(
+          const FullType(
+              CollectionGenericValue, const [const FullType(String)]),
+          () => new CollectionGenericValueBuilder<String>()))
     .build();
