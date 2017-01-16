@@ -51,10 +51,16 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
   V build();
 }
 
-// Nullable annotation for Built Value fields.
-//
-// Fields marked with this annotation are allowed to be null.
+/// Nullable annotation for Built Value fields.
+///
+/// Fields marked with this annotation are allowed to be null.
 const String nullable = 'nullable';
+
+/// Memoized annotation for Built Value getters and methods.
+///
+/// Getters marked with this annotation are memoized: the result is calculated
+/// once on first access and stored in the instance.
+const String memoized = 'memoized';
 
 /// Enum Class base class.
 ///
