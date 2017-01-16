@@ -6,6 +6,7 @@
   to memoize their result. That means it's computed on first access then
   stored in the instance.
 - Support generics, in value types and in serialization.
+- Add support for "standard" JSON via PrettyPlugin. 
 
 ## 0.5.0
 
