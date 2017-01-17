@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.2
+
+- Support "import ... as" for field types.
+
 ## 0.5.1
 
 - Add @memoized. Annotate getters on built_value classes with @memoized

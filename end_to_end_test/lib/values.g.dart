@@ -12,6 +12,8 @@ Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
 Serializer<ValidatedValue> _$validatedValueSerializer =
     new _$ValidatedValueSerializer();
+Serializer<ValueUsingImportAs> _$valueUsingImportAsSerializer =
+    new _$ValueUsingImportAsSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -171,6 +173,55 @@ class _$ValidatedValueSerializer
           case 'aString':
             result.aString = serializers.deserialize(value,
                 specifiedType: const FullType(String)) as dynamic;
+            break;
+        }
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ValueUsingImportAsSerializer
+    implements StructuredSerializer<ValueUsingImportAs> {
+  @override
+  final Iterable<Type> types = const [ValueUsingImportAs, _$ValueUsingImportAs];
+  @override
+  final String wireName = 'ValueUsingImportAs';
+
+  @override
+  Iterable serialize(Serializers serializers, ValueUsingImportAs object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = [
+      'value',
+      serializers.serialize(object.value,
+          specifiedType: const FullType(using_import_as.TestEnum)),
+    ];
+
+    return result;
+  }
+
+  @override
+  ValueUsingImportAs deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new ValueUsingImportAsBuilder();
+
+    var key;
+    var value;
+    var expectingKey = true;
+    for (final item in serialized) {
+      if (expectingKey) {
+        key = item;
+        expectingKey = false;
+      } else {
+        value = item;
+        expectingKey = true;
+
+        switch (key as String) {
+          case 'value':
+            result.value = serializers.deserialize(value,
+                    specifiedType: const FullType(using_import_as.TestEnum))
+                as dynamic;
             break;
         }
       }
@@ -717,6 +768,85 @@ class ValidatedValueBuilder
   ValidatedValue build() {
     final result =
         _$v ?? new _$ValidatedValue._(anInt: anInt, aString: aString);
+    replace(result);
+    return result;
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class ValueUsingImportAs
+// **************************************************************************
+
+class _$ValueUsingImportAs extends ValueUsingImportAs {
+  @override
+  final using_import_as.TestEnum value;
+
+  factory _$ValueUsingImportAs([updates(ValueUsingImportAsBuilder b)]) =>
+      (new ValueUsingImportAsBuilder()..update(updates)).build();
+
+  _$ValueUsingImportAs._({this.value}) : super._() {
+    if (value == null) throw new ArgumentError.notNull('value');
+  }
+
+  @override
+  ValueUsingImportAs rebuild(updates(ValueUsingImportAsBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ValueUsingImportAsBuilder toBuilder() =>
+      new ValueUsingImportAsBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (other is! ValueUsingImportAs) return false;
+    return value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return 'ValueUsingImportAs {'
+        'value=${value.toString()},\n'
+        '}';
+  }
+}
+
+class ValueUsingImportAsBuilder
+    implements Builder<ValueUsingImportAs, ValueUsingImportAsBuilder> {
+  ValueUsingImportAs _$v;
+
+  using_import_as.TestEnum _value;
+  using_import_as.TestEnum get value => _$this._value;
+  set value(using_import_as.TestEnum value) => _$this._value = value;
+
+  ValueUsingImportAsBuilder();
+
+  ValueUsingImportAsBuilder get _$this {
+    if (_$v != null) {
+      _value = _$v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueUsingImportAs other) {
+    _$v = other;
+  }
+
+  @override
+  void update(updates(ValueUsingImportAsBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  ValueUsingImportAs build() {
+    final result = _$v ?? new _$ValueUsingImportAs._(value: value);
     replace(result);
     return result;
   }

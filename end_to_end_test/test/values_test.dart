@@ -2,6 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:end_to_end_test/enums.dart';
 import 'package:end_to_end_test/values.dart';
 import 'package:quiver/core.dart';
 import 'package:test/test.dart';
@@ -191,6 +192,12 @@ aString=,
     test('builder exposes values via getters', () {
       final builder = new ValueWithDefaults((b) => b..anInt = 12).toBuilder();
       expect(builder.anInt, 12);
+    });
+  });
+
+  group('ValueUsingImportAs', () {
+    test('can be instantiated', () {
+      new ValueUsingImportAs((b) => b..value = TestEnum.yes);
     });
   });
 }

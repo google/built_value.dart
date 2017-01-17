@@ -7,6 +7,7 @@ library values;
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:meta/meta.dart';
+import 'package:end_to_end_test/enums.dart' as using_import_as;
 
 part 'values.g.dart';
 
@@ -118,4 +119,17 @@ abstract class ValidatedValue
   ValidatedValue._() {
     if (anInt == 7) throw new StateError('anInt may not be 7');
   }
+}
+
+abstract class ValueUsingImportAs
+    implements Built<ValueUsingImportAs, ValueUsingImportAsBuilder> {
+  static final Serializer<ValueUsingImportAs> serializer =
+      _$valueUsingImportAsSerializer;
+
+  using_import_as.TestEnum get value;
+
+  factory ValueUsingImportAs([updates(ValueUsingImportAsBuilder b)]) =
+      _$ValueUsingImportAs;
+
+  ValueUsingImportAs._();
 }

@@ -63,6 +63,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(SimpleValue.serializer)
       ..add(CompoundValue.serializer)
       ..add(ValidatedValue.serializer)
+      ..add(ValueUsingImportAs.serializer)
       ..add(ValueWithInt.serializer)
       ..add(EnumWithInt.serializer))
     .build();

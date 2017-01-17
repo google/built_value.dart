@@ -4,6 +4,7 @@
 
 library built_value_generator.source_field;
 
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
@@ -56,7 +57,12 @@ abstract class SerializerSourceField
       result.isNullable = fieldElement.getter.metadata.any(
           (metadata) => metadata.constantValue.toStringValue() == 'nullable');
       result.name = fieldElement.displayName;
-      result.type = fieldElement.getter.returnType.displayName;
+
+      // Go via AST to pull in any import prefix.
+      result.type = (fieldElement.getter.computeNode() as MethodDeclaration)
+              ?.returnType
+              ?.toString() ??
+          'dynamic';
 
       final builderFieldElementIsValid =
           (builderFieldElement?.getter?.isAbstract ?? false) &&
