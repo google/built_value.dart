@@ -4,6 +4,7 @@
 
 library built_value_generator.source_field;
 
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
@@ -38,7 +39,12 @@ abstract class ValueSourceField
       FieldElement fieldElement, FieldElement builderFieldElement) {
     final result = new ValueSourceFieldBuilder();
     final builderFieldExists = builderFieldElement != null;
-    final type = fieldElement.getter.returnType.displayName;
+
+    // Go via AST to pull in any import prefix.
+    final type = (fieldElement.getter.computeNode() as MethodDeclaration)
+        .returnType
+        .toString();
+
     result
       ..name = fieldElement.displayName
       ..type = type
