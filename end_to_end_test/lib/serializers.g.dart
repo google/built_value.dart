@@ -8,8 +8,21 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
-      ..add(ValueWithInt.serializer)
-      ..add(EnumWithInt.serializer)
+      ..add(GenericValue.serializer)
+      ..add(BoundGenericValue.serializer)
+      ..add(CollectionGenericValue.serializer)
+      ..add(GenericContainer.serializer)
+      ..addBuilderFactory(
+          const FullType(GenericValue, const [const FullType(String)]),
+          () => new GenericValueBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BoundGenericValue, const [const FullType(double)]),
+          () => new BoundGenericValueBuilder<double>())
+      ..addBuilderFactory(
+          const FullType(
+              CollectionGenericValue, const [const FullType(String)]),
+          () => new CollectionGenericValueBuilder<String>())
+      ..add(TestEnum.serializer)
       ..add(Collections.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
@@ -50,19 +63,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(SimpleValue.serializer)
       ..add(CompoundValue.serializer)
       ..add(ValidatedValue.serializer)
-      ..add(GenericValue.serializer)
-      ..add(BoundGenericValue.serializer)
-      ..add(CollectionGenericValue.serializer)
-      ..add(GenericContainer.serializer)
-      ..addBuilderFactory(
-          const FullType(GenericValue, const [const FullType(String)]),
-          () => new GenericValueBuilder<String>())
-      ..addBuilderFactory(
-          const FullType(BoundGenericValue, const [const FullType(double)]),
-          () => new BoundGenericValueBuilder<double>())
-      ..addBuilderFactory(
-          const FullType(
-              CollectionGenericValue, const [const FullType(String)]),
-          () => new CollectionGenericValueBuilder<String>())
-      ..add(TestEnum.serializer))
+      ..add(ValueWithInt.serializer)
+      ..add(EnumWithInt.serializer))
     .build();
