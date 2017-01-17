@@ -42,8 +42,9 @@ abstract class ValueSourceField
 
     // Go via AST to pull in any import prefix.
     final type = (fieldElement.getter.computeNode() as MethodDeclaration)
-        .returnType
-        .toString();
+            ?.returnType
+            ?.toString() ??
+        'dynamic';
 
     result
       ..name = fieldElement.displayName

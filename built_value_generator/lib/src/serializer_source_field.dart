@@ -60,8 +60,9 @@ abstract class SerializerSourceField
 
       // Go via AST to pull in any import prefix.
       result.type = (fieldElement.getter.computeNode() as MethodDeclaration)
-          .returnType
-          .toString();
+              ?.returnType
+              ?.toString() ??
+          'dynamic';
 
       final builderFieldElementIsValid =
           (builderFieldElement?.getter?.isAbstract ?? false) &&
