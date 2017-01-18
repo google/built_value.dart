@@ -14,6 +14,7 @@ part 'serializer_source_class.g.dart';
 abstract class SerializerSourceClass
     implements Built<SerializerSourceClass, SerializerSourceClassBuilder> {
   String get name;
+  String get serializerDeclaration;
   BuiltList<String> get genericParameters;
   BuiltList<String> get genericBounds;
   bool get isBuiltValue;
@@ -47,6 +48,16 @@ abstract class SerializerSourceClass
         !classElement.name.startsWith(r'_$') &&
         classElement.fields.any((field) => field.name == 'serializer');
 
+    result.serializerDeclaration = '';
+    final serializerFields = classElement.fields
+        .where((field) => field.name == 'serializer')
+        .toList();
+    if (serializerFields.isNotEmpty) {
+      final serializerField = serializerFields.single;
+      result.serializerDeclaration =
+          serializerField.getter?.computeNode()?.toString() ?? '';
+    }
+
     for (final fieldElement in classElement.fields) {
       final builderFieldElement =
           builderClassElement?.getField(fieldElement.displayName);
@@ -67,6 +78,19 @@ abstract class SerializerSourceClass
   static BuiltList<String> _getGenericBounds(ClassElement classElement) =>
       new BuiltList<String>(classElement.typeParameters
           .map((element) => (element.bound ?? '').toString()));
+
+  Iterable<String> computeErrors() {
+    final camelCaseName =
+        name.substring(0, 1).toLowerCase() + name.substring(1);
+    final expectedSerializerDeclaration =
+        'static Serializer<$name> get serializer => '
+        '_\$${camelCaseName}Serializer;';
+    if (serializerDeclaration != expectedSerializerDeclaration) {
+      return ['Declare $name.serializer as: $expectedSerializerDeclaration'];
+    }
+
+    return [];
+  }
 
   bool get needsBuiltJson => isBuiltValue || isEnumClass;
 

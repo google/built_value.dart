@@ -12,7 +12,7 @@ import 'package:end_to_end_test/enums.dart' as using_import_as;
 part 'values.g.dart';
 
 abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
-  static final Serializer<SimpleValue> serializer = _$simpleValueSerializer;
+  static Serializer<SimpleValue> get serializer => _$simpleValueSerializer;
 
   int get anInt;
 
@@ -26,7 +26,7 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
 
 abstract class CompoundValue
     implements Built<CompoundValue, CompoundValueBuilder> {
-  static final Serializer<CompoundValue> serializer = _$compoundValueSerializer;
+  static Serializer<CompoundValue> get serializer => _$compoundValueSerializer;
 
   SimpleValue get simpleValue;
   @nullable
@@ -107,7 +107,7 @@ abstract class ValueWithDefaultsBuilder
 
 abstract class ValidatedValue
     implements Built<ValidatedValue, ValidatedValueBuilder> {
-  static final Serializer<ValidatedValue> serializer =
+  static Serializer<ValidatedValue> get serializer =>
       _$validatedValueSerializer;
 
   int get anInt;
@@ -123,7 +123,7 @@ abstract class ValidatedValue
 
 abstract class ValueUsingImportAs
     implements Built<ValueUsingImportAs, ValueUsingImportAsBuilder> {
-  static final Serializer<ValueUsingImportAs> serializer =
+  static Serializer<ValueUsingImportAs> get serializer =>
       _$valueUsingImportAsSerializer;
 
   using_import_as.TestEnum get value;

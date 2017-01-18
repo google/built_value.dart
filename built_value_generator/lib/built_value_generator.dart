@@ -27,7 +27,7 @@ class BuiltValueGenerator extends Generator {
           SerializerSourceLibrary.fromLibraryElement(element);
       if (serializerSourceLibrary.needsBuiltJson ||
           serializerSourceLibrary.hasSerializers) {
-        return (enumCode ?? '') + '\n' + serializerSourceLibrary.generate();
+        return (enumCode ?? '') + '\n' + serializerSourceLibrary.generateCode();
       } else {
         return enumCode;
       }

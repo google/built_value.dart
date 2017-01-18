@@ -20,7 +20,7 @@ abstract class Collections implements Built<Collections, CollectionsBuilder> {
   /// Declare a static final [Serializers] field called `serializer`.
   /// The built_value code generator will provide the implementation. You need
   /// to do this for every type you want to serialize.
-  static final Serializer<Collections> serializer = _$collectionsSerializer;
+  static Serializer<Collections> get serializer => _$collectionsSerializer;
 
   BuiltList<int> get list;
   BuiltSet<String> get set;

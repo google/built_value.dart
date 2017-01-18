@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.4
+
+- Enforce that serializer declarations refer to the right generated name.
+
 ## 0.5.3
 
 - Add null check to generated builder "replace" methods.

@@ -31,7 +31,7 @@ library value;
 import 'package:test_support/test_support.dart';
 
 abstract class Value implements Built<Value, ValueBuilder> {}
-'''), isNot(contains('Serializer<Value>')));
+'''), isNot(contains('implements StructuredSerializer<Value>')));
     });
 
     test('generates for built_value class with serializer', () async {
@@ -41,9 +41,9 @@ library value;
 import 'package:test_support/test_support.dart';
 
 abstract class Value implements Built<Value, ValueBuilder> {
-  static final Serializer<Value> serializer = _$serializer;
+  static Serializer<Value> get serializer => _$valueSerializer;
 }
-'''), contains('Serializer<Value>'));
+'''), contains('implements StructuredSerializer<Value>'));
     });
 
     test('ignores EnumClass without serializer', () async {
@@ -63,7 +63,7 @@ library value;
 import 'package:test_support/test_support.dart';
 
 class Enum extends EnumClass {
-  static final Serializer<Enum> serializer = _$serializer;
+  static Serializer<Enum> get serializer => _$serializer;
 }
 '''), isNotEmpty);
     });
@@ -85,14 +85,36 @@ library value;
 import 'package:test_support/test_support.dart';
 
 abstract class Value implements Built<Value, ValueBuilder> {
-  static final Serializer<Value> serializer = _$serializer;
+  static Serializer<Value> get serializer => _$valueSerializer;
   bool get aBool;
 }
 
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   set aBool(bool aBool);
 }
-'''), contains('Serializer<Value>'));
+'''), contains('implements StructuredSerializer<Value>'));
+    });
+
+    test('checks serializer declarations use correct values', () async {
+      expect(
+          await generate(r'''
+library value;
+
+import 'package:test_support/test_support.dart';
+
+abstract class Value implements Built<Value, ValueBuilder> {
+  static Serializer<Value> get serializer => _$valueSerializer;
+  bool get aBool;
+}
+
+abstract class OtherValue implements Built<Value, ValueBuilder> {
+  static Serializer<Value> get serializer => _$serializer;
+  bool get aBool;
+}
+'''),
+          contains(r'1. Declare OtherValue.serializer as: '
+              'static Serializer<OtherValue> get serializer => '
+              '_\$otherValueSerializer;'));
     });
   });
 }

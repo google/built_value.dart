@@ -11,6 +11,8 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   final String name;
   @override
+  final String serializerDeclaration;
+  @override
   final BuiltList<String> genericParameters;
   @override
   final BuiltList<String> genericBounds;
@@ -26,6 +28,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   _$SerializerSourceClass._(
       {this.name,
+      this.serializerDeclaration,
       this.genericParameters,
       this.genericBounds,
       this.isBuiltValue,
@@ -33,6 +36,8 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       this.fields})
       : super._() {
     if (name == null) throw new ArgumentError.notNull('name');
+    if (serializerDeclaration == null)
+      throw new ArgumentError.notNull('serializerDeclaration');
     if (genericParameters == null)
       throw new ArgumentError.notNull('genericParameters');
     if (genericBounds == null) throw new ArgumentError.notNull('genericBounds');
@@ -53,6 +58,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   bool operator ==(dynamic other) {
     if (other is! SerializerSourceClass) return false;
     return name == other.name &&
+        serializerDeclaration == other.serializerDeclaration &&
         genericParameters == other.genericParameters &&
         genericBounds == other.genericBounds &&
         isBuiltValue == other.isBuiltValue &&
@@ -65,7 +71,11 @@ class _$SerializerSourceClass extends SerializerSourceClass {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, name.hashCode), genericParameters.hashCode),
+                $jc(
+                    $jc(
+                        $jc($jc(0, name.hashCode),
+                            serializerDeclaration.hashCode),
+                        genericParameters.hashCode),
                     genericBounds.hashCode),
                 isBuiltValue.hashCode),
             isEnumClass.hashCode),
@@ -76,6 +86,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   String toString() {
     return 'SerializerSourceClass {'
         'name=${name.toString()},\n'
+        'serializerDeclaration=${serializerDeclaration.toString()},\n'
         'genericParameters=${genericParameters.toString()},\n'
         'genericBounds=${genericBounds.toString()},\n'
         'isBuiltValue=${isBuiltValue.toString()},\n'
@@ -92,6 +103,11 @@ class SerializerSourceClassBuilder
   String _name;
   String get name => _$this._name;
   set name(String name) => _$this._name = name;
+
+  String _serializerDeclaration;
+  String get serializerDeclaration => _$this._serializerDeclaration;
+  set serializerDeclaration(String serializerDeclaration) =>
+      _$this._serializerDeclaration = serializerDeclaration;
 
   ListBuilder<String> _genericParameters;
   ListBuilder<String> get genericParameters =>
@@ -124,6 +140,7 @@ class SerializerSourceClassBuilder
   SerializerSourceClassBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
+      _serializerDeclaration = _$v.serializerDeclaration;
       _genericParameters = _$v.genericParameters?.toBuilder();
       _genericBounds = _$v.genericBounds?.toBuilder();
       _isBuiltValue = _$v.isBuiltValue;
@@ -150,6 +167,7 @@ class SerializerSourceClassBuilder
     final result = _$v ??
         new _$SerializerSourceClass._(
             name: name,
+            serializerDeclaration: serializerDeclaration,
             genericParameters: genericParameters?.build(),
             genericBounds: genericBounds?.build(),
             isBuiltValue: isBuiltValue,

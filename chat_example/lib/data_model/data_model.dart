@@ -52,7 +52,7 @@ abstract class Status implements Built<Status, StatusBuilder>, Command {
 
 /// User status: online, away or offline.
 class StatusType extends EnumClass {
-  static Serializer<StatusType> serializer = _$statusTypeSerializer;
+  static Serializer<StatusType> get serializer => _$statusTypeSerializer;
 
   static const StatusType online = _$online;
   static const StatusType away = _$away;

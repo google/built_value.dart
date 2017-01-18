@@ -11,7 +11,7 @@ import 'package:built_value/serializer.dart';
 part 'collections.g.dart';
 
 abstract class Collections implements Built<Collections, CollectionsBuilder> {
-  static final Serializer<Collections> serializer = _$collectionsSerializer;
+  static Serializer<Collections> get serializer => _$collectionsSerializer;
 
   BuiltList<int> get list;
   BuiltSet<String> get set;
