@@ -300,6 +300,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -391,6 +392,7 @@ class CompoundValueBuilder
 
   @override
   void replace(CompoundValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -480,6 +482,7 @@ class DerivedValueBuilder
 
   @override
   void replace(DerivedValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -566,6 +569,7 @@ class ValueWithCodeBuilder
 
   @override
   void replace(ValueWithCode other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -668,6 +672,7 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   @override
   void replace(ValueWithDefaults other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -756,6 +761,7 @@ class ValidatedValueBuilder
 
   @override
   void replace(ValidatedValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -836,6 +842,7 @@ class ValueUsingImportAsBuilder
 
   @override
   void replace(ValueUsingImportAs other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

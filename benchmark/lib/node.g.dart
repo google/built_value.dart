@@ -77,6 +77,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
 
   @override
   void replace(Node other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

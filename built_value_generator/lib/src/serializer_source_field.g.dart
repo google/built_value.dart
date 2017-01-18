@@ -157,6 +157,7 @@ class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
 
   @override
   void replace(SerializerSourceField other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

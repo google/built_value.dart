@@ -162,6 +162,7 @@ class ValueSourceFieldBuilder
 
   @override
   void replace(ValueSourceField other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

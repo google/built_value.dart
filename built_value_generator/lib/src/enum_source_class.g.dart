@@ -145,6 +145,7 @@ class EnumSourceClassBuilder
 
   @override
   void replace(EnumSourceClass other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

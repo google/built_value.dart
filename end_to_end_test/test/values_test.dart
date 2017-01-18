@@ -17,6 +17,14 @@ void main() {
       expect(() => new SimpleValue(), throws);
     });
 
+    test('throws on null replace', () {
+      expect(
+          () => new SimpleValue((b) => b
+            ..anInt = 1
+            ..replace(null)),
+          throws);
+    });
+
     test('fields can be set via build constructor', () {
       final value = new SimpleValue((b) => b
         ..anInt = 1
