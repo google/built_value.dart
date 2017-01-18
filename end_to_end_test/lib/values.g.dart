@@ -14,6 +14,8 @@ Serializer<ValidatedValue> _$validatedValueSerializer =
     new _$ValidatedValueSerializer();
 Serializer<ValueUsingImportAs> _$valueUsingImportAsSerializer =
     new _$ValueUsingImportAsSerializer();
+Serializer<NoFieldsValue> _$noFieldsValueSerializer =
+    new _$NoFieldsValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -228,6 +230,25 @@ class _$ValueUsingImportAsSerializer
     }
 
     return result.build();
+  }
+}
+
+class _$NoFieldsValueSerializer implements StructuredSerializer<NoFieldsValue> {
+  @override
+  final Iterable<Type> types = const [NoFieldsValue, _$NoFieldsValue];
+  @override
+  final String wireName = 'NoFieldsValue';
+
+  @override
+  Iterable serialize(Serializers serializers, NoFieldsValue object,
+      {FullType specifiedType: FullType.unspecified}) {
+    return [];
+  }
+
+  @override
+  NoFieldsValue deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    return new NoFieldsValueBuilder().build();
   }
 }
 
@@ -854,6 +875,66 @@ class ValueUsingImportAsBuilder
   @override
   ValueUsingImportAs build() {
     final result = _$v ?? new _$ValueUsingImportAs._(value: value);
+    replace(result);
+    return result;
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class NoFieldsValue
+// **************************************************************************
+
+class _$NoFieldsValue extends NoFieldsValue {
+  factory _$NoFieldsValue([updates(NoFieldsValueBuilder b)]) =>
+      (new NoFieldsValueBuilder()..update(updates)).build();
+
+  _$NoFieldsValue._() : super._();
+
+  @override
+  NoFieldsValue rebuild(updates(NoFieldsValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  NoFieldsValueBuilder toBuilder() => new NoFieldsValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (other is! NoFieldsValue) return false;
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    return 601485316;
+  }
+
+  @override
+  String toString() {
+    return 'NoFieldsValue {}';
+  }
+}
+
+class NoFieldsValueBuilder
+    implements Builder<NoFieldsValue, NoFieldsValueBuilder> {
+  NoFieldsValue _$v;
+
+  NoFieldsValueBuilder();
+
+  @override
+  void replace(NoFieldsValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other;
+  }
+
+  @override
+  void update(updates(NoFieldsValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  NoFieldsValue build() {
+    final result = _$v ?? new _$NoFieldsValue._();
     replace(result);
     return result;
   }
