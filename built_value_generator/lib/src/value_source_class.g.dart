@@ -407,6 +407,7 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
 
   @override
   void replace(ValueSourceClass other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

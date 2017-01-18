@@ -352,6 +352,7 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
 
   @override
   void replace(Collections other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

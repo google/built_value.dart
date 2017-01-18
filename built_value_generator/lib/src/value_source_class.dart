@@ -443,6 +443,8 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     result.writeln('void replace($name$_generics other) {');
+    result.writeln("if (other == null) "
+        "throw new ArgumentError.notNull('other');");
     result.writeln('_\$v = other;');
     result.writeln('}');
 

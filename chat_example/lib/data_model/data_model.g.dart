@@ -554,6 +554,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
 
   @override
   void replace(Chat other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -640,6 +641,7 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
 
   @override
   void replace(Login other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -726,6 +728,7 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
 
   @override
   void replace(Status other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -805,6 +808,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 
   @override
   void replace(ListUsers other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -903,6 +907,7 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
 
   @override
   void replace(ShowChat other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -990,6 +995,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
 
   @override
   void replace(Welcome other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -1071,6 +1077,7 @@ class ListUsersResponseBuilder
 
   @override
   void replace(ListUsersResponse other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

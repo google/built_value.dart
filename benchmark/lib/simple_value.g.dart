@@ -72,6 +72,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

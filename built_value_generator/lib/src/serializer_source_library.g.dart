@@ -116,6 +116,7 @@ class _$SerializerSourceLibraryBuilder extends SerializerSourceLibraryBuilder {
 
   @override
   void replace(SerializerSourceLibrary other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 

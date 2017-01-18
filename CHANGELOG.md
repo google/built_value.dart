@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.3
+
+- Add null check to generated builder "replace" methods.
+
 ## 0.5.2
 
 - Support "import ... as" for field types.

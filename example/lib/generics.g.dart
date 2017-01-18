@@ -342,6 +342,7 @@ class GenericValueBuilder<T>
 
   @override
   void replace(GenericValue<T> other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -425,6 +426,7 @@ class BoundGenericValueBuilder<T extends num>
 
   @override
   void replace(BoundGenericValue<T> other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -511,6 +513,7 @@ class CollectionGenericValueBuilder<T>
 
   @override
   void replace(CollectionGenericValue<T> other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
@@ -625,6 +628,7 @@ class GenericContainerBuilder
 
   @override
   void replace(GenericContainer other) {
+    if (other == null) throw new ArgumentError.notNull('other');
     _$v = other;
   }
 
