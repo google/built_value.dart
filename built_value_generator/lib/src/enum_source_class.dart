@@ -15,6 +15,7 @@ part 'enum_source_class.g.dart';
 abstract class EnumSourceClass
     implements Built<EnumSourceClass, EnumSourceClassBuilder> {
   String get name;
+  bool get isAbstract;
   BuiltList<EnumSourceField> get fields;
   BuiltList<String> get constructors;
   @nullable
@@ -34,6 +35,7 @@ abstract class EnumSourceClass
     final mixinElement = classElement.library.getType(name + 'Mixin');
     return new EnumSourceClass((b) => b
       ..name = name
+      ..isAbstract = classElement.isAbstract
       ..fields.replace(EnumSourceField.fromClassElement(classElement))
       ..constructors.addAll(classElement.constructors
           .map((element) => element.computeNode().toString()))
@@ -86,12 +88,17 @@ abstract class EnumSourceClass
 
   Iterable<String> computeErrors() {
     return concat([
+      _checkAbstract(),
       _checkFields(),
       _checkConstructor(),
       _checkValuesGetter(),
       _checkValueOf(),
       _checkMixin()
     ]).toList();
+  }
+
+  Iterable<String> _checkAbstract() {
+    return isAbstract ? ['Make $name concrete; remove "abstract".'] : [];
   }
 
   Iterable<String> _checkFields() {

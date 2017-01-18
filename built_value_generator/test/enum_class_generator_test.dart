@@ -644,6 +644,36 @@ part of test_enum;
 '''));
     });
 
+    test('fails with error on abstract class', () async {
+      expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+abstract class TestEnum extends EnumClass {
+  static const TestEnum yes = _$yes;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''
+part of test_enum;
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: library test_enum
+// **************************************************************************
+
+// Error: Please make the following changes to use EnumClass:
+//
+//        1. Make TestEnum concrete; remove "abstract".
+'''));
+    });
+
     test('is robust to newlines in input', () async {
       expect(await generate(r'''
 library test_enum;
