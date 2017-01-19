@@ -11,6 +11,8 @@ class _$EnumSourceClass extends EnumSourceClass {
   @override
   final String name;
   @override
+  final bool isAbstract;
+  @override
   final BuiltList<EnumSourceField> fields;
   @override
   final BuiltList<String> constructors;
@@ -28,6 +30,7 @@ class _$EnumSourceClass extends EnumSourceClass {
 
   _$EnumSourceClass._(
       {this.name,
+      this.isAbstract,
       this.fields,
       this.constructors,
       this.valuesIdentifier,
@@ -36,6 +39,7 @@ class _$EnumSourceClass extends EnumSourceClass {
       this.mixinDeclaration})
       : super._() {
     if (name == null) throw new ArgumentError.notNull('name');
+    if (isAbstract == null) throw new ArgumentError.notNull('isAbstract');
     if (fields == null) throw new ArgumentError.notNull('fields');
     if (constructors == null) throw new ArgumentError.notNull('constructors');
     if (usesMixin == null) throw new ArgumentError.notNull('usesMixin');
@@ -53,6 +57,7 @@ class _$EnumSourceClass extends EnumSourceClass {
   bool operator ==(dynamic other) {
     if (other is! EnumSourceClass) return false;
     return name == other.name &&
+        isAbstract == other.isAbstract &&
         fields == other.fields &&
         constructors == other.constructors &&
         valuesIdentifier == other.valuesIdentifier &&
@@ -67,7 +72,9 @@ class _$EnumSourceClass extends EnumSourceClass {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, name.hashCode), fields.hashCode),
+                    $jc(
+                        $jc($jc($jc(0, name.hashCode), isAbstract.hashCode),
+                            fields.hashCode),
                         constructors.hashCode),
                     valuesIdentifier.hashCode),
                 valueOfIdentifier.hashCode),
@@ -79,6 +86,7 @@ class _$EnumSourceClass extends EnumSourceClass {
   String toString() {
     return 'EnumSourceClass {'
         'name=${name.toString()},\n'
+        'isAbstract=${isAbstract.toString()},\n'
         'fields=${fields.toString()},\n'
         'constructors=${constructors.toString()},\n'
         'valuesIdentifier=${valuesIdentifier.toString()},\n'
@@ -96,6 +104,10 @@ class EnumSourceClassBuilder
   String _name;
   String get name => _$this._name;
   set name(String name) => _$this._name = name;
+
+  bool _isAbstract;
+  bool get isAbstract => _$this._isAbstract;
+  set isAbstract(bool isAbstract) => _$this._isAbstract = isAbstract;
 
   ListBuilder<EnumSourceField> _fields;
   ListBuilder<EnumSourceField> get fields =>
@@ -132,6 +144,7 @@ class EnumSourceClassBuilder
   EnumSourceClassBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
+      _isAbstract = _$v.isAbstract;
       _fields = _$v.fields?.toBuilder();
       _constructors = _$v.constructors?.toBuilder();
       _valuesIdentifier = _$v.valuesIdentifier;
@@ -159,6 +172,7 @@ class EnumSourceClassBuilder
     final result = _$v ??
         new _$EnumSourceClass._(
             name: name,
+            isAbstract: isAbstract,
             fields: fields?.build(),
             constructors: constructors?.build(),
             valuesIdentifier: valuesIdentifier,

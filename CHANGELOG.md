@@ -3,6 +3,7 @@
 ## 0.5.3
 
 - Add null check to generated builder "replace" methods.
+- Fail with error on abstract enum classes.
 
 ## 0.5.2
 
