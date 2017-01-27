@@ -111,7 +111,8 @@ Future<String> generate(String source) async {
 
   final writer = new InMemoryAssetWriter();
   await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
-  return writer.assets[new AssetId(pkgName, 'lib/value.g.dart')]?.value ?? '';
+  return writer.assets[new AssetId(pkgName, 'lib/value.g.dart')]?.stringValue ??
+      '';
 }
 
 // Classes mentioned in the test input need to exist, but we don't need the

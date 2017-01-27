@@ -178,7 +178,7 @@ class _$CollectionGenericValueSerializer
     final result = isUnderspecified
         ? new CollectionGenericValueBuilder<Object>()
         : serializers.newBuilder(specifiedType)
-        as CollectionGenericValueBuilder;
+            as CollectionGenericValueBuilder;
 
     var key;
     var value;
