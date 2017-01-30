@@ -718,7 +718,8 @@ Future<String> generate(String source) async {
 
   final writer = new InMemoryAssetWriter();
   await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
-  return writer.assets[new AssetId(pkgName, 'lib/test_enum.g.dart')]?.value;
+  return writer
+      .assets[new AssetId(pkgName, 'lib/test_enum.g.dart')]?.stringValue;
 }
 
 Future<String> generateTwo(String source, String source2) async {
@@ -730,8 +731,10 @@ Future<String> generateTwo(String source, String source2) async {
 
   final writer = new InMemoryAssetWriter();
   await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
-  return writer.assets[new AssetId(pkgName, 'lib/test_enum.g.dart')]?.value +
-      writer.assets[new AssetId(pkgName, 'lib/test_enum_two.g.dart')]?.value;
+  return writer
+          .assets[new AssetId(pkgName, 'lib/test_enum.g.dart')]?.stringValue +
+      writer.assets[new AssetId(pkgName, 'lib/test_enum_two.g.dart')]
+          ?.stringValue;
 }
 
 const String builtValueSource = r'''

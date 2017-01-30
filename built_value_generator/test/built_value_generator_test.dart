@@ -367,7 +367,7 @@ Future<String> generate(String source) async {
 
   final writer = new InMemoryAssetWriter();
   await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
-  return writer.assets[new AssetId(pkgName, 'lib/value.g.dart')]?.value;
+  return writer.assets[new AssetId(pkgName, 'lib/value.g.dart')]?.stringValue;
 }
 
 const String builtValueSource = r'''
