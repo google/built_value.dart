@@ -4,7 +4,7 @@
 
 - Add null check to generated builder "replace" methods.
 - Fail with error on abstract enum classes.
-- Update to `build` 0.7.0 , `build_runner` 0.2.0, and `build_test` 0.4.0.
+- Update to `build` 0.7.0 , `build_runner` 0.3.0, and `build_test` 0.4.0.
 
 ## 0.5.2
 
