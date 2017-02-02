@@ -29,15 +29,7 @@ used both client and server side, uses value types, enums and serialization from
 built_value.
 
 Simple examples are
-[here](https://github.com/google/built_value.dart/tree/master/example):
-[value type]
-(https://github.com/google/built_value.dart/blob/master/example/lib/simple_value.dart)
-and [usage]
-(https://github.com/google/built_value.dart/blob/master/example/test/simple_value_test.dart),
-[enum class]
-(https://github.com/google/built_value.dart/blob/master/example/lib/test_enum.dart),
-[serialization]
-(https://github.com/google/built_value.dart/blob/master/example/test/collections_serializer_test.dart).
+[here](https://github.com/google/built_value.dart/tree/master/example/lib/example.dart).
 
 Codegen is triggered via either a
 [build.dart]
