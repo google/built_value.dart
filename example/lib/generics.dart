@@ -22,7 +22,7 @@ abstract class GenericValue<T>
   /// Declare a static final [Serializer] field called `serializer`.
   /// The built_value code generator will provide the implementation. You need
   /// to do this for every type you want to serialize.
-  static final Serializer<GenericValue> serializer = _$genericValueSerializer;
+  static Serializer<GenericValue> get serializer => _$genericValueSerializer;
 
   T get value;
 
@@ -37,7 +37,7 @@ abstract class BoundGenericValue<T extends num>
   /// Declare a static final [Serializer] field called `serializer`.
   /// The built_value code generator will provide the implementation. You need
   /// to do this for every type you want to serialize.
-  static final Serializer<BoundGenericValue> serializer =
+  static Serializer<BoundGenericValue> get serializer =>
       _$boundGenericValueSerializer;
 
   T get value;
@@ -55,7 +55,7 @@ abstract class CollectionGenericValue<T>
   /// Declare a static final [Serializer] field called `serializer`.
   /// The built_value code generator will provide the implementation. You need
   /// to do this for every type you want to serialize.
-  static final Serializer<CollectionGenericValue> serializer =
+  static Serializer<CollectionGenericValue> get serializer =>
       _$collectionGenericValueSerializer;
 
   BuiltList<T> get values;
@@ -73,7 +73,7 @@ abstract class GenericContainer
   /// Declare a static final [Serializer] field called `serializer`.
   /// The built_value code generator will provide the implementation. You need
   /// to do this for every type you want to serialize.
-  static final Serializer<GenericContainer> serializer =
+  static Serializer<GenericContainer> get serializer =>
       _$genericContainerSerializer;
 
   GenericValue<String> get genericValue;

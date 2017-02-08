@@ -10,6 +10,8 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/library_elements.dart';
 import 'package:built_value_generator/src/serializer_source_class.dart';
 import 'package:meta/meta.dart';
+import 'package:quiver/iterables.dart';
+import 'package:source_gen/source_gen.dart';
 
 part 'serializer_source_library.g.dart';
 
@@ -58,7 +60,13 @@ abstract class SerializerSourceLibrary
   bool get needsBuiltJson => sourceClasses.isNotEmpty;
 
   /// Generates serializer source for this library.
-  String generate() {
+  String generateCode() {
+    final errors = concat(sourceClasses
+        .map((sourceClass) => sourceClass.computeErrors())
+        .toList());
+
+    if (errors.isNotEmpty) throw _makeError(errors);
+
     return (hasSerializers
             ? 'Serializers _\$serializers = (new Serializers().toBuilder()' +
                 transitiveSourceClasses
@@ -92,4 +100,14 @@ abstract class SerializerSourceLibraryBuilder
 
   factory SerializerSourceLibraryBuilder() = _$SerializerSourceLibraryBuilder;
   SerializerSourceLibraryBuilder._();
+}
+
+InvalidGenerationSourceError _makeError(Iterable<String> todos) {
+  final message = new StringBuffer(
+      'Please make the following changes to use built_value serialization:\n');
+  for (var i = 0; i != todos.length; ++i) {
+    message.write('\n${i + 1}. ${todos.elementAt(i)}');
+  }
+
+  return new InvalidGenerationSourceError(message.toString());
 }

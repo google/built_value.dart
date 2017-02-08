@@ -4,6 +4,7 @@
 
 library interfaces;
 
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -15,7 +16,7 @@ abstract class HasInt {
 
 abstract class ValueWithInt
     implements Built<ValueWithInt, ValueWithIntBuilder>, HasInt {
-  static final Serializer<ValueWithInt> serializer = _$valueWithIntSerializer;
+  static Serializer<ValueWithInt> get serializer => _$valueWithIntSerializer;
   static final int youCanHaveStaticFields = 3;
 
   @override
@@ -29,7 +30,7 @@ abstract class ValueWithInt
 
 class EnumWithInt extends EnumClass implements HasInt {
   /// Serializer field makes the enum_class serializable.
-  static final Serializer<EnumWithInt> serializer = _$enumWithIntSerializer;
+  static Serializer<EnumWithInt> get serializer => _$enumWithIntSerializer;
 
   static const EnumWithInt one = _$one;
   static const EnumWithInt two = _$two;

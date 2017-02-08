@@ -21,7 +21,7 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
   /// Declare a static final [Serializer] field called `serializer`.
   /// The built_value code generator will provide the implementation. You need
   /// to do this for every type you want to serialize.
-  static final Serializer<SimpleValue> serializer = _$simpleValueSerializer;
+  static Serializer<SimpleValue> get serializer => _$simpleValueSerializer;
 
   int get anInt;
 
@@ -41,7 +41,7 @@ abstract class CompoundValue
   /// Declare a static final [Serializers] field called `serializer`.
   /// The built_value code generator will provide the implementation. You need
   /// to do this for every type you want to serialize.
-  static final Serializer<CompoundValue> serializer = _$compoundValueSerializer;
+  static Serializer<CompoundValue> get serializer => _$compoundValueSerializer;
 
   SimpleValue get simpleValue;
   @nullable
@@ -54,7 +54,7 @@ abstract class CompoundValue
 /// Additional custom validation goes in the constructor.
 abstract class ValidatedValue
     implements Built<ValidatedValue, ValidatedValueBuilder> {
-  static final Serializer<ValidatedValue> serializer =
+  static Serializer<ValidatedValue> get serializer =>
       _$validatedValueSerializer;
 
   int get anInt;

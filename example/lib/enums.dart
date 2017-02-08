@@ -25,7 +25,7 @@ class TestEnum extends EnumClass {
   /// Declare a static final [Serializers] field called `serializer`.
   /// The built_value code generator will provide the implementation. You need
   /// to do this for every type you want to serialize.
-  static final Serializer<TestEnum> serializer = _$testEnumSerializer;
+  static Serializer<TestEnum> get serializer => _$testEnumSerializer;
 
   static const TestEnum yes = _$yes;
   static const TestEnum no = _$no;
