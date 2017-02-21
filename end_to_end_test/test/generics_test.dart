@@ -16,7 +16,7 @@ void main() {
     });
 
     test('throws on missing generic type parameter', () {
-      expect(() => new GenericValue((b) => b..value = 1), throws);
+      expect(() => new GenericValue<dynamic>((b) => b..value = 1), throws);
     });
 
     test('fields can be set via build constructor', () {

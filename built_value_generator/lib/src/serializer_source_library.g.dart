@@ -16,8 +16,9 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   final BuiltSet<SerializerSourceClass> transitiveSourceClasses;
 
   factory _$SerializerSourceLibrary(
-          [updates(SerializerSourceLibraryBuilder b)]) =>
-      (new SerializerSourceLibraryBuilder()..update(updates)).build();
+          [void updates(SerializerSourceLibraryBuilder b)]) =>
+      (new SerializerSourceLibraryBuilder()..update(updates)).build()
+      as _$SerializerSourceLibrary;
 
   _$SerializerSourceLibrary._(
       {this.hasSerializers, this.sourceClasses, this.transitiveSourceClasses})
@@ -30,7 +31,8 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   }
 
   @override
-  SerializerSourceLibrary rebuild(updates(SerializerSourceLibraryBuilder b)) =>
+  SerializerSourceLibrary rebuild(
+          void updates(SerializerSourceLibraryBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -63,7 +65,7 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
 }
 
 class _$SerializerSourceLibraryBuilder extends SerializerSourceLibraryBuilder {
-  SerializerSourceLibrary _$v;
+  _$SerializerSourceLibrary _$v;
 
   @override
   bool get hasSerializers {
@@ -118,16 +120,16 @@ class _$SerializerSourceLibraryBuilder extends SerializerSourceLibraryBuilder {
   @override
   void replace(SerializerSourceLibrary other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$SerializerSourceLibrary;
   }
 
   @override
-  void update(updates(SerializerSourceLibraryBuilder b)) {
+  void update(void updates(SerializerSourceLibraryBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  SerializerSourceLibrary build() {
+  _$SerializerSourceLibrary build() {
     final result = _$v ??
         new _$SerializerSourceLibrary._(
             hasSerializers: hasSerializers,

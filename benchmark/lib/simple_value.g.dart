@@ -13,7 +13,7 @@ class _$SimpleValue extends SimpleValue {
   @override
   final String aString;
 
-  factory _$SimpleValue([updates(SimpleValueBuilder b)]) =>
+  factory _$SimpleValue([void updates(SimpleValueBuilder b)]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
@@ -22,7 +22,7 @@ class _$SimpleValue extends SimpleValue {
   }
 
   @override
-  SimpleValue rebuild(updates(SimpleValueBuilder b)) =>
+  SimpleValue rebuild(void updates(SimpleValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -50,7 +50,7 @@ class _$SimpleValue extends SimpleValue {
 }
 
 class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
-  SimpleValue _$v;
+  _$SimpleValue _$v;
 
   int _anInt;
   int get anInt => _$this._anInt;
@@ -74,16 +74,16 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   @override
   void replace(SimpleValue other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$SimpleValue;
   }
 
   @override
-  void update(updates(SimpleValueBuilder b)) {
+  void update(void updates(SimpleValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  SimpleValue build() {
+  _$SimpleValue build() {
     final result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
     replace(result);
     return result;

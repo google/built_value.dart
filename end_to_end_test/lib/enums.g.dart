@@ -40,6 +40,7 @@ class _$TestEnumMeta {
 }
 
 abstract class _$TestEnumMixin {
+  // ignore: non_constant_identifier_names
   _$TestEnumMeta get TestEnum => const _$TestEnumMeta();
 }
 
@@ -83,6 +84,6 @@ class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   @override
   TestEnum deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    return TestEnum.valueOf(serialized);
+    return TestEnum.valueOf(serialized as String);
   }
 }

@@ -25,7 +25,7 @@ class _$EnumSourceClass extends EnumSourceClass {
   @override
   final String mixinDeclaration;
 
-  factory _$EnumSourceClass([updates(EnumSourceClassBuilder b)]) =>
+  factory _$EnumSourceClass([void updates(EnumSourceClassBuilder b)]) =>
       (new EnumSourceClassBuilder()..update(updates)).build();
 
   _$EnumSourceClass._(
@@ -46,7 +46,7 @@ class _$EnumSourceClass extends EnumSourceClass {
   }
 
   @override
-  EnumSourceClass rebuild(updates(EnumSourceClassBuilder b)) =>
+  EnumSourceClass rebuild(void updates(EnumSourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -100,7 +100,7 @@ class _$EnumSourceClass extends EnumSourceClass {
 
 class EnumSourceClassBuilder
     implements Builder<EnumSourceClass, EnumSourceClassBuilder> {
-  EnumSourceClass _$v;
+  _$EnumSourceClass _$v;
 
   String _name;
   String get name => _$this._name;
@@ -160,16 +160,16 @@ class EnumSourceClassBuilder
   @override
   void replace(EnumSourceClass other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$EnumSourceClass;
   }
 
   @override
-  void update(updates(EnumSourceClassBuilder b)) {
+  void update(void updates(EnumSourceClassBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  EnumSourceClass build() {
+  _$EnumSourceClass build() {
     final result = _$v ??
         new _$EnumSourceClass._(
             name: name,

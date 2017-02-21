@@ -74,7 +74,7 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
   @override
   Iterable serialize(Serializers serializers, Chat object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'text',
       serializers.serialize(object.text, specifiedType: const FullType(String)),
       'targets',
@@ -91,28 +91,22 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new ChatBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'text':
-            result.text = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-          case 'targets':
-            result.targets.replace(serializers.deserialize(value,
-                specifiedType: const FullType(
-                    BuiltSet, const [const FullType(String)])) as dynamic);
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'text':
+          result.text = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'targets':
+          result.targets.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltSet, const [const FullType(String)]))
+              as BuiltSet<String>);
+          break;
       }
     }
 
@@ -129,7 +123,7 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
   @override
   Iterable serialize(Serializers serializers, Login object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'username',
       serializers.serialize(object.username,
           specifiedType: const FullType(String)),
@@ -146,27 +140,20 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new LoginBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'username':
-            result.username = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-          case 'password':
-            result.password = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'username':
+          result.username = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'password':
+          result.password = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -183,7 +170,7 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
   @override
   Iterable serialize(Serializers serializers, Status object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'message',
       serializers.serialize(object.message,
           specifiedType: const FullType(String)),
@@ -200,27 +187,20 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new StatusBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'message':
-            result.message = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-          case 'type':
-            result.type = serializers.deserialize(value,
-                specifiedType: const FullType(StatusType)) as dynamic;
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'message':
+          result.message = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'type':
+          result.type = serializers.deserialize(value,
+              specifiedType: const FullType(StatusType)) as StatusType;
+          break;
       }
     }
 
@@ -243,7 +223,7 @@ class _$StatusTypeSerializer implements PrimitiveSerializer<StatusType> {
   @override
   StatusType deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    return StatusType.valueOf(serialized);
+    return StatusType.valueOf(serialized as String);
   }
 }
 
@@ -256,7 +236,7 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
   @override
   Iterable serialize(Serializers serializers, ListUsers object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'statusTypes',
       serializers.serialize(object.statusTypes,
           specifiedType:
@@ -271,24 +251,18 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new ListUsersBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'statusTypes':
-            result.statusTypes.replace(serializers.deserialize(value,
-                specifiedType: const FullType(
-                    BuiltSet, const [const FullType(StatusType)])) as dynamic);
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'statusTypes':
+          result.statusTypes.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltSet, const [const FullType(StatusType)]))
+              as BuiltSet<StatusType>);
+          break;
       }
     }
 
@@ -311,7 +285,7 @@ class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
   @override
   LoginResponse deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    return LoginResponse.valueOf(serialized);
+    return LoginResponse.valueOf(serialized as String);
   }
 }
 
@@ -324,7 +298,7 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
   @override
   Iterable serialize(Serializers serializers, ShowChat object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'username',
       serializers.serialize(object.username,
           specifiedType: const FullType(String)),
@@ -343,31 +317,24 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new ShowChatBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'username':
-            result.username = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-          case 'private':
-            result.private = serializers.deserialize(value,
-                specifiedType: const FullType(bool)) as dynamic;
-            break;
-          case 'text':
-            result.text = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'username':
+          result.username = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'private':
+          result.private = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'text':
+          result.text = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -384,7 +351,7 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
   @override
   Iterable serialize(Serializers serializers, Welcome object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'log',
       serializers.serialize(object.log,
           specifiedType:
@@ -402,28 +369,22 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new WelcomeBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'log':
-            result.log.replace(serializers.deserialize(value,
-                specifiedType: const FullType(
-                    BuiltList, const [const FullType(Response)])) as dynamic);
-            break;
-          case 'message':
-            result.message = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'log':
+          result.log.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Response)]))
+              as BuiltList<Response>);
+          break;
+        case 'message':
+          result.message = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -441,7 +402,7 @@ class _$ListUsersResponseSerializer
   @override
   Iterable serialize(Serializers serializers, ListUsersResponse object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'statuses',
       serializers.serialize(object.statuses,
           specifiedType: const FullType(BuiltMap,
@@ -456,26 +417,19 @@ class _$ListUsersResponseSerializer
       {FullType specifiedType: FullType.unspecified}) {
     final result = new ListUsersResponseBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'statuses':
-            result.statuses.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltMap, const [
-                  const FullType(String),
-                  const FullType(Status)
-                ])) as dynamic);
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'statuses':
+          result.statuses.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(String),
+                const FullType(Status)
+              ])) as BuiltMap<String, Status>);
+          break;
       }
     }
 
@@ -494,7 +448,7 @@ class _$Chat extends Chat {
   @override
   final BuiltSet<String> targets;
 
-  factory _$Chat([updates(ChatBuilder b)]) =>
+  factory _$Chat([void updates(ChatBuilder b)]) =>
       (new ChatBuilder()..update(updates)).build();
 
   _$Chat._({this.text, this.targets}) : super._() {
@@ -503,7 +457,7 @@ class _$Chat extends Chat {
   }
 
   @override
-  Chat rebuild(updates(ChatBuilder b)) =>
+  Chat rebuild(void updates(ChatBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -531,7 +485,7 @@ class _$Chat extends Chat {
 }
 
 class ChatBuilder implements Builder<Chat, ChatBuilder> {
-  Chat _$v;
+  _$Chat _$v;
 
   String _text;
   String get text => _$this._text;
@@ -556,16 +510,16 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   @override
   void replace(Chat other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$Chat;
   }
 
   @override
-  void update(updates(ChatBuilder b)) {
+  void update(void updates(ChatBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  Chat build() {
+  _$Chat build() {
     final result = _$v ?? new _$Chat._(text: text, targets: targets?.build());
     replace(result);
     return result;
@@ -583,7 +537,7 @@ class _$Login extends Login {
   @override
   final String password;
 
-  factory _$Login([updates(LoginBuilder b)]) =>
+  factory _$Login([void updates(LoginBuilder b)]) =>
       (new LoginBuilder()..update(updates)).build();
 
   _$Login._({this.username, this.password}) : super._() {
@@ -592,7 +546,7 @@ class _$Login extends Login {
   }
 
   @override
-  Login rebuild(updates(LoginBuilder b)) =>
+  Login rebuild(void updates(LoginBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -620,7 +574,7 @@ class _$Login extends Login {
 }
 
 class LoginBuilder implements Builder<Login, LoginBuilder> {
-  Login _$v;
+  _$Login _$v;
 
   String _username;
   String get username => _$this._username;
@@ -644,16 +598,16 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   @override
   void replace(Login other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$Login;
   }
 
   @override
-  void update(updates(LoginBuilder b)) {
+  void update(void updates(LoginBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  Login build() {
+  _$Login build() {
     final result = _$v ?? new _$Login._(username: username, password: password);
     replace(result);
     return result;
@@ -671,7 +625,7 @@ class _$Status extends Status {
   @override
   final StatusType type;
 
-  factory _$Status([updates(StatusBuilder b)]) =>
+  factory _$Status([void updates(StatusBuilder b)]) =>
       (new StatusBuilder()..update(updates)).build();
 
   _$Status._({this.message, this.type}) : super._() {
@@ -680,7 +634,7 @@ class _$Status extends Status {
   }
 
   @override
-  Status rebuild(updates(StatusBuilder b)) =>
+  Status rebuild(void updates(StatusBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -708,7 +662,7 @@ class _$Status extends Status {
 }
 
 class StatusBuilder implements Builder<Status, StatusBuilder> {
-  Status _$v;
+  _$Status _$v;
 
   String _message;
   String get message => _$this._message;
@@ -732,16 +686,16 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   @override
   void replace(Status other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$Status;
   }
 
   @override
-  void update(updates(StatusBuilder b)) {
+  void update(void updates(StatusBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  Status build() {
+  _$Status build() {
     final result = _$v ?? new _$Status._(message: message, type: type);
     replace(result);
     return result;
@@ -757,7 +711,7 @@ class _$ListUsers extends ListUsers {
   @override
   final BuiltSet<StatusType> statusTypes;
 
-  factory _$ListUsers([updates(ListUsersBuilder b)]) =>
+  factory _$ListUsers([void updates(ListUsersBuilder b)]) =>
       (new ListUsersBuilder()..update(updates)).build();
 
   _$ListUsers._({this.statusTypes}) : super._() {
@@ -765,7 +719,7 @@ class _$ListUsers extends ListUsers {
   }
 
   @override
-  ListUsers rebuild(updates(ListUsersBuilder b)) =>
+  ListUsers rebuild(void updates(ListUsersBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -792,7 +746,7 @@ class _$ListUsers extends ListUsers {
 }
 
 class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
-  ListUsers _$v;
+  _$ListUsers _$v;
 
   SetBuilder<StatusType> _statusTypes;
   SetBuilder<StatusType> get statusTypes =>
@@ -813,16 +767,16 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
   @override
   void replace(ListUsers other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ListUsers;
   }
 
   @override
-  void update(updates(ListUsersBuilder b)) {
+  void update(void updates(ListUsersBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ListUsers build() {
+  _$ListUsers build() {
     final result = _$v ?? new _$ListUsers._(statusTypes: statusTypes?.build());
     replace(result);
     return result;
@@ -842,7 +796,7 @@ class _$ShowChat extends ShowChat {
   @override
   final String text;
 
-  factory _$ShowChat([updates(ShowChatBuilder b)]) =>
+  factory _$ShowChat([void updates(ShowChatBuilder b)]) =>
       (new ShowChatBuilder()..update(updates)).build();
 
   _$ShowChat._({this.username, this.private, this.text}) : super._() {
@@ -852,7 +806,7 @@ class _$ShowChat extends ShowChat {
   }
 
   @override
-  ShowChat rebuild(updates(ShowChatBuilder b)) =>
+  ShowChat rebuild(void updates(ShowChatBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -884,7 +838,7 @@ class _$ShowChat extends ShowChat {
 }
 
 class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
-  ShowChat _$v;
+  _$ShowChat _$v;
 
   String _username;
   String get username => _$this._username;
@@ -913,16 +867,16 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   @override
   void replace(ShowChat other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ShowChat;
   }
 
   @override
-  void update(updates(ShowChatBuilder b)) {
+  void update(void updates(ShowChatBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ShowChat build() {
+  _$ShowChat build() {
     final result = _$v ??
         new _$ShowChat._(username: username, private: private, text: text);
     replace(result);
@@ -941,7 +895,7 @@ class _$Welcome extends Welcome {
   @override
   final String message;
 
-  factory _$Welcome([updates(WelcomeBuilder b)]) =>
+  factory _$Welcome([void updates(WelcomeBuilder b)]) =>
       (new WelcomeBuilder()..update(updates)).build();
 
   _$Welcome._({this.log, this.message}) : super._() {
@@ -950,7 +904,7 @@ class _$Welcome extends Welcome {
   }
 
   @override
-  Welcome rebuild(updates(WelcomeBuilder b)) =>
+  Welcome rebuild(void updates(WelcomeBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -978,7 +932,7 @@ class _$Welcome extends Welcome {
 }
 
 class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
-  Welcome _$v;
+  _$Welcome _$v;
 
   ListBuilder<Response> _log;
   ListBuilder<Response> get log => _$this._log ??= new ListBuilder<Response>();
@@ -1002,16 +956,16 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   @override
   void replace(Welcome other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$Welcome;
   }
 
   @override
-  void update(updates(WelcomeBuilder b)) {
+  void update(void updates(WelcomeBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  Welcome build() {
+  _$Welcome build() {
     final result = _$v ?? new _$Welcome._(log: log?.build(), message: message);
     replace(result);
     return result;
@@ -1027,7 +981,7 @@ class _$ListUsersResponse extends ListUsersResponse {
   @override
   final BuiltMap<String, Status> statuses;
 
-  factory _$ListUsersResponse([updates(ListUsersResponseBuilder b)]) =>
+  factory _$ListUsersResponse([void updates(ListUsersResponseBuilder b)]) =>
       (new ListUsersResponseBuilder()..update(updates)).build();
 
   _$ListUsersResponse._({this.statuses}) : super._() {
@@ -1035,7 +989,7 @@ class _$ListUsersResponse extends ListUsersResponse {
   }
 
   @override
-  ListUsersResponse rebuild(updates(ListUsersResponseBuilder b)) =>
+  ListUsersResponse rebuild(void updates(ListUsersResponseBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1064,7 +1018,7 @@ class _$ListUsersResponse extends ListUsersResponse {
 
 class ListUsersResponseBuilder
     implements Builder<ListUsersResponse, ListUsersResponseBuilder> {
-  ListUsersResponse _$v;
+  _$ListUsersResponse _$v;
 
   MapBuilder<String, Status> _statuses;
   MapBuilder<String, Status> get statuses =>
@@ -1085,16 +1039,16 @@ class ListUsersResponseBuilder
   @override
   void replace(ListUsersResponse other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ListUsersResponse;
   }
 
   @override
-  void update(updates(ListUsersResponseBuilder b)) {
+  void update(void updates(ListUsersResponseBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ListUsersResponse build() {
+  _$ListUsersResponse build() {
     final result =
         _$v ?? new _$ListUsersResponse._(statuses: statuses?.build());
     replace(result);

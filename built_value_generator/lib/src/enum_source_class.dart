@@ -190,6 +190,7 @@ abstract class EnumSourceClass
       ..writeln('BuiltSet<$name> get values => $valuesIdentifier;')
       ..writeln('}')
       ..writeln('abstract class _\$${name}Mixin {')
+      ..writeln('  // ignore: non_constant_identifier_names')
       ..writeln('_\$${name}Meta get $name => const _\$${name}Meta();')
       ..writeln('}');
 

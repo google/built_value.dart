@@ -243,8 +243,13 @@ abstract class ValueSourceClass
     }
     result.writeln();
 
-    result.writeln('factory _\$$name([updates(${name}Builder$_generics b)]) '
-        '=> (new ${name}Builder$_generics()..update(updates)).build();');
+    // If there is a manually maintained builder we have to cast the "build()"
+    // result to the generated value class. If the builder is generated, that
+    // can return the right type directly and needs no cast.
+    final cast = hasBuilder ? 'as _\$$name' : '';
+    result.writeln(
+        'factory _\$$name([void updates(${name}Builder$_generics b)]) '
+        '=> (new ${name}Builder$_generics()..update(updates)).build() $cast;');
     result.writeln();
 
     if (fields.isEmpty) {
@@ -277,9 +282,9 @@ abstract class ValueSourceClass
     }
 
     result.writeln('@override');
-    result
-        .writeln('$name$_generics rebuild(updates(${name}Builder$_generics b)) '
-            '=> (toBuilder()..update(updates)).build();');
+    result.writeln(
+        '$name$_generics rebuild(void updates(${name}Builder$_generics b)) '
+        '=> (toBuilder()..update(updates)).build();');
     result.writeln();
 
     result.writeln('@override');
@@ -348,7 +353,7 @@ abstract class ValueSourceClass
     }
 
     // Builder holds a reference to a value, copies from it lazily.
-    result.writeln('$name$_generics _\$v;');
+    result.writeln('_\$$name$_generics _\$v;');
     result.writeln('');
 
     if (hasBuilder) {
@@ -448,16 +453,16 @@ abstract class ValueSourceClass
     result.writeln('void replace($name$_generics other) {');
     result.writeln("if (other == null) "
         "throw new ArgumentError.notNull('other');");
-    result.writeln('_\$v = other;');
+    result.writeln('_\$v = other as _\$$name$_generics;');
     result.writeln('}');
 
     result.writeln('@override');
-    result.writeln('void update(updates(${name}Builder$_generics b)) {'
+    result.writeln('void update(void updates(${name}Builder$_generics b)) {'
         ' if (updates != null) updates(this); }');
     result.writeln();
 
     result.writeln('@override');
-    result.writeln('$name$_generics build() {');
+    result.writeln('_\$$name$_generics build() {');
     result.writeln('final result = _\$v ?? ');
     result.writeln('new _\$$name$_generics._(');
     result.write(fields.map((field) {

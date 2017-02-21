@@ -26,7 +26,7 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
   Iterable serialize(Serializers serializers, SimpleValue object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
     ];
@@ -44,27 +44,20 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new SimpleValueBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'anInt':
-            result.anInt = serializers.deserialize(value,
-                specifiedType: const FullType(int)) as dynamic;
-            break;
-          case 'aString':
-            result.aString = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'anInt':
+          result.anInt = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'aString':
+          result.aString = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -81,7 +74,7 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
   @override
   Iterable serialize(Serializers serializers, CompoundValue object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
           specifiedType: const FullType(SimpleValue)),
@@ -100,27 +93,20 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new CompoundValueBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'simpleValue':
-            result.simpleValue.replace(serializers.deserialize(value,
-                specifiedType: const FullType(SimpleValue)) as dynamic);
-            break;
-          case 'validatedValue':
-            result.validatedValue.replace(serializers.deserialize(value,
-                specifiedType: const FullType(ValidatedValue)) as dynamic);
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'simpleValue':
+          result.simpleValue.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+          break;
+        case 'validatedValue':
+          result.validatedValue.replace(serializers.deserialize(value,
+              specifiedType: const FullType(ValidatedValue)) as ValidatedValue);
+          break;
       }
     }
 
@@ -138,7 +124,7 @@ class _$ValidatedValueSerializer
   @override
   Iterable serialize(Serializers serializers, ValidatedValue object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
     ];
@@ -156,27 +142,20 @@ class _$ValidatedValueSerializer
       {FullType specifiedType: FullType.unspecified}) {
     final result = new ValidatedValueBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'anInt':
-            result.anInt = serializers.deserialize(value,
-                specifiedType: const FullType(int)) as dynamic;
-            break;
-          case 'aString':
-            result.aString = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'anInt':
+          result.anInt = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'aString':
+          result.aString = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -194,7 +173,7 @@ class _$ValueUsingImportAsSerializer
   @override
   Iterable serialize(Serializers serializers, ValueUsingImportAs object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'value',
       serializers.serialize(object.value,
           specifiedType: const FullType(using_import_as.TestEnum)),
@@ -208,24 +187,17 @@ class _$ValueUsingImportAsSerializer
       {FullType specifiedType: FullType.unspecified}) {
     final result = new ValueUsingImportAsBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'value':
-            result.value = serializers.deserialize(value,
-                    specifiedType: const FullType(using_import_as.TestEnum))
-                as dynamic;
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+                  specifiedType: const FullType(using_import_as.TestEnum))
+              as using_import_as.TestEnum;
+          break;
       }
     }
 
@@ -242,7 +214,7 @@ class _$NoFieldsValueSerializer implements StructuredSerializer<NoFieldsValue> {
   @override
   Iterable serialize(Serializers serializers, NoFieldsValue object,
       {FullType specifiedType: FullType.unspecified}) {
-    return [];
+    return <Object>[];
   }
 
   @override
@@ -263,7 +235,7 @@ class _$SimpleValue extends SimpleValue {
   @override
   final String aString;
 
-  factory _$SimpleValue([updates(SimpleValueBuilder b)]) =>
+  factory _$SimpleValue([void updates(SimpleValueBuilder b)]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
@@ -271,7 +243,7 @@ class _$SimpleValue extends SimpleValue {
   }
 
   @override
-  SimpleValue rebuild(updates(SimpleValueBuilder b)) =>
+  SimpleValue rebuild(void updates(SimpleValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -299,7 +271,7 @@ class _$SimpleValue extends SimpleValue {
 }
 
 class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
-  SimpleValue _$v;
+  _$SimpleValue _$v;
 
   int _anInt;
   int get anInt => _$this._anInt;
@@ -323,16 +295,16 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   @override
   void replace(SimpleValue other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$SimpleValue;
   }
 
   @override
-  void update(updates(SimpleValueBuilder b)) {
+  void update(void updates(SimpleValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  SimpleValue build() {
+  _$SimpleValue build() {
     final result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
     replace(result);
     return result;
@@ -350,7 +322,7 @@ class _$CompoundValue extends CompoundValue {
   @override
   final ValidatedValue validatedValue;
 
-  factory _$CompoundValue([updates(CompoundValueBuilder b)]) =>
+  factory _$CompoundValue([void updates(CompoundValueBuilder b)]) =>
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
@@ -358,7 +330,7 @@ class _$CompoundValue extends CompoundValue {
   }
 
   @override
-  CompoundValue rebuild(updates(CompoundValueBuilder b)) =>
+  CompoundValue rebuild(void updates(CompoundValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -388,7 +360,7 @@ class _$CompoundValue extends CompoundValue {
 
 class CompoundValueBuilder
     implements Builder<CompoundValue, CompoundValueBuilder> {
-  CompoundValue _$v;
+  _$CompoundValue _$v;
 
   SimpleValueBuilder _simpleValue;
   SimpleValueBuilder get simpleValue =>
@@ -416,16 +388,16 @@ class CompoundValueBuilder
   @override
   void replace(CompoundValue other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$CompoundValue;
   }
 
   @override
-  void update(updates(CompoundValueBuilder b)) {
+  void update(void updates(CompoundValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  CompoundValue build() {
+  _$CompoundValue build() {
     final result = _$v ??
         new _$CompoundValue._(
             simpleValue: simpleValue?.build(),
@@ -446,7 +418,7 @@ class _$DerivedValue extends DerivedValue {
   int __derivedValue;
   Iterable<String> __derivedString;
 
-  factory _$DerivedValue([updates(DerivedValueBuilder b)]) =>
+  factory _$DerivedValue([void updates(DerivedValueBuilder b)]) =>
       (new DerivedValueBuilder()..update(updates)).build();
 
   _$DerivedValue._({this.anInt}) : super._() {
@@ -460,7 +432,7 @@ class _$DerivedValue extends DerivedValue {
   Iterable<String> get derivedString => __derivedString ??= super.derivedString;
 
   @override
-  DerivedValue rebuild(updates(DerivedValueBuilder b)) =>
+  DerivedValue rebuild(void updates(DerivedValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -488,7 +460,7 @@ class _$DerivedValue extends DerivedValue {
 
 class DerivedValueBuilder
     implements Builder<DerivedValue, DerivedValueBuilder> {
-  DerivedValue _$v;
+  _$DerivedValue _$v;
 
   int _anInt;
   int get anInt => _$this._anInt;
@@ -507,16 +479,16 @@ class DerivedValueBuilder
   @override
   void replace(DerivedValue other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$DerivedValue;
   }
 
   @override
-  void update(updates(DerivedValueBuilder b)) {
+  void update(void updates(DerivedValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  DerivedValue build() {
+  _$DerivedValue build() {
     final result = _$v ?? new _$DerivedValue._(anInt: anInt);
     replace(result);
     return result;
@@ -534,7 +506,7 @@ class _$ValueWithCode extends ValueWithCode {
   @override
   final String aString;
 
-  factory _$ValueWithCode([updates(ValueWithCodeBuilder b)]) =>
+  factory _$ValueWithCode([void updates(ValueWithCodeBuilder b)]) =>
       (new ValueWithCodeBuilder()..update(updates)).build();
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
@@ -542,7 +514,7 @@ class _$ValueWithCode extends ValueWithCode {
   }
 
   @override
-  ValueWithCode rebuild(updates(ValueWithCodeBuilder b)) =>
+  ValueWithCode rebuild(void updates(ValueWithCodeBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -571,7 +543,7 @@ class _$ValueWithCode extends ValueWithCode {
 
 class ValueWithCodeBuilder
     implements Builder<ValueWithCode, ValueWithCodeBuilder> {
-  ValueWithCode _$v;
+  _$ValueWithCode _$v;
 
   int _anInt;
   int get anInt => _$this._anInt;
@@ -595,16 +567,16 @@ class ValueWithCodeBuilder
   @override
   void replace(ValueWithCode other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ValueWithCode;
   }
 
   @override
-  void update(updates(ValueWithCodeBuilder b)) {
+  void update(void updates(ValueWithCodeBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ValueWithCode build() {
+  _$ValueWithCode build() {
     final result = _$v ?? new _$ValueWithCode._(anInt: anInt, aString: aString);
     replace(result);
     return result;
@@ -622,15 +594,16 @@ class _$ValueWithDefaults extends ValueWithDefaults {
   @override
   final String aString;
 
-  factory _$ValueWithDefaults([updates(ValueWithDefaultsBuilder b)]) =>
-      (new ValueWithDefaultsBuilder()..update(updates)).build();
+  factory _$ValueWithDefaults([void updates(ValueWithDefaultsBuilder b)]) =>
+      (new ValueWithDefaultsBuilder()..update(updates)).build()
+      as _$ValueWithDefaults;
 
   _$ValueWithDefaults._({this.anInt, this.aString}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
   }
 
   @override
-  ValueWithDefaults rebuild(updates(ValueWithDefaultsBuilder b)) =>
+  ValueWithDefaults rebuild(void updates(ValueWithDefaultsBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -659,7 +632,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 }
 
 class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
-  ValueWithDefaults _$v;
+  _$ValueWithDefaults _$v;
 
   @override
   int get anInt {
@@ -699,16 +672,16 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   @override
   void replace(ValueWithDefaults other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ValueWithDefaults;
   }
 
   @override
-  void update(updates(ValueWithDefaultsBuilder b)) {
+  void update(void updates(ValueWithDefaultsBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ValueWithDefaults build() {
+  _$ValueWithDefaults build() {
     final result =
         _$v ?? new _$ValueWithDefaults._(anInt: anInt, aString: aString);
     replace(result);
@@ -727,7 +700,7 @@ class _$ValidatedValue extends ValidatedValue {
   @override
   final String aString;
 
-  factory _$ValidatedValue([updates(ValidatedValueBuilder b)]) =>
+  factory _$ValidatedValue([void updates(ValidatedValueBuilder b)]) =>
       (new ValidatedValueBuilder()..update(updates)).build();
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
@@ -735,7 +708,7 @@ class _$ValidatedValue extends ValidatedValue {
   }
 
   @override
-  ValidatedValue rebuild(updates(ValidatedValueBuilder b)) =>
+  ValidatedValue rebuild(void updates(ValidatedValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -765,7 +738,7 @@ class _$ValidatedValue extends ValidatedValue {
 
 class ValidatedValueBuilder
     implements Builder<ValidatedValue, ValidatedValueBuilder> {
-  ValidatedValue _$v;
+  _$ValidatedValue _$v;
 
   int _anInt;
   int get anInt => _$this._anInt;
@@ -789,16 +762,16 @@ class ValidatedValueBuilder
   @override
   void replace(ValidatedValue other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ValidatedValue;
   }
 
   @override
-  void update(updates(ValidatedValueBuilder b)) {
+  void update(void updates(ValidatedValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ValidatedValue build() {
+  _$ValidatedValue build() {
     final result =
         _$v ?? new _$ValidatedValue._(anInt: anInt, aString: aString);
     replace(result);
@@ -815,7 +788,7 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
   @override
   final using_import_as.TestEnum value;
 
-  factory _$ValueUsingImportAs([updates(ValueUsingImportAsBuilder b)]) =>
+  factory _$ValueUsingImportAs([void updates(ValueUsingImportAsBuilder b)]) =>
       (new ValueUsingImportAsBuilder()..update(updates)).build();
 
   _$ValueUsingImportAs._({this.value}) : super._() {
@@ -823,7 +796,7 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
   }
 
   @override
-  ValueUsingImportAs rebuild(updates(ValueUsingImportAsBuilder b)) =>
+  ValueUsingImportAs rebuild(void updates(ValueUsingImportAsBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -852,7 +825,7 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
 
 class ValueUsingImportAsBuilder
     implements Builder<ValueUsingImportAs, ValueUsingImportAsBuilder> {
-  ValueUsingImportAs _$v;
+  _$ValueUsingImportAs _$v;
 
   using_import_as.TestEnum _value;
   using_import_as.TestEnum get value => _$this._value;
@@ -871,16 +844,16 @@ class ValueUsingImportAsBuilder
   @override
   void replace(ValueUsingImportAs other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ValueUsingImportAs;
   }
 
   @override
-  void update(updates(ValueUsingImportAsBuilder b)) {
+  void update(void updates(ValueUsingImportAsBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ValueUsingImportAs build() {
+  _$ValueUsingImportAs build() {
     final result = _$v ?? new _$ValueUsingImportAs._(value: value);
     replace(result);
     return result;
@@ -893,13 +866,13 @@ class ValueUsingImportAsBuilder
 // **************************************************************************
 
 class _$NoFieldsValue extends NoFieldsValue {
-  factory _$NoFieldsValue([updates(NoFieldsValueBuilder b)]) =>
+  factory _$NoFieldsValue([void updates(NoFieldsValueBuilder b)]) =>
       (new NoFieldsValueBuilder()..update(updates)).build();
 
   _$NoFieldsValue._() : super._();
 
   @override
-  NoFieldsValue rebuild(updates(NoFieldsValueBuilder b)) =>
+  NoFieldsValue rebuild(void updates(NoFieldsValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -925,23 +898,23 @@ class _$NoFieldsValue extends NoFieldsValue {
 
 class NoFieldsValueBuilder
     implements Builder<NoFieldsValue, NoFieldsValueBuilder> {
-  NoFieldsValue _$v;
+  _$NoFieldsValue _$v;
 
   NoFieldsValueBuilder();
 
   @override
   void replace(NoFieldsValue other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$NoFieldsValue;
   }
 
   @override
-  void update(updates(NoFieldsValueBuilder b)) {
+  void update(void updates(NoFieldsValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  NoFieldsValue build() {
+  _$NoFieldsValue build() {
     final result = _$v ?? new _$NoFieldsValue._();
     replace(result);
     return result;

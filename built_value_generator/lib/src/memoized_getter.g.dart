@@ -13,7 +13,7 @@ class _$MemoizedGetter extends MemoizedGetter {
   @override
   final String name;
 
-  factory _$MemoizedGetter([updates(MemoizedGetterBuilder b)]) =>
+  factory _$MemoizedGetter([void updates(MemoizedGetterBuilder b)]) =>
       (new MemoizedGetterBuilder()..update(updates)).build();
 
   _$MemoizedGetter._({this.returnType, this.name}) : super._() {
@@ -22,7 +22,7 @@ class _$MemoizedGetter extends MemoizedGetter {
   }
 
   @override
-  MemoizedGetter rebuild(updates(MemoizedGetterBuilder b)) =>
+  MemoizedGetter rebuild(void updates(MemoizedGetterBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -52,7 +52,7 @@ class _$MemoizedGetter extends MemoizedGetter {
 
 class MemoizedGetterBuilder
     implements Builder<MemoizedGetter, MemoizedGetterBuilder> {
-  MemoizedGetter _$v;
+  _$MemoizedGetter _$v;
 
   String _returnType;
   String get returnType => _$this._returnType;
@@ -76,16 +76,16 @@ class MemoizedGetterBuilder
   @override
   void replace(MemoizedGetter other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$MemoizedGetter;
   }
 
   @override
-  void update(updates(MemoizedGetterBuilder b)) {
+  void update(void updates(MemoizedGetterBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  MemoizedGetter build() {
+  _$MemoizedGetter build() {
     final result =
         _$v ?? new _$MemoizedGetter._(returnType: returnType, name: name);
     replace(result);

@@ -5,6 +5,8 @@
 - Enforce that serializer declarations refer to the right generated name.
 - Streamline generation for classes with no fields.
 - Add identical check to generated operator==.
+- Make generated code compatible with strong mode implicit-dynamic:false
+  and implicit-cast:false.
 
 ## 0.5.3
 

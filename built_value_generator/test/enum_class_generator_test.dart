@@ -72,6 +72,7 @@ class _$TestEnumMeta {
 }
 
 abstract class _$TestEnumMixin {
+  // ignore: non_constant_identifier_names
   _$TestEnumMeta get TestEnum => const _$TestEnumMeta();
 }
 ''';
