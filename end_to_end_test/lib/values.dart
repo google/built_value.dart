@@ -133,3 +133,12 @@ abstract class ValueUsingImportAs
 
   ValueUsingImportAs._();
 }
+
+abstract class NoFieldsValue
+    implements Built<NoFieldsValue, NoFieldsValueBuilder> {
+  static Serializer<NoFieldsValue> get serializer => _$noFieldsValueSerializer;
+
+  factory NoFieldsValue([updates(NoFieldsValueBuilder b)]) = _$NoFieldsValue;
+
+  NoFieldsValue._();
+}

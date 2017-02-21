@@ -3,6 +3,7 @@
 ## 0.5.4
 
 - Enforce that serializer declarations refer to the right generated name.
+- Streamline generation for classes with no fields.
 
 ## 0.5.3
 

@@ -425,21 +425,23 @@ abstract class ValueSourceClass
     result.writeln();
 
     // Getter for "this" that does lazy copying if needed.
-    result.writeln('${name}Builder$_generics get _\$this {');
-    result.writeln('if (_\$v != null) {');
-    for (final field in fields) {
-      final name = field.name;
-      final nameInBuilder = hasBuilder ? 'super.$name' : '_$name';
-      if (field.isNestedBuilder) {
-        result.writeln('$nameInBuilder = _\$v.$name?.toBuilder();');
-      } else {
-        result.writeln('$nameInBuilder = _\$v.$name;');
+    if (fields.isNotEmpty) {
+      result.writeln('${name}Builder$_generics get _\$this {');
+      result.writeln('if (_\$v != null) {');
+      for (final field in fields) {
+        final name = field.name;
+        final nameInBuilder = hasBuilder ? 'super.$name' : '_$name';
+        if (field.isNestedBuilder) {
+          result.writeln('$nameInBuilder = _\$v.$name?.toBuilder();');
+        } else {
+          result.writeln('$nameInBuilder = _\$v.$name;');
+        }
       }
+      result.writeln('_\$v = null;');
+      result.writeln('}');
+      result.writeln('return this;');
+      result.writeln('}');
     }
-    result.writeln('_\$v = null;');
-    result.writeln('}');
-    result.writeln('return this;');
-    result.writeln('}');
 
     result.writeln('@override');
     result.writeln('void replace($name$_generics other) {');

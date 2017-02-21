@@ -86,7 +86,10 @@ abstract class SerializerSourceClass
         'static Serializer<$name> get serializer => '
         '_\$${camelCaseName}Serializer;';
     if (serializerDeclaration != expectedSerializerDeclaration) {
-      return ['Declare $name.serializer as: $expectedSerializerDeclaration'];
+      return [
+        'Declare $name.serializer as: '
+            '$expectedSerializerDeclaration got $serializerDeclaration'
+      ];
     }
 
     return [];
@@ -129,16 +132,19 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
   @override
   Iterable serialize(Serializers serializers, $name object,
       {FullType specifiedType: FullType.unspecified}) {
+    ${fields.isEmpty ? 'return [];' : '''
     ${_generateGenericsSerializerPreamble()}
     final result = [${_generateRequiredFieldSerializers()}];
     ${_generateNullableFieldSerializers()}
     return result;
+    '''}
   }
 
   @override
   $name deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType: FullType.unspecified}) {
     ${_generateGenericsSerializerPreamble()}
+    ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
     final result = ${_generateNewBuilder()};
 
     var key;
@@ -159,6 +165,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
     }
 
     return result.build();
+    '''}
   }
 }
 ''';
