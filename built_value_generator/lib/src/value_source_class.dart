@@ -294,6 +294,7 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     result.writeln('bool operator==(dynamic other) {');
+    result.writeln('  if (identical(other, this)) return true;');
     result.writeln('  if (other is! $name) return false;');
     if (fields.length == 0) {
       result.writeln('return true;');

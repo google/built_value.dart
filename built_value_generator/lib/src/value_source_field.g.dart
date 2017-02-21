@@ -61,6 +61,7 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! ValueSourceField) return false;
     return name == other.name &&
         type == other.type &&

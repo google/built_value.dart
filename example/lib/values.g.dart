@@ -207,6 +207,7 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! SimpleValue) return false;
     return anInt == other.anInt && aString == other.aString;
   }
@@ -293,6 +294,7 @@ class _$CompoundValue extends CompoundValue {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! CompoundValue) return false;
     return simpleValue == other.simpleValue &&
         validatedValue == other.validatedValue;
@@ -389,6 +391,7 @@ class _$ValidatedValue extends ValidatedValue {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! ValidatedValue) return false;
     return anInt == other.anInt && aString == other.aString;
   }
@@ -477,6 +480,7 @@ class _$ValueWithCode extends ValueWithCode {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! ValueWithCode) return false;
     return anInt == other.anInt && aString == other.aString;
   }
@@ -565,6 +569,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! ValueWithDefaults) return false;
     return anInt == other.anInt && aString == other.aString;
   }
@@ -674,6 +679,7 @@ class _$DerivedValue extends DerivedValue {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! DerivedValue) return false;
     return anInt == other.anInt;
   }

@@ -55,6 +55,7 @@ class _$EnumSourceClass extends EnumSourceClass {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! EnumSourceClass) return false;
     return name == other.name &&
         isAbstract == other.isAbstract &&

@@ -511,6 +511,7 @@ class _$Chat extends Chat {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! Chat) return false;
     return text == other.text && targets == other.targets;
   }
@@ -599,6 +600,7 @@ class _$Login extends Login {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! Login) return false;
     return username == other.username && password == other.password;
   }
@@ -686,6 +688,7 @@ class _$Status extends Status {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! Status) return false;
     return message == other.message && type == other.type;
   }
@@ -770,6 +773,7 @@ class _$ListUsers extends ListUsers {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! ListUsers) return false;
     return statusTypes == other.statusTypes;
   }
@@ -856,6 +860,7 @@ class _$ShowChat extends ShowChat {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! ShowChat) return false;
     return username == other.username &&
         private == other.private &&
@@ -953,6 +958,7 @@ class _$Welcome extends Welcome {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! Welcome) return false;
     return log == other.log && message == other.message;
   }
@@ -1038,6 +1044,7 @@ class _$ListUsersResponse extends ListUsersResponse {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! ListUsersResponse) return false;
     return statuses == other.statuses;
   }

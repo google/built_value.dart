@@ -301,6 +301,7 @@ class _$GenericValue<T> extends GenericValue<T> {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! GenericValue) return false;
     return value == other.value;
   }
@@ -385,6 +386,7 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! BoundGenericValue) return false;
     return value == other.value;
   }
@@ -471,6 +473,7 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! CollectionGenericValue) return false;
     return values == other.values;
   }
@@ -567,6 +570,7 @@ class _$GenericContainer extends GenericContainer {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! GenericContainer) return false;
     return genericValue == other.genericValue &&
         boundGenericValue == other.boundGenericValue &&
