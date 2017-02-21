@@ -47,6 +47,7 @@ class _$EnumSourceField extends EnumSourceField {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! EnumSourceField) return false;
     return name == other.name &&
         type == other.type &&

@@ -101,6 +101,7 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! ValueSourceClass) return false;
     return name == other.name &&
         genericParameters == other.genericParameters &&

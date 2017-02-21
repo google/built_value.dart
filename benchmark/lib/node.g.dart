@@ -29,6 +29,7 @@ class _$Node extends Node {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! Node) return false;
     return label == other.label && left == other.left && right == other.right;
   }

@@ -31,6 +31,7 @@ class _$MemoizedGetter extends MemoizedGetter {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! MemoizedGetter) return false;
     return returnType == other.returnType && name == other.name;
   }

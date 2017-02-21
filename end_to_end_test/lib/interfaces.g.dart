@@ -133,6 +133,7 @@ class _$ValueWithInt extends ValueWithInt {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! ValueWithInt) return false;
     return anInt == other.anInt && note == other.note;
   }

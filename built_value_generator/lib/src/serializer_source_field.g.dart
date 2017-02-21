@@ -48,6 +48,7 @@ class _$SerializerSourceField extends SerializerSourceField {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! SerializerSourceField) return false;
     return isSerializable == other.isSerializable &&
         isNullable == other.isNullable &&

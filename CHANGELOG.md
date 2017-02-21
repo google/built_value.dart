@@ -4,6 +4,7 @@
 
 - Enforce that serializer declarations refer to the right generated name.
 - Streamline generation for classes with no fields.
+- Add identical check to generated operator==.
 
 ## 0.5.3
 

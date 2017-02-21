@@ -30,6 +30,7 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! SimpleValue) return false;
     return anInt == other.anInt && aString == other.aString;
   }

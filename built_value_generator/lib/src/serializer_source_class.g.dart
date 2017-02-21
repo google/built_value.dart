@@ -56,6 +56,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! SerializerSourceClass) return false;
     return name == other.name &&
         serializerDeclaration == other.serializerDeclaration &&

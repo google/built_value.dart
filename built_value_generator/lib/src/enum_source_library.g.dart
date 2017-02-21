@@ -38,6 +38,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! EnumSourceLibrary) return false;
     return name == other.name &&
         fileName == other.fileName &&

@@ -221,6 +221,7 @@ class _$Collections extends Collections {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! Collections) return false;
     return list == other.list &&
         set == other.set &&

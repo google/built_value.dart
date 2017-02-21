@@ -39,6 +39,7 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
 
   @override
   bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
     if (other is! SerializerSourceLibrary) return false;
     return hasSerializers == other.hasSerializers &&
         sourceClasses == other.sourceClasses &&
