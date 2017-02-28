@@ -132,9 +132,9 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
   @override
   Iterable serialize(Serializers serializers, $name object,
       {FullType specifiedType: FullType.unspecified}) {
-    ${fields.isEmpty ? 'return [];' : '''
+    ${fields.isEmpty ? 'return <Object>[];' : '''
     ${_generateGenericsSerializerPreamble()}
-    final result = [${_generateRequiredFieldSerializers()}];
+    final result = <Object>[${_generateRequiredFieldSerializers()}];
     ${_generateNullableFieldSerializers()}
     return result;
     '''}
@@ -147,20 +147,13 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
     ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
     final result = ${_generateNewBuilder()};
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          ${_generateFieldDeserializers()}
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        ${_generateFieldDeserializers()}
       }
     }
 
@@ -186,7 +179,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   @override
   $name deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    return $name.valueOf(serialized);
+    return $name.valueOf(serialized as String);
   }
 }
 ''';
@@ -250,20 +243,35 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
 ''').join('');
   }
 
+  /// Gets a map from generic parameter to its bound.
+  ///
+  /// 'Object' is substituted where there is no bound.
+  BuiltMap<String, String> get _genericBoundsAsMap {
+    final genericBoundsOrObject =
+        genericBounds.map((bound) => bound.isEmpty ? 'Object' : bound).toList();
+    final result = new MapBuilder<String, String>();
+    for (var i = 0; i != genericParameters.length; ++i) {
+      result[genericParameters[i]] = genericBoundsOrObject[i];
+    }
+    return result.build();
+  }
+
   String _generateFieldDeserializers() {
     return fields.map((field) {
+      final fullType = field.generateFullType(genericParameters.toBuiltSet());
+      final cast = field.generateCast(_genericBoundsAsMap);
       if (field.builderFieldUsesNestedBuilder) {
         return '''
 case '${field.name}':
   result.${field.name}.replace(serializers.deserialize(
-      value, specifiedType: ${field.generateFullType(genericParameters.toBuiltSet())}) as dynamic);
+      value, specifiedType: $fullType) $cast);
   break;
 ''';
       } else {
         return '''
 case '${field.name}':
   result.${field.name} = serializers.deserialize(
-      value, specifiedType: ${field.generateFullType(genericParameters.toBuiltSet())}) as dynamic;
+      value, specifiedType: $fullType) $cast;
   break;
 ''';
       }

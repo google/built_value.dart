@@ -19,8 +19,10 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   final bool builderFieldUsesNestedBuilder;
 
-  factory _$SerializerSourceField([updates(SerializerSourceFieldBuilder b)]) =>
-      (new SerializerSourceFieldBuilder()..update(updates)).build();
+  factory _$SerializerSourceField(
+          [void updates(SerializerSourceFieldBuilder b)]) =>
+      (new SerializerSourceFieldBuilder()..update(updates)).build()
+      as _$SerializerSourceField;
 
   _$SerializerSourceField._(
       {this.isSerializable,
@@ -39,7 +41,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   }
 
   @override
-  SerializerSourceField rebuild(updates(SerializerSourceFieldBuilder b)) =>
+  SerializerSourceField rebuild(void updates(SerializerSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -80,7 +82,7 @@ class _$SerializerSourceField extends SerializerSourceField {
 }
 
 class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
-  SerializerSourceField _$v;
+  _$SerializerSourceField _$v;
 
   @override
   bool get isSerializable {
@@ -159,16 +161,16 @@ class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
   @override
   void replace(SerializerSourceField other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$SerializerSourceField;
   }
 
   @override
-  void update(updates(SerializerSourceFieldBuilder b)) {
+  void update(void updates(SerializerSourceFieldBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  SerializerSourceField build() {
+  _$SerializerSourceField build() {
     final result = _$v ??
         new _$SerializerSourceField._(
             isSerializable: isSerializable,

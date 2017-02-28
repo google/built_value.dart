@@ -15,13 +15,13 @@ class _$Node extends Node {
   @override
   final Node right;
 
-  factory _$Node([updates(NodeBuilder b)]) =>
+  factory _$Node([void updates(NodeBuilder b)]) =>
       (new NodeBuilder()..update(updates)).build();
 
   _$Node._({this.label, this.left, this.right}) : super._();
 
   @override
-  Node rebuild(updates(NodeBuilder b)) =>
+  Node rebuild(void updates(NodeBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -50,7 +50,7 @@ class _$Node extends Node {
 }
 
 class NodeBuilder implements Builder<Node, NodeBuilder> {
-  Node _$v;
+  _$Node _$v;
 
   String _label;
   String get label => _$this._label;
@@ -79,16 +79,16 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
   @override
   void replace(Node other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$Node;
   }
 
   @override
-  void update(updates(NodeBuilder b)) {
+  void update(void updates(NodeBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  Node build() {
+  _$Node build() {
     final result = _$v ??
         new _$Node._(
             label: label, left: _left?.build(), right: _right?.build());

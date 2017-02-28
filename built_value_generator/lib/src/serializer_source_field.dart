@@ -85,6 +85,15 @@ abstract class SerializerSourceField
         type, classGenericParameters ?? new BuiltSet<String>());
   }
 
+  /// Generates a cast using 'as' to this field type.
+  ///
+  /// Generics are cast to the bound of the generic. If there is no bound,
+  /// no cast is needed, and an empty string is returned.
+  String generateCast(BuiltMap<String, String> classGenericBounds) {
+    final result = _generateCast(type, classGenericBounds);
+    return result == 'Object' ? '' : 'as $result';
+  }
+
   bool get needsBuilder => type.contains('<');
 
   String generateBuilder() {
@@ -115,6 +124,24 @@ abstract class SerializerSourceField
       final constOrNew = canUseConst ? 'const' : 'new';
       final constOrEmpty = canUseConst ? 'const' : '';
       return '$constOrNew FullType($bareType, $constOrEmpty [$parameterFullTypes])';
+    }
+  }
+
+  static String _generateCast(
+      String type, BuiltMap<String, String> classGenericBounds) {
+    final bareType = _getBareType(type);
+    final generics = _getGenerics(type);
+    final genericItems = generics.split(', ');
+
+    if (generics.isEmpty) {
+      if (classGenericBounds.keys.contains(bareType))
+        return classGenericBounds[bareType];
+      return bareType;
+    } else {
+      final parameterFullTypes = genericItems
+          .map((item) => _generateCast(item, classGenericBounds))
+          .join(', ');
+      return '$bareType<$parameterFullTypes>';
     }
   }
 

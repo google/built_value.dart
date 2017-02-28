@@ -41,8 +41,9 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   final BuiltList<MemoizedGetter> memoizedGetters;
 
-  factory _$ValueSourceClass([updates(ValueSourceClassBuilder b)]) =>
-      (new ValueSourceClassBuilder()..update(updates)).build();
+  factory _$ValueSourceClass([void updates(ValueSourceClassBuilder b)]) =>
+      (new ValueSourceClassBuilder()..update(updates)).build()
+      as _$ValueSourceClass;
 
   _$ValueSourceClass._(
       {this.name,
@@ -92,7 +93,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   }
 
   @override
-  ValueSourceClass rebuild(updates(ValueSourceClassBuilder b)) =>
+  ValueSourceClass rebuild(void updates(ValueSourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -186,7 +187,7 @@ class _$ValueSourceClass extends ValueSourceClass {
 }
 
 class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
-  ValueSourceClass _$v;
+  _$ValueSourceClass _$v;
 
   @override
   String get name {
@@ -409,16 +410,16 @@ class _$ValueSourceClassBuilder extends ValueSourceClassBuilder {
   @override
   void replace(ValueSourceClass other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ValueSourceClass;
   }
 
   @override
-  void update(updates(ValueSourceClassBuilder b)) {
+  void update(void updates(ValueSourceClassBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ValueSourceClass build() {
+  _$ValueSourceClass build() {
     final result = _$v ??
         new _$ValueSourceClass._(
             name: name,

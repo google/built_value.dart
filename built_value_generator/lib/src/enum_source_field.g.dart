@@ -19,7 +19,7 @@ class _$EnumSourceField extends EnumSourceField {
   @override
   final bool isStatic;
 
-  factory _$EnumSourceField([updates(EnumSourceFieldBuilder b)]) =>
+  factory _$EnumSourceField([void updates(EnumSourceFieldBuilder b)]) =>
       (new EnumSourceFieldBuilder()..update(updates)).build();
 
   _$EnumSourceField._(
@@ -38,7 +38,7 @@ class _$EnumSourceField extends EnumSourceField {
   }
 
   @override
-  EnumSourceField rebuild(updates(EnumSourceFieldBuilder b)) =>
+  EnumSourceField rebuild(void updates(EnumSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -80,7 +80,7 @@ class _$EnumSourceField extends EnumSourceField {
 
 class EnumSourceFieldBuilder
     implements Builder<EnumSourceField, EnumSourceFieldBuilder> {
-  EnumSourceField _$v;
+  _$EnumSourceField _$v;
 
   String _name;
   String get name => _$this._name;
@@ -120,16 +120,16 @@ class EnumSourceFieldBuilder
   @override
   void replace(EnumSourceField other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$EnumSourceField;
   }
 
   @override
-  void update(updates(EnumSourceFieldBuilder b)) {
+  void update(void updates(EnumSourceFieldBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  EnumSourceField build() {
+  _$EnumSourceField build() {
     final result = _$v ??
         new _$EnumSourceField._(
             name: name,

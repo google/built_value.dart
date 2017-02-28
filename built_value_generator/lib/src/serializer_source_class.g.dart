@@ -23,7 +23,8 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   final BuiltList<SerializerSourceField> fields;
 
-  factory _$SerializerSourceClass([updates(SerializerSourceClassBuilder b)]) =>
+  factory _$SerializerSourceClass(
+          [void updates(SerializerSourceClassBuilder b)]) =>
       (new SerializerSourceClassBuilder()..update(updates)).build();
 
   _$SerializerSourceClass._(
@@ -47,7 +48,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   }
 
   @override
-  SerializerSourceClass rebuild(updates(SerializerSourceClassBuilder b)) =>
+  SerializerSourceClass rebuild(void updates(SerializerSourceClassBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -99,7 +100,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
 class SerializerSourceClassBuilder
     implements Builder<SerializerSourceClass, SerializerSourceClassBuilder> {
-  SerializerSourceClass _$v;
+  _$SerializerSourceClass _$v;
 
   String _name;
   String get name => _$this._name;
@@ -155,16 +156,16 @@ class SerializerSourceClassBuilder
   @override
   void replace(SerializerSourceClass other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$SerializerSourceClass;
   }
 
   @override
-  void update(updates(SerializerSourceClassBuilder b)) {
+  void update(void updates(SerializerSourceClassBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  SerializerSourceClass build() {
+  _$SerializerSourceClass build() {
     final result = _$v ??
         new _$SerializerSourceClass._(
             name: name,

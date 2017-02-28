@@ -17,7 +17,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
   @override
   final BuiltList<EnumSourceClass> classes;
 
-  factory _$EnumSourceLibrary([updates(EnumSourceLibraryBuilder b)]) =>
+  factory _$EnumSourceLibrary([void updates(EnumSourceLibraryBuilder b)]) =>
       (new EnumSourceLibraryBuilder()..update(updates)).build();
 
   _$EnumSourceLibrary._({this.name, this.fileName, this.source, this.classes})
@@ -29,7 +29,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
   }
 
   @override
-  EnumSourceLibrary rebuild(updates(EnumSourceLibraryBuilder b)) =>
+  EnumSourceLibrary rebuild(void updates(EnumSourceLibraryBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -66,7 +66,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
 
 class EnumSourceLibraryBuilder
     implements Builder<EnumSourceLibrary, EnumSourceLibraryBuilder> {
-  EnumSourceLibrary _$v;
+  _$EnumSourceLibrary _$v;
 
   String _name;
   String get name => _$this._name;
@@ -102,16 +102,16 @@ class EnumSourceLibraryBuilder
   @override
   void replace(EnumSourceLibrary other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$EnumSourceLibrary;
   }
 
   @override
-  void update(updates(EnumSourceLibraryBuilder b)) {
+  void update(void updates(EnumSourceLibraryBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  EnumSourceLibrary build() {
+  _$EnumSourceLibrary build() {
     final result = _$v ??
         new _$EnumSourceLibrary._(
             name: name,

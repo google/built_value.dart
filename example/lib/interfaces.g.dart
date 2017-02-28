@@ -43,7 +43,7 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   @override
   Iterable serialize(Serializers serializers, ValueWithInt object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
       'note',
@@ -58,27 +58,20 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new ValueWithIntBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'anInt':
-            result.anInt = serializers.deserialize(value,
-                specifiedType: const FullType(int)) as dynamic;
-            break;
-          case 'note':
-            result.note = serializers.deserialize(value,
-                specifiedType: const FullType(String)) as dynamic;
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'anInt':
+          result.anInt = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'note':
+          result.note = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -101,7 +94,7 @@ class _$EnumWithIntSerializer implements PrimitiveSerializer<EnumWithInt> {
   @override
   EnumWithInt deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    return EnumWithInt.valueOf(serialized);
+    return EnumWithInt.valueOf(serialized as String);
   }
 }
 
@@ -116,8 +109,8 @@ class _$ValueWithInt extends ValueWithInt {
   @override
   final String note;
 
-  factory _$ValueWithInt([updates(ValueWithIntBuilder b)]) =>
-      (new ValueWithIntBuilder()..update(updates)).build();
+  factory _$ValueWithInt([void updates(ValueWithIntBuilder b)]) =>
+      (new ValueWithIntBuilder()..update(updates)).build() as _$ValueWithInt;
 
   _$ValueWithInt._({this.anInt, this.note}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
@@ -125,7 +118,7 @@ class _$ValueWithInt extends ValueWithInt {
   }
 
   @override
-  ValueWithInt rebuild(updates(ValueWithIntBuilder b)) =>
+  ValueWithInt rebuild(void updates(ValueWithIntBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -154,7 +147,7 @@ class _$ValueWithInt extends ValueWithInt {
 }
 
 class _$ValueWithIntBuilder extends ValueWithIntBuilder {
-  ValueWithInt _$v;
+  _$ValueWithInt _$v;
 
   @override
   int get anInt {
@@ -194,16 +187,16 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
   @override
   void replace(ValueWithInt other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ValueWithInt;
   }
 
   @override
-  void update(updates(ValueWithIntBuilder b)) {
+  void update(void updates(ValueWithIntBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ValueWithInt build() {
+  _$ValueWithInt build() {
     final result = _$v ?? new _$ValueWithInt._(anInt: anInt, note: note);
     replace(result);
     return result;

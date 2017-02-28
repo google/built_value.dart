@@ -25,7 +25,7 @@ class _$ValueSourceField extends ValueSourceField {
   @override
   final bool isNestedBuilder;
 
-  factory _$ValueSourceField([updates(ValueSourceFieldBuilder b)]) =>
+  factory _$ValueSourceField([void updates(ValueSourceFieldBuilder b)]) =>
       (new ValueSourceFieldBuilder()..update(updates)).build();
 
   _$ValueSourceField._(
@@ -52,7 +52,7 @@ class _$ValueSourceField extends ValueSourceField {
   }
 
   @override
-  ValueSourceField rebuild(updates(ValueSourceFieldBuilder b)) =>
+  ValueSourceField rebuild(void updates(ValueSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -106,7 +106,7 @@ class _$ValueSourceField extends ValueSourceField {
 
 class ValueSourceFieldBuilder
     implements Builder<ValueSourceField, ValueSourceFieldBuilder> {
-  ValueSourceField _$v;
+  _$ValueSourceField _$v;
 
   String _name;
   String get name => _$this._name;
@@ -164,16 +164,16 @@ class ValueSourceFieldBuilder
   @override
   void replace(ValueSourceField other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$ValueSourceField;
   }
 
   @override
-  void update(updates(ValueSourceFieldBuilder b)) {
+  void update(void updates(ValueSourceFieldBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  ValueSourceField build() {
+  _$ValueSourceField build() {
     final result = _$v ??
         new _$ValueSourceField._(
             name: name,

@@ -18,7 +18,7 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
   @override
   Iterable serialize(Serializers serializers, Collections object,
       {FullType specifiedType: FullType.unspecified}) {
-    final result = [
+    final result = <Object>[
       'list',
       serializers.serialize(object.list,
           specifiedType:
@@ -79,83 +79,78 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
       {FullType specifiedType: FullType.unspecified}) {
     final result = new CollectionsBuilder();
 
-    var key;
-    var value;
-    var expectingKey = true;
-    for (final item in serialized) {
-      if (expectingKey) {
-        key = item;
-        expectingKey = false;
-      } else {
-        value = item;
-        expectingKey = true;
-
-        switch (key as String) {
-          case 'list':
-            result.list.replace(serializers.deserialize(value,
-                    specifiedType:
-                        const FullType(BuiltList, const [const FullType(int)]))
-                as dynamic);
-            break;
-          case 'set':
-            result.set.replace(serializers.deserialize(value,
-                specifiedType: const FullType(
-                    BuiltSet, const [const FullType(String)])) as dynamic);
-            break;
-          case 'map':
-            result.map.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltMap, const [
-                  const FullType(String),
-                  const FullType(int)
-                ])) as dynamic);
-            break;
-          case 'listMultimap':
-            result.listMultimap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltListMultimap, const [
-                  const FullType(int),
-                  const FullType(bool)
-                ])) as dynamic);
-            break;
-          case 'setMultimap':
-            result.setMultimap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltSetMultimap, const [
-                  const FullType(String),
-                  const FullType(bool)
-                ])) as dynamic);
-            break;
-          case 'nullableList':
-            result.nullableList.replace(serializers.deserialize(value,
-                    specifiedType:
-                        const FullType(BuiltList, const [const FullType(int)]))
-                as dynamic);
-            break;
-          case 'nullableSet':
-            result.nullableSet.replace(serializers.deserialize(value,
-                specifiedType: const FullType(
-                    BuiltSet, const [const FullType(String)])) as dynamic);
-            break;
-          case 'nullableMap':
-            result.nullableMap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltMap, const [
-                  const FullType(String),
-                  const FullType(int)
-                ])) as dynamic);
-            break;
-          case 'nullableListMultimap':
-            result.nullableListMultimap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltListMultimap, const [
-                  const FullType(int),
-                  const FullType(bool)
-                ])) as dynamic);
-            break;
-          case 'nullableSetMultimap':
-            result.nullableSetMultimap.replace(serializers.deserialize(value,
-                specifiedType: const FullType(BuiltSetMultimap, const [
-                  const FullType(String),
-                  const FullType(bool)
-                ])) as dynamic);
-            break;
-        }
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'list':
+          result.list.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(int)]))
+              as BuiltList<int>);
+          break;
+        case 'set':
+          result.set.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltSet, const [const FullType(String)]))
+              as BuiltSet<String>);
+          break;
+        case 'map':
+          result.map.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(String),
+                const FullType(int)
+              ])) as BuiltMap<String, int>);
+          break;
+        case 'listMultimap':
+          result.listMultimap.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltListMultimap, const [
+                const FullType(int),
+                const FullType(bool)
+              ])) as BuiltListMultimap<int, bool>);
+          break;
+        case 'setMultimap':
+          result.setMultimap.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltSetMultimap, const [
+                const FullType(String),
+                const FullType(bool)
+              ])) as BuiltSetMultimap<String, bool>);
+          break;
+        case 'nullableList':
+          result.nullableList.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(int)]))
+              as BuiltList<int>);
+          break;
+        case 'nullableSet':
+          result.nullableSet.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltSet, const [const FullType(String)]))
+              as BuiltSet<String>);
+          break;
+        case 'nullableMap':
+          result.nullableMap.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(String),
+                const FullType(int)
+              ])) as BuiltMap<String, int>);
+          break;
+        case 'nullableListMultimap':
+          result.nullableListMultimap.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltListMultimap, const [
+                const FullType(int),
+                const FullType(bool)
+              ])) as BuiltListMultimap<int, bool>);
+          break;
+        case 'nullableSetMultimap':
+          result.nullableSetMultimap.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltSetMultimap, const [
+                const FullType(String),
+                const FullType(bool)
+              ])) as BuiltSetMultimap<String, bool>);
+          break;
       }
     }
 
@@ -190,7 +185,7 @@ class _$Collections extends Collections {
   @override
   final BuiltSetMultimap<String, bool> nullableSetMultimap;
 
-  factory _$Collections([updates(CollectionsBuilder b)]) =>
+  factory _$Collections([void updates(CollectionsBuilder b)]) =>
       (new CollectionsBuilder()..update(updates)).build();
 
   _$Collections._(
@@ -213,7 +208,7 @@ class _$Collections extends Collections {
   }
 
   @override
-  Collections rebuild(updates(CollectionsBuilder b)) =>
+  Collections rebuild(void updates(CollectionsBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -273,7 +268,7 @@ class _$Collections extends Collections {
 }
 
 class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
-  Collections _$v;
+  _$Collections _$v;
 
   ListBuilder<int> _list;
   ListBuilder<int> get list => _$this._list ??= new ListBuilder<int>();
@@ -354,16 +349,16 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
   @override
   void replace(Collections other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other;
+    _$v = other as _$Collections;
   }
 
   @override
-  void update(updates(CollectionsBuilder b)) {
+  void update(void updates(CollectionsBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  Collections build() {
+  _$Collections build() {
     final result = _$v ??
         new _$Collections._(
             list: list?.build(),
