@@ -9,16 +9,24 @@ import 'package:test/test.dart';
 
 void main() {
   group('HasInt', () {
-    final data = new BuiltList<HasInt>([
-      new ValueWithInt((b) => b
+    final data = new BuiltList<ValueWithHasInt>([
+      new ValueWithHasInt((b) => b.hasInt = new ValueWithInt((b) => b
         ..anInt = 2
-        ..note = 'two'),
-      EnumWithInt.one,
+        ..note = 'two')),
+      new ValueWithHasInt((b) => b.hasInt = EnumWithInt.one),
     ]);
     final serialized = [
       'list',
-      ['ValueWithInt', 'anInt', 2, 'note', 'two'],
-      ['EnumWithInt', 'one'],
+      [
+        'ValueWithHasInt',
+        'hasInt',
+        ['ValueWithInt', 'anInt', 2, 'note', 'two']
+      ],
+      [
+        'ValueWithHasInt',
+        'hasInt',
+        ['EnumWithInt', 'one']
+      ],
     ];
 
     test('can be serialized', () {
