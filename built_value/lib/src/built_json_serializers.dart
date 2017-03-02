@@ -37,8 +37,7 @@ class BuiltJsonSerializers implements Serializers {
     }
     var result = _serialize(transformedObject, specifiedType);
     for (final plugin in _plugins) {
-      result =
-          plugin.afterSerialize(result, specifiedType);
+      result = plugin.afterSerialize(result, specifiedType);
     }
     return result;
   }
@@ -97,7 +96,7 @@ class BuiltJsonSerializers implements Serializers {
 
   Object _deserialize(Object object, FullType specifiedType) {
     if (specifiedType.isUnspecified) {
-      final wireName = (object as List).first;
+      final String wireName = (object as List).first as String;
 
       final serializer = _wireNameToSerializer[wireName];
       if (serializer == null) {
@@ -115,8 +114,12 @@ class BuiltJsonSerializers implements Serializers {
     } else {
       final serializer = _getSerializerByType(specifiedType.root);
       if (serializer == null) {
-        // Might be an interface; try resolving using the runtime type.
-        return deserialize(object);
+        if (object is List && object.first is String) {
+          // Might be an interface; try resolving using the type on the wire.
+          return deserialize(object);
+        } else {
+          throw new StateError("No serializer for '${specifiedType.root}'.");
+        }
       }
 
       if (serializer is StructuredSerializer) {

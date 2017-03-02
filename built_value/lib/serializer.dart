@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/src/num_serializer.dart';
 import 'package:quiver/core.dart';
 import 'src/bool_serializer.dart';
 import 'src/built_json_serializers.dart';
@@ -32,6 +33,7 @@ abstract class Serializers {
           ..add(new BuiltSetMultimapSerializer())
           ..add(new DoubleSerializer())
           ..add(new IntSerializer())
+          ..add(new NumSerializer())
           ..add(new StringSerializer())
           ..addBuilderFactory(
               const FullType(BuiltList, const [FullType.object]),

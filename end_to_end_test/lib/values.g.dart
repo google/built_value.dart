@@ -16,6 +16,8 @@ Serializer<ValueUsingImportAs> _$valueUsingImportAsSerializer =
     new _$ValueUsingImportAsSerializer();
 Serializer<NoFieldsValue> _$noFieldsValueSerializer =
     new _$NoFieldsValueSerializer();
+Serializer<PrimitivesValue> _$primitivesValueSerializer =
+    new _$PrimitivesValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -221,6 +223,72 @@ class _$NoFieldsValueSerializer implements StructuredSerializer<NoFieldsValue> {
   NoFieldsValue deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType: FullType.unspecified}) {
     return new NoFieldsValueBuilder().build();
+  }
+}
+
+class _$PrimitivesValueSerializer
+    implements StructuredSerializer<PrimitivesValue> {
+  @override
+  final Iterable<Type> types = const [PrimitivesValue, _$PrimitivesValue];
+  @override
+  final String wireName = 'PrimitivesValue';
+
+  @override
+  Iterable serialize(Serializers serializers, PrimitivesValue object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'boolean',
+      serializers.serialize(object.boolean,
+          specifiedType: const FullType(bool)),
+      'integer',
+      serializers.serialize(object.integer, specifiedType: const FullType(int)),
+      'dbl',
+      serializers.serialize(object.dbl, specifiedType: const FullType(double)),
+      'number',
+      serializers.serialize(object.number, specifiedType: const FullType(num)),
+      'string',
+      serializers.serialize(object.string,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PrimitivesValue deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new PrimitivesValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'boolean':
+          result.boolean = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'integer':
+          result.integer = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'dbl':
+          result.dbl = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'number':
+          result.number = serializers.deserialize(value,
+              specifiedType: const FullType(num)) as num;
+          break;
+        case 'string':
+          result.string = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
   }
 }
 
@@ -916,6 +984,138 @@ class NoFieldsValueBuilder
   @override
   _$NoFieldsValue build() {
     final result = _$v ?? new _$NoFieldsValue._();
+    replace(result);
+    return result;
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class PrimitivesValue
+// **************************************************************************
+
+class _$PrimitivesValue extends PrimitivesValue {
+  @override
+  final bool boolean;
+  @override
+  final int integer;
+  @override
+  final double dbl;
+  @override
+  final num number;
+  @override
+  final String string;
+
+  factory _$PrimitivesValue([void updates(PrimitivesValueBuilder b)]) =>
+      (new PrimitivesValueBuilder()..update(updates)).build();
+
+  _$PrimitivesValue._(
+      {this.boolean, this.integer, this.dbl, this.number, this.string})
+      : super._() {
+    if (boolean == null) throw new ArgumentError.notNull('boolean');
+    if (integer == null) throw new ArgumentError.notNull('integer');
+    if (dbl == null) throw new ArgumentError.notNull('dbl');
+    if (number == null) throw new ArgumentError.notNull('number');
+    if (string == null) throw new ArgumentError.notNull('string');
+  }
+
+  @override
+  PrimitivesValue rebuild(void updates(PrimitivesValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PrimitivesValueBuilder toBuilder() =>
+      new PrimitivesValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! PrimitivesValue) return false;
+    return boolean == other.boolean &&
+        integer == other.integer &&
+        dbl == other.dbl &&
+        number == other.number &&
+        string == other.string;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc($jc($jc($jc(0, boolean.hashCode), integer.hashCode), dbl.hashCode),
+            number.hashCode),
+        string.hashCode));
+  }
+
+  @override
+  String toString() {
+    return 'PrimitivesValue {'
+        'boolean=${boolean.toString()},\n'
+        'integer=${integer.toString()},\n'
+        'dbl=${dbl.toString()},\n'
+        'number=${number.toString()},\n'
+        'string=${string.toString()},\n'
+        '}';
+  }
+}
+
+class PrimitivesValueBuilder
+    implements Builder<PrimitivesValue, PrimitivesValueBuilder> {
+  _$PrimitivesValue _$v;
+
+  bool _boolean;
+  bool get boolean => _$this._boolean;
+  set boolean(bool boolean) => _$this._boolean = boolean;
+
+  int _integer;
+  int get integer => _$this._integer;
+  set integer(int integer) => _$this._integer = integer;
+
+  double _dbl;
+  double get dbl => _$this._dbl;
+  set dbl(double dbl) => _$this._dbl = dbl;
+
+  num _number;
+  num get number => _$this._number;
+  set number(num number) => _$this._number = number;
+
+  String _string;
+  String get string => _$this._string;
+  set string(String string) => _$this._string = string;
+
+  PrimitivesValueBuilder();
+
+  PrimitivesValueBuilder get _$this {
+    if (_$v != null) {
+      _boolean = _$v.boolean;
+      _integer = _$v.integer;
+      _dbl = _$v.dbl;
+      _number = _$v.number;
+      _string = _$v.string;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(PrimitivesValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$PrimitivesValue;
+  }
+
+  @override
+  void update(void updates(PrimitivesValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$PrimitivesValue build() {
+    final result = _$v ??
+        new _$PrimitivesValue._(
+            boolean: boolean,
+            integer: integer,
+            dbl: dbl,
+            number: number,
+            string: string);
     replace(result);
     return result;
   }

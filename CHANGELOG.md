@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.5
+
+- Add serializer for "num" fields.
+- Better error message for missing serializer.
+
 ## 0.5.4
 
 - Enforce that serializer declarations refer to the right generated name.

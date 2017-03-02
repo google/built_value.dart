@@ -142,3 +142,18 @@ abstract class NoFieldsValue
 
   NoFieldsValue._();
 }
+
+abstract class PrimitivesValue
+    implements Built<PrimitivesValue, PrimitivesValueBuilder> {
+  static Serializer<PrimitivesValue> get serializer => _$primitivesValueSerializer;
+
+  bool get boolean;
+  int get integer;
+  double get dbl;
+  num get number;
+  String get string;
+
+  factory PrimitivesValue([updates(PrimitivesValueBuilder b)]) = _$PrimitivesValue;
+
+  PrimitivesValue._();
+}

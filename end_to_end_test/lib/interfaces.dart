@@ -56,3 +56,15 @@ class EnumWithInt extends EnumClass implements HasInt {
     }
   }
 }
+
+abstract class ValueWithHasInt
+    implements Built<ValueWithHasInt, ValueWithHasIntBuilder> {
+  static Serializer<ValueWithHasInt> get serializer =>
+      _$valueWithHasIntSerializer;
+
+  factory ValueWithHasInt([updates(ValueWithHasIntBuilder b)]) =
+      _$ValueWithHasInt;
+  ValueWithHasInt._();
+
+  HasInt get hasInt;
+}

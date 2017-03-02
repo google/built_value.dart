@@ -109,4 +109,34 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('PrimitivesValue', () {
+    final data = new PrimitivesValue((b) => b
+      ..boolean = true
+      ..integer = 42
+      ..dbl = 2.5
+      ..number = 17.5
+      ..string = 'test');
+    final serialized = [
+      'PrimitivesValue',
+      'boolean',
+      true,
+      'integer',
+      42,
+      'dbl',
+      2.5,
+      'number',
+      17.5,
+      'string',
+      'test',
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }
