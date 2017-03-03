@@ -107,10 +107,9 @@ abstract class SerializerSourceField
 
   static String _generateFullType(
       String type, BuiltSet<String> classGenericParameters) {
-    // TODO(davidmorgan): support more than one level of nesting.
     final bareType = _getBareType(type);
     final generics = _getGenerics(type);
-    final genericItems = generics.split(', ');
+    final genericItems = _splitOnTopLevelCommas(generics);
 
     if (generics.isEmpty) {
       if (classGenericParameters.contains(bareType))
@@ -131,7 +130,7 @@ abstract class SerializerSourceField
       String type, BuiltMap<String, String> classGenericBounds) {
     final bareType = _getBareType(type);
     final generics = _getGenerics(type);
-    final genericItems = generics.split(', ');
+    final genericItems = _splitOnTopLevelCommas(generics);
 
     if (generics.isEmpty) {
       if (classGenericBounds.keys.contains(bareType))
@@ -157,6 +156,29 @@ abstract class SerializerSourceField
         : name
             .substring(genericsStart + 1)
             .substring(0, name.length - genericsStart - 2);
+  }
+
+  /// Splits a generic parameter string on top level commas; that means
+  /// commas nested inside '<' and '>' are ignored.
+  static BuiltList<String> _splitOnTopLevelCommas(String string) {
+    final result = new ListBuilder<String>();
+    final accumulator = new StringBuffer();
+    var depth = 0;
+    for (var i = 0; i != string.length; ++i) {
+      if (string[i] == '<') ++depth;
+      if (string[i] == '>') --depth;
+
+      if (string[i] == ',' && depth == 0) {
+        result.add(accumulator.toString().trim());
+        accumulator.clear();
+      } else {
+        accumulator.write(string[i]);
+      }
+    }
+    if (accumulator.isNotEmpty) {
+      result.add(accumulator.toString().trim());
+    }
+    return result.build();
   }
 
   // These three methods are copied from built_value to match the behaviour

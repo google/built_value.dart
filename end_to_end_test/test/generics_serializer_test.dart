@@ -338,4 +338,38 @@ void main() {
       expect(serializersWithBuilder.deserialize(serialized), data);
     });
   });
+
+  group('NestedGenericContainer with known specifiedType', () {
+    final data = new NestedGenericContainer(
+        (b) => b..map.value = new BuiltMap<int, String>({1: 'one'}));
+    final specifiedType = const FullType(NestedGenericContainer);
+    // TODO(davidmorgan): adding this builder manually shouldn't be necessary.
+    // Auto-add builders for nested generic types.
+    final serializersWithBuilder = (serializers.toBuilder()
+          ..addBuilderFactory(
+              const FullType(BuiltMap,
+                  const [const FullType(int), const FullType(String)]),
+              () => new MapBuilder<int, String>()))
+        .build();
+    final serialized = [
+      'map',
+      [
+        'value',
+        [1, 'one'],
+      ],
+    ];
+
+    test('can be serialized', () {
+      expect(
+          serializersWithBuilder.serialize(data, specifiedType: specifiedType),
+          serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(
+          serializersWithBuilder.deserialize(serialized,
+              specifiedType: specifiedType),
+          data);
+    });
+  });
 }

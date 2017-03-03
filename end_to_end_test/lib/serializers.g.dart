@@ -22,6 +22,13 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(
               CollectionGenericValue, const [const FullType(String)]),
           () => new CollectionGenericValueBuilder<String>())
+      ..add(NestedGenericContainer.serializer)
+      ..addBuilderFactory(
+          const FullType(GenericValue, const [
+            const FullType(
+                BuiltMap, const [const FullType(int), const FullType(String)])
+          ]),
+          () => new GenericValueBuilder<BuiltMap<int, String>>())
       ..add(TestEnum.serializer)
       ..add(Collections.serializer)
       ..addBuilderFactory(

@@ -15,6 +15,8 @@ Serializer<CollectionGenericValue> _$collectionGenericValueSerializer =
     new _$CollectionGenericValueSerializer();
 Serializer<GenericContainer> _$genericContainerSerializer =
     new _$GenericContainerSerializer();
+Serializer<NestedGenericContainer> _$nestedGenericContainerSerializer =
+    new _$NestedGenericContainerSerializer();
 
 class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
   @override
@@ -240,6 +242,57 @@ class _$GenericContainerSerializer
                   specifiedType: const FullType(
                       CollectionGenericValue, const [const FullType(String)]))
               as CollectionGenericValue<String>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$NestedGenericContainerSerializer
+    implements StructuredSerializer<NestedGenericContainer> {
+  @override
+  final Iterable<Type> types = const [
+    NestedGenericContainer,
+    _$NestedGenericContainer
+  ];
+  @override
+  final String wireName = 'NestedGenericContainer';
+
+  @override
+  Iterable serialize(Serializers serializers, NestedGenericContainer object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'map',
+      serializers.serialize(object.map,
+          specifiedType: const FullType(GenericValue, const [
+            const FullType(
+                BuiltMap, const [const FullType(int), const FullType(String)])
+          ])),
+    ];
+
+    return result;
+  }
+
+  @override
+  NestedGenericContainer deserialize(
+      Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new NestedGenericContainerBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'map':
+          result.map.replace(serializers.deserialize(value,
+              specifiedType: const FullType(GenericValue, const [
+                const FullType(BuiltMap,
+                    const [const FullType(int), const FullType(String)])
+              ])) as GenericValue<BuiltMap<int, String>>);
           break;
       }
     }
@@ -621,6 +674,90 @@ class GenericContainerBuilder
             genericValue: genericValue?.build(),
             boundGenericValue: boundGenericValue?.build(),
             collectionGenericValue: collectionGenericValue?.build());
+    replace(result);
+    return result;
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class NestedGenericContainer
+// **************************************************************************
+
+class _$NestedGenericContainer extends NestedGenericContainer {
+  @override
+  final GenericValue<BuiltMap<int, String>> map;
+
+  factory _$NestedGenericContainer(
+          [void updates(NestedGenericContainerBuilder b)]) =>
+      (new NestedGenericContainerBuilder()..update(updates)).build();
+
+  _$NestedGenericContainer._({this.map}) : super._() {
+    if (map == null) throw new ArgumentError.notNull('map');
+  }
+
+  @override
+  NestedGenericContainer rebuild(
+          void updates(NestedGenericContainerBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  NestedGenericContainerBuilder toBuilder() =>
+      new NestedGenericContainerBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! NestedGenericContainer) return false;
+    return map == other.map;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, map.hashCode));
+  }
+
+  @override
+  String toString() {
+    return 'NestedGenericContainer {'
+        'map=${map.toString()},\n'
+        '}';
+  }
+}
+
+class NestedGenericContainerBuilder
+    implements Builder<NestedGenericContainer, NestedGenericContainerBuilder> {
+  _$NestedGenericContainer _$v;
+
+  GenericValueBuilder<BuiltMap<int, String>> _map;
+  GenericValueBuilder<BuiltMap<int, String>> get map =>
+      _$this._map ??= new GenericValueBuilder<BuiltMap<int, String>>();
+  set map(GenericValueBuilder<BuiltMap<int, String>> map) => _$this._map = map;
+
+  NestedGenericContainerBuilder();
+
+  NestedGenericContainerBuilder get _$this {
+    if (_$v != null) {
+      _map = _$v.map?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(NestedGenericContainer other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$NestedGenericContainer;
+  }
+
+  @override
+  void update(void updates(NestedGenericContainerBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$NestedGenericContainer build() {
+    final result = _$v ?? new _$NestedGenericContainer._(map: map?.build());
     replace(result);
     return result;
   }
