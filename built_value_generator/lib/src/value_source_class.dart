@@ -162,12 +162,9 @@ abstract class ValueSourceClass
 
     if (!valueClassFactories
         .any((factory) => factory.contains('_\$$name$_generics'))) {
-      final examples = [
-        'factory $name([updates(${name}Builder$_generics b)]) = '
-            '_\$$name$_generics;',
-      ];
       result.add('Add a factory so your class can be instantiated. Example:\n\n'
-          '${examples.join("\n")}');
+          'factory $name([updates(${name}Builder$_generics b)]) = '
+          '_\$$name$_generics;');
     }
 
     return result;

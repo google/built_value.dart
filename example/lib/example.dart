@@ -33,7 +33,7 @@ void example() {
   // Values can use generics.
   final value6 = new GenericValue<String>((b) => b..value = 'string');
 
-  // Values with a simplified factory still have a builder if you want it.
+  // Values with a simplified factory still have a builder.
   final value7 = new VerySimpleValue(3);
   final value8 = value7.rebuild((b) => b..value = 4);
 
