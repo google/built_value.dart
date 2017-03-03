@@ -5,6 +5,7 @@
 - Add serializer for "num" fields.
 - Better error message for missing serializer.
 - Fix generation when there are nested multi-parameter generics.
+- Use cascades in generated code as suggested by lint.
 
 ## 0.5.4
 

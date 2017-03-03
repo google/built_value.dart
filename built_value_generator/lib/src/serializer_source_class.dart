@@ -236,8 +236,9 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   String _generateNullableFieldSerializers() {
     return fields.where((field) => field.isNullable).map((field) => '''
     if (object.${field.name} != null) {
-      result.add('${field.name}');
-      result.add(serializers.serialize(
+      result
+          ..add('${field.name}')
+          ..add(serializers.serialize(
           object.${field.name}, specifiedType: ${field.generateFullType(genericParameters.toBuiltSet())}));
     }
 ''').join('');
