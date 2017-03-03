@@ -160,13 +160,14 @@ abstract class ValueSourceClass
           'Make class have exactly one constructor: $expectedConstructor;');
     }
 
-    final expectedFactory =
-        'factory $name([updates(${name}Builder$_generics b)]) = _\$$name$_generics;';
-    final alternativeExpectedFactory =
-        'factory $name([void updates(${name}Builder$_generics b)]) = _\$$name$_generics;';
-    if (!valueClassFactories.any((factory) =>
-        factory == expectedFactory || factory == alternativeExpectedFactory)) {
-      result.add('Make class have factory: $expectedFactory');
+    if (!valueClassFactories
+        .any((factory) => factory.contains('_\$$name$_generics'))) {
+      final examples = [
+        'factory $name([updates(${name}Builder$_generics b)]) = '
+            '_\$$name$_generics;',
+      ];
+      result.add('Add a factory so your class can be instantiated. Example:\n\n'
+          '${examples.join("\n")}');
     }
 
     return result;

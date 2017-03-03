@@ -33,8 +33,21 @@ void example() {
   // Values can use generics.
   final value6 = new GenericValue<String>((b) => b..value = 'string');
 
+  // Values with a simplified factory still have a builder if you want it.
+  final value7 = new VerySimpleValue(3);
+  final value8 = value7.rebuild((b) => b..value = 4);
+
   // Everything is serializable.
-  for (final object in [value, value2, value3, value4, value5, value6]) {
+  for (final object in [
+    value,
+    value2,
+    value3,
+    value4,
+    value5,
+    value6,
+    value7,
+    value8,
+  ]) {
     final serialized = serializers.serialize(object);
     print(serialized);
     assert(serializers.deserialize(serialized) == object);

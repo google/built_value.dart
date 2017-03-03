@@ -48,6 +48,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
               const [const FullType(String), const FullType(bool)]),
           () => new SetMultimapBuilder<String, bool>())
       ..add(SimpleValue.serializer)
+      ..add(VerySimpleValue.serializer)
       ..add(CompoundValue.serializer)
       ..add(ValidatedValue.serializer)
       ..add(GenericValue.serializer)
