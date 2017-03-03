@@ -41,34 +41,39 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
               const [const FullType(String), const FullType(bool)])),
     ];
     if (object.nullableList != null) {
-      result.add('nullableList');
-      result.add(serializers.serialize(object.nullableList,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(int)])));
+      result
+        ..add('nullableList')
+        ..add(serializers.serialize(object.nullableList,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(int)])));
     }
     if (object.nullableSet != null) {
-      result.add('nullableSet');
-      result.add(serializers.serialize(object.nullableSet,
-          specifiedType:
-              const FullType(BuiltSet, const [const FullType(String)])));
+      result
+        ..add('nullableSet')
+        ..add(serializers.serialize(object.nullableSet,
+            specifiedType:
+                const FullType(BuiltSet, const [const FullType(String)])));
     }
     if (object.nullableMap != null) {
-      result.add('nullableMap');
-      result.add(serializers.serialize(object.nullableMap,
-          specifiedType: const FullType(
-              BuiltMap, const [const FullType(String), const FullType(int)])));
+      result
+        ..add('nullableMap')
+        ..add(serializers.serialize(object.nullableMap,
+            specifiedType: const FullType(BuiltMap,
+                const [const FullType(String), const FullType(int)])));
     }
     if (object.nullableListMultimap != null) {
-      result.add('nullableListMultimap');
-      result.add(serializers.serialize(object.nullableListMultimap,
-          specifiedType: const FullType(BuiltListMultimap,
-              const [const FullType(int), const FullType(bool)])));
+      result
+        ..add('nullableListMultimap')
+        ..add(serializers.serialize(object.nullableListMultimap,
+            specifiedType: const FullType(BuiltListMultimap,
+                const [const FullType(int), const FullType(bool)])));
     }
     if (object.nullableSetMultimap != null) {
-      result.add('nullableSetMultimap');
-      result.add(serializers.serialize(object.nullableSetMultimap,
-          specifiedType: const FullType(BuiltSetMultimap,
-              const [const FullType(String), const FullType(bool)])));
+      result
+        ..add('nullableSetMultimap')
+        ..add(serializers.serialize(object.nullableSetMultimap,
+            specifiedType: const FullType(BuiltSetMultimap,
+                const [const FullType(String), const FullType(bool)])));
     }
 
     return result;

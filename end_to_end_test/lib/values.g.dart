@@ -33,9 +33,10 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
     ];
     if (object.aString != null) {
-      result.add('aString');
-      result.add(serializers.serialize(object.aString,
-          specifiedType: const FullType(String)));
+      result
+        ..add('aString')
+        ..add(serializers.serialize(object.aString,
+            specifiedType: const FullType(String)));
     }
 
     return result;
@@ -82,9 +83,10 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
           specifiedType: const FullType(SimpleValue)),
     ];
     if (object.validatedValue != null) {
-      result.add('validatedValue');
-      result.add(serializers.serialize(object.validatedValue,
-          specifiedType: const FullType(ValidatedValue)));
+      result
+        ..add('validatedValue')
+        ..add(serializers.serialize(object.validatedValue,
+            specifiedType: const FullType(ValidatedValue)));
     }
 
     return result;
@@ -131,9 +133,10 @@ class _$ValidatedValueSerializer
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
     ];
     if (object.aString != null) {
-      result.add('aString');
-      result.add(serializers.serialize(object.aString,
-          specifiedType: const FullType(String)));
+      result
+        ..add('aString')
+        ..add(serializers.serialize(object.aString,
+            specifiedType: const FullType(String)));
     }
 
     return result;
