@@ -4,6 +4,7 @@
 
 - Add serializer for "num" fields.
 - Better error message for missing serializer.
+- Fix generation when there are nested multi-parameter generics.
 
 ## 0.5.4
 

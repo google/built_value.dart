@@ -59,3 +59,15 @@ abstract class GenericContainer
       _$GenericContainer;
   GenericContainer._();
 }
+
+abstract class NestedGenericContainer
+    implements Built<NestedGenericContainer, NestedGenericContainerBuilder> {
+  static Serializer<NestedGenericContainer> get serializer =>
+      _$nestedGenericContainerSerializer;
+
+  GenericValue<BuiltMap<int, String>> get map;
+
+  factory NestedGenericContainer([updates(NestedGenericContainerBuilder b)]) =
+  _$NestedGenericContainer;
+  NestedGenericContainer._();
+}
