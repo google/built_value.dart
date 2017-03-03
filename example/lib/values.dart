@@ -29,8 +29,30 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
   @nullable
   String get aString;
 
+  /// The recommended factory exposes the generated builder interface. This
+  /// works well for classes with many fields, or for classes that might be
+  /// changed to have more fields later. For very simple classes, you might
+  /// want something simpler. See [VerySimpleValue].
   factory SimpleValue([updates(SimpleValueBuilder b)]) = _$SimpleValue;
   SimpleValue._();
+}
+
+abstract class VerySimpleValue
+    implements Built<VerySimpleValue, VerySimpleValueBuilder> {
+  /// Example of how to make a built_value type serializable.
+  ///
+  /// Declare a static final [Serializer] field called `serializer`.
+  /// The built_value code generator will provide the implementation. You need
+  /// to do this for every type you want to serialize.
+  static Serializer<VerySimpleValue> get serializer =>
+      _$verySimpleValueSerializer;
+
+  int get value;
+
+  /// If you won't usually use the generated builder -- for example, for a
+  /// class with one field -- you can write a simpler factory.
+  factory VerySimpleValue(int value) => new _$VerySimpleValue._(value: value);
+  VerySimpleValue._();
 }
 
 /// Fields can use built_value classes.

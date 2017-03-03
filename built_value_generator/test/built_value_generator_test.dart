@@ -160,8 +160,11 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''),
-          contains("1. Make class have factory: "
-              "factory Value([updates(ValueBuilder b)]) = _\$Value;"));
+          contains(
+              '1. Add a factory so your class can be instantiated. Example:\n'
+              '//\n'
+              '//        '
+              'factory Value([updates(ValueBuilder b)]) = _\$Value;'));
     });
 
     test('suggests to make builder class abstract', () async {

@@ -8,6 +8,8 @@ part of values;
 // **************************************************************************
 
 Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
+Serializer<VerySimpleValue> _$verySimpleValueSerializer =
+    new _$VerySimpleValueSerializer();
 Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
 Serializer<ValidatedValue> _$validatedValueSerializer =
@@ -54,6 +56,46 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
         case 'aString':
           result.aString = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$VerySimpleValueSerializer
+    implements StructuredSerializer<VerySimpleValue> {
+  @override
+  final Iterable<Type> types = const [VerySimpleValue, _$VerySimpleValue];
+  @override
+  final String wireName = 'VerySimpleValue';
+
+  @override
+  Iterable serialize(Serializers serializers, VerySimpleValue object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  VerySimpleValue deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new VerySimpleValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -244,6 +286,87 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   @override
   _$SimpleValue build() {
     final result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
+    replace(result);
+    return result;
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class VerySimpleValue
+// **************************************************************************
+
+class _$VerySimpleValue extends VerySimpleValue {
+  @override
+  final int value;
+
+  factory _$VerySimpleValue([void updates(VerySimpleValueBuilder b)]) =>
+      (new VerySimpleValueBuilder()..update(updates)).build();
+
+  _$VerySimpleValue._({this.value}) : super._() {
+    if (value == null) throw new ArgumentError.notNull('value');
+  }
+
+  @override
+  VerySimpleValue rebuild(void updates(VerySimpleValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  VerySimpleValueBuilder toBuilder() =>
+      new VerySimpleValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! VerySimpleValue) return false;
+    return value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return 'VerySimpleValue {'
+        'value=${value.toString()},\n'
+        '}';
+  }
+}
+
+class VerySimpleValueBuilder
+    implements Builder<VerySimpleValue, VerySimpleValueBuilder> {
+  _$VerySimpleValue _$v;
+
+  int _value;
+  int get value => _$this._value;
+  set value(int value) => _$this._value = value;
+
+  VerySimpleValueBuilder();
+
+  VerySimpleValueBuilder get _$this {
+    if (_$v != null) {
+      _value = _$v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(VerySimpleValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$VerySimpleValue;
+  }
+
+  @override
+  void update(void updates(VerySimpleValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$VerySimpleValue build() {
+    final result = _$v ?? new _$VerySimpleValue._(value: value);
     replace(result);
     return result;
   }

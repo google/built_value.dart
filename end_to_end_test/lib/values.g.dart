@@ -18,6 +18,8 @@ Serializer<NoFieldsValue> _$noFieldsValueSerializer =
     new _$NoFieldsValueSerializer();
 Serializer<PrimitivesValue> _$primitivesValueSerializer =
     new _$PrimitivesValueSerializer();
+Serializer<NamedFactoryValue> _$namedFactoryValueSerializer =
+    new _$NamedFactoryValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -287,6 +289,46 @@ class _$PrimitivesValueSerializer
         case 'string':
           result.string = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$NamedFactoryValueSerializer
+    implements StructuredSerializer<NamedFactoryValue> {
+  @override
+  final Iterable<Type> types = const [NamedFactoryValue, _$NamedFactoryValue];
+  @override
+  final String wireName = 'NamedFactoryValue';
+
+  @override
+  Iterable serialize(Serializers serializers, NamedFactoryValue object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  NamedFactoryValue deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new NamedFactoryValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -1119,6 +1161,87 @@ class PrimitivesValueBuilder
             dbl: dbl,
             number: number,
             string: string);
+    replace(result);
+    return result;
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class NamedFactoryValue
+// **************************************************************************
+
+class _$NamedFactoryValue extends NamedFactoryValue {
+  @override
+  final int value;
+
+  factory _$NamedFactoryValue([void updates(NamedFactoryValueBuilder b)]) =>
+      (new NamedFactoryValueBuilder()..update(updates)).build();
+
+  _$NamedFactoryValue._({this.value}) : super._() {
+    if (value == null) throw new ArgumentError.notNull('value');
+  }
+
+  @override
+  NamedFactoryValue rebuild(void updates(NamedFactoryValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  NamedFactoryValueBuilder toBuilder() =>
+      new NamedFactoryValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! NamedFactoryValue) return false;
+    return value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return 'NamedFactoryValue {'
+        'value=${value.toString()},\n'
+        '}';
+  }
+}
+
+class NamedFactoryValueBuilder
+    implements Builder<NamedFactoryValue, NamedFactoryValueBuilder> {
+  _$NamedFactoryValue _$v;
+
+  int _value;
+  int get value => _$this._value;
+  set value(int value) => _$this._value = value;
+
+  NamedFactoryValueBuilder();
+
+  NamedFactoryValueBuilder get _$this {
+    if (_$v != null) {
+      _value = _$v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(NamedFactoryValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$NamedFactoryValue;
+  }
+
+  @override
+  void update(void updates(NamedFactoryValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$NamedFactoryValue build() {
+    final result = _$v ?? new _$NamedFactoryValue._(value: value);
     replace(result);
     return result;
   }

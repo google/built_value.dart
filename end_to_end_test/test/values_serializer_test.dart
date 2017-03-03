@@ -139,4 +139,17 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('NamedFactoryValue', () {
+    final data = new NamedFactoryValue(3);
+    final serialized = ['NamedFactoryValue', 'value', 3];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }
