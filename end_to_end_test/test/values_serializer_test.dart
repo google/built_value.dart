@@ -116,7 +116,8 @@ void main() {
       ..integer = 42
       ..dbl = 2.5
       ..number = 17.5
-      ..string = 'test');
+      ..string = 'test'
+      ..dateTime = new DateTime.fromMillisecondsSinceEpoch(1000, isUtc: true));
     final serialized = [
       'PrimitivesValue',
       'boolean',
@@ -129,6 +130,8 @@ void main() {
       17.5,
       'string',
       'test',
+      'dateTime',
+      1000,
     ];
 
     test('can be serialized', () {
