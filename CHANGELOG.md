@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.6
+
+- Add serializer for "DateTime" fields.
+
 ## 0.5.5
 
 - Add serializer for "num" fields.

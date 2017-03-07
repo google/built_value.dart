@@ -3,8 +3,10 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/src/date_time_serializer.dart';
 import 'package:built_value/src/num_serializer.dart';
 import 'package:quiver/core.dart';
+
 import 'src/bool_serializer.dart';
 import 'src/built_json_serializers.dart';
 import 'src/built_list_multimap_serializer.dart';
@@ -31,6 +33,7 @@ abstract class Serializers {
           ..add(new BuiltMapSerializer())
           ..add(new BuiltSetSerializer())
           ..add(new BuiltSetMultimapSerializer())
+          ..add(new DateTimeSerializer())
           ..add(new DoubleSerializer())
           ..add(new IntSerializer())
           ..add(new NumSerializer())

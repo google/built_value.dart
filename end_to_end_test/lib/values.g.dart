@@ -254,6 +254,9 @@ class _$PrimitivesValueSerializer
       'string',
       serializers.serialize(object.string,
           specifiedType: const FullType(String)),
+      'dateTime',
+      serializers.serialize(object.dateTime,
+          specifiedType: const FullType(DateTime)),
     ];
 
     return result;
@@ -289,6 +292,10 @@ class _$PrimitivesValueSerializer
         case 'string':
           result.string = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+        case 'dateTime':
+          result.dateTime = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
           break;
       }
     }
@@ -1050,18 +1057,26 @@ class _$PrimitivesValue extends PrimitivesValue {
   final num number;
   @override
   final String string;
+  @override
+  final DateTime dateTime;
 
   factory _$PrimitivesValue([void updates(PrimitivesValueBuilder b)]) =>
       (new PrimitivesValueBuilder()..update(updates)).build();
 
   _$PrimitivesValue._(
-      {this.boolean, this.integer, this.dbl, this.number, this.string})
+      {this.boolean,
+      this.integer,
+      this.dbl,
+      this.number,
+      this.string,
+      this.dateTime})
       : super._() {
     if (boolean == null) throw new ArgumentError.notNull('boolean');
     if (integer == null) throw new ArgumentError.notNull('integer');
     if (dbl == null) throw new ArgumentError.notNull('dbl');
     if (number == null) throw new ArgumentError.notNull('number');
     if (string == null) throw new ArgumentError.notNull('string');
+    if (dateTime == null) throw new ArgumentError.notNull('dateTime');
   }
 
   @override
@@ -1080,15 +1095,20 @@ class _$PrimitivesValue extends PrimitivesValue {
         integer == other.integer &&
         dbl == other.dbl &&
         number == other.number &&
-        string == other.string;
+        string == other.string &&
+        dateTime == other.dateTime;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, boolean.hashCode), integer.hashCode), dbl.hashCode),
-            number.hashCode),
-        string.hashCode));
+        $jc(
+            $jc(
+                $jc($jc($jc(0, boolean.hashCode), integer.hashCode),
+                    dbl.hashCode),
+                number.hashCode),
+            string.hashCode),
+        dateTime.hashCode));
   }
 
   @override
@@ -1099,6 +1119,7 @@ class _$PrimitivesValue extends PrimitivesValue {
         'dbl=${dbl.toString()},\n'
         'number=${number.toString()},\n'
         'string=${string.toString()},\n'
+        'dateTime=${dateTime.toString()},\n'
         '}';
   }
 }
@@ -1127,6 +1148,10 @@ class PrimitivesValueBuilder
   String get string => _$this._string;
   set string(String string) => _$this._string = string;
 
+  DateTime _dateTime;
+  DateTime get dateTime => _$this._dateTime;
+  set dateTime(DateTime dateTime) => _$this._dateTime = dateTime;
+
   PrimitivesValueBuilder();
 
   PrimitivesValueBuilder get _$this {
@@ -1136,6 +1161,7 @@ class PrimitivesValueBuilder
       _dbl = _$v.dbl;
       _number = _$v.number;
       _string = _$v.string;
+      _dateTime = _$v.dateTime;
       _$v = null;
     }
     return this;
@@ -1160,7 +1186,8 @@ class PrimitivesValueBuilder
             integer: integer,
             dbl: dbl,
             number: number,
-            string: string);
+            string: string,
+            dateTime: dateTime);
     replace(result);
     return result;
   }
