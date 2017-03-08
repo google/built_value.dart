@@ -1,4 +1,5 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'dart:convert' show JSON;
 
@@ -25,14 +26,16 @@ class StandardJsonPlugin implements SerializerPlugin {
 
   @override
   Object afterSerialize(Object object, FullType specifiedType) {
-    return object is List && specifiedType.root != BuiltList
+    return object is List &&
+            specifiedType.root != BuiltList &&
+            specifiedType.root != JsonObject
         ? _toMap(object, _alreadyHasStringKeys(specifiedType))
         : object;
   }
 
   @override
   Object beforeDeserialize(Object object, FullType specifiedType) {
-    return object is Map
+    return object is Map && specifiedType.root != JsonObject
         ? _toList(object, _alreadyHasStringKeys(specifiedType))
         : object;
   }

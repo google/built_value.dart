@@ -1,3 +1,5 @@
+import 'package:built_value/serializer.dart';
+import 'package:built_value/standard_json_plugin.dart';
 import 'package:example/generics.dart';
 import 'package:example/serializers.dart';
 import 'package:example/values.dart';
@@ -54,4 +56,45 @@ void example() {
   }
 
   // See chat_example and end_to_end_test for more complex usage!
+}
+
+/// Example of using StandardJsonPlugin.
+///
+/// The plugin changes the built_value serialization format to the Map-based
+/// format used by most JSON APIs. You must specify which type you are
+/// serializing/deserializing when using this plugin.
+void standardJsonExample() {
+  final standardSerializers =
+      (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
+
+  final serializedAccount = {
+    'id': 3,
+    'name': 'John Smith',
+    'keyValues': {
+      'visited': 1732,
+      'active': true,
+      'email': 'john.smith@example.com',
+      'tags': [74, 123, 4001],
+      'preferences': {
+        'showMenu': true,
+        'skipIntro': true,
+        'colorScheme': 'light',
+      }
+    }
+  };
+
+  // Use the deserializeWith method to specify what type you're deserializing.
+  final value = standardSerializers.deserializeWith(
+      Account.serializer, serializedAccount);
+  print(value);
+
+  assert(value.id == 3);
+  assert(value.name == 'John Smith');
+  assert(value.keyValues['tags'].asList[2] == 4001);
+  assert(value.keyValues['preferences'].asMap['colorScheme'] == 'light');
+
+  // Use the serializeWith method to specify what type you're serializing.
+  final serializedAgain =
+      standardSerializers.serializeWith(Account.serializer, value);
+  assert(serializedAccount.toString() == serializedAgain.toString());
 }

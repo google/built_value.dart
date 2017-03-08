@@ -14,6 +14,7 @@ Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
 Serializer<ValidatedValue> _$validatedValueSerializer =
     new _$ValidatedValueSerializer();
+Serializer<Account> _$accountSerializer = new _$AccountSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -196,6 +197,62 @@ class _$ValidatedValueSerializer
         case 'aString':
           result.aString = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$AccountSerializer implements StructuredSerializer<Account> {
+  @override
+  final Iterable<Type> types = const [Account, _$Account];
+  @override
+  final String wireName = 'Account';
+
+  @override
+  Iterable serialize(Serializers serializers, Account object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'keyValues',
+      serializers.serialize(object.keyValues,
+          specifiedType: const FullType(BuiltMap,
+              const [const FullType(String), const FullType(JsonObject)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  Account deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new AccountBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'keyValues':
+          result.keyValues.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(String),
+                const FullType(JsonObject)
+              ])) as BuiltMap<String, JsonObject>);
           break;
       }
     }
@@ -835,6 +892,107 @@ class DerivedValueBuilder
   @override
   _$DerivedValue build() {
     final result = _$v ?? new _$DerivedValue._(anInt: anInt);
+    replace(result);
+    return result;
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class Account
+// **************************************************************************
+
+class _$Account extends Account {
+  @override
+  final int id;
+  @override
+  final String name;
+  @override
+  final BuiltMap<String, JsonObject> keyValues;
+
+  factory _$Account([void updates(AccountBuilder b)]) =>
+      (new AccountBuilder()..update(updates)).build();
+
+  _$Account._({this.id, this.name, this.keyValues}) : super._() {
+    if (id == null) throw new ArgumentError.notNull('id');
+    if (name == null) throw new ArgumentError.notNull('name');
+    if (keyValues == null) throw new ArgumentError.notNull('keyValues');
+  }
+
+  @override
+  Account rebuild(void updates(AccountBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  AccountBuilder toBuilder() => new AccountBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! Account) return false;
+    return id == other.id && name == other.name && keyValues == other.keyValues;
+  }
+
+  @override
+  int get hashCode {
+    return $jf(
+        $jc($jc($jc(0, id.hashCode), name.hashCode), keyValues.hashCode));
+  }
+
+  @override
+  String toString() {
+    return 'Account {'
+        'id=${id.toString()},\n'
+        'name=${name.toString()},\n'
+        'keyValues=${keyValues.toString()},\n'
+        '}';
+  }
+}
+
+class AccountBuilder implements Builder<Account, AccountBuilder> {
+  _$Account _$v;
+
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
+
+  String _name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
+
+  MapBuilder<String, JsonObject> _keyValues;
+  MapBuilder<String, JsonObject> get keyValues =>
+      _$this._keyValues ??= new MapBuilder<String, JsonObject>();
+  set keyValues(MapBuilder<String, JsonObject> keyValues) =>
+      _$this._keyValues = keyValues;
+
+  AccountBuilder();
+
+  AccountBuilder get _$this {
+    if (_$v != null) {
+      _id = _$v.id;
+      _name = _$v.name;
+      _keyValues = _$v.keyValues?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Account other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$Account;
+  }
+
+  @override
+  void update(void updates(AccountBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Account build() {
+    final result = _$v ??
+        new _$Account._(id: id, name: name, keyValues: keyValues?.build());
     replace(result);
     return result;
   }
