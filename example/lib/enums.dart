@@ -54,9 +54,25 @@ class SecondTestEnum extends EnumClass {
   static const SecondTestEnum yes = _$ys;
   static const SecondTestEnum no = _$n;
   static const SecondTestEnum definitely = _$definitely;
-
+  @SerializedAs('no-thanks')
+  static const SecondTestEnum noThanks = _$noThanks;
   const SecondTestEnum._(String name) : super(name);
-
+  static Serializer<SecondTestEnum> get serializer => _$secondTestEnumSerializer;
   static BuiltSet<SecondTestEnum> get values => _$vls;
   static SecondTestEnum valueOf(String name) => _$vlOf(name);
+}
+/// Fields can use built_value classes.
+abstract class ValueUsingEnum
+    implements Built<ValueUsingEnum, ValueUsingEnumBuilder> {
+  /// Example of how to make a built_value type serializable.
+  ///
+  /// Declare a static final [Serializers] field called `serializer`.
+  /// The built_value code generator will provide the implementation. You need
+  /// to do this for every type you want to serialize.
+  static Serializer<ValueUsingEnum> get serializer => _$valueUsingEnumSerializer;
+
+
+  SecondTestEnum get answer;
+  factory ValueUsingEnum([updates(ValueUsingEnumBuilder b)]) = _$ValueUsingEnum;
+  ValueUsingEnum._();
 }

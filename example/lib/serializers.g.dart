@@ -65,5 +65,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(
               CollectionGenericValue, const [const FullType(String)]),
           () => new CollectionGenericValueBuilder<String>())
-      ..add(TestEnum.serializer))
+      ..add(TestEnum.serializer)
+      ..add(SecondTestEnum.serializer)
+      ..add(ValueUsingEnum.serializer))
     .build();
