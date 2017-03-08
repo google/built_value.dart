@@ -15,6 +15,8 @@ class _$EnumSourceField extends EnumSourceField {
   @override
   final String generatedIdentifier;
   @override
+  final String serializedAsValue;
+  @override
   final bool isConst;
   @override
   final bool isStatic;
@@ -26,6 +28,7 @@ class _$EnumSourceField extends EnumSourceField {
       {this.name,
       this.type,
       this.generatedIdentifier,
+      this.serializedAsValue,
       this.isConst,
       this.isStatic})
       : super._() {
@@ -52,6 +55,7 @@ class _$EnumSourceField extends EnumSourceField {
     return name == other.name &&
         type == other.type &&
         generatedIdentifier == other.generatedIdentifier &&
+        serializedAsValue == other.serializedAsValue &&
         isConst == other.isConst &&
         isStatic == other.isStatic;
   }
@@ -60,8 +64,10 @@ class _$EnumSourceField extends EnumSourceField {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, name.hashCode), type.hashCode),
-                generatedIdentifier.hashCode),
+            $jc(
+                $jc($jc($jc(0, name.hashCode), type.hashCode),
+                    generatedIdentifier.hashCode),
+                serializedAsValue.hashCode),
             isConst.hashCode),
         isStatic.hashCode));
   }
@@ -72,6 +78,7 @@ class _$EnumSourceField extends EnumSourceField {
         'name=${name.toString()},\n'
         'type=${type.toString()},\n'
         'generatedIdentifier=${generatedIdentifier.toString()},\n'
+        'serializedAsValue=${serializedAsValue.toString()},\n'
         'isConst=${isConst.toString()},\n'
         'isStatic=${isStatic.toString()},\n'
         '}';
@@ -95,6 +102,11 @@ class EnumSourceFieldBuilder
   set generatedIdentifier(String generatedIdentifier) =>
       _$this._generatedIdentifier = generatedIdentifier;
 
+  String _serializedAsValue;
+  String get serializedAsValue => _$this._serializedAsValue;
+  set serializedAsValue(String serializedAsValue) =>
+      _$this._serializedAsValue = serializedAsValue;
+
   bool _isConst;
   bool get isConst => _$this._isConst;
   set isConst(bool isConst) => _$this._isConst = isConst;
@@ -110,6 +122,7 @@ class EnumSourceFieldBuilder
       _name = _$v.name;
       _type = _$v.type;
       _generatedIdentifier = _$v.generatedIdentifier;
+      _serializedAsValue = _$v.serializedAsValue;
       _isConst = _$v.isConst;
       _isStatic = _$v.isStatic;
       _$v = null;
@@ -135,6 +148,7 @@ class EnumSourceFieldBuilder
             name: name,
             type: type,
             generatedIdentifier: generatedIdentifier,
+            serializedAsValue: serializedAsValue,
             isConst: isConst,
             isStatic: isStatic);
     replace(result);
