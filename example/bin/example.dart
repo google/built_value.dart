@@ -6,4 +6,5 @@ import 'package:example/example.dart';
 /// Simple usage examples for built_value.
 void main() {
   example();
+  standardJsonExample();
 }

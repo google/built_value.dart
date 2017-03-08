@@ -51,6 +51,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(VerySimpleValue.serializer)
       ..add(CompoundValue.serializer)
       ..add(ValidatedValue.serializer)
+      ..add(PartiallyStructuredValue.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltMap,
+              const [const FullType(String), const FullType(JsonObject)]),
+          () => new MapBuilder<String, JsonObject>())
       ..add(GenericValue.serializer)
       ..add(BoundGenericValue.serializer)
       ..add(CollectionGenericValue.serializer)

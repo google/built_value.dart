@@ -9,6 +9,7 @@ void main() {
   group('Example', () {
     test('runs', () {
       example();
+      standardJsonExample();
     });
   });
 }

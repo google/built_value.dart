@@ -4,7 +4,9 @@
 
 library values;
 
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:meta/meta.dart';
 
@@ -161,4 +163,21 @@ abstract class DerivedValue
 
   factory DerivedValue([updates(DerivedValueBuilder b)]) = _$DerivedValue;
   DerivedValue._();
+}
+
+/// Example of a value that also contains a [JsonObject]. This allows a class
+/// with some structured fields to pass through raw JSON as a JsonObject.
+abstract class PartiallyStructuredValue
+    implements
+        Built<PartiallyStructuredValue, PartiallyStructuredValueBuilder> {
+  static Serializer<PartiallyStructuredValue> get serializer =>
+      _$partiallyStructuredValueSerializer;
+  int get anInt;
+  String get aString;
+  BuiltMap<String, JsonObject> get keyValues;
+
+  factory PartiallyStructuredValue(
+          [updates(PartiallyStructuredValueBuilder b)]) =
+      _$PartiallyStructuredValue;
+  PartiallyStructuredValue._();
 }

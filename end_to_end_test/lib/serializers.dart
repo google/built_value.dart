@@ -5,11 +5,13 @@
 library serializers;
 
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/collections.dart';
 import 'package:end_to_end_test/enums.dart';
-import 'package:end_to_end_test/interfaces.dart';
 import 'package:end_to_end_test/generics.dart';
+import 'package:end_to_end_test/interfaces.dart';
+import 'package:end_to_end_test/standard_json.dart';
 import 'package:end_to_end_test/values.dart';
 
 part 'serializers.g.dart';

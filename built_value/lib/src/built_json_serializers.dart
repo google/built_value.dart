@@ -5,6 +5,7 @@
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
+import 'package:built_value/serializer.dart';
 
 /// Default implementation of [Serializers].
 class BuiltJsonSerializers implements Serializers {
@@ -26,6 +27,18 @@ class BuiltJsonSerializers implements Serializers {
 
   BuiltJsonSerializers._(this._typeToSerializer, this._wireNameToSerializer,
       this._typeNameToSerializer, this._builderFactories, this._plugins);
+
+  @override
+  T deserializeWith<T>(Serializer<T> serializer, Object serialized) {
+    return deserialize(serialized,
+        specifiedType: new FullType(serializer.types.first)) as T;
+  }
+
+  @override
+  Object serializeWith<T>(Serializer<T> serializer, T object) {
+    return serialize(object,
+        specifiedType: new FullType(serializer.types.first));
+  }
 
   @override
   Object serialize(Object object,

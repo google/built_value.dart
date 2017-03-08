@@ -14,6 +14,8 @@ Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
 Serializer<ValidatedValue> _$validatedValueSerializer =
     new _$ValidatedValueSerializer();
+Serializer<PartiallyStructuredValue> _$partiallyStructuredValueSerializer =
+    new _$PartiallyStructuredValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -196,6 +198,68 @@ class _$ValidatedValueSerializer
         case 'aString':
           result.aString = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PartiallyStructuredValueSerializer
+    implements StructuredSerializer<PartiallyStructuredValue> {
+  @override
+  final Iterable<Type> types = const [
+    PartiallyStructuredValue,
+    _$PartiallyStructuredValue
+  ];
+  @override
+  final String wireName = 'PartiallyStructuredValue';
+
+  @override
+  Iterable serialize(Serializers serializers, PartiallyStructuredValue object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'anInt',
+      serializers.serialize(object.anInt, specifiedType: const FullType(int)),
+      'aString',
+      serializers.serialize(object.aString,
+          specifiedType: const FullType(String)),
+      'keyValues',
+      serializers.serialize(object.keyValues,
+          specifiedType: const FullType(BuiltMap,
+              const [const FullType(String), const FullType(JsonObject)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  PartiallyStructuredValue deserialize(
+      Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new PartiallyStructuredValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'anInt':
+          result.anInt = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'aString':
+          result.aString = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'keyValues':
+          result.keyValues.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(String),
+                const FullType(JsonObject)
+              ])) as BuiltMap<String, JsonObject>);
           break;
       }
     }
@@ -835,6 +899,116 @@ class DerivedValueBuilder
   @override
   _$DerivedValue build() {
     final result = _$v ?? new _$DerivedValue._(anInt: anInt);
+    replace(result);
+    return result;
+  }
+}
+
+// **************************************************************************
+// Generator: BuiltValueGenerator
+// Target: abstract class PartiallyStructuredValue
+// **************************************************************************
+
+class _$PartiallyStructuredValue extends PartiallyStructuredValue {
+  @override
+  final int anInt;
+  @override
+  final String aString;
+  @override
+  final BuiltMap<String, JsonObject> keyValues;
+
+  factory _$PartiallyStructuredValue(
+          [void updates(PartiallyStructuredValueBuilder b)]) =>
+      (new PartiallyStructuredValueBuilder()..update(updates)).build();
+
+  _$PartiallyStructuredValue._({this.anInt, this.aString, this.keyValues})
+      : super._() {
+    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (aString == null) throw new ArgumentError.notNull('aString');
+    if (keyValues == null) throw new ArgumentError.notNull('keyValues');
+  }
+
+  @override
+  PartiallyStructuredValue rebuild(
+          void updates(PartiallyStructuredValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PartiallyStructuredValueBuilder toBuilder() =>
+      new PartiallyStructuredValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! PartiallyStructuredValue) return false;
+    return anInt == other.anInt &&
+        aString == other.aString &&
+        keyValues == other.keyValues;
+  }
+
+  @override
+  int get hashCode {
+    return $jf(
+        $jc($jc($jc(0, anInt.hashCode), aString.hashCode), keyValues.hashCode));
+  }
+
+  @override
+  String toString() {
+    return 'PartiallyStructuredValue {'
+        'anInt=${anInt.toString()},\n'
+        'aString=${aString.toString()},\n'
+        'keyValues=${keyValues.toString()},\n'
+        '}';
+  }
+}
+
+class PartiallyStructuredValueBuilder
+    implements
+        Builder<PartiallyStructuredValue, PartiallyStructuredValueBuilder> {
+  _$PartiallyStructuredValue _$v;
+
+  int _anInt;
+  int get anInt => _$this._anInt;
+  set anInt(int anInt) => _$this._anInt = anInt;
+
+  String _aString;
+  String get aString => _$this._aString;
+  set aString(String aString) => _$this._aString = aString;
+
+  MapBuilder<String, JsonObject> _keyValues;
+  MapBuilder<String, JsonObject> get keyValues =>
+      _$this._keyValues ??= new MapBuilder<String, JsonObject>();
+  set keyValues(MapBuilder<String, JsonObject> keyValues) =>
+      _$this._keyValues = keyValues;
+
+  PartiallyStructuredValueBuilder();
+
+  PartiallyStructuredValueBuilder get _$this {
+    if (_$v != null) {
+      _anInt = _$v.anInt;
+      _aString = _$v.aString;
+      _keyValues = _$v.keyValues?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(PartiallyStructuredValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$PartiallyStructuredValue;
+  }
+
+  @override
+  void update(void updates(PartiallyStructuredValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$PartiallyStructuredValue build() {
+    final result = _$v ??
+        new _$PartiallyStructuredValue._(
+            anInt: anInt, aString: aString, keyValues: keyValues?.build());
     replace(result);
     return result;
   }
