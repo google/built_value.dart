@@ -62,6 +62,12 @@ const String nullable = 'nullable';
 /// once on first access and stored in the instance.
 const String memoized = 'memoized';
 
+class SerializedAs {
+  final String name;
+  const SerializedAs(this.name);
+}
+
+
 /// Enum Class base class.
 ///
 /// Extend this class then use the built_value.dart code generation
