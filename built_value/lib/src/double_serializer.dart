@@ -7,6 +7,10 @@ import 'package:built_value/serializer.dart';
 
 // TODO(davidmorgan): support special values.
 class DoubleSerializer implements PrimitiveSerializer<double> {
+  static final String NAN = 'NaN';
+  static final String INFINITY = 'INF';
+  static final String NEGATIVE_INFINITY = '-INF';
+
   final bool structured = false;
   @override
   final Iterable<Type> types = new BuiltList<Type>([double]);
@@ -16,12 +20,26 @@ class DoubleSerializer implements PrimitiveSerializer<double> {
   @override
   Object serialize(Serializers serializers, double aDouble,
       {FullType specifiedType: FullType.unspecified}) {
-    return aDouble;
+    if (aDouble.isNaN) {
+      return NAN;
+    } else if (aDouble.isInfinite) {
+      return aDouble.isNegative ? NEGATIVE_INFINITY : INFINITY;
+    } else {
+      return aDouble;
+    }
   }
 
   @override
   double deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    return (serialized as num).toDouble();
+    if (serialized == NAN) {
+      return double.NAN;
+    } else if (serialized == NEGATIVE_INFINITY) {
+      return double.NEGATIVE_INFINITY;
+    } else if (serialized == INFINITY) {
+      return double.INFINITY;
+    } else {
+      return (serialized as num).toDouble();
+    }
   }
 }

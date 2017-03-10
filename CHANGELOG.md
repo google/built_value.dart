@@ -6,6 +6,7 @@
 - Add JsonObject class and serializer.
 - Add convenience methods Seralizers.serializeWith and deserializeWith. 
 - Add example for using StandardJsonPlugin.
+- Support serializing NaN, INF and -INF for double and num.
 
 ## 0.5.5
 

@@ -23,4 +23,56 @@ void main() {
           data);
     });
   });
+
+  group('num with NaN value', () {
+    final data = double.NAN;
+    final serialized = 'NaN';
+    final specifiedType = const FullType(num);
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data, specifiedType: specifiedType),
+          serialized);
+    });
+
+    test('can be deserialized', () {
+      // Compare using toString as NaN != NaN.
+      expect(
+          serializers
+              .deserialize(serialized, specifiedType: specifiedType)
+              .toString(),
+          data.toString());
+    });
+  });
+
+  group('num with -INF value', () {
+    final data = double.NEGATIVE_INFINITY;
+    final serialized = '-INF';
+    final specifiedType = const FullType(num);
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data, specifiedType: specifiedType),
+          serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized, specifiedType: specifiedType),
+          data);
+    });
+  });
+
+  group('num with INF value', () {
+    final data = double.INFINITY;
+    final serialized = 'INF';
+    final specifiedType = const FullType(num);
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data, specifiedType: specifiedType),
+          serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized, specifiedType: specifiedType),
+          data);
+    });
+  });
 }
