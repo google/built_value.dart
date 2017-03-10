@@ -5,7 +5,6 @@
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
-import 'package:built_value/serializer.dart';
 
 /// Default implementation of [Serializers].
 class BuiltJsonSerializers implements Serializers {
