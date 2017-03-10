@@ -3,6 +3,9 @@
 ## 0.5.6
 
 - Add serializer for "DateTime" fields.
+- Add JsonObject class and serializer.
+- Add convenience methods Seralizers.serializeWith and deserializeWith. 
+- Add example for using StandardJsonPlugin.
 
 ## 0.5.5
 

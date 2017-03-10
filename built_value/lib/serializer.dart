@@ -4,6 +4,7 @@
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/src/date_time_serializer.dart';
+import 'package:built_value/src/json_object_serializer.dart';
 import 'package:built_value/src/num_serializer.dart';
 import 'package:quiver/core.dart';
 
@@ -36,6 +37,7 @@ abstract class Serializers {
           ..add(new DateTimeSerializer())
           ..add(new DoubleSerializer())
           ..add(new IntSerializer())
+          ..add(new JsonObjectSerializer())
           ..add(new NumSerializer())
           ..add(new StringSerializer())
           ..addBuilderFactory(
@@ -72,6 +74,11 @@ abstract class Serializers {
   Object serialize(Object object,
       {FullType specifiedType: FullType.unspecified});
 
+  /// Convenience method for when you know the type you're serializing.
+  /// Specify the type by specifying its [Serializer] class. Equivalent to
+  /// calling [serialize] with a `specifiedType`.
+  Object serializeWith<T>(Serializer<T> serializer, T object);
+
   /// Deserializes [serialized].
   ///
   /// A [Serializer] must have been provided for every type the object uses.
@@ -80,6 +87,11 @@ abstract class Serializers {
   /// the exact same [specifiedType] must be provided to deserialize.
   Object deserialize(Object serialized,
       {FullType specifiedType: FullType.unspecified});
+
+  /// Convenience method for when you know the type you're deserializing.
+  /// Specify the type by specifying its [Serializer] class. Equivalent to
+  /// calling [deserialize] with a `specifiedType`.
+  T deserializeWith<T>(Serializer<T> serializer, Object serialized);
 
   /// Creates a new builder for the type represented by [fullType].
   ///
