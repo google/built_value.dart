@@ -133,8 +133,9 @@ part of a powerful data model is ensuring it's valid, so classes can make
 guarantees about what they can do. Other libraries also support validation
 but usually in a less prominent way.
 
-It's _pluggable_. Arbitrary extensions can be added to give 
-custom JSON serialization for your own types. This could be used to
+It's _pluggable_. You can add serializers for your own types, and you can add
+[plugins](https://github.com/google/built_value.dart/blob/master/built_value/lib/standard_json_plugin.dart)
+which run before and after all serializers. This could be used to
 interoperate with other tools or to add hand coded high performance serializers
 for specific classes. Some other libraries are not so extensible.
 
