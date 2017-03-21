@@ -20,6 +20,9 @@ abstract class StandardJsonValue
   String get text;
   BuiltMap<String, JsonObject> get keyValues;
 
+  @nullable
+  BuiltList<String> get strings;
+
   factory StandardJsonValue([updates(StandardJsonValueBuilder b)]) =
       _$StandardJsonValue;
   StandardJsonValue._();

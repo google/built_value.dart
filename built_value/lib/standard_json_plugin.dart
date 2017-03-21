@@ -67,6 +67,9 @@ class StandardJsonPlugin implements SerializerPlugin {
     final result = new List(map.length * 2);
     var i = 0;
     map.forEach((key, value) {
+      // Drop null values, they are represented by missing keys.
+      if (value == null) return;
+
       result[i] = alreadyStringKeys ? key : _fromStringKey(key);
       result[i + 1] = value;
       i += 2;

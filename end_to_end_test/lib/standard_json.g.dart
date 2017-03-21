@@ -30,6 +30,13 @@ class _$StandardJsonValueSerializer
           specifiedType: const FullType(BuiltMap,
               const [const FullType(String), const FullType(JsonObject)])),
     ];
+    if (object.strings != null) {
+      result
+        ..add('strings')
+        ..add(serializers.serialize(object.strings,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(String)])));
+    }
 
     return result;
   }
@@ -60,6 +67,12 @@ class _$StandardJsonValueSerializer
                 const FullType(JsonObject)
               ])) as BuiltMap<String, JsonObject>);
           break;
+        case 'strings':
+          result.strings.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(String)]))
+              as BuiltList<String>);
+          break;
       }
     }
 
@@ -79,11 +92,14 @@ class _$StandardJsonValue extends StandardJsonValue {
   final String text;
   @override
   final BuiltMap<String, JsonObject> keyValues;
+  @override
+  final BuiltList<String> strings;
 
   factory _$StandardJsonValue([void updates(StandardJsonValueBuilder b)]) =>
       (new StandardJsonValueBuilder()..update(updates)).build();
 
-  _$StandardJsonValue._({this.number, this.text, this.keyValues}) : super._() {
+  _$StandardJsonValue._({this.number, this.text, this.keyValues, this.strings})
+      : super._() {
     if (number == null) throw new ArgumentError.notNull('number');
     if (text == null) throw new ArgumentError.notNull('text');
     if (keyValues == null) throw new ArgumentError.notNull('keyValues');
@@ -103,13 +119,15 @@ class _$StandardJsonValue extends StandardJsonValue {
     if (other is! StandardJsonValue) return false;
     return number == other.number &&
         text == other.text &&
-        keyValues == other.keyValues;
+        keyValues == other.keyValues &&
+        strings == other.strings;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, number.hashCode), text.hashCode), keyValues.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, number.hashCode), text.hashCode), keyValues.hashCode),
+        strings.hashCode));
   }
 
   @override
@@ -118,6 +136,7 @@ class _$StandardJsonValue extends StandardJsonValue {
         'number=${number.toString()},\n'
         'text=${text.toString()},\n'
         'keyValues=${keyValues.toString()},\n'
+        'strings=${strings.toString()},\n'
         '}';
   }
 }
@@ -140,6 +159,11 @@ class StandardJsonValueBuilder
   set keyValues(MapBuilder<String, JsonObject> keyValues) =>
       _$this._keyValues = keyValues;
 
+  ListBuilder<String> _strings;
+  ListBuilder<String> get strings =>
+      _$this._strings ??= new ListBuilder<String>();
+  set strings(ListBuilder<String> strings) => _$this._strings = strings;
+
   StandardJsonValueBuilder();
 
   StandardJsonValueBuilder get _$this {
@@ -147,6 +171,7 @@ class StandardJsonValueBuilder
       _number = _$v.number;
       _text = _$v.text;
       _keyValues = _$v.keyValues?.toBuilder();
+      _strings = _$v.strings?.toBuilder();
       _$v = null;
     }
     return this;
@@ -167,7 +192,10 @@ class StandardJsonValueBuilder
   _$StandardJsonValue build() {
     final result = _$v ??
         new _$StandardJsonValue._(
-            number: number, text: text, keyValues: keyValues?.build());
+            number: number,
+            text: text,
+            keyValues: keyValues?.build(),
+            strings: _strings?.build());
     replace(result);
     return result;
   }

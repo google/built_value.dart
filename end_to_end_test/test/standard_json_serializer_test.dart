@@ -47,4 +47,37 @@ void main() {
           data);
     });
   });
+
+  group('StandardJsonValue with extraneous nulls', () {
+    final data = new StandardJsonValue((b) => b
+      ..number = 3
+      ..text = 'some text'
+      ..keyValues['one'] = new JsonObject(1)
+      ..keyValues['two'] = new JsonObject('two')
+      ..keyValues['three'] = new JsonObject(true)
+      ..keyValues['four'] = new JsonObject([1, 2, 3])
+      ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2}));
+    final specifiedType = new FullType(StandardJsonValue);
+    final serializersWithPlugin =
+        (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
+    final serialized = {
+      'number': 3,
+      'text': 'some text',
+      'keyValues': {
+        'one': 1,
+        'two': 'two',
+        'three': true,
+        'four': [1, 2, 3],
+        'five': {'one': 1, 'two': 2},
+      },
+      'strings': null,
+    };
+
+    test('can be deserialized', () {
+      expect(
+          serializersWithPlugin.deserialize(serialized,
+              specifiedType: specifiedType),
+          data);
+    });
+  });
 }
