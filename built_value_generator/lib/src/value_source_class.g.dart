@@ -165,24 +165,24 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   String toString() {
-    return 'ValueSourceClass {'
-        'name=${name.toString()},\n'
-        'genericParameters=${genericParameters.toString()},\n'
-        'genericBounds=${genericBounds.toString()},\n'
-        'builtParameters=${builtParameters.toString()},\n'
-        'hasBuilder=${hasBuilder.toString()},\n'
-        'builderParameters=${builderParameters.toString()},\n'
-        'fields=${fields.toString()},\n'
-        'partStatement=${partStatement.toString()},\n'
-        'hasPartStatement=${hasPartStatement.toString()},\n'
-        'valueClassIsAbstract=${valueClassIsAbstract.toString()},\n'
-        'valueClassConstructors=${valueClassConstructors.toString()},\n'
-        'valueClassFactories=${valueClassFactories.toString()},\n'
-        'builderClassIsAbstract=${builderClassIsAbstract.toString()},\n'
-        'builderClassConstructors=${builderClassConstructors.toString()},\n'
-        'builderClassFactories=${builderClassFactories.toString()},\n'
-        'memoizedGetters=${memoizedGetters.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ValueSourceClass')
+          ..add('name', name)
+          ..add('genericParameters', genericParameters)
+          ..add('genericBounds', genericBounds)
+          ..add('builtParameters', builtParameters)
+          ..add('hasBuilder', hasBuilder)
+          ..add('builderParameters', builderParameters)
+          ..add('fields', fields)
+          ..add('partStatement', partStatement)
+          ..add('hasPartStatement', hasPartStatement)
+          ..add('valueClassIsAbstract', valueClassIsAbstract)
+          ..add('valueClassConstructors', valueClassConstructors)
+          ..add('valueClassFactories', valueClassFactories)
+          ..add('builderClassIsAbstract', builderClassIsAbstract)
+          ..add('builderClassConstructors', builderClassConstructors)
+          ..add('builderClassFactories', builderClassFactories)
+          ..add('memoizedGetters', memoizedGetters))
+        .toString();
   }
 }
 

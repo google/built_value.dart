@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.8
+
+- Made toString() output customizable.
+- Made the default toString() output use indentation and omit nulls.
+
 ## 0.5.7
 
 - Ignore nulls when deserializing with StandardJsonPlugin.

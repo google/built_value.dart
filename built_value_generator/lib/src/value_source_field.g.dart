@@ -91,16 +91,16 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   String toString() {
-    return 'ValueSourceField {'
-        'name=${name.toString()},\n'
-        'type=${type.toString()},\n'
-        'isGetter=${isGetter.toString()},\n'
-        'isNullable=${isNullable.toString()},\n'
-        'builderFieldExists=${builderFieldExists.toString()},\n'
-        'builderFieldIsNormalField=${builderFieldIsNormalField.toString()},\n'
-        'typeInBuilder=${typeInBuilder.toString()},\n'
-        'isNestedBuilder=${isNestedBuilder.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ValueSourceField')
+          ..add('name', name)
+          ..add('type', type)
+          ..add('isGetter', isGetter)
+          ..add('isNullable', isNullable)
+          ..add('builderFieldExists', builderFieldExists)
+          ..add('builderFieldIsNormalField', builderFieldIsNormalField)
+          ..add('typeInBuilder', typeInBuilder)
+          ..add('isNestedBuilder', isNestedBuilder))
+        .toString();
   }
 }
 

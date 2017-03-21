@@ -71,13 +71,13 @@ class _$SerializerSourceField extends SerializerSourceField {
 
   @override
   String toString() {
-    return 'SerializerSourceField {'
-        'isSerializable=${isSerializable.toString()},\n'
-        'isNullable=${isNullable.toString()},\n'
-        'name=${name.toString()},\n'
-        'type=${type.toString()},\n'
-        'builderFieldUsesNestedBuilder=${builderFieldUsesNestedBuilder.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('SerializerSourceField')
+          ..add('isSerializable', isSerializable)
+          ..add('isNullable', isNullable)
+          ..add('name', name)
+          ..add('type', type)
+          ..add('builderFieldUsesNestedBuilder', builderFieldUsesNestedBuilder))
+        .toString();
   }
 }
 

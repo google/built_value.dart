@@ -300,10 +300,10 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   String toString() {
-    return 'SimpleValue {'
-        'anInt=${anInt.toString()},\n'
-        'aString=${aString.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('SimpleValue')
+          ..add('anInt', anInt)
+          ..add('aString', aString))
+        .toString();
   }
 }
 
@@ -386,9 +386,8 @@ class _$VerySimpleValue extends VerySimpleValue {
 
   @override
   String toString() {
-    return 'VerySimpleValue {'
-        'value=${value.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('VerySimpleValue')..add('value', value))
+        .toString();
   }
 }
 
@@ -469,10 +468,10 @@ class _$CompoundValue extends CompoundValue {
 
   @override
   String toString() {
-    return 'CompoundValue {'
-        'simpleValue=${simpleValue.toString()},\n'
-        'validatedValue=${validatedValue.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('CompoundValue')
+          ..add('simpleValue', simpleValue)
+          ..add('validatedValue', validatedValue))
+        .toString();
   }
 }
 
@@ -565,10 +564,10 @@ class _$ValidatedValue extends ValidatedValue {
 
   @override
   String toString() {
-    return 'ValidatedValue {'
-        'anInt=${anInt.toString()},\n'
-        'aString=${aString.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ValidatedValue')
+          ..add('anInt', anInt)
+          ..add('aString', aString))
+        .toString();
   }
 }
 
@@ -654,10 +653,10 @@ class _$ValueWithCode extends ValueWithCode {
 
   @override
   String toString() {
-    return 'ValueWithCode {'
-        'anInt=${anInt.toString()},\n'
-        'aString=${aString.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ValueWithCode')
+          ..add('anInt', anInt)
+          ..add('aString', aString))
+        .toString();
   }
 }
 
@@ -744,10 +743,10 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 
   @override
   String toString() {
-    return 'ValueWithDefaults {'
-        'anInt=${anInt.toString()},\n'
-        'aString=${aString.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ValueWithDefaults')
+          ..add('anInt', anInt)
+          ..add('aString', aString))
+        .toString();
   }
 }
 
@@ -854,9 +853,8 @@ class _$DerivedValue extends DerivedValue {
 
   @override
   String toString() {
-    return 'DerivedValue {'
-        'anInt=${anInt.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('DerivedValue')..add('anInt', anInt))
+        .toString();
   }
 }
 
@@ -941,11 +939,11 @@ class _$Account extends Account {
 
   @override
   String toString() {
-    return 'Account {'
-        'id=${id.toString()},\n'
-        'name=${name.toString()},\n'
-        'keyValues=${keyValues.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('Account')
+          ..add('id', id)
+          ..add('name', name)
+          ..add('keyValues', keyValues))
+        .toString();
   }
 }
 

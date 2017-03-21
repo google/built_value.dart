@@ -56,11 +56,11 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
 
   @override
   String toString() {
-    return 'SerializerSourceLibrary {'
-        'hasSerializers=${hasSerializers.toString()},\n'
-        'sourceClasses=${sourceClasses.toString()},\n'
-        'transitiveSourceClasses=${transitiveSourceClasses.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('SerializerSourceLibrary')
+          ..add('hasSerializers', hasSerializers)
+          ..add('sourceClasses', sourceClasses)
+          ..add('transitiveSourceClasses', transitiveSourceClasses))
+        .toString();
   }
 }
 

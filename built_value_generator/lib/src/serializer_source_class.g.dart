@@ -86,15 +86,15 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   @override
   String toString() {
-    return 'SerializerSourceClass {'
-        'name=${name.toString()},\n'
-        'serializerDeclaration=${serializerDeclaration.toString()},\n'
-        'genericParameters=${genericParameters.toString()},\n'
-        'genericBounds=${genericBounds.toString()},\n'
-        'isBuiltValue=${isBuiltValue.toString()},\n'
-        'isEnumClass=${isEnumClass.toString()},\n'
-        'fields=${fields.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('SerializerSourceClass')
+          ..add('name', name)
+          ..add('serializerDeclaration', serializerDeclaration)
+          ..add('genericParameters', genericParameters)
+          ..add('genericBounds', genericBounds)
+          ..add('isBuiltValue', isBuiltValue)
+          ..add('isEnumClass', isEnumClass)
+          ..add('fields', fields))
+        .toString();
   }
 }
 

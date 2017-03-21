@@ -68,13 +68,13 @@ class _$EnumSourceField extends EnumSourceField {
 
   @override
   String toString() {
-    return 'EnumSourceField {'
-        'name=${name.toString()},\n'
-        'type=${type.toString()},\n'
-        'generatedIdentifier=${generatedIdentifier.toString()},\n'
-        'isConst=${isConst.toString()},\n'
-        'isStatic=${isStatic.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('EnumSourceField')
+          ..add('name', name)
+          ..add('type', type)
+          ..add('generatedIdentifier', generatedIdentifier)
+          ..add('isConst', isConst)
+          ..add('isStatic', isStatic))
+        .toString();
   }
 }
 

@@ -55,12 +55,12 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
 
   @override
   String toString() {
-    return 'EnumSourceLibrary {'
-        'name=${name.toString()},\n'
-        'fileName=${fileName.toString()},\n'
-        'source=${source.toString()},\n'
-        'classes=${classes.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('EnumSourceLibrary')
+          ..add('name', name)
+          ..add('fileName', fileName)
+          ..add('source', source)
+          ..add('classes', classes))
+        .toString();
   }
 }
 

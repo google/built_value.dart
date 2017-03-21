@@ -139,10 +139,10 @@ class _$ValueWithInt extends ValueWithInt {
 
   @override
   String toString() {
-    return 'ValueWithInt {'
-        'anInt=${anInt.toString()},\n'
-        'note=${note.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ValueWithInt')
+          ..add('anInt', anInt)
+          ..add('note', note))
+        .toString();
   }
 }
 

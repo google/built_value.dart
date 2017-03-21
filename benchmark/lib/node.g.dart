@@ -41,11 +41,11 @@ class _$Node extends Node {
 
   @override
   String toString() {
-    return 'Node {'
-        'label=${label.toString()},\n'
-        'left=${left.toString()},\n'
-        'right=${right.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('Node')
+          ..add('label', label)
+          ..add('left', left)
+          ..add('right', right))
+        .toString();
   }
 }
 

@@ -132,12 +132,12 @@ class _$StandardJsonValue extends StandardJsonValue {
 
   @override
   String toString() {
-    return 'StandardJsonValue {'
-        'number=${number.toString()},\n'
-        'text=${text.toString()},\n'
-        'keyValues=${keyValues.toString()},\n'
-        'strings=${strings.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('StandardJsonValue')
+          ..add('number', number)
+          ..add('text', text)
+          ..add('keyValues', keyValues)
+          ..add('strings', strings))
+        .toString();
   }
 }
 

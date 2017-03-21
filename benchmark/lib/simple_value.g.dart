@@ -42,10 +42,10 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   String toString() {
-    return 'SimpleValue {'
-        'anInt=${anInt.toString()},\n'
-        'aString=${aString.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('SimpleValue')
+          ..add('anInt', anInt)
+          ..add('aString', aString))
+        .toString();
   }
 }
 
