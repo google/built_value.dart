@@ -13,6 +13,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(JsonObject)]),
           () => new MapBuilder<String, JsonObject>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
       ..add(GenericValue.serializer)
       ..add(BoundGenericValue.serializer)
       ..add(CollectionGenericValue.serializer)

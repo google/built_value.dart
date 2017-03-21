@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.7
+
+- Ignore nulls when deserializing with StandardJsonPlugin.
+
 ## 0.5.6
 
 - Add serializer for "DateTime" fields.
