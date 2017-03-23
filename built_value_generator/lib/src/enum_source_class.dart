@@ -145,7 +145,7 @@ abstract class EnumSourceClass
 
     for (final field in fields) {
       result.writeln('const $name ${field.generatedIdentifier} = '
-          'const $name._(\'${field.name}\');');
+          'const $name._(\'${field.serializedAsValue ?? field.name}\');');
     }
 
     result.writeln('');
@@ -154,7 +154,7 @@ abstract class EnumSourceClass
         'switch (name) {');
     for (final field in fields) {
       result.writeln(
-          'case \'${field.name}\': return ${field.generatedIdentifier};');
+          'case \'${field.serializedAsValue ?? field.name}\': return ${field.generatedIdentifier};');
     }
     result.writeln('default: throw new ArgumentError(name);');
     result.writeln('}}');

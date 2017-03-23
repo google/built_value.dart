@@ -15,6 +15,8 @@ abstract class EnumSourceField
   String get name;
   String get type;
   String get generatedIdentifier;
+  @nullable
+  String get serializedAsValue;
   bool get isConst;
   bool get isStatic;
 
@@ -23,9 +25,18 @@ abstract class EnumSourceField
   EnumSourceField._();
 
   factory EnumSourceField.fromFieldElement(FieldElement fieldElement) {
+    String _serializedAsValue;
+    final serializedAs = fieldElement.metadata.firstWhere(
+        (el) => el.constantValue.type.displayName == 'SerializedAs',
+        orElse: () => null);
+    if (serializedAs != null) {
+      _serializedAsValue = serializedAs.constantValue.getField('name').toStringValue();
+    }
+
     return new EnumSourceField((b) => b
       ..name = fieldElement.displayName
       ..type = fieldElement.getter.returnType.displayName
+      ..serializedAsValue = _serializedAsValue
       ..generatedIdentifier = _getGeneratedIdentifier(fieldElement)
       ..isConst = fieldElement.isConst
       ..isStatic = fieldElement.isStatic);

@@ -3,6 +3,7 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'package:example/generics.dart';
 import 'package:example/serializers.dart';
 import 'package:example/values.dart';
+import 'package:example/enums.dart';
 
 /// Simple usage examples for built_value.
 void example() {
@@ -39,6 +40,10 @@ void example() {
   final value7 = new VerySimpleValue(3);
   final value8 = value7.rebuild((b) => b..value = 4);
 
+  final value9 = new ValueUsingEnum((b)=> b..answer = SecondTestEnum.noThanks);
+
+
+
   // Everything is serializable.
   for (final object in [
     value,
@@ -49,6 +54,7 @@ void example() {
     value6,
     value7,
     value8,
+    value9,
   ]) {
     final serialized = serializers.serialize(object);
     print(serialized);
