@@ -49,7 +49,7 @@ abstract class TestEnumMixin = Object with _$TestEnumMixin;
 ///
 /// For this to work, you need to change any generated names that clash. For
 /// example, _$values and _$valueOf will always clash. You can change them
-/// to anything you like, the code generation wll match what you write.
+/// to anything you like, the code generation will match what you write.
 class SecondTestEnum extends EnumClass {
   static const SecondTestEnum yes = _$ys;
   static const SecondTestEnum no = _$n;
