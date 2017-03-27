@@ -69,11 +69,15 @@ abstract class SerializerSourceLibrary
 
     return (hasSerializers
             ? 'Serializers _\$serializers = (new Serializers().toBuilder()' +
-                transitiveSourceClasses
-                    .map((sourceClass) =>
-                        sourceClass.generateTransitiveSerializerAdder() +
-                        '\n' +
-                        sourceClass.generateBuilderFactoryAdders())
+                (transitiveSourceClasses
+                        .map((sourceClass) =>
+                            sourceClass.generateTransitiveSerializerAdder())
+                        .toList()..sort())
+                    .join('\n') +
+                (transitiveSourceClasses
+                        .map((sourceClass) =>
+                            sourceClass.generateBuilderFactoryAdders())
+                        .toList()..sort())
                     .join('\n') +
                 ').build();'
             : '') +

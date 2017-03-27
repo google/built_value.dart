@@ -4,6 +4,7 @@
 
 - Made toString() output customizable.
 - Made the default toString() output use indentation and omit nulls.
+- Sort serializers in generated output.
 
 ## 0.5.7
 
