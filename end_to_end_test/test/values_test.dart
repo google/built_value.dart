@@ -107,8 +107,9 @@ void main() {
         ..aString = '');
       expect(
           value1.toString(),
-          '''SimpleValue {anInt=0,
-aString=,
+          '''SimpleValue {
+  anInt=0,
+  aString=,
 }''');
     });
   });

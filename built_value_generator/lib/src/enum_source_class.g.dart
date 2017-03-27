@@ -85,16 +85,16 @@ class _$EnumSourceClass extends EnumSourceClass {
 
   @override
   String toString() {
-    return 'EnumSourceClass {'
-        'name=${name.toString()},\n'
-        'isAbstract=${isAbstract.toString()},\n'
-        'fields=${fields.toString()},\n'
-        'constructors=${constructors.toString()},\n'
-        'valuesIdentifier=${valuesIdentifier.toString()},\n'
-        'valueOfIdentifier=${valueOfIdentifier.toString()},\n'
-        'usesMixin=${usesMixin.toString()},\n'
-        'mixinDeclaration=${mixinDeclaration.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('EnumSourceClass')
+          ..add('name', name)
+          ..add('isAbstract', isAbstract)
+          ..add('fields', fields)
+          ..add('constructors', constructors)
+          ..add('valuesIdentifier', valuesIdentifier)
+          ..add('valueOfIdentifier', valueOfIdentifier)
+          ..add('usesMixin', usesMixin)
+          ..add('mixinDeclaration', mixinDeclaration))
+        .toString();
   }
 }
 

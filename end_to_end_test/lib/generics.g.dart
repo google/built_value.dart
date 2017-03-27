@@ -339,9 +339,8 @@ class _$GenericValue<T> extends GenericValue<T> {
 
   @override
   String toString() {
-    return 'GenericValue {'
-        'value=${value.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('GenericValue')..add('value', value))
+        .toString();
   }
 }
 
@@ -424,9 +423,9 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
 
   @override
   String toString() {
-    return 'BoundGenericValue {'
-        'value=${value.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('BoundGenericValue')
+          ..add('value', value))
+        .toString();
   }
 }
 
@@ -511,9 +510,9 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
 
   @override
   String toString() {
-    return 'CollectionGenericValue {'
-        'values=${values.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('CollectionGenericValue')
+          ..add('values', values))
+        .toString();
   }
 }
 
@@ -612,11 +611,11 @@ class _$GenericContainer extends GenericContainer {
 
   @override
   String toString() {
-    return 'GenericContainer {'
-        'genericValue=${genericValue.toString()},\n'
-        'boundGenericValue=${boundGenericValue.toString()},\n'
-        'collectionGenericValue=${collectionGenericValue.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('GenericContainer')
+          ..add('genericValue', genericValue)
+          ..add('boundGenericValue', boundGenericValue)
+          ..add('collectionGenericValue', collectionGenericValue))
+        .toString();
   }
 }
 
@@ -719,9 +718,9 @@ class _$NestedGenericContainer extends NestedGenericContainer {
 
   @override
   String toString() {
-    return 'NestedGenericContainer {'
-        'map=${map.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('NestedGenericContainer')
+          ..add('map', map))
+        .toString();
   }
 }
 

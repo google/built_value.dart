@@ -257,18 +257,18 @@ class _$Collections extends Collections {
 
   @override
   String toString() {
-    return 'Collections {'
-        'list=${list.toString()},\n'
-        'set=${set.toString()},\n'
-        'map=${map.toString()},\n'
-        'listMultimap=${listMultimap.toString()},\n'
-        'setMultimap=${setMultimap.toString()},\n'
-        'nullableList=${nullableList.toString()},\n'
-        'nullableSet=${nullableSet.toString()},\n'
-        'nullableMap=${nullableMap.toString()},\n'
-        'nullableListMultimap=${nullableListMultimap.toString()},\n'
-        'nullableSetMultimap=${nullableSetMultimap.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('Collections')
+          ..add('list', list)
+          ..add('set', set)
+          ..add('map', map)
+          ..add('listMultimap', listMultimap)
+          ..add('setMultimap', setMultimap)
+          ..add('nullableList', nullableList)
+          ..add('nullableSet', nullableSet)
+          ..add('nullableMap', nullableMap)
+          ..add('nullableListMultimap', nullableListMultimap)
+          ..add('nullableSetMultimap', nullableSetMultimap))
+        .toString();
   }
 }
 

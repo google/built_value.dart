@@ -477,10 +477,10 @@ class _$Chat extends Chat {
 
   @override
   String toString() {
-    return 'Chat {'
-        'text=${text.toString()},\n'
-        'targets=${targets.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('Chat')
+          ..add('text', text)
+          ..add('targets', targets))
+        .toString();
   }
 }
 
@@ -566,10 +566,10 @@ class _$Login extends Login {
 
   @override
   String toString() {
-    return 'Login {'
-        'username=${username.toString()},\n'
-        'password=${password.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('Login')
+          ..add('username', username)
+          ..add('password', password))
+        .toString();
   }
 }
 
@@ -654,10 +654,10 @@ class _$Status extends Status {
 
   @override
   String toString() {
-    return 'Status {'
-        'message=${message.toString()},\n'
-        'type=${type.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('Status')
+          ..add('message', message)
+          ..add('type', type))
+        .toString();
   }
 }
 
@@ -739,9 +739,9 @@ class _$ListUsers extends ListUsers {
 
   @override
   String toString() {
-    return 'ListUsers {'
-        'statusTypes=${statusTypes.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ListUsers')
+          ..add('statusTypes', statusTypes))
+        .toString();
   }
 }
 
@@ -829,11 +829,11 @@ class _$ShowChat extends ShowChat {
 
   @override
   String toString() {
-    return 'ShowChat {'
-        'username=${username.toString()},\n'
-        'private=${private.toString()},\n'
-        'text=${text.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ShowChat')
+          ..add('username', username)
+          ..add('private', private)
+          ..add('text', text))
+        .toString();
   }
 }
 
@@ -924,10 +924,10 @@ class _$Welcome extends Welcome {
 
   @override
   String toString() {
-    return 'Welcome {'
-        'log=${log.toString()},\n'
-        'message=${message.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('Welcome')
+          ..add('log', log)
+          ..add('message', message))
+        .toString();
   }
 }
 
@@ -1010,9 +1010,9 @@ class _$ListUsersResponse extends ListUsersResponse {
 
   @override
   String toString() {
-    return 'ListUsersResponse {'
-        'statuses=${statuses.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ListUsersResponse')
+          ..add('statuses', statuses))
+        .toString();
   }
 }
 

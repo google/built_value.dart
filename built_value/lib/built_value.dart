@@ -92,3 +92,85 @@ int $jf(int hash) {
   hash = hash ^ (hash >> 11);
   return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
 }
+
+/// Function that returns a [BuiltValueToStringHelper].
+typedef BuiltValueToStringHelper BuiltValueToStringHelperProvider(
+    String className);
+
+/// Function used by generated code to get a [BuiltValueToStringHelper].
+/// Set this to change built_value class toString() output. Built-in examples
+/// are [IndentingBuiltValueToStringHelper], which is the default, and
+/// [FlatBuiltValueToStringHelper].
+BuiltValueToStringHelperProvider newBuiltValueToStringHelper =
+    (String className) => new IndentingBuiltValueToStringHelper(className);
+
+/// Interface for built_value toString() output helpers.
+abstract class BuiltValueToStringHelper {
+  /// Add a field and its value.
+  void add(String field, Object value);
+
+  /// Returns to completed toString(). The helper may not be used after this
+  /// method is called.
+  @override
+  String toString();
+}
+
+/// A [BuiltValueToStringHelper] that produces multi-line indented output.
+class IndentingBuiltValueToStringHelper implements BuiltValueToStringHelper {
+  StringBuffer _result = new StringBuffer();
+
+  IndentingBuiltValueToStringHelper(String className) {
+    _result..write(className)..write(' {\n');
+    _indentingBuiltValueToStringHelperIndent += 2;
+  }
+
+  @override
+  void add(String field, Object value) {
+    if (value != null) {
+      _result
+        ..write(' ' * _indentingBuiltValueToStringHelperIndent)
+        ..write(field)
+        ..write('=')
+        ..write(value)
+        ..write(',\n');
+    }
+  }
+
+  @override
+  String toString() {
+    _indentingBuiltValueToStringHelperIndent -= 2;
+    _result..write(' ' * _indentingBuiltValueToStringHelperIndent)..write('}');
+    final stringResult = _result.toString();
+    _result = null;
+    return stringResult;
+  }
+}
+
+int _indentingBuiltValueToStringHelperIndent = 0;
+
+/// A [BuiltValueToStringHelper] that produces single line output.
+class FlatBuiltValueToStringHelper implements BuiltValueToStringHelper {
+  StringBuffer _result = new StringBuffer();
+  bool _previousField = false;
+
+  FlatBuiltValueToStringHelper(String className) {
+    _result..write(className)..write(' {');
+  }
+
+  @override
+  void add(String field, Object value) {
+    if (value != null) {
+      if (_previousField) _result.write(',');
+      _result..write(field)..write('=')..write(value);
+      _previousField = true;
+    }
+  }
+
+  @override
+  String toString() {
+    _result..write('}');
+    final stringResult = _result.toString();
+    _result = null;
+    return stringResult;
+  }
+}

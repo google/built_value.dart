@@ -328,14 +328,13 @@ abstract class ValueSourceClass
     result.writeln('@override');
     result.writeln('String toString() {');
     if (fields.length == 0) {
-      result.writeln("return '$name {}';");
+      result.writeln("return newBuiltValueToStringHelper('$name').toString();");
     } else {
-      result.writeln("return '$name {'");
+      result.writeln("return (newBuiltValueToStringHelper('$name')");
       result.writeln(fields
-          .map((field) => "'${field.name}=\${${field.name}.toString()},\\n'")
+          .map((field) => "..add('${field.name}',  ${field.name})")
           .join(''));
-      result.writeln("'}'");
-      result.writeln(';');
+      result.writeln(").toString();");
     }
     result.writeln('}');
     result.writeln();

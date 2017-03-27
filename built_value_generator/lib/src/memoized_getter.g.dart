@@ -43,10 +43,10 @@ class _$MemoizedGetter extends MemoizedGetter {
 
   @override
   String toString() {
-    return 'MemoizedGetter {'
-        'returnType=${returnType.toString()},\n'
-        'name=${name.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('MemoizedGetter')
+          ..add('returnType', returnType)
+          ..add('name', name))
+        .toString();
   }
 }
 

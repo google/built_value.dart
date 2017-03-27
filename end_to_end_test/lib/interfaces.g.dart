@@ -181,10 +181,10 @@ class _$ValueWithInt extends ValueWithInt {
 
   @override
   String toString() {
-    return 'ValueWithInt {'
-        'anInt=${anInt.toString()},\n'
-        'note=${note.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ValueWithInt')
+          ..add('anInt', anInt)
+          ..add('note', note))
+        .toString();
   }
 }
 
@@ -268,9 +268,9 @@ class _$ValueWithHasInt extends ValueWithHasInt {
 
   @override
   String toString() {
-    return 'ValueWithHasInt {'
-        'hasInt=${hasInt.toString()},\n'
-        '}';
+    return (newBuiltValueToStringHelper('ValueWithHasInt')
+          ..add('hasInt', hasInt))
+        .toString();
   }
 }
 
