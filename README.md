@@ -8,8 +8,8 @@ Built Values provides:
 - EnumClass, classes that behave like enums;
 - JSON serialization.
 
-Immutable collections are from [built_collection]
-(https://github.com/google/built_collection.dart#built-collections-for-dart).
+Immutable collections are from
+[built_collection](https://github.com/google/built_collection.dart#built-collections-for-dart).
 
 ## Articles
 
@@ -20,11 +20,11 @@ Immutable collections are from [built_collection]
 
 ## Examples
 
-For an end to end example see the [chat example]
-(https://github.com/google/built_value.dart/tree/master/chat_example), which was
+For an end to end example see the
+[chat example](https://github.com/google/built_value.dart/tree/master/chat_example), which was
 [demoed](https://www.youtube.com/watch?v=TMeJxWltoVo) at the Dart Summit 2016.
-The [data model]
-(https://github.com/google/built_value.dart/blob/master/chat_example/lib/data_model/data_model.dart),
+The
+[data model](https://github.com/google/built_value.dart/blob/master/chat_example/lib/data_model/data_model.dart),
 used both client and server side, uses value types, enums and serialization from
 built_value.
 
@@ -32,11 +32,9 @@ Simple examples are
 [here](https://github.com/google/built_value.dart/tree/master/example/lib/example.dart).
 
 Codegen is triggered via either a
-[build.dart]
-(https://github.com/google/built_value.dart/blob/master/example/tool/build.dart)
+[build.dart](https://github.com/google/built_value.dart/blob/master/example/tool/build.dart)
 to do a one-off build or a
-[watch.dart]
-(https://github.com/google/built_value.dart/blob/master/example/tool/watch.dart)
+[watch.dart](https://github.com/google/built_value.dart/blob/master/example/tool/watch.dart)
 to continuously watch your source and update generated output.
 
 ## Value Types
@@ -52,8 +50,8 @@ Value types are very commonly sent by RPC and/or stored for later
 retrieval.
 
 The problems that led to the creation of the Built Value library have
-been [discussed at great length]
-(https://docs.google.com/presentation/d/14u_h-lMn7f1rXE1nDiLX0azS3IkgjGl5uxp5jGJ75RE/edit)
+been
+[discussed at great length](https://docs.google.com/presentation/d/14u_h-lMn7f1rXE1nDiLX0azS3IkgjGl5uxp5jGJ75RE/edit)
 in the context of
 [AutoValue](https://github.com/google/auto/tree/master/value#autovalue)
 for Java.
@@ -92,8 +90,8 @@ Design:
 
 Built Values comes with JSON serialization support which allows you to
 serialize a complete data model of Built Values, Enum Classes and
-Built Collections. The [chat example]
-(https://github.com/google/built_value.dart/tree/master/chat_example) shows 
+Built Collections. The
+[chat example](https://github.com/google/built_value.dart/tree/master/chat_example) shows 
 how easy this makes building a full application with Dart on the server and
 client.
 
