@@ -111,6 +111,8 @@ abstract class Serializers {
   SerializersBuilder toBuilder();
 }
 
+/// Note: this is an experimental feature. API may change without a major
+/// version increase.
 abstract class SerializerPlugin {
   Object beforeSerialize(Object object, FullType specifiedType);
 
