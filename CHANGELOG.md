@@ -1,7 +1,10 @@
 # Changelog
 
-## 0.5.8
+## 1.0.0
 
+- Version bump to 1.0.0. Three minor features are marked as experimental and 
+  may change without a major version increase: BuiltValueToStringHelper,
+  JsonObject and SerializerPlugin.
 - Made toString() output customizable.
 - Made the default toString() output use indentation and omit nulls.
 - Sort serializers in generated output.

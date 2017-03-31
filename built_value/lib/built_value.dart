@@ -105,6 +105,9 @@ BuiltValueToStringHelperProvider newBuiltValueToStringHelper =
     (String className) => new IndentingBuiltValueToStringHelper(className);
 
 /// Interface for built_value toString() output helpers.
+///
+/// Note: this is an experimental feature. API may change without a major
+/// version increase.
 abstract class BuiltValueToStringHelper {
   /// Add a field and its value.
   void add(String field, Object value);

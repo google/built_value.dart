@@ -16,6 +16,9 @@ import 'package:collection/collection.dart';
 /// [UnmodifiableMapView] so they won't be modifiable via this object. You
 /// must ensure that no updates are made via the original reference, as a
 /// copy is not made.
+///
+/// Note: this is an experimental feature. API may change without a major
+/// version increase.
 abstract class JsonObject {
   /// The value, which may be a bool, a List, a Map, a num or a String.
   Object get value;
