@@ -18,7 +18,7 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   factory _$SerializerSourceLibrary(
           [void updates(SerializerSourceLibraryBuilder b)]) =>
       (new SerializerSourceLibraryBuilder()..update(updates)).build()
-      as _$SerializerSourceLibrary;
+          as _$SerializerSourceLibrary;
 
   _$SerializerSourceLibrary._(
       {this.hasSerializers, this.sourceClasses, this.transitiveSourceClasses})

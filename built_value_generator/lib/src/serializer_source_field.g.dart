@@ -22,7 +22,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   factory _$SerializerSourceField(
           [void updates(SerializerSourceFieldBuilder b)]) =>
       (new SerializerSourceFieldBuilder()..update(updates)).build()
-      as _$SerializerSourceField;
+          as _$SerializerSourceField;
 
   _$SerializerSourceField._(
       {this.isSerializable,

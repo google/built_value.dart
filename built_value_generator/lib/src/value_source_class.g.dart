@@ -43,7 +43,7 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   factory _$ValueSourceClass([void updates(ValueSourceClassBuilder b)]) =>
       (new ValueSourceClassBuilder()..update(updates)).build()
-      as _$ValueSourceClass;
+          as _$ValueSourceClass;
 
   _$ValueSourceClass._(
       {this.name,
