@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Allow quiver 0.25.
+
 ## 1.0.0
 
 - Version bump to 1.0.0. Three minor features are marked as experimental and 
