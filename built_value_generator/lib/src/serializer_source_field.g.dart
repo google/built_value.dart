@@ -9,150 +9,91 @@ part of built_value_generator.source_field;
 
 class _$SerializerSourceField extends SerializerSourceField {
   @override
-  final bool isSerializable;
+  final FieldElement element;
   @override
-  final bool isNullable;
-  @override
-  final String name;
-  @override
-  final String type;
-  @override
-  final bool builderFieldUsesNestedBuilder;
+  final FieldElement builderElement;
+  bool __isSerializable;
+  bool __isNullable;
+  String __name;
+  String __type;
+  bool __builderFieldUsesNestedBuilder;
+  String __rawType;
 
   factory _$SerializerSourceField(
           [void updates(SerializerSourceFieldBuilder b)]) =>
-      (new SerializerSourceFieldBuilder()..update(updates)).build()
-          as _$SerializerSourceField;
+      (new SerializerSourceFieldBuilder()..update(updates)).build();
 
-  _$SerializerSourceField._(
-      {this.isSerializable,
-      this.isNullable,
-      this.name,
-      this.type,
-      this.builderFieldUsesNestedBuilder})
-      : super._() {
-    if (isSerializable == null)
-      throw new ArgumentError.notNull('isSerializable');
-    if (isNullable == null) throw new ArgumentError.notNull('isNullable');
-    if (name == null) throw new ArgumentError.notNull('name');
-    if (type == null) throw new ArgumentError.notNull('type');
-    if (builderFieldUsesNestedBuilder == null)
-      throw new ArgumentError.notNull('builderFieldUsesNestedBuilder');
+  _$SerializerSourceField._({this.element, this.builderElement}) : super._() {
+    if (element == null) throw new ArgumentError.notNull('element');
   }
+
+  @override
+  bool get isSerializable => __isSerializable ??= super.isSerializable;
+
+  @override
+  bool get isNullable => __isNullable ??= super.isNullable;
+
+  @override
+  String get name => __name ??= super.name;
+
+  @override
+  String get type => __type ??= super.type;
+
+  @override
+  bool get builderFieldUsesNestedBuilder =>
+      __builderFieldUsesNestedBuilder ??= super.builderFieldUsesNestedBuilder;
+
+  @override
+  String get rawType => __rawType ??= super.rawType;
 
   @override
   SerializerSourceField rebuild(void updates(SerializerSourceFieldBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  _$SerializerSourceFieldBuilder toBuilder() =>
-      new _$SerializerSourceFieldBuilder()..replace(this);
+  SerializerSourceFieldBuilder toBuilder() =>
+      new SerializerSourceFieldBuilder()..replace(this);
 
   @override
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! SerializerSourceField) return false;
-    return isSerializable == other.isSerializable &&
-        isNullable == other.isNullable &&
-        name == other.name &&
-        type == other.type &&
-        builderFieldUsesNestedBuilder == other.builderFieldUsesNestedBuilder;
+    return element == other.element && builderElement == other.builderElement;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc($jc($jc(0, isSerializable.hashCode), isNullable.hashCode),
-                name.hashCode),
-            type.hashCode),
-        builderFieldUsesNestedBuilder.hashCode));
+    return $jf($jc($jc(0, element.hashCode), builderElement.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SerializerSourceField')
-          ..add('isSerializable', isSerializable)
-          ..add('isNullable', isNullable)
-          ..add('name', name)
-          ..add('type', type)
-          ..add('builderFieldUsesNestedBuilder', builderFieldUsesNestedBuilder))
+          ..add('element', element)
+          ..add('builderElement', builderElement))
         .toString();
   }
 }
 
-class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
+class SerializerSourceFieldBuilder
+    implements Builder<SerializerSourceField, SerializerSourceFieldBuilder> {
   _$SerializerSourceField _$v;
 
-  @override
-  bool get isSerializable {
-    _$this;
-    return super.isSerializable;
-  }
+  FieldElement _element;
+  FieldElement get element => _$this._element;
+  set element(FieldElement element) => _$this._element = element;
 
-  @override
-  set isSerializable(bool isSerializable) {
-    _$this;
-    super.isSerializable = isSerializable;
-  }
+  FieldElement _builderElement;
+  FieldElement get builderElement => _$this._builderElement;
+  set builderElement(FieldElement builderElement) =>
+      _$this._builderElement = builderElement;
 
-  @override
-  bool get isNullable {
-    _$this;
-    return super.isNullable;
-  }
-
-  @override
-  set isNullable(bool isNullable) {
-    _$this;
-    super.isNullable = isNullable;
-  }
-
-  @override
-  String get name {
-    _$this;
-    return super.name;
-  }
-
-  @override
-  set name(String name) {
-    _$this;
-    super.name = name;
-  }
-
-  @override
-  String get type {
-    _$this;
-    return super.type;
-  }
-
-  @override
-  set type(String type) {
-    _$this;
-    super.type = type;
-  }
-
-  @override
-  bool get builderFieldUsesNestedBuilder {
-    _$this;
-    return super.builderFieldUsesNestedBuilder;
-  }
-
-  @override
-  set builderFieldUsesNestedBuilder(bool builderFieldUsesNestedBuilder) {
-    _$this;
-    super.builderFieldUsesNestedBuilder = builderFieldUsesNestedBuilder;
-  }
-
-  _$SerializerSourceFieldBuilder() : super._();
+  SerializerSourceFieldBuilder();
 
   SerializerSourceFieldBuilder get _$this {
     if (_$v != null) {
-      super.isSerializable = _$v.isSerializable;
-      super.isNullable = _$v.isNullable;
-      super.name = _$v.name;
-      super.type = _$v.type;
-      super.builderFieldUsesNestedBuilder = _$v.builderFieldUsesNestedBuilder;
+      _element = _$v.element;
+      _builderElement = _$v.builderElement;
       _$v = null;
     }
     return this;
@@ -173,11 +114,7 @@ class _$SerializerSourceFieldBuilder extends SerializerSourceFieldBuilder {
   _$SerializerSourceField build() {
     final result = _$v ??
         new _$SerializerSourceField._(
-            isSerializable: isSerializable,
-            isNullable: isNullable,
-            name: name,
-            type: type,
-            builderFieldUsesNestedBuilder: builderFieldUsesNestedBuilder);
+            element: element, builderElement: builderElement);
     replace(result);
     return result;
   }

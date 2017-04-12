@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+
+- Significantly improve build performance by using @memoized instead of precomputed fields.
+
 ## 1.1.1
 
 - Update analyzer and build dependencies.

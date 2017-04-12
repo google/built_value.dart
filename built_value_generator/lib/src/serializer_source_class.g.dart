@@ -9,43 +9,48 @@ part of built_value_generator.source_class;
 
 class _$SerializerSourceClass extends SerializerSourceClass {
   @override
-  final String name;
+  final ClassElement element;
   @override
-  final String serializerDeclaration;
-  @override
-  final BuiltList<String> genericParameters;
-  @override
-  final BuiltList<String> genericBounds;
-  @override
-  final bool isBuiltValue;
-  @override
-  final bool isEnumClass;
-  @override
-  final BuiltList<SerializerSourceField> fields;
+  final ClassElement builderElement;
+  String __name;
+  String __serializerDeclaration;
+  BuiltList<String> __genericParameters;
+  BuiltList<String> __genericBounds;
+  bool __isBuiltValue;
+  bool __isEnumClass;
+  BuiltList<SerializerSourceField> __fields;
 
   factory _$SerializerSourceClass(
           [void updates(SerializerSourceClassBuilder b)]) =>
       (new SerializerSourceClassBuilder()..update(updates)).build();
 
-  _$SerializerSourceClass._(
-      {this.name,
-      this.serializerDeclaration,
-      this.genericParameters,
-      this.genericBounds,
-      this.isBuiltValue,
-      this.isEnumClass,
-      this.fields})
-      : super._() {
-    if (name == null) throw new ArgumentError.notNull('name');
-    if (serializerDeclaration == null)
-      throw new ArgumentError.notNull('serializerDeclaration');
-    if (genericParameters == null)
-      throw new ArgumentError.notNull('genericParameters');
-    if (genericBounds == null) throw new ArgumentError.notNull('genericBounds');
-    if (isBuiltValue == null) throw new ArgumentError.notNull('isBuiltValue');
-    if (isEnumClass == null) throw new ArgumentError.notNull('isEnumClass');
-    if (fields == null) throw new ArgumentError.notNull('fields');
+  _$SerializerSourceClass._({this.element, this.builderElement}) : super._() {
+    if (element == null) throw new ArgumentError.notNull('element');
   }
+
+  @override
+  String get name => __name ??= super.name;
+
+  @override
+  String get serializerDeclaration =>
+      __serializerDeclaration ??= super.serializerDeclaration;
+
+  @override
+  BuiltList<String> get genericParameters =>
+      __genericParameters ??= super.genericParameters;
+
+  @override
+  BuiltList<String> get genericBounds =>
+      __genericBounds ??= super.genericBounds;
+
+  @override
+  bool get isBuiltValue => __isBuiltValue ??= super.isBuiltValue;
+
+  @override
+  bool get isEnumClass => __isEnumClass ??= super.isEnumClass;
+
+  @override
+  BuiltList<SerializerSourceField> get fields => __fields ??= super.fields;
 
   @override
   SerializerSourceClass rebuild(void updates(SerializerSourceClassBuilder b)) =>
@@ -59,41 +64,19 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! SerializerSourceClass) return false;
-    return name == other.name &&
-        serializerDeclaration == other.serializerDeclaration &&
-        genericParameters == other.genericParameters &&
-        genericBounds == other.genericBounds &&
-        isBuiltValue == other.isBuiltValue &&
-        isEnumClass == other.isEnumClass &&
-        fields == other.fields;
+    return element == other.element && builderElement == other.builderElement;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc($jc(0, name.hashCode),
-                            serializerDeclaration.hashCode),
-                        genericParameters.hashCode),
-                    genericBounds.hashCode),
-                isBuiltValue.hashCode),
-            isEnumClass.hashCode),
-        fields.hashCode));
+    return $jf($jc($jc(0, element.hashCode), builderElement.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SerializerSourceClass')
-          ..add('name', name)
-          ..add('serializerDeclaration', serializerDeclaration)
-          ..add('genericParameters', genericParameters)
-          ..add('genericBounds', genericBounds)
-          ..add('isBuiltValue', isBuiltValue)
-          ..add('isEnumClass', isEnumClass)
-          ..add('fields', fields))
+          ..add('element', element)
+          ..add('builderElement', builderElement))
         .toString();
   }
 }
@@ -102,52 +85,21 @@ class SerializerSourceClassBuilder
     implements Builder<SerializerSourceClass, SerializerSourceClassBuilder> {
   _$SerializerSourceClass _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  ClassElement _element;
+  ClassElement get element => _$this._element;
+  set element(ClassElement element) => _$this._element = element;
 
-  String _serializerDeclaration;
-  String get serializerDeclaration => _$this._serializerDeclaration;
-  set serializerDeclaration(String serializerDeclaration) =>
-      _$this._serializerDeclaration = serializerDeclaration;
-
-  ListBuilder<String> _genericParameters;
-  ListBuilder<String> get genericParameters =>
-      _$this._genericParameters ??= new ListBuilder<String>();
-  set genericParameters(ListBuilder<String> genericParameters) =>
-      _$this._genericParameters = genericParameters;
-
-  ListBuilder<String> _genericBounds;
-  ListBuilder<String> get genericBounds =>
-      _$this._genericBounds ??= new ListBuilder<String>();
-  set genericBounds(ListBuilder<String> genericBounds) =>
-      _$this._genericBounds = genericBounds;
-
-  bool _isBuiltValue;
-  bool get isBuiltValue => _$this._isBuiltValue;
-  set isBuiltValue(bool isBuiltValue) => _$this._isBuiltValue = isBuiltValue;
-
-  bool _isEnumClass;
-  bool get isEnumClass => _$this._isEnumClass;
-  set isEnumClass(bool isEnumClass) => _$this._isEnumClass = isEnumClass;
-
-  ListBuilder<SerializerSourceField> _fields;
-  ListBuilder<SerializerSourceField> get fields =>
-      _$this._fields ??= new ListBuilder<SerializerSourceField>();
-  set fields(ListBuilder<SerializerSourceField> fields) =>
-      _$this._fields = fields;
+  ClassElement _builderElement;
+  ClassElement get builderElement => _$this._builderElement;
+  set builderElement(ClassElement builderElement) =>
+      _$this._builderElement = builderElement;
 
   SerializerSourceClassBuilder();
 
   SerializerSourceClassBuilder get _$this {
     if (_$v != null) {
-      _name = _$v.name;
-      _serializerDeclaration = _$v.serializerDeclaration;
-      _genericParameters = _$v.genericParameters?.toBuilder();
-      _genericBounds = _$v.genericBounds?.toBuilder();
-      _isBuiltValue = _$v.isBuiltValue;
-      _isEnumClass = _$v.isEnumClass;
-      _fields = _$v.fields?.toBuilder();
+      _element = _$v.element;
+      _builderElement = _$v.builderElement;
       _$v = null;
     }
     return this;
@@ -168,13 +120,7 @@ class SerializerSourceClassBuilder
   _$SerializerSourceClass build() {
     final result = _$v ??
         new _$SerializerSourceClass._(
-            name: name,
-            serializerDeclaration: serializerDeclaration,
-            genericParameters: genericParameters?.build(),
-            genericBounds: genericBounds?.build(),
-            isBuiltValue: isBuiltValue,
-            isEnumClass: isEnumClass,
-            fields: fields?.build());
+            element: element, builderElement: builderElement);
     replace(result);
     return result;
   }

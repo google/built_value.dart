@@ -16,29 +16,32 @@ part 'enum_source_library.g.dart';
 
 abstract class EnumSourceLibrary
     implements Built<EnumSourceLibrary, EnumSourceLibraryBuilder> {
-  String get name;
-  String get fileName;
-  String get source;
-  BuiltList<EnumSourceClass> get classes;
+  LibraryElement get element;
 
-  factory EnumSourceLibrary([updates(EnumSourceLibraryBuilder b)]) =
-      _$EnumSourceLibrary;
+  factory EnumSourceLibrary(LibraryElement element) =>
+      new _$EnumSourceLibrary._(element: element);
   EnumSourceLibrary._();
 
-  factory EnumSourceLibrary.fromLibraryElement(LibraryElement libraryElement) {
-    final result = new EnumSourceLibraryBuilder()
-      ..name = libraryElement.name
-      ..fileName = libraryElement.source.shortName.replaceAll('.dart', '')
-      ..source = libraryElement.source.contents.data;
+  @memoized
+  String get name => element.name;
 
-    for (final classElement
-        in LibraryElements.getClassElements(libraryElement)) {
+  @memoized
+  String get fileName => element.source.shortName.replaceAll('.dart', '');
+
+  @memoized
+  String get source => element.source.contents.data;
+
+  @memoized
+  BuiltList<EnumSourceClass> get classes {
+    final result = new ListBuilder<EnumSourceClass>();
+
+    for (final classElement in LibraryElements.getClassElements(element)) {
       if (EnumSourceClass.isMissingImportFor(classElement)) {
         throw _makeError([
           "Import EnumClass: import 'package:built_value/built_value.dart';"
         ]);
       } else if (EnumSourceClass.needsEnumClass(classElement)) {
-        result.classes.add(new EnumSourceClass.fromClassElement(classElement));
+        result.add(new EnumSourceClass(classElement));
       }
     }
     return result.build();

@@ -17,43 +17,44 @@ part 'serializer_source_library.g.dart';
 
 abstract class SerializerSourceLibrary
     implements Built<SerializerSourceLibrary, SerializerSourceLibraryBuilder> {
-  bool get hasSerializers;
-  BuiltSet<SerializerSourceClass> get sourceClasses;
-  BuiltSet<SerializerSourceClass> get transitiveSourceClasses;
+  LibraryElement get element;
 
-  factory SerializerSourceLibrary([updates(SerializerSourceLibraryBuilder b)]) =
-      _$SerializerSourceLibrary;
+  factory SerializerSourceLibrary(LibraryElement element) =>
+      new _$SerializerSourceLibrary._(element: element);
   SerializerSourceLibrary._();
 
-  static SerializerSourceLibrary fromLibraryElement(
-      LibraryElement libraryElement) {
-    final result = new SerializerSourceLibraryBuilder();
+  // TODO(davidmorgan): better way of checking for top level declaration.
+  @memoized
+  bool get hasSerializers => element.definingCompilationUnit.accessors
+      .any((element) => element.displayName == 'serializers');
 
-    // TODO(davidmorgan): better way of checking for top level declaration.
-    result.hasSerializers = libraryElement.definingCompilationUnit.accessors
-        .any((element) => element.displayName == 'serializers');
-
-    final classElements = LibraryElements.getClassElements(libraryElement);
+  @memoized
+  BuiltSet<SerializerSourceClass> get sourceClasses {
+    final result = new SetBuilder<SerializerSourceClass>();
+    final classElements = LibraryElements.getClassElements(element);
     for (final classElement in classElements) {
       final builderClassElement =
-          libraryElement.getType(classElement.displayName + 'Builder');
-      final sourceClass = SerializerSourceClass.fromClassElements(
-          classElement, builderClassElement);
-      if (sourceClass.needsBuiltJson) {
-        result.sourceClasses.add(sourceClass);
-      }
-    }
-
-    final transitiveClassElements =
-        LibraryElements.getTransitiveClassElements(libraryElement);
-    for (final classElement in transitiveClassElements) {
+          element.getType(element.displayName + 'Builder');
       final sourceClass =
-          SerializerSourceClass.fromClassElements(classElement, null);
+          new SerializerSourceClass(classElement, builderClassElement);
       if (sourceClass.needsBuiltJson) {
-        result.transitiveSourceClasses.add(sourceClass);
+        result.add(sourceClass);
       }
     }
+    return result.build();
+  }
 
+  @memoized
+  BuiltSet<SerializerSourceClass> get transitiveSourceClasses {
+    final result = new SetBuilder<SerializerSourceClass>();
+    final transitiveClassElements =
+        LibraryElements.getTransitiveClassElements(element);
+    for (final classElement in transitiveClassElements) {
+      final sourceClass = new SerializerSourceClass(classElement, null);
+      if (sourceClass.needsBuiltJson) {
+        result.add(sourceClass);
+      }
+    }
     return result.build();
   }
 
@@ -72,12 +73,14 @@ abstract class SerializerSourceLibrary
                 (transitiveSourceClasses
                         .map((sourceClass) =>
                             sourceClass.generateTransitiveSerializerAdder())
-                        .toList()..sort())
+                        .toList()
+                          ..sort())
                     .join('\n') +
                 (transitiveSourceClasses
                         .map((sourceClass) =>
                             sourceClass.generateBuilderFactoryAdders())
-                        .toList()..sort())
+                        .toList()
+                          ..sort())
                     .join('\n') +
                 ').build();'
             : '') +
@@ -88,22 +91,6 @@ abstract class SerializerSourceLibrary
             .map((sourceClass) => sourceClass.generateSerializer())
             .join('\n');
   }
-}
-
-abstract class SerializerSourceLibraryBuilder
-    implements
-        Builder<SerializerSourceLibrary, SerializerSourceLibraryBuilder> {
-  @virtual
-  bool hasSerializers = false;
-  @virtual
-  SetBuilder<SerializerSourceClass> sourceClasses =
-      new SetBuilder<SerializerSourceClass>();
-  @virtual
-  SetBuilder<SerializerSourceClass> transitiveSourceClasses =
-      new SetBuilder<SerializerSourceClass>();
-
-  factory SerializerSourceLibraryBuilder() = _$SerializerSourceLibraryBuilder;
-  SerializerSourceLibraryBuilder._();
 }
 
 InvalidGenerationSourceError _makeError(Iterable<String> todos) {
