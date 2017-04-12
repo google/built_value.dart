@@ -10,6 +10,10 @@ cd built_value \
     && pub get \
     && dart tool/build.dart \
     && pub run test \
+    && cd ../built_value_test \
+    && pub get \
+    && dart tool/build.dart \
+    && pub run test \
     && cd ../end_to_end_test \
     && pub get \
     && dart tool/build.dart \
