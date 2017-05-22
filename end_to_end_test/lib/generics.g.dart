@@ -166,7 +166,7 @@ class _$CollectionGenericValueSerializer
     final result = isUnderspecified
         ? new CollectionGenericValueBuilder<Object>()
         : serializers.newBuilder(specifiedType)
-        as CollectionGenericValueBuilder;
+            as CollectionGenericValueBuilder;
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {

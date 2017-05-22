@@ -715,7 +715,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 
   factory _$ValueWithDefaults([void updates(ValueWithDefaultsBuilder b)]) =>
       (new ValueWithDefaultsBuilder()..update(updates)).build()
-      as _$ValueWithDefaults;
+          as _$ValueWithDefaults;
 
   _$ValueWithDefaults._({this.anInt, this.aString}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
