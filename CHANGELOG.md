@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Update analyzer and build dependencies.
+
 ## 1.1.0
 
 - Add "built_value_test" library. It provides a matcher which gives good mismatch messages for built_value instances.
