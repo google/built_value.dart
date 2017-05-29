@@ -9,41 +9,51 @@ part of built_value_generator.enum_source_class;
 
 class _$EnumSourceClass extends EnumSourceClass {
   @override
-  final String name;
-  @override
-  final bool isAbstract;
-  @override
-  final BuiltList<EnumSourceField> fields;
-  @override
-  final BuiltList<String> constructors;
-  @override
-  final String valuesIdentifier;
-  @override
-  final String valueOfIdentifier;
-  @override
-  final bool usesMixin;
-  @override
-  final String mixinDeclaration;
+  final ClassElement element;
+  String __name;
+  bool __isAbstract;
+  BuiltList<EnumSourceField> __fields;
+  BuiltList<String> __constructors;
+  String __valuesIdentifier;
+  String __valueOfIdentifier;
+  bool __usesMixin;
+  String __mixinDeclaration;
+  Iterable<String> __identifiers;
 
   factory _$EnumSourceClass([void updates(EnumSourceClassBuilder b)]) =>
       (new EnumSourceClassBuilder()..update(updates)).build();
 
-  _$EnumSourceClass._(
-      {this.name,
-      this.isAbstract,
-      this.fields,
-      this.constructors,
-      this.valuesIdentifier,
-      this.valueOfIdentifier,
-      this.usesMixin,
-      this.mixinDeclaration})
-      : super._() {
-    if (name == null) throw new ArgumentError.notNull('name');
-    if (isAbstract == null) throw new ArgumentError.notNull('isAbstract');
-    if (fields == null) throw new ArgumentError.notNull('fields');
-    if (constructors == null) throw new ArgumentError.notNull('constructors');
-    if (usesMixin == null) throw new ArgumentError.notNull('usesMixin');
+  _$EnumSourceClass._({this.element}) : super._() {
+    if (element == null) throw new ArgumentError.notNull('element');
   }
+
+  @override
+  String get name => __name ??= super.name;
+
+  @override
+  bool get isAbstract => __isAbstract ??= super.isAbstract;
+
+  @override
+  BuiltList<EnumSourceField> get fields => __fields ??= super.fields;
+
+  @override
+  BuiltList<String> get constructors => __constructors ??= super.constructors;
+
+  @override
+  String get valuesIdentifier => __valuesIdentifier ??= super.valuesIdentifier;
+
+  @override
+  String get valueOfIdentifier =>
+      __valueOfIdentifier ??= super.valueOfIdentifier;
+
+  @override
+  bool get usesMixin => __usesMixin ??= super.usesMixin;
+
+  @override
+  String get mixinDeclaration => __mixinDeclaration ??= super.mixinDeclaration;
+
+  @override
+  Iterable<String> get identifiers => __identifiers ??= super.identifiers;
 
   @override
   EnumSourceClass rebuild(void updates(EnumSourceClassBuilder b)) =>
@@ -57,43 +67,18 @@ class _$EnumSourceClass extends EnumSourceClass {
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! EnumSourceClass) return false;
-    return name == other.name &&
-        isAbstract == other.isAbstract &&
-        fields == other.fields &&
-        constructors == other.constructors &&
-        valuesIdentifier == other.valuesIdentifier &&
-        valueOfIdentifier == other.valueOfIdentifier &&
-        usesMixin == other.usesMixin &&
-        mixinDeclaration == other.mixinDeclaration;
+    return element == other.element;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc($jc($jc(0, name.hashCode), isAbstract.hashCode),
-                            fields.hashCode),
-                        constructors.hashCode),
-                    valuesIdentifier.hashCode),
-                valueOfIdentifier.hashCode),
-            usesMixin.hashCode),
-        mixinDeclaration.hashCode));
+    return $jf($jc(0, element.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('EnumSourceClass')
-          ..add('name', name)
-          ..add('isAbstract', isAbstract)
-          ..add('fields', fields)
-          ..add('constructors', constructors)
-          ..add('valuesIdentifier', valuesIdentifier)
-          ..add('valueOfIdentifier', valueOfIdentifier)
-          ..add('usesMixin', usesMixin)
-          ..add('mixinDeclaration', mixinDeclaration))
+          ..add('element', element))
         .toString();
   }
 }
@@ -102,56 +87,15 @@ class EnumSourceClassBuilder
     implements Builder<EnumSourceClass, EnumSourceClassBuilder> {
   _$EnumSourceClass _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
-
-  bool _isAbstract;
-  bool get isAbstract => _$this._isAbstract;
-  set isAbstract(bool isAbstract) => _$this._isAbstract = isAbstract;
-
-  ListBuilder<EnumSourceField> _fields;
-  ListBuilder<EnumSourceField> get fields =>
-      _$this._fields ??= new ListBuilder<EnumSourceField>();
-  set fields(ListBuilder<EnumSourceField> fields) => _$this._fields = fields;
-
-  ListBuilder<String> _constructors;
-  ListBuilder<String> get constructors =>
-      _$this._constructors ??= new ListBuilder<String>();
-  set constructors(ListBuilder<String> constructors) =>
-      _$this._constructors = constructors;
-
-  String _valuesIdentifier;
-  String get valuesIdentifier => _$this._valuesIdentifier;
-  set valuesIdentifier(String valuesIdentifier) =>
-      _$this._valuesIdentifier = valuesIdentifier;
-
-  String _valueOfIdentifier;
-  String get valueOfIdentifier => _$this._valueOfIdentifier;
-  set valueOfIdentifier(String valueOfIdentifier) =>
-      _$this._valueOfIdentifier = valueOfIdentifier;
-
-  bool _usesMixin;
-  bool get usesMixin => _$this._usesMixin;
-  set usesMixin(bool usesMixin) => _$this._usesMixin = usesMixin;
-
-  String _mixinDeclaration;
-  String get mixinDeclaration => _$this._mixinDeclaration;
-  set mixinDeclaration(String mixinDeclaration) =>
-      _$this._mixinDeclaration = mixinDeclaration;
+  ClassElement _element;
+  ClassElement get element => _$this._element;
+  set element(ClassElement element) => _$this._element = element;
 
   EnumSourceClassBuilder();
 
   EnumSourceClassBuilder get _$this {
     if (_$v != null) {
-      _name = _$v.name;
-      _isAbstract = _$v.isAbstract;
-      _fields = _$v.fields?.toBuilder();
-      _constructors = _$v.constructors?.toBuilder();
-      _valuesIdentifier = _$v.valuesIdentifier;
-      _valueOfIdentifier = _$v.valueOfIdentifier;
-      _usesMixin = _$v.usesMixin;
-      _mixinDeclaration = _$v.mixinDeclaration;
+      _element = _$v.element;
       _$v = null;
     }
     return this;
@@ -170,16 +114,7 @@ class EnumSourceClassBuilder
 
   @override
   _$EnumSourceClass build() {
-    final result = _$v ??
-        new _$EnumSourceClass._(
-            name: name,
-            isAbstract: isAbstract,
-            fields: fields?.build(),
-            constructors: constructors?.build(),
-            valuesIdentifier: valuesIdentifier,
-            valueOfIdentifier: valueOfIdentifier,
-            usesMixin: usesMixin,
-            mixinDeclaration: mixinDeclaration);
+    final result = _$v ?? new _$EnumSourceClass._(element: element);
     replace(result);
     return result;
   }

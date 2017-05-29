@@ -9,33 +9,35 @@ part of built_value_generator.enum_source_field;
 
 class _$EnumSourceField extends EnumSourceField {
   @override
-  final String name;
-  @override
-  final String type;
-  @override
-  final String generatedIdentifier;
-  @override
-  final bool isConst;
-  @override
-  final bool isStatic;
+  final FieldElement element;
+  String __name;
+  String __type;
+  String __generatedIdentifier;
+  bool __isConst;
+  bool __isStatic;
 
   factory _$EnumSourceField([void updates(EnumSourceFieldBuilder b)]) =>
       (new EnumSourceFieldBuilder()..update(updates)).build();
 
-  _$EnumSourceField._(
-      {this.name,
-      this.type,
-      this.generatedIdentifier,
-      this.isConst,
-      this.isStatic})
-      : super._() {
-    if (name == null) throw new ArgumentError.notNull('name');
-    if (type == null) throw new ArgumentError.notNull('type');
-    if (generatedIdentifier == null)
-      throw new ArgumentError.notNull('generatedIdentifier');
-    if (isConst == null) throw new ArgumentError.notNull('isConst');
-    if (isStatic == null) throw new ArgumentError.notNull('isStatic');
+  _$EnumSourceField._({this.element}) : super._() {
+    if (element == null) throw new ArgumentError.notNull('element');
   }
+
+  @override
+  String get name => __name ??= super.name;
+
+  @override
+  String get type => __type ??= super.type;
+
+  @override
+  String get generatedIdentifier =>
+      __generatedIdentifier ??= super.generatedIdentifier;
+
+  @override
+  bool get isConst => __isConst ??= super.isConst;
+
+  @override
+  bool get isStatic => __isStatic ??= super.isStatic;
 
   @override
   EnumSourceField rebuild(void updates(EnumSourceFieldBuilder b)) =>
@@ -49,31 +51,18 @@ class _$EnumSourceField extends EnumSourceField {
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! EnumSourceField) return false;
-    return name == other.name &&
-        type == other.type &&
-        generatedIdentifier == other.generatedIdentifier &&
-        isConst == other.isConst &&
-        isStatic == other.isStatic;
+    return element == other.element;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc($jc($jc(0, name.hashCode), type.hashCode),
-                generatedIdentifier.hashCode),
-            isConst.hashCode),
-        isStatic.hashCode));
+    return $jf($jc(0, element.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('EnumSourceField')
-          ..add('name', name)
-          ..add('type', type)
-          ..add('generatedIdentifier', generatedIdentifier)
-          ..add('isConst', isConst)
-          ..add('isStatic', isStatic))
+          ..add('element', element))
         .toString();
   }
 }
@@ -82,36 +71,15 @@ class EnumSourceFieldBuilder
     implements Builder<EnumSourceField, EnumSourceFieldBuilder> {
   _$EnumSourceField _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
-
-  String _type;
-  String get type => _$this._type;
-  set type(String type) => _$this._type = type;
-
-  String _generatedIdentifier;
-  String get generatedIdentifier => _$this._generatedIdentifier;
-  set generatedIdentifier(String generatedIdentifier) =>
-      _$this._generatedIdentifier = generatedIdentifier;
-
-  bool _isConst;
-  bool get isConst => _$this._isConst;
-  set isConst(bool isConst) => _$this._isConst = isConst;
-
-  bool _isStatic;
-  bool get isStatic => _$this._isStatic;
-  set isStatic(bool isStatic) => _$this._isStatic = isStatic;
+  FieldElement _element;
+  FieldElement get element => _$this._element;
+  set element(FieldElement element) => _$this._element = element;
 
   EnumSourceFieldBuilder();
 
   EnumSourceFieldBuilder get _$this {
     if (_$v != null) {
-      _name = _$v.name;
-      _type = _$v.type;
-      _generatedIdentifier = _$v.generatedIdentifier;
-      _isConst = _$v.isConst;
-      _isStatic = _$v.isStatic;
+      _element = _$v.element;
       _$v = null;
     }
     return this;
@@ -130,13 +98,7 @@ class EnumSourceFieldBuilder
 
   @override
   _$EnumSourceField build() {
-    final result = _$v ??
-        new _$EnumSourceField._(
-            name: name,
-            type: type,
-            generatedIdentifier: generatedIdentifier,
-            isConst: isConst,
-            isStatic: isStatic);
+    final result = _$v ?? new _$EnumSourceField._(element: element);
     replace(result);
     return result;
   }

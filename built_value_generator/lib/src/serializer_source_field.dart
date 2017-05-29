@@ -32,53 +32,52 @@ abstract class SerializerSourceField
     'BuiltSetMultimap': 'SetMultimapBuilder',
   });
 
-  bool get isSerializable;
-  bool get isNullable;
-  String get name;
-  String get type;
-  bool get builderFieldUsesNestedBuilder;
+  FieldElement get element;
+  @nullable
+  FieldElement get builderElement;
 
-  factory SerializerSourceField([updates(SerializerSourceFieldBuilder b)]) =
-      _$SerializerSourceField;
+  factory SerializerSourceField(
+          FieldElement element, FieldElement builderElement) =>
+      new _$SerializerSourceField._(
+          element: element, builderElement: builderElement);
   SerializerSourceField._();
 
-  String get rawType => _getBareType(type);
+  @memoized
+  bool get isSerializable =>
+      element.getter != null && element.getter.isAbstract && !element.isStatic;
 
-  static SerializerSourceField fromFieldElements(
-      FieldElement fieldElement, FieldElement builderFieldElement) {
-    final result = new SerializerSourceFieldBuilder();
-    final isSerializable = fieldElement.getter != null &&
-        fieldElement.getter.isAbstract &&
-        !fieldElement.isStatic;
+  @memoized
+  bool get isNullable => element.getter.metadata
+      .any((metadata) => metadata.constantValue.toStringValue() == 'nullable');
 
-    result.isSerializable = isSerializable;
+  @memoized
+  String get name => element.displayName;
 
-    if (isSerializable) {
-      result.isNullable = fieldElement.getter.metadata.any(
-          (metadata) => metadata.constantValue.toStringValue() == 'nullable');
-      result.name = fieldElement.displayName;
+  // Go via AST to pull in any import prefix.
+  @memoized
+  String get type =>
+      (element.getter.computeNode() as MethodDeclaration)
+          ?.returnType
+          ?.toString() ??
+      'dynamic';
 
-      // Go via AST to pull in any import prefix.
-      result.type = (fieldElement.getter.computeNode() as MethodDeclaration)
-              ?.returnType
-              ?.toString() ??
-          'dynamic';
+  @memoized
+  bool get builderFieldUsesNestedBuilder {
+    final builderFieldElementIsValid =
+        (builderElement?.getter?.isAbstract ?? false) &&
+            !builderElement.isStatic;
 
-      final builderFieldElementIsValid =
-          (builderFieldElement?.getter?.isAbstract ?? false) &&
-              !builderFieldElement.isStatic;
-
-      // If the builder is present, check it to determine whether a nested
-      // builder is needed. Otherwise, use the same logic as built_value when
-      // it decides whether to use a nested builder.
-      result.builderFieldUsesNestedBuilder = builderFieldElementIsValid
-          ? fieldElement.getter.returnType.displayName !=
-              builderFieldElement.getter.returnType.displayName
-          : _needsNestedBuilder(fieldElement.getter.returnType);
-    }
-
-    return result.build();
+    // If the builder is present, check it to determine whether a nested
+    // builder is needed. Otherwise, use the same logic as built_value when
+    // it decides whether to use a nested builder.
+    return builderFieldElementIsValid
+        ? element.getter.returnType.displayName !=
+            builderElement.getter.returnType.displayName
+        : _needsNestedBuilder(element.getter.returnType);
   }
+
+  @memoized
+  String get rawType => _getBareType(type);
 
   String generateFullType([BuiltSet<String> classGenericParameters]) {
     return _generateFullType(
@@ -199,21 +198,4 @@ abstract class SerializerSourceField
     return _builtCollectionNames
         .any((name) => type.displayName.startsWith('$name<'));
   }
-}
-
-abstract class SerializerSourceFieldBuilder
-    implements Builder<SerializerSourceField, SerializerSourceFieldBuilder> {
-  @virtual
-  bool isSerializable;
-  @virtual
-  bool isNullable = false;
-  @virtual
-  String name = '';
-  @virtual
-  String type = '';
-  @virtual
-  bool builderFieldUsesNestedBuilder = false;
-
-  factory SerializerSourceFieldBuilder() = _$SerializerSourceFieldBuilder;
-  SerializerSourceFieldBuilder._();
 }

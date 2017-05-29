@@ -9,47 +9,50 @@ part of built_value_generator.source_field;
 
 class _$ValueSourceField extends ValueSourceField {
   @override
-  final String name;
+  final FieldElement element;
   @override
-  final String type;
-  @override
-  final bool isGetter;
-  @override
-  final bool isNullable;
-  @override
-  final bool builderFieldExists;
-  @override
-  final bool builderFieldIsNormalField;
-  @override
-  final String typeInBuilder;
-  @override
-  final bool isNestedBuilder;
+  final FieldElement builderElement;
+  String __name;
+  String __type;
+  bool __isGetter;
+  bool __isNullable;
+  bool __builderFieldExists;
+  bool __builderFieldIsNormalField;
+  String __typeInBuilder;
+  bool __isNestedBuilder;
 
   factory _$ValueSourceField([void updates(ValueSourceFieldBuilder b)]) =>
       (new ValueSourceFieldBuilder()..update(updates)).build();
 
-  _$ValueSourceField._(
-      {this.name,
-      this.type,
-      this.isGetter,
-      this.isNullable,
-      this.builderFieldExists,
-      this.builderFieldIsNormalField,
-      this.typeInBuilder,
-      this.isNestedBuilder})
-      : super._() {
-    if (name == null) throw new ArgumentError.notNull('name');
-    if (type == null) throw new ArgumentError.notNull('type');
-    if (isGetter == null) throw new ArgumentError.notNull('isGetter');
-    if (isNullable == null) throw new ArgumentError.notNull('isNullable');
-    if (builderFieldExists == null)
-      throw new ArgumentError.notNull('builderFieldExists');
-    if (builderFieldIsNormalField == null)
-      throw new ArgumentError.notNull('builderFieldIsNormalField');
-    if (typeInBuilder == null) throw new ArgumentError.notNull('typeInBuilder');
-    if (isNestedBuilder == null)
-      throw new ArgumentError.notNull('isNestedBuilder');
+  _$ValueSourceField._({this.element, this.builderElement}) : super._() {
+    if (element == null) throw new ArgumentError.notNull('element');
   }
+
+  @override
+  String get name => __name ??= super.name;
+
+  @override
+  String get type => __type ??= super.type;
+
+  @override
+  bool get isGetter => __isGetter ??= super.isGetter;
+
+  @override
+  bool get isNullable => __isNullable ??= super.isNullable;
+
+  @override
+  bool get builderFieldExists =>
+      __builderFieldExists ??= super.builderFieldExists;
+
+  @override
+  bool get builderFieldIsNormalField =>
+      __builderFieldIsNormalField ??= super.builderFieldIsNormalField;
+
+  @override
+  String get typeInBuilder => __typeInBuilder ??= super.typeInBuilder;
+
+  @override
+  bool get isNestedBuilder => __isNestedBuilder ??= super.isNestedBuilder;
 
   @override
   ValueSourceField rebuild(void updates(ValueSourceFieldBuilder b)) =>
@@ -63,43 +66,19 @@ class _$ValueSourceField extends ValueSourceField {
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! ValueSourceField) return false;
-    return name == other.name &&
-        type == other.type &&
-        isGetter == other.isGetter &&
-        isNullable == other.isNullable &&
-        builderFieldExists == other.builderFieldExists &&
-        builderFieldIsNormalField == other.builderFieldIsNormalField &&
-        typeInBuilder == other.typeInBuilder &&
-        isNestedBuilder == other.isNestedBuilder;
+    return element == other.element && builderElement == other.builderElement;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc($jc($jc(0, name.hashCode), type.hashCode),
-                            isGetter.hashCode),
-                        isNullable.hashCode),
-                    builderFieldExists.hashCode),
-                builderFieldIsNormalField.hashCode),
-            typeInBuilder.hashCode),
-        isNestedBuilder.hashCode));
+    return $jf($jc($jc(0, element.hashCode), builderElement.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ValueSourceField')
-          ..add('name', name)
-          ..add('type', type)
-          ..add('isGetter', isGetter)
-          ..add('isNullable', isNullable)
-          ..add('builderFieldExists', builderFieldExists)
-          ..add('builderFieldIsNormalField', builderFieldIsNormalField)
-          ..add('typeInBuilder', typeInBuilder)
-          ..add('isNestedBuilder', isNestedBuilder))
+          ..add('element', element)
+          ..add('builderElement', builderElement))
         .toString();
   }
 }
@@ -108,54 +87,21 @@ class ValueSourceFieldBuilder
     implements Builder<ValueSourceField, ValueSourceFieldBuilder> {
   _$ValueSourceField _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  FieldElement _element;
+  FieldElement get element => _$this._element;
+  set element(FieldElement element) => _$this._element = element;
 
-  String _type;
-  String get type => _$this._type;
-  set type(String type) => _$this._type = type;
-
-  bool _isGetter;
-  bool get isGetter => _$this._isGetter;
-  set isGetter(bool isGetter) => _$this._isGetter = isGetter;
-
-  bool _isNullable;
-  bool get isNullable => _$this._isNullable;
-  set isNullable(bool isNullable) => _$this._isNullable = isNullable;
-
-  bool _builderFieldExists;
-  bool get builderFieldExists => _$this._builderFieldExists;
-  set builderFieldExists(bool builderFieldExists) =>
-      _$this._builderFieldExists = builderFieldExists;
-
-  bool _builderFieldIsNormalField;
-  bool get builderFieldIsNormalField => _$this._builderFieldIsNormalField;
-  set builderFieldIsNormalField(bool builderFieldIsNormalField) =>
-      _$this._builderFieldIsNormalField = builderFieldIsNormalField;
-
-  String _typeInBuilder;
-  String get typeInBuilder => _$this._typeInBuilder;
-  set typeInBuilder(String typeInBuilder) =>
-      _$this._typeInBuilder = typeInBuilder;
-
-  bool _isNestedBuilder;
-  bool get isNestedBuilder => _$this._isNestedBuilder;
-  set isNestedBuilder(bool isNestedBuilder) =>
-      _$this._isNestedBuilder = isNestedBuilder;
+  FieldElement _builderElement;
+  FieldElement get builderElement => _$this._builderElement;
+  set builderElement(FieldElement builderElement) =>
+      _$this._builderElement = builderElement;
 
   ValueSourceFieldBuilder();
 
   ValueSourceFieldBuilder get _$this {
     if (_$v != null) {
-      _name = _$v.name;
-      _type = _$v.type;
-      _isGetter = _$v.isGetter;
-      _isNullable = _$v.isNullable;
-      _builderFieldExists = _$v.builderFieldExists;
-      _builderFieldIsNormalField = _$v.builderFieldIsNormalField;
-      _typeInBuilder = _$v.typeInBuilder;
-      _isNestedBuilder = _$v.isNestedBuilder;
+      _element = _$v.element;
+      _builderElement = _$v.builderElement;
       _$v = null;
     }
     return this;
@@ -176,14 +122,7 @@ class ValueSourceFieldBuilder
   _$ValueSourceField build() {
     final result = _$v ??
         new _$ValueSourceField._(
-            name: name,
-            type: type,
-            isGetter: isGetter,
-            isNullable: isNullable,
-            builderFieldExists: builderFieldExists,
-            builderFieldIsNormalField: builderFieldIsNormalField,
-            typeInBuilder: typeInBuilder,
-            isNestedBuilder: isNestedBuilder);
+            element: element, builderElement: builderElement);
     replace(result);
     return result;
   }

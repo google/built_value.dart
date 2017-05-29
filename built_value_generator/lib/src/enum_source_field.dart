@@ -12,29 +12,29 @@ part 'enum_source_field.g.dart';
 
 abstract class EnumSourceField
     implements Built<EnumSourceField, EnumSourceFieldBuilder> {
-  String get name;
-  String get type;
-  String get generatedIdentifier;
-  bool get isConst;
-  bool get isStatic;
+  FieldElement get element;
 
-  factory EnumSourceField([updates(EnumSourceFieldBuilder b)]) =
-      _$EnumSourceField;
+  factory EnumSourceField(FieldElement element) =>
+      new _$EnumSourceField._(element: element);
   EnumSourceField._();
 
-  factory EnumSourceField.fromFieldElement(FieldElement fieldElement) {
-    return new EnumSourceField((b) => b
-      ..name = fieldElement.displayName
-      ..type = fieldElement.getter.returnType.displayName
-      ..generatedIdentifier = _getGeneratedIdentifier(fieldElement)
-      ..isConst = fieldElement.isConst
-      ..isStatic = fieldElement.isStatic);
+  @memoized
+  String get name => element.displayName;
+
+  @memoized
+  String get type => element.getter.returnType.displayName;
+
+  @memoized
+  String get generatedIdentifier {
+    final fieldName = element.displayName;
+    return element.computeNode().toString().substring('$fieldName = '.length);
   }
 
-  static String _getGeneratedIdentifier(FieldElement field) {
-    final fieldName = field.displayName;
-    return field.computeNode().toString().substring('$fieldName = '.length);
-  }
+  @memoized
+  bool get isConst => element.isConst;
+
+  @memoized
+  bool get isStatic => element.isStatic;
 
   static BuiltList<EnumSourceField> fromClassElement(
       ClassElement classElement) {
@@ -45,7 +45,7 @@ abstract class EnumSourceField
       final type = fieldElement.getter.returnType.displayName;
       if (!fieldElement.isSynthetic &&
           (type == enumName || type == 'dynamic')) {
-        result.add(new EnumSourceField.fromFieldElement(fieldElement));
+        result.add(new EnumSourceField(fieldElement));
       }
     }
 

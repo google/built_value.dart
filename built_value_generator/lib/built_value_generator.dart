@@ -18,13 +18,11 @@ class BuiltValueGenerator extends Generator {
   @override
   Future<String> generate(Element element, BuildStep buildStep) async {
     if (element is ClassElement && ValueSourceClass.needsBuiltValue(element)) {
-      return new ValueSourceClass.fromClassElement(element).generateCode();
+      return new ValueSourceClass(element).generateCode();
     } else if (element is LibraryElement) {
-      final enumCode =
-          new EnumSourceLibrary.fromLibraryElement(element).generateCode();
+      final enumCode = new EnumSourceLibrary(element).generateCode();
 
-      final serializerSourceLibrary =
-          SerializerSourceLibrary.fromLibraryElement(element);
+      final serializerSourceLibrary = new SerializerSourceLibrary(element);
       if (serializerSourceLibrary.needsBuiltJson ||
           serializerSourceLibrary.hasSerializers) {
         return (enumCode ?? '') + '\n' + serializerSourceLibrary.generateCode();

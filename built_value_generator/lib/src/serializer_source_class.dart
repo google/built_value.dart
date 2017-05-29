@@ -13,71 +13,69 @@ part 'serializer_source_class.g.dart';
 
 abstract class SerializerSourceClass
     implements Built<SerializerSourceClass, SerializerSourceClassBuilder> {
-  String get name;
-  String get serializerDeclaration;
-  BuiltList<String> get genericParameters;
-  BuiltList<String> get genericBounds;
-  bool get isBuiltValue;
-  bool get isEnumClass;
-  BuiltList<SerializerSourceField> get fields;
+  ClassElement get element;
+  @nullable
+  ClassElement get builderElement;
 
-  factory SerializerSourceClass([updates(SerializerSourceClassBuilder b)]) =
-      _$SerializerSourceClass;
+  factory SerializerSourceClass(
+          ClassElement element, ClassElement builderElement) =>
+      new _$SerializerSourceClass._(
+          element: element, builderElement: builderElement);
   SerializerSourceClass._();
 
-  static SerializerSourceClass fromClassElements(
-      ClassElement classElement, ClassElement builderClassElement) {
-    final result = new SerializerSourceClassBuilder();
+  @memoized
+  String get name => element.name;
 
-    result
-      ..name = classElement.name
-      ..genericParameters.replace(_getGenericParameters(classElement))
-      ..genericBounds.replace(_getGenericBounds(classElement));
-
-    // TODO(davidmorgan): better check.
-    result.isBuiltValue = classElement.allSupertypes
-            .map((type) => type.name)
-            .any((name) => name.startsWith('Built')) &&
-        !classElement.name.startsWith(r'_$') &&
-        classElement.fields.any((field) => field.name == 'serializer');
-
-    // TODO(davidmorgan): better check.
-    result.isEnumClass = classElement.allSupertypes
-            .map((type) => type.name)
-            .any((name) => name == 'EnumClass') &&
-        !classElement.name.startsWith(r'_$') &&
-        classElement.fields.any((field) => field.name == 'serializer');
-
-    result.serializerDeclaration = '';
-    final serializerFields = classElement.fields
-        .where((field) => field.name == 'serializer')
-        .toList();
-    if (serializerFields.isNotEmpty) {
-      final serializerField = serializerFields.single;
-      result.serializerDeclaration =
-          serializerField.getter?.computeNode()?.toString() ?? '';
-    }
-
-    for (final fieldElement in classElement.fields) {
-      final builderFieldElement =
-          builderClassElement?.getField(fieldElement.displayName);
-      final sourceField = SerializerSourceField.fromFieldElements(
-          fieldElement, builderFieldElement);
-      if (sourceField.isSerializable) {
-        result.fields.add(sourceField);
-      }
-    }
-
-    return result.build();
+  @memoized
+  String get serializerDeclaration {
+    final serializerFields =
+        element.fields.where((field) => field.name == 'serializer').toList();
+    if (serializerFields.isEmpty) return '';
+    final serializerField = serializerFields.single;
+    return serializerField.getter?.computeNode()?.toString() ?? '';
   }
 
-  static BuiltList<String> _getGenericParameters(ClassElement classElement) =>
-      new BuiltList<String>(classElement.typeParameters
-          .map((element) => element.computeNode().toString()));
+  @memoized
+  BuiltList<String> get genericParameters => new BuiltList<String>(
+      element.typeParameters.map((e) => e.computeNode().toString()));
 
-  static BuiltList<String> _getGenericBounds(ClassElement classElement) =>
-      new BuiltList<String>(classElement.typeParameters
+  @memoized
+  BuiltList<String> get genericBounds =>
+      new BuiltList<String>(element.typeParameters
           .map((element) => (element.bound ?? '').toString()));
+
+  // TODO(davidmorgan): better check.
+  @memoized
+  bool get isBuiltValue =>
+      element.allSupertypes
+          .map((type) => type.name)
+          .any((name) => name.startsWith('Built')) &&
+      !element.name.startsWith(r'_$') &&
+      element.fields.any((field) => field.name == 'serializer');
+
+  // TODO(davidmorgan): better check.
+  @memoized
+  bool get isEnumClass =>
+      element.allSupertypes
+          .map((type) => type.name)
+          .any((name) => name == 'EnumClass') &&
+      !element.name.startsWith(r'_$') &&
+      element.fields.any((field) => field.name == 'serializer');
+
+  @memoized
+  BuiltList<SerializerSourceField> get fields {
+    final result = new ListBuilder<SerializerSourceField>();
+    for (final fieldElement in element.fields) {
+      final builderFieldElement =
+          builderElement?.getField(fieldElement.displayName);
+      final sourceField =
+          new SerializerSourceField(fieldElement, builderFieldElement);
+      if (sourceField.isSerializable) {
+        result.add(sourceField);
+      }
+    }
+    return result.build();
+  }
 
   Iterable<String> computeErrors() {
     final camelCaseName =

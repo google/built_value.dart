@@ -22,57 +22,53 @@ BuiltSet<String> _builtCollectionNames = new BuiltSet<String>([
 
 abstract class ValueSourceField
     implements Built<ValueSourceField, ValueSourceFieldBuilder> {
-  String get name;
-  String get type;
-  bool get isGetter;
-  bool get isNullable;
-  bool get builderFieldExists;
-  bool get builderFieldIsNormalField;
-  String get typeInBuilder;
-  bool get isNestedBuilder;
+  FieldElement get element;
+  @nullable
+  FieldElement get builderElement;
 
-  factory ValueSourceField([updates(ValueSourceFieldBuilder b)]) =
-      _$ValueSourceField;
+  factory ValueSourceField(FieldElement element, FieldElement builderElement) =>
+      new _$ValueSourceField._(
+          element: element, builderElement: builderElement);
   ValueSourceField._();
 
-  factory ValueSourceField.fromFieldElements(
-      FieldElement fieldElement, FieldElement builderFieldElement) {
-    final result = new ValueSourceFieldBuilder();
-    final builderFieldExists = builderFieldElement != null;
+  @memoized
+  String get name => element.displayName;
 
-    // Go via AST to pull in any import prefix.
-    final type = (fieldElement.getter.computeNode() as MethodDeclaration)
-            ?.returnType
-            ?.toString() ??
-        'dynamic';
+  // Go via AST to pull in any import prefix.
+  @memoized
+  String get type =>
+      (element.getter.computeNode() as MethodDeclaration)
+          ?.returnType
+          ?.toString() ??
+      'dynamic';
 
-    result
-      ..name = fieldElement.displayName
-      ..type = type
-      ..isGetter =
-          fieldElement.getter != null && !fieldElement.getter.isSynthetic
-      ..isNullable = fieldElement.getter.metadata.any(
-          (metadata) => metadata.constantValue.toStringValue() == 'nullable');
+  @memoized
+  bool get isGetter => element.getter != null && !element.getter.isSynthetic;
 
-    if (builderFieldExists) {
-      result
-        ..builderFieldExists = true
-        ..builderFieldIsNormalField = builderFieldElement.getter != null &&
-            !builderFieldElement.getter.isAbstract &&
-            builderFieldElement.getter.isSynthetic
-        ..typeInBuilder = builderFieldElement.getter?.returnType?.displayName
-        ..isNestedBuilder = builderFieldElement.getter?.returnType?.displayName
-                ?.contains('Builder') ??
-            false;
-    } else {
-      result
-        ..builderFieldExists = false
-        ..builderFieldIsNormalField = true
-        ..typeInBuilder = _toBuilderType(fieldElement.getter.returnType)
-        ..isNestedBuilder = _needsNestedBuilder(fieldElement.getter.returnType);
-    }
-    return result.build();
-  }
+  @memoized
+  bool get isNullable => element.getter.metadata
+      .any((metadata) => metadata.constantValue.toStringValue() == 'nullable');
+
+  @memoized
+  bool get builderFieldExists => builderElement != null;
+
+  @memoized
+  bool get builderFieldIsNormalField =>
+      builderFieldExists &&
+      builderElement.getter != null &&
+      !builderElement.getter.isAbstract &&
+      builderElement.getter.isSynthetic;
+
+  @memoized
+  String get typeInBuilder => builderFieldExists
+      ? builderElement.getter?.returnType?.displayName
+      : _toBuilderType(element.getter.returnType);
+
+  @memoized
+  bool get isNestedBuilder => builderFieldExists
+      ? builderElement.getter?.returnType?.displayName?.contains('Builder') ??
+          false
+      : _needsNestedBuilder(element.getter.returnType);
 
   static BuiltList<ValueSourceField> fromClassElements(
       ClassElement classElement, ClassElement builderClassElement) {
@@ -83,7 +79,7 @@ abstract class ValueSourceField
           field.getter != null &&
           (field.getter.isAbstract || field.getter.isSynthetic)) {
         final builderField = builderClassElement?.getField(field.name);
-        result.add(new ValueSourceField.fromFieldElements(field, builderField));
+        result.add(new ValueSourceField(field, builderField));
       }
     }
 

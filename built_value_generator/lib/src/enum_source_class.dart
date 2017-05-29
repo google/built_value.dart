@@ -14,57 +14,63 @@ part 'enum_source_class.g.dart';
 
 abstract class EnumSourceClass
     implements Built<EnumSourceClass, EnumSourceClassBuilder> {
-  String get name;
-  bool get isAbstract;
-  BuiltList<EnumSourceField> get fields;
-  BuiltList<String> get constructors;
-  @nullable
-  String get valuesIdentifier;
-  @nullable
-  String get valueOfIdentifier;
-  bool get usesMixin;
-  @nullable
-  String get mixinDeclaration;
+  ClassElement get element;
 
-  factory EnumSourceClass([updates(EnumSourceClassBuilder b)]) =
-      _$EnumSourceClass;
+  factory EnumSourceClass(ClassElement element) =>
+      new _$EnumSourceClass._(element: element);
   EnumSourceClass._();
 
-  factory EnumSourceClass.fromClassElement(ClassElement classElement) {
-    final name = classElement.displayName;
-    final mixinElement = classElement.library.getType(name + 'Mixin');
-    return new EnumSourceClass((b) => b
-      ..name = name
-      ..isAbstract = classElement.isAbstract
-      ..fields.replace(EnumSourceField.fromClassElement(classElement))
-      ..constructors.addAll(classElement.constructors
-          .map((element) => element.computeNode().toString()))
-      ..valuesIdentifier = _getValuesIdentifier(classElement)
-      ..valueOfIdentifier = _getValueOfIdentifier(classElement)
-      ..usesMixin = mixinElement != null
-      ..mixinDeclaration = mixinElement?.computeNode()?.toString());
+  @memoized
+  String get name => element.name;
+
+  @memoized
+  bool get isAbstract => element.isAbstract;
+
+  @memoized
+  BuiltList<EnumSourceField> get fields =>
+      EnumSourceField.fromClassElement(element);
+
+  @memoized
+  BuiltList<String> get constructors => new BuiltList<String>(
+      element.constructors.map((element) => element.computeNode().toString()));
+
+  @memoized
+  String get valuesIdentifier {
+    final getter = element.getGetter('values');
+    if (getter == null) return null;
+    final source = getter.computeNode().toSource();
+    final matches = new RegExp(r'static BuiltSet<' +
+            element.displayName +
+            r'> get values => (_\$\w+)\;')
+        .allMatches(source);
+    return matches.isEmpty ? null : matches.first.group(1);
   }
 
-  static String _getValueOfIdentifier(ClassElement classElement) {
-    final getter = classElement.getMethod('valueOf');
+  @memoized
+  String get valueOfIdentifier {
+    final getter = element.getMethod('valueOf');
     if (getter == null) return null;
     final source = getter.computeNode().toSource();
     final matches = new RegExp(r'static ' +
-            classElement.displayName +
+            element.displayName +
             r' valueOf\(String name\) \=\> (\_\$\w+)\(name\)\;')
         .allMatches(source);
     return matches.isEmpty ? null : matches.first.group(1);
   }
 
-  static String _getValuesIdentifier(ClassElement classElement) {
-    final getter = classElement.getGetter('values');
-    if (getter == null) return null;
-    final source = getter.computeNode().toSource();
-    final matches = new RegExp(r'static BuiltSet<' +
-            classElement.displayName +
-            r'> get values => (_\$\w+)\;')
-        .allMatches(source);
-    return matches.isEmpty ? null : matches.first.group(1);
+  @memoized
+  bool get usesMixin => element.library.getType(name + 'Mixin') != null;
+
+  @memoized
+  String get mixinDeclaration =>
+      element.library.getType(name + 'Mixin')?.computeNode()?.toString();
+
+  @memoized
+  Iterable<String> get identifiers {
+    return concat([
+      [valuesIdentifier, valueOfIdentifier],
+      fields.map((field) => field.generatedIdentifier)
+    ]);
   }
 
   static bool isMissingImportFor(ClassElement classElement) {
@@ -77,13 +83,6 @@ abstract class EnumSourceClass
 
   static bool needsEnumClass(ClassElement classElement) {
     return classElement.supertype.displayName == 'EnumClass';
-  }
-
-  Iterable<String> get identifiers {
-    return concat([
-      [valuesIdentifier, valueOfIdentifier],
-      fields.map((field) => field.generatedIdentifier)
-    ]);
   }
 
   Iterable<String> computeErrors() {

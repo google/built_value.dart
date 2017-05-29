@@ -18,89 +18,41 @@ part 'value_source_class.g.dart';
 
 abstract class ValueSourceClass
     implements Built<ValueSourceClass, ValueSourceClassBuilder> {
-  String get name;
-  BuiltList<String> get genericParameters;
-  BuiltList<String> get genericBounds;
-  String get builtParameters;
-  bool get hasBuilder;
-  String get builderParameters;
-  BuiltList<ValueSourceField> get fields;
+  ClassElement get element;
 
-  String get partStatement;
-  bool get hasPartStatement;
-
-  bool get valueClassIsAbstract;
-  BuiltList<String> get valueClassConstructors;
-  BuiltList<String> get valueClassFactories;
-
-  bool get builderClassIsAbstract;
-  BuiltList<String> get builderClassConstructors;
-  BuiltList<String> get builderClassFactories;
-
-  BuiltList<MemoizedGetter> get memoizedGetters;
-
-  factory ValueSourceClass([updates(ValueSourceClassBuilder b)]) =
-      _$ValueSourceClass;
+  factory ValueSourceClass(ClassElement element) =>
+      new _$ValueSourceClass._(element: element);
   ValueSourceClass._();
 
-  factory ValueSourceClass.fromClassElement(ClassElement classElement) {
-    final name = classElement.displayName;
-    final builderClassElement = classElement.library.getType(name + 'Builder');
-    final hasBuilder = builderClassElement != null;
+  @memoized
+  String get name => element.displayName;
 
-    final result = new ValueSourceClassBuilder();
-    result
-      ..name = name
-      ..genericParameters.replace(_getGenericParameters(classElement))
-      ..genericBounds.replace(_getGenericBounds(classElement))
-      ..builtParameters = _getBuiltParameters(classElement)
-      ..hasBuilder = hasBuilder
-      ..partStatement = _getPartStatement(classElement)
-      ..hasPartStatement = _getHasPartStatement(classElement)
-      ..valueClassIsAbstract = classElement.isAbstract
-      ..valueClassConstructors.replace(classElement.constructors
-          .where((constructor) =>
-              !constructor.isFactory && !constructor.isSynthetic)
-          .map((constructor) => constructor.computeNode().toSource()))
-      ..valueClassFactories.replace(classElement.constructors
-          .where((constructor) => constructor.isFactory)
-          .map((factory) => factory.computeNode().toSource()))
-      ..fields.replace(
-          ValueSourceField.fromClassElements(classElement, builderClassElement))
-      ..memoizedGetters.replace(MemoizedGetter.fromClassElement(classElement));
+  @memoized
+  ClassElement get builderElement => element.library.getType(name + 'Builder');
 
-    if (hasBuilder) {
-      result
-        ..builderParameters = _getBuilderParameters(builderClassElement)
-        ..builderClassIsAbstract = builderClassElement.isAbstract
-        ..builderClassConstructors.replace(builderClassElement.constructors
-            .where((constructor) =>
-                !constructor.isFactory && !constructor.isSynthetic)
-            .map((constructor) => constructor.computeNode().toSource()))
-        ..builderClassFactories.replace(builderClassElement.constructors
-            .where((constructor) => constructor.isFactory)
-            .map((factory) => factory.computeNode().toSource()));
-    }
-
-    return result.build();
-  }
-
-  static BuiltList<String> _getGenericParameters(ClassElement classElement) =>
-      new BuiltList<String>(classElement.typeParameters
+  @memoized
+  BuiltList<String> get genericParameters =>
+      new BuiltList<String>(element.typeParameters
           .map((element) => element.computeNode().toString()));
 
-  static BuiltList<String> _getGenericBounds(ClassElement classElement) =>
-      new BuiltList<String>(classElement.typeParameters
+  @memoized
+  BuiltList<String> get genericBounds =>
+      new BuiltList<String>(element.typeParameters
           .map((element) => (element.bound ?? '').toString()));
 
-  static String _getBuiltParameters(ClassElement classElement) {
+  @memoized
+  String get builtParameters {
     final visitor = new BuiltParametersVisitor();
-    classElement.computeNode().accept(visitor);
+    element.computeNode().accept(visitor);
     return visitor.result;
   }
 
-  static String _getBuilderParameters(ClassElement classElement) {
-    return classElement.allSupertypes
+  @memoized
+  bool get hasBuilder => builderElement != null;
+
+  @memoized
+  String get builderParameters {
+    return builderElement.allSupertypes
         .where((interfaceType) => interfaceType.name == 'Builder')
         .single
         .typeArguments
@@ -108,16 +60,57 @@ abstract class ValueSourceClass
         .join(', ');
   }
 
-  static String _getPartStatement(ClassElement classElement) {
-    final fileName =
-        classElement.library.source.shortName.replaceAll('.dart', '');
+  @memoized
+  BuiltList<ValueSourceField> get fields =>
+      ValueSourceField.fromClassElements(element, builderElement);
+
+  @memoized
+  String get partStatement {
+    final fileName = element.library.source.shortName.replaceAll('.dart', '');
     return "part '$fileName.g.dart';";
   }
 
-  static bool _getHasPartStatement(ClassElement classElement) {
-    final expectedCode = _getPartStatement(classElement);
-    return classElement.library.source.contents.data.contains(expectedCode);
+  @memoized
+  bool get hasPartStatement {
+    final expectedCode = partStatement;
+    return element.library.source.contents.data.contains(expectedCode);
   }
+
+  @memoized
+  bool get valueClassIsAbstract => element.isAbstract;
+
+  @memoized
+  BuiltList<String> get valueClassConstructors => new BuiltList<String>(element
+      .constructors
+      .where(
+          (constructor) => !constructor.isFactory && !constructor.isSynthetic)
+      .map((constructor) => constructor.computeNode().toSource()));
+
+  @memoized
+  BuiltList<String> get valueClassFactories =>
+      new BuiltList<String>(element.constructors
+          .where((constructor) => constructor.isFactory)
+          .map((factory) => factory.computeNode().toSource()));
+
+  @memoized
+  bool get builderClassIsAbstract => builderElement.isAbstract;
+
+  @memoized
+  BuiltList<String> get builderClassConstructors =>
+      new BuiltList<String>(builderElement.constructors
+          .where((constructor) =>
+              !constructor.isFactory && !constructor.isSynthetic)
+          .map((constructor) => constructor.computeNode().toSource()));
+
+  @memoized
+  BuiltList<String> get builderClassFactories =>
+      new BuiltList<String>(builderElement.constructors
+          .where((constructor) => constructor.isFactory)
+          .map((factory) => factory.computeNode().toSource()));
+
+  @memoized
+  BuiltList<MemoizedGetter> get memoizedGetters =>
+      new BuiltList<MemoizedGetter>(MemoizedGetter.fromClassElement(element));
 
   static bool needsBuiltValue(ClassElement classElement) {
     // TODO(davidmorgan): more exact type check.
@@ -483,50 +476,6 @@ abstract class ValueSourceClass
 
     return result.toString();
   }
-}
-
-abstract class ValueSourceClassBuilder
-    implements Builder<ValueSourceClass, ValueSourceClassBuilder> {
-  @virtual
-  String name;
-  @virtual
-  ListBuilder<String> genericParameters = new ListBuilder<String>();
-  @virtual
-  ListBuilder<String> genericBounds = new ListBuilder<String>();
-  @virtual
-  String builtParameters;
-  @virtual
-  bool hasBuilder;
-  @virtual
-  String builderParameters = '';
-  @virtual
-  ListBuilder<ValueSourceField> fields = new ListBuilder<ValueSourceField>();
-
-  @virtual
-  String partStatement;
-  @virtual
-  bool hasPartStatement;
-
-  @virtual
-  bool valueClassIsAbstract;
-  @virtual
-  ListBuilder<String> valueClassConstructors = new ListBuilder<String>();
-  @virtual
-  ListBuilder<String> valueClassFactories = new ListBuilder<String>();
-
-  @virtual
-  bool builderClassIsAbstract = true;
-  @virtual
-  ListBuilder<String> builderClassConstructors = new ListBuilder<String>();
-  @virtual
-  ListBuilder<String> builderClassFactories = new ListBuilder<String>();
-
-  @virtual
-  ListBuilder<MemoizedGetter> memoizedGetters =
-      new ListBuilder<MemoizedGetter>();
-
-  factory ValueSourceClassBuilder() = _$ValueSourceClassBuilder;
-  ValueSourceClassBuilder._();
 }
 
 InvalidGenerationSourceError _makeError(Iterable<String> todos) {
