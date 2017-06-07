@@ -9,7 +9,6 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/library_elements.dart';
 import 'package:built_value_generator/src/serializer_source_class.dart';
-import 'package:meta/meta.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 

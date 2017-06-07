@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+
+- Removed dependency on now-unneeded package:meta.
+
 ## 1.1.2
 
 - Significantly improve build performance by using @memoized instead of precomputed fields.

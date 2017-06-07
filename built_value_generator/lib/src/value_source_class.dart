@@ -10,7 +10,6 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/built_parameters_visitor.dart';
 import 'package:built_value_generator/src/memoized_getter.dart';
 import 'package:built_value_generator/src/value_source_field.dart';
-import 'package:meta/meta.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
