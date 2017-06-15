@@ -72,19 +72,17 @@ Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   @override
-  final Iterable<Type> types = const [TestEnum];
+  final Iterable<Type> types = const <Type>[TestEnum];
   @override
   final String wireName = 'TestEnum';
 
   @override
   Object serialize(Serializers serializers, TestEnum object,
-      {FullType specifiedType: FullType.unspecified}) {
-    return object.name;
-  }
+          {FullType specifiedType: FullType.unspecified}) =>
+      object.name;
 
   @override
   TestEnum deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
-    return TestEnum.valueOf(serialized as String);
-  }
+          {FullType specifiedType: FullType.unspecified}) =>
+      TestEnum.valueOf(serialized as String);
 }

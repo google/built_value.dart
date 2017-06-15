@@ -82,21 +82,19 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
 
 class _$EnumWithIntSerializer implements PrimitiveSerializer<EnumWithInt> {
   @override
-  final Iterable<Type> types = const [EnumWithInt];
+  final Iterable<Type> types = const <Type>[EnumWithInt];
   @override
   final String wireName = 'EnumWithInt';
 
   @override
   Object serialize(Serializers serializers, EnumWithInt object,
-      {FullType specifiedType: FullType.unspecified}) {
-    return object.name;
-  }
+          {FullType specifiedType: FullType.unspecified}) =>
+      object.name;
 
   @override
   EnumWithInt deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
-    return EnumWithInt.valueOf(serialized as String);
-  }
+          {FullType specifiedType: FullType.unspecified}) =>
+      EnumWithInt.valueOf(serialized as String);
 }
 
 // **************************************************************************
