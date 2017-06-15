@@ -24,7 +24,8 @@ StatusType _$stValueOf(String name) {
   }
 }
 
-final BuiltSet<StatusType> _$stValues = new BuiltSet<StatusType>(const [
+final BuiltSet<StatusType> _$stValues =
+    new BuiltSet<StatusType>(const <StatusType>[
   _$online,
   _$away,
   _$offline,
@@ -47,7 +48,8 @@ LoginResponse _$lrValueOf(String name) {
   }
 }
 
-final BuiltSet<LoginResponse> _$lrValues = new BuiltSet<LoginResponse>(const [
+final BuiltSet<LoginResponse> _$lrValues =
+    new BuiltSet<LoginResponse>(const <LoginResponse>[
   _$success,
   _$badPassword,
   _$reset,

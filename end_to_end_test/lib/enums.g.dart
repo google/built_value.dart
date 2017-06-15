@@ -24,7 +24,7 @@ TestEnum _$valueOf(String name) {
   }
 }
 
-final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const [
+final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const <TestEnum>[
   _$yes,
   _$no,
   _$maybe,
@@ -61,7 +61,8 @@ SecondTestEnum _$vlOf(String name) {
   }
 }
 
-final BuiltSet<SecondTestEnum> _$vls = new BuiltSet<SecondTestEnum>(const [
+final BuiltSet<SecondTestEnum> _$vls =
+    new BuiltSet<SecondTestEnum>(const <SecondTestEnum>[
   _$ys,
   _$n,
   _$definitely,

@@ -24,7 +24,8 @@ EnumWithInt _$valueOf(String name) {
   }
 }
 
-final BuiltSet<EnumWithInt> _$values = new BuiltSet<EnumWithInt>(const [
+final BuiltSet<EnumWithInt> _$values =
+    new BuiltSet<EnumWithInt>(const <EnumWithInt>[
   _$one,
   _$two,
   _$three,

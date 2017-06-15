@@ -56,7 +56,7 @@ TestEnum _$valueOf(String name) {
   }
 }
 
-final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const [
+final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const <TestEnum>[
   _$yes,
   _$no,
   _$maybe,
@@ -323,7 +323,7 @@ TestEnum _$valueOf(String name) {
   }
 }
 
-final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const [
+final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const <TestEnum>[
   _$no,
   _$maybe,
   _$yes,
@@ -374,7 +374,7 @@ TestEnum _$vlOf(String name) {
   }
 }
 
-final BuiltSet<TestEnum> _$vls = new BuiltSet<TestEnum>(const [
+final BuiltSet<TestEnum> _$vls = new BuiltSet<TestEnum>(const <TestEnum>[
   _$yes,
   _$no,
   _$maybe,
