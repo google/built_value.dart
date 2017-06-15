@@ -24,7 +24,8 @@ StatusType _$stValueOf(String name) {
   }
 }
 
-final BuiltSet<StatusType> _$stValues = new BuiltSet<StatusType>(const [
+final BuiltSet<StatusType> _$stValues =
+    new BuiltSet<StatusType>(const <StatusType>[
   _$online,
   _$away,
   _$offline,
@@ -47,7 +48,8 @@ LoginResponse _$lrValueOf(String name) {
   }
 }
 
-final BuiltSet<LoginResponse> _$lrValues = new BuiltSet<LoginResponse>(const [
+final BuiltSet<LoginResponse> _$lrValues =
+    new BuiltSet<LoginResponse>(const <LoginResponse>[
   _$success,
   _$badPassword,
   _$reset,
@@ -210,21 +212,19 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
 
 class _$StatusTypeSerializer implements PrimitiveSerializer<StatusType> {
   @override
-  final Iterable<Type> types = const [StatusType];
+  final Iterable<Type> types = const <Type>[StatusType];
   @override
   final String wireName = 'StatusType';
 
   @override
   Object serialize(Serializers serializers, StatusType object,
-      {FullType specifiedType: FullType.unspecified}) {
-    return object.name;
-  }
+          {FullType specifiedType: FullType.unspecified}) =>
+      object.name;
 
   @override
   StatusType deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
-    return StatusType.valueOf(serialized as String);
-  }
+          {FullType specifiedType: FullType.unspecified}) =>
+      StatusType.valueOf(serialized as String);
 }
 
 class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
@@ -272,21 +272,19 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
 
 class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
   @override
-  final Iterable<Type> types = const [LoginResponse];
+  final Iterable<Type> types = const <Type>[LoginResponse];
   @override
   final String wireName = 'LoginResponse';
 
   @override
   Object serialize(Serializers serializers, LoginResponse object,
-      {FullType specifiedType: FullType.unspecified}) {
-    return object.name;
-  }
+          {FullType specifiedType: FullType.unspecified}) =>
+      object.name;
 
   @override
   LoginResponse deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
-    return LoginResponse.valueOf(serialized as String);
-  }
+          {FullType specifiedType: FullType.unspecified}) =>
+      LoginResponse.valueOf(serialized as String);
 }
 
 class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {

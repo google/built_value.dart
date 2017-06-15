@@ -3,6 +3,7 @@
 ## 1.1.3
 
 - Removed dependency on now-unneeded package:meta.
+- Fixed a few lints/hints in enum generated code.
 
 ## 1.1.2
 

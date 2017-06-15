@@ -164,21 +164,19 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
       return '''
 class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   @override
-  final Iterable<Type> types = const [$name];
+  final Iterable<Type> types = const <Type>[$name];
   @override
   final String wireName = '$name';
 
   @override
   Object serialize(Serializers serializers, $name object,
-      {FullType specifiedType: FullType.unspecified}) {
-    return object.name;
-  }
+      {FullType specifiedType: FullType.unspecified}) =>
+    object.name;
 
   @override
   $name deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
-    return $name.valueOf(serialized as String);
-  }
+      {FullType specifiedType: FullType.unspecified}) =>
+    $name.valueOf(serialized as String);
 }
 ''';
     } else {

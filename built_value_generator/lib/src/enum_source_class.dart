@@ -161,7 +161,7 @@ abstract class EnumSourceClass
     result.writeln('');
 
     result.writeln('final BuiltSet<$name> $valuesIdentifier ='
-        'new BuiltSet<$name>(const [');
+        'new BuiltSet<$name>(const <$name>[');
     for (final field in fields) {
       result.writeln('${field.generatedIdentifier},');
     }
