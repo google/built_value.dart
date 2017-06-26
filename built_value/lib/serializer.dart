@@ -77,7 +77,7 @@ abstract class Serializers {
   /// Convenience method for when you know the type you're serializing.
   /// Specify the type by specifying its [Serializer] class. Equivalent to
   /// calling [serialize] with a `specifiedType`.
-  Object serializeWith<T>(Serializer<T> serializer, T object);
+  Object serializeWith/*<T>*/(Serializer/*<T>*/ serializer, /*=T*/ object);
 
   /// Deserializes [serialized].
   ///
@@ -91,7 +91,7 @@ abstract class Serializers {
   /// Convenience method for when you know the type you're deserializing.
   /// Specify the type by specifying its [Serializer] class. Equivalent to
   /// calling [deserialize] with a `specifiedType`.
-  T deserializeWith<T>(Serializer<T> serializer, Object serialized);
+  /*=T*/ deserializeWith/*<T>*/(Serializer/*<T>*/ serializer, Object serialized);
 
   /// Creates a new builder for the type represented by [fullType].
   ///
