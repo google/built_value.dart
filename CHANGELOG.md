@@ -4,6 +4,8 @@
 
 - Removed dependency on now-unneeded package:meta.
 - Fixed a few lints/hints in enum generated code.
+- Use comment syntax for generics; using the non-comment syntax requires
+  SDK 1.21 which is not specified in pubspec.yaml.
 
 ## 1.1.2
 
