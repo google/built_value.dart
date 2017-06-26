@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.4
+
+- Require SDK 1.21 and use the non-comment syntax for generics again.
+
 ## 1.1.3
 
 - Removed dependency on now-unneeded package:meta.
