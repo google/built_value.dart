@@ -1,5 +1,5 @@
 name: chat_example
-version: 1.1.3
+version: 1.1.4
 description: >
   Just an example, not for publishing.
 authors:
@@ -12,7 +12,7 @@ environment:
 dependencies:
   browser: ^0.10.0
   built_collection: ^1.0.0
-  built_value: ^1.1.3
+  built_value: ^1.1.4
   shelf: ^0.6.0
   shelf_proxy: ^0.1.0
   shelf_web_socket: ^0.2.1
@@ -21,6 +21,6 @@ dependencies:
 dev_dependencies:
   build: ^0.9.0
   build_runner: ^0.3.2
-  built_value_generator: ^1.1.3
+  built_value_generator: ^1.1.4
   source_gen: '>=0.5.0+03 <0.6.0'
   test: any

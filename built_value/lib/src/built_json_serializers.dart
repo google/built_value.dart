@@ -28,13 +28,13 @@ class BuiltJsonSerializers implements Serializers {
       this._typeNameToSerializer, this._builderFactories, this._plugins);
 
   @override
-  /*=T*/ deserializeWith/*<T>*/(Serializer/*<T>*/ serializer, Object serialized) {
+  T deserializeWith<T>(Serializer<T> serializer, Object serialized) {
     return deserialize(serialized,
-        specifiedType: new FullType(serializer.types.first)) as dynamic /*=T*/;
+        specifiedType: new FullType(serializer.types.first)) as T;
   }
 
   @override
-  Object serializeWith/*<T>*/(Serializer/*<T>*/ serializer, /*=T*/ object) {
+  Object serializeWith<T>(Serializer<T> serializer, T object) {
     return serialize(object,
         specifiedType: new FullType(serializer.types.first));
   }
