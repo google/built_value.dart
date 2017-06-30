@@ -17,6 +17,7 @@ Immutable collections are from
 - [`built_value` for Serialization](https://medium.com/@davidmorgan_14314/darts-built-value-for-serialization-f5db9d0f4159#.h12y94wu7)
 - [Building a Chat App in Dart](https://medium.com/@davidmorgan_14314/building-a-chat-app-in-dart-815fcd0e5a31#.ku4vtbmk2)
 - [End to End Testing in One Short Second with Dart](https://medium.com/@davidmorgan_14314/end-to-end-testing-in-one-short-second-with-dart-e699c8146fd6#.c7xfxohg4)
+- [Moving Fast with Dart Immutable Values](https://medium.com/@davidmorgan_14314/moving-fast-with-dart-immutable-values-1e717925fafb)
 
 ## Examples
 
