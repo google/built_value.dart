@@ -60,14 +60,28 @@ abstract class ValueSourceField
       builderElement.getter.isSynthetic;
 
   @memoized
+  String get buildElementType {
+    // Try to get a resolved type first, it's faster.
+    final result = builderElement.getter?.returnType?.displayName;
+    if (result != null && result != 'dynamic') return result;
+    // Go via AST to allow use of unresolvable types not yet generated.
+    return builderElement
+            ?.computeNode()
+            ?.parent
+            ?.childEntities
+            ?.first
+            .toString() ??
+        'dynamic';
+  }
+
+  @memoized
   String get typeInBuilder => builderFieldExists
-      ? builderElement.getter?.returnType?.displayName
+      ? buildElementType
       : _toBuilderType(element.getter.returnType);
 
   @memoized
   bool get isNestedBuilder => builderFieldExists
-      ? builderElement.getter?.returnType?.displayName?.contains('Builder') ??
-          false
+      ? typeInBuilder.contains('Builder') ?? false
       : _needsNestedBuilder(element.getter.returnType);
 
   static BuiltList<ValueSourceField> fromClassElements(
@@ -132,7 +146,8 @@ abstract class ValueSourceField
         // TODO(davidmorgan): smarter check for builder types.
         type.replaceAll('Built', '') !=
             typeInBuilder.replaceAll('Builder', '')) {
-      result.add('Make builder field $name have type: $type');
+      result.add('Make builder field $name have type: '
+          '$type (or, if applicable, builder)');
     }
 
     if (builderFieldExists && !builderFieldIsNormalField) {

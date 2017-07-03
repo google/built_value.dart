@@ -6,7 +6,6 @@ library values;
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:meta/meta.dart';
 import 'package:end_to_end_test/enums.dart' as using_import_as;
 
 part 'values.g.dart';
@@ -86,6 +85,7 @@ abstract class ValueWithDefaults
   int get anInt;
   @nullable
   String get aString;
+  SimpleValue get value;
 
   factory ValueWithDefaults([updates(ValueWithDefaultsBuilder b)]) =
       _$ValueWithDefaults;
@@ -94,12 +94,11 @@ abstract class ValueWithDefaults
 
 abstract class ValueWithDefaultsBuilder
     implements Builder<ValueWithDefaults, ValueWithDefaultsBuilder> {
-  @virtual
   int anInt = 7;
 
   @nullable
-  @virtual
   String aString;
+  SimpleValueBuilder value = new SimpleValue((b) => b..anInt = 3).toBuilder();
 
   factory ValueWithDefaultsBuilder() = _$ValueWithDefaultsBuilder;
   ValueWithDefaultsBuilder._();

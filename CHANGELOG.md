@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.5
+
+- Fix depending on a fully generated builder from a manually maintained builder.
+
 ## 1.1.4
 
 - Require SDK 1.21 and use the non-comment syntax for generics again.
