@@ -7,6 +7,7 @@ part of built_value_generator.source_field;
 // Target: abstract class ValueSourceField
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueSourceField extends ValueSourceField {
   @override
   final FieldElement element;

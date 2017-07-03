@@ -1,5 +1,6 @@
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:example/generics.dart';
+import 'package:example/polymorphism.dart';
 import 'package:example/serializers.dart';
 import 'package:example/values.dart';
 
@@ -38,6 +39,18 @@ void example() {
   final value7 = new VerySimpleValue(3);
   final value8 = value7.rebuild((b) => b..value = 4);
 
+  // Values can use polymorphism.
+  final animals = <Animal>[
+    new Cat((b) => b
+      ..legs = 3
+      ..tail = true),
+    new Fish((b) => b
+      ..legs = 0
+      ..fins = 4),
+  ];
+  final modifiedAnimals =
+      animals.map((animal) => animal.rebuild((b) => b.legs++)).toList();
+
   // Everything is serializable.
   for (final object in [
     value,
@@ -48,6 +61,8 @@ void example() {
     value6,
     value7,
     value8,
+    modifiedAnimals[0],
+    modifiedAnimals[1],
   ]) {
     final serialized = serializers.serialize(object);
     print(serialized);

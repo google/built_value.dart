@@ -51,6 +51,25 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
   V build();
 }
 
+/// Optionally, annotate a Built Value with this to specify settings. This is
+/// only needed for advanced use.
+class BuiltValue {
+  /// Whether the Built Value is instantiable. Defaults to `true`.
+  ///
+  /// A non-instantiable Built Value has no constructor or factory. No
+  /// implementation will be generated. But, an abstract builder will be
+  /// generated, or you may write one yourself.
+  ///
+  /// Other Built Values may choose to `implement` a non-instantiable Built
+  /// Value, pulling in fields and methods from it. Their generated builders
+  /// will automatically `implement` the corresponding builder, so you can
+  /// access and modify the common inherited fields without knowing the
+  /// concrete type.
+  final bool instantiable;
+
+  const BuiltValue({this.instantiable: true});
+}
+
 /// Nullable annotation for Built Value fields.
 ///
 /// Fields marked with this annotation are allowed to be null.

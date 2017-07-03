@@ -145,6 +145,7 @@ class _$ValueWithHasIntSerializer
 // Target: abstract class ValueWithInt
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueWithInt extends ValueWithInt {
   @override
   final int anInt;
@@ -234,6 +235,7 @@ class ValueWithIntBuilder
 // Target: abstract class ValueWithHasInt
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueWithHasInt extends ValueWithHasInt {
   @override
   final HasInt hasInt;

@@ -7,6 +7,7 @@ part of built_value_generator.enum_source_library;
 // Target: abstract class EnumSourceLibrary
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$EnumSourceLibrary extends EnumSourceLibrary {
   @override
   final LibraryElement element;

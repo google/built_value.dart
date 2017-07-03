@@ -4,11 +4,13 @@
 
 library built_value_generator.source_field;
 
+import 'dart:collection';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value_generator/src/fields.dart' show collectFields;
 
 part 'value_source_field.g.dart';
 
@@ -88,7 +90,7 @@ abstract class ValueSourceField
       ClassElement classElement, ClassElement builderClassElement) {
     final result = new ListBuilder<ValueSourceField>();
 
-    for (final field in classElement.fields) {
+    for (final field in collectFields(classElement)) {
       if (!field.isStatic &&
           field.getter != null &&
           (field.getter.isAbstract || field.getter.isSynthetic)) {

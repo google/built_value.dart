@@ -11,6 +11,7 @@ import 'package:end_to_end_test/collections.dart';
 import 'package:end_to_end_test/enums.dart';
 import 'package:end_to_end_test/generics.dart';
 import 'package:end_to_end_test/interfaces.dart';
+import 'package:end_to_end_test/polymorphism.dart';
 import 'package:end_to_end_test/standard_json.dart';
 import 'package:end_to_end_test/values.dart';
 

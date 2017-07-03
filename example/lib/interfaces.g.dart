@@ -102,6 +102,7 @@ class _$EnumWithIntSerializer implements PrimitiveSerializer<EnumWithInt> {
 // Target: abstract class ValueWithInt
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueWithInt extends ValueWithInt {
   @override
   final int anInt;

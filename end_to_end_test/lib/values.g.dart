@@ -349,6 +349,7 @@ class _$NamedFactoryValueSerializer
 // Target: abstract class SimpleValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;
@@ -436,6 +437,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 // Target: abstract class CompoundValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$CompoundValue extends CompoundValue {
   @override
   final SimpleValue simpleValue;
@@ -532,6 +534,7 @@ class CompoundValueBuilder
 // Target: abstract class DerivedValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$DerivedValue extends DerivedValue {
   @override
   final int anInt;
@@ -619,6 +622,7 @@ class DerivedValueBuilder
 // Target: abstract class ValueWithCode
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueWithCode extends ValueWithCode {
   @override
   final int anInt;
@@ -707,6 +711,7 @@ class ValueWithCodeBuilder
 // Target: abstract class ValueWithDefaults
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueWithDefaults extends ValueWithDefaults {
   @override
   final int anInt;
@@ -834,6 +839,7 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 // Target: abstract class ValidatedValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValidatedValue extends ValidatedValue {
   @override
   final int anInt;
@@ -924,6 +930,7 @@ class ValidatedValueBuilder
 // Target: abstract class ValueUsingImportAs
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueUsingImportAs extends ValueUsingImportAs {
   @override
   final using_import_as.TestEnum value;
@@ -1005,6 +1012,7 @@ class ValueUsingImportAsBuilder
 // Target: abstract class NoFieldsValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$NoFieldsValue extends NoFieldsValue {
   factory _$NoFieldsValue([void updates(NoFieldsValueBuilder b)]) =>
       (new NoFieldsValueBuilder()..update(updates)).build();
@@ -1066,6 +1074,7 @@ class NoFieldsValueBuilder
 // Target: abstract class PrimitivesValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$PrimitivesValue extends PrimitivesValue {
   @override
   final bool boolean;
@@ -1218,6 +1227,7 @@ class PrimitivesValueBuilder
 // Target: abstract class NamedFactoryValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$NamedFactoryValue extends NamedFactoryValue {
   @override
   final int value;

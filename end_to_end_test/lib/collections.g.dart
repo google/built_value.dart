@@ -168,6 +168,7 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
 // Target: abstract class Collections
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$Collections extends Collections {
   @override
   final BuiltList<int> list;
