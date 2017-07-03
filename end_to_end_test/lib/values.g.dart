@@ -712,13 +712,16 @@ class _$ValueWithDefaults extends ValueWithDefaults {
   final int anInt;
   @override
   final String aString;
+  @override
+  final SimpleValue value;
 
   factory _$ValueWithDefaults([void updates(ValueWithDefaultsBuilder b)]) =>
       (new ValueWithDefaultsBuilder()..update(updates)).build()
           as _$ValueWithDefaults;
 
-  _$ValueWithDefaults._({this.anInt, this.aString}) : super._() {
+  _$ValueWithDefaults._({this.anInt, this.aString, this.value}) : super._() {
     if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (value == null) throw new ArgumentError.notNull('value');
   }
 
   @override
@@ -733,19 +736,23 @@ class _$ValueWithDefaults extends ValueWithDefaults {
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! ValueWithDefaults) return false;
-    return anInt == other.anInt && aString == other.aString;
+    return anInt == other.anInt &&
+        aString == other.aString &&
+        value == other.value;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+    return $jf(
+        $jc($jc($jc(0, anInt.hashCode), aString.hashCode), value.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ValueWithDefaults')
           ..add('anInt', anInt)
-          ..add('aString', aString))
+          ..add('aString', aString)
+          ..add('value', value))
         .toString();
   }
 }
@@ -777,12 +784,25 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
     super.aString = aString;
   }
 
+  @override
+  SimpleValueBuilder get value {
+    _$this;
+    return super.value ??= new SimpleValueBuilder();
+  }
+
+  @override
+  set value(SimpleValueBuilder value) {
+    _$this;
+    super.value = value;
+  }
+
   _$ValueWithDefaultsBuilder() : super._();
 
   ValueWithDefaultsBuilder get _$this {
     if (_$v != null) {
       super.anInt = _$v.anInt;
       super.aString = _$v.aString;
+      super.value = _$v.value?.toBuilder();
       _$v = null;
     }
     return this;
@@ -801,8 +821,9 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   @override
   _$ValueWithDefaults build() {
-    final result =
-        _$v ?? new _$ValueWithDefaults._(anInt: anInt, aString: aString);
+    final result = _$v ??
+        new _$ValueWithDefaults._(
+            anInt: anInt, aString: aString, value: value?.build());
     replace(result);
     return result;
   }

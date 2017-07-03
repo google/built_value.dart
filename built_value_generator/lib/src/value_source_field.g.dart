@@ -18,6 +18,7 @@ class _$ValueSourceField extends ValueSourceField {
   bool __isNullable;
   bool __builderFieldExists;
   bool __builderFieldIsNormalField;
+  String __buildElementType;
   String __typeInBuilder;
   bool __isNestedBuilder;
 
@@ -47,6 +48,9 @@ class _$ValueSourceField extends ValueSourceField {
   @override
   bool get builderFieldIsNormalField =>
       __builderFieldIsNormalField ??= super.builderFieldIsNormalField;
+
+  @override
+  String get buildElementType => __buildElementType ??= super.buildElementType;
 
   @override
   String get typeInBuilder => __typeInBuilder ??= super.typeInBuilder;
