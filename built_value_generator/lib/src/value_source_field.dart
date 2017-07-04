@@ -4,7 +4,6 @@
 
 library built_value_generator.source_field;
 
-import 'dart:collection';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
