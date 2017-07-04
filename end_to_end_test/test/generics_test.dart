@@ -12,11 +12,13 @@ void main() {
     });
 
     test('throws on null for non-nullable fields on build', () {
-      expect(() => new GenericValue<int>(), throws);
+      expect(() => new GenericValue<int>(),
+          throwsA(new isInstanceOf<ArgumentError>()));
     });
 
     test('throws on missing generic type parameter', () {
-      expect(() => new GenericValue<dynamic>((b) => b..value = 1), throws);
+      expect(() => new GenericValue<dynamic>((b) => b..value = 1),
+          throwsA(new isInstanceOf<ArgumentError>()));
     });
 
     test('fields can be set via build constructor', () {

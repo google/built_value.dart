@@ -70,7 +70,7 @@ class StandardJsonPlugin implements SerializerPlugin {
       // Drop null values, they are represented by missing keys.
       if (value == null) return;
 
-      result[i] = alreadyStringKeys ? key : _fromStringKey(key);
+      result[i] = alreadyStringKeys ? key : _fromStringKey(key as String);
       result[i + 1] = value;
       i += 2;
     });

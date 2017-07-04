@@ -21,14 +21,14 @@ void main() {
 
     test('cannot be serialized', () {
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<StateError>()));
     });
 
     test('cannot be deserialized', () {
       expect(
           () =>
               serializers.deserialize(serialized, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<StateError>()));
     });
   });
 
@@ -101,14 +101,14 @@ void main() {
 
     test('cannot be serialized', () {
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<StateError>()));
     });
 
     test('cannot be deserialized', () {
       expect(
           () =>
               serializers.deserialize(serialized, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<StateError>()));
     });
   });
 
@@ -184,14 +184,14 @@ void main() {
 
     test('cannot be serialized', () {
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<StateError>()));
     });
 
     test('cannot be deserialized', () {
       expect(
           () =>
               serializers.deserialize(serialized, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<StateError>()));
     });
   });
 

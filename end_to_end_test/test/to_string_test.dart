@@ -2,10 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:end_to_end_test/enums.dart';
-import 'package:end_to_end_test/values.dart';
 import 'package:built_value/built_value.dart';
-import 'package:quiver/core.dart';
+import 'package:end_to_end_test/values.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -32,6 +30,3 @@ void main() {
     });
   });
 }
-
-
-

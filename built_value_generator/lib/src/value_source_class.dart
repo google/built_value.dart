@@ -211,8 +211,8 @@ abstract class ValueSourceClass
       ? ''
       : '<' +
           zip(<Iterable>[genericParameters, genericBounds]).map((zipped) {
-            final parameter = zipped[0];
-            final bound = zipped[1];
+            final parameter = zipped[0] as String;
+            final bound = zipped[1] as String;
             return bound.isEmpty ? parameter : '$parameter extends $bound';
           }).join(', ') +
           '>';

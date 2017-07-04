@@ -39,11 +39,13 @@ void main() {
 
   group('Serializers with StandardJsonPlugin', () {
     test('throws on serialize if specifiedType is missing', () {
-      expect(() => serializers.serialize(1), throws);
+      expect(() => serializers.serialize(1),
+          throwsA(new isInstanceOf<ArgumentError>()));
     });
 
     test('throws on deserialize if specifiedType is missing', () {
-      expect(() => serializers.deserialize(1), throws);
+      expect(
+          () => serializers.deserialize(1), throwsA(new isInstanceOf<Error>()));
     });
 
     test('throws on serialize of list multimaps', () {
@@ -55,7 +57,7 @@ void main() {
       final specifiedType = const FullType(BuiltListMultimap,
           const [const FullType(int), const FullType(String)]);
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<ArgumentError>()));
     });
 
     test('throws on serialize of sets', () {
@@ -63,7 +65,7 @@ void main() {
       final specifiedType =
           const FullType(BuiltSet, const [const FullType(int)]);
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<ArgumentError>()));
     });
 
     test('throws on serialize of set multimaps', () {
@@ -75,7 +77,7 @@ void main() {
       final specifiedType = const FullType(BuiltSetMultimap,
           const [const FullType(int), const FullType(String)]);
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<ArgumentError>()));
     });
 
     group('can take a list and', () {

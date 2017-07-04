@@ -185,19 +185,20 @@ class BuiltJsonSerializers implements Serializers {
 
 /// Default implementation of [SerializersBuilder].
 class BuiltJsonSerializersBuilder implements SerializersBuilder {
-  MapBuilder<Type, Serializer> _typeToSerializer =
-      new MapBuilder<Type, Serializer>();
-  MapBuilder<String, Serializer> _wireNameToSerializer =
-      new MapBuilder<String, Serializer>();
-  MapBuilder<String, Serializer> _typeNameToSerializer =
-      new MapBuilder<String, Serializer>();
+  final MapBuilder<Type, Serializer> _typeToSerializer;
+  final MapBuilder<String, Serializer> _wireNameToSerializer;
+  final MapBuilder<String, Serializer> _typeNameToSerializer;
 
-  MapBuilder<FullType, Function> _builderFactories =
-      new MapBuilder<FullType, Function>();
+  final MapBuilder<FullType, Function> _builderFactories;
 
-  ListBuilder<SerializerPlugin> _plugins = new ListBuilder<SerializerPlugin>();
+  final ListBuilder<SerializerPlugin> _plugins;
 
-  BuiltJsonSerializersBuilder();
+  factory BuiltJsonSerializersBuilder() => new BuiltJsonSerializersBuilder._(
+      new MapBuilder<Type, Serializer>(),
+      new MapBuilder<String, Serializer>(),
+      new MapBuilder<String, Serializer>(),
+      new MapBuilder<FullType, Function>(),
+      new ListBuilder<SerializerPlugin>());
 
   BuiltJsonSerializersBuilder._(
       this._typeToSerializer,

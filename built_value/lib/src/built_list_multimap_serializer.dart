@@ -66,7 +66,8 @@ class BuiltListMultimapSerializer
       result.addValues(
           key,
           serialized.elementAt(i + 1).map((value) =>
-              serializers.deserialize(value, specifiedType: valueType)));
+                  serializers.deserialize(value, specifiedType: valueType))
+              as Iterable);
     }
 
     return result.build();
