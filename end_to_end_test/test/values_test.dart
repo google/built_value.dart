@@ -14,7 +14,8 @@ void main() {
     });
 
     test('throws on null for non-nullable fields on build', () {
-      expect(() => new SimpleValue(), throws);
+      expect(
+          () => new SimpleValue(), throwsA(new isInstanceOf<ArgumentError>()));
     });
 
     test('throws on null replace', () {
@@ -22,7 +23,7 @@ void main() {
           () => new SimpleValue((b) => b
             ..anInt = 1
             ..replace(null)),
-          throws);
+          throwsA(new isInstanceOf<ArgumentError>()));
     });
 
     test('fields can be set via build constructor', () {
@@ -171,7 +172,8 @@ void main() {
     });
 
     test('does custom validation', () {
-      expect(() => new ValidatedValue((b) => b..anInt = 7), throws);
+      expect(() => new ValidatedValue((b) => b..anInt = 7),
+          throwsA(new isInstanceOf<StateError>()));
     });
   });
 

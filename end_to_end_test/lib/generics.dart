@@ -68,6 +68,6 @@ abstract class NestedGenericContainer
   GenericValue<BuiltMap<int, String>> get map;
 
   factory NestedGenericContainer([updates(NestedGenericContainerBuilder b)]) =
-  _$NestedGenericContainer;
+      _$NestedGenericContainer;
   NestedGenericContainer._();
 }

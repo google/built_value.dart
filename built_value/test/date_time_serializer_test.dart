@@ -24,7 +24,8 @@ void main() {
     });
 
     test('serialize throws if not UTC', () {
-      expect(() => serializers.serialize(new DateTime.now()), throws);
+      expect(() => serializers.serialize(new DateTime.now()),
+          throwsA(new isInstanceOf<ArgumentError>()));
     });
   });
 

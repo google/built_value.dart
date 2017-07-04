@@ -18,14 +18,14 @@ void main() {
 
     test('serialize throws', () {
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<StateError>()));
     });
 
     test('deserialize throws', () {
       expect(
           () =>
               serializers.deserialize(serialized, specifiedType: specifiedType),
-          throws);
+          throwsA(new isInstanceOf<StateError>()));
     });
   });
 

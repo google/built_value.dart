@@ -5,8 +5,9 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 
-// TODO(davidmorgan): support special values.
 class DoubleSerializer implements PrimitiveSerializer<double> {
+  // Constant names match those in [double].
+  // ignore_for_file: non_constant_identifier_names
   static final String NAN = 'NaN';
   static final String INFINITY = 'INF';
   static final String NEGATIVE_INFINITY = '-INF';
