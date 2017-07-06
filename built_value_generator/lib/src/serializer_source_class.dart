@@ -8,6 +8,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/serializer_source_field.dart';
+import 'package:built_value_generator/src/fields.dart' show collectFields;
 
 part 'serializer_source_class.g.dart';
 
@@ -65,7 +66,7 @@ abstract class SerializerSourceClass
   @memoized
   BuiltList<SerializerSourceField> get fields {
     final result = new ListBuilder<SerializerSourceField>();
-    for (final fieldElement in element.fields) {
+    for (final fieldElement in collectFields(element)) {
       final builderFieldElement =
           builderElement?.getField(fieldElement.displayName);
       final sourceField =

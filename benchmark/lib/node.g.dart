@@ -7,6 +7,7 @@ part of node;
 // Target: abstract class Node
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$Node extends Node {
   @override
   final String label;

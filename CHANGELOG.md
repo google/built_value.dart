@@ -1,8 +1,12 @@
 # Changelog
 
-## 1.1.5
+## 1.2.0
 
 - Fix depending on a fully generated builder from a manually maintained builder.
+- Pick up fields on implemented interfaces, so you don't have to @override them.
+- Add BuiltValue annotation for specifying settings.
+- Add "instantiable" setting. When false, no implementation is generated, only a builder interface.
+- Polymorphism support: you can now "implement" a non-instantiable Built class. The generated builder will implement its builder, so the types all work.
 
 ## 1.1.4
 

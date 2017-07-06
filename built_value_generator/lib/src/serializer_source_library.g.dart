@@ -7,6 +7,7 @@ part of built_value_generator.source_library;
 // Target: abstract class SerializerSourceLibrary
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   @override
   final LibraryElement element;

@@ -7,6 +7,7 @@ part of built_value_generator.source_field;
 // Target: abstract class SerializerSourceField
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$SerializerSourceField extends SerializerSourceField {
   @override
   final FieldElement element;

@@ -9,10 +9,12 @@ part of serializers;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BoundGenericValue.serializer)
+      ..add(Cat.serializer)
       ..add(CollectionGenericValue.serializer)
       ..add(Collections.serializer)
       ..add(CompoundValue.serializer)
       ..add(EnumWithInt.serializer)
+      ..add(Fish.serializer)
       ..add(GenericContainer.serializer)
       ..add(GenericValue.serializer)
       ..add(NamedFactoryValue.serializer)

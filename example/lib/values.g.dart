@@ -266,6 +266,7 @@ class _$AccountSerializer implements StructuredSerializer<Account> {
 // Target: abstract class SimpleValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;
@@ -353,6 +354,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 // Target: abstract class VerySimpleValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$VerySimpleValue extends VerySimpleValue {
   @override
   final int value;
@@ -433,6 +435,7 @@ class VerySimpleValueBuilder
 // Target: abstract class CompoundValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$CompoundValue extends CompoundValue {
   @override
   final SimpleValue simpleValue;
@@ -529,6 +532,7 @@ class CompoundValueBuilder
 // Target: abstract class ValidatedValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValidatedValue extends ValidatedValue {
   @override
   final int anInt;
@@ -619,6 +623,7 @@ class ValidatedValueBuilder
 // Target: abstract class ValueWithCode
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueWithCode extends ValueWithCode {
   @override
   final int anInt;
@@ -707,6 +712,7 @@ class ValueWithCodeBuilder
 // Target: abstract class ValueWithDefaults
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueWithDefaults extends ValueWithDefaults {
   @override
   final int anInt;
@@ -813,6 +819,7 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 // Target: abstract class DerivedValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$DerivedValue extends DerivedValue {
   @override
   final int anInt;
@@ -900,6 +907,7 @@ class DerivedValueBuilder
 // Target: abstract class Account
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$Account extends Account {
   @override
   final int id;

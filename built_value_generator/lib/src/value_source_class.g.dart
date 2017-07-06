@@ -7,11 +7,13 @@ part of built_value_generator.source_class;
 // Target: abstract class ValueSourceClass
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ValueSourceClass extends ValueSourceClass {
   @override
   final ClassElement element;
   String __name;
   ClassElement __builderElement;
+  BuiltValue __settings;
   BuiltList<String> __genericParameters;
   BuiltList<String> __genericBounds;
   String __builtParameters;
@@ -27,6 +29,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   BuiltList<String> __builderClassConstructors;
   BuiltList<String> __builderClassFactories;
   BuiltList<MemoizedGetter> __memoizedGetters;
+  String __builderImplements;
 
   factory _$ValueSourceClass([void updates(ValueSourceClassBuilder b)]) =>
       (new ValueSourceClassBuilder()..update(updates)).build();
@@ -40,6 +43,9 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   ClassElement get builderElement => __builderElement ??= super.builderElement;
+
+  @override
+  BuiltValue get settings => __settings ??= super.settings;
 
   @override
   BuiltList<String> get genericParameters =>
@@ -95,6 +101,10 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   BuiltList<MemoizedGetter> get memoizedGetters =>
       __memoizedGetters ??= super.memoizedGetters;
+
+  @override
+  String get builderImplements =>
+      __builderImplements ??= super.builderImplements;
 
   @override
   ValueSourceClass rebuild(void updates(ValueSourceClassBuilder b)) =>

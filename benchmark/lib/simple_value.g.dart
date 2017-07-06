@@ -7,6 +7,7 @@ part of simple_value;
 // Target: abstract class SimpleValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;

@@ -7,6 +7,7 @@ part of built_value_generator.memoized_getter;
 // Target: abstract class MemoizedGetter
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$MemoizedGetter extends MemoizedGetter {
   @override
   final String returnType;

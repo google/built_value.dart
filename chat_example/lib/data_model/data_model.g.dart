@@ -440,6 +440,7 @@ class _$ListUsersResponseSerializer
 // Target: abstract class Chat
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$Chat extends Chat {
   @override
   final String text;
@@ -529,6 +530,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
 // Target: abstract class Login
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$Login extends Login {
   @override
   final String username;
@@ -617,6 +619,7 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
 // Target: abstract class Status
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$Status extends Status {
   @override
   final String message;
@@ -705,6 +708,7 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
 // Target: abstract class ListUsers
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ListUsers extends ListUsers {
   @override
   final BuiltSet<StatusType> statusTypes;
@@ -786,6 +790,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 // Target: abstract class ShowChat
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ShowChat extends ShowChat {
   @override
   final String username;
@@ -887,6 +892,7 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
 // Target: abstract class Welcome
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$Welcome extends Welcome {
   @override
   final BuiltList<Response> log;
@@ -975,6 +981,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
 // Target: abstract class ListUsersResponse
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$ListUsersResponse extends ListUsersResponse {
   @override
   final BuiltMap<String, Status> statuses;

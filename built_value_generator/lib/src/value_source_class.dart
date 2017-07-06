@@ -30,6 +30,17 @@ abstract class ValueSourceClass
   ClassElement get builderElement => element.library.getType(name + 'Builder');
 
   @memoized
+  BuiltValue get settings {
+    final annotations = element.metadata
+        .map((annotation) => annotation.computeConstantValue())
+        .where((value) => value?.type?.displayName == 'BuiltValue');
+    if (annotations.isEmpty) return const BuiltValue();
+    final annotation = annotations.single;
+    return new BuiltValue(
+        instantiable: annotation.getField('instantiable').toBoolValue());
+  }
+
+  @memoized
   BuiltList<String> get genericParameters =>
       new BuiltList<String>(element.typeParameters
           .map((element) => element.computeNode().toString()));
@@ -111,6 +122,19 @@ abstract class ValueSourceClass
   BuiltList<MemoizedGetter> get memoizedGetters =>
       new BuiltList<MemoizedGetter>(MemoizedGetter.fromClassElement(element));
 
+  /// Returns the `implements` clause for the builder.
+  ///
+  /// All builders implement `Builder`.
+  ///
+  /// Additionally, if the value class implements other value classes, the
+  /// builder implements the corresponding builders.
+  @memoized
+  String get builderImplements => new BuiltList<String>.build((b) => b
+    ..add('Builder<$name$_generics, ${name}Builder$_generics>')
+    ..addAll(element.interfaces
+        .where((interface) => needsBuiltValue(interface.element))
+        .map((interface) => interface.displayName + 'Builder'))).join(', ');
+
   static bool needsBuiltValue(ClassElement classElement) {
     // TODO(davidmorgan): more exact type check.
     return classElement.allSupertypes
@@ -145,18 +169,31 @@ abstract class ValueSourceClass
           'Currently: Built<$builtParameters>');
     }
 
-    final expectedConstructor = '$name._()';
-    if (valueClassConstructors.length != 1 ||
-        !(valueClassConstructors.single.startsWith(expectedConstructor))) {
-      result.add(
-          'Make class have exactly one constructor: $expectedConstructor;');
+    if (settings.instantiable) {
+      final expectedConstructor = '$name._()';
+      if (valueClassConstructors.length != 1 ||
+          !(valueClassConstructors.single.startsWith(expectedConstructor))) {
+        result.add(
+            'Make class have exactly one constructor: $expectedConstructor;');
+      }
+    } else {
+      if (valueClassConstructors.length != 0) {
+        result.add('Remove all constructors or remove "instantiable: false".');
+      }
     }
 
-    if (!valueClassFactories
-        .any((factory) => factory.contains('_\$$name$_generics'))) {
-      result.add('Add a factory so your class can be instantiated. Example:\n\n'
-          'factory $name([updates(${name}Builder$_generics b)]) = '
-          '_\$$name$_generics;');
+    if (settings.instantiable) {
+      if (!valueClassFactories
+          .any((factory) => factory.contains('_\$$name$_generics'))) {
+        result
+            .add('Add a factory so your class can be instantiated. Example:\n\n'
+                'factory $name([updates(${name}Builder$_generics b)]) = '
+                '_\$$name$_generics;');
+      }
+    } else {
+      if (valueClassFactories.isNotEmpty) {
+        result.add('Remove all factories or remove "instantiable: false".');
+      }
     }
 
     return result;
@@ -222,7 +259,22 @@ abstract class ValueSourceClass
     if (errors.isNotEmpty) throw _makeError(errors);
 
     final result = new StringBuffer();
+    // Working out which fields are overrides is complex; interfaces,
+    // superclasses and mixins could all trigger the warning. Suppress the
+    // warning instead.
+    result.writeln('// ignore_for_file: annotate_overrides');
+    if (settings.instantiable) result.write(_generateImpl());
+    if (settings.instantiable) {
+      result.write(_generateBuilder());
+    } else if (!hasBuilder) {
+      result.write(_generateAbstractBuilder());
+    }
+    return result.toString();
+  }
 
+  /// Generates the value class implementation.
+  String _generateImpl() {
+    final result = new StringBuffer();
     result.writeln('class _\$$name$_boundedGenerics extends $name$_generics {');
     for (final field in fields) {
       result.writeln('@override');
@@ -332,13 +384,18 @@ abstract class ValueSourceClass
     result.writeln();
 
     result.writeln('}');
+    return result.toString();
+  }
 
+  /// Generates the builder implementation.
+  String _generateBuilder() {
+    final result = new StringBuffer();
     if (hasBuilder) {
       result.writeln(
           'class _\$${name}Builder$_boundedGenerics extends ${name}Builder$_generics {');
     } else {
       result.writeln(
-          'class ${name}Builder$_boundedGenerics implements Builder<$name$_generics, ${name}Builder$_generics>{');
+          'class ${name}Builder$_boundedGenerics implements $builderImplements {');
     }
 
     // Builder holds a reference to a value, copies from it lazily.
@@ -473,6 +530,25 @@ abstract class ValueSourceClass
     result.writeln('}');
     result.writeln('}');
 
+    return result.toString();
+  }
+
+  /// Generates an abstract builder with just abstract setters and getters.
+  String _generateAbstractBuilder() {
+    final result = new StringBuffer();
+    result.writeln('abstract class ${name}Builder$_boundedGenerics '
+        'implements $builderImplements {');
+
+    for (final field in fields) {
+      final typeInBuilder = field.typeInBuilder;
+      final name = field.name;
+
+      result.writeln('$typeInBuilder get $name;');
+      result.writeln('set $name($typeInBuilder $name);');
+      result.writeln();
+    }
+
+    result.writeln('}');
     return result.toString();
   }
 }

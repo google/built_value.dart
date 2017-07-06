@@ -85,6 +85,7 @@ class _$StandardJsonValueSerializer
 // Target: abstract class StandardJsonValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$StandardJsonValue extends StandardJsonValue {
   @override
   final num number;

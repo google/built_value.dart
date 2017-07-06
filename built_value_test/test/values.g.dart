@@ -7,6 +7,7 @@ part of values;
 // Target: abstract class SimpleValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;
@@ -96,6 +97,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 // Target: abstract class CompoundValue
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
 class _$CompoundValue extends CompoundValue {
   @override
   final SimpleValue simpleValue;

@@ -148,6 +148,21 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
               "1. Make class have exactly one constructor: Value._();")));
     });
 
+    test('suggests to remove constructor from non-instantiable value class', () async {
+      expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+@BuiltValue(instantiable: false)
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value() {}
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''), contains('1. Remove all constructors or remove "instantiable: false".'));
+    });
+
     test('suggests to add factory to value class', () async {
       expect(
           await generate('''library value;
@@ -165,6 +180,20 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
               '//\n'
               '//        '
               'factory Value([updates(ValueBuilder b)]) = _\$Value;'));
+    });
+
+    test('suggests to remove factory from non-instantiable value class', () async {
+      expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+@BuiltValue(instantiable: false)
+abstract class Value extends Built<Value, ValueBuilder> {
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''), contains('1. Remove all factories or remove "instantiable: false".'));
     });
 
     test('suggests to make builder class abstract', () async {
@@ -385,5 +414,11 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
   void replace(V value);
   void update(updates(B builder));
   V build();
+}
+
+class BuiltValue {
+  final bool instantiable;
+
+  const BuiltValue({this.instantiable: true});
 }
 ''';
