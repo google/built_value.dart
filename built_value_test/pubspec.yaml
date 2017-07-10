@@ -1,5 +1,5 @@
 name: built_value_test
-version: 1.2.0
+version: 1.2.1
 description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library provides test support.
@@ -11,9 +11,7 @@ environment:
   sdk: '>=1.8.0 <2.0.0'
 
 dependencies:
-# built_value: ^1.2.0
-  built_value:
-    path: ../built_value
+  built_value: ^1.2.1
   built_collection: ^1.0.0
   collection: ^1.0.0
   quiver: '>=0.21.0 <0.26.0'
@@ -22,7 +20,5 @@ dependencies:
 dev_dependencies:
   build: ^0.9.0
   build_runner: ^0.3.2
-# built_value_generator: ^1.2.0
-  built_value_generator:
-    path: ../built_value_generator
+  built_value_generator: ^1.2.1
   source_gen: '>=0.5.0+03 <0.6.0'
