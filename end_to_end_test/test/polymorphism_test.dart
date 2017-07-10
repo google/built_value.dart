@@ -72,4 +72,23 @@ void main() {
       expect(modifiedAnimals, expectedAnimals);
     });
   });
+
+  group('HasField', () {
+    test('can be used as an interface, including builder', () {
+      final hasFields = <HasField<dynamic>>[
+        new HasString((b) => b..field = 'hello'),
+        new HasDouble((b) => b..field = 3.14)
+      ];
+
+      final modifiedHasFields = hasFields
+          .map((hasField) => hasField.rebuild((b) => b..field += b.field));
+
+      final expectedHasFields = [
+        new HasString((b) => b..field = 'hellohello'),
+        new HasDouble((b) => b..field = 6.28)
+      ];
+
+      expect(modifiedHasFields, expectedHasFields);
+    });
+  });
 }

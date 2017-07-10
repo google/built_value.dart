@@ -133,7 +133,14 @@ abstract class ValueSourceClass
     ..add('Builder<$name$_generics, ${name}Builder$_generics>')
     ..addAll(element.interfaces
         .where((interface) => needsBuiltValue(interface.element))
-        .map((interface) => interface.displayName + 'Builder'))).join(', ');
+        .map((interface) {
+      final displayName = interface.displayName;
+      if (!displayName.contains('<')) return displayName + 'Builder';
+      final index = displayName.indexOf('<');
+      return displayName.substring(0, index) +
+          'Builder' +
+          displayName.substring(index);
+    }))).join(', ');
 
   static bool needsBuiltValue(ClassElement classElement) {
     // TODO(davidmorgan): more exact type check.
