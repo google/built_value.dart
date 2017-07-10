@@ -12,9 +12,11 @@ import 'package:built_collection/built_collection.dart';
 /// returned.
 BuiltList<FieldElement> collectFields(ClassElement element) {
   final fields = <FieldElement>[];
+  // Add fields from this class before interfaces, so they're added to the set
+  // first below. Re-added fields from interfaces are ignored.
+  fields.addAll(element.fields);
   element.interfaces
       .forEach((interface) => fields.addAll(collectFields(interface.element)));
-  fields.addAll(element.fields);
 
 // Overridden fields have multiple declarations, so deduplicate by adding
 // to a set that compares on field name.

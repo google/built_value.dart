@@ -39,11 +39,38 @@ abstract class Fish extends Object
 abstract class Walker {
   int get legs;
 
-  bool get canWalk => legs > 0;
+  bool get canWalk => legs > 1;
 }
 
 abstract class Swimmer {
   int get fins;
 
   bool get canSwim => fins > 1;
+}
+
+@BuiltValue(instantiable: false)
+abstract class HasField<T> implements Built<HasField<T>, HasFieldBuilder<T>> {
+  T get field;
+}
+
+abstract class HasString
+    implements Built<HasString, HasStringBuilder>, HasField<String> {
+  static Serializer<HasString> get serializer => _$hasStringSerializer;
+
+  @override
+  String get field;
+
+  factory HasString([updates(HasStringBuilder b)]) = _$HasString;
+  HasString._();
+}
+
+abstract class HasDouble
+    implements Built<HasDouble, HasDoubleBuilder>, HasField<double> {
+  static Serializer<HasDouble> get serializer => _$hasDoubleSerializer;
+
+  @override
+  double get field;
+
+  factory HasDouble([updates(HasDoubleBuilder b)]) = _$HasDouble;
+  HasDouble._();
 }

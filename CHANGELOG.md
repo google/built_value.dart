@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+- Fix generated code when implementing generic non-instantiable Built class.
+
 ## 1.2.0
 
 - Fix depending on a fully generated builder from a manually maintained builder.

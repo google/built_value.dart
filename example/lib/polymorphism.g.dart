@@ -20,10 +20,10 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   Iterable serialize(Serializers serializers, Cat object,
       {FullType specifiedType: FullType.unspecified}) {
     final result = <Object>[
-      'legs',
-      serializers.serialize(object.legs, specifiedType: const FullType(int)),
       'tail',
       serializers.serialize(object.tail, specifiedType: const FullType(bool)),
+      'legs',
+      serializers.serialize(object.legs, specifiedType: const FullType(int)),
     ];
 
     return result;
@@ -40,13 +40,13 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'legs':
-          result.legs = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
-          break;
         case 'tail':
           result.tail = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'legs':
+          result.legs = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -65,10 +65,10 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   Iterable serialize(Serializers serializers, Fish object,
       {FullType specifiedType: FullType.unspecified}) {
     final result = <Object>[
-      'legs',
-      serializers.serialize(object.legs, specifiedType: const FullType(int)),
       'fins',
       serializers.serialize(object.fins, specifiedType: const FullType(int)),
+      'legs',
+      serializers.serialize(object.legs, specifiedType: const FullType(int)),
     ];
 
     return result;
@@ -85,12 +85,12 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'legs':
-          result.legs = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
-          break;
         case 'fins':
           result.fins = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'legs':
+          result.legs = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
       }
@@ -119,16 +119,16 @@ abstract class AnimalBuilder implements Builder<Animal, AnimalBuilder> {
 // ignore_for_file: annotate_overrides
 class _$Cat extends Cat {
   @override
-  final int legs;
-  @override
   final bool tail;
+  @override
+  final int legs;
 
   factory _$Cat([void updates(CatBuilder b)]) =>
       (new CatBuilder()..update(updates)).build();
 
-  _$Cat._({this.legs, this.tail}) : super._() {
-    if (legs == null) throw new ArgumentError.notNull('legs');
+  _$Cat._({this.tail, this.legs}) : super._() {
     if (tail == null) throw new ArgumentError.notNull('tail');
+    if (legs == null) throw new ArgumentError.notNull('legs');
   }
 
   @override
@@ -142,19 +142,19 @@ class _$Cat extends Cat {
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! Cat) return false;
-    return legs == other.legs && tail == other.tail;
+    return tail == other.tail && legs == other.legs;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, legs.hashCode), tail.hashCode));
+    return $jf($jc($jc(0, tail.hashCode), legs.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Cat')
-          ..add('legs', legs)
-          ..add('tail', tail))
+          ..add('tail', tail)
+          ..add('legs', legs))
         .toString();
   }
 }
@@ -162,20 +162,20 @@ class _$Cat extends Cat {
 class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   _$Cat _$v;
 
-  int _legs;
-  int get legs => _$this._legs;
-  set legs(int legs) => _$this._legs = legs;
-
   bool _tail;
   bool get tail => _$this._tail;
   set tail(bool tail) => _$this._tail = tail;
+
+  int _legs;
+  int get legs => _$this._legs;
+  set legs(int legs) => _$this._legs = legs;
 
   CatBuilder();
 
   CatBuilder get _$this {
     if (_$v != null) {
-      _legs = _$v.legs;
       _tail = _$v.tail;
+      _legs = _$v.legs;
       _$v = null;
     }
     return this;
@@ -194,7 +194,7 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
 
   @override
   _$Cat build() {
-    final result = _$v ?? new _$Cat._(legs: legs, tail: tail);
+    final result = _$v ?? new _$Cat._(tail: tail, legs: legs);
     replace(result);
     return result;
   }
@@ -208,16 +208,16 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
 // ignore_for_file: annotate_overrides
 class _$Fish extends Fish {
   @override
-  final int legs;
-  @override
   final int fins;
+  @override
+  final int legs;
 
   factory _$Fish([void updates(FishBuilder b)]) =>
       (new FishBuilder()..update(updates)).build();
 
-  _$Fish._({this.legs, this.fins}) : super._() {
-    if (legs == null) throw new ArgumentError.notNull('legs');
+  _$Fish._({this.fins, this.legs}) : super._() {
     if (fins == null) throw new ArgumentError.notNull('fins');
+    if (legs == null) throw new ArgumentError.notNull('legs');
   }
 
   @override
@@ -231,19 +231,19 @@ class _$Fish extends Fish {
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! Fish) return false;
-    return legs == other.legs && fins == other.fins;
+    return fins == other.fins && legs == other.legs;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, legs.hashCode), fins.hashCode));
+    return $jf($jc($jc(0, fins.hashCode), legs.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Fish')
-          ..add('legs', legs)
-          ..add('fins', fins))
+          ..add('fins', fins)
+          ..add('legs', legs))
         .toString();
   }
 }
@@ -251,20 +251,20 @@ class _$Fish extends Fish {
 class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   _$Fish _$v;
 
-  int _legs;
-  int get legs => _$this._legs;
-  set legs(int legs) => _$this._legs = legs;
-
   int _fins;
   int get fins => _$this._fins;
   set fins(int fins) => _$this._fins = fins;
+
+  int _legs;
+  int get legs => _$this._legs;
+  set legs(int legs) => _$this._legs = legs;
 
   FishBuilder();
 
   FishBuilder get _$this {
     if (_$v != null) {
-      _legs = _$v.legs;
       _fins = _$v.fins;
+      _legs = _$v.legs;
       _$v = null;
     }
     return this;
@@ -283,7 +283,7 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   @override
   _$Fish build() {
-    final result = _$v ?? new _$Fish._(legs: legs, fins: fins);
+    final result = _$v ?? new _$Fish._(fins: fins, legs: legs);
     replace(result);
     return result;
   }
