@@ -36,7 +36,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 const TestEnum _$yes = const TestEnum._('yes');
@@ -117,7 +116,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -147,7 +145,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -179,7 +176,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -211,7 +207,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -245,7 +240,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -303,7 +297,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 const TestEnum _$no = const TestEnum._('yes');
@@ -354,7 +347,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 const TestEnum _$yes = const TestEnum._('yes');
@@ -405,7 +397,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -437,7 +428,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -474,7 +464,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -506,7 +495,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -542,7 +530,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -573,7 +560,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -604,7 +590,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -636,7 +621,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -666,7 +650,6 @@ part of test_enum;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library test_enum
 // **************************************************************************
 
 // Error: Please make the following changes to use EnumClass:
@@ -709,7 +692,7 @@ final String pkgName = 'pkg';
 
 // Recreate BuiltValueGenerator for each test because we repeatedly create
 // enums with the same name in the same library, which will clash.
-Builder get builder => new GeneratorBuilder([new BuiltValueGenerator()]);
+Builder get builder => new PartBuilder([new BuiltValueGenerator()]);
 
 Future<String> generate(String source) async {
   final srcs = <String, String>{

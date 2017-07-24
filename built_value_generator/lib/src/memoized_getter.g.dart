@@ -4,7 +4,6 @@ part of built_value_generator.memoized_getter;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: abstract class MemoizedGetter
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides

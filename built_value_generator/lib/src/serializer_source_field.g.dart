@@ -4,7 +4,6 @@ part of built_value_generator.source_field;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: abstract class SerializerSourceField
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides

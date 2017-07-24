@@ -389,7 +389,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 
 final String pkgName = 'pkg';
 
-final Builder builder = new GeneratorBuilder([new BuiltValueGenerator()]);
+final Builder builder = new PartBuilder([new BuiltValueGenerator()]);
 
 Future<String> generate(String source) async {
   final srcs = <String, String>{

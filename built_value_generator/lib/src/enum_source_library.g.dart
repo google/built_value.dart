@@ -4,7 +4,6 @@ part of built_value_generator.enum_source_library;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: abstract class EnumSourceLibrary
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides
