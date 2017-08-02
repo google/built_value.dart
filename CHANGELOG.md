@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- Allow fields to be called 'result'.
+
 ## 2.0.0
 
 - Update to source_gen 0.7.0.

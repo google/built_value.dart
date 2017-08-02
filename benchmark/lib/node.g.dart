@@ -89,10 +89,10 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
 
   @override
   _$Node build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$Node._(
             label: label, left: _left?.build(), right: _right?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

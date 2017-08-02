@@ -218,9 +218,9 @@ class ValueWithIntBuilder
 
   @override
   _$ValueWithInt build() {
-    final result = _$v ?? new _$ValueWithInt._(anInt: anInt, note: note);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$ValueWithInt._(anInt: anInt, note: note);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -295,8 +295,8 @@ class ValueWithHasIntBuilder
 
   @override
   _$ValueWithHasInt build() {
-    final result = _$v ?? new _$ValueWithHasInt._(hasInt: hasInt);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$ValueWithHasInt._(hasInt: hasInt);
+    replace(_$result);
+    return _$result;
   }
 }

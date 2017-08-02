@@ -185,13 +185,13 @@ class StandardJsonValueBuilder
 
   @override
   _$StandardJsonValue build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$StandardJsonValue._(
             number: number,
             text: text,
             keyValues: keyValues?.build(),
             strings: _strings?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

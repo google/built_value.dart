@@ -124,10 +124,10 @@ class ValueSourceFieldBuilder
 
   @override
   _$ValueSourceField build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$ValueSourceField._(
             element: element, builderElement: builderElement);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

@@ -86,9 +86,9 @@ class MemoizedGetterBuilder
 
   @override
   _$MemoizedGetter build() {
-    final result =
+    final _$result =
         _$v ?? new _$MemoizedGetter._(returnType: returnType, name: name);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

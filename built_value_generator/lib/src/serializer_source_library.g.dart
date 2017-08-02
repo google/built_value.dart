@@ -94,8 +94,8 @@ class SerializerSourceLibraryBuilder
 
   @override
   _$SerializerSourceLibrary build() {
-    final result = _$v ?? new _$SerializerSourceLibrary._(element: element);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$SerializerSourceLibrary._(element: element);
+    replace(_$result);
+    return _$result;
   }
 }

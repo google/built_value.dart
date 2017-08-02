@@ -321,9 +321,9 @@ class GenericValueBuilder<T>
 
   @override
   _$GenericValue<T> build() {
-    final result = _$v ?? new _$GenericValue<T>._(value: value);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$GenericValue<T>._(value: value);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -402,9 +402,9 @@ class BoundGenericValueBuilder<T extends num>
 
   @override
   _$BoundGenericValue<T> build() {
-    final result = _$v ?? new _$BoundGenericValue<T>._(value: value);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$BoundGenericValue<T>._(value: value);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -486,10 +486,10 @@ class CollectionGenericValueBuilder<T>
 
   @override
   _$CollectionGenericValue<T> build() {
-    final result =
+    final _$result =
         _$v ?? new _$CollectionGenericValue<T>._(values: values?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -598,12 +598,12 @@ class GenericContainerBuilder
 
   @override
   _$GenericContainer build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$GenericContainer._(
             genericValue: genericValue?.build(),
             boundGenericValue: boundGenericValue?.build(),
             collectionGenericValue: collectionGenericValue?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

@@ -164,8 +164,8 @@ class ValueSourceClassBuilder
 
   @override
   _$ValueSourceClass build() {
-    final result = _$v ?? new _$ValueSourceClass._(element: element);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$ValueSourceClass._(element: element);
+    replace(_$result);
+    return _$result;
   }
 }

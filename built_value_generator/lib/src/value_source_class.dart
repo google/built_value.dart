@@ -516,7 +516,7 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     result.writeln('_\$$name$_generics build() {');
-    result.writeln('final result = _\$v ?? ');
+    result.writeln('final _\$result = _\$v ?? ');
     result.writeln('new _\$$name$_generics._(');
     result.write(fields.map((field) {
       final name = field.name;
@@ -532,8 +532,8 @@ abstract class ValueSourceClass
     }).join(', '));
     result.writeln(');');
     // Set _$v to the built value, so it will be lazily copied if needed.
-    result.writeln('replace(result);');
-    result.writeln('return result;');
+    result.writeln('replace(_\$result);');
+    result.writeln('return _\$result;');
     result.writeln('}');
     result.writeln('}');
 

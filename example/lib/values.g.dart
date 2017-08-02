@@ -337,9 +337,9 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   _$SimpleValue build() {
-    final result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -413,9 +413,9 @@ class VerySimpleValueBuilder
 
   @override
   _$VerySimpleValue build() {
-    final result = _$v ?? new _$VerySimpleValue._(value: value);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$VerySimpleValue._(value: value);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -502,12 +502,12 @@ class CompoundValueBuilder
 
   @override
   _$CompoundValue build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$CompoundValue._(
             simpleValue: simpleValue?.build(),
             validatedValue: _validatedValue?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -590,10 +590,10 @@ class ValidatedValueBuilder
 
   @override
   _$ValidatedValue build() {
-    final result =
+    final _$result =
         _$v ?? new _$ValidatedValue._(anInt: anInt, aString: aString);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -675,9 +675,10 @@ class ValueWithCodeBuilder
 
   @override
   _$ValueWithCode build() {
-    final result = _$v ?? new _$ValueWithCode._(anInt: anInt, aString: aString);
-    replace(result);
-    return result;
+    final _$result =
+        _$v ?? new _$ValueWithCode._(anInt: anInt, aString: aString);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -776,10 +777,10 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   @override
   _$ValueWithDefaults build() {
-    final result =
+    final _$result =
         _$v ?? new _$ValueWithDefaults._(anInt: anInt, aString: aString);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -860,9 +861,9 @@ class DerivedValueBuilder
 
   @override
   _$DerivedValue build() {
-    final result = _$v ?? new _$DerivedValue._(anInt: anInt);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$DerivedValue._(anInt: anInt);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -956,9 +957,9 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
 
   @override
   _$Account build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$Account._(id: id, name: name, keyValues: keyValues?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

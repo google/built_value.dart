@@ -85,9 +85,10 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   _$SimpleValue build() {
-    final result = _$v ?? new _$SimpleValue._(anInt: anInt, map: map?.build());
-    replace(result);
-    return result;
+    final _$result =
+        _$v ?? new _$SimpleValue._(anInt: anInt, map: map?.build());
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -171,10 +172,10 @@ class CompoundValueBuilder
 
   @override
   _$CompoundValue build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$CompoundValue._(
             simpleValue: simpleValue?.build(), string: string);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
