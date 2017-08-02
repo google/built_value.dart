@@ -67,7 +67,18 @@ class BuiltValue {
   /// concrete type.
   final bool instantiable;
 
-  const BuiltValue({this.instantiable: true});
+  /// Whether to use nested builders. Defaults to `true`.
+  ///
+  /// If the builder class is fully generated, controls whether nested builders
+  /// are used. This means builder fields are themselves builders if there is a
+  /// builder available for each field type.
+  ///
+  /// If you write the builder class by hand, this has no effect; simply
+  /// declare each field as the type you want, either the built type or the
+  /// builder.
+  final bool nestedBuilders;
+
+  const BuiltValue({this.instantiable: true, this.nestedBuilders: true});
 }
 
 /// Nullable annotation for Built Value fields.

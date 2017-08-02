@@ -9,28 +9,22 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
-import 'package:built_value_generator/src/value_source_class.dart';
 
 part 'value_source_field.g.dart';
 
-BuiltSet<String> _builtCollectionNames = new BuiltSet<String>([
-  'BuiltList',
-  'BuiltListMultimap',
-  'BuiltMap',
-  'BuiltSet',
-  'BuiltSetMultimap',
-]);
-
 abstract class ValueSourceField
     implements Built<ValueSourceField, ValueSourceFieldBuilder> {
+  BuiltValue get settings;
   FieldElement get element;
   @nullable
   FieldElement get builderElement;
 
-  factory ValueSourceField(FieldElement element, FieldElement builderElement) =>
+  factory ValueSourceField(BuiltValue settings, FieldElement element,
+          FieldElement builderElement) =>
       new _$ValueSourceField._(
-          element: element, builderElement: builderElement);
+          settings: settings, element: element, builderElement: builderElement);
   ValueSourceField._();
 
   @memoized
@@ -84,9 +78,10 @@ abstract class ValueSourceField
   @memoized
   bool get isNestedBuilder => builderFieldExists
       ? typeInBuilder.contains('Builder') ?? false
-      : _needsNestedBuilder(element.getter.returnType);
+      : settings.nestedBuilders &&
+          DartTypes.needsNestedBuilder(element.getter.returnType);
 
-  static BuiltList<ValueSourceField> fromClassElements(
+  static BuiltList<ValueSourceField> fromClassElements(BuiltValue settings,
       ClassElement classElement, ClassElement builderClassElement) {
     final result = new ListBuilder<ValueSourceField>();
 
@@ -95,42 +90,19 @@ abstract class ValueSourceField
           field.getter != null &&
           (field.getter.isAbstract || field.getter.isSynthetic)) {
         final builderField = builderClassElement?.getField(field.name);
-        result.add(new ValueSourceField(field, builderField));
+        result.add(new ValueSourceField(settings, field, builderField));
       }
     }
 
     return result.build();
   }
 
-  static bool _needsNestedBuilder(DartType type) {
-    return _isInstantiableBuiltValue(type) || _isBuiltCollection(type);
-  }
-
-  static bool _isInstantiableBuiltValue(DartType type) {
-    return _isBuiltValue(type) &&
-        new ValueSourceClass(type.element as ClassElement)
-            .settings
-            .instantiable;
-  }
-
-  static bool _isBuiltValue(DartType type) {
-    if (type.element is! ClassElement) return false;
-    return (type.element as ClassElement)
-        .allSupertypes
-        .any((interfaceType) => interfaceType.name == 'Built');
-  }
-
-  static bool _isBuiltCollection(DartType type) {
-    return _builtCollectionNames
-        .any((name) => type.displayName.startsWith('$name<'));
-  }
-
   static String _toBuilderType(DartType type) {
-    if (_isBuiltCollection(type)) {
+    if (DartTypes.isBuiltCollection(type)) {
       return type.displayName
           .replaceFirst('Built', '')
           .replaceFirst('<', 'Builder<');
-    } else if (_isInstantiableBuiltValue(type)) {
+    } else if (DartTypes.isInstantiableBuiltValue(type)) {
       return type.displayName.contains('<')
           ? type.displayName.replaceFirst('<', 'Builder<')
           : '${type}Builder';

@@ -1,7 +1,9 @@
 # Changelog
 
-## 2.0.1
+## 2.1.0
 
+- Add "nestedBuilders" setting. Defaults to true; set to false to stop
+  using nested builders by default in fully generated builders.
 - Allow fields to be called 'result'.
 - Fix generation when a field is a noninstantiable built value: don't try to
   instantiate the abstract builder.

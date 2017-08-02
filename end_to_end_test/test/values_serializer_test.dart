@@ -61,6 +61,37 @@ void main() {
     });
   });
 
+  group('CompoundValueNoNesting', () {
+    final data = new CompoundValueNoNesting((b) => b
+      ..simpleValue = new SimpleValue((b) => b
+        ..anInt = 1
+        ..aString = 'two')
+      ..validatedValue = new ValidatedValue((b) => b.anInt = 3));
+    final serialized = [
+      'CompoundValueNoNesting',
+      'simpleValue',
+      [
+        'anInt',
+        1,
+        'aString',
+        'two',
+      ],
+      'validatedValue',
+      [
+        'anInt',
+        3,
+      ],
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
   group('CompoundValue using StandardJsonPlugin', () {
     final data = new CompoundValue((b) => b
       ..simpleValue.anInt = 1

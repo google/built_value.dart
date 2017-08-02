@@ -6,9 +6,9 @@ library built_value_generator.source_field;
 
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value_generator/src/dart_types.dart';
 
 part 'serializer_source_field.g.dart';
 
@@ -30,15 +30,15 @@ abstract class SerializerSourceField
     'BuiltSet': 'SetBuilder',
     'BuiltSetMultimap': 'SetMultimapBuilder',
   });
-
+  BuiltValue get settings;
   FieldElement get element;
   @nullable
   FieldElement get builderElement;
 
-  factory SerializerSourceField(
-          FieldElement element, FieldElement builderElement) =>
+  factory SerializerSourceField(BuiltValue settings, FieldElement element,
+          FieldElement builderElement) =>
       new _$SerializerSourceField._(
-          element: element, builderElement: builderElement);
+          settings: settings, element: element, builderElement: builderElement);
   SerializerSourceField._();
 
   @memoized
@@ -72,7 +72,8 @@ abstract class SerializerSourceField
     return builderFieldElementIsValid
         ? element.getter.returnType.displayName !=
             builderElement.getter.returnType.displayName
-        : _needsNestedBuilder(element.getter.returnType);
+        : settings.nestedBuilders &&
+            DartTypes.needsNestedBuilder(element.getter.returnType);
   }
 
   @memoized
@@ -177,24 +178,5 @@ abstract class SerializerSourceField
       result.add(accumulator.toString().trim());
     }
     return result.build();
-  }
-
-  // These three methods are copied from built_value to match the behaviour
-  // when a builder is not explicitly defined.
-  // TODO(davidmorgan): dedupe.
-  static bool _needsNestedBuilder(DartType type) {
-    return _isBuiltValue(type) || _isBuiltCollection(type);
-  }
-
-  static bool _isBuiltValue(DartType type) {
-    if (type.element is! ClassElement) return false;
-    return (type.element as ClassElement)
-        .allSupertypes
-        .any((interfaceType) => interfaceType.name == 'Built');
-  }
-
-  static bool _isBuiltCollection(DartType type) {
-    return _builtCollectionNames
-        .any((name) => type.displayName.startsWith('$name<'));
   }
 }

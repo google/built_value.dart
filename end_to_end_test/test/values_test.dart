@@ -106,7 +106,9 @@ void main() {
       final value1 = new SimpleValue((b) => b
         ..anInt = 0
         ..aString = '');
-      expect(value1.toString(), '''SimpleValue {
+      expect(
+          value1.toString(),
+          '''SimpleValue {
   anInt=0,
   aString=,
 }''');
@@ -141,6 +143,13 @@ void main() {
 
       expect(value.hashCode,
           hashObjects([value.simpleValue, value.validatedValue]));
+    });
+  });
+
+  group('CompoundValueNoNesting', () {
+    test('does not use nested builders', () {
+      new CompoundValueNoNesting(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
     });
   });
 
