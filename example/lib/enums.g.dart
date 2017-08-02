@@ -4,7 +4,6 @@ part of enums;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library enums
 // **************************************************************************
 
 const TestEnum _$yes = const TestEnum._('yes');

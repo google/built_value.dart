@@ -4,7 +4,6 @@ part of simple_value;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: abstract class SimpleValue
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides

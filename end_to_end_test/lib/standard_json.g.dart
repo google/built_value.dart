@@ -4,7 +4,6 @@ part of standard_json;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library standard_json
 // **************************************************************************
 
 Serializer<StandardJsonValue> _$standardJsonValueSerializer =
@@ -79,11 +78,6 @@ class _$StandardJsonValueSerializer
     return result.build();
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class StandardJsonValue
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$StandardJsonValue extends StandardJsonValue {

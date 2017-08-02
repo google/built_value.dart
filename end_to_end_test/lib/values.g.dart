@@ -4,7 +4,6 @@ part of values;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library values
 // **************************************************************************
 
 Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
@@ -344,11 +343,6 @@ class _$NamedFactoryValueSerializer
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class SimpleValue
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$SimpleValue extends SimpleValue {
   @override
@@ -431,11 +425,6 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class CompoundValue
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$CompoundValue extends CompoundValue {
@@ -529,11 +518,6 @@ class CompoundValueBuilder
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class DerivedValue
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$DerivedValue extends DerivedValue {
   @override
@@ -616,11 +600,6 @@ class DerivedValueBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValueWithCode
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$ValueWithCode extends ValueWithCode {
@@ -705,11 +684,6 @@ class ValueWithCodeBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValueWithDefaults
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$ValueWithDefaults extends ValueWithDefaults {
@@ -834,11 +808,6 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValidatedValue
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$ValidatedValue extends ValidatedValue {
   @override
@@ -925,11 +894,6 @@ class ValidatedValueBuilder
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValueUsingImportAs
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$ValueUsingImportAs extends ValueUsingImportAs {
   @override
@@ -1007,11 +971,6 @@ class ValueUsingImportAsBuilder
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class NoFieldsValue
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$NoFieldsValue extends NoFieldsValue {
   factory _$NoFieldsValue([void updates(NoFieldsValueBuilder b)]) =>
@@ -1068,11 +1027,6 @@ class NoFieldsValueBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class PrimitivesValue
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$PrimitivesValue extends PrimitivesValue {
@@ -1221,11 +1175,6 @@ class PrimitivesValueBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class NamedFactoryValue
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$NamedFactoryValue extends NamedFactoryValue {

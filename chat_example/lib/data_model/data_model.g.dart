@@ -4,7 +4,6 @@ part of data_model;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library data_model
 // **************************************************************************
 
 const StatusType _$online = const StatusType._('online');
@@ -435,11 +434,6 @@ class _$ListUsersResponseSerializer
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Chat
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$Chat extends Chat {
   @override
@@ -525,11 +519,6 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Login
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$Login extends Login {
   @override
@@ -613,11 +602,6 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Status
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$Status extends Status {
@@ -703,11 +687,6 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ListUsers
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$ListUsers extends ListUsers {
   @override
@@ -784,11 +763,6 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ShowChat
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$ShowChat extends ShowChat {
@@ -887,11 +861,6 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Welcome
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$Welcome extends Welcome {
   @override
@@ -975,11 +944,6 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ListUsersResponse
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$ListUsersResponse extends ListUsersResponse {

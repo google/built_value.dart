@@ -4,7 +4,6 @@ part of interfaces;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library interfaces
 // **************************************************************************
 
 const EnumWithInt _$one = const EnumWithInt._('one');
@@ -96,11 +95,6 @@ class _$EnumWithIntSerializer implements PrimitiveSerializer<EnumWithInt> {
           {FullType specifiedType: FullType.unspecified}) =>
       EnumWithInt.valueOf(serialized as String);
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValueWithInt
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$ValueWithInt extends ValueWithInt {

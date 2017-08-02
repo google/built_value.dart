@@ -4,7 +4,6 @@ part of polymorphism;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library polymorphism
 // **************************************************************************
 
 Serializer<Cat> _$catSerializer = new _$CatSerializer();
@@ -100,21 +99,11 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Animal
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 abstract class AnimalBuilder implements Builder<Animal, AnimalBuilder> {
   int get legs;
   set legs(int legs);
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Cat
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$Cat extends Cat {
@@ -199,11 +188,6 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Fish
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$Fish extends Fish {

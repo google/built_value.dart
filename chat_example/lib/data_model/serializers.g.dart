@@ -4,7 +4,6 @@ part of serializers;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library serializers
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
