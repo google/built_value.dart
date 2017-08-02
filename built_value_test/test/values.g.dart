@@ -4,7 +4,6 @@ part of values;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: abstract class SimpleValue
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides
@@ -91,11 +90,6 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class CompoundValue
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$CompoundValue extends CompoundValue {

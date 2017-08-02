@@ -4,7 +4,6 @@ part of values;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library values
 // **************************************************************************
 
 Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
@@ -261,11 +260,6 @@ class _$AccountSerializer implements StructuredSerializer<Account> {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class SimpleValue
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$SimpleValue extends SimpleValue {
   @override
@@ -349,11 +343,6 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class VerySimpleValue
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$VerySimpleValue extends VerySimpleValue {
   @override
@@ -429,11 +418,6 @@ class VerySimpleValueBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class CompoundValue
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$CompoundValue extends CompoundValue {
@@ -527,11 +511,6 @@ class CompoundValueBuilder
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValidatedValue
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$ValidatedValue extends ValidatedValue {
   @override
@@ -618,11 +597,6 @@ class ValidatedValueBuilder
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValueWithCode
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$ValueWithCode extends ValueWithCode {
   @override
@@ -706,11 +680,6 @@ class ValueWithCodeBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValueWithDefaults
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$ValueWithDefaults extends ValueWithDefaults {
@@ -814,11 +783,6 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class DerivedValue
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$DerivedValue extends DerivedValue {
   @override
@@ -901,11 +865,6 @@ class DerivedValueBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Account
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$Account extends Account {

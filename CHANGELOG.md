@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0
+
+- Update to source_gen 0.7.0.
+- Please make the following trivial update to your `build.dart` and
+  `watch.dart`: replace the string `GeneratorBuilder` with `PartBuilder`.
+
 ## 1.2.1
 
 - Fix generated code when implementing generic non-instantiable Built class.

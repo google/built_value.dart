@@ -4,7 +4,6 @@ part of polymorphism;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library polymorphism
 // **************************************************************************
 
 Serializer<Cat> _$catSerializer = new _$CatSerializer();
@@ -182,21 +181,11 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Animal
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 abstract class AnimalBuilder implements Builder<Animal, AnimalBuilder> {
   int get legs;
   set legs(int legs);
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Cat
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$Cat extends Cat {
@@ -282,11 +271,6 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Fish
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$Fish extends Fish {
   @override
@@ -371,22 +355,12 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class HasField
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 abstract class HasFieldBuilder<T>
     implements Builder<HasField<T>, HasFieldBuilder<T>> {
   T get field;
   set field(T field);
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class HasString
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$HasString extends HasString {
@@ -462,11 +436,6 @@ class HasStringBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class HasDouble
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$HasDouble extends HasDouble {

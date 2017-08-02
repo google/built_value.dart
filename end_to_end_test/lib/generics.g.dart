@@ -4,7 +4,6 @@ part of generics;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library generics
 // **************************************************************************
 
 Serializer<GenericValue> _$genericValueSerializer =
@@ -301,11 +300,6 @@ class _$NestedGenericContainerSerializer
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class GenericValue
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$GenericValue<T> extends GenericValue<T> {
   @override
@@ -385,11 +379,6 @@ class GenericValueBuilder<T>
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class BoundGenericValue
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
@@ -471,11 +460,6 @@ class BoundGenericValueBuilder<T extends num>
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class CollectionGenericValue
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
@@ -561,11 +545,6 @@ class CollectionGenericValueBuilder<T>
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class GenericContainer
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$GenericContainer extends GenericContainer {
@@ -681,11 +660,6 @@ class GenericContainerBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class NestedGenericContainer
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$NestedGenericContainer extends NestedGenericContainer {

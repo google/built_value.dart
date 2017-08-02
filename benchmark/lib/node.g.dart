@@ -4,7 +4,6 @@ part of node;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: abstract class Node
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides

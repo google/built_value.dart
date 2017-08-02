@@ -4,7 +4,6 @@ part of interfaces;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library interfaces
 // **************************************************************************
 
 const EnumWithInt _$one = const EnumWithInt._('one');
@@ -140,11 +139,6 @@ class _$ValueWithHasIntSerializer
   }
 }
 
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValueWithInt
-// **************************************************************************
-
 // ignore_for_file: annotate_overrides
 class _$ValueWithInt extends ValueWithInt {
   @override
@@ -229,11 +223,6 @@ class ValueWithIntBuilder
     return result;
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class ValueWithHasInt
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$ValueWithHasInt extends ValueWithHasInt {

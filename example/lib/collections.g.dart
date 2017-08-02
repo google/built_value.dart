@@ -4,7 +4,6 @@ part of collections;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: library collections
 // **************************************************************************
 
 Serializer<Collections> _$collectionsSerializer = new _$CollectionsSerializer();
@@ -162,11 +161,6 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
     return result.build();
   }
 }
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// Target: abstract class Collections
-// **************************************************************************
 
 // ignore_for_file: annotate_overrides
 class _$Collections extends Collections {
