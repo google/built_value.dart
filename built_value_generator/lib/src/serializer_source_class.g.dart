@@ -118,10 +118,10 @@ class SerializerSourceClassBuilder
 
   @override
   _$SerializerSourceClass build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$SerializerSourceClass._(
             element: element, builderElement: builderElement);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

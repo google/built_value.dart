@@ -191,8 +191,8 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
 
   @override
   _$ValueWithInt build() {
-    final result = _$v ?? new _$ValueWithInt._(anInt: anInt, note: note);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$ValueWithInt._(anInt: anInt, note: note);
+    replace(_$result);
+    return _$result;
   }
 }

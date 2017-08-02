@@ -93,8 +93,8 @@ class EnumSourceLibraryBuilder
 
   @override
   _$EnumSourceLibrary build() {
-    final result = _$v ?? new _$EnumSourceLibrary._(element: element);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$EnumSourceLibrary._(element: element);
+    replace(_$result);
+    return _$result;
   }
 }

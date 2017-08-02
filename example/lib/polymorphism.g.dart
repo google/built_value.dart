@@ -183,9 +183,9 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
 
   @override
   _$Cat build() {
-    final result = _$v ?? new _$Cat._(tail: tail, legs: legs);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$Cat._(tail: tail, legs: legs);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -267,8 +267,8 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   @override
   _$Fish build() {
-    final result = _$v ?? new _$Fish._(fins: fins, legs: legs);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$Fish._(fins: fins, legs: legs);
+    replace(_$result);
+    return _$result;
   }
 }

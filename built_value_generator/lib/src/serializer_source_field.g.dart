@@ -112,10 +112,10 @@ class SerializerSourceFieldBuilder
 
   @override
   _$SerializerSourceField build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$SerializerSourceField._(
             element: element, builderElement: builderElement);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

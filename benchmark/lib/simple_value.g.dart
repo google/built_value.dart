@@ -84,8 +84,8 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   _$SimpleValue build() {
-    final result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
+    replace(_$result);
+    return _$result;
   }
 }

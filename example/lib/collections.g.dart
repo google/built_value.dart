@@ -359,7 +359,7 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
 
   @override
   _$Collections build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$Collections._(
             list: list?.build(),
             set: set?.build(),
@@ -371,7 +371,7 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
             nullableMap: _nullableMap?.build(),
             nullableListMultimap: _nullableListMultimap?.build(),
             nullableSetMultimap: _nullableSetMultimap?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

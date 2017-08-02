@@ -513,9 +513,9 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
 
   @override
   _$Chat build() {
-    final result = _$v ?? new _$Chat._(text: text, targets: targets?.build());
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$Chat._(text: text, targets: targets?.build());
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -597,9 +597,10 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
 
   @override
   _$Login build() {
-    final result = _$v ?? new _$Login._(username: username, password: password);
-    replace(result);
-    return result;
+    final _$result =
+        _$v ?? new _$Login._(username: username, password: password);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -681,9 +682,9 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
 
   @override
   _$Status build() {
-    final result = _$v ?? new _$Status._(message: message, type: type);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$Status._(message: message, type: type);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -758,9 +759,10 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 
   @override
   _$ListUsers build() {
-    final result = _$v ?? new _$ListUsers._(statusTypes: statusTypes?.build());
-    replace(result);
-    return result;
+    final _$result =
+        _$v ?? new _$ListUsers._(statusTypes: statusTypes?.build());
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -854,10 +856,10 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
 
   @override
   _$ShowChat build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$ShowChat._(username: username, private: private, text: text);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -939,9 +941,10 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
 
   @override
   _$Welcome build() {
-    final result = _$v ?? new _$Welcome._(log: log?.build(), message: message);
-    replace(result);
-    return result;
+    final _$result =
+        _$v ?? new _$Welcome._(log: log?.build(), message: message);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -1018,9 +1021,9 @@ class ListUsersResponseBuilder
 
   @override
   _$ListUsersResponse build() {
-    final result =
+    final _$result =
         _$v ?? new _$ListUsersResponse._(statuses: statuses?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }

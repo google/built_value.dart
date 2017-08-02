@@ -420,9 +420,9 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   _$SimpleValue build() {
-    final result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -509,12 +509,12 @@ class CompoundValueBuilder
 
   @override
   _$CompoundValue build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$CompoundValue._(
             simpleValue: simpleValue?.build(),
             validatedValue: _validatedValue?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -595,9 +595,9 @@ class DerivedValueBuilder
 
   @override
   _$DerivedValue build() {
-    final result = _$v ?? new _$DerivedValue._(anInt: anInt);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$DerivedValue._(anInt: anInt);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -679,9 +679,10 @@ class ValueWithCodeBuilder
 
   @override
   _$ValueWithCode build() {
-    final result = _$v ?? new _$ValueWithCode._(anInt: anInt, aString: aString);
-    replace(result);
-    return result;
+    final _$result =
+        _$v ?? new _$ValueWithCode._(anInt: anInt, aString: aString);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -800,11 +801,11 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   @override
   _$ValueWithDefaults build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$ValueWithDefaults._(
             anInt: anInt, aString: aString, value: value?.build());
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -887,10 +888,10 @@ class ValidatedValueBuilder
 
   @override
   _$ValidatedValue build() {
-    final result =
+    final _$result =
         _$v ?? new _$ValidatedValue._(anInt: anInt, aString: aString);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -965,9 +966,9 @@ class ValueUsingImportAsBuilder
 
   @override
   _$ValueUsingImportAs build() {
-    final result = _$v ?? new _$ValueUsingImportAs._(value: value);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$ValueUsingImportAs._(value: value);
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -1022,9 +1023,9 @@ class NoFieldsValueBuilder
 
   @override
   _$NoFieldsValue build() {
-    final result = _$v ?? new _$NoFieldsValue._();
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$NoFieldsValue._();
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -1163,7 +1164,7 @@ class PrimitivesValueBuilder
 
   @override
   _$PrimitivesValue build() {
-    final result = _$v ??
+    final _$result = _$v ??
         new _$PrimitivesValue._(
             boolean: boolean,
             integer: integer,
@@ -1171,8 +1172,8 @@ class PrimitivesValueBuilder
             number: number,
             string: string,
             dateTime: dateTime);
-    replace(result);
-    return result;
+    replace(_$result);
+    return _$result;
   }
 }
 
@@ -1247,8 +1248,8 @@ class NamedFactoryValueBuilder
 
   @override
   _$NamedFactoryValue build() {
-    final result = _$v ?? new _$NamedFactoryValue._(value: value);
-    replace(result);
-    return result;
+    final _$result = _$v ?? new _$NamedFactoryValue._(value: value);
+    replace(_$result);
+    return _$result;
   }
 }
