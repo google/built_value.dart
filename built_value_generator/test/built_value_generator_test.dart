@@ -148,7 +148,8 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
               "1. Make class have exactly one constructor: Value._();")));
     });
 
-    test('suggests to remove constructor from non-instantiable value class', () async {
+    test('suggests to remove constructor from non-instantiable value class',
+        () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
@@ -182,7 +183,8 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
               'factory Value([updates(ValueBuilder b)]) = _\$Value;'));
     });
 
-    test('suggests to remove factory from non-instantiable value class', () async {
+    test('suggests to remove factory from non-instantiable value class',
+        () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
@@ -389,7 +391,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 
 final String pkgName = 'pkg';
 
-final Builder builder = new GeneratorBuilder([new BuiltValueGenerator()]);
+final Builder builder = new PartBuilder([new BuiltValueGenerator()]);
 
 Future<String> generate(String source) async {
   final srcs = <String, String>{

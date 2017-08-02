@@ -16,21 +16,39 @@ import 'package:source_gen/source_gen.dart';
 /// See https://github.com/google/built_value.dart/tree/master/example
 class BuiltValueGenerator extends Generator {
   @override
-  Future<String> generate(Element element, BuildStep buildStep) async {
-    if (element is ClassElement && ValueSourceClass.needsBuiltValue(element)) {
-      return new ValueSourceClass(element).generateCode();
-    } else if (element is LibraryElement) {
-      final enumCode = new EnumSourceLibrary(element).generateCode();
-
-      final serializerSourceLibrary = new SerializerSourceLibrary(element);
+  Future<String> generate(LibraryReader library, BuildStep buildStep) async {
+    final result = new StringBuffer();
+    try {
+      final enumCode = new EnumSourceLibrary(library.element).generateCode();
+      if (enumCode != null) result.writeln(enumCode);
+      final serializerSourceLibrary =
+          new SerializerSourceLibrary(library.element);
       if (serializerSourceLibrary.needsBuiltJson ||
           serializerSourceLibrary.hasSerializers) {
-        return (enumCode ?? '') + '\n' + serializerSourceLibrary.generateCode();
-      } else {
-        return enumCode;
+        result.writeln(serializerSourceLibrary.generateCode());
       }
-    } else {
-      return null;
+    } catch (e, st) {
+      result.writeln(_error(e.message));
+      log.severe('Error in BuiltValueGenerator for $library.', e, st);
     }
+
+    for (final element in library.allElements) {
+      if (element is ClassElement &&
+          ValueSourceClass.needsBuiltValue(element)) {
+        try {
+          result.writeln(new ValueSourceClass(element).generateCode() ?? '');
+        } catch (e, st) {
+          result.writeln(_error(e));
+          log.severe('Error in BuiltValueGenerator for $element.', e, st);
+        }
+      }
+    }
+    return '$result';
   }
+}
+
+String _error(Object error) {
+  final lines = '$error'.split('\n');
+  final indented = lines.skip(1).map((l) => '//        $l'.trim()).join('\n');
+  return '// Error: ${lines.first}\n$indented';
 }

@@ -10,8 +10,7 @@ import 'package:source_gen/source_gen.dart';
 
 Future main(List<String> args) async {
   await build(
-      new PhaseGroup.singleAction(
-          new GeneratorBuilder([new BuiltValueGenerator()]),
+      new PhaseGroup.singleAction(new PartBuilder([new BuiltValueGenerator()]),
           new InputSet('built_value_generator', const ['lib/src/*.dart'])),
       deleteFilesByDefault: true);
 }

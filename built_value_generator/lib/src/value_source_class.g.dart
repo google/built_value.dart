@@ -4,7 +4,6 @@ part of built_value_generator.source_class;
 
 // **************************************************************************
 // Generator: BuiltValueGenerator
-// Target: abstract class ValueSourceClass
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides

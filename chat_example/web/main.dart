@@ -11,5 +11,6 @@ import 'package:chat_example/client/layout.dart';
 void main() {
   new Layout();
   final input = new Input();
-  new Client(input.keyboardInput, new HtmlDisplay(), new HttpClientConnection());
+  new Client(
+      input.keyboardInput, new HtmlDisplay(), new HttpClientConnection());
 }
