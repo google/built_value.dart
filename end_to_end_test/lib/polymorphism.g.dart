@@ -356,6 +356,80 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 }
 
 // ignore_for_file: annotate_overrides
+class _$Cage extends Cage {
+  @override
+  final Animal inhabitant;
+
+  factory _$Cage([void updates(CageBuilder b)]) =>
+      (new CageBuilder()..update(updates)).build();
+
+  _$Cage._({this.inhabitant}) : super._() {
+    if (inhabitant == null) throw new ArgumentError.notNull('inhabitant');
+  }
+
+  @override
+  Cage rebuild(void updates(CageBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  CageBuilder toBuilder() => new CageBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! Cage) return false;
+    return inhabitant == other.inhabitant;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, inhabitant.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Cage')..add('inhabitant', inhabitant))
+        .toString();
+  }
+}
+
+class CageBuilder implements Builder<Cage, CageBuilder> {
+  _$Cage _$v;
+
+  Animal _inhabitant;
+  Animal get inhabitant => _$this._inhabitant;
+  set inhabitant(Animal inhabitant) => _$this._inhabitant = inhabitant;
+
+  CageBuilder();
+
+  CageBuilder get _$this {
+    if (_$v != null) {
+      _inhabitant = _$v.inhabitant;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Cage other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$Cage;
+  }
+
+  @override
+  void update(void updates(CageBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Cage build() {
+    final _$result = _$v ?? new _$Cage._(inhabitant: inhabitant);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+// ignore_for_file: annotate_overrides
 abstract class HasFieldBuilder<T>
     implements Builder<HasField<T>, HasFieldBuilder<T>> {
   T get field;

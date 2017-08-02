@@ -48,6 +48,13 @@ abstract class Swimmer {
   bool get canSwim => fins > 1;
 }
 
+abstract class Cage implements Built<Cage, CageBuilder> {
+  Animal get inhabitant;
+
+  factory Cage([updates(CageBuilder b)]) = _$Cage;
+  Cage._();
+}
+
 @BuiltValue(instantiable: false)
 abstract class HasField<T> implements Built<HasField<T>, HasFieldBuilder<T>> {
   T get field;

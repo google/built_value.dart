@@ -3,6 +3,8 @@
 ## 2.0.1
 
 - Allow fields to be called 'result'.
+- Fix generation when a field is a noninstantiable built value: don't try to
+  instantiate the abstract builder.
 
 ## 2.0.0
 

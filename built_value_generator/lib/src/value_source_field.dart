@@ -10,6 +10,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
+import 'package:built_value_generator/src/value_source_class.dart';
 
 part 'value_source_field.g.dart';
 
@@ -102,7 +103,14 @@ abstract class ValueSourceField
   }
 
   static bool _needsNestedBuilder(DartType type) {
-    return _isBuiltValue(type) || _isBuiltCollection(type);
+    return _isInstantiableBuiltValue(type) || _isBuiltCollection(type);
+  }
+
+  static bool _isInstantiableBuiltValue(DartType type) {
+    return _isBuiltValue(type) &&
+        new ValueSourceClass(type.element as ClassElement)
+            .settings
+            .instantiable;
   }
 
   static bool _isBuiltValue(DartType type) {
@@ -122,7 +130,7 @@ abstract class ValueSourceField
       return type.displayName
           .replaceFirst('Built', '')
           .replaceFirst('<', 'Builder<');
-    } else if (_isBuiltValue(type)) {
+    } else if (_isInstantiableBuiltValue(type)) {
       return type.displayName.contains('<')
           ? type.displayName.replaceFirst('<', 'Builder<')
           : '${type}Builder';
