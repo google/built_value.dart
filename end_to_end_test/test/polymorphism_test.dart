@@ -73,6 +73,14 @@ void main() {
     });
   });
 
+  group('Cage', () {
+    test('holds any animal; does not try to use the abstract builder', () {
+      new Cage((b) => b.inhabitant = new Cat((b) => b
+        ..legs = 4
+        ..tail = true));
+    });
+  });
+
   group('HasField', () {
     test('can be used as an interface, including builder', () {
       final hasFields = <HasField<dynamic>>[
