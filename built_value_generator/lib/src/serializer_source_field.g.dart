@@ -9,6 +9,8 @@ part of built_value_generator.source_field;
 // ignore_for_file: annotate_overrides
 class _$SerializerSourceField extends SerializerSourceField {
   @override
+  final BuiltValue settings;
+  @override
   final FieldElement element;
   @override
   final FieldElement builderElement;
@@ -23,7 +25,9 @@ class _$SerializerSourceField extends SerializerSourceField {
           [void updates(SerializerSourceFieldBuilder b)]) =>
       (new SerializerSourceFieldBuilder()..update(updates)).build();
 
-  _$SerializerSourceField._({this.element, this.builderElement}) : super._() {
+  _$SerializerSourceField._({this.settings, this.element, this.builderElement})
+      : super._() {
+    if (settings == null) throw new ArgumentError.notNull('settings');
     if (element == null) throw new ArgumentError.notNull('element');
   }
 
@@ -58,17 +62,21 @@ class _$SerializerSourceField extends SerializerSourceField {
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! SerializerSourceField) return false;
-    return element == other.element && builderElement == other.builderElement;
+    return settings == other.settings &&
+        element == other.element &&
+        builderElement == other.builderElement;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, element.hashCode), builderElement.hashCode));
+    return $jf($jc($jc($jc(0, settings.hashCode), element.hashCode),
+        builderElement.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SerializerSourceField')
+          ..add('settings', settings)
           ..add('element', element)
           ..add('builderElement', builderElement))
         .toString();
@@ -78,6 +86,10 @@ class _$SerializerSourceField extends SerializerSourceField {
 class SerializerSourceFieldBuilder
     implements Builder<SerializerSourceField, SerializerSourceFieldBuilder> {
   _$SerializerSourceField _$v;
+
+  BuiltValue _settings;
+  BuiltValue get settings => _$this._settings;
+  set settings(BuiltValue settings) => _$this._settings = settings;
 
   FieldElement _element;
   FieldElement get element => _$this._element;
@@ -92,6 +104,7 @@ class SerializerSourceFieldBuilder
 
   SerializerSourceFieldBuilder get _$this {
     if (_$v != null) {
+      _settings = _$v.settings;
       _element = _$v.element;
       _builderElement = _$v.builderElement;
       _$v = null;
@@ -114,7 +127,9 @@ class SerializerSourceFieldBuilder
   _$SerializerSourceField build() {
     final _$result = _$v ??
         new _$SerializerSourceField._(
-            element: element, builderElement: builderElement);
+            settings: settings,
+            element: element,
+            builderElement: builderElement);
     replace(_$result);
     return _$result;
   }

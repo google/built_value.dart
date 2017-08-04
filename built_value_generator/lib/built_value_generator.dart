@@ -27,8 +27,11 @@ class BuiltValueGenerator extends Generator {
           serializerSourceLibrary.hasSerializers) {
         result.writeln(serializerSourceLibrary.generateCode());
       }
-    } catch (e, st) {
+    } on InvalidGenerationSourceError catch (e, st) {
       result.writeln(_error(e.message));
+      log.severe('Error in BuiltValueGenerator for $library.', e, st);
+    } catch (e, st) {
+      result.writeln(_error(e.toString()));
       log.severe('Error in BuiltValueGenerator for $library.', e, st);
     }
 

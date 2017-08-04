@@ -7,8 +7,9 @@ library built_value_generator.source_class;
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/serializer_source_field.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
+import 'package:built_value_generator/src/serializer_source_field.dart';
+import 'package:built_value_generator/src/value_source_class.dart';
 
 part 'serializer_source_class.g.dart';
 
@@ -23,6 +24,10 @@ abstract class SerializerSourceClass
       new _$SerializerSourceClass._(
           element: element, builderElement: builderElement);
   SerializerSourceClass._();
+
+  // TODO(davidmorgan): share common code in a nicer way.
+  @memoized
+  BuiltValue get settings => new ValueSourceClass(element).settings;
 
   @memoized
   String get name => element.name;
@@ -69,8 +74,8 @@ abstract class SerializerSourceClass
     for (final fieldElement in collectFields(element)) {
       final builderFieldElement =
           builderElement?.getField(fieldElement.displayName);
-      final sourceField =
-          new SerializerSourceField(fieldElement, builderFieldElement);
+      final sourceField = new SerializerSourceField(
+          settings, fieldElement, builderFieldElement);
       if (sourceField.isSerializable) {
         result.add(sourceField);
       }

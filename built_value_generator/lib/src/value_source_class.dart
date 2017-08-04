@@ -37,7 +37,8 @@ abstract class ValueSourceClass
     if (annotations.isEmpty) return const BuiltValue();
     final annotation = annotations.single;
     return new BuiltValue(
-        instantiable: annotation.getField('instantiable').toBoolValue());
+        instantiable: annotation.getField('instantiable').toBoolValue(),
+        nestedBuilders: annotation.getField('nestedBuilders').toBoolValue());
   }
 
   @memoized
@@ -72,7 +73,7 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltList<ValueSourceField> get fields =>
-      ValueSourceField.fromClassElements(element, builderElement);
+      ValueSourceField.fromClassElements(settings, element, builderElement);
 
   @memoized
   String get partStatement {

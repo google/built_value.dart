@@ -12,6 +12,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   final ClassElement element;
   @override
   final ClassElement builderElement;
+  BuiltValue __settings;
   String __name;
   String __serializerDeclaration;
   BuiltList<String> __genericParameters;
@@ -27,6 +28,9 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   _$SerializerSourceClass._({this.element, this.builderElement}) : super._() {
     if (element == null) throw new ArgumentError.notNull('element');
   }
+
+  @override
+  BuiltValue get settings => __settings ??= super.settings;
 
   @override
   String get name => __name ??= super.name;
