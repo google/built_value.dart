@@ -1,5 +1,5 @@
 name: example
-version: 2.0.0
+version: 2.1.0
 description: >
   Just an example, not for publishing.
 authors:
@@ -12,16 +12,12 @@ environment:
 dependencies:
   meta: ^1.0.4
   built_collection: ^1.0.0
-# built_value: ^2.0.0
-  built_value:
-    path: ../built_value
+  built_value: ^2.1.0
 
 dev_dependencies:
   build: ^0.9.0
   build_runner: ^0.3.2
-# built_value_generator: ^2.0.0
-  built_value_generator:
-    path: ../built_value_generator
+  built_value_generator: ^2.1.0
   source_gen: ^0.7.0
   quiver: '>=0.21.0 <0.26.0'
   test: any
