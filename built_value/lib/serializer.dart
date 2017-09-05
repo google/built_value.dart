@@ -19,9 +19,30 @@ import 'src/double_serializer.dart';
 import 'src/int_serializer.dart';
 import 'src/string_serializer.dart';
 
+/// Annotation to trigger code generation of a [Serializers] instance.
+///
+/// Use like this:
+///
+/// ```
+/// @SerializersFor(const [
+///   MySerializableClass,
+///   MyOtherSerializableClass,
+/// ])
+/// final Serializers serializers = _$serializers;
+/// ```
+///
+/// The `_$serializers` value will be generated for you in a part file next
+/// to the current source file. It will hold serializers for the types
+/// specified plus any types used in their fields, transitively.
+class SerializersFor {
+  final List<Type> types;
+
+  const SerializersFor(this.types);
+}
+
 /// Serializes all known classes.
 ///
-/// See: https://github.com/google/built_json.dart/tree/master/example
+/// See: https://github.com/google/built_value.dart/tree/master/example
 abstract class Serializers {
   /// Default [Serializers] that can serialize primitives and collections.
   ///

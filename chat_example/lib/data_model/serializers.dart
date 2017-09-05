@@ -10,5 +10,15 @@ import 'package:chat_example/data_model/data_model.dart';
 
 part 'serializers.g.dart';
 
-/// Collection of generated serializers for the built_json chat example.
-Serializers serializers = _$serializers;
+/// Collection of generated serializers for the built_value chat example.
+@SerializersFor(const [
+  Chat,
+  ListUsers,
+  ListUsersResponse,
+  Login,
+  LoginResponse,
+  ShowChat,
+  Status,
+  Welcome,
+])
+final Serializers serializers = _$serializers;

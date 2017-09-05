@@ -68,14 +68,35 @@ class Enum extends EnumClass {
 '''), isNotEmpty);
     });
 
-    test('generates for serializers', () async {
+    test('does not generate for serializers without annotation', () async {
       expect(await generate(r'''
 library value;
 
 import 'package:test_support/test_support.dart';
 
 final Serializers serializers = _$serializers;
-'''), isNotEmpty);
+'''), isEmpty);
+    });
+
+    test('generates for serializers with annotation', () async {
+      expect(await generate(r'''
+library value;
+
+import 'package:test_support/test_support.dart';
+
+part 'value.g.dart';
+
+@SerializersFor(const [Value])
+final Serializers serializers = _$serializers;
+
+abstract class Value implements Built<Value, ValueBuilder> {
+  static Serializer<Value> get serializer => _$valueSerializer;
+  bool get aBool;
+  
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _$Value;
+}
+'''), contains(r'_$serializers'));
     });
 
     test('does not crash for incorrect builder getter', () async {
@@ -149,6 +170,12 @@ class BuiltList<E> {}
 class BuiltMap<K, V> {}
 
 class EnumClass {}
+
+class SerializersFor {
+  final List<Type> types;
+
+  const SerializersFor(this.types);
+}
 
 class Serializer<T> {}
 

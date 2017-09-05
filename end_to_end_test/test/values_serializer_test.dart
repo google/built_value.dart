@@ -186,4 +186,33 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('FieldDiscoveryValue', () {
+    final data = new FieldDiscoveryValue((b) => b
+      ..value.value.value = 1
+      ..values.add(new ThirdDiscoverableValue((b) => b..value = 4)));
+    final serialized = [
+      'FieldDiscoveryValue',
+      'value',
+      [
+        'value',
+        ['value', 1],
+      ],
+      'values',
+      [
+        [
+          'value',
+          4,
+        ]
+      ],
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }
