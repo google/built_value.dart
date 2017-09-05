@@ -24,14 +24,14 @@ class DateTimeSerializer implements PrimitiveSerializer<DateTime> {
           dateTime, 'dateTime', 'Must be in utc for serialization.');
     }
 
-    return dateTime.millisecondsSinceEpoch;
+    return dateTime.microsecondsSinceEpoch;
   }
 
   @override
   DateTime deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    final millisecondsSinceEpoch = serialized as int;
-    return new DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch,
+    final microsecondsSinceEpoch = serialized as int;
+    return new DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
         isUtc: true);
   }
 }

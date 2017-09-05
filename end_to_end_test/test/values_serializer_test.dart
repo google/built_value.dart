@@ -162,7 +162,7 @@ void main() {
       'string',
       'test',
       'dateTime',
-      1000,
+      1000000,
     ];
 
     test('can be serialized', () {

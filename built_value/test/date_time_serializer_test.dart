@@ -9,8 +9,8 @@ void main() {
   final serializers = new Serializers();
 
   group('DateTime with known specifiedType', () {
-    final data = new DateTime.utc(1980);
-    final serialized = data.millisecondsSinceEpoch;
+    final data = new DateTime.utc(1980, 1, 2, 3, 4, 5, 6, 7);
+    final serialized = data.microsecondsSinceEpoch;
     final specifiedType = const FullType(DateTime);
 
     test('can be serialized', () {
@@ -30,8 +30,8 @@ void main() {
   });
 
   group('DateTime with unknown specifiedType', () {
-    final data = new DateTime.utc(1980);
-    final serialized = ['DateTime', data.millisecondsSinceEpoch];
+    final data = new DateTime.utc(1980, 1, 2, 3, 4, 5, 6, 7);
+    final serialized = ['DateTime', data.microsecondsSinceEpoch];
     final specifiedType = FullType.unspecified;
 
     test('can be serialized', () {
