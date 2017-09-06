@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.0 (unreleased)
+
+- Fix DateTime serialization; include microseconds. This is a breaking change
+  to the JSON format.
+
 ## 2.1.0
 
 - Add "nestedBuilders" setting. Defaults to true; set to false to stop
@@ -23,8 +28,10 @@
 - Fix depending on a fully generated builder from a manually maintained builder.
 - Pick up fields on implemented interfaces, so you don't have to @override them.
 - Add BuiltValue annotation for specifying settings.
-- Add "instantiable" setting. When false, no implementation is generated, only a builder interface.
-- Polymorphism support: you can now "implement" a non-instantiable Built class. The generated builder will implement its builder, so the types all work.
+- Add "instantiable" setting. When false, no implementation is generated, only
+  a builder interface.
+- Polymorphism support: you can now "implement" a non-instantiable Built class.
+  The generated builder will implement its builder, so the types all work.
 
 ## 1.1.4
 
@@ -39,7 +46,8 @@
 
 ## 1.1.2
 
-- Significantly improve build performance by using @memoized instead of precomputed fields.
+- Significantly improve build performance by using @memoized instead of
+  precomputed fields.
 
 ## 1.1.1
 
@@ -47,7 +55,8 @@
 
 ## 1.1.0
 
-- Add "built_value_test" library. It provides a matcher which gives good mismatch messages for built_value instances.
+- Add "built_value_test" library. It provides a matcher which gives good
+  mismatch messages for built_value instances.
 
 ## 1.0.1
 
