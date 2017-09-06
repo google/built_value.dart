@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0 (unreleased)
+## 3.0.0
 
 - Fix DateTime serialization; include microseconds. This is a breaking change
   to the JSON format.
