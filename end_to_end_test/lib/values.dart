@@ -4,6 +4,7 @@
 
 library values;
 
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/enums.dart' as using_import_as;
@@ -186,4 +187,61 @@ abstract class NamedFactoryValue
       new _$NamedFactoryValue._(value: value);
 
   NamedFactoryValue._();
+}
+
+// Check discovery of serializable types via fields.
+abstract class FieldDiscoveryValue
+    implements Built<FieldDiscoveryValue, FieldDiscoveryValueBuilder> {
+  static Serializer<FieldDiscoveryValue> get serializer =>
+      _$fieldDiscoveryValueSerializer;
+
+  DiscoverableValue get value;
+  BuiltList<ThirdDiscoverableValue> get values;
+
+  // Check that discovery doesn't recurse forever on reference to self.
+  @nullable
+  FieldDiscoveryValue get recursiveValue;
+
+  factory FieldDiscoveryValue([updates(FieldDiscoveryValueBuilder b)]) =
+      _$FieldDiscoveryValue;
+  FieldDiscoveryValue._();
+}
+
+// Discovered indirectly via FieldDiscoveryValue.
+abstract class DiscoverableValue
+    implements Built<DiscoverableValue, DiscoverableValueBuilder> {
+  static Serializer<DiscoverableValue> get serializer =>
+      _$discoverableValueSerializer;
+
+  SecondDiscoverableValue get value;
+
+  factory DiscoverableValue([updates(DiscoverableValueBuilder b)]) =
+      _$DiscoverableValue;
+  DiscoverableValue._();
+}
+
+// Discovered indirectly via DiscoverableValue.
+abstract class SecondDiscoverableValue
+    implements Built<SecondDiscoverableValue, SecondDiscoverableValueBuilder> {
+  static Serializer<SecondDiscoverableValue> get serializer =>
+      _$secondDiscoverableValueSerializer;
+
+  int get value;
+
+  factory SecondDiscoverableValue([updates(SecondDiscoverableValueBuilder b)]) =
+      _$SecondDiscoverableValue;
+  SecondDiscoverableValue._();
+}
+
+// Discovered indirectly via FieldDiscoveryValue.
+abstract class ThirdDiscoverableValue
+    implements Built<ThirdDiscoverableValue, ThirdDiscoverableValueBuilder> {
+  static Serializer<ThirdDiscoverableValue> get serializer =>
+      _$thirdDiscoverableValueSerializer;
+
+  int get value;
+
+  factory ThirdDiscoverableValue([updates(ThirdDiscoverableValueBuilder b)]) =
+      _$ThirdDiscoverableValue;
+  ThirdDiscoverableValue._();
 }

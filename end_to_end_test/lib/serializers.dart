@@ -17,4 +17,28 @@ import 'package:end_to_end_test/values.dart';
 
 part 'serializers.g.dart';
 
-Serializers serializers = _$serializers;
+@SerializersFor(const [
+  BoundGenericValue,
+  Cat,
+  CollectionGenericValue,
+  Collections,
+  CompoundValue,
+  CompoundValueNoNesting,
+  EnumWithInt,
+  FieldDiscoveryValue,
+  GenericContainer,
+  GenericValue,
+  HasDouble,
+  HasString,
+  NamedFactoryValue,
+  NestedGenericContainer,
+  PrimitivesValue,
+  SecondTestEnum,
+  SimpleValue,
+  StandardJsonValue,
+  TestEnum,
+  ValueUsingImportAs,
+  ValueWithHasInt,
+  ValueWithInt,
+])
+final Serializers serializers = _$serializers;

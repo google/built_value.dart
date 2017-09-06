@@ -22,20 +22,33 @@ abstract class SerializerSourceLibrary
       new _$SerializerSourceLibrary._(element: element);
   SerializerSourceLibrary._();
 
-  // TODO(davidmorgan): better way of checking for top level declaration.
   @memoized
-  bool get hasSerializers => element.definingCompilationUnit.accessors
-      .any((element) => element.displayName == 'serializers');
+  bool get hasSerializers => serializersForAnnotation != null;
+
+  /// Returns the @serializersFor annotation from an accessor called
+  /// "serializers", or null if none is found.
+  @memoized
+  ElementAnnotation get serializersForAnnotation {
+    final accessors = element.definingCompilationUnit.accessors
+        .where((element) =>
+            element.isGetter && element.displayName == 'serializers')
+        .toList();
+    if (accessors.isEmpty) return null;
+    final annotations = accessors.single.variable.metadata
+        .where((annotation) =>
+            annotation.computeConstantValue()?.type?.displayName ==
+            'SerializersFor')
+        .toList();
+    if (annotations.isEmpty) return null;
+    return annotations.single;
+  }
 
   @memoized
   BuiltSet<SerializerSourceClass> get sourceClasses {
     final result = new SetBuilder<SerializerSourceClass>();
     final classElements = LibraryElements.getClassElements(element);
     for (final classElement in classElements) {
-      final builderClassElement =
-          element.getType(element.displayName + 'Builder');
-      final sourceClass =
-          new SerializerSourceClass(classElement, builderClassElement);
+      final sourceClass = new SerializerSourceClass(classElement);
       if (sourceClass.needsBuiltJson) {
         result.add(sourceClass);
       }
@@ -44,17 +57,31 @@ abstract class SerializerSourceLibrary
   }
 
   @memoized
-  BuiltSet<SerializerSourceClass> get transitiveSourceClasses {
-    final result = new SetBuilder<SerializerSourceClass>();
-    final transitiveClassElements =
-        LibraryElements.getTransitiveClassElements(element);
-    for (final classElement in transitiveClassElements) {
-      final sourceClass = new SerializerSourceClass(classElement, null);
-      if (sourceClass.needsBuiltJson) {
-        result.add(sourceClass);
-      }
+  BuiltSet<SerializerSourceClass> get serializeForClasses {
+    final types = serializersForAnnotation
+        .computeConstantValue()
+        .getField('types')
+        .toListValue()
+        .map((dartObject) => dartObject.toTypeValue());
+    return new BuiltSet<SerializerSourceClass>(types.map(
+        (type) => new SerializerSourceClass(type.element as ClassElement)));
+  }
+
+  @memoized
+  BuiltSet<SerializerSourceClass> get serializeForTransitiveClasses {
+    var currentResult = new BuiltSet<SerializerSourceClass>(
+        serializeForClasses.where(
+            (serializerSourceClass) => serializerSourceClass.needsBuiltJson));
+    BuiltSet<SerializerSourceClass> expandedResult;
+
+    while (currentResult != expandedResult) {
+      currentResult = expandedResult ?? currentResult;
+      expandedResult = currentResult.rebuild((b) => b
+        ..addAll(currentResult.expand((sourceClass) => sourceClass.fieldClasses
+            .where((fieldClass) => fieldClass.needsBuiltJson))));
     }
-    return result.build();
+
+    return currentResult;
   }
 
   bool get needsBuiltJson => sourceClasses.isNotEmpty;
@@ -69,13 +96,13 @@ abstract class SerializerSourceLibrary
 
     return (hasSerializers
             ? 'Serializers _\$serializers = (new Serializers().toBuilder()' +
-                (transitiveSourceClasses
+                (serializeForTransitiveClasses
                         .map((sourceClass) =>
                             sourceClass.generateTransitiveSerializerAdder())
                         .toList()
                           ..sort())
                     .join('\n') +
-                (transitiveSourceClasses
+                (serializeForTransitiveClasses
                         .map((sourceClass) =>
                             sourceClass.generateBuilderFactoryAdders())
                         .toList()

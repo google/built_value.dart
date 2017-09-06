@@ -11,8 +11,10 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   @override
   final LibraryElement element;
   bool __hasSerializers;
+  ElementAnnotation __serializersForAnnotation;
   BuiltSet<SerializerSourceClass> __sourceClasses;
-  BuiltSet<SerializerSourceClass> __transitiveSourceClasses;
+  BuiltSet<SerializerSourceClass> __serializeForClasses;
+  BuiltSet<SerializerSourceClass> __serializeForTransitiveClasses;
 
   factory _$SerializerSourceLibrary(
           [void updates(SerializerSourceLibraryBuilder b)]) =>
@@ -26,12 +28,20 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   bool get hasSerializers => __hasSerializers ??= super.hasSerializers;
 
   @override
+  ElementAnnotation get serializersForAnnotation =>
+      __serializersForAnnotation ??= super.serializersForAnnotation;
+
+  @override
   BuiltSet<SerializerSourceClass> get sourceClasses =>
       __sourceClasses ??= super.sourceClasses;
 
   @override
-  BuiltSet<SerializerSourceClass> get transitiveSourceClasses =>
-      __transitiveSourceClasses ??= super.transitiveSourceClasses;
+  BuiltSet<SerializerSourceClass> get serializeForClasses =>
+      __serializeForClasses ??= super.serializeForClasses;
+
+  @override
+  BuiltSet<SerializerSourceClass> get serializeForTransitiveClasses =>
+      __serializeForTransitiveClasses ??= super.serializeForTransitiveClasses;
 
   @override
   SerializerSourceLibrary rebuild(

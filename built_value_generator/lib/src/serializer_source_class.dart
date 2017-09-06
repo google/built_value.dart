@@ -5,6 +5,7 @@
 library built_value_generator.source_class;
 
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
@@ -19,10 +20,11 @@ abstract class SerializerSourceClass
   @nullable
   ClassElement get builderElement;
 
-  factory SerializerSourceClass(
-          ClassElement element, ClassElement builderElement) =>
+  factory SerializerSourceClass(ClassElement element) =>
       new _$SerializerSourceClass._(
-          element: element, builderElement: builderElement);
+          element: element,
+          builderElement:
+              element.library.getType(element.displayName + 'Builder'));
   SerializerSourceClass._();
 
   // TODO(davidmorgan): share common code in a nicer way.
@@ -80,6 +82,51 @@ abstract class SerializerSourceClass
         result.add(sourceField);
       }
     }
+    return result.build();
+  }
+
+  /// Returns all the serializable classes used, transitively, by fields of
+  /// this class.
+  @memoized
+  BuiltSet<SerializerSourceClass> get fieldClasses {
+    final result = new SetBuilder<SerializerSourceClass>();
+    for (final fieldElement in collectFields(element)) {
+      if (fieldElement.isStatic) continue;
+      if (fieldElement.setter != null) continue;
+
+      // Type is not fully specified, ignore.
+      if (fieldElement.type.element is! ClassElement) continue;
+
+      // Also find classes used as generic parameters; for example a field
+      // of type List<Foo> means we need to be able to serialize Foo.
+      if (fieldElement.type is ParameterizedType) {
+        for (final type
+            in (fieldElement.type as ParameterizedType).typeArguments) {
+          // Type is not fully specified, ignore.
+          if (type.element is! ClassElement) continue;
+
+          final sourceClass =
+              new SerializerSourceClass(type.element as ClassElement);
+
+          if (sourceClass != this &&
+              !result.build().contains(sourceClass) &&
+              sourceClass.needsBuiltJson) {
+            result.add(sourceClass);
+            result.addAll(sourceClass.fieldClasses);
+          }
+        }
+      }
+
+      final sourceClass =
+          new SerializerSourceClass(fieldElement.type.element as ClassElement);
+      if (sourceClass != this &&
+          !result.build().contains(sourceClass) &&
+          sourceClass.needsBuiltJson) {
+        result.add(sourceClass);
+        result.addAll(sourceClass.fieldClasses);
+      }
+    }
+
     return result.build();
   }
 

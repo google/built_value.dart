@@ -20,6 +20,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   bool __isBuiltValue;
   bool __isEnumClass;
   BuiltList<SerializerSourceField> __fields;
+  BuiltSet<SerializerSourceClass> __fieldClasses;
 
   factory _$SerializerSourceClass(
           [void updates(SerializerSourceClassBuilder b)]) =>
@@ -55,6 +56,10 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   @override
   BuiltList<SerializerSourceField> get fields => __fields ??= super.fields;
+
+  @override
+  BuiltSet<SerializerSourceClass> get fieldClasses =>
+      __fieldClasses ??= super.fieldClasses;
 
   @override
   SerializerSourceClass rebuild(void updates(SerializerSourceClassBuilder b)) =>

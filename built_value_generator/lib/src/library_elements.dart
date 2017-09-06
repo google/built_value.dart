@@ -14,17 +14,6 @@ class LibraryElements {
     libraryElement.visitChildren(result);
     return new BuiltList<ClassElement>(result.classElements);
   }
-
-  static BuiltList<ClassElement> getTransitiveClassElements(
-      LibraryElement libraryElement) {
-    final result = new ListBuilder<ClassElement>();
-    for (final source in libraryElement.context.librarySources) {
-      final otherLibraryElement =
-          libraryElement.context.computeLibraryElement(source);
-      result.addAll(getClassElements(otherLibraryElement));
-    }
-    return result.build();
-  }
 }
 
 /// Visitor that gets all [ClassElement]s.

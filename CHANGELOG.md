@@ -4,6 +4,12 @@
 
 - Fix DateTime serialization; include microseconds. This is a breaking change
   to the JSON format.
+- Add SerializersFor annotation. Classes to serialize are no longer found by
+  scanning all available libraries, as this was slow and hard to control.
+  Instead, specify which classes you need to serialize using the new
+  annotation on your "serializers" declaration. You only need to specify the
+  "root" classes; the classes needed for the fields of classes you specify
+  are included, transitively.
 
 ## 2.1.0
 
