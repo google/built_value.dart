@@ -130,18 +130,19 @@ abstract class ValueSourceClass
   /// Additionally, if the value class implements other value classes, the
   /// builder implements the corresponding builders.
   @memoized
-  String get builderImplements => new BuiltList<String>.build((b) => b
-    ..add('Builder<$name$_generics, ${name}Builder$_generics>')
-    ..addAll(element.interfaces
-        .where((interface) => needsBuiltValue(interface.element))
-        .map((interface) {
-      final displayName = interface.displayName;
-      if (!displayName.contains('<')) return displayName + 'Builder';
-      final index = displayName.indexOf('<');
-      return displayName.substring(0, index) +
-          'Builder' +
-          displayName.substring(index);
-    }))).join(', ');
+  BuiltList<String> get builderImplements =>
+      new BuiltList<String>.build((b) => b
+        ..add('Builder<$name$_generics, ${name}Builder$_generics>')
+        ..addAll(element.interfaces
+            .where((interface) => needsBuiltValue(interface.element))
+            .map((interface) {
+          final displayName = interface.displayName;
+          if (!displayName.contains('<')) return displayName + 'Builder';
+          final index = displayName.indexOf('<');
+          return displayName.substring(0, index) +
+              'Builder' +
+              displayName.substring(index);
+        })));
 
   static bool needsBuiltValue(ClassElement classElement) {
     // TODO(davidmorgan): more exact type check.
@@ -402,8 +403,8 @@ abstract class ValueSourceClass
       result.writeln(
           'class _\$${name}Builder$_boundedGenerics extends ${name}Builder$_generics {');
     } else {
-      result.writeln(
-          'class ${name}Builder$_boundedGenerics implements $builderImplements {');
+      result.writeln('class ${name}Builder$_boundedGenerics implements '
+          '${builderImplements.join(", ")} {');
     }
 
     // Builder holds a reference to a value, copies from it lazily.
@@ -504,7 +505,15 @@ abstract class ValueSourceClass
     }
 
     result.writeln('@override');
-    result.writeln('void replace($name$_generics other) {');
+    if (builderImplements.length > 1) {
+      // If we're overriding `replace` from other builders, tell the analyzer
+      // that this builder only accepts values of exactly the right type, by
+      // marking the value `covariant`.
+      result.writeln('void replace(covariant $name$_generics other) {');
+    } else {
+      result.writeln('void replace($name$_generics other) {');
+    }
+
     result.writeln("if (other == null) "
         "throw new ArgumentError.notNull('other');");
     result.writeln('_\$v = other as _\$$name$_generics;');
@@ -545,7 +554,7 @@ abstract class ValueSourceClass
   String _generateAbstractBuilder() {
     final result = new StringBuffer();
     result.writeln('abstract class ${name}Builder$_boundedGenerics '
-        'implements $builderImplements {');
+        'implements ${builderImplements.join(", ")} {');
 
     for (final field in fields) {
       final typeInBuilder = field.typeInBuilder;

@@ -28,7 +28,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   BuiltList<String> __builderClassConstructors;
   BuiltList<String> __builderClassFactories;
   BuiltList<MemoizedGetter> __memoizedGetters;
-  String __builderImplements;
+  BuiltList<String> __builderImplements;
 
   factory _$ValueSourceClass([void updates(ValueSourceClassBuilder b)]) =>
       (new ValueSourceClassBuilder()..update(updates)).build();
@@ -102,7 +102,7 @@ class _$ValueSourceClass extends ValueSourceClass {
       __memoizedGetters ??= super.memoizedGetters;
 
   @override
-  String get builderImplements =>
+  BuiltList<String> get builderImplements =>
       __builderImplements ??= super.builderImplements;
 
   @override

@@ -3,43 +3,47 @@
 # All rights reserved. Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-echo 'Presubmit for built_value.' \
-    && cd built_value \
-    && pub get \
-    && pub run test \
-    && echo 'Presubmit for built_value_generator.' \
-    && cd ../built_value_generator \
-    && pub get \
-    && pub upgrade \
-    && dart tool/build.dart \
-    && pub run test \
-    && echo 'Presubmit for built_value_test.' \
-    && cd ../built_value_test \
-    && pub get \
-    && pub upgrade \
-    && dart tool/build.dart \
-    && pub run test \
-    && echo 'Presubmit for end_to_end_test.' \
-    && cd ../end_to_end_test \
-    && pub get \
-    && pub upgrade \
-    && dart tool/build.dart \
-    && pub run test \
-    && echo 'Presubmit for benchmark.' \
-    && cd ../benchmark \
-    && pub get \
-    && pub upgrade \
-    && dart tool/build.dart \
-    && pub run test \
-    && echo 'Presubmit for example.' \
-    && cd ../example \
-    && pub get \
-    && pub upgrade \
-    && dart tool/build.dart \
-    && pub run test \
-    && echo 'Presubmit for chat_example.' \
-    && cd ../chat_example \
-    && pub get \
-    && pub upgrade \
-    && dart tool/build.dart \
-    && pub run test
+set -e
+
+directories="built_value built_value_generator built_value_test \
+    end_to_end_test benchmark example chat_example"
+
+parent_directory=$PWD
+
+for directory in $directories; do
+  echo
+  echo "*** Formatting $directory..."
+  echo
+  cd "$parent_directory/$directory"
+
+  dartfmt -w $(find bin lib test -name \*.dart 2>/dev/null)
+done
+
+for directory in $directories; do
+  echo
+  echo "*** Building $directory..."
+  echo
+  cd "$parent_directory/$directory"
+
+  pub get
+  pub upgrade
+  test -f tool/build.dart && dart tool/build.dart
+done
+
+for directory in $directories; do
+  echo
+  echo "*** Analyzing $directory..."
+  echo
+  cd "$parent_directory/$directory"
+
+  dartanalyzer --strong $(find bin lib test -name \*.dart 2>/dev/null)
+done
+
+for directory in $directories; do
+  echo
+  echo "*** Testing $directory..."
+  echo
+  cd "$parent_directory/$directory"
+
+  pub run test
+done
