@@ -9,8 +9,12 @@ import 'package:built_value_generator/built_value_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 Future main(List<String> args) async {
-  await build(
-      new PhaseGroup.singleAction(new PartBuilder([new BuiltValueGenerator()]),
-          new InputSet('benchmark', const ['lib/*.dart'])),
-      deleteFilesByDefault: true);
+  await build([
+    new BuildAction(
+        new PartBuilder([
+          new BuiltValueGenerator(),
+        ]),
+        'benchmark',
+        inputs: const ['lib/*.dart'])
+  ], deleteFilesByDefault: true);
 }

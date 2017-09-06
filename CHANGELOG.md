@@ -1,10 +1,12 @@
 # Changelog
 
-## 3.0.1 (unreleased)
+## 4.0.0 (unreleased)
 
 - Fix generated polymorphic builders for the analyzer. Mark the `rebuild`
   method with `covariant` so the analyzer knows that, for example, a
   `CatBuilder` cannot accept an `Animal`.
+- Update to build 0.10.0 and build_runner 0.4.0. Please update your
+  `build.dart` and `watch.dart` as shown in the examples.
 
 ## 3.0.0
 
