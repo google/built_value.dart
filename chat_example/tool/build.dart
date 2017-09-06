@@ -10,11 +10,12 @@ import 'package:source_gen/source_gen.dart';
 
 /// Build the generated files in the built_value chat example.
 Future main(List<String> args) async {
-  await build(
-      new PhaseGroup.singleAction(
-          new PartBuilder([
-            new BuiltValueGenerator(),
-          ]),
-          new InputSet('chat_example', const ['lib/**/*.dart'])),
-      deleteFilesByDefault: true);
+  await build([
+    new BuildAction(
+        new PartBuilder([
+          new BuiltValueGenerator(),
+        ]),
+        'chat_example',
+        inputs: const ['lib/**/*.dart'])
+  ], deleteFilesByDefault: true);
 }
