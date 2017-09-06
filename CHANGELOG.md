@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.0.0 (unreleased)
+## 4.0.0
 
 - Fix generated polymorphic builders for the analyzer. Mark the `rebuild`
   method with `covariant` so the analyzer knows that, for example, a
