@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.1 (unreleased)
+
+- Fix generated polymorphic builders for the analyzer. Mark the `rebuild`
+  method with `covariant` so the analyzer knows that, for example, a
+  `CatBuilder` cannot accept an `Animal`.
+
 ## 3.0.0
 
 - Fix DateTime serialization; include microseconds. This is a breaking change

@@ -8,7 +8,7 @@ linter:
 # Error Rules
     - avoid_empty_else
     - cancel_subscriptions
-    - close_sinks
+#    - close_sinks
     - comment_references
     - control_flow_in_finally
     - empty_statements
@@ -39,7 +39,7 @@ linter:
     - library_names
     - library_prefixes
     - non_constant_identifier_names
-    - one_member_abstracts
+#    - one_member_abstracts
     - only_throw_errors
     - overridden_fields
     - package_api_docs

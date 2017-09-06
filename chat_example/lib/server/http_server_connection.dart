@@ -18,7 +18,7 @@ class HttpServerConnection implements ServerConnection {
 
   HttpServerConnection(this._webSocketChannel) {
     _webSocketChannel.stream.listen((data) {
-      _streamController.add(data);
+      _streamController.add(data as String);
     });
   }
 

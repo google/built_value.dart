@@ -253,7 +253,7 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   }
 
   @override
-  void replace(Cat other) {
+  void replace(covariant Cat other) {
     if (other == null) throw new ArgumentError.notNull('other');
     _$v = other as _$Cat;
   }
@@ -337,7 +337,7 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 
   @override
-  void replace(Fish other) {
+  void replace(covariant Fish other) {
     if (other == null) throw new ArgumentError.notNull('other');
     _$v = other as _$Fish;
   }
@@ -493,7 +493,7 @@ class HasStringBuilder
   }
 
   @override
-  void replace(HasString other) {
+  void replace(covariant HasString other) {
     if (other == null) throw new ArgumentError.notNull('other');
     _$v = other as _$HasString;
   }
@@ -568,7 +568,7 @@ class HasDoubleBuilder
   }
 
   @override
-  void replace(HasDouble other) {
+  void replace(covariant HasDouble other) {
     if (other == null) throw new ArgumentError.notNull('other');
     _$v = other as _$HasDouble;
   }
