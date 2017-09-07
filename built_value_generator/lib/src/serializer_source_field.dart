@@ -47,7 +47,7 @@ abstract class SerializerSourceField
 
   @memoized
   bool get isNullable => element.getter.metadata
-      .any((metadata) => metadata.constantValue.toStringValue() == 'nullable');
+      .any((metadata) => metadata.constantValue?.toStringValue() == 'nullable');
 
   @memoized
   String get name => element.displayName;

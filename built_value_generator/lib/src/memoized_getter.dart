@@ -19,7 +19,7 @@ abstract class MemoizedGetter
             field.getter != null &&
             !field.getter.isAbstract &&
             field.getter.metadata.any((metadata) =>
-                metadata.constantValue.toStringValue() == 'memoized'))
+                metadata.constantValue?.toStringValue() == 'memoized'))
         .map((field) => new MemoizedGetter((b) => b
           ..returnType = field.getter.returnType.toString()
           ..name = field.displayName))
