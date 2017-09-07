@@ -6,6 +6,10 @@ part of values;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
 Serializer<VerySimpleValue> _$verySimpleValueSerializer =
     new _$VerySimpleValueSerializer();
@@ -260,7 +264,6 @@ class _$AccountSerializer implements StructuredSerializer<Account> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;
@@ -343,7 +346,6 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$VerySimpleValue extends VerySimpleValue {
   @override
   final int value;
@@ -419,7 +421,6 @@ class VerySimpleValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$CompoundValue extends CompoundValue {
   @override
   final SimpleValue simpleValue;
@@ -511,7 +512,6 @@ class CompoundValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ValidatedValue extends ValidatedValue {
   @override
   final int anInt;
@@ -597,7 +597,6 @@ class ValidatedValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ValueWithCode extends ValueWithCode {
   @override
   final int anInt;
@@ -682,7 +681,6 @@ class ValueWithCodeBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ValueWithDefaults extends ValueWithDefaults {
   @override
   final int anInt;
@@ -784,7 +782,6 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$DerivedValue extends DerivedValue {
   @override
   final int anInt;
@@ -867,7 +864,6 @@ class DerivedValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Account extends Account {
   @override
   final int id;

@@ -6,6 +6,10 @@ part of polymorphism;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 Serializer<Cat> _$catSerializer = new _$CatSerializer();
 Serializer<Fish> _$fishSerializer = new _$FishSerializer();
 Serializer<Robot> _$robotSerializer = new _$RobotSerializer();
@@ -227,13 +231,11 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 abstract class AnimalBuilder implements Builder<Animal, AnimalBuilder> {
   int get legs;
   set legs(int legs);
 }
 
-// ignore_for_file: annotate_overrides
 class _$Cat extends Cat {
   @override
   final bool tail;
@@ -317,7 +319,6 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Fish extends Fish {
   @override
   final int fins;
@@ -401,7 +402,6 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Robot extends Robot {
   @override
   final int fins;
@@ -485,7 +485,6 @@ class RobotBuilder implements Builder<Robot, RobotBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Cage extends Cage {
   @override
   final Animal inhabitant;
@@ -559,14 +558,12 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 abstract class HasFieldBuilder<T>
     implements Builder<HasField<T>, HasFieldBuilder<T>> {
   T get field;
   set field(T field);
 }
 
-// ignore_for_file: annotate_overrides
 class _$HasString extends HasString {
   @override
   final String field;
@@ -641,7 +638,6 @@ class HasStringBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$HasDouble extends HasDouble {
   @override
   final double field;

@@ -7,6 +7,9 @@ part of built_value_generator.source_class;
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   final ClassElement element;

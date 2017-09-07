@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.1.1 (unreleased)
+
+- Generated code now tells the analyzer to ignore prefer_expression_function_bodies
+  and sort_constructors_first.
+  
+
 ## 4.1.0
 
 - Improved annotation handling for corner cases.

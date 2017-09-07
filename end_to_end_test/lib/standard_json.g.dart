@@ -6,6 +6,10 @@ part of standard_json;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 Serializer<StandardJsonValue> _$standardJsonValueSerializer =
     new _$StandardJsonValueSerializer();
 
@@ -79,7 +83,6 @@ class _$StandardJsonValueSerializer
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$StandardJsonValue extends StandardJsonValue {
   @override
   final num number;

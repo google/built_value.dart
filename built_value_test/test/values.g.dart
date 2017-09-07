@@ -7,6 +7,9 @@ part of values;
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;
@@ -92,7 +95,6 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$CompoundValue extends CompoundValue {
   @override
   final SimpleValue simpleValue;

@@ -32,12 +32,6 @@ abstract class TestEnumMixin = Object with _$TestEnumMixin;
 ''';
 
 final String correctOutput = r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 const TestEnum _$yes = const TestEnum._('yes');
 const TestEnum _$no = const TestEnum._('no');
 const TestEnum _$maybe = const TestEnum._('maybe');
@@ -112,12 +106,6 @@ void main() {
               'class TestEnum extends EnumClass {\n'
               '  static const anInt = 3;')),
           endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Specify a type for field "anInt".
@@ -141,12 +129,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Import EnumClass: import 'package:built_value/built_value.dart';
@@ -172,12 +154,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), contains(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Import generated part: part 'test_enum.g.dart';
@@ -203,12 +179,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Make field "yes" const.
@@ -236,12 +206,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Make field "yes" static const.
@@ -293,12 +257,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 const TestEnum _$no = const TestEnum._('yes');
 const TestEnum _$maybe = const TestEnum._('no');
 const TestEnum _$yes = const TestEnum._('maybe');
@@ -343,12 +301,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$vlOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 const TestEnum _$yes = const TestEnum._('yes');
 const TestEnum _$no = const TestEnum._('no');
 const TestEnum _$maybe = const TestEnum._('maybe');
@@ -393,12 +345,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.
@@ -424,12 +370,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.
@@ -460,12 +400,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Have exactly one constructor: const TestEnum._(String name) : super(name);
@@ -491,12 +425,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Have exactly one constructor: const TestEnum._(String name) : super(name);
@@ -526,12 +454,6 @@ class TestEnum extends EnumClass {
 abstract class BuiltSet<T> {
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Have exactly one constructor: const TestEnum._(String name) : super(name);
@@ -556,12 +478,6 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Add getter: static BuiltSet<TestEnum> get values => _$values
@@ -586,12 +502,6 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Add method: static TestEnum valueOf(String name) => _$valueOf(name)
@@ -617,12 +527,6 @@ class TestEnum extends EnumClass {
 
 class TestEnumMixin = Object with _$TestEnumMixin;
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Remove mixin or declare using exactly: abstract class TestEnumMixin = Object with _$TestEnumMixin;
@@ -646,12 +550,6 @@ abstract class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''), endsWith(r'''
-part of test_enum;
-
-// **************************************************************************
-// Generator: BuiltValueGenerator
-// **************************************************************************
-
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Make TestEnum concrete; remove "abstract".

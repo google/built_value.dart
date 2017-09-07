@@ -7,6 +7,9 @@ part of built_value_generator.enum_source_library;
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 class _$EnumSourceLibrary extends EnumSourceLibrary {
   @override
   final LibraryElement element;

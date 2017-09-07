@@ -7,6 +7,9 @@ part of built_value_generator.enum_source_field;
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 class _$EnumSourceField extends EnumSourceField {
   @override
   final FieldElement element;

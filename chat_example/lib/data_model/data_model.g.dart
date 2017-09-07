@@ -6,6 +6,10 @@ part of data_model;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 const StatusType _$online = const StatusType._('online');
 const StatusType _$away = const StatusType._('away');
 const StatusType _$offline = const StatusType._('offline');
@@ -434,7 +438,6 @@ class _$ListUsersResponseSerializer
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Chat extends Chat {
   @override
   final String text;
@@ -519,7 +522,6 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Login extends Login {
   @override
   final String username;
@@ -604,7 +606,6 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Status extends Status {
   @override
   final String message;
@@ -688,7 +689,6 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ListUsers extends ListUsers {
   @override
   final BuiltSet<StatusType> statusTypes;
@@ -766,7 +766,6 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ShowChat extends ShowChat {
   @override
   final String username;
@@ -863,7 +862,6 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Welcome extends Welcome {
   @override
   final BuiltList<Response> log;
@@ -948,7 +946,6 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ListUsersResponse extends ListUsersResponse {
   @override
   final BuiltMap<String, Status> statuses;

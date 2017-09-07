@@ -46,7 +46,16 @@ class BuiltValueGenerator extends Generator {
         }
       }
     }
-    return '$result';
+
+    if (result.isNotEmpty) {
+      return '// ignore_for_file: annotate_overrides\n'
+          '// ignore_for_file: prefer_expression_function_bodies\n'
+          '// ignore_for_file: sort_constructors_first\n'
+          '\n'
+          '$result';
+    } else {
+      return null;
+    }
   }
 }
 

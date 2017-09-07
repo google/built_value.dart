@@ -6,6 +6,10 @@ part of generics;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 Serializer<GenericValue> _$genericValueSerializer =
     new _$GenericValueSerializer();
 Serializer<BoundGenericValue> _$boundGenericValueSerializer =
@@ -247,7 +251,6 @@ class _$GenericContainerSerializer
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$GenericValue<T> extends GenericValue<T> {
   @override
   final T value;
@@ -327,7 +330,6 @@ class GenericValueBuilder<T>
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
   @override
   final T value;
@@ -408,7 +410,6 @@ class BoundGenericValueBuilder<T extends num>
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
   @override
   final BuiltList<T> values;
@@ -493,7 +494,6 @@ class CollectionGenericValueBuilder<T>
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$GenericContainer extends GenericContainer {
   @override
   final GenericValue<String> genericValue;
