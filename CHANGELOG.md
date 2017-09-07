@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.1 (unreleased)
+
+- Make generator robust against invalid annotations.
+
 ## 4.0.0
 
 - Fix generated polymorphic builders for the analyzer. Mark the `rebuild`

@@ -43,7 +43,7 @@ abstract class ValueSourceField
 
   @memoized
   bool get isNullable => element.getter.metadata
-      .any((metadata) => metadata.constantValue.toStringValue() == 'nullable');
+      .any((metadata) => metadata.constantValue?.toStringValue() == 'nullable');
 
   @memoized
   bool get builderFieldExists => builderElement != null;
