@@ -2,7 +2,7 @@
 
 ## 4.0.1 (unreleased)
 
-- Make generator robust against invalid annotations.
+- Improved annotation handling for corner cases.
 
 ## 4.0.0
 
