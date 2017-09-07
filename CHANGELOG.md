@@ -1,8 +1,9 @@
 # Changelog
 
-## 4.0.1 (unreleased)
+## 4.1.0 (unreleased)
 
 - Improved annotation handling for corner cases.
+- Pick up field declarations from mixins as well as interfaces.
 
 ## 4.0.0
 

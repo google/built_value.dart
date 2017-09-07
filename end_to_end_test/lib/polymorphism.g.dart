@@ -8,6 +8,7 @@ part of polymorphism;
 
 Serializer<Cat> _$catSerializer = new _$CatSerializer();
 Serializer<Fish> _$fishSerializer = new _$FishSerializer();
+Serializer<Robot> _$robotSerializer = new _$RobotSerializer();
 Serializer<HasString> _$hasStringSerializer = new _$HasStringSerializer();
 Serializer<HasDouble> _$hasDoubleSerializer = new _$HasDoubleSerializer();
 
@@ -79,6 +80,51 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   Fish deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType: FullType.unspecified}) {
     final result = new FishBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'fins':
+          result.fins = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'legs':
+          result.legs = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$RobotSerializer implements StructuredSerializer<Robot> {
+  @override
+  final Iterable<Type> types = const [Robot, _$Robot];
+  @override
+  final String wireName = 'Robot';
+
+  @override
+  Iterable serialize(Serializers serializers, Robot object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'fins',
+      serializers.serialize(object.fins, specifiedType: const FullType(int)),
+      'legs',
+      serializers.serialize(object.legs, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  Robot deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new RobotBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -350,6 +396,90 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   @override
   _$Fish build() {
     final _$result = _$v ?? new _$Fish._(fins: fins, legs: legs);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+// ignore_for_file: annotate_overrides
+class _$Robot extends Robot {
+  @override
+  final int fins;
+  @override
+  final int legs;
+
+  factory _$Robot([void updates(RobotBuilder b)]) =>
+      (new RobotBuilder()..update(updates)).build();
+
+  _$Robot._({this.fins, this.legs}) : super._() {
+    if (fins == null) throw new ArgumentError.notNull('fins');
+    if (legs == null) throw new ArgumentError.notNull('legs');
+  }
+
+  @override
+  Robot rebuild(void updates(RobotBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  RobotBuilder toBuilder() => new RobotBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! Robot) return false;
+    return fins == other.fins && legs == other.legs;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, fins.hashCode), legs.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Robot')
+          ..add('fins', fins)
+          ..add('legs', legs))
+        .toString();
+  }
+}
+
+class RobotBuilder implements Builder<Robot, RobotBuilder> {
+  _$Robot _$v;
+
+  int _fins;
+  int get fins => _$this._fins;
+  set fins(int fins) => _$this._fins = fins;
+
+  int _legs;
+  int get legs => _$this._legs;
+  set legs(int legs) => _$this._legs = legs;
+
+  RobotBuilder();
+
+  RobotBuilder get _$this {
+    if (_$v != null) {
+      _fins = _$v.fins;
+      _legs = _$v.legs;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Robot other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$Robot;
+  }
+
+  @override
+  void update(void updates(RobotBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Robot build() {
+    final _$result = _$v ?? new _$Robot._(fins: fins, legs: legs);
     replace(_$result);
     return _$result;
   }

@@ -29,6 +29,27 @@ void main() {
     });
   });
 
+  group('Robot', () {
+    final data = new Robot((b) => b
+      ..legs = 4
+      ..fins = 3);
+    final serialized = [
+      'Robot',
+      'fins',
+      3,
+      'legs',
+      4,
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
   group('HasField', () {
     final data = new BuiltList<HasField<dynamic>>([
       new HasString((b) => b..field = 'hello'),
