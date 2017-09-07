@@ -33,6 +33,7 @@ part 'serializers.g.dart';
   NamedFactoryValue,
   NestedGenericContainer,
   PrimitivesValue,
+  Robot,
   SecondTestEnum,
   SimpleValue,
   StandardJsonValue,

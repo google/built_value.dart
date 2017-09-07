@@ -46,6 +46,30 @@ void main() {
     });
   });
 
+  group('Robot', () {
+    test('can be instantiated', () {
+      new Robot((b) => b
+        ..legs = 0
+        ..fins = 2);
+    });
+
+    test('has method from mixin', () {
+      expect(
+          new Robot((b) => b
+            ..legs = 0
+            ..fins = 2).canWalk,
+          false);
+    });
+
+    test('has method from second mixin', () {
+      expect(
+          new Robot((b) => b
+            ..legs = 0
+            ..fins = 2).canSwim,
+          true);
+    });
+  });
+
   group('Animal', () {
     test('can be used as an interface, including builder', () {
       final animals = [

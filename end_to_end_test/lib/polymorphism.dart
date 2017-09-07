@@ -36,6 +36,16 @@ abstract class Fish extends Object
   Fish._();
 }
 
+// Fields should come via mixins with no need for interfaces.
+abstract class Robot extends Object
+    with Swimmer, Walker
+    implements Built<Robot, RobotBuilder> {
+  static Serializer<Robot> get serializer => _$robotSerializer;
+
+  factory Robot([updates(RobotBuilder b)]) = _$Robot;
+  Robot._();
+}
+
 abstract class Walker {
   int get legs;
 

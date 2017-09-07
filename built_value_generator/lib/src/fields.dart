@@ -4,6 +4,7 @@
 
 import 'dart:collection';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 
 /// Gets fields, including from interfaces.
@@ -15,8 +16,10 @@ BuiltList<FieldElement> collectFields(ClassElement element) {
   // Add fields from this class before interfaces, so they're added to the set
   // first below. Re-added fields from interfaces are ignored.
   fields.addAll(element.fields);
-  element.interfaces
-      .forEach((interface) => fields.addAll(collectFields(interface.element)));
+
+  new Set<InterfaceType>.from(element.interfaces)
+    ..addAll(element.mixins)
+    ..forEach((interface) => fields.addAll(collectFields(interface.element)));
 
 // Overridden fields have multiple declarations, so deduplicate by adding
 // to a set that compares on field name.
