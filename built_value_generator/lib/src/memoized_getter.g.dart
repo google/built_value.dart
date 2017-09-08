@@ -7,6 +7,9 @@ part of built_value_generator.memoized_getter;
 // **************************************************************************
 
 // ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 class _$MemoizedGetter extends MemoizedGetter {
   @override
   final String returnType;

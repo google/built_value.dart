@@ -271,7 +271,6 @@ abstract class ValueSourceClass
     // Working out which fields are overrides is complex; interfaces,
     // superclasses and mixins could all trigger the warning. Suppress the
     // warning instead.
-    result.writeln('// ignore_for_file: annotate_overrides');
     if (settings.instantiable) result.write(_generateImpl());
     if (settings.instantiable) {
       result.write(_generateBuilder());

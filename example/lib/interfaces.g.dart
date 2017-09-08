@@ -6,6 +6,10 @@ part of interfaces;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 const EnumWithInt _$one = const EnumWithInt._('one');
 const EnumWithInt _$two = const EnumWithInt._('two');
 const EnumWithInt _$three = const EnumWithInt._('three');
@@ -96,7 +100,6 @@ class _$EnumWithIntSerializer implements PrimitiveSerializer<EnumWithInt> {
       EnumWithInt.valueOf(serialized as String);
 }
 
-// ignore_for_file: annotate_overrides
 class _$ValueWithInt extends ValueWithInt {
   @override
   final int anInt;

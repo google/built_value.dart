@@ -6,6 +6,10 @@ part of enums;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 const TestEnum _$yes = const TestEnum._('yes');
 const TestEnum _$no = const TestEnum._('no');
 const TestEnum _$maybe = const TestEnum._('maybe');

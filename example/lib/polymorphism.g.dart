@@ -6,6 +6,10 @@ part of polymorphism;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 Serializer<Cat> _$catSerializer = new _$CatSerializer();
 Serializer<Fish> _$fishSerializer = new _$FishSerializer();
 
@@ -99,13 +103,11 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 abstract class AnimalBuilder implements Builder<Animal, AnimalBuilder> {
   int get legs;
   set legs(int legs);
 }
 
-// ignore_for_file: annotate_overrides
 class _$Cat extends Cat {
   @override
   final bool tail;
@@ -189,7 +191,6 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Fish extends Fish {
   @override
   final int fins;

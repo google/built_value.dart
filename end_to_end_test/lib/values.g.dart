@@ -6,6 +6,10 @@ part of values;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
 Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
@@ -604,7 +608,6 @@ class _$ThirdDiscoverableValueSerializer
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;
@@ -687,7 +690,6 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$CompoundValue extends CompoundValue {
   @override
   final SimpleValue simpleValue;
@@ -779,7 +781,6 @@ class CompoundValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$CompoundValueNoNesting extends CompoundValueNoNesting {
   @override
   final SimpleValue simpleValue;
@@ -871,7 +872,6 @@ class CompoundValueNoNestingBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$DerivedValue extends DerivedValue {
   @override
   final int anInt;
@@ -954,7 +954,6 @@ class DerivedValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ValueWithCode extends ValueWithCode {
   @override
   final int anInt;
@@ -1039,7 +1038,6 @@ class ValueWithCodeBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ValueWithDefaults extends ValueWithDefaults {
   @override
   final int anInt;
@@ -1162,7 +1160,6 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ValidatedValue extends ValidatedValue {
   @override
   final int anInt;
@@ -1248,7 +1245,6 @@ class ValidatedValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ValueUsingImportAs extends ValueUsingImportAs {
   @override
   final using_import_as.TestEnum value;
@@ -1325,7 +1321,6 @@ class ValueUsingImportAsBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$NoFieldsValue extends NoFieldsValue {
   factory _$NoFieldsValue([void updates(NoFieldsValueBuilder b)]) =>
       (new NoFieldsValueBuilder()..update(updates)).build();
@@ -1382,7 +1377,6 @@ class NoFieldsValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$PrimitivesValue extends PrimitivesValue {
   @override
   final bool boolean;
@@ -1530,7 +1524,6 @@ class PrimitivesValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$NamedFactoryValue extends NamedFactoryValue {
   @override
   final int value;
@@ -1607,7 +1600,6 @@ class NamedFactoryValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$FieldDiscoveryValue extends FieldDiscoveryValue {
   @override
   final DiscoverableValue value;
@@ -1714,7 +1706,6 @@ class FieldDiscoveryValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$DiscoverableValue extends DiscoverableValue {
   @override
   final SecondDiscoverableValue value;
@@ -1792,7 +1783,6 @@ class DiscoverableValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$SecondDiscoverableValue extends SecondDiscoverableValue {
   @override
   final int value;
@@ -1872,7 +1862,6 @@ class SecondDiscoverableValueBuilder
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$ThirdDiscoverableValue extends ThirdDiscoverableValue {
   @override
   final int value;

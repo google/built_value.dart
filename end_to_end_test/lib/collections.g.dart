@@ -6,6 +6,10 @@ part of collections;
 // Generator: BuiltValueGenerator
 // **************************************************************************
 
+// ignore_for_file: annotate_overrides
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+
 Serializer<Collections> _$collectionsSerializer = new _$CollectionsSerializer();
 
 class _$CollectionsSerializer implements StructuredSerializer<Collections> {
@@ -162,7 +166,6 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
   }
 }
 
-// ignore_for_file: annotate_overrides
 class _$Collections extends Collections {
   @override
   final BuiltList<int> list;
