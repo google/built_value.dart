@@ -23,6 +23,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   String __type;
   bool __builderFieldUsesNestedBuilder;
   String __rawType;
+  bool __needsBuilder;
 
   factory _$SerializerSourceField(
           [void updates(SerializerSourceFieldBuilder b)]) =>
@@ -52,6 +53,9 @@ class _$SerializerSourceField extends SerializerSourceField {
 
   @override
   String get rawType => __rawType ??= super.rawType;
+
+  @override
+  bool get needsBuilder => __needsBuilder ??= super.needsBuilder;
 
   @override
   SerializerSourceField rebuild(void updates(SerializerSourceFieldBuilder b)) =>

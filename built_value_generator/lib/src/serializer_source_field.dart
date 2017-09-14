@@ -86,6 +86,9 @@ abstract class SerializerSourceField
         type, classGenericParameters ?? new BuiltSet<String>());
   }
 
+  @memoized
+  bool get needsBuilder => element.getter.returnType.displayName.contains('<');
+
   /// Generates a cast using 'as' to this field type.
   ///
   /// Generics are cast to the bound of the generic. If there is no bound,
@@ -94,8 +97,6 @@ abstract class SerializerSourceField
     final result = _generateCast(type, classGenericBounds);
     return result == 'Object' ? '' : 'as $result';
   }
-
-  bool get needsBuilder => type.contains('<');
 
   String generateBuilder() {
     final bareType = _getBareType(type);
