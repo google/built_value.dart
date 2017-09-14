@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.1.1 (unreleased)
+## 4.1.1
 
 - Generated code now tells the analyzer to ignore
   prefer_expression_function_bodies and sort_constructors_first.
