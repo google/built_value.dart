@@ -2,9 +2,10 @@
 
 ## 4.1.1 (unreleased)
 
-- Generated code now tells the analyzer to ignore prefer_expression_function_bodies
-  and sort_constructors_first.
-  
+- Generated code now tells the analyzer to ignore
+  prefer_expression_function_bodies and sort_constructors_first.
+- Remove an unneeded use of computeNode in generator; improves generator
+  performance.
 
 ## 4.1.0
 
