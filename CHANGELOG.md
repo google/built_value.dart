@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.2
+
+- Generated code ignores more lints.
+
 ## 4.1.1
 
 - Generated code now tells the analyzer to ignore
