@@ -48,7 +48,11 @@ class BuiltValueGenerator extends Generator {
     }
 
     if (result.isNotEmpty) {
-      return '// ignore_for_file: annotate_overrides\n'
+      return '// ignore_for_file: always_put_control_body_on_new_line\n'
+          '// ignore_for_file: annotate_overrides\n'
+          '// ignore_for_file: avoid_annotating_with_dynamic\n'
+          '// ignore_for_file: avoid_returning_this\n'
+          '// ignore_for_file: omit_local_variable_types\n'
           '// ignore_for_file: prefer_expression_function_bodies\n'
           '// ignore_for_file: sort_constructors_first\n'
           '\n'
