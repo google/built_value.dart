@@ -5,6 +5,10 @@
 - Generated code ignores more lints.
 - Add a workaround so "polymorphism" features can be used with dart2js.
   See example/lib/polymorphism.dart.
+- Deal explicitly with the user defining their own operator==, hashCode
+  and/or toString(). Previously, they would just not work. Now, custom
+  operator== and hashCode are forbidden at compile time, but custom
+  toString() is supported.
 
 ## 4.1.1
 

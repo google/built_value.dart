@@ -148,6 +148,15 @@ abstract class ValueSourceClass
               displayName.substring(index);
         })));
 
+  @memoized
+  bool get implementsHashCode => element.getGetter('hashCode') != null;
+
+  @memoized
+  bool get implementsOperatorEquals => element.getMethod('==') != null;
+
+  @memoized
+  bool get implementsToString => element.getMethod('toString') != null;
+
   static bool needsBuiltValue(ClassElement classElement) {
     // TODO(davidmorgan): more exact type check.
     return !classElement.displayName.startsWith('_\$') &&
@@ -215,6 +224,14 @@ abstract class ValueSourceClass
       }
     }
 
+    if (implementsHashCode) {
+      result.add('Stop implementing hashCode; it will be generated for you.');
+    }
+
+    if (implementsOperatorEquals) {
+      result.add('Stop implementing operator==; it will be generated for you.');
+    }
+
     return result;
   }
 
@@ -278,9 +295,6 @@ abstract class ValueSourceClass
     if (errors.isNotEmpty) throw _makeError(errors);
 
     final result = new StringBuffer();
-    // Working out which fields are overrides is complex; interfaces,
-    // superclasses and mixins could all trigger the warning. Suppress the
-    // warning instead.
     if (settings.instantiable) result.write(_generateImpl());
     if (settings.instantiable) {
       result.write(_generateBuilder());
@@ -387,19 +401,23 @@ abstract class ValueSourceClass
     result.writeln('}');
     result.writeln();
 
-    result.writeln('@override');
-    result.writeln('String toString() {');
-    if (fields.length == 0) {
-      result.writeln("return newBuiltValueToStringHelper('$name').toString();");
-    } else {
-      result.writeln("return (newBuiltValueToStringHelper('$name')");
-      result.writeln(fields
-          .map((field) => "..add('${field.name}',  ${field.name})")
-          .join(''));
-      result.writeln(").toString();");
+    // Only generate toString() if there wasn't one already.
+    if (!implementsToString) {
+      result.writeln('@override');
+      result.writeln('String toString() {');
+      if (fields.length == 0) {
+        result
+            .writeln("return newBuiltValueToStringHelper('$name').toString();");
+      } else {
+        result.writeln("return (newBuiltValueToStringHelper('$name')");
+        result.writeln(fields
+            .map((field) => "..add('${field.name}',  ${field.name})")
+            .join(''));
+        result.writeln(").toString();");
+      }
+      result.writeln('}');
+      result.writeln();
     }
-    result.writeln('}');
-    result.writeln();
 
     result.writeln('}');
     return result.toString();

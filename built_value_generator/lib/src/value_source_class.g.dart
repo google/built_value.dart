@@ -37,6 +37,9 @@ class _$ValueSourceClass extends ValueSourceClass {
   BuiltList<String> __builderClassFactories;
   BuiltList<MemoizedGetter> __memoizedGetters;
   BuiltList<String> __builderImplements;
+  bool __implementsHashCode;
+  bool __implementsOperatorEquals;
+  bool __implementsToString;
 
   factory _$ValueSourceClass([void updates(ValueSourceClassBuilder b)]) =>
       (new ValueSourceClassBuilder()..update(updates)).build();
@@ -115,6 +118,18 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   BuiltList<String> get builderImplements =>
       __builderImplements ??= super.builderImplements;
+
+  @override
+  bool get implementsHashCode =>
+      __implementsHashCode ??= super.implementsHashCode;
+
+  @override
+  bool get implementsOperatorEquals =>
+      __implementsOperatorEquals ??= super.implementsOperatorEquals;
+
+  @override
+  bool get implementsToString =>
+      __implementsToString ??= super.implementsToString;
 
   @override
   ValueSourceClass rebuild(void updates(ValueSourceClassBuilder b)) =>

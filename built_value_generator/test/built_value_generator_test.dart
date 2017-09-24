@@ -385,6 +385,45 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       expect(generated, contains('super._();'));
     });
   });
+
+  test('rejects hashCode', () async {
+    expect(
+        await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  int get hashCode => 0;
+}'''),
+        contains(
+            '1. Stop implementing hashCode; it will be generated for you.'));
+  });
+
+  test('rejects operator==', () async {
+    expect(
+        await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  bool operator==(other) => false;
+}'''),
+        contains(
+            '1. Stop implementing operator==; it will be generated for you.'));
+  });
+
+  test('uses toString()', () async {
+    expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  String toString() => 'hi!';
+}'''), isNot(contains('String toString()')));
+  });
 }
 
 // Test setup.
