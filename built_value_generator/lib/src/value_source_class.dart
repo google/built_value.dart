@@ -30,6 +30,10 @@ abstract class ValueSourceClass
   ClassElement get builderElement => element.library.getType(name + 'Builder');
 
   @memoized
+  bool get implementsBuilt => element.allSupertypes
+      .any((interfaceType) => interfaceType.name == 'Built');
+
+  @memoized
   BuiltValue get settings {
     final annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
@@ -146,9 +150,12 @@ abstract class ValueSourceClass
 
   static bool needsBuiltValue(ClassElement classElement) {
     // TODO(davidmorgan): more exact type check.
-    return classElement.allSupertypes
-            .any((interfaceType) => interfaceType.name == 'Built') &&
-        !classElement.displayName.startsWith('_\$');
+    return !classElement.displayName.startsWith('_\$') &&
+        (classElement.allSupertypes
+                .any((interfaceType) => interfaceType.name == 'Built') ||
+            classElement.metadata
+                .map((annotation) => annotation.computeConstantValue())
+                .any((value) => value?.type?.displayName == 'BuiltValue'));
   }
 
   Iterable<String> _computeErrors() {
@@ -172,10 +179,13 @@ abstract class ValueSourceClass
       result.add('Make class abstract.');
     }
 
-    final expectedBuildParameters = '$name$_generics, ${name}Builder$_generics';
-    if (builtParameters != expectedBuildParameters) {
-      result.add('Make class implement Built<$expectedBuildParameters>. '
-          'Currently: Built<$builtParameters>');
+    if (settings.instantiable) {
+      final expectedBuildParameters =
+          '$name$_generics, ${name}Builder$_generics';
+      if (builtParameters != expectedBuildParameters) {
+        result.add('Make class implement Built<$expectedBuildParameters>. '
+            'Currently: Built<$builtParameters>');
+      }
     }
 
     if (settings.instantiable) {
@@ -552,8 +562,19 @@ abstract class ValueSourceClass
   /// Generates an abstract builder with just abstract setters and getters.
   String _generateAbstractBuilder() {
     final result = new StringBuffer();
-    result.writeln('abstract class ${name}Builder$_boundedGenerics '
-        'implements ${builderImplements.join(", ")} {');
+
+    if (implementsBuilt) {
+      result.writeln('abstract class ${name}Builder$_boundedGenerics '
+          'implements ${builderImplements.join(", ")} {');
+    } else {
+      // The "Built" interface has been omitted to work around dart2js issue
+      // https://github.com/dart-lang/sdk/issues/14729. So, we can't implement
+      // "Builder". Add the methods explicitly.
+      result.writeln('abstract class ${name}Builder$_boundedGenerics {');
+
+      result.writeln('void replace($name$_generics other);');
+      result.writeln('void update(void updates(${name}Builder$_generics b));');
+    }
 
     for (final field in fields) {
       final typeInBuilder = field.typeInBuilder;

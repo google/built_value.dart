@@ -112,6 +112,13 @@ abstract class AnimalBuilder implements Builder<Animal, AnimalBuilder> {
   set legs(int legs);
 }
 
+abstract class Dart2jsCompatibleAnimalBuilder {
+  void replace(Dart2jsCompatibleAnimal other);
+  void update(void updates(Dart2jsCompatibleAnimalBuilder b));
+  int get legs;
+  set legs(int legs);
+}
+
 class _$Cat extends Cat {
   @override
   final bool tail;

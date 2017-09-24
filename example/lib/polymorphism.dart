@@ -18,12 +18,29 @@ part 'polymorphism.g.dart';
 /// Very little code is generated for a non-instantiable Built Value; just the
 /// interface for the builder. You can write this yourself if you prefer, then
 /// nothing will be generated.
+///
+/// Note that this type of inheritance is currently not supported by dart2js.
+/// See [Dart2jsCompatibleAnimal].
 @BuiltValue(instantiable: false)
 abstract class Animal extends Object
     with Walker
     implements Built<Animal, AnimalBuilder> {
   @override
   int get legs;
+}
+
+/// The dart2js issue https://github.com/dart-lang/sdk/issues/14729
+/// prevents this working when compiling to js. As a workaround, make `Animal`
+/// not implement `Built`, and add the `rebuild` and `toBuilder` methods to
+/// it explicitly if you need them.
+@BuiltValue(instantiable: false)
+abstract class Dart2jsCompatibleAnimal extends Object with Walker {
+  @override
+  int get legs;
+
+  Dart2jsCompatibleAnimal rebuild(
+      void updates(Dart2jsCompatibleAnimalBuilder b));
+  Dart2jsCompatibleAnimalBuilder toBuilder();
 }
 
 /// `Cat` implements the non-instantiable Built Value `Animal`. The generated

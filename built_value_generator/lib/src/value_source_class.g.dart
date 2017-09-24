@@ -19,6 +19,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   final ClassElement element;
   String __name;
   ClassElement __builderElement;
+  bool __implementsBuilt;
   BuiltValue __settings;
   BuiltList<String> __genericParameters;
   BuiltList<String> __genericBounds;
@@ -49,6 +50,9 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   ClassElement get builderElement => __builderElement ??= super.builderElement;
+
+  @override
+  bool get implementsBuilt => __implementsBuilt ??= super.implementsBuilt;
 
   @override
   BuiltValue get settings => __settings ??= super.settings;
