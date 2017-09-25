@@ -1,8 +1,10 @@
 # Changelog
 
-## 4.1.2
+## 4.2.0
 
 - Generated code ignores more lints.
+- Add a workaround so "polymorphism" features can be used with dart2js.
+  See example/lib/polymorphism.dart.
 
 ## 4.1.1
 
