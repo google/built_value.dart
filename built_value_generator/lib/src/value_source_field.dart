@@ -7,6 +7,7 @@ library built_value_generator.source_field;
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:analyzer/exception/exception.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
@@ -32,13 +33,20 @@ abstract class ValueSourceField
   @memoized
   String get name => element.displayName;
 
-  // Go via AST to pull in any import prefix.
   @memoized
-  String get type =>
-      (element.getter.computeNode() as MethodDeclaration)
-          ?.returnType
-          ?.toString() ??
-      'dynamic';
+  String get type {
+    try {
+      // Try going via AST to pull in any import prefix.
+      return (element.getter.computeNode() as MethodDeclaration)
+              ?.returnType
+              ?.toString() ??
+          'dynamic';
+    } on AnalysisException {
+      // Fall back to non-AST; works even if source is not available, but will
+      // not pick up an import prefix.
+      return element.getter.returnType.displayName;
+    }
+  }
 
   @memoized
   bool get isGetter => element.getter != null && !element.getter.isSynthetic;
