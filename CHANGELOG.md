@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.2.1
+
+- Correct handling of import prefixes; fixes some corner cases in
+  generation.
+
 ## 4.2.0
 
 - Generated code ignores more lints.
