@@ -54,13 +54,24 @@ abstract class SerializerSourceField
   @memoized
   String get name => element.displayName;
 
-  // Go via AST to pull in any import prefix.
   @memoized
-  String get type =>
+  String get type => element.getter.returnType.displayName;
+
+  /// The [type] plus any import prefix.
+  @memoized
+  String get typeWithPrefix =>
       (element.getter.computeNode() as MethodDeclaration)
           ?.returnType
           ?.toString() ??
       'dynamic';
+
+  /// Returns the type with import prefix if the compilation unit matches,
+  /// otherwise the type with no import prefix.
+  String typeInCompilationUnit(CompilationUnitElement compilationUnitElement) {
+    return compilationUnitElement == element.library.definingCompilationUnit
+        ? typeWithPrefix
+        : type;
+  }
 
   @memoized
   bool get builderFieldUsesNestedBuilder {
@@ -81,9 +92,10 @@ abstract class SerializerSourceField
   @memoized
   String get rawType => _getBareType(type);
 
-  String generateFullType([BuiltSet<String> classGenericParameters]) {
-    return _generateFullType(
-        type, classGenericParameters ?? new BuiltSet<String>());
+  String generateFullType(CompilationUnitElement compilationUnit,
+      [BuiltSet<String> classGenericParameters]) {
+    return _generateFullType(typeInCompilationUnit(compilationUnit),
+        classGenericParameters ?? new BuiltSet<String>());
   }
 
   @memoized
@@ -93,8 +105,10 @@ abstract class SerializerSourceField
   ///
   /// Generics are cast to the bound of the generic. If there is no bound,
   /// no cast is needed, and an empty string is returned.
-  String generateCast(BuiltMap<String, String> classGenericBounds) {
-    final result = _generateCast(type, classGenericBounds);
+  String generateCast(CompilationUnitElement compilationUnit,
+      BuiltMap<String, String> classGenericBounds) {
+    final result = _generateCast(
+        typeInCompilationUnit(compilationUnit), classGenericBounds);
     return result == 'Object' ? '' : 'as $result';
   }
 
