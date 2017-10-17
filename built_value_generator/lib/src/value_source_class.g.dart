@@ -40,6 +40,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   bool __implementsHashCode;
   bool __implementsOperatorEquals;
   bool __implementsToString;
+  CompilationUnitElement __compilationUnit;
 
   factory _$ValueSourceClass([void updates(ValueSourceClassBuilder b)]) =>
       (new ValueSourceClassBuilder()..update(updates)).build();
@@ -130,6 +131,10 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   bool get implementsToString =>
       __implementsToString ??= super.implementsToString;
+
+  @override
+  CompilationUnitElement get compilationUnit =>
+      __compilationUnit ??= super.compilationUnit;
 
   @override
   ValueSourceClass rebuild(void updates(ValueSourceClassBuilder b)) =>

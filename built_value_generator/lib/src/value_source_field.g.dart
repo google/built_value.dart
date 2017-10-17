@@ -23,6 +23,7 @@ class _$ValueSourceField extends ValueSourceField {
   final FieldElement builderElement;
   String __name;
   String __type;
+  String __typeWithPrefix;
   bool __isGetter;
   bool __isNullable;
   bool __builderFieldExists;
@@ -45,6 +46,9 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   String get type => __type ??= super.type;
+
+  @override
+  String get typeWithPrefix => __typeWithPrefix ??= super.typeWithPrefix;
 
   @override
   bool get isGetter => __isGetter ??= super.isGetter;

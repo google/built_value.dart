@@ -25,6 +25,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   bool __isNullable;
   String __name;
   String __type;
+  String __typeWithPrefix;
   bool __builderFieldUsesNestedBuilder;
   String __rawType;
   bool __needsBuilder;
@@ -50,6 +51,9 @@ class _$SerializerSourceField extends SerializerSourceField {
 
   @override
   String get type => __type ??= super.type;
+
+  @override
+  String get typeWithPrefix => __typeWithPrefix ??= super.typeWithPrefix;
 
   @override
   bool get builderFieldUsesNestedBuilder =>

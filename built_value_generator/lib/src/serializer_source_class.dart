@@ -130,6 +130,10 @@ abstract class SerializerSourceClass
     return result.build();
   }
 
+  @memoized
+  CompilationUnitElement get compilationUnit =>
+      element.library.definingCompilationUnit;
+
   Iterable<String> computeErrors() {
     final camelCaseName =
         name.substring(0, 1).toLowerCase() + name.substring(1);
@@ -157,10 +161,12 @@ abstract class SerializerSourceClass
         .where((field) =>
             field.needsBuilder &&
             field
-                .generateFullType(genericParameters.toBuiltSet())
+                .generateFullType(
+                    compilationUnit, genericParameters.toBuiltSet())
                 .startsWith('const '))
         .map((field) =>
-            '..addBuilderFactory(${field.generateFullType()}, () => ${field.generateBuilder()})')
+            '..addBuilderFactory(${field.generateFullType(compilationUnit)}, '
+            ' () => ${field.generateBuilder()})')
         .join('\n');
   }
 
@@ -278,7 +284,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
         .map((field) => "'${field.name}', "
             'serializers.serialize(object.${field.name}, '
             'specifiedType: '
-            '${field.generateFullType(genericParameters.toBuiltSet())}),')
+            '${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())}),')
         .join('');
   }
 
@@ -288,7 +294,9 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
       result
           ..add('${field.name}')
           ..add(serializers.serialize(
-          object.${field.name}, specifiedType: ${field.generateFullType(genericParameters.toBuiltSet())}));
+          object.${field.name}, 
+          specifiedType:
+              ${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())}));
     }
 ''').join('');
   }
@@ -308,8 +316,9 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
 
   String _generateFieldDeserializers() {
     return fields.map((field) {
-      final fullType = field.generateFullType(genericParameters.toBuiltSet());
-      final cast = field.generateCast(_genericBoundsAsMap);
+      final fullType = field.generateFullType(
+          compilationUnit, genericParameters.toBuiltSet());
+      final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
       if (field.builderFieldUsesNestedBuilder) {
         return '''
 case '${field.name}':

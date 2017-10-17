@@ -7,7 +7,6 @@ library built_value_generator.source_field;
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:analyzer/exception/exception.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
@@ -34,18 +33,22 @@ abstract class ValueSourceField
   String get name => element.displayName;
 
   @memoized
-  String get type {
-    try {
-      // Try going via AST to pull in any import prefix.
-      return (element.getter.computeNode() as MethodDeclaration)
-              ?.returnType
-              ?.toString() ??
-          'dynamic';
-    } on AnalysisException {
-      // Fall back to non-AST; works even if source is not available, but will
-      // not pick up an import prefix.
-      return element.getter.returnType.displayName;
-    }
+  String get type => element.getter.returnType.displayName;
+
+  /// The [type] plus any import prefix.
+  @memoized
+  String get typeWithPrefix =>
+      (element.getter.computeNode() as MethodDeclaration)
+          ?.returnType
+          ?.toString() ??
+      'dynamic';
+
+  /// Returns the type with import prefix if the compilation unit matches,
+  /// otherwise the type with no import prefix.
+  String typeInCompilationUnit(CompilationUnitElement compilationUnitElement) {
+    return compilationUnitElement == element.library.definingCompilationUnit
+        ? typeWithPrefix
+        : type;
   }
 
   @memoized

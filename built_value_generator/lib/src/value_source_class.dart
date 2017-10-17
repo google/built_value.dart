@@ -157,6 +157,10 @@ abstract class ValueSourceClass
   @memoized
   bool get implementsToString => element.getMethod('toString') != null;
 
+  @memoized
+  CompilationUnitElement get compilationUnit =>
+      element.library.definingCompilationUnit;
+
   static bool needsBuiltValue(ClassElement classElement) {
     // TODO(davidmorgan): more exact type check.
     return !classElement.displayName.startsWith('_\$') &&
@@ -309,8 +313,9 @@ abstract class ValueSourceClass
     final result = new StringBuffer();
     result.writeln('class _\$$name$_boundedGenerics extends $name$_generics {');
     for (final field in fields) {
+      final type = field.typeInCompilationUnit(compilationUnit);
       result.writeln('@override');
-      result.writeln('final ${field.type} ${field.name};');
+      result.writeln('final $type ${field.name};');
     }
     for (final memoizedGetter in memoizedGetters) {
       result.writeln('${memoizedGetter.returnType} __${memoizedGetter.name};');
@@ -440,7 +445,7 @@ abstract class ValueSourceClass
 
     if (hasBuilder) {
       for (final field in fields) {
-        final type = field.type;
+        final type = field.typeInCompilationUnit(compilationUnit);
         final typeInBuilder = field.typeInBuilder;
         final name = field.name;
 
@@ -471,7 +476,7 @@ abstract class ValueSourceClass
       }
     } else {
       for (final field in fields) {
-        final type = field.type;
+        final type = field.typeInCompilationUnit(compilationUnit);
         final typeInBuilder = field.typeInBuilder;
         final name = field.name;
 
