@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.3.1
+
+- Fix generation when a field comes from an interface but is also implemented
+  by a mixin.
+
 ## 4.3.0
 
 - Support serializing Int64.

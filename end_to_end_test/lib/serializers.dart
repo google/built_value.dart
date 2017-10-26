@@ -36,6 +36,7 @@ part 'serializers.g.dart';
   Robot,
   SecondTestEnum,
   SimpleValue,
+  StandardCat,
   StandardJsonValue,
   TestEnum,
   ValueUsingImportAs,

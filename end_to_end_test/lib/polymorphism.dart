@@ -65,6 +65,29 @@ abstract class Cage implements Built<Cage, CageBuilder> {
   Cage._();
 }
 
+// It's possible to implement getters via mixins. Such getters are treated
+// exactly as concrete getters in the immediate class -- they are ignored.
+abstract class FourLeggedWalker {
+  int get legs => 4;
+}
+
+abstract class HasLegs {
+  int get legs;
+}
+
+// "Legs" field comes from "FourLeggedWalker" mixin and does not lead to a
+// generated field.
+abstract class StandardCat extends Object
+    with Walker, FourLeggedWalker
+    implements HasLegs, Built<StandardCat, StandardCatBuilder> {
+  static Serializer<StandardCat> get serializer => _$standardCatSerializer;
+
+  bool get tail;
+
+  factory StandardCat([updates(StandardCatBuilder b)]) = _$StandardCat;
+  StandardCat._();
+}
+
 @BuiltValue(instantiable: false)
 abstract class HasField<T> implements Built<HasField<T>, HasFieldBuilder<T>> {
   T get field;

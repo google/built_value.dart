@@ -17,6 +17,7 @@ part of polymorphism;
 Serializer<Cat> _$catSerializer = new _$CatSerializer();
 Serializer<Fish> _$fishSerializer = new _$FishSerializer();
 Serializer<Robot> _$robotSerializer = new _$RobotSerializer();
+Serializer<StandardCat> _$standardCatSerializer = new _$StandardCatSerializer();
 Serializer<HasString> _$hasStringSerializer = new _$HasStringSerializer();
 Serializer<HasDouble> _$hasDoubleSerializer = new _$HasDoubleSerializer();
 
@@ -147,6 +148,45 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
         case 'legs':
           result.legs = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$StandardCatSerializer implements StructuredSerializer<StandardCat> {
+  @override
+  final Iterable<Type> types = const [StandardCat, _$StandardCat];
+  @override
+  final String wireName = 'StandardCat';
+
+  @override
+  Iterable serialize(Serializers serializers, StandardCat object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'tail',
+      serializers.serialize(object.tail, specifiedType: const FullType(bool)),
+    ];
+
+    return result;
+  }
+
+  @override
+  StandardCat deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new StandardCatBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'tail':
+          result.tail = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
           break;
       }
     }
@@ -557,6 +597,79 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
   @override
   _$Cage build() {
     final _$result = _$v ?? new _$Cage._(inhabitant: inhabitant);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$StandardCat extends StandardCat {
+  @override
+  final bool tail;
+
+  factory _$StandardCat([void updates(StandardCatBuilder b)]) =>
+      (new StandardCatBuilder()..update(updates)).build();
+
+  _$StandardCat._({this.tail}) : super._() {
+    if (tail == null) throw new ArgumentError.notNull('tail');
+  }
+
+  @override
+  StandardCat rebuild(void updates(StandardCatBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  StandardCatBuilder toBuilder() => new StandardCatBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! StandardCat) return false;
+    return tail == other.tail;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, tail.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('StandardCat')..add('tail', tail))
+        .toString();
+  }
+}
+
+class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
+  _$StandardCat _$v;
+
+  bool _tail;
+  bool get tail => _$this._tail;
+  set tail(bool tail) => _$this._tail = tail;
+
+  StandardCatBuilder();
+
+  StandardCatBuilder get _$this {
+    if (_$v != null) {
+      _tail = _$v.tail;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(StandardCat other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$StandardCat;
+  }
+
+  @override
+  void update(void updates(StandardCatBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$StandardCat build() {
+    final _$result = _$v ?? new _$StandardCat._(tail: tail);
     replace(_$result);
     return _$result;
   }
