@@ -8,6 +8,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/enums.dart' as using_import_as;
+import 'package:fixnum/fixnum.dart';
 
 part 'values.g.dart';
 
@@ -165,6 +166,7 @@ abstract class PrimitivesValue
 
   bool get boolean;
   int get integer;
+  Int64 get int64;
   double get dbl;
   num get number;
   String get string;

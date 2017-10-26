@@ -13,6 +13,7 @@ environment:
 dependencies:
   built_collection: ^1.0.0
   collection: ^1.0.0
+  fixnum: ^0.10.0
   quiver: '>=0.21.0 <0.26.0'
 
 dev_dependencies:

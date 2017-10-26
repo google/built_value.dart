@@ -7,6 +7,7 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'package:end_to_end_test/enums.dart';
 import 'package:end_to_end_test/serializers.dart';
 import 'package:end_to_end_test/values.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -145,6 +146,7 @@ void main() {
     final data = new PrimitivesValue((b) => b
       ..boolean = true
       ..integer = 42
+      ..int64 = Int64.MAX_VALUE
       ..dbl = 2.5
       ..number = 17.5
       ..string = 'test'
@@ -155,6 +157,8 @@ void main() {
       true,
       'integer',
       42,
+      'int64',
+      '9223372036854775807',
       'dbl',
       2.5,
       'number',

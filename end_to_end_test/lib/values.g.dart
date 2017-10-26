@@ -319,6 +319,8 @@ class _$PrimitivesValueSerializer
           specifiedType: const FullType(bool)),
       'integer',
       serializers.serialize(object.integer, specifiedType: const FullType(int)),
+      'int64',
+      serializers.serialize(object.int64, specifiedType: const FullType(Int64)),
       'dbl',
       serializers.serialize(object.dbl, specifiedType: const FullType(double)),
       'number',
@@ -352,6 +354,10 @@ class _$PrimitivesValueSerializer
         case 'integer':
           result.integer = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+        case 'int64':
+          result.int64 = serializers.deserialize(value,
+              specifiedType: const FullType(Int64)) as Int64;
           break;
         case 'dbl':
           result.dbl = serializers.deserialize(value,
@@ -1387,6 +1393,8 @@ class _$PrimitivesValue extends PrimitivesValue {
   @override
   final int integer;
   @override
+  final Int64 int64;
+  @override
   final double dbl;
   @override
   final num number;
@@ -1401,6 +1409,7 @@ class _$PrimitivesValue extends PrimitivesValue {
   _$PrimitivesValue._(
       {this.boolean,
       this.integer,
+      this.int64,
       this.dbl,
       this.number,
       this.string,
@@ -1408,6 +1417,7 @@ class _$PrimitivesValue extends PrimitivesValue {
       : super._() {
     if (boolean == null) throw new ArgumentError.notNull('boolean');
     if (integer == null) throw new ArgumentError.notNull('integer');
+    if (int64 == null) throw new ArgumentError.notNull('int64');
     if (dbl == null) throw new ArgumentError.notNull('dbl');
     if (number == null) throw new ArgumentError.notNull('number');
     if (string == null) throw new ArgumentError.notNull('string');
@@ -1428,6 +1438,7 @@ class _$PrimitivesValue extends PrimitivesValue {
     if (other is! PrimitivesValue) return false;
     return boolean == other.boolean &&
         integer == other.integer &&
+        int64 == other.int64 &&
         dbl == other.dbl &&
         number == other.number &&
         string == other.string &&
@@ -1439,7 +1450,9 @@ class _$PrimitivesValue extends PrimitivesValue {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, boolean.hashCode), integer.hashCode),
+                $jc(
+                    $jc($jc($jc(0, boolean.hashCode), integer.hashCode),
+                        int64.hashCode),
                     dbl.hashCode),
                 number.hashCode),
             string.hashCode),
@@ -1451,6 +1464,7 @@ class _$PrimitivesValue extends PrimitivesValue {
     return (newBuiltValueToStringHelper('PrimitivesValue')
           ..add('boolean', boolean)
           ..add('integer', integer)
+          ..add('int64', int64)
           ..add('dbl', dbl)
           ..add('number', number)
           ..add('string', string)
@@ -1470,6 +1484,10 @@ class PrimitivesValueBuilder
   int _integer;
   int get integer => _$this._integer;
   set integer(int integer) => _$this._integer = integer;
+
+  Int64 _int64;
+  Int64 get int64 => _$this._int64;
+  set int64(Int64 int64) => _$this._int64 = int64;
 
   double _dbl;
   double get dbl => _$this._dbl;
@@ -1493,6 +1511,7 @@ class PrimitivesValueBuilder
     if (_$v != null) {
       _boolean = _$v.boolean;
       _integer = _$v.integer;
+      _int64 = _$v.int64;
       _dbl = _$v.dbl;
       _number = _$v.number;
       _string = _$v.string;
@@ -1519,6 +1538,7 @@ class PrimitivesValueBuilder
         new _$PrimitivesValue._(
             boolean: boolean,
             integer: integer,
+            int64: int64,
             dbl: dbl,
             number: number,
             string: string,

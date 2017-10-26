@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.0
+
+- Support serializing Int64.
+
 ## 4.2.1
 
 - Correct handling of import prefixes; fixes some corner cases in
