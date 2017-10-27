@@ -25,7 +25,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   BuiltValue __settings;
   BuiltList<String> __genericParameters;
   BuiltList<String> __genericBounds;
-  String __builtParameters;
+  ClassDeclaration __classDeclaration;
   bool __hasBuilder;
   String __builderParameters;
   BuiltList<ValueSourceField> __fields;
@@ -35,8 +35,8 @@ class _$ValueSourceClass extends ValueSourceClass {
   bool __hasBuiltValueImportWithShow;
   bool __hasBuiltValueImportWithAs;
   bool __valueClassIsAbstract;
-  BuiltList<String> __valueClassConstructors;
-  BuiltList<String> __valueClassFactories;
+  BuiltList<ConstructorDeclaration> __valueClassConstructors;
+  BuiltList<ConstructorDeclaration> __valueClassFactories;
   bool __builderClassIsAbstract;
   BuiltList<String> __builderClassConstructors;
   BuiltList<String> __builderClassFactories;
@@ -82,7 +82,8 @@ class _$ValueSourceClass extends ValueSourceClass {
       __genericBounds ??= super.genericBounds;
 
   @override
-  String get builtParameters => __builtParameters ??= super.builtParameters;
+  ClassDeclaration get classDeclaration =>
+      __classDeclaration ??= super.classDeclaration;
 
   @override
   bool get hasBuilder => __hasBuilder ??= super.hasBuilder;
@@ -116,11 +117,11 @@ class _$ValueSourceClass extends ValueSourceClass {
       __valueClassIsAbstract ??= super.valueClassIsAbstract;
 
   @override
-  BuiltList<String> get valueClassConstructors =>
+  BuiltList<ConstructorDeclaration> get valueClassConstructors =>
       __valueClassConstructors ??= super.valueClassConstructors;
 
   @override
-  BuiltList<String> get valueClassFactories =>
+  BuiltList<ConstructorDeclaration> get valueClassFactories =>
       __valueClassFactories ??= super.valueClassFactories;
 
   @override

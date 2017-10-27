@@ -1,0 +1,11 @@
+name: analyzed_angular_plugin_loader
+version: 0.0.0
+description: This pubspec determines the version of the analyzer plugin to load.
+environment:
+  sdk: '>=1.24.0-dev.1.0'
+dependencies:
+  built_value_generator:
+    # For development of the plugin: rename this file to `pubspec.yaml`, add
+    # the absolute path to the `built_value_generator` package that you are
+    # working on here, run `pub get` in this folder, then rename the file back.
+    path: <add path here>
