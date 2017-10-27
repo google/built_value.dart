@@ -7,7 +7,8 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 
-/// Gets fields, including from interfaces.
+/// Gets fields, including from interfaces. Fields from interfaces are only
+/// returned if they are not also implemented by a mixin.
 ///
 /// If a field is overriden then just the closest (overriding) field is
 /// returned.
@@ -21,11 +22,17 @@ BuiltList<FieldElement> collectFields(ClassElement element) {
     ..addAll(element.mixins)
     ..forEach((interface) => fields.addAll(collectFields(interface.element)));
 
-// Overridden fields have multiple declarations, so deduplicate by adding
-// to a set that compares on field name.
+  // Overridden fields have multiple declarations, so deduplicate by adding
+  // to a set that compares on field name.
   final fieldSet = new LinkedHashSet<FieldElement>(
       equals: (a, b) => a.displayName == b.displayName,
       hashCode: (a) => a.displayName.hashCode);
   fieldSet.addAll(fields);
-  return new BuiltList<FieldElement>(fieldSet);
+
+  // Filter out interface fields that are implemented in a mixin.
+  return new BuiltList<FieldElement>.build((b) => b
+    ..addAll(fieldSet)
+    ..where((field) =>
+        field.enclosingElement == element ||
+        element.lookUpGetter(field.name, element.library).isAbstract));
 }

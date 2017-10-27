@@ -105,6 +105,12 @@ void main() {
     });
   });
 
+  group('StandardCat', () {
+    test('uses legs field from mixin', () {
+      expect(new StandardCat((b) => b..tail = true).legs, 4);
+    });
+  });
+
   group('HasField', () {
     test('can be used as an interface, including builder', () {
       final hasFields = <HasField<dynamic>>[

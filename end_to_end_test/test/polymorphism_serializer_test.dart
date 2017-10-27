@@ -50,6 +50,23 @@ void main() {
     });
   });
 
+  group('StandardCat', () {
+    final data = new StandardCat((b) => b..tail = true);
+    final serialized = [
+      'StandardCat',
+      'tail',
+      true,
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
   group('HasField', () {
     final data = new BuiltList<HasField<dynamic>>([
       new HasString((b) => b..field = 'hello'),
