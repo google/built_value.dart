@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.2
+
+- Fix generation when a field is found via two levels of inheritance.
+
 ## 4.3.1
 
 - Fix generation when a field comes from an interface but is also implemented

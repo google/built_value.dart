@@ -114,3 +114,30 @@ abstract class HasDouble
   factory HasDouble([updates(HasDoubleBuilder b)]) = _$HasDouble;
   HasDouble._();
 }
+
+// Check generation for fields that are pulled in via a chain of `implements`.
+// Check both the "abstract" case and the "implemented by mixin" case.
+abstract class ChainedInterface {
+  int get foo;
+  int get moreFoo;
+}
+
+abstract class ChainedInterface2 implements ChainedInterface {
+  int get bar;
+  int get moreBar;
+}
+
+abstract class MoreMixin {
+  int get moreFoo => 0;
+  int get moreBar => 1;
+}
+
+abstract class UsesChainedInterface extends Object
+    with MoreMixin
+    implements
+        Built<UsesChainedInterface, UsesChainedInterfaceBuilder>,
+        ChainedInterface2 {
+  factory UsesChainedInterface([updates(UsesChainedInterfaceBuilder b)]) =
+      _$UsesChainedInterface;
+  UsesChainedInterface._();
+}
