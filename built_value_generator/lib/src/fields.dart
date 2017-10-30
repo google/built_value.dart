@@ -29,10 +29,10 @@ BuiltList<FieldElement> collectFields(ClassElement element) {
       hashCode: (a) => a.displayName.hashCode);
   fieldSet.addAll(fields);
 
-  // Filter out interface fields that are implemented in a mixin.
+  // Filter to fields that are not implemented by a mixin.
   return new BuiltList<FieldElement>.build((b) => b
     ..addAll(fieldSet)
     ..where((field) =>
-        field.enclosingElement == element ||
-        element.lookUpGetter(field.name, element.library).isAbstract));
+        element.lookUpInheritedConcreteGetter(field.name, element.library) ==
+        null));
 }

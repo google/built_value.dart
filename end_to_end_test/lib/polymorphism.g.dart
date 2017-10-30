@@ -828,3 +828,89 @@ class HasDoubleBuilder
     return _$result;
   }
 }
+
+class _$UsesChainedInterface extends UsesChainedInterface {
+  @override
+  final int bar;
+  @override
+  final int foo;
+
+  factory _$UsesChainedInterface(
+          [void updates(UsesChainedInterfaceBuilder b)]) =>
+      (new UsesChainedInterfaceBuilder()..update(updates)).build();
+
+  _$UsesChainedInterface._({this.bar, this.foo}) : super._() {
+    if (bar == null) throw new ArgumentError.notNull('bar');
+    if (foo == null) throw new ArgumentError.notNull('foo');
+  }
+
+  @override
+  UsesChainedInterface rebuild(void updates(UsesChainedInterfaceBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  UsesChainedInterfaceBuilder toBuilder() =>
+      new UsesChainedInterfaceBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! UsesChainedInterface) return false;
+    return bar == other.bar && foo == other.foo;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, bar.hashCode), foo.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('UsesChainedInterface')
+          ..add('bar', bar)
+          ..add('foo', foo))
+        .toString();
+  }
+}
+
+class UsesChainedInterfaceBuilder
+    implements Builder<UsesChainedInterface, UsesChainedInterfaceBuilder> {
+  _$UsesChainedInterface _$v;
+
+  int _bar;
+  int get bar => _$this._bar;
+  set bar(int bar) => _$this._bar = bar;
+
+  int _foo;
+  int get foo => _$this._foo;
+  set foo(int foo) => _$this._foo = foo;
+
+  UsesChainedInterfaceBuilder();
+
+  UsesChainedInterfaceBuilder get _$this {
+    if (_$v != null) {
+      _bar = _$v.bar;
+      _foo = _$v.foo;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(UsesChainedInterface other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$UsesChainedInterface;
+  }
+
+  @override
+  void update(void updates(UsesChainedInterfaceBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$UsesChainedInterface build() {
+    final _$result = _$v ?? new _$UsesChainedInterface._(bar: bar, foo: foo);
+    replace(_$result);
+    return _$result;
+  }
+}
