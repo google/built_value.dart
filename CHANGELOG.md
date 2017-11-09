@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.3
+
+- Allow quiver 0.26.
+
 ## 4.3.2
 
 - Fix generation when a field is found via two levels of inheritance.
