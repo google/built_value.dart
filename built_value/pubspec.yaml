@@ -11,7 +11,7 @@ environment:
   sdk: '>=1.21.0 <2.0.0'
 
 dependencies:
-  built_collection: ^1.0.0
+  built_collection: ^2.0.0
   collection: ^1.0.0
   fixnum: ^0.10.0
   quiver: '>=0.21.0 <0.27.0'

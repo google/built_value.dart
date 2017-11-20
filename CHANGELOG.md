@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.4
+
+- Fix for built_collection 2.0.0.
+
 ## 4.3.3
 
 - Allow quiver 0.26.

@@ -8,7 +8,8 @@ import 'package:built_value/serializer.dart';
 class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
   final bool structured = true;
   @override
-  final Iterable<Type> types = new BuiltList<Type>([BuiltSet]);
+  final Iterable<Type> types =
+      new BuiltList<Type>([BuiltSet, new BuiltSet<Object>().runtimeType]);
   @override
   final String wireName = 'set';
 

@@ -51,9 +51,8 @@ void main() {
       expect(
           serializers
               .deserialize(serialized, specifiedType: specifiedType)
-              .runtimeType
-              .toString(),
-          'BuiltMap<int, String>');
+              .runtimeType,
+          new BuiltMap<int, String>().runtimeType);
     });
   });
 
@@ -178,9 +177,9 @@ void main() {
       expect(
           genericSerializer
               .deserialize(serialized, specifiedType: specifiedType)
-              .runtimeType
-              .toString(),
-          'BuiltMap<BuiltMap<int, int>, BuiltMap<String, String>>');
+              .runtimeType,
+          new BuiltMap<BuiltMap<int, int>, BuiltMap<String, String>>()
+              .runtimeType);
     });
   });
 

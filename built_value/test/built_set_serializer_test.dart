@@ -51,9 +51,8 @@ void main() {
       expect(
           serializers
               .deserialize(serialized, specifiedType: specifiedType)
-              .runtimeType
-              .toString(),
-          'BuiltSet<int>');
+              .runtimeType,
+          new BuiltSet<int>().runtimeType);
     });
   });
 
