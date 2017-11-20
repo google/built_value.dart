@@ -8,7 +8,8 @@ import 'package:built_value/serializer.dart';
 class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
   final bool structured = true;
   @override
-  final Iterable<Type> types = new BuiltList<Type>([BuiltMap]);
+  final Iterable<Type> types = new BuiltList<Type>(
+      [BuiltMap, new BuiltMap<Object, Object>().runtimeType]);
   @override
   final String wireName = 'map';
 

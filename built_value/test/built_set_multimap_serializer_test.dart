@@ -42,9 +42,8 @@ void main() {
       expect(
           serializers
               .deserialize(serialized, specifiedType: specifiedType)
-              .runtimeType
-              .toString(),
-          'BuiltSetMultimap<int, String>');
+              .runtimeType,
+          new BuiltSetMultimap<int, String>().runtimeType);
     });
   });
 }

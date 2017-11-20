@@ -9,7 +9,8 @@ class BuiltListMultimapSerializer
     implements StructuredSerializer<BuiltListMultimap> {
   final bool structured = true;
   @override
-  final Iterable<Type> types = new BuiltList<Type>([BuiltListMultimap]);
+  final Iterable<Type> types = new BuiltList<Type>(
+      [BuiltListMultimap, new BuiltListMultimap<Object, Object>().runtimeType]);
   @override
   final String wireName = 'listMultimap';
 

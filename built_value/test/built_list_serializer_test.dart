@@ -50,9 +50,8 @@ void main() {
       expect(
           serializers
               .deserialize(serialized, specifiedType: specifiedType)
-              .runtimeType
-              .toString(),
-          'BuiltList<int>');
+              .runtimeType,
+          new BuiltList<int>().runtimeType);
     });
   });
 
