@@ -15,6 +15,9 @@ import 'package:source_gen/source_gen.dart';
 ///
 /// See https://github.com/google/built_value.dart/tree/master/example
 class BuiltValueGenerator extends Generator {
+  // Allow creating via `const` as well as enforces immutability here.
+  const BuiltValueGenerator();
+
   @override
   Future<String> generate(LibraryReader library, BuildStep buildStep) async {
     final result = new StringBuffer();
