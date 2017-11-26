@@ -59,6 +59,10 @@ abstract class ValueSourceField
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
 
   @memoized
+  bool get isIgnored => element.getter.metadata
+      .any((metadata) => metadataToStringValue(metadata) == 'ignored');
+
+  @memoized
   bool get builderFieldExists => builderElement != null;
 
   @memoized

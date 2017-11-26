@@ -26,6 +26,7 @@ class _$ValueSourceField extends ValueSourceField {
   String __typeWithPrefix;
   bool __isGetter;
   bool __isNullable;
+  bool __isIgnored;
   bool __builderFieldExists;
   bool __builderFieldIsNormalField;
   String __buildElementType;
@@ -55,6 +56,9 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   bool get isNullable => __isNullable ??= super.isNullable;
+
+  @override
+  bool get isIgnored => __isIgnored ??= super.isIgnored;
 
   @override
   bool get builderFieldExists =>

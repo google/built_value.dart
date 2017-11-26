@@ -185,3 +185,88 @@ class CompoundValueBuilder
     return _$result;
   }
 }
+
+class _$IgnoredValue extends IgnoredValue {
+  @override
+  final String name;
+  @override
+  final Function onChanged;
+
+  factory _$IgnoredValue([void updates(IgnoredValueBuilder b)]) =>
+      (new IgnoredValueBuilder()..update(updates)).build();
+
+  _$IgnoredValue._({this.name, this.onChanged}) : super._() {
+    if (name == null) throw new ArgumentError.notNull('name');
+    if (onChanged == null) throw new ArgumentError.notNull('onChanged');
+  }
+
+  @override
+  IgnoredValue rebuild(void updates(IgnoredValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  IgnoredValueBuilder toBuilder() => new IgnoredValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! IgnoredValue) return false;
+    return name == other.name;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, name.hashCode), onChanged.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('IgnoredValue')
+          ..add('name', name)
+          ..add('onChanged', onChanged))
+        .toString();
+  }
+}
+
+class IgnoredValueBuilder
+    implements Builder<IgnoredValue, IgnoredValueBuilder> {
+  _$IgnoredValue _$v;
+
+  String _name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
+
+  Function _onChanged;
+  Function get onChanged => _$this._onChanged;
+  set onChanged(Function onChanged) => _$this._onChanged = onChanged;
+
+  IgnoredValueBuilder();
+
+  IgnoredValueBuilder get _$this {
+    if (_$v != null) {
+      _name = _$v.name;
+      _onChanged = _$v.onChanged;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(IgnoredValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$IgnoredValue;
+  }
+
+  @override
+  void update(void updates(IgnoredValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$IgnoredValue build() {
+    final _$result =
+        _$v ?? new _$IgnoredValue._(name: name, onChanged: onChanged);
+    replace(_$result);
+    return _$result;
+  }
+}

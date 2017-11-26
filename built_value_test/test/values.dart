@@ -26,3 +26,13 @@ abstract class CompoundValue
   factory CompoundValue([updates(CompoundValueBuilder b)]) = _$CompoundValue;
   CompoundValue._();
 }
+
+abstract class IgnoredValue
+    implements Built<IgnoredValue, IgnoredValueBuilder> {
+  String get name;
+  @ignored
+  Function get onChanged;
+
+  factory IgnoredValue([updates(IgnoredValueBuilder b)]) = _$IgnoredValue;
+  IgnoredValue._();
+}

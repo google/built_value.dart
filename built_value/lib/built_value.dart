@@ -88,6 +88,11 @@ const String nullable = 'nullable';
 
 /// Memoized annotation for Built Value getters and methods.
 ///
+/// Fields marked with this annotation are not compared in the == operator.
+const String ignored = 'ignored';
+
+/// Memoized annotation for Built Value getters and methods.
+///
 /// Getters marked with this annotation are memoized: the result is calculated
 /// once on first access and stored in the instance.
 const String memoized = 'memoized';
