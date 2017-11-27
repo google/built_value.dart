@@ -46,33 +46,33 @@ void main() {
       _expectMismatch(value, otherValue, 'is the wrong type');
     });
 
-    test('ignored value matcher', () {
-      final value = new IgnoredValue((b) => b
+    test('compared value matcher', () {
+      final value = new ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change happened!');
-      final otherValue = new IgnoredValue((b) => b
+      final otherValue = new ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change happened!');
 
       expect(value, otherValue);
     });
 
-    test('ignored value matcher with different onChanged outcomes', () {
-      final value = new IgnoredValue((b) => b
+    test('compared value matcher with different onChanged outcomes', () {
+      final value = new ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change happened!');
-      final otherValue = new IgnoredValue((b) => b
+      final otherValue = new ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change did not happen!');
 
       expect(value, otherValue);
     });
 
-    test('ignored value matcher with different names', () {
-      final value = new IgnoredValue((b) => b
+    test('compared value matcher with different names', () {
+      final value = new ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change happened!');
-      final otherValue = new IgnoredValue((b) => b
+      final otherValue = new ComparedValue((b) => b
         ..name = 'bar'
         ..onChanged = () => 'Change did not happen!');
 

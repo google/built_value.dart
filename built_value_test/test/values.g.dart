@@ -186,51 +186,51 @@ class CompoundValueBuilder
   }
 }
 
-class _$IgnoredValue extends IgnoredValue {
+class _$ComparedValue extends ComparedValue {
   @override
   final String name;
   @override
   final Function onChanged;
 
-  factory _$IgnoredValue([void updates(IgnoredValueBuilder b)]) =>
-      (new IgnoredValueBuilder()..update(updates)).build();
+  factory _$ComparedValue([void updates(ComparedValueBuilder b)]) =>
+      (new ComparedValueBuilder()..update(updates)).build();
 
-  _$IgnoredValue._({this.name, this.onChanged}) : super._() {
+  _$ComparedValue._({this.name, this.onChanged}) : super._() {
     if (name == null) throw new ArgumentError.notNull('name');
     if (onChanged == null) throw new ArgumentError.notNull('onChanged');
   }
 
   @override
-  IgnoredValue rebuild(void updates(IgnoredValueBuilder b)) =>
+  ComparedValue rebuild(void updates(ComparedValueBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  IgnoredValueBuilder toBuilder() => new IgnoredValueBuilder()..replace(this);
+  ComparedValueBuilder toBuilder() => new ComparedValueBuilder()..replace(this);
 
   @override
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    if (other is! IgnoredValue) return false;
+    if (other is! ComparedValue) return false;
     return name == other.name;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, name.hashCode), onChanged.hashCode));
+    return $jf($jc(0, name.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('IgnoredValue')
+    return (newBuiltValueToStringHelper('ComparedValue')
           ..add('name', name)
           ..add('onChanged', onChanged))
         .toString();
   }
 }
 
-class IgnoredValueBuilder
-    implements Builder<IgnoredValue, IgnoredValueBuilder> {
-  _$IgnoredValue _$v;
+class ComparedValueBuilder
+    implements Builder<ComparedValue, ComparedValueBuilder> {
+  _$ComparedValue _$v;
 
   String _name;
   String get name => _$this._name;
@@ -240,9 +240,9 @@ class IgnoredValueBuilder
   Function get onChanged => _$this._onChanged;
   set onChanged(Function onChanged) => _$this._onChanged = onChanged;
 
-  IgnoredValueBuilder();
+  ComparedValueBuilder();
 
-  IgnoredValueBuilder get _$this {
+  ComparedValueBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
       _onChanged = _$v.onChanged;
@@ -252,20 +252,20 @@ class IgnoredValueBuilder
   }
 
   @override
-  void replace(IgnoredValue other) {
+  void replace(ComparedValue other) {
     if (other == null) throw new ArgumentError.notNull('other');
-    _$v = other as _$IgnoredValue;
+    _$v = other as _$ComparedValue;
   }
 
   @override
-  void update(void updates(IgnoredValueBuilder b)) {
+  void update(void updates(ComparedValueBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$IgnoredValue build() {
+  _$ComparedValue build() {
     final _$result =
-        _$v ?? new _$IgnoredValue._(name: name, onChanged: onChanged);
+        _$v ?? new _$ComparedValue._(name: name, onChanged: onChanged);
     replace(_$result);
     return _$result;
   }

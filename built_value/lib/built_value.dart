@@ -86,10 +86,14 @@ class BuiltValue {
 /// Fields marked with this annotation are allowed to be null.
 const String nullable = 'nullable';
 
-/// Memoized annotation for Built Value getters and methods.
+/// BuiltValueField annotation for Built Value fields.
 ///
 /// Fields marked with this annotation are not compared in the == operator.
-const String ignored = 'ignored';
+class BuiltValueField {
+  final bool compare;
+
+  const BuiltValueField({this.compare: true});
+}
 
 /// Memoized annotation for Built Value getters and methods.
 ///

@@ -380,7 +380,7 @@ abstract class ValueSourceClass
     result.writeln('bool operator==(dynamic other) {');
     result.writeln('  if (identical(other, this)) return true;');
     result.writeln('  if (other is! $name) return false;');
-    final comparedFields = fields.where((field) => !field.isIgnored);
+    final comparedFields = fields.where((field) => field.isCompared);
     if (comparedFields.length == 0) {
       result.writeln('return true;');
     } else {
@@ -395,13 +395,15 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     result.writeln('int get hashCode {');
-    if (fields.length == 0) {
+
+    if (comparedFields.length == 0) {
       result.writeln('return ${name.hashCode};');
     } else {
       result.writeln(r'return $jf(');
-      result.writeln(r'$jc(' * fields.length);
+      result.writeln(r'$jc(' * comparedFields.length);
       result.writeln('0, ');
-      result.write(fields.map((field) => '${field.name}.hashCode').join('), '));
+      result.write(
+          comparedFields.map((field) => '${field.name}.hashCode').join('), '));
       result.writeln('));');
     }
     result.writeln('}');

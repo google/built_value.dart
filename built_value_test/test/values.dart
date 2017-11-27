@@ -27,12 +27,13 @@ abstract class CompoundValue
   CompoundValue._();
 }
 
-abstract class IgnoredValue
-    implements Built<IgnoredValue, IgnoredValueBuilder> {
+abstract class ComparedValue
+    implements Built<ComparedValue, ComparedValueBuilder> {
   String get name;
-  @ignored
+
+  @BuiltValueField(compare: false)
   Function get onChanged;
 
-  factory IgnoredValue([updates(IgnoredValueBuilder b)]) = _$IgnoredValue;
-  IgnoredValue._();
+  factory ComparedValue([updates(ComparedValueBuilder b)]) = _$ComparedValue;
+  ComparedValue._();
 }
