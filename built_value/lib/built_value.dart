@@ -89,7 +89,11 @@ const String nullable = 'nullable';
 /// Memoized annotation for Built Value getters and methods.
 ///
 /// Fields marked with this annotation are not compared in the == operator.
-const String ignored = 'ignored';
+class BuiltValueField {
+  final bool compare;
+
+  const BuiltValueField({this.compare: true});
+}
 
 /// Memoized annotation for Built Value getters and methods.
 ///

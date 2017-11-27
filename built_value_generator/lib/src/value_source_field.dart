@@ -12,7 +12,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
 import 'package:built_value_generator/src/metadata.dart'
-    show metadataToStringValue;
+    show metadataToStringValue, getMetadataField;
 
 part 'value_source_field.g.dart';
 
@@ -59,8 +59,10 @@ abstract class ValueSourceField
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
 
   @memoized
-  bool get isIgnored => element.getter.metadata
-      .any((metadata) => metadataToStringValue(metadata) == 'ignored');
+  bool get isCompared => element.getter.metadata.every((metadata) =>
+      getMetadataField(metadata, 'compare') != null
+          ? getMetadataField(metadata, 'compare').toBoolValue()
+          : true);
 
   @memoized
   bool get builderFieldExists => builderElement != null;
