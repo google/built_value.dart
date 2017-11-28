@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.4.0
+
+- New annotation, `BuiltValueField`, for configuring fields. First
+  setting available is `compare`. Set to `false` to ignore a particular field
+  for `operator==` and `hashCode`.
+- Generator now has a `const` constructor.
+
 ## 4.3.4
 
 - Fix for built_collection 2.0.0.
