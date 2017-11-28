@@ -59,6 +59,17 @@ abstract class ValueSourceField
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
 
   @memoized
+  BuiltValueField get builtValueField {
+    final annotations = element.getter.metadata
+        .map((annotation) => annotation.computeConstantValue())
+        .where((value) => value?.type?.displayName == 'BuiltValueField');
+    if (annotations.isEmpty) return const BuiltValueField();
+    final annotation = annotations.single;
+    return new BuiltValueField(
+        compare: annotation.getField('compare').toBoolValue());
+  }
+
+  @memoized
   bool get builderFieldExists => builderElement != null;
 
   @memoized

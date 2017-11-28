@@ -185,3 +185,88 @@ class CompoundValueBuilder
     return _$result;
   }
 }
+
+class _$ComparedValue extends ComparedValue {
+  @override
+  final String name;
+  @override
+  final Function onChanged;
+
+  factory _$ComparedValue([void updates(ComparedValueBuilder b)]) =>
+      (new ComparedValueBuilder()..update(updates)).build();
+
+  _$ComparedValue._({this.name, this.onChanged}) : super._() {
+    if (name == null) throw new ArgumentError.notNull('name');
+    if (onChanged == null) throw new ArgumentError.notNull('onChanged');
+  }
+
+  @override
+  ComparedValue rebuild(void updates(ComparedValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ComparedValueBuilder toBuilder() => new ComparedValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! ComparedValue) return false;
+    return name == other.name;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, name.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ComparedValue')
+          ..add('name', name)
+          ..add('onChanged', onChanged))
+        .toString();
+  }
+}
+
+class ComparedValueBuilder
+    implements Builder<ComparedValue, ComparedValueBuilder> {
+  _$ComparedValue _$v;
+
+  String _name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
+
+  Function _onChanged;
+  Function get onChanged => _$this._onChanged;
+  set onChanged(Function onChanged) => _$this._onChanged = onChanged;
+
+  ComparedValueBuilder();
+
+  ComparedValueBuilder get _$this {
+    if (_$v != null) {
+      _name = _$v.name;
+      _onChanged = _$v.onChanged;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ComparedValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$ComparedValue;
+  }
+
+  @override
+  void update(void updates(ComparedValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ComparedValue build() {
+    final _$result =
+        _$v ?? new _$ComparedValue._(name: name, onChanged: onChanged);
+    replace(_$result);
+    return _$result;
+  }
+}

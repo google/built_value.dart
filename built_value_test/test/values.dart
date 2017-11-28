@@ -26,3 +26,14 @@ abstract class CompoundValue
   factory CompoundValue([updates(CompoundValueBuilder b)]) = _$CompoundValue;
   CompoundValue._();
 }
+
+abstract class ComparedValue
+    implements Built<ComparedValue, ComparedValueBuilder> {
+  String get name;
+
+  @BuiltValueField(compare: false)
+  Function get onChanged;
+
+  factory ComparedValue([updates(ComparedValueBuilder b)]) = _$ComparedValue;
+  ComparedValue._();
+}

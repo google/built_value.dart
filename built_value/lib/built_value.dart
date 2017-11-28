@@ -86,6 +86,18 @@ class BuiltValue {
 /// Fields marked with this annotation are allowed to be null.
 const String nullable = 'nullable';
 
+/// Optionally, annotate a Built Value field with this to specify settings.
+/// This is only needed for advanced use.
+class BuiltValueField {
+  /// Whether the field is compared and hashed. Defaults to `true`.
+  ///
+  /// Set to `false` to ignore the field when calculating `hashCode` and when
+  /// comparing with `operator==`.
+  final bool compare;
+
+  const BuiltValueField({this.compare: true});
+}
+
 /// Memoized annotation for Built Value getters and methods.
 ///
 /// Getters marked with this annotation are memoized: the result is calculated

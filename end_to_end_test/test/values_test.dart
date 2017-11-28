@@ -106,7 +106,9 @@ void main() {
       final value1 = new SimpleValue((b) => b
         ..anInt = 0
         ..aString = '');
-      expect(value1.toString(), '''SimpleValue {
+      expect(
+          value1.toString(),
+          '''SimpleValue {
   anInt=0,
   aString=,
 }''');

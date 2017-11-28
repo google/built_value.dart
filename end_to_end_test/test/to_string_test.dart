@@ -11,7 +11,9 @@ void main() {
     test('omits nulls', () {
       final value = new CompoundValue((b) => b..simpleValue.anInt = 1);
 
-      expect(value.toString(), '''CompoundValue {
+      expect(
+          value.toString(),
+          '''CompoundValue {
   simpleValue=SimpleValue {
     anInt=1,
   },
