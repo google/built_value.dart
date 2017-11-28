@@ -380,7 +380,8 @@ abstract class ValueSourceClass
     result.writeln('bool operator==(dynamic other) {');
     result.writeln('  if (identical(other, this)) return true;');
     result.writeln('  if (other is! $name) return false;');
-    final comparedFields = fields.where((field) => field.isCompared);
+    final comparedFields =
+        fields.where((field) => field.builtValueField.compare);
     if (comparedFields.length == 0) {
       result.writeln('return true;');
     } else {
