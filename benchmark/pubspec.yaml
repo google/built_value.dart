@@ -1,5 +1,5 @@
 name: benchmark
-version: 4.4.0
+version: 4.4.1
 description: >
   Benchmark, not for publishing.
 authors:
@@ -12,12 +12,12 @@ environment:
 dependencies:
   browser: any
   built_collection: ^2.0.0
-  built_value: ^4.4.0
+  built_value: ^4.4.1
 
 dev_dependencies:
-  build: ^0.10.0
-  build_runner: ^0.4.0
-  built_value_generator: ^4.4.0
+  build: ^0.11.1
+  build_runner: ^0.6.0
+  built_value_generator: ^4.4.1
   source_gen: ^0.7.0
   quiver: '>=0.21.0 <0.26.0'
   test: any

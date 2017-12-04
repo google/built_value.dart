@@ -14,14 +14,6 @@ import 'package:built_value_generator/src/metadata.dart'
 
 part 'serializer_source_field.g.dart';
 
-BuiltSet<String> _builtCollectionNames = new BuiltSet<String>([
-  'BuiltList',
-  'BuiltListMultimap',
-  'BuiltMap',
-  'BuiltSet',
-  'BuiltSetMultimap',
-]);
-
 abstract class SerializerSourceField
     implements Built<SerializerSourceField, SerializerSourceFieldBuilder> {
   static final BuiltMap<String, String> typesWithBuilder =

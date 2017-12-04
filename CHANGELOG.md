@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.4.1
+
+- Use build 0.11.1 and build_runner 0.6.0.
+
 ## 4.4.0
 
 - New annotation, `BuiltValueField`, for configuring fields. First
