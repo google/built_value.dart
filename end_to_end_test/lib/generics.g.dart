@@ -743,3 +743,94 @@ class NestedGenericContainerBuilder
     return _$result;
   }
 }
+
+class _$CustomBuilderGenericValue<T> extends CustomBuilderGenericValue<T> {
+  @override
+  final T value;
+
+  factory _$CustomBuilderGenericValue(
+          [void updates(CustomBuilderGenericValueBuilder<T> b)]) =>
+      (new CustomBuilderGenericValueBuilder<T>()..update(updates)).build()
+          as _$CustomBuilderGenericValue<T>;
+
+  _$CustomBuilderGenericValue._({this.value}) : super._() {
+    if (value == null) throw new ArgumentError.notNull('value');
+  }
+
+  @override
+  CustomBuilderGenericValue<T> rebuild(
+          void updates(CustomBuilderGenericValueBuilder<T> b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$CustomBuilderGenericValueBuilder<T> toBuilder() =>
+      new _$CustomBuilderGenericValueBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! CustomBuilderGenericValue) return false;
+    return value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('CustomBuilderGenericValue')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class _$CustomBuilderGenericValueBuilder<T>
+    extends CustomBuilderGenericValueBuilder<T> {
+  _$CustomBuilderGenericValue<T> _$v;
+
+  @override
+  T get value {
+    _$this;
+    return super.value;
+  }
+
+  @override
+  set value(T value) {
+    _$this;
+    super.value = value;
+  }
+
+  _$CustomBuilderGenericValueBuilder() : super._() {
+    if (T == dynamic)
+      throw new ArgumentError.value(
+          'dynamic', 'T', 'All type arguments must be specified.');
+  }
+
+  CustomBuilderGenericValueBuilder<T> get _$this {
+    if (_$v != null) {
+      super.value = _$v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(CustomBuilderGenericValue<T> other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$CustomBuilderGenericValue<T>;
+  }
+
+  @override
+  void update(void updates(CustomBuilderGenericValueBuilder<T> b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$CustomBuilderGenericValue<T> build() {
+    final _$result = _$v ?? new _$CustomBuilderGenericValue<T>._(value: value);
+    replace(_$result);
+    return _$result;
+  }
+}

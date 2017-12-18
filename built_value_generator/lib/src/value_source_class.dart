@@ -247,7 +247,8 @@ abstract class ValueSourceClass
       result.add('Make builder class abstract.');
     }
 
-    final expectedBuilderParameters = '$name, ${name}Builder';
+    final expectedBuilderParameters =
+        '$name$_generics, ${name}Builder$_generics';
     if (builderParameters != expectedBuilderParameters) {
       result.add(
           'Make builder class implement Builder<$expectedBuilderParameters>. '
@@ -261,7 +262,8 @@ abstract class ValueSourceClass
           'Make builder class have exactly one constructor: $expectedConstructor;');
     }
 
-    final expectedFactory = 'factory ${name}Builder() = _\$${name}Builder;';
+    final expectedFactory =
+        'factory ${name}Builder() = _\$${name}Builder$_generics;';
     if (builderClassFactories.length != 1 ||
         builderClassFactories.single != expectedFactory) {
       result
@@ -325,7 +327,7 @@ abstract class ValueSourceClass
     // If there is a manually maintained builder we have to cast the "build()"
     // result to the generated value class. If the builder is generated, that
     // can return the right type directly and needs no cast.
-    final cast = hasBuilder ? 'as _\$$name' : '';
+    final cast = hasBuilder ? 'as _\$$name$_generics' : '';
     result.writeln(
         'factory _\$$name([void updates(${name}Builder$_generics b)]) '
         '=> (new ${name}Builder$_generics()..update(updates)).build() $cast;');

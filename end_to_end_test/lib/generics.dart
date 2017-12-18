@@ -71,3 +71,26 @@ abstract class NestedGenericContainer
       _$NestedGenericContainer;
   NestedGenericContainer._();
 }
+
+abstract class CustomBuilderGenericValue<T>
+    implements
+        Built<CustomBuilderGenericValue<T>,
+            CustomBuilderGenericValueBuilder<T>> {
+  T get value;
+
+  factory CustomBuilderGenericValue(
+          [updates(CustomBuilderGenericValueBuilder<T> b)]) =
+      _$CustomBuilderGenericValue<T>;
+  CustomBuilderGenericValue._();
+}
+
+abstract class CustomBuilderGenericValueBuilder<T>
+    implements
+        Builder<CustomBuilderGenericValue<T>,
+            CustomBuilderGenericValueBuilder<T>> {
+  T value;
+
+  factory CustomBuilderGenericValueBuilder() =
+      _$CustomBuilderGenericValueBuilder<T>;
+  CustomBuilderGenericValueBuilder._();
+}
