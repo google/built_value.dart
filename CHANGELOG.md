@@ -7,6 +7,7 @@
   generics.
 - Explicitly disallow private fields; fail with an error during generation if
   one is found.
+- Add built in serializer for `Uri`.
 
 ## 4.4.1
 

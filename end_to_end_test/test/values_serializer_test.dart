@@ -150,7 +150,8 @@ void main() {
       ..dbl = 2.5
       ..number = 17.5
       ..string = 'test'
-      ..dateTime = new DateTime.fromMillisecondsSinceEpoch(1000, isUtc: true));
+      ..dateTime = new DateTime.fromMillisecondsSinceEpoch(1000, isUtc: true)
+      ..uri = Uri.parse('https://github.com/google/built_value.dart'));
     final serialized = [
       'PrimitivesValue',
       'boolean',
@@ -167,6 +168,8 @@ void main() {
       'test',
       'dateTime',
       1000000,
+      'uri',
+      'https://github.com/google/built_value.dart',
     ];
 
     test('can be serialized', () {

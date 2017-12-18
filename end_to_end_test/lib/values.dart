@@ -171,6 +171,7 @@ abstract class PrimitivesValue
   num get number;
   String get string;
   DateTime get dateTime;
+  Uri get uri;
 
   factory PrimitivesValue([updates(PrimitivesValueBuilder b)]) =
       _$PrimitivesValue;
