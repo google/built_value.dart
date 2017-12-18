@@ -15,6 +15,6 @@ Future main(List<String> args) async {
           new BuiltValueGenerator(),
         ]),
         'end_to_end_test',
-        inputs: const ['lib/*.dart'])
+        inputs: const ['lib/*.dart', 'test/*.dart'])
   ], deleteFilesByDefault: true);
 }
