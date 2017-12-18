@@ -306,14 +306,17 @@ abstract class Value extends Built<Value, ValueBuilder> {
     });
 
     test('rejects dynamic fields', () async {
-      expect(await generate('''library value;
+      expect(
+          await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value extends Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   get foo;
-}'''), contains("1. Make field foo have non-dynamic type."));
+}'''),
+          contains('1. Make field foo have non-dynamic type. If you are '
+              'already specifying a type, please make sure the type is correctly imported.'));
     });
 
     test('suggests builder fields must be getters', () async {

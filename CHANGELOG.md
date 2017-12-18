@@ -9,6 +9,7 @@
   one is found.
 - Add built in serializer for `Uri`.
 - Allow declaration of multiple `Serializers` in the same file.
+- Improve error message for field without type.
 
 ## 4.4.1
 

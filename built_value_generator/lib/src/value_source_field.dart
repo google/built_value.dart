@@ -143,7 +143,9 @@ abstract class ValueSourceField
     }
 
     if (type == 'dynamic') {
-      result.add('Make field $name have non-dynamic type.');
+      result.add('Make field $name have non-dynamic type. '
+          'If you are already specifying a type, '
+          'please make sure the type is correctly imported.');
     }
 
     if (name.startsWith('_')) {
