@@ -1548,6 +1548,160 @@ class PrimitivesValueBuilder
   }
 }
 
+class _$FunctionValue extends FunctionValue {
+  @override
+  final MyFunctionType function;
+
+  factory _$FunctionValue([void updates(FunctionValueBuilder b)]) =>
+      (new FunctionValueBuilder()..update(updates)).build();
+
+  _$FunctionValue._({this.function}) : super._() {
+    if (function == null) throw new ArgumentError.notNull('function');
+  }
+
+  @override
+  FunctionValue rebuild(void updates(FunctionValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  FunctionValueBuilder toBuilder() => new FunctionValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! FunctionValue) return false;
+    return function == other.function;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, function.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('FunctionValue')
+          ..add('function', function))
+        .toString();
+  }
+}
+
+class FunctionValueBuilder
+    implements Builder<FunctionValue, FunctionValueBuilder> {
+  _$FunctionValue _$v;
+
+  MyFunctionType _function;
+  MyFunctionType get function => _$this._function;
+  set function(MyFunctionType function) => _$this._function = function;
+
+  FunctionValueBuilder();
+
+  FunctionValueBuilder get _$this {
+    if (_$v != null) {
+      _function = _$v.function;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(FunctionValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$FunctionValue;
+  }
+
+  @override
+  void update(void updates(FunctionValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$FunctionValue build() {
+    final _$result = _$v ?? new _$FunctionValue._(function: function);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ListOfFunctionValue extends ListOfFunctionValue {
+  @override
+  final BuiltList<MyFunctionType> functions;
+
+  factory _$ListOfFunctionValue([void updates(ListOfFunctionValueBuilder b)]) =>
+      (new ListOfFunctionValueBuilder()..update(updates)).build();
+
+  _$ListOfFunctionValue._({this.functions}) : super._() {
+    if (functions == null) throw new ArgumentError.notNull('functions');
+  }
+
+  @override
+  ListOfFunctionValue rebuild(void updates(ListOfFunctionValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ListOfFunctionValueBuilder toBuilder() =>
+      new ListOfFunctionValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! ListOfFunctionValue) return false;
+    return functions == other.functions;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, functions.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ListOfFunctionValue')
+          ..add('functions', functions))
+        .toString();
+  }
+}
+
+class ListOfFunctionValueBuilder
+    implements Builder<ListOfFunctionValue, ListOfFunctionValueBuilder> {
+  _$ListOfFunctionValue _$v;
+
+  ListBuilder<MyFunctionType> _functions;
+  ListBuilder<MyFunctionType> get functions =>
+      _$this._functions ??= new ListBuilder<MyFunctionType>();
+  set functions(ListBuilder<MyFunctionType> functions) =>
+      _$this._functions = functions;
+
+  ListOfFunctionValueBuilder();
+
+  ListOfFunctionValueBuilder get _$this {
+    if (_$v != null) {
+      _functions = _$v.functions?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ListOfFunctionValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$ListOfFunctionValue;
+  }
+
+  @override
+  void update(void updates(ListOfFunctionValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ListOfFunctionValue build() {
+    final _$result =
+        _$v ?? new _$ListOfFunctionValue._(functions: functions?.build());
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$NamedFactoryValue extends NamedFactoryValue {
   @override
   final int value;
