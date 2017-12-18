@@ -9,7 +9,7 @@ import 'package:built_value_generator/built_value_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 Future main(List<String> args) async {
-  watch([
+  await watch([
     new BuildAction(
         new PartBuilder([
           new BuiltValueGenerator(),
