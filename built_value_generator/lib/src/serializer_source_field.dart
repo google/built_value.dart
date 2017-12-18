@@ -37,7 +37,22 @@ abstract class SerializerSourceField
 
   @memoized
   bool get isSerializable =>
-      element.getter != null && element.getter.isAbstract && !element.isStatic;
+      element.getter != null &&
+      element.getter.isAbstract &&
+      !element.isStatic &&
+      builtValueField.serialize;
+
+  @memoized
+  BuiltValueField get builtValueField {
+    final annotations = element.getter.metadata
+        .map((annotation) => annotation.computeConstantValue())
+        .where((value) => value?.type?.displayName == 'BuiltValueField');
+    if (annotations.isEmpty) return const BuiltValueField();
+    final annotation = annotations.single;
+    return new BuiltValueField(
+        compare: annotation.getField('compare').toBoolValue(),
+        serialize: annotation.getField('serialize').toBoolValue());
+  }
 
   @memoized
   bool get isNullable => element.getter.metadata

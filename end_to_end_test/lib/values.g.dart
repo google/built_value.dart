@@ -27,6 +27,8 @@ Serializer<NoFieldsValue> _$noFieldsValueSerializer =
     new _$NoFieldsValueSerializer();
 Serializer<PrimitivesValue> _$primitivesValueSerializer =
     new _$PrimitivesValueSerializer();
+Serializer<PartiallySerializableValue> _$partiallySerializableValueSerializer =
+    new _$PartiallySerializableValueSerializer();
 Serializer<NamedFactoryValue> _$namedFactoryValueSerializer =
     new _$NamedFactoryValueSerializer();
 Serializer<FieldDiscoveryValue> _$fieldDiscoveryValueSerializer =
@@ -380,6 +382,50 @@ class _$PrimitivesValueSerializer
         case 'uri':
           result.uri = serializers.deserialize(value,
               specifiedType: const FullType(Uri)) as Uri;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PartiallySerializableValueSerializer
+    implements StructuredSerializer<PartiallySerializableValue> {
+  @override
+  final Iterable<Type> types = const [
+    PartiallySerializableValue,
+    _$PartiallySerializableValue
+  ];
+  @override
+  final String wireName = 'PartiallySerializableValue';
+
+  @override
+  Iterable serialize(Serializers serializers, PartiallySerializableValue object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PartiallySerializableValue deserialize(
+      Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new PartiallySerializableValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -1717,6 +1763,97 @@ class ListOfFunctionValueBuilder
   _$ListOfFunctionValue build() {
     final _$result =
         _$v ?? new _$ListOfFunctionValue._(functions: functions?.build());
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PartiallySerializableValue extends PartiallySerializableValue {
+  @override
+  final int value;
+  @override
+  final int transientValue;
+
+  factory _$PartiallySerializableValue(
+          [void updates(PartiallySerializableValueBuilder b)]) =>
+      (new PartiallySerializableValueBuilder()..update(updates)).build();
+
+  _$PartiallySerializableValue._({this.value, this.transientValue})
+      : super._() {
+    if (value == null) throw new ArgumentError.notNull('value');
+  }
+
+  @override
+  PartiallySerializableValue rebuild(
+          void updates(PartiallySerializableValueBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PartiallySerializableValueBuilder toBuilder() =>
+      new PartiallySerializableValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! PartiallySerializableValue) return false;
+    return value == other.value && transientValue == other.transientValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, value.hashCode), transientValue.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('PartiallySerializableValue')
+          ..add('value', value)
+          ..add('transientValue', transientValue))
+        .toString();
+  }
+}
+
+class PartiallySerializableValueBuilder
+    implements
+        Builder<PartiallySerializableValue, PartiallySerializableValueBuilder> {
+  _$PartiallySerializableValue _$v;
+
+  int _value;
+  int get value => _$this._value;
+  set value(int value) => _$this._value = value;
+
+  int _transientValue;
+  int get transientValue => _$this._transientValue;
+  set transientValue(int transientValue) =>
+      _$this._transientValue = transientValue;
+
+  PartiallySerializableValueBuilder();
+
+  PartiallySerializableValueBuilder get _$this {
+    if (_$v != null) {
+      _value = _$v.value;
+      _transientValue = _$v.transientValue;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(PartiallySerializableValue other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$PartiallySerializableValue;
+  }
+
+  @override
+  void update(void updates(PartiallySerializableValueBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$PartiallySerializableValue build() {
+    final _$result = _$v ??
+        new _$PartiallySerializableValue._(
+            value: value, transientValue: transientValue);
     replace(_$result);
     return _$result;
   }

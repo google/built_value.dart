@@ -200,6 +200,25 @@ abstract class ListOfFunctionValue
   ListOfFunctionValue._();
 }
 
+abstract class PartiallySerializableValue
+    implements
+        Built<PartiallySerializableValue, PartiallySerializableValueBuilder> {
+  static Serializer<PartiallySerializableValue> get serializer =>
+      _$partiallySerializableValueSerializer;
+
+  int get value;
+
+  @nullable
+  @BuiltValueField(serialize: false)
+  int get transientValue;
+
+  factory PartiallySerializableValue(
+          [updates(PartiallySerializableValueBuilder b)]) =
+      _$PartiallySerializableValue;
+
+  PartiallySerializableValue._();
+}
+
 abstract class NamedFactoryValue
     implements Built<NamedFactoryValue, NamedFactoryValueBuilder> {
   static Serializer<NamedFactoryValue> get serializer =>

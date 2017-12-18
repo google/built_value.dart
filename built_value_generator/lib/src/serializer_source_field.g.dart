@@ -22,6 +22,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   final FieldElement builderElement;
   bool __isSerializable;
+  BuiltValueField __builtValueField;
   bool __isNullable;
   String __name;
   String __type;
@@ -42,6 +43,10 @@ class _$SerializerSourceField extends SerializerSourceField {
 
   @override
   bool get isSerializable => __isSerializable ??= super.isSerializable;
+
+  @override
+  BuiltValueField get builtValueField =>
+      __builtValueField ??= super.builtValueField;
 
   @override
   bool get isNullable => __isNullable ??= super.isNullable;

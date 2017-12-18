@@ -32,6 +32,7 @@ part 'serializers.g.dart';
   HasString,
   NamedFactoryValue,
   NestedGenericContainer,
+  PartiallySerializableValue,
   PrimitivesValue,
   Robot,
   SecondTestEnum,
