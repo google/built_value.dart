@@ -3,6 +3,8 @@
 ## 4.4.2
 
 - Fix generated builder when fields hold function types.
+- Fix checks and generated builder when manually maintained builder has
+  generics.
 
 ## 4.4.1
 
