@@ -97,7 +97,7 @@ abstract class ValueSourceField
   @memoized
   String get typeInBuilder => builderFieldExists
       ? buildElementType
-      : _toBuilderType(element.getter.returnType);
+      : _toBuilderType(element.getter.returnType, typeWithPrefix);
 
   @memoized
   bool get isNestedBuilder => builderFieldExists
@@ -121,17 +121,17 @@ abstract class ValueSourceField
     return result.build();
   }
 
-  static String _toBuilderType(DartType type) {
+  static String _toBuilderType(DartType type, String displayName) {
     if (DartTypes.isBuiltCollection(type)) {
-      return type.displayName
+      return displayName
           .replaceFirst('Built', '')
           .replaceFirst('<', 'Builder<');
     } else if (DartTypes.isInstantiableBuiltValue(type)) {
-      return type.displayName.contains('<')
-          ? type.displayName.replaceFirst('<', 'Builder<')
+      return displayName.contains('<')
+          ? displayName.replaceFirst('<', 'Builder<')
           : '${type}Builder';
     } else {
-      return type.displayName;
+      return displayName;
     }
   }
 

@@ -178,6 +178,27 @@ abstract class PrimitivesValue
   PrimitivesValue._();
 }
 
+typedef MyFunctionType = int Function<String>();
+
+abstract class FunctionValue
+    implements Built<FunctionValue, FunctionValueBuilder> {
+  MyFunctionType get function;
+
+  factory FunctionValue([updates(FunctionValueBuilder b)]) = _$FunctionValue;
+
+  FunctionValue._();
+}
+
+abstract class ListOfFunctionValue
+    implements Built<ListOfFunctionValue, ListOfFunctionValueBuilder> {
+  BuiltList<MyFunctionType> get functions;
+
+  factory ListOfFunctionValue([updates(ListOfFunctionValueBuilder b)]) =
+      _$ListOfFunctionValue;
+
+  ListOfFunctionValue._();
+}
+
 abstract class NamedFactoryValue
     implements Built<NamedFactoryValue, NamedFactoryValueBuilder> {
   static Serializer<NamedFactoryValue> get serializer =>
