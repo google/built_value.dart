@@ -7,6 +7,7 @@ import 'package:built_value/src/date_time_serializer.dart';
 import 'package:built_value/src/int64_serializer.dart';
 import 'package:built_value/src/json_object_serializer.dart';
 import 'package:built_value/src/num_serializer.dart';
+import 'package:built_value/src/uri_serializer.dart';
 import 'package:quiver/core.dart';
 
 import 'src/bool_serializer.dart';
@@ -63,6 +64,7 @@ abstract class Serializers {
           ..add(new JsonObjectSerializer())
           ..add(new NumSerializer())
           ..add(new StringSerializer())
+          ..add(new UriSerializer())
           ..addBuilderFactory(
               const FullType(BuiltList, const [FullType.object]),
               () => new ListBuilder<Object>())
