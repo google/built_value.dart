@@ -26,6 +26,13 @@ abstract class ValueSourceClass
   @memoized
   String get name => element.displayName;
 
+  /// Returns the class name for the generated implementation. If the manually
+  /// maintained class is private then we ignore the underscore here, to avoid
+  /// returning a class name starting `_$_`.
+  @memoized
+  String get implName =>
+      name.startsWith('_') ? '_\$${name.substring(1)}' : '_\$$name';
+
   @memoized
   ClassElement get builderElement => element.library.getType(name + 'Builder');
 
@@ -216,11 +223,11 @@ abstract class ValueSourceClass
 
     if (settings.instantiable) {
       if (!valueClassFactories
-          .any((factory) => factory.contains('_\$$name$_generics'))) {
+          .any((factory) => factory.contains('$implName$_generics'))) {
         result
             .add('Add a factory so your class can be instantiated. Example:\n\n'
                 'factory $name([updates(${name}Builder$_generics b)]) = '
-                '_\$$name$_generics;');
+                '$implName$_generics;');
       }
     } else {
       if (valueClassFactories.isNotEmpty) {
@@ -313,7 +320,8 @@ abstract class ValueSourceClass
   /// Generates the value class implementation.
   String _generateImpl() {
     final result = new StringBuffer();
-    result.writeln('class _\$$name$_boundedGenerics extends $name$_generics {');
+    result.writeln('class $implName$_boundedGenerics '
+        'extends $name$_generics {');
     for (final field in fields) {
       final type = field.typeInCompilationUnit(compilationUnit);
       result.writeln('@override');
@@ -328,15 +336,15 @@ abstract class ValueSourceClass
     // result to the generated value class. If the builder is generated, that
     // can return the right type directly and needs no cast.
     final cast = hasBuilder ? 'as _\$$name$_generics' : '';
-    result.writeln(
-        'factory _\$$name([void updates(${name}Builder$_generics b)]) '
+    result.writeln('factory $implName(['
+        'void updates(${name}Builder$_generics b)]) '
         '=> (new ${name}Builder$_generics()..update(updates)).build() $cast;');
     result.writeln();
 
     if (fields.isEmpty) {
-      result.write('_\$$name._() : super._()');
+      result.write('$implName._() : super._()');
     } else {
-      result.write('_\$$name._({');
+      result.write('$implName._({');
       result.write(fields.map((field) => 'this.${field.name}').join(', '));
       result.write('}) : super._()');
     }
@@ -370,8 +378,8 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     if (hasBuilder) {
-      result.writeln('_\$${name}Builder$_generics toBuilder() '
-          '=> new _\$${name}Builder$_generics()..replace(this);');
+      result.writeln('${implName}Builder$_generics toBuilder() '
+          '=> new ${implName}Builder$_generics()..replace(this);');
     } else {
       result.writeln('${name}Builder$_generics toBuilder() '
           '=> new ${name}Builder$_generics()..replace(this);');
@@ -438,15 +446,15 @@ abstract class ValueSourceClass
   String _generateBuilder() {
     final result = new StringBuffer();
     if (hasBuilder) {
-      result.writeln(
-          'class _\$${name}Builder$_boundedGenerics extends ${name}Builder$_generics {');
+      result.writeln('class ${implName}Builder$_boundedGenerics '
+          'extends ${name}Builder$_generics {');
     } else {
-      result.writeln('class ${name}Builder$_boundedGenerics implements '
-          '${builderImplements.join(", ")} {');
+      result.writeln('class ${name}Builder$_boundedGenerics '
+          'implements ${builderImplements.join(", ")} {');
     }
 
     // Builder holds a reference to a value, copies from it lazily.
-    result.writeln('_\$$name$_generics _\$v;');
+    result.writeln('$implName$_generics _\$v;');
     result.writeln('');
 
     if (hasBuilder) {
@@ -504,7 +512,7 @@ abstract class ValueSourceClass
     result.writeln();
 
     if (hasBuilder) {
-      result.writeln('_\$${name}Builder() : super._()');
+      result.writeln('${implName}Builder() : super._()');
     } else {
       result.writeln('${name}Builder()');
     }
@@ -554,7 +562,7 @@ abstract class ValueSourceClass
 
     result.writeln("if (other == null) "
         "throw new ArgumentError.notNull('other');");
-    result.writeln('_\$v = other as _\$$name$_generics;');
+    result.writeln('_\$v = other as $implName$_generics;');
     result.writeln('}');
 
     result.writeln('@override');
@@ -563,9 +571,9 @@ abstract class ValueSourceClass
     result.writeln();
 
     result.writeln('@override');
-    result.writeln('_\$$name$_generics build() {');
+    result.writeln('$implName$_generics build() {');
     result.writeln('final _\$result = _\$v ?? ');
-    result.writeln('new _\$$name$_generics._(');
+    result.writeln('new $implName$_generics._(');
     result.write(fields.map((field) {
       final name = field.name;
       if (!field.isNestedBuilder) return '$name: $name';

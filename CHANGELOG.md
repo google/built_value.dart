@@ -10,6 +10,7 @@
 - Add built in serializer for `Uri`.
 - Allow declaration of multiple `Serializers` in the same file.
 - Improve error message for field without type.
+- Fix name of classes generated from a private class.
 
 ## 4.4.1
 

@@ -18,6 +18,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   final ClassElement element;
   String __name;
+  String __implName;
   ClassElement __builderElement;
   bool __implementsBuilt;
   BuiltValue __settings;
@@ -51,6 +52,9 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   String get name => __name ??= super.name;
+
+  @override
+  String get implName => __implName ??= super.implName;
 
   @override
   ClassElement get builderElement => __builderElement ??= super.builderElement;
