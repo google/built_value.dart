@@ -18,10 +18,11 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   @override
   final LibraryElement element;
   bool __hasSerializers;
-  ElementAnnotation __serializersForAnnotation;
+  BuiltMap<String, ElementAnnotation> __serializersForAnnotations;
   BuiltSet<SerializerSourceClass> __sourceClasses;
-  BuiltSet<SerializerSourceClass> __serializeForClasses;
-  BuiltSet<SerializerSourceClass> __serializeForTransitiveClasses;
+  BuiltSetMultimap<String, SerializerSourceClass> __serializeForClasses;
+  BuiltSetMultimap<String, SerializerSourceClass>
+      __serializeForTransitiveClasses;
 
   factory _$SerializerSourceLibrary(
           [void updates(SerializerSourceLibraryBuilder b)]) =>
@@ -35,20 +36,21 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   bool get hasSerializers => __hasSerializers ??= super.hasSerializers;
 
   @override
-  ElementAnnotation get serializersForAnnotation =>
-      __serializersForAnnotation ??= super.serializersForAnnotation;
+  BuiltMap<String, ElementAnnotation> get serializersForAnnotations =>
+      __serializersForAnnotations ??= super.serializersForAnnotations;
 
   @override
   BuiltSet<SerializerSourceClass> get sourceClasses =>
       __sourceClasses ??= super.sourceClasses;
 
   @override
-  BuiltSet<SerializerSourceClass> get serializeForClasses =>
+  BuiltSetMultimap<String, SerializerSourceClass> get serializeForClasses =>
       __serializeForClasses ??= super.serializeForClasses;
 
   @override
-  BuiltSet<SerializerSourceClass> get serializeForTransitiveClasses =>
-      __serializeForTransitiveClasses ??= super.serializeForTransitiveClasses;
+  BuiltSetMultimap<String, SerializerSourceClass>
+      get serializeForTransitiveClasses => __serializeForTransitiveClasses ??=
+          super.serializeForTransitiveClasses;
 
   @override
   SerializerSourceLibrary rebuild(

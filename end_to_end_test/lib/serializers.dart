@@ -44,3 +44,9 @@ part 'serializers.g.dart';
   ValueWithInt,
 ])
 final Serializers serializers = _$serializers;
+
+// Check that multiple `Serializers` can be declared in one file.
+@SerializersFor(const [
+  Cat,
+])
+final Serializers moreSerializers = _$moreSerializers;

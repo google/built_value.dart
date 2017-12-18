@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.4.2
+## 4.5.0
 
 - Fix generated builder when fields hold function types.
 - Fix checks and generated builder when manually maintained builder has
@@ -8,6 +8,7 @@
 - Explicitly disallow private fields; fail with an error during generation if
   one is found.
 - Add built in serializer for `Uri`.
+- Allow declaration of multiple `Serializers` in the same file.
 
 ## 4.4.1
 
