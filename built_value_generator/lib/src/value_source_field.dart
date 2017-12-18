@@ -146,6 +146,10 @@ abstract class ValueSourceField
       result.add('Make field $name have non-dynamic type.');
     }
 
+    if (name.startsWith('_')) {
+      result.add('Make field $name public; remove the underscore.');
+    }
+
     if (builderFieldExists &&
         type != typeInBuilder &&
         // TODO(davidmorgan): smarter check for builder types.

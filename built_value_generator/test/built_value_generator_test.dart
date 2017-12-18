@@ -294,6 +294,17 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 }'''), contains("1. Make field foo a getter."));
     });
 
+    test('suggests value fields must be public', () async {
+      expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  int get _foo;
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}'''), contains('1. Make field _foo public; remove the underscore.'));
+    });
+
     test('rejects dynamic fields', () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
