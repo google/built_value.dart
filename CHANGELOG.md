@@ -5,6 +5,8 @@
 - Fix generated builder when fields hold function types.
 - Fix checks and generated builder when manually maintained builder has
   generics.
+- Explicitly disallow private fields; fail with an error during generation if
+  one is found.
 
 ## 4.4.1
 
