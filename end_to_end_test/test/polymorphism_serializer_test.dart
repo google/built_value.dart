@@ -27,6 +27,14 @@ void main() {
     test('can be deserialized', () {
       expect(serializers.deserialize(serialized), data);
     });
+
+    test('can be serialized by moreSerializers', () {
+      expect(moreSerializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized by moreSerializers', () {
+      expect(moreSerializers.deserialize(serialized), data);
+    });
   });
 
   group('Robot', () {

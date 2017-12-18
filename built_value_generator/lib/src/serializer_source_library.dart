@@ -23,26 +23,34 @@ abstract class SerializerSourceLibrary
   SerializerSourceLibrary._();
 
   @memoized
-  bool get hasSerializers => serializersForAnnotation != null;
+  bool get hasSerializers => serializersForAnnotations.isNotEmpty;
 
-  /// Returns the @serializersFor annotation from an accessor called
-  /// "serializers", or null if none is found.
+  /// Returns a map of `Serializers` declarations; the keys are field names
+  /// and the values are the `@SerializersFor` annotations.
   @memoized
-  ElementAnnotation get serializersForAnnotation {
+  BuiltMap<String, ElementAnnotation> get serializersForAnnotations {
+    final result = new MapBuilder<String, ElementAnnotation>();
     final accessors = element.definingCompilationUnit.accessors
         .where((element) =>
-            element.isGetter && element.displayName == 'serializers')
+            element.isGetter && element.returnType.displayName == 'Serializers')
         .toList();
-    if (accessors.isEmpty) return null;
-    final annotations = accessors.single.variable.metadata
-        .where((annotation) =>
-            annotation.computeConstantValue()?.type?.displayName ==
-            'SerializersFor')
-        .toList();
-    if (annotations.isEmpty) return null;
-    return annotations.single;
+
+    for (final accessor in accessors) {
+      final annotations = accessor.variable.metadata
+          .where((annotation) =>
+              annotation.computeConstantValue()?.type?.displayName ==
+              'SerializersFor')
+          .toList();
+      if (annotations.isEmpty) continue;
+
+      result[accessor.name] = annotations.single;
+    }
+
+    return result.build();
   }
 
+  /// Returns the set of serializable classes in this library. A serializer
+  /// needs to be generated for each of these.
   @memoized
   BuiltSet<SerializerSourceClass> get sourceClasses {
     final result = new SetBuilder<SerializerSourceClass>();
@@ -56,32 +64,54 @@ abstract class SerializerSourceLibrary
     return result.build();
   }
 
+  /// Returns a map from `Serializers` declaration field names to the classes
+  /// that each serializer is required to be able to serialize.
   @memoized
-  BuiltSet<SerializerSourceClass> get serializeForClasses {
-    final types = serializersForAnnotation
-        .computeConstantValue()
-        .getField('types')
-        .toListValue()
-        .map((dartObject) => dartObject.toTypeValue());
-    return new BuiltSet<SerializerSourceClass>(types.map(
-        (type) => new SerializerSourceClass(type.element as ClassElement)));
+  BuiltSetMultimap<String, SerializerSourceClass> get serializeForClasses {
+    final result = new SetMultimapBuilder<String, SerializerSourceClass>();
+
+    for (final field in serializersForAnnotations.keys) {
+      final serializersForAnnotation = serializersForAnnotations[field];
+
+      final types = serializersForAnnotation
+          .computeConstantValue()
+          .getField('types')
+          .toListValue()
+          .map((dartObject) => dartObject.toTypeValue());
+
+      result.addValues(
+          field,
+          types.map((type) =>
+              new SerializerSourceClass(type.element as ClassElement)));
+    }
+    return result.build();
   }
 
+  /// Returns a map from `Serializers` declaration field names to the
+  /// transitive set of serializable classes implied by `serializeForClasses`.
   @memoized
-  BuiltSet<SerializerSourceClass> get serializeForTransitiveClasses {
-    var currentResult = new BuiltSet<SerializerSourceClass>(
-        serializeForClasses.where(
-            (serializerSourceClass) => serializerSourceClass.needsBuiltJson));
-    BuiltSet<SerializerSourceClass> expandedResult;
+  BuiltSetMultimap<String, SerializerSourceClass>
+      get serializeForTransitiveClasses {
+    final result = new SetMultimapBuilder<String, SerializerSourceClass>();
 
-    while (currentResult != expandedResult) {
-      currentResult = expandedResult ?? currentResult;
-      expandedResult = currentResult.rebuild((b) => b
-        ..addAll(currentResult.expand((sourceClass) => sourceClass.fieldClasses
-            .where((fieldClass) => fieldClass.needsBuiltJson))));
+    for (final field in serializersForAnnotations.keys) {
+      var currentResult = new BuiltSet<SerializerSourceClass>(
+          serializeForClasses[field].where(
+              (serializerSourceClass) => serializerSourceClass.needsBuiltJson));
+      BuiltSet<SerializerSourceClass> expandedResult;
+
+      while (currentResult != expandedResult) {
+        currentResult = expandedResult ?? currentResult;
+        expandedResult = currentResult.rebuild((b) => b
+          ..addAll(currentResult.expand((sourceClass) => sourceClass
+              .fieldClasses
+              .where((fieldClass) => fieldClass.needsBuiltJson))));
+      }
+
+      result.addValues(field, currentResult);
     }
 
-    return currentResult;
+    return result.build();
   }
 
   bool get needsBuiltJson => sourceClasses.isNotEmpty;
@@ -94,22 +124,7 @@ abstract class SerializerSourceLibrary
 
     if (errors.isNotEmpty) throw _makeError(errors);
 
-    return (hasSerializers
-            ? 'Serializers _\$serializers = (new Serializers().toBuilder()' +
-                (serializeForTransitiveClasses
-                        .map((sourceClass) =>
-                            sourceClass.generateTransitiveSerializerAdder())
-                        .toList()
-                          ..sort())
-                    .join('\n') +
-                (serializeForTransitiveClasses
-                        .map((sourceClass) =>
-                            sourceClass.generateBuilderFactoryAdders())
-                        .toList()
-                          ..sort())
-                    .join('\n') +
-                ').build();'
-            : '') +
+    return _generateSerializersTopLevelFields() +
         sourceClasses
             .map((sourceClass) => sourceClass.generateSerializerDeclaration())
             .join('\n') +
@@ -117,6 +132,24 @@ abstract class SerializerSourceLibrary
             .map((sourceClass) => sourceClass.generateSerializer())
             .join('\n');
   }
+
+  String _generateSerializersTopLevelFields() => serializersForAnnotations.keys
+      .map((field) =>
+          'Serializers _\$$field = (new Serializers().toBuilder()' +
+          (serializeForTransitiveClasses[field]
+                  .map((sourceClass) =>
+                      sourceClass.generateTransitiveSerializerAdder())
+                  .toList()
+                    ..sort())
+              .join('\n') +
+          (serializeForTransitiveClasses[field]
+                  .map((sourceClass) =>
+                      sourceClass.generateBuilderFactoryAdders())
+                  .toList()
+                    ..sort())
+              .join('\n') +
+          ').build();')
+      .join('\n');
 }
 
 InvalidGenerationSourceError _makeError(Iterable<String> todos) {

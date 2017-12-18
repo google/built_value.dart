@@ -106,3 +106,5 @@ Serializers _$serializers = (new Serializers().toBuilder()
               CollectionGenericValue, const [const FullType(String)]),
           () => new CollectionGenericValueBuilder<String>()))
     .build();
+Serializers _$moreSerializers =
+    (new Serializers().toBuilder()..add(Cat.serializer)).build();
