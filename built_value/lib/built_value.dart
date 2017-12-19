@@ -95,7 +95,13 @@ class BuiltValueField {
   /// comparing with `operator==`.
   final bool compare;
 
-  const BuiltValueField({this.compare: true});
+  /// Whether the field is serialized. Defaults to `true`.
+  ///
+  /// If a field is not serialized, it must either be `@nullable` or specify a
+  /// default for deserialization to succeed.
+  final bool serialize;
+
+  const BuiltValueField({this.compare: true, this.serialize: true});
 }
 
 /// Memoized annotation for Built Value getters and methods.

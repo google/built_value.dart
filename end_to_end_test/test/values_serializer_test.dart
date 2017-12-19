@@ -222,4 +222,24 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('PartiallySerializableValue', () {
+    final data = new PartiallySerializableValue((b) => b
+      ..value = 1
+      ..transientValue = 2);
+    final serialized = [
+      'PartiallySerializableValue',
+      'value',
+      1,
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized),
+          data.rebuild((b) => b..transientValue = null));
+    });
+  });
 }

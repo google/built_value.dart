@@ -66,7 +66,8 @@ abstract class ValueSourceField
     if (annotations.isEmpty) return const BuiltValueField();
     final annotation = annotations.single;
     return new BuiltValueField(
-        compare: annotation.getField('compare').toBoolValue());
+        compare: annotation.getField('compare').toBoolValue(),
+        serialize: annotation.getField('serialize').toBoolValue());
   }
 
   @memoized
