@@ -156,6 +156,9 @@ abstract class SerializerSourceClass
     return '..add($name.serializer)';
   }
 
+  /// Returns a string with `addBuilderFactory` calls to add the needed builder
+  /// factories. Specify the [compilationUnit] the code will run in, so the
+  /// code can be generated correctly (with or without import prefixes).
   String generateBuilderFactoryAdders(CompilationUnitElement compilationUnit) {
     return fields
         .where((field) =>
