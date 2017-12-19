@@ -78,7 +78,12 @@ class BuiltValue {
   /// builder.
   final bool nestedBuilders;
 
-  const BuiltValue({this.instantiable: true, this.nestedBuilders: true});
+  /// The wire name when the class is serialized. Defaults to `null` which
+  /// indicates that the name is to be taken from the literal class name.
+  final String wireName;
+
+  const BuiltValue(
+      {this.instantiable: true, this.nestedBuilders: true, this.wireName});
 }
 
 /// Nullable annotation for Built Value fields.
@@ -101,7 +106,12 @@ class BuiltValueField {
   /// default for deserialization to succeed.
   final bool serialize;
 
-  const BuiltValueField({this.compare: true, this.serialize: true});
+  /// The wire name when the field is serialized. Defaults to `null` which
+  /// indicates the name is to be taken from the literal field name.
+  final String wireName;
+
+  const BuiltValueField(
+      {this.compare: true, this.serialize: true, this.wireName});
 }
 
 /// Memoized annotation for Built Value getters and methods.

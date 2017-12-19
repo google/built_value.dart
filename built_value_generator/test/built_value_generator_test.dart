@@ -475,7 +475,9 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
 class BuiltValue {
   final bool instantiable;
   final bool nestedBuilders;
+  final String wireName;
 
-  const BuiltValue({this.instantiable: true, this.nestedBuilders: true});
+  const BuiltValue({
+      this.instantiable: true, this.nestedBuilders: true, this.wireName});
 }
 ''';

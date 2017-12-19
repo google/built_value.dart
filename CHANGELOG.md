@@ -14,6 +14,8 @@
 - Add `serialize` field to `@BuiltValueField`. Use this to tag fields to skip
   when serializing.
 - Fix builder and serializer generation when importing with a prefix.
+- Add `wireName` field to `@BuiltValue` and `@BuiltValueField`. Use this to
+  override the wire name for classes and fields when serializing.
 
 ## 4.4.1
 

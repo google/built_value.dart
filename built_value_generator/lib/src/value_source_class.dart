@@ -49,7 +49,8 @@ abstract class ValueSourceClass
     final annotation = annotations.single;
     return new BuiltValue(
         instantiable: annotation.getField('instantiable').toBoolValue(),
-        nestedBuilders: annotation.getField('nestedBuilders').toBoolValue());
+        nestedBuilders: annotation.getField('nestedBuilders').toBoolValue(),
+        wireName: annotation.getField('wireName').toStringValue());
   }
 
   @memoized

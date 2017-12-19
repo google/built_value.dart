@@ -51,7 +51,8 @@ abstract class SerializerSourceField
     final annotation = annotations.single;
     return new BuiltValueField(
         compare: annotation.getField('compare').toBoolValue(),
-        serialize: annotation.getField('serialize').toBoolValue());
+        serialize: annotation.getField('serialize').toBoolValue(),
+        wireName: annotation.getField('wireName').toStringValue());
   }
 
   @memoized
@@ -60,6 +61,9 @@ abstract class SerializerSourceField
 
   @memoized
   String get name => element.displayName;
+
+  @memoized
+  String get wireName => builtValueField.wireName ?? name;
 
   @memoized
   String get type => element.getter.returnType.displayName;
