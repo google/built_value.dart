@@ -24,6 +24,20 @@ abstract class EnumSourceClass
   String get name => element.name;
 
   @memoized
+  String get wireName => settings.wireName ?? name;
+
+  @memoized
+  BuiltValueEnum get settings {
+    final annotations = element.metadata
+        .map((annotation) => annotation.computeConstantValue())
+        .where((value) => value?.type?.displayName == 'BuiltValueEnum');
+    if (annotations.isEmpty) return const BuiltValueEnum();
+    final annotation = annotations.single;
+    return new BuiltValueEnum(
+        wireName: annotation.getField('wireName').toStringValue());
+  }
+
+  @memoized
   bool get isAbstract => element.isAbstract;
 
   @memoized

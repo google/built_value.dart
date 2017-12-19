@@ -18,6 +18,8 @@ class _$EnumSourceClass extends EnumSourceClass {
   @override
   final ClassElement element;
   String __name;
+  String __wireName;
+  BuiltValueEnum __settings;
   bool __isAbstract;
   BuiltList<EnumSourceField> __fields;
   BuiltList<String> __constructors;
@@ -36,6 +38,12 @@ class _$EnumSourceClass extends EnumSourceClass {
 
   @override
   String get name => __name ??= super.name;
+
+  @override
+  String get wireName => __wireName ??= super.wireName;
+
+  @override
+  BuiltValueEnum get settings => __settings ??= super.settings;
 
   @override
   bool get isAbstract => __isAbstract ??= super.isAbstract;
