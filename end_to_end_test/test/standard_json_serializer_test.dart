@@ -80,4 +80,37 @@ void main() {
           data);
     });
   });
+
+  group('StandardJsonValue with unknown specifiedType', () {
+    final data = new StandardJsonValue((b) => b
+      ..number = 3
+      ..text = 'some text'
+      ..keyValues['one'] = new JsonObject(1)
+      ..keyValues['two'] = new JsonObject('two')
+      ..keyValues['three'] = new JsonObject(true)
+      ..keyValues['four'] = new JsonObject([1, 2, 3])
+      ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2}));
+    final serializersWithPlugin =
+        (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
+    final serialized = {
+      r'$': 'StandardJsonValue',
+      'number': 3,
+      'text': 'some text',
+      'keyValues': {
+        'one': 1,
+        'two': 'two',
+        'three': true,
+        'four': [1, 2, 3],
+        'five': {'one': 1, 'two': 2},
+      }
+    };
+
+    test('can be serialized', () {
+      expect(serializersWithPlugin.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializersWithPlugin.deserialize(serialized), data);
+    });
+  });
 }

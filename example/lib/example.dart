@@ -75,8 +75,13 @@ void example() {
 /// Example of using StandardJsonPlugin.
 ///
 /// The plugin changes the built_value serialization format to the Map-based
-/// format used by most JSON APIs. You must specify which type you are
-/// serializing/deserializing when using this plugin.
+/// format used by most JSON APIs.
+///
+/// Where needed the plugin specifies which type to serialize/deserialize using
+/// a `discriminator` field. By default this field is called `$`; you can pass
+/// a different name to the `StandardJsonPlugin` constructor. If the wire
+/// format should not contain the type name, you must instead explicitly
+/// specify which type to serialize/deserialize.
 void standardJsonExample() {
   final standardSerializers =
       (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
