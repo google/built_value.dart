@@ -13,6 +13,7 @@
 - Fix name of classes generated from a private class.
 - Add `serialize` field to `@BuiltValueField`. Use this to tag fields to skip
   when serializing.
+- Fix builder and serializer generation when importing with a prefix.
 
 ## 4.4.1
 

@@ -10,6 +10,7 @@ import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/collections.dart';
 import 'package:end_to_end_test/enums.dart';
 import 'package:end_to_end_test/generics.dart';
+import 'package:end_to_end_test/imported_values.dart';
 import 'package:end_to_end_test/interfaces.dart';
 import 'package:end_to_end_test/polymorphism.dart';
 import 'package:end_to_end_test/standard_json.dart';
@@ -30,6 +31,7 @@ part 'serializers.g.dart';
   GenericValue,
   HasDouble,
   HasString,
+  ImportedValue,
   NamedFactoryValue,
   NestedGenericContainer,
   PartiallySerializableValue,
