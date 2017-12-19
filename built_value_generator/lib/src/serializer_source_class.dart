@@ -35,6 +35,9 @@ abstract class SerializerSourceClass
   String get name => element.name;
 
   @memoized
+  String get wireName => settings.wireName ?? name;
+
+  @memoized
   String get serializerDeclaration {
     final serializerFields =
         element.fields.where((field) => field.name == 'serializer').toList();
@@ -187,7 +190,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
   @override
   final Iterable<Type> types = const [$name, _\$$name];
   @override
-  final String wireName = '$name';
+  final String wireName = '$wireName';
 
   @override
   Iterable serialize(Serializers serializers, $name object,
@@ -228,7 +231,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   @override
   final Iterable<Type> types = const <Type>[$name];
   @override
-  final String wireName = '$name';
+  final String wireName = '$wireName';
 
   @override
   Object serialize(Serializers serializers, $name object,
@@ -284,7 +287,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   String _generateRequiredFieldSerializers() {
     return fields
         .where((field) => !field.isNullable)
-        .map((field) => "'${field.name}', "
+        .map((field) => "'${field.wireName}', "
             'serializers.serialize(object.${field.name}, '
             'specifiedType: '
             '${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())}),')
@@ -295,7 +298,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
     return fields.where((field) => field.isNullable).map((field) => '''
     if (object.${field.name} != null) {
       result
-          ..add('${field.name}')
+          ..add('${field.wireName}')
           ..add(serializers.serialize(
           object.${field.name}, 
           specifiedType:
@@ -324,14 +327,14 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
       final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
       if (field.builderFieldUsesNestedBuilder) {
         return '''
-case '${field.name}':
+case '${field.wireName}':
   result.${field.name}.replace(serializers.deserialize(
       value, specifiedType: $fullType) $cast);
   break;
 ''';
       } else {
         return '''
-case '${field.name}':
+case '${field.wireName}':
   result.${field.name} = serializers.deserialize(
       value, specifiedType: $fullType) $cast;
   break;

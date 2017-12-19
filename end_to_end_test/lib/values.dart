@@ -232,6 +232,19 @@ abstract class NamedFactoryValue
   NamedFactoryValue._();
 }
 
+@BuiltValue(wireName: 'V')
+abstract class WireNameValue
+    implements Built<WireNameValue, WireNameValueBuilder> {
+  static Serializer<WireNameValue> get serializer => _$wireNameValueSerializer;
+
+  @BuiltValueField(wireName: 'v')
+  int get value;
+
+  factory WireNameValue([updates(WireNameValueBuilder b)]) = _$WireNameValue;
+
+  WireNameValue._();
+}
+
 // Check discovery of serializable types via fields.
 abstract class FieldDiscoveryValue
     implements Built<FieldDiscoveryValue, FieldDiscoveryValueBuilder> {

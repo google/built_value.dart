@@ -242,4 +242,21 @@ void main() {
           data.rebuild((b) => b..transientValue = null));
     });
   });
+
+  group('WireNameValue', () {
+    final data = new WireNameValue((b) => b..value = 1);
+    final serialized = [
+      'V',
+      'v',
+      1,
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }

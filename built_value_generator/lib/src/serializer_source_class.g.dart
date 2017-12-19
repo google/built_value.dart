@@ -21,6 +21,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   final ClassElement builderElement;
   BuiltValue __settings;
   String __name;
+  String __wireName;
   String __serializerDeclaration;
   BuiltList<String> __genericParameters;
   BuiltList<String> __genericBounds;
@@ -43,6 +44,9 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   @override
   String get name => __name ??= super.name;
+
+  @override
+  String get wireName => __wireName ??= super.wireName;
 
   @override
   String get serializerDeclaration =>
