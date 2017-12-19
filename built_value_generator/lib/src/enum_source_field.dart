@@ -25,6 +25,17 @@ abstract class EnumSourceField
   String get type => element.getter.returnType.displayName;
 
   @memoized
+  BuiltValueEnumConst get settings {
+    final annotations = element.metadata
+        .map((annotation) => annotation.computeConstantValue())
+        .where((value) => value?.type?.displayName == 'BuiltValueEnumConst');
+    if (annotations.isEmpty) return const BuiltValueEnumConst();
+    final annotation = annotations.single;
+    return new BuiltValueEnumConst(
+        wireName: annotation.getField('wireName').toStringValue());
+  }
+
+  @memoized
   String get generatedIdentifier {
     final fieldName = element.displayName;
     return element.computeNode().toString().substring('$fieldName = '.length);

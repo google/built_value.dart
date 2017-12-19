@@ -45,6 +45,7 @@ part 'serializers.g.dart';
   ValueUsingImportAs,
   ValueWithHasInt,
   ValueWithInt,
+  WireNameEnum,
   WireNameValue,
 ])
 final Serializers serializers = _$serializers;

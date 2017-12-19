@@ -19,7 +19,8 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   final ClassElement element;
   @override
   final ClassElement builderElement;
-  BuiltValue __settings;
+  BuiltValue __builtValueSettings;
+  BuiltValueEnum __enumClassSettings;
   String __name;
   String __wireName;
   String __serializerDeclaration;
@@ -40,7 +41,12 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   }
 
   @override
-  BuiltValue get settings => __settings ??= super.settings;
+  BuiltValue get builtValueSettings =>
+      __builtValueSettings ??= super.builtValueSettings;
+
+  @override
+  BuiltValueEnum get enumClassSettings =>
+      __enumClassSettings ??= super.enumClassSettings;
 
   @override
   String get name => __name ??= super.name;

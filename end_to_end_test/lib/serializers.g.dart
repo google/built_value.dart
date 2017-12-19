@@ -44,6 +44,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ValueUsingImportAs.serializer)
       ..add(ValueWithHasInt.serializer)
       ..add(ValueWithInt.serializer)
+      ..add(WireNameEnum.serializer)
       ..add(WireNameValue.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SimpleValue)]),

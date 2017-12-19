@@ -120,6 +120,26 @@ class BuiltValueField {
 /// once on first access and stored in the instance.
 const String memoized = 'memoized';
 
+/// Optionally, annotate an `EnumClass` with this to specify settings. This
+/// is only needed for advanced use.
+class BuiltValueEnum {
+  /// The wire name when the enum is serialized. Defaults to `null` which
+  /// indicates that the name is to be taken from the literal class name.
+  final String wireName;
+
+  const BuiltValueEnum({this.wireName});
+}
+
+/// Optionally, annotate an `EnumClass` constant with this to specify settings.
+/// This is only needed for advanced use.
+class BuiltValueEnumConst {
+  /// The wire name when the constant is serialized. Defaults to `null` which
+  /// indicates the name is to be taken from the literal field name.
+  final String wireName;
+
+  const BuiltValueEnumConst({this.wireName});
+}
+
 /// Enum Class base class.
 ///
 /// Extend this class then use the built_value.dart code generation

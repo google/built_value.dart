@@ -19,6 +19,7 @@ class _$EnumSourceField extends EnumSourceField {
   final FieldElement element;
   String __name;
   String __type;
+  BuiltValueEnumConst __settings;
   String __generatedIdentifier;
   bool __isConst;
   bool __isStatic;
@@ -35,6 +36,9 @@ class _$EnumSourceField extends EnumSourceField {
 
   @override
   String get type => __type ??= super.type;
+
+  @override
+  BuiltValueEnumConst get settings => __settings ??= super.settings;
 
   @override
   String get generatedIdentifier =>
