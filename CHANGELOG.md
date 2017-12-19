@@ -16,6 +16,9 @@
 - Fix builder and serializer generation when importing with a prefix.
 - Add `wireName` field to `@BuiltValue` and `@BuiltValueField`. Use this to
   override the wire name for classes and fields when serializing.
+- Add `@BuiltValueEnum` and `@BuiltValueEnumConst` annotations for specifying
+  settings for enums. Add `wireName` field to these to override the wire names
+  in enums when serializing.
 
 ## 4.4.1
 

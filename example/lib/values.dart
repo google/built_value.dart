@@ -176,3 +176,18 @@ abstract class Account implements Built<Account, AccountBuilder> {
   factory Account([updates(AccountBuilder b)]) = _$Account;
   Account._();
 }
+
+/// If you need to change the values sent over the wire when serializing you
+/// can do so using the [BuiltValue] and [BuiltValueField] annotations.
+@BuiltValue(wireName: 'V')
+abstract class WireNameValue
+    implements Built<WireNameValue, WireNameValueBuilder> {
+  static Serializer<WireNameValue> get serializer => _$wireNameValueSerializer;
+
+  @BuiltValueField(wireName: 'v')
+  int get value;
+
+  factory WireNameValue([updates(WireNameValueBuilder b)]) = _$WireNameValue;
+
+  WireNameValue._();
+}

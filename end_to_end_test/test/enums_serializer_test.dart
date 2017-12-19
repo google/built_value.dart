@@ -19,4 +19,17 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('WireNameEnum', () {
+    final data = WireNameEnum.yes;
+    final serialized = ['E', 'y'];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }

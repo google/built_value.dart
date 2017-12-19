@@ -67,7 +67,8 @@ abstract class ValueSourceField
     final annotation = annotations.single;
     return new BuiltValueField(
         compare: annotation.getField('compare').toBoolValue(),
-        serialize: annotation.getField('serialize').toBoolValue());
+        serialize: annotation.getField('serialize').toBoolValue(),
+        wireName: annotation.getField('wireName').toStringValue());
   }
 
   @memoized

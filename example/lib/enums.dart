@@ -60,3 +60,24 @@ class SecondTestEnum extends EnumClass {
   static BuiltSet<SecondTestEnum> get values => _$vls;
   static SecondTestEnum valueOf(String name) => _$vlOf(name);
 }
+
+/// If you need to change the values sent over the wire when serializing you
+/// can do so using the [BuiltValueEnum] and [BuiltValueEnumConst] annotations.
+@BuiltValueEnum(wireName: 'E')
+class WireNameEnum extends EnumClass {
+  static Serializer<WireNameEnum> get serializer => _$wireNameEnumSerializer;
+
+  @BuiltValueEnumConst(wireName: 'y')
+  static const WireNameEnum yes = _$wireYes;
+
+  @BuiltValueEnumConst(wireName: 'n')
+  static const WireNameEnum no = _$wireNo;
+
+  @BuiltValueEnumConst(wireName: 'd')
+  static const WireNameEnum definitely = _$wireDefinitely;
+
+  const WireNameEnum._(String name) : super(name);
+
+  static BuiltSet<WireNameEnum> get values => _$wireValues;
+  static WireNameEnum valueOf(String name) => _$wireValueOf(name);
+}

@@ -8,6 +8,8 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value_generator/src/enum_source_class.dart';
+import 'package:built_value_generator/src/enum_source_field.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
 import 'package:built_value_generator/src/serializer_source_field.dart';
 import 'package:built_value_generator/src/value_source_class.dart';
@@ -29,13 +31,25 @@ abstract class SerializerSourceClass
 
   // TODO(davidmorgan): share common code in a nicer way.
   @memoized
-  BuiltValue get settings => new ValueSourceClass(element).settings;
+  BuiltValue get builtValueSettings => new ValueSourceClass(element).settings;
+
+  // TODO(davidmorgan): share common code in a nicer way.
+  @memoized
+  BuiltValueEnum get enumClassSettings => new EnumSourceClass(element).settings;
 
   @memoized
   String get name => element.name;
 
   @memoized
-  String get wireName => settings.wireName ?? name;
+  String get wireName {
+    if (isBuiltValue) {
+      return builtValueSettings.wireName ?? name;
+    } else if (isEnumClass) {
+      return enumClassSettings.wireName ?? name;
+    } else {
+      return name;
+    }
+  }
 
   @memoized
   String get serializerDeclaration {
@@ -80,7 +94,7 @@ abstract class SerializerSourceClass
       final builderFieldElement =
           builderElement?.getField(fieldElement.displayName);
       final sourceField = new SerializerSourceField(
-          settings, fieldElement, builderFieldElement);
+          builtValueSettings, fieldElement, builderFieldElement);
       if (sourceField.isSerializable) {
         result.add(sourceField);
       }
@@ -226,7 +240,19 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
 }
 ''';
     } else if (isEnumClass) {
-      return '''
+      final wireNameMapping = new BuiltMap<String, String>.build((b) => element
+              .fields
+              .where((field) => field.isConst && field.isStatic)
+              .forEach((field) {
+            final enumSourceField = new EnumSourceField(field);
+            if (enumSourceField.settings.wireName != null) {
+              b[field.name] = enumSourceField.settings.wireName;
+            }
+          }));
+
+      if (wireNameMapping.isEmpty) {
+        // No wire names. Just use the enum names directly.
+        return '''
 class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   @override
   final Iterable<Type> types = const <Type>[$name];
@@ -242,8 +268,41 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   $name deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) =>
     $name.valueOf(serialized as String);
-}
-''';
+}''';
+      } else {
+        // Generate maps between enum names and wire names.
+        final toWire = '''
+         static const Map<String, String> _toWire = const <String, String>{
+           ${wireNameMapping.keys.map(
+                (key) => "'$key': '${wireNameMapping[key]}',").join('\n')}
+         };''';
+        final fromWire = '''
+         static const Map<String, String> _fromWire = const <String, String>{
+           ${wireNameMapping.keys.map(
+                (key) => "'${wireNameMapping[key]}': '$key',").join('\n')}
+         };''';
+
+        return '''
+class _\$${name}Serializer implements PrimitiveSerializer<$name> {
+  $toWire
+  $fromWire
+
+  @override
+  final Iterable<Type> types = const <Type>[$name];
+  @override
+  final String wireName = '$wireName';
+
+  @override
+  Object serialize(Serializers serializers, $name object,
+      {FullType specifiedType: FullType.unspecified}) =>
+    _toWire[object.name] ?? object.name;
+
+  @override
+  $name deserialize(Serializers serializers, Object serialized,
+      {FullType specifiedType: FullType.unspecified}) =>
+    $name.valueOf(_fromWire[serialized] ?? serialized as String);
+}''';
+      }
     } else {
       throw new UnsupportedError('not serializable');
     }

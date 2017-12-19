@@ -75,7 +75,33 @@ final BuiltSet<SecondTestEnum> _$vls =
   _$definitely,
 ]);
 
+const WireNameEnum _$wireYes = const WireNameEnum._('yes');
+const WireNameEnum _$wireNo = const WireNameEnum._('no');
+const WireNameEnum _$wireDefinitely = const WireNameEnum._('definitely');
+
+WireNameEnum _$wireValueOf(String name) {
+  switch (name) {
+    case 'yes':
+      return _$wireYes;
+    case 'no':
+      return _$wireNo;
+    case 'definitely':
+      return _$wireDefinitely;
+    default:
+      throw new ArgumentError(name);
+  }
+}
+
+final BuiltSet<WireNameEnum> _$wireValues =
+    new BuiltSet<WireNameEnum>(const <WireNameEnum>[
+  _$wireYes,
+  _$wireNo,
+  _$wireDefinitely,
+]);
+
 Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
+Serializer<WireNameEnum> _$wireNameEnumSerializer =
+    new _$WireNameEnumSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   @override
@@ -92,4 +118,32 @@ class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   TestEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType: FullType.unspecified}) =>
       TestEnum.valueOf(serialized as String);
+}
+
+class _$WireNameEnumSerializer implements PrimitiveSerializer<WireNameEnum> {
+  static const Map<String, String> _toWire = const <String, String>{
+    'yes': 'y',
+    'no': 'n',
+    'definitely': 'd',
+  };
+  static const Map<String, String> _fromWire = const <String, String>{
+    'y': 'yes',
+    'n': 'no',
+    'd': 'definitely',
+  };
+
+  @override
+  final Iterable<Type> types = const <Type>[WireNameEnum];
+  @override
+  final String wireName = 'E';
+
+  @override
+  Object serialize(Serializers serializers, WireNameEnum object,
+          {FullType specifiedType: FullType.unspecified}) =>
+      _toWire[object.name] ?? object.name;
+
+  @override
+  WireNameEnum deserialize(Serializers serializers, Object serialized,
+          {FullType specifiedType: FullType.unspecified}) =>
+      WireNameEnum.valueOf(_fromWire[serialized] ?? serialized as String);
 }
