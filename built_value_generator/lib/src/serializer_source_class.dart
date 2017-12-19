@@ -156,7 +156,7 @@ abstract class SerializerSourceClass
     return '..add($name.serializer)';
   }
 
-  String generateBuilderFactoryAdders() {
+  String generateBuilderFactoryAdders(CompilationUnitElement compilationUnit) {
     return fields
         .where((field) =>
             field.needsBuilder &&

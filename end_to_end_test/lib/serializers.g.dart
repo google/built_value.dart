@@ -28,6 +28,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GenericValue.serializer)
       ..add(HasDouble.serializer)
       ..add(HasString.serializer)
+      ..add(ImportedValue.serializer)
       ..add(NamedFactoryValue.serializer)
       ..add(NestedGenericContainer.serializer)
       ..add(PartiallySerializableValue.serializer)
@@ -43,6 +44,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ValueUsingImportAs.serializer)
       ..add(ValueWithHasInt.serializer)
       ..add(ValueWithInt.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SimpleValue)]),
+          () => new ListBuilder<SimpleValue>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(ThirdDiscoverableValue)]),

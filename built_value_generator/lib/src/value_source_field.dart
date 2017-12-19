@@ -130,7 +130,7 @@ abstract class ValueSourceField
     } else if (DartTypes.isInstantiableBuiltValue(type)) {
       return displayName.contains('<')
           ? displayName.replaceFirst('<', 'Builder<')
-          : '${type}Builder';
+          : '${displayName}Builder';
     } else {
       return displayName;
     }
