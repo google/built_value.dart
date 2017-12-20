@@ -72,7 +72,7 @@ void example() {
   // See chat_example and end_to_end_test for more complex usage!
 }
 
-/// Example of using StandardJsonPlugin.
+/// Examples of using StandardJsonPlugin.
 ///
 /// The plugin changes the built_value serialization format to the Map-based
 /// format used by most JSON APIs.
@@ -81,11 +81,13 @@ void example() {
 /// a `discriminator` field. By default this field is called `$`; you can pass
 /// a different name to the `StandardJsonPlugin` constructor. If the wire
 /// format should not contain the type name, you must instead explicitly
-/// specify which type to serialize/deserialize.
+/// specify which type to serialize/deserialize. Both cases are shown below.
 void standardJsonExample() {
   final standardSerializers =
       (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
 
+  // In this first example we know the type we want to serialize/deserialize,
+  // so the type is not mentioned on the wire.
   final serializedAccount = {
     'id': 3,
     'name': 'John Smith',
@@ -116,4 +118,34 @@ void standardJsonExample() {
   final serializedAgain =
       standardSerializers.serializeWith(Account.serializer, value);
   assert(serializedAccount.toString() == serializedAgain.toString());
+
+  // In this second example we don't know the type we want to
+  // serialize/deserialize, so it has to be specified on the wire.
+  final serializedAccountWithDiscriminator = {
+    r'$': 'Account',
+    'id': 3,
+    'name': 'John Smith',
+    'keyValues': {
+      'visited': 1732,
+      'active': true,
+      'email': 'john.smith@example.com',
+      'tags': [74, 123, 4001],
+      'preferences': {
+        'showMenu': true,
+        'skipIntro': true,
+        'colorScheme': 'light',
+      }
+    }
+  };
+
+  // We don't have to specify the type when deserializing.
+  final value2 =
+      standardSerializers.deserialize(serializedAccountWithDiscriminator);
+  print(value2);
+  assert(value == value2);
+
+  // We don't have to specify the type when serializing.
+  final serializedAgain2 = serializers.serialize(value2);
+  assert(serializedAccountWithDiscriminator.toString ==
+      serializedAgain2.toString());
 }
