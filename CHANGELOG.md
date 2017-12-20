@@ -22,6 +22,9 @@
 - Add support for polymorphism to `StandardJsonPlugin`. It will now specify
   type names as needed via a `discriminator` field, which by defualt is
   called `$`. This can be changed in the `StandardJsonPlugin` constructor.
+- Add `BuiltListAsyncDeserializer`. It provides a way to deserialize large
+  responses without blocking, provided the top level serialized type is
+  `BuiltList`.
 
 ## 4.4.1
 
