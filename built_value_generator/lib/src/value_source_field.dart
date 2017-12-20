@@ -96,14 +96,19 @@ abstract class ValueSourceField
         'dynamic';
   }
 
-  @memoized
-  String get typeInBuilder => builderFieldExists
-      ? buildElementType
-      : _toBuilderType(element.getter.returnType, typeWithPrefix);
+  /// Gets the type name for the builder. Specify the compilation unit to
+  /// get the name for as [compilationUnit]; this affects whether an import
+  /// prefix is used. Pass `null` for [compilationUnit] to just omit the prefix.
+  String typeInBuilder(
+          CompilationUnitElement compilationUnit) =>
+      builderFieldExists
+          ? buildElementType
+          : _toBuilderType(element.getter.returnType,
+              typeInCompilationUnit(compilationUnit));
 
   @memoized
   bool get isNestedBuilder => builderFieldExists
-      ? typeInBuilder.contains('Builder') ?? false
+      ? typeInBuilder(null).contains('Builder') ?? false
       : settings.nestedBuilders &&
           DartTypes.needsNestedBuilder(element.getter.returnType);
 
@@ -155,10 +160,10 @@ abstract class ValueSourceField
     }
 
     if (builderFieldExists &&
-        type != typeInBuilder &&
+        type != typeInBuilder(null) &&
         // TODO(davidmorgan): smarter check for builder types.
         type.replaceAll('Built', '') !=
-            typeInBuilder.replaceAll('Builder', '')) {
+            typeInBuilder(null).replaceAll('Builder', '')) {
       result.add('Make builder field $name have type: '
           '$type (or, if applicable, builder)');
     }
