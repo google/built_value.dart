@@ -1,5 +1,5 @@
 name: built_value_generator
-version: 4.4.1
+version: 4.5.0
 description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library is the dev dependency.
@@ -14,9 +14,7 @@ dependencies:
   analyzer: '>=0.29.0 <0.31.0'
   build: ^0.11.1
   built_collection: ^2.0.0
-# built_value: ^4.4.1
-  built_value:
-    path: ../built_value
+  built_value: ^4.5.0
   source_gen: ^0.7.0
   quiver: '>=0.21.0 <0.27.0'
 
