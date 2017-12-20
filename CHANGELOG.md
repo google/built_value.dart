@@ -19,6 +19,9 @@
 - Add `@BuiltValueEnum` and `@BuiltValueEnumConst` annotations for specifying
   settings for enums. Add `wireName` field to these to override the wire names
   in enums when serializing.
+- Add support for polymorphism to `StandardJsonPlugin`. It will now specify
+  type names as needed via a `discriminator` field, which by defualt is
+  called `$`. This can be changed in the `StandardJsonPlugin` constructor.
 
 ## 4.4.1
 
