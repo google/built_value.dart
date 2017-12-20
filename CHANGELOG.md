@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.5.1
+
+- Fix generation when analyzing using summaries.
+
 ## 4.5.0
 
 New features:

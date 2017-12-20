@@ -461,7 +461,7 @@ abstract class ValueSourceClass
     if (hasBuilder) {
       for (final field in fields) {
         final type = field.typeInCompilationUnit(compilationUnit);
-        final typeInBuilder = field.typeInBuilder;
+        final typeInBuilder = field.typeInBuilder(compilationUnit);
         final name = field.name;
 
         if (field.isNestedBuilder) {
@@ -492,7 +492,7 @@ abstract class ValueSourceClass
     } else {
       for (final field in fields) {
         final type = field.typeInCompilationUnit(compilationUnit);
-        final typeInBuilder = field.typeInBuilder;
+        final typeInBuilder = field.typeInBuilder(compilationUnit);
         final name = field.name;
 
         if (field.isNestedBuilder) {
@@ -615,7 +615,7 @@ abstract class ValueSourceClass
     }
 
     for (final field in fields) {
-      final typeInBuilder = field.typeInBuilder;
+      final typeInBuilder = field.typeInBuilder(compilationUnit);
       final name = field.name;
 
       result.writeln('$typeInBuilder get $name;');
