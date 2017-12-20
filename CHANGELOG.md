@@ -2,18 +2,10 @@
 
 ## 4.5.0
 
-- Fix generated builder when fields hold function types.
-- Fix checks and generated builder when manually maintained builder has
-  generics.
-- Explicitly disallow private fields; fail with an error during generation if
-  one is found.
-- Add built in serializer for `Uri`.
-- Allow declaration of multiple `Serializers` in the same file.
-- Improve error message for field without type.
-- Fix name of classes generated from a private class.
+New features:
+
 - Add `serialize` field to `@BuiltValueField`. Use this to tag fields to skip
   when serializing.
-- Fix builder and serializer generation when importing with a prefix.
 - Add `wireName` field to `@BuiltValue` and `@BuiltValueField`. Use this to
   override the wire name for classes and fields when serializing.
 - Add `@BuiltValueEnum` and `@BuiltValueEnumConst` annotations for specifying
@@ -25,6 +17,22 @@
 - Add `BuiltListAsyncDeserializer`. It provides a way to deserialize large
   responses without blocking, provided the top level serialized type is
   `BuiltList`.
+- Add built in serializer for `Uri`.
+
+Improvements:
+
+- Allow declaration of multiple `Serializers` in the same file.
+- Explicitly disallow private fields; fail with an error during generation if
+  one is found.
+- Improve error message for field without type.
+
+Fixes:
+
+- Fix generated builder when fields hold function types.
+- Fix checks and generated builder when manually maintained builder has
+  generics.
+- Fix name of classes generated from a private class.
+- Fix builder and serializer generation when importing with a prefix.
 
 ## 4.4.1
 
