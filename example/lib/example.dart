@@ -145,7 +145,7 @@ void standardJsonExample() {
   assert(value == value2);
 
   // We don't have to specify the type when serializing.
-  final serializedAgain2 = serializers.serialize(value2);
-  assert(serializedAccountWithDiscriminator.toString ==
+  final serializedAgain2 = standardSerializers.serialize(value2);
+  assert(serializedAccountWithDiscriminator.toString() ==
       serializedAgain2.toString());
 }
