@@ -37,9 +37,9 @@ class StandardJsonPlugin implements SerializerPlugin {
         specifiedType.root != BuiltList &&
         specifiedType.root != JsonObject) {
       if (specifiedType.isUnspecified) {
-        return _toMapSpecifyType(object);
+        return _toMapWithDiscriminator(object);
       } else {
-        return _toMap(object, _alreadyHasStringKeys(specifiedType));
+        return _toMap(object, _needsEncodedKeys(specifiedType));
       }
     } else {
       return object;
@@ -50,9 +50,9 @@ class StandardJsonPlugin implements SerializerPlugin {
   Object beforeDeserialize(Object object, FullType specifiedType) {
     if (object is Map && specifiedType.root != JsonObject) {
       if (specifiedType.isUnspecified) {
-        return _toListExtractType(object);
+        return _toListUsingDiscriminator(object);
       } else {
-        return _toList(object, _alreadyHasStringKeys(specifiedType));
+        return _toList(object, _needsEncodedKeys(specifiedType));
       }
     } else {
       return object;
@@ -64,29 +64,38 @@ class StandardJsonPlugin implements SerializerPlugin {
     return object;
   }
 
-  bool _alreadyHasStringKeys(FullType specifiedType) =>
-      specifiedType.root != BuiltMap ||
-      specifiedType.parameters[0].root == String;
+  /// Returns whether a type has keys that aren't supported by JSON maps; this
+  /// only applies to `BuiltMap` with non-String keys.
+  bool _needsEncodedKeys(FullType specifiedType) =>
+      specifiedType.root == BuiltMap &&
+      specifiedType.parameters[0].root != String;
 
-  Map _toMap(List list, bool alreadyStringKeys) {
+  /// Converts serialization output, a `List`, to a `Map`, when the serialized
+  /// type is known statically.
+  Map _toMap(List list, bool needsEncodedKeys) {
     final result = {};
     for (int i = 0; i != list.length ~/ 2; ++i) {
       final key = list[i * 2];
       final value = list[i * 2 + 1];
-      result[alreadyStringKeys ? key : _toStringKey(key)] = value;
+      result[needsEncodedKeys ? _encodeKey(key) : key] = value;
     }
     return result;
   }
 
-  Map _toMapSpecifyType(List list) {
+  /// Converts serialization output, a `List`, to a `Map`, when the serialized
+  /// type is not known statically. The type will be specified in the
+  /// [discriminator] field.
+  Map _toMapWithDiscriminator(List list) {
     var type = list[0];
 
+    // Length is at least two because we have one entry for type and one for
+    // the value.
     if (list.length == 2) {
       // Just a type and a primitive value. Encode the value in the map.
       return <Object, Object>{discriminator: type, valueKey: list[1]};
     }
 
-    if (list[0] == 'list') {
+    if (type == 'list') {
       // Embed the list in the map.
       return <Object, Object>{discriminator: type, valueKey: list.sublist(1)};
     }
@@ -109,32 +118,39 @@ class StandardJsonPlugin implements SerializerPlugin {
     final result = <Object, Object>{discriminator: type};
     for (int i = 0; i != (list.length - 1) ~/ 2; ++i) {
       final key =
-          needToEncodeKeys ? _toStringKey(list[i * 2 + 1]) : list[i * 2 + 1];
+          needToEncodeKeys ? _encodeKey(list[i * 2 + 1]) : list[i * 2 + 1];
       final value = list[i * 2 + 2];
       result[key] = value;
     }
     return result;
   }
 
-  String _toStringKey(Object key) {
+  /// JSON-encodes an `Object` key so it can be stored as a `String`. Needed
+  /// because JSON maps are only allowed strings as keys.
+  String _encodeKey(Object key) {
     return JSON.encode(key);
   }
 
-  List _toList(Map map, bool alreadyStringKeys) {
+  /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
+  /// when the serialized type is known statically.
+  List _toList(Map map, bool hasEncodedKeys) {
     final result = new List(map.length * 2);
     var i = 0;
     map.forEach((key, value) {
       // Drop null values, they are represented by missing keys.
       if (value == null) return;
 
-      result[i] = alreadyStringKeys ? key : _fromStringKey(key as String);
+      result[i] = hasEncodedKeys ? _decodeKey(key as String) : key;
       result[i + 1] = value;
       i += 2;
     });
     return result;
   }
 
-  List _toListExtractType(Map map) {
+  /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
+  /// when the serialized type is not known statically. The type is retrieved
+  /// from the [discriminator] field.
+  List _toListUsingDiscriminator(Map map) {
     var type = map[discriminator];
 
     if (type == null) {
@@ -172,14 +188,15 @@ class StandardJsonPlugin implements SerializerPlugin {
       // Drop null values, they are represented by missing keys.
       if (value == null) return;
 
-      result[i] = needToDecodeKeys ? _fromStringKey(key as String) : key;
+      result[i] = needToDecodeKeys ? _decodeKey(key as String) : key;
       result[i + 1] = value;
       i += 2;
     });
     return result;
   }
 
-  Object _fromStringKey(String key) {
+  /// JSON-decodes a `String` encoded using [_encodeKey].
+  Object _decodeKey(String key) {
     return JSON.decode(key);
   }
 }
