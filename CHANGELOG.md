@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.5.2
+
+- Allow built_collection 3.0.0.
+- Allow quiver 0.27.
+
 ## 4.5.1
 
 - Fix generation when analyzing using summaries.
