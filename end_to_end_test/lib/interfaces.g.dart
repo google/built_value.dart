@@ -157,8 +157,10 @@ class _$ValueWithInt extends ValueWithInt {
       (new ValueWithIntBuilder()..update(updates)).build();
 
   _$ValueWithInt._({this.anInt, this.note}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
-    if (note == null) throw new ArgumentError.notNull('note');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('ValueWithInt', 'anInt');
+    if (note == null)
+      throw new BuiltValueNullFieldError('ValueWithInt', 'note');
   }
 
   @override
@@ -239,7 +241,8 @@ class _$ValueWithHasInt extends ValueWithHasInt {
       (new ValueWithHasIntBuilder()..update(updates)).build();
 
   _$ValueWithHasInt._({this.hasInt}) : super._() {
-    if (hasInt == null) throw new ArgumentError.notNull('hasInt');
+    if (hasInt == null)
+      throw new BuiltValueNullFieldError('ValueWithHasInt', 'hasInt');
   }
 
   @override

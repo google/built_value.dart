@@ -341,8 +341,8 @@ class _$Cat extends Cat {
       (new CatBuilder()..update(updates)).build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
-    if (tail == null) throw new ArgumentError.notNull('tail');
-    if (legs == null) throw new ArgumentError.notNull('legs');
+    if (tail == null) throw new BuiltValueNullFieldError('Cat', 'tail');
+    if (legs == null) throw new BuiltValueNullFieldError('Cat', 'legs');
   }
 
   @override
@@ -424,8 +424,8 @@ class _$Fish extends Fish {
       (new FishBuilder()..update(updates)).build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
-    if (fins == null) throw new ArgumentError.notNull('fins');
-    if (legs == null) throw new ArgumentError.notNull('legs');
+    if (fins == null) throw new BuiltValueNullFieldError('Fish', 'fins');
+    if (legs == null) throw new BuiltValueNullFieldError('Fish', 'legs');
   }
 
   @override
@@ -507,8 +507,8 @@ class _$Robot extends Robot {
       (new RobotBuilder()..update(updates)).build();
 
   _$Robot._({this.fins, this.legs}) : super._() {
-    if (fins == null) throw new ArgumentError.notNull('fins');
-    if (legs == null) throw new ArgumentError.notNull('legs');
+    if (fins == null) throw new BuiltValueNullFieldError('Robot', 'fins');
+    if (legs == null) throw new BuiltValueNullFieldError('Robot', 'legs');
   }
 
   @override
@@ -590,9 +590,10 @@ class _$Cage extends Cage {
       (new CageBuilder()..update(updates)).build();
 
   _$Cage._({this.inhabitant, this.otherInhabitants}) : super._() {
-    if (inhabitant == null) throw new ArgumentError.notNull('inhabitant');
+    if (inhabitant == null)
+      throw new BuiltValueNullFieldError('Cage', 'inhabitant');
     if (otherInhabitants == null)
-      throw new ArgumentError.notNull('otherInhabitants');
+      throw new BuiltValueNullFieldError('Cage', 'otherInhabitants');
   }
 
   @override
@@ -661,10 +662,23 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
 
   @override
   _$Cage build() {
-    final _$result = _$v ??
-        new _$Cage._(
-            inhabitant: inhabitant,
-            otherInhabitants: otherInhabitants?.build());
+    _$Cage _$result;
+    try {
+      _$result = _$v ??
+          new _$Cage._(
+              inhabitant: inhabitant,
+              otherInhabitants: otherInhabitants.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'otherInhabitants';
+        otherInhabitants.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Cage', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -678,7 +692,7 @@ class _$StandardCat extends StandardCat {
       (new StandardCatBuilder()..update(updates)).build();
 
   _$StandardCat._({this.tail}) : super._() {
-    if (tail == null) throw new ArgumentError.notNull('tail');
+    if (tail == null) throw new BuiltValueNullFieldError('StandardCat', 'tail');
   }
 
   @override
@@ -757,7 +771,7 @@ class _$HasString extends HasString {
       (new HasStringBuilder()..update(updates)).build();
 
   _$HasString._({this.field}) : super._() {
-    if (field == null) throw new ArgumentError.notNull('field');
+    if (field == null) throw new BuiltValueNullFieldError('HasString', 'field');
   }
 
   @override
@@ -831,7 +845,7 @@ class _$HasDouble extends HasDouble {
       (new HasDoubleBuilder()..update(updates)).build();
 
   _$HasDouble._({this.field}) : super._() {
-    if (field == null) throw new ArgumentError.notNull('field');
+    if (field == null) throw new BuiltValueNullFieldError('HasDouble', 'field');
   }
 
   @override
@@ -908,8 +922,10 @@ class _$UsesChainedInterface extends UsesChainedInterface {
       (new UsesChainedInterfaceBuilder()..update(updates)).build();
 
   _$UsesChainedInterface._({this.bar, this.foo}) : super._() {
-    if (bar == null) throw new ArgumentError.notNull('bar');
-    if (foo == null) throw new ArgumentError.notNull('foo');
+    if (bar == null)
+      throw new BuiltValueNullFieldError('UsesChainedInterface', 'bar');
+    if (foo == null)
+      throw new BuiltValueNullFieldError('UsesChainedInterface', 'foo');
   }
 
   @override

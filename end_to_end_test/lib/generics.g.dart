@@ -316,7 +316,8 @@ class _$GenericValue<T> extends GenericValue<T> {
       (new GenericValueBuilder<T>()..update(updates)).build();
 
   _$GenericValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('GenericValue', 'value');
   }
 
   @override
@@ -356,8 +357,7 @@ class GenericValueBuilder<T>
 
   GenericValueBuilder() {
     if (T == dynamic)
-      throw new ArgumentError.value(
-          'dynamic', 'T', 'All type arguments must be specified.');
+      throw new BuiltValueMissingGenericsError('GenericValue', 'T');
   }
 
   GenericValueBuilder<T> get _$this {
@@ -395,7 +395,8 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
       (new BoundGenericValueBuilder<T>()..update(updates)).build();
 
   _$BoundGenericValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('BoundGenericValue', 'value');
   }
 
   @override
@@ -436,8 +437,7 @@ class BoundGenericValueBuilder<T extends num>
 
   BoundGenericValueBuilder() {
     if (T == dynamic)
-      throw new ArgumentError.value(
-          'dynamic', 'T', 'All type arguments must be specified.');
+      throw new BuiltValueMissingGenericsError('BoundGenericValue', 'T');
   }
 
   BoundGenericValueBuilder<T> get _$this {
@@ -476,7 +476,8 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
       (new CollectionGenericValueBuilder<T>()..update(updates)).build();
 
   _$CollectionGenericValue._({this.values}) : super._() {
-    if (values == null) throw new ArgumentError.notNull('values');
+    if (values == null)
+      throw new BuiltValueNullFieldError('CollectionGenericValue', 'values');
   }
 
   @override
@@ -519,8 +520,7 @@ class CollectionGenericValueBuilder<T>
 
   CollectionGenericValueBuilder() {
     if (T == dynamic)
-      throw new ArgumentError.value(
-          'dynamic', 'T', 'All type arguments must be specified.');
+      throw new BuiltValueMissingGenericsError('CollectionGenericValue', 'T');
   }
 
   CollectionGenericValueBuilder<T> get _$this {
@@ -544,8 +544,21 @@ class CollectionGenericValueBuilder<T>
 
   @override
   _$CollectionGenericValue<T> build() {
-    final _$result =
-        _$v ?? new _$CollectionGenericValue<T>._(values: values?.build());
+    _$CollectionGenericValue<T> _$result;
+    try {
+      _$result =
+          _$v ?? new _$CollectionGenericValue<T>._(values: values.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'values';
+        values.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'CollectionGenericValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -565,11 +578,14 @@ class _$GenericContainer extends GenericContainer {
   _$GenericContainer._(
       {this.genericValue, this.boundGenericValue, this.collectionGenericValue})
       : super._() {
-    if (genericValue == null) throw new ArgumentError.notNull('genericValue');
+    if (genericValue == null)
+      throw new BuiltValueNullFieldError('GenericContainer', 'genericValue');
     if (boundGenericValue == null)
-      throw new ArgumentError.notNull('boundGenericValue');
+      throw new BuiltValueNullFieldError(
+          'GenericContainer', 'boundGenericValue');
     if (collectionGenericValue == null)
-      throw new ArgumentError.notNull('collectionGenericValue');
+      throw new BuiltValueNullFieldError(
+          'GenericContainer', 'collectionGenericValue');
   }
 
   @override
@@ -655,11 +671,28 @@ class GenericContainerBuilder
 
   @override
   _$GenericContainer build() {
-    final _$result = _$v ??
-        new _$GenericContainer._(
-            genericValue: genericValue?.build(),
-            boundGenericValue: boundGenericValue?.build(),
-            collectionGenericValue: collectionGenericValue?.build());
+    _$GenericContainer _$result;
+    try {
+      _$result = _$v ??
+          new _$GenericContainer._(
+              genericValue: genericValue.build(),
+              boundGenericValue: boundGenericValue.build(),
+              collectionGenericValue: collectionGenericValue.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'genericValue';
+        genericValue.build();
+        _$failedField = 'boundGenericValue';
+        boundGenericValue.build();
+        _$failedField = 'collectionGenericValue';
+        collectionGenericValue.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'GenericContainer', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -674,7 +707,8 @@ class _$NestedGenericContainer extends NestedGenericContainer {
       (new NestedGenericContainerBuilder()..update(updates)).build();
 
   _$NestedGenericContainer._({this.map}) : super._() {
-    if (map == null) throw new ArgumentError.notNull('map');
+    if (map == null)
+      throw new BuiltValueNullFieldError('NestedGenericContainer', 'map');
   }
 
   @override
@@ -738,7 +772,20 @@ class NestedGenericContainerBuilder
 
   @override
   _$NestedGenericContainer build() {
-    final _$result = _$v ?? new _$NestedGenericContainer._(map: map?.build());
+    _$NestedGenericContainer _$result;
+    try {
+      _$result = _$v ?? new _$NestedGenericContainer._(map: map.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'map';
+        map.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'NestedGenericContainer', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -754,7 +801,8 @@ class _$CustomBuilderGenericValue<T> extends CustomBuilderGenericValue<T> {
           as _$CustomBuilderGenericValue<T>;
 
   _$CustomBuilderGenericValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('CustomBuilderGenericValue', 'value');
   }
 
   @override
@@ -804,8 +852,8 @@ class _$CustomBuilderGenericValueBuilder<T>
 
   _$CustomBuilderGenericValueBuilder() : super._() {
     if (T == dynamic)
-      throw new ArgumentError.value(
-          'dynamic', 'T', 'All type arguments must be specified.');
+      throw new BuiltValueMissingGenericsError(
+          'CustomBuilderGenericValue', 'T');
   }
 
   CustomBuilderGenericValueBuilder<T> get _$this {

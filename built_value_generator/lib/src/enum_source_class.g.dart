@@ -33,7 +33,8 @@ class _$EnumSourceClass extends EnumSourceClass {
       (new EnumSourceClassBuilder()..update(updates)).build();
 
   _$EnumSourceClass._({this.element}) : super._() {
-    if (element == null) throw new ArgumentError.notNull('element');
+    if (element == null)
+      throw new BuiltValueNullFieldError('EnumSourceClass', 'element');
   }
 
   @override

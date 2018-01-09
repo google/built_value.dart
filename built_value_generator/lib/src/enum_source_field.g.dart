@@ -28,7 +28,8 @@ class _$EnumSourceField extends EnumSourceField {
       (new EnumSourceFieldBuilder()..update(updates)).build();
 
   _$EnumSourceField._({this.element}) : super._() {
-    if (element == null) throw new ArgumentError.notNull('element');
+    if (element == null)
+      throw new BuiltValueNullFieldError('EnumSourceField', 'element');
   }
 
   @override

@@ -1,7 +1,12 @@
 # Changelog
 
-## 4.5.3
+## 4.6.0
 
+- Add custom `Error` classes: `BuiltValueNullFieldError`,
+  `BuiltValueMissingGenericsError` and `BuiltValueNestedFieldError`. These
+  provide clearer error messages on failure. In particular, errors in nested
+  builders now report the enclosing class and field name, making them much
+  more useful.
 - Fix serialization when using polymorphism with StandardJsonPlugin.
 
 ## 4.5.2

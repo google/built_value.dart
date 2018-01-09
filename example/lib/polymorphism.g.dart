@@ -129,8 +129,8 @@ class _$Cat extends Cat {
       (new CatBuilder()..update(updates)).build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
-    if (tail == null) throw new ArgumentError.notNull('tail');
-    if (legs == null) throw new ArgumentError.notNull('legs');
+    if (tail == null) throw new BuiltValueNullFieldError('Cat', 'tail');
+    if (legs == null) throw new BuiltValueNullFieldError('Cat', 'legs');
   }
 
   @override
@@ -212,8 +212,8 @@ class _$Fish extends Fish {
       (new FishBuilder()..update(updates)).build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
-    if (fins == null) throw new ArgumentError.notNull('fins');
-    if (legs == null) throw new ArgumentError.notNull('legs');
+    if (fins == null) throw new BuiltValueNullFieldError('Fish', 'fins');
+    if (legs == null) throw new BuiltValueNullFieldError('Fish', 'legs');
   }
 
   @override

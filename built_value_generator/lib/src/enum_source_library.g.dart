@@ -26,7 +26,8 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
       (new EnumSourceLibraryBuilder()..update(updates)).build();
 
   _$EnumSourceLibrary._({this.element}) : super._() {
-    if (element == null) throw new ArgumentError.notNull('element');
+    if (element == null)
+      throw new BuiltValueNullFieldError('EnumSourceLibrary', 'element');
   }
 
   @override

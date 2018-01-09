@@ -452,8 +452,8 @@ class _$Chat extends Chat {
       (new ChatBuilder()..update(updates)).build();
 
   _$Chat._({this.text, this.targets}) : super._() {
-    if (text == null) throw new ArgumentError.notNull('text');
-    if (targets == null) throw new ArgumentError.notNull('targets');
+    if (text == null) throw new BuiltValueNullFieldError('Chat', 'text');
+    if (targets == null) throw new BuiltValueNullFieldError('Chat', 'targets');
   }
 
   @override
@@ -520,7 +520,20 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
 
   @override
   _$Chat build() {
-    final _$result = _$v ?? new _$Chat._(text: text, targets: targets?.build());
+    _$Chat _$result;
+    try {
+      _$result = _$v ?? new _$Chat._(text: text, targets: targets.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'targets';
+        targets.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Chat', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -536,8 +549,10 @@ class _$Login extends Login {
       (new LoginBuilder()..update(updates)).build();
 
   _$Login._({this.username, this.password}) : super._() {
-    if (username == null) throw new ArgumentError.notNull('username');
-    if (password == null) throw new ArgumentError.notNull('password');
+    if (username == null)
+      throw new BuiltValueNullFieldError('Login', 'username');
+    if (password == null)
+      throw new BuiltValueNullFieldError('Login', 'password');
   }
 
   @override
@@ -620,8 +635,9 @@ class _$Status extends Status {
       (new StatusBuilder()..update(updates)).build();
 
   _$Status._({this.message, this.type}) : super._() {
-    if (message == null) throw new ArgumentError.notNull('message');
-    if (type == null) throw new ArgumentError.notNull('type');
+    if (message == null)
+      throw new BuiltValueNullFieldError('Status', 'message');
+    if (type == null) throw new BuiltValueNullFieldError('Status', 'type');
   }
 
   @override
@@ -701,7 +717,8 @@ class _$ListUsers extends ListUsers {
       (new ListUsersBuilder()..update(updates)).build();
 
   _$ListUsers._({this.statusTypes}) : super._() {
-    if (statusTypes == null) throw new ArgumentError.notNull('statusTypes');
+    if (statusTypes == null)
+      throw new BuiltValueNullFieldError('ListUsers', 'statusTypes');
   }
 
   @override
@@ -763,8 +780,20 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 
   @override
   _$ListUsers build() {
-    final _$result =
-        _$v ?? new _$ListUsers._(statusTypes: statusTypes?.build());
+    _$ListUsers _$result;
+    try {
+      _$result = _$v ?? new _$ListUsers._(statusTypes: statusTypes.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'statusTypes';
+        statusTypes.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ListUsers', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -782,9 +811,11 @@ class _$ShowChat extends ShowChat {
       (new ShowChatBuilder()..update(updates)).build();
 
   _$ShowChat._({this.username, this.private, this.text}) : super._() {
-    if (username == null) throw new ArgumentError.notNull('username');
-    if (private == null) throw new ArgumentError.notNull('private');
-    if (text == null) throw new ArgumentError.notNull('text');
+    if (username == null)
+      throw new BuiltValueNullFieldError('ShowChat', 'username');
+    if (private == null)
+      throw new BuiltValueNullFieldError('ShowChat', 'private');
+    if (text == null) throw new BuiltValueNullFieldError('ShowChat', 'text');
   }
 
   @override
@@ -876,8 +907,9 @@ class _$Welcome extends Welcome {
       (new WelcomeBuilder()..update(updates)).build();
 
   _$Welcome._({this.log, this.message}) : super._() {
-    if (log == null) throw new ArgumentError.notNull('log');
-    if (message == null) throw new ArgumentError.notNull('message');
+    if (log == null) throw new BuiltValueNullFieldError('Welcome', 'log');
+    if (message == null)
+      throw new BuiltValueNullFieldError('Welcome', 'message');
   }
 
   @override
@@ -943,8 +975,20 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
 
   @override
   _$Welcome build() {
-    final _$result =
-        _$v ?? new _$Welcome._(log: log?.build(), message: message);
+    _$Welcome _$result;
+    try {
+      _$result = _$v ?? new _$Welcome._(log: log.build(), message: message);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'log';
+        log.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Welcome', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -958,7 +1002,8 @@ class _$ListUsersResponse extends ListUsersResponse {
       (new ListUsersResponseBuilder()..update(updates)).build();
 
   _$ListUsersResponse._({this.statuses}) : super._() {
-    if (statuses == null) throw new ArgumentError.notNull('statuses');
+    if (statuses == null)
+      throw new BuiltValueNullFieldError('ListUsersResponse', 'statuses');
   }
 
   @override
@@ -1022,8 +1067,20 @@ class ListUsersResponseBuilder
 
   @override
   _$ListUsersResponse build() {
-    final _$result =
-        _$v ?? new _$ListUsersResponse._(statuses: statuses?.build());
+    _$ListUsersResponse _$result;
+    try {
+      _$result = _$v ?? new _$ListUsersResponse._(statuses: statuses.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'statuses';
+        statuses.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ListUsersResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

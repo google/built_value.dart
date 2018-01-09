@@ -47,7 +47,8 @@ class _$ValueSourceClass extends ValueSourceClass {
       (new ValueSourceClassBuilder()..update(updates)).build();
 
   _$ValueSourceClass._({this.element}) : super._() {
-    if (element == null) throw new ArgumentError.notNull('element');
+    if (element == null)
+      throw new BuiltValueNullFieldError('ValueSourceClass', 'element');
   }
 
   @override

@@ -96,9 +96,24 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
 
   @override
   _$Node build() {
-    final _$result = _$v ??
-        new _$Node._(
-            label: label, left: _left?.build(), right: _right?.build());
+    _$Node _$result;
+    try {
+      _$result = _$v ??
+          new _$Node._(
+              label: label, left: _left?.build(), right: _right?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'left';
+        _left?.build();
+        _$failedField = 'right';
+        _right?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Node', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

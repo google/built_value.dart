@@ -24,8 +24,10 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
-    if (aString == null) throw new ArgumentError.notNull('aString');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
+    if (aString == null)
+      throw new BuiltValueNullFieldError('SimpleValue', 'aString');
   }
 
   @override

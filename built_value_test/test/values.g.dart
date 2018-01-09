@@ -24,8 +24,9 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.map}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
-    if (map == null) throw new ArgumentError.notNull('map');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
+    if (map == null) throw new BuiltValueNullFieldError('SimpleValue', 'map');
   }
 
   @override
@@ -92,8 +93,20 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   _$SimpleValue build() {
-    final _$result =
-        _$v ?? new _$SimpleValue._(anInt: anInt, map: map?.build());
+    _$SimpleValue _$result;
+    try {
+      _$result = _$v ?? new _$SimpleValue._(anInt: anInt, map: map.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'map';
+        map.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SimpleValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -109,7 +122,8 @@ class _$CompoundValue extends CompoundValue {
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.string}) : super._() {
-    if (simpleValue == null) throw new ArgumentError.notNull('simpleValue');
+    if (simpleValue == null)
+      throw new BuiltValueNullFieldError('CompoundValue', 'simpleValue');
   }
 
   @override
@@ -178,9 +192,22 @@ class CompoundValueBuilder
 
   @override
   _$CompoundValue build() {
-    final _$result = _$v ??
-        new _$CompoundValue._(
-            simpleValue: simpleValue?.build(), string: string);
+    _$CompoundValue _$result;
+    try {
+      _$result = _$v ??
+          new _$CompoundValue._(
+              simpleValue: simpleValue.build(), string: string);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        simpleValue.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'CompoundValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -196,8 +223,10 @@ class _$ComparedValue extends ComparedValue {
       (new ComparedValueBuilder()..update(updates)).build();
 
   _$ComparedValue._({this.name, this.onChanged}) : super._() {
-    if (name == null) throw new ArgumentError.notNull('name');
-    if (onChanged == null) throw new ArgumentError.notNull('onChanged');
+    if (name == null)
+      throw new BuiltValueNullFieldError('ComparedValue', 'name');
+    if (onChanged == null)
+      throw new BuiltValueNullFieldError('ComparedValue', 'onChanged');
   }
 
   @override

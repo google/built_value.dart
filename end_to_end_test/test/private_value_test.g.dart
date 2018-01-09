@@ -22,7 +22,8 @@ class _$PrivateValue extends _PrivateValue {
       (new _PrivateValueBuilder()..update(updates)).build();
 
   _$PrivateValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('_PrivateValue', 'value');
   }
 
   @override

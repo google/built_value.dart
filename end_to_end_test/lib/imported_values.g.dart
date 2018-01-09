@@ -78,8 +78,10 @@ class _$ImportedValue extends ImportedValue {
       (new ImportedValueBuilder()..update(updates)).build();
 
   _$ImportedValue._({this.simpleValue, this.simpleValues}) : super._() {
-    if (simpleValue == null) throw new ArgumentError.notNull('simpleValue');
-    if (simpleValues == null) throw new ArgumentError.notNull('simpleValues');
+    if (simpleValue == null)
+      throw new BuiltValueNullFieldError('ImportedValue', 'simpleValue');
+    if (simpleValues == null)
+      throw new BuiltValueNullFieldError('ImportedValue', 'simpleValues');
   }
 
   @override
@@ -151,10 +153,25 @@ class ImportedValueBuilder
 
   @override
   _$ImportedValue build() {
-    final _$result = _$v ??
-        new _$ImportedValue._(
-            simpleValue: simpleValue?.build(),
-            simpleValues: simpleValues?.build());
+    _$ImportedValue _$result;
+    try {
+      _$result = _$v ??
+          new _$ImportedValue._(
+              simpleValue: simpleValue.build(),
+              simpleValues: simpleValues.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        simpleValue.build();
+        _$failedField = 'simpleValues';
+        simpleValues.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ImportedValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

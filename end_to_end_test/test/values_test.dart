@@ -2,7 +2,9 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:built_value/built_value.dart';
 import 'package:end_to_end_test/enums.dart';
+import 'package:end_to_end_test/errors_matchers.dart';
 import 'package:end_to_end_test/values.dart';
 import 'package:quiver/core.dart';
 import 'package:test/test.dart';
@@ -14,8 +16,17 @@ void main() {
     });
 
     test('throws on null for non-nullable fields on build', () {
+      expect(() => new SimpleValue(),
+          throwsA(new isInstanceOf<BuiltValueNullFieldError>()));
+    });
+
+    test('includes field name in null error message', () {
+      expect(() => new SimpleValue(), throwsA(isErrorContaining('anInt')));
+    });
+
+    test('includes class name in null error message', () {
       expect(
-          () => new SimpleValue(), throwsA(new isInstanceOf<ArgumentError>()));
+          () => new SimpleValue(), throwsA(isErrorContaining('SimpleValue')));
     });
 
     test('throws on null replace', () {
@@ -116,6 +127,25 @@ void main() {
   group('CompoundValue', () {
     test('can be instantiated', () {
       new CompoundValue((b) => b..simpleValue.anInt = 1);
+    });
+
+    test('throws on null for non-nullable nested fields on build', () {
+      expect(() => new CompoundValue(),
+          throwsA(new isInstanceOf<BuiltValueNestedFieldError>()));
+    });
+
+    test('includes helpful information in null error message', () {
+      expect(
+          () => new CompoundValue(),
+          throwsA(allOf(
+              // Mentions outer type.
+              isErrorContaining('"CompoundValue"'),
+              // Mentions field in outer type.
+              isErrorContaining('"simpleValue"'),
+              // Mentions inner type.
+              isErrorContaining('"SimpleValue"'),
+              // Mentions field in inner type.
+              isErrorContaining('"anInt"'))));
     });
 
     test('allows nested updates', () {

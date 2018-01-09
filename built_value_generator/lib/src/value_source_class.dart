@@ -356,7 +356,7 @@ abstract class ValueSourceClass
       result.writeln('{');
       for (final field in requiredFields) {
         result.writeln("if (${field.name} == null) "
-            "throw new ArgumentError.notNull('${field.name}');");
+            "throw new BuiltValueNullFieldError('${name}', '${field.name}');");
       }
       result.writeln('}');
     }
@@ -523,10 +523,9 @@ abstract class ValueSourceClass
     } else {
       result.writeln('{');
       for (final genericParameter in genericParameters) {
-        result.writeln(
-            'if ($genericParameter == dynamic) throw new ArgumentError.value('
-            "'dynamic', '$genericParameter', "
-            "'All type arguments must be specified');");
+        result.writeln('if ($genericParameter == dynamic) '
+            'throw new BuiltValueMissingGenericsError('
+            "'$name', '$genericParameter');");
       }
       result.writeln('}');
     }
@@ -573,21 +572,68 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     result.writeln('$implName$_generics build() {');
-    result.writeln('final _\$result = _\$v ?? ');
-    result.writeln('new $implName$_generics._(');
-    result.write(fields.map((field) {
+
+    // Construct a map from field to how it's built. If it's a normal field,
+    // this is just the field name; if it's a nested builder, this is an
+    // invocation of the nested builder taking into account nullability.
+    final fieldBuilders = <String, String>{};
+    fields.forEach((field) {
       final name = field.name;
-      if (!field.isNestedBuilder) return '$name: $name';
-      // If not nullable, go via the public accessor, which instantiates
-      // if needed.
-      if (!field.isNullable) return '$name: $name?.build()';
-      // Otherwise access the private field: in super if there's a manually
-      // maintaned builder, otherwise here.
-      return hasBuilder
-          ? '$name: super.$name?.build()'
-          : '$name: _$name?.build()';
-    }).join(', '));
+      if (!field.isNestedBuilder) {
+        fieldBuilders[name] = name;
+      } else if (!field.isNullable) {
+        // If not nullable, go via the public accessor, which instantiates
+        // if needed.
+        fieldBuilders[name] = '$name.build()';
+      } else if (hasBuilder) {
+        // Otherwise access the private field: in super if there's a manually
+        // maintained builder.
+        fieldBuilders[name] = 'super.$name?.build()';
+      } else {
+        // Or, directly if there is no manually maintained builder.
+        fieldBuilders[name] = '_$name?.build()';
+      }
+    });
+
+    // If there are nested builders then wrap the build in a try/catch so we
+    // can add information should a nested builder fail.
+    final needsTryCatchOnBuild =
+        fieldBuilders.keys.any((field) => fieldBuilders[field] != field);
+
+    if (needsTryCatchOnBuild) {
+      result.writeln('$implName$_generics _\$result;');
+      result.writeln('try {');
+    } else {
+      result.write('final ');
+    }
+    result.writeln('_\$result = _\$v ?? ');
+    result.writeln('new $implName$_generics._(');
+    result.write(fieldBuilders.keys
+        .map((field) => '$field: ${fieldBuilders[field]}')
+        .join(','));
     result.writeln(');');
+
+    if (needsTryCatchOnBuild) {
+      // Handle errors by re-running all nested builders; if there's an error
+      // in a nested builder then throw with more information. Otherwise,
+      // just rethrow.
+      result.writeln('} catch (_) {');
+      result.writeln('String _\$failedField;');
+      result.writeln('try {');
+      result.write(fieldBuilders.keys.map((field) {
+        final fieldBuilder = fieldBuilders[field];
+        if (fieldBuilder == field) return '';
+        return "_\$failedField = '$field'; $fieldBuilder;";
+      }).join('\n'));
+
+      result.writeln('} catch (e) {');
+      result.writeln('throw new BuiltValueNestedFieldError('
+          "'$name', _\$failedField, e.toString());");
+      result.writeln('}');
+      result.writeln('rethrow;');
+      result.writeln('}');
+    }
+
     // Set _$v to the built value, so it will be lazily copied if needed.
     result.writeln('replace(_\$result);');
     result.writeln('return _\$result;');

@@ -115,10 +115,14 @@ class _$StandardJsonValue extends StandardJsonValue {
   _$StandardJsonValue._(
       {this.number, this.text, this.keyValues, this.zoo, this.strings})
       : super._() {
-    if (number == null) throw new ArgumentError.notNull('number');
-    if (text == null) throw new ArgumentError.notNull('text');
-    if (keyValues == null) throw new ArgumentError.notNull('keyValues');
-    if (zoo == null) throw new ArgumentError.notNull('zoo');
+    if (number == null)
+      throw new BuiltValueNullFieldError('StandardJsonValue', 'number');
+    if (text == null)
+      throw new BuiltValueNullFieldError('StandardJsonValue', 'text');
+    if (keyValues == null)
+      throw new BuiltValueNullFieldError('StandardJsonValue', 'keyValues');
+    if (zoo == null)
+      throw new BuiltValueNullFieldError('StandardJsonValue', 'zoo');
   }
 
   @override
@@ -216,13 +220,30 @@ class StandardJsonValueBuilder
 
   @override
   _$StandardJsonValue build() {
-    final _$result = _$v ??
-        new _$StandardJsonValue._(
-            number: number,
-            text: text,
-            keyValues: keyValues?.build(),
-            zoo: zoo?.build(),
-            strings: _strings?.build());
+    _$StandardJsonValue _$result;
+    try {
+      _$result = _$v ??
+          new _$StandardJsonValue._(
+              number: number,
+              text: text,
+              keyValues: keyValues.build(),
+              zoo: zoo.build(),
+              strings: _strings?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'keyValues';
+        keyValues.build();
+        _$failedField = 'zoo';
+        zoo.build();
+        _$failedField = 'strings';
+        _strings?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'StandardJsonValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

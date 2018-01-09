@@ -207,11 +207,13 @@ class _$Collections extends Collections {
       this.nullableListMultimap,
       this.nullableSetMultimap})
       : super._() {
-    if (list == null) throw new ArgumentError.notNull('list');
-    if (set == null) throw new ArgumentError.notNull('set');
-    if (map == null) throw new ArgumentError.notNull('map');
-    if (listMultimap == null) throw new ArgumentError.notNull('listMultimap');
-    if (setMultimap == null) throw new ArgumentError.notNull('setMultimap');
+    if (list == null) throw new BuiltValueNullFieldError('Collections', 'list');
+    if (set == null) throw new BuiltValueNullFieldError('Collections', 'set');
+    if (map == null) throw new BuiltValueNullFieldError('Collections', 'map');
+    if (listMultimap == null)
+      throw new BuiltValueNullFieldError('Collections', 'listMultimap');
+    if (setMultimap == null)
+      throw new BuiltValueNullFieldError('Collections', 'setMultimap');
   }
 
   @override
@@ -366,18 +368,49 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
 
   @override
   _$Collections build() {
-    final _$result = _$v ??
-        new _$Collections._(
-            list: list?.build(),
-            set: set?.build(),
-            map: map?.build(),
-            listMultimap: listMultimap?.build(),
-            setMultimap: setMultimap?.build(),
-            nullableList: _nullableList?.build(),
-            nullableSet: _nullableSet?.build(),
-            nullableMap: _nullableMap?.build(),
-            nullableListMultimap: _nullableListMultimap?.build(),
-            nullableSetMultimap: _nullableSetMultimap?.build());
+    _$Collections _$result;
+    try {
+      _$result = _$v ??
+          new _$Collections._(
+              list: list.build(),
+              set: set.build(),
+              map: map.build(),
+              listMultimap: listMultimap.build(),
+              setMultimap: setMultimap.build(),
+              nullableList: _nullableList?.build(),
+              nullableSet: _nullableSet?.build(),
+              nullableMap: _nullableMap?.build(),
+              nullableListMultimap: _nullableListMultimap?.build(),
+              nullableSetMultimap: _nullableSetMultimap?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'list';
+        list.build();
+        _$failedField = 'set';
+        set.build();
+        _$failedField = 'map';
+        map.build();
+        _$failedField = 'listMultimap';
+        listMultimap.build();
+        _$failedField = 'setMultimap';
+        setMultimap.build();
+        _$failedField = 'nullableList';
+        _nullableList?.build();
+        _$failedField = 'nullableSet';
+        _nullableSet?.build();
+        _$failedField = 'nullableMap';
+        _nullableMap?.build();
+        _$failedField = 'nullableListMultimap';
+        _nullableListMultimap?.build();
+        _$failedField = 'nullableSetMultimap';
+        _nullableSetMultimap?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Collections', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
