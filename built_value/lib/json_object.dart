@@ -68,7 +68,7 @@ abstract class JsonObject {
       return new MapJsonObject(value);
     } else {
       throw new ArgumentError.value(value, 'value',
-          'Must be bool, List<Object>, Map<String, Object>, num or String.');
+          'Must be bool, List<Object>, Map<String, Object>, num or String');
     }
   }
 

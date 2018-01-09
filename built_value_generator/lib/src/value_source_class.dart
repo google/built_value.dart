@@ -526,7 +526,7 @@ abstract class ValueSourceClass
         result.writeln(
             'if ($genericParameter == dynamic) throw new ArgumentError.value('
             "'dynamic', '$genericParameter', "
-            "'All type arguments must be specified.');");
+            "'All type arguments must be specified');");
       }
       result.writeln('}');
     }
