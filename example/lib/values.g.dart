@@ -319,7 +319,8 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
   }
 
   @override
@@ -399,7 +400,8 @@ class _$VerySimpleValue extends VerySimpleValue {
       (new VerySimpleValueBuilder()..update(updates)).build();
 
   _$VerySimpleValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('VerySimpleValue', 'value');
   }
 
   @override
@@ -476,7 +478,8 @@ class _$CompoundValue extends CompoundValue {
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
-    if (simpleValue == null) throw new ArgumentError.notNull('simpleValue');
+    if (simpleValue == null)
+      throw new BuiltValueNullFieldError('CompoundValue', 'simpleValue');
   }
 
   @override
@@ -567,7 +570,8 @@ class _$ValidatedValue extends ValidatedValue {
       (new ValidatedValueBuilder()..update(updates)).build();
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('ValidatedValue', 'anInt');
   }
 
   @override
@@ -652,7 +656,8 @@ class _$ValueWithCode extends ValueWithCode {
       (new ValueWithCodeBuilder()..update(updates)).build();
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('ValueWithCode', 'anInt');
   }
 
   @override
@@ -737,7 +742,8 @@ class _$ValueWithDefaults extends ValueWithDefaults {
           as _$ValueWithDefaults;
 
   _$ValueWithDefaults._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('ValueWithDefaults', 'anInt');
   }
 
   @override
@@ -837,7 +843,8 @@ class _$DerivedValue extends DerivedValue {
       (new DerivedValueBuilder()..update(updates)).build();
 
   _$DerivedValue._({this.anInt}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('DerivedValue', 'anInt');
   }
 
   @override
@@ -921,9 +928,10 @@ class _$Account extends Account {
       (new AccountBuilder()..update(updates)).build();
 
   _$Account._({this.id, this.name, this.keyValues}) : super._() {
-    if (id == null) throw new ArgumentError.notNull('id');
-    if (name == null) throw new ArgumentError.notNull('name');
-    if (keyValues == null) throw new ArgumentError.notNull('keyValues');
+    if (id == null) throw new BuiltValueNullFieldError('Account', 'id');
+    if (name == null) throw new BuiltValueNullFieldError('Account', 'name');
+    if (keyValues == null)
+      throw new BuiltValueNullFieldError('Account', 'keyValues');
   }
 
   @override
@@ -1013,7 +1021,8 @@ class _$WireNameValue extends WireNameValue {
       (new WireNameValueBuilder()..update(updates)).build();
 
   _$WireNameValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('WireNameValue', 'value');
   }
 
   @override

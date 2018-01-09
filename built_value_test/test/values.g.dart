@@ -24,8 +24,9 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.map}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
-    if (map == null) throw new ArgumentError.notNull('map');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
+    if (map == null) throw new BuiltValueNullFieldError('SimpleValue', 'map');
   }
 
   @override
@@ -109,7 +110,8 @@ class _$CompoundValue extends CompoundValue {
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.string}) : super._() {
-    if (simpleValue == null) throw new ArgumentError.notNull('simpleValue');
+    if (simpleValue == null)
+      throw new BuiltValueNullFieldError('CompoundValue', 'simpleValue');
   }
 
   @override
@@ -196,8 +198,10 @@ class _$ComparedValue extends ComparedValue {
       (new ComparedValueBuilder()..update(updates)).build();
 
   _$ComparedValue._({this.name, this.onChanged}) : super._() {
-    if (name == null) throw new ArgumentError.notNull('name');
-    if (onChanged == null) throw new ArgumentError.notNull('onChanged');
+    if (name == null)
+      throw new BuiltValueNullFieldError('ComparedValue', 'name');
+    if (onChanged == null)
+      throw new BuiltValueNullFieldError('ComparedValue', 'onChanged');
   }
 
   @override

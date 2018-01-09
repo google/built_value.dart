@@ -255,3 +255,31 @@ class FlatBuiltValueToStringHelper implements BuiltValueToStringHelper {
     return stringResult;
   }
 }
+
+/// [Error] indicating that a built_value class constructor was called with
+/// a `null` value for a field not marked `@nullable`.
+class BuiltValueNullFieldError extends Error {
+  final String type;
+  final String field;
+
+  BuiltValueNullFieldError(this.type, this.field);
+
+  @override
+  String toString() =>
+      'Tried to construct class "$type" with null field "$field". '
+      'This is forbidden; to allow it, mark "$field" with @nullable.';
+}
+
+/// [Error] indicating that a built_value class constructor was called with
+/// a missing or `dynamic` type parameter.
+class BuiltValueMissingGenericsError extends Error {
+  final String type;
+  final String parameter;
+
+  BuiltValueMissingGenericsError(this.type, this.parameter);
+
+  @override
+  String toString() =>
+      'Tried to construct class "$type" with missing or dynamic '
+      'type argument "$parameter". All type arguments must be specified.';
+}

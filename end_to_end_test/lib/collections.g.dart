@@ -207,11 +207,13 @@ class _$Collections extends Collections {
       this.nullableListMultimap,
       this.nullableSetMultimap})
       : super._() {
-    if (list == null) throw new ArgumentError.notNull('list');
-    if (set == null) throw new ArgumentError.notNull('set');
-    if (map == null) throw new ArgumentError.notNull('map');
-    if (listMultimap == null) throw new ArgumentError.notNull('listMultimap');
-    if (setMultimap == null) throw new ArgumentError.notNull('setMultimap');
+    if (list == null) throw new BuiltValueNullFieldError('Collections', 'list');
+    if (set == null) throw new BuiltValueNullFieldError('Collections', 'set');
+    if (map == null) throw new BuiltValueNullFieldError('Collections', 'map');
+    if (listMultimap == null)
+      throw new BuiltValueNullFieldError('Collections', 'listMultimap');
+    if (setMultimap == null)
+      throw new BuiltValueNullFieldError('Collections', 'setMultimap');
   }
 
   @override

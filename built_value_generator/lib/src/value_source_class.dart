@@ -356,7 +356,7 @@ abstract class ValueSourceClass
       result.writeln('{');
       for (final field in requiredFields) {
         result.writeln("if (${field.name} == null) "
-            "throw new ArgumentError.notNull('${field.name}');");
+            "throw new BuiltValueNullFieldError('${name}', '${field.name}');");
       }
       result.writeln('}');
     }
@@ -523,10 +523,9 @@ abstract class ValueSourceClass
     } else {
       result.writeln('{');
       for (final genericParameter in genericParameters) {
-        result.writeln(
-            'if ($genericParameter == dynamic) throw new ArgumentError.value('
-            "'dynamic', '$genericParameter', "
-            "'All type arguments must be specified');");
+        result.writeln('if ($genericParameter == dynamic) '
+            'throw new BuiltValueMissingGenericsError('
+            "'$name', '$genericParameter');");
       }
       result.writeln('}');
     }

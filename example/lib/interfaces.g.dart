@@ -114,8 +114,10 @@ class _$ValueWithInt extends ValueWithInt {
       (new ValueWithIntBuilder()..update(updates)).build() as _$ValueWithInt;
 
   _$ValueWithInt._({this.anInt, this.note}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
-    if (note == null) throw new ArgumentError.notNull('note');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('ValueWithInt', 'anInt');
+    if (note == null)
+      throw new BuiltValueNullFieldError('ValueWithInt', 'note');
   }
 
   @override

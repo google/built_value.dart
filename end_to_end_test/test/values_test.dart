@@ -2,7 +2,9 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:built_value/built_value.dart';
 import 'package:end_to_end_test/enums.dart';
+import 'package:end_to_end_test/errors_matchers.dart';
 import 'package:end_to_end_test/values.dart';
 import 'package:quiver/core.dart';
 import 'package:test/test.dart';
@@ -14,8 +16,17 @@ void main() {
     });
 
     test('throws on null for non-nullable fields on build', () {
+      expect(() => new SimpleValue(),
+          throwsA(new isInstanceOf<BuiltValueNullFieldError>()));
+    });
+
+    test('includes field name in null error message', () {
+      expect(() => new SimpleValue(), throwsA(isErrorContaining('anInt')));
+    });
+
+    test('includes class name in null error message', () {
       expect(
-          () => new SimpleValue(), throwsA(new isInstanceOf<ArgumentError>()));
+          () => new SimpleValue(), throwsA(isErrorContaining('SimpleValue')));
     });
 
     test('throws on null replace', () {

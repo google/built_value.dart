@@ -721,7 +721,8 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
   }
 
   @override
@@ -803,7 +804,8 @@ class _$CompoundValue extends CompoundValue {
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
-    if (simpleValue == null) throw new ArgumentError.notNull('simpleValue');
+    if (simpleValue == null)
+      throw new BuiltValueNullFieldError('CompoundValue', 'simpleValue');
   }
 
   @override
@@ -896,7 +898,9 @@ class _$CompoundValueNoNesting extends CompoundValueNoNesting {
 
   _$CompoundValueNoNesting._({this.simpleValue, this.validatedValue})
       : super._() {
-    if (simpleValue == null) throw new ArgumentError.notNull('simpleValue');
+    if (simpleValue == null)
+      throw new BuiltValueNullFieldError(
+          'CompoundValueNoNesting', 'simpleValue');
   }
 
   @override
@@ -985,7 +989,8 @@ class _$DerivedValue extends DerivedValue {
       (new DerivedValueBuilder()..update(updates)).build();
 
   _$DerivedValue._({this.anInt}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('DerivedValue', 'anInt');
   }
 
   @override
@@ -1067,7 +1072,8 @@ class _$ValueWithCode extends ValueWithCode {
       (new ValueWithCodeBuilder()..update(updates)).build();
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('ValueWithCode', 'anInt');
   }
 
   @override
@@ -1154,8 +1160,10 @@ class _$ValueWithDefaults extends ValueWithDefaults {
           as _$ValueWithDefaults;
 
   _$ValueWithDefaults._({this.anInt, this.aString, this.value}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('ValueWithDefaults', 'anInt');
+    if (value == null)
+      throw new BuiltValueNullFieldError('ValueWithDefaults', 'value');
   }
 
   @override
@@ -1273,7 +1281,8 @@ class _$ValidatedValue extends ValidatedValue {
       (new ValidatedValueBuilder()..update(updates)).build();
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null) throw new ArgumentError.notNull('anInt');
+    if (anInt == null)
+      throw new BuiltValueNullFieldError('ValidatedValue', 'anInt');
   }
 
   @override
@@ -1356,7 +1365,8 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
       (new ValueUsingImportAsBuilder()..update(updates)).build();
 
   _$ValueUsingImportAs._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('ValueUsingImportAs', 'value');
   }
 
   @override
@@ -1511,14 +1521,22 @@ class _$PrimitivesValue extends PrimitivesValue {
       this.dateTime,
       this.uri})
       : super._() {
-    if (boolean == null) throw new ArgumentError.notNull('boolean');
-    if (integer == null) throw new ArgumentError.notNull('integer');
-    if (int64 == null) throw new ArgumentError.notNull('int64');
-    if (dbl == null) throw new ArgumentError.notNull('dbl');
-    if (number == null) throw new ArgumentError.notNull('number');
-    if (string == null) throw new ArgumentError.notNull('string');
-    if (dateTime == null) throw new ArgumentError.notNull('dateTime');
-    if (uri == null) throw new ArgumentError.notNull('uri');
+    if (boolean == null)
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'boolean');
+    if (integer == null)
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'integer');
+    if (int64 == null)
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'int64');
+    if (dbl == null)
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'dbl');
+    if (number == null)
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'number');
+    if (string == null)
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'string');
+    if (dateTime == null)
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'dateTime');
+    if (uri == null)
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'uri');
   }
 
   @override
@@ -1663,7 +1681,8 @@ class _$FunctionValue extends FunctionValue {
       (new FunctionValueBuilder()..update(updates)).build();
 
   _$FunctionValue._({this.function}) : super._() {
-    if (function == null) throw new ArgumentError.notNull('function');
+    if (function == null)
+      throw new BuiltValueNullFieldError('FunctionValue', 'function');
   }
 
   @override
@@ -1738,7 +1757,8 @@ class _$ListOfFunctionValue extends ListOfFunctionValue {
       (new ListOfFunctionValueBuilder()..update(updates)).build();
 
   _$ListOfFunctionValue._({this.functions}) : super._() {
-    if (functions == null) throw new ArgumentError.notNull('functions');
+    if (functions == null)
+      throw new BuiltValueNullFieldError('ListOfFunctionValue', 'functions');
   }
 
   @override
@@ -1821,7 +1841,8 @@ class _$PartiallySerializableValue extends PartiallySerializableValue {
 
   _$PartiallySerializableValue._({this.value, this.transientValue})
       : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('PartiallySerializableValue', 'value');
   }
 
   @override
@@ -1908,7 +1929,8 @@ class _$NamedFactoryValue extends NamedFactoryValue {
       (new NamedFactoryValueBuilder()..update(updates)).build();
 
   _$NamedFactoryValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('NamedFactoryValue', 'value');
   }
 
   @override
@@ -1984,7 +2006,8 @@ class _$WireNameValue extends WireNameValue {
       (new WireNameValueBuilder()..update(updates)).build();
 
   _$WireNameValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('WireNameValue', 'value');
   }
 
   @override
@@ -2063,8 +2086,10 @@ class _$FieldDiscoveryValue extends FieldDiscoveryValue {
 
   _$FieldDiscoveryValue._({this.value, this.values, this.recursiveValue})
       : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
-    if (values == null) throw new ArgumentError.notNull('values');
+    if (value == null)
+      throw new BuiltValueNullFieldError('FieldDiscoveryValue', 'value');
+    if (values == null)
+      throw new BuiltValueNullFieldError('FieldDiscoveryValue', 'values');
   }
 
   @override
@@ -2164,7 +2189,8 @@ class _$DiscoverableValue extends DiscoverableValue {
       (new DiscoverableValueBuilder()..update(updates)).build();
 
   _$DiscoverableValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('DiscoverableValue', 'value');
   }
 
   @override
@@ -2242,7 +2268,8 @@ class _$SecondDiscoverableValue extends SecondDiscoverableValue {
       (new SecondDiscoverableValueBuilder()..update(updates)).build();
 
   _$SecondDiscoverableValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('SecondDiscoverableValue', 'value');
   }
 
   @override
@@ -2321,7 +2348,8 @@ class _$ThirdDiscoverableValue extends ThirdDiscoverableValue {
       (new ThirdDiscoverableValueBuilder()..update(updates)).build();
 
   _$ThirdDiscoverableValue._({this.value}) : super._() {
-    if (value == null) throw new ArgumentError.notNull('value');
+    if (value == null)
+      throw new BuiltValueNullFieldError('ThirdDiscoverableValue', 'value');
   }
 
   @override

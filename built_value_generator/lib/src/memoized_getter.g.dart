@@ -24,8 +24,10 @@ class _$MemoizedGetter extends MemoizedGetter {
       (new MemoizedGetterBuilder()..update(updates)).build();
 
   _$MemoizedGetter._({this.returnType, this.name}) : super._() {
-    if (returnType == null) throw new ArgumentError.notNull('returnType');
-    if (name == null) throw new ArgumentError.notNull('name');
+    if (returnType == null)
+      throw new BuiltValueNullFieldError('MemoizedGetter', 'returnType');
+    if (name == null)
+      throw new BuiltValueNullFieldError('MemoizedGetter', 'name');
   }
 
   @override

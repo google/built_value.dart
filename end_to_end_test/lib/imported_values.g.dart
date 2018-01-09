@@ -78,8 +78,10 @@ class _$ImportedValue extends ImportedValue {
       (new ImportedValueBuilder()..update(updates)).build();
 
   _$ImportedValue._({this.simpleValue, this.simpleValues}) : super._() {
-    if (simpleValue == null) throw new ArgumentError.notNull('simpleValue');
-    if (simpleValues == null) throw new ArgumentError.notNull('simpleValues');
+    if (simpleValue == null)
+      throw new BuiltValueNullFieldError('ImportedValue', 'simpleValue');
+    if (simpleValues == null)
+      throw new BuiltValueNullFieldError('ImportedValue', 'simpleValues');
   }
 
   @override
