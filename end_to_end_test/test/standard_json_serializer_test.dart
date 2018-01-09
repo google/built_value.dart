@@ -5,6 +5,7 @@
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
+import 'package:end_to_end_test/polymorphism.dart';
 import 'package:end_to_end_test/serializers.dart';
 import 'package:end_to_end_test/standard_json.dart';
 import 'package:test/test.dart';
@@ -18,7 +19,10 @@ void main() {
       ..keyValues['two'] = new JsonObject('two')
       ..keyValues['three'] = new JsonObject(true)
       ..keyValues['four'] = new JsonObject([1, 2, 3])
-      ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2}));
+      ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2})
+      ..zoo.add(new Cat((b) => b
+        ..tail = true
+        ..legs = 4)));
     final specifiedType = new FullType(StandardJsonValue);
     final serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
@@ -31,7 +35,10 @@ void main() {
         'three': true,
         'four': [1, 2, 3],
         'five': {'one': 1, 'two': 2},
-      }
+      },
+      'zoo': [
+        {r'$': 'Cat', 'tail': true, 'legs': 4}
+      ],
     };
 
     test('can be serialized', () {
@@ -89,7 +96,10 @@ void main() {
       ..keyValues['two'] = new JsonObject('two')
       ..keyValues['three'] = new JsonObject(true)
       ..keyValues['four'] = new JsonObject([1, 2, 3])
-      ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2}));
+      ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2})
+      ..zoo.add(new Cat((b) => b
+        ..tail = true
+        ..legs = 4)));
     final serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
     final serialized = {
@@ -102,7 +112,10 @@ void main() {
         'three': true,
         'four': [1, 2, 3],
         'five': {'one': 1, 'two': 2},
-      }
+      },
+      'zoo': [
+        {r'$': 'Cat', 'tail': true, 'legs': 4}
+      ],
     };
 
     test('can be serialized', () {

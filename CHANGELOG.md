@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.5.3
+
+- Fix serialization when using polymorphism with StandardJsonPlugin.
+
 ## 4.5.2
 
 - Allow built_collection 3.0.0.
