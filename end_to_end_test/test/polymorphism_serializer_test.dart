@@ -94,4 +94,31 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('Cage', () {
+    final data = new Cage((b) => b
+      ..inhabitant = new Cat((b) => b
+        ..tail = true
+        ..legs = 4)
+      ..otherInhabitants.add(new Fish((b) => b
+        ..legs = 0
+        ..fins = 4)));
+    final serialized = [
+      'Cage',
+      'inhabitant',
+      ['Cat', 'tail', true, 'legs', 4],
+      'otherInhabitants',
+      [
+        ['Fish', 'fins', 4, 'legs', 0]
+      ],
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }

@@ -16,6 +16,7 @@ part of serializers;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BoundGenericValue.serializer)
+      ..add(Cage.serializer)
       ..add(Cat.serializer)
       ..add(CollectionGenericValue.serializer)
       ..add(Collections.serializer)
@@ -24,6 +25,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(DiscoverableValue.serializer)
       ..add(EnumWithInt.serializer)
       ..add(FieldDiscoveryValue.serializer)
+      ..add(Fish.serializer)
       ..add(GenericContainer.serializer)
       ..add(GenericValue.serializer)
       ..add(HasDouble.serializer)
@@ -46,6 +48,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ValueWithInt.serializer)
       ..add(WireNameEnum.serializer)
       ..add(WireNameValue.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Animal)]),
+          () => new ListBuilder<Animal>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SimpleValue)]),
           () => new ListBuilder<SimpleValue>())
@@ -93,6 +98,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(JsonObject)]),
           () => new MapBuilder<String, JsonObject>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Animal)]),
+          () => new ListBuilder<Animal>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())

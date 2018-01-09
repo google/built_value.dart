@@ -36,6 +36,10 @@ class _$StandardJsonValueSerializer
       serializers.serialize(object.keyValues,
           specifiedType: const FullType(BuiltMap,
               const [const FullType(String), const FullType(JsonObject)])),
+      'zoo',
+      serializers.serialize(object.zoo,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(Animal)])),
     ];
     if (object.strings != null) {
       result
@@ -74,6 +78,12 @@ class _$StandardJsonValueSerializer
                 const FullType(JsonObject)
               ])) as BuiltMap<String, JsonObject>);
           break;
+        case 'zoo':
+          result.zoo.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Animal)]))
+              as BuiltList<Animal>);
+          break;
         case 'strings':
           result.strings.replace(serializers.deserialize(value,
                   specifiedType:
@@ -95,16 +105,20 @@ class _$StandardJsonValue extends StandardJsonValue {
   @override
   final BuiltMap<String, JsonObject> keyValues;
   @override
+  final BuiltList<Animal> zoo;
+  @override
   final BuiltList<String> strings;
 
   factory _$StandardJsonValue([void updates(StandardJsonValueBuilder b)]) =>
       (new StandardJsonValueBuilder()..update(updates)).build();
 
-  _$StandardJsonValue._({this.number, this.text, this.keyValues, this.strings})
+  _$StandardJsonValue._(
+      {this.number, this.text, this.keyValues, this.zoo, this.strings})
       : super._() {
     if (number == null) throw new ArgumentError.notNull('number');
     if (text == null) throw new ArgumentError.notNull('text');
     if (keyValues == null) throw new ArgumentError.notNull('keyValues');
+    if (zoo == null) throw new ArgumentError.notNull('zoo');
   }
 
   @override
@@ -122,13 +136,17 @@ class _$StandardJsonValue extends StandardJsonValue {
     return number == other.number &&
         text == other.text &&
         keyValues == other.keyValues &&
+        zoo == other.zoo &&
         strings == other.strings;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, number.hashCode), text.hashCode), keyValues.hashCode),
+        $jc(
+            $jc($jc($jc(0, number.hashCode), text.hashCode),
+                keyValues.hashCode),
+            zoo.hashCode),
         strings.hashCode));
   }
 
@@ -138,6 +156,7 @@ class _$StandardJsonValue extends StandardJsonValue {
           ..add('number', number)
           ..add('text', text)
           ..add('keyValues', keyValues)
+          ..add('zoo', zoo)
           ..add('strings', strings))
         .toString();
   }
@@ -161,6 +180,10 @@ class StandardJsonValueBuilder
   set keyValues(MapBuilder<String, JsonObject> keyValues) =>
       _$this._keyValues = keyValues;
 
+  ListBuilder<Animal> _zoo;
+  ListBuilder<Animal> get zoo => _$this._zoo ??= new ListBuilder<Animal>();
+  set zoo(ListBuilder<Animal> zoo) => _$this._zoo = zoo;
+
   ListBuilder<String> _strings;
   ListBuilder<String> get strings =>
       _$this._strings ??= new ListBuilder<String>();
@@ -173,6 +196,7 @@ class StandardJsonValueBuilder
       _number = _$v.number;
       _text = _$v.text;
       _keyValues = _$v.keyValues?.toBuilder();
+      _zoo = _$v.zoo?.toBuilder();
       _strings = _$v.strings?.toBuilder();
       _$v = null;
     }
@@ -197,6 +221,7 @@ class StandardJsonValueBuilder
             number: number,
             text: text,
             keyValues: keyValues?.build(),
+            zoo: zoo?.build(),
             strings: _strings?.build());
     replace(_$result);
     return _$result;

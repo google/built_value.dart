@@ -17,6 +17,7 @@ part of polymorphism;
 Serializer<Cat> _$catSerializer = new _$CatSerializer();
 Serializer<Fish> _$fishSerializer = new _$FishSerializer();
 Serializer<Robot> _$robotSerializer = new _$RobotSerializer();
+Serializer<Cage> _$cageSerializer = new _$CageSerializer();
 Serializer<StandardCat> _$standardCatSerializer = new _$StandardCatSerializer();
 Serializer<HasString> _$hasStringSerializer = new _$HasStringSerializer();
 Serializer<HasDouble> _$hasDoubleSerializer = new _$HasDoubleSerializer();
@@ -148,6 +149,56 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
         case 'legs':
           result.legs = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$CageSerializer implements StructuredSerializer<Cage> {
+  @override
+  final Iterable<Type> types = const [Cage, _$Cage];
+  @override
+  final String wireName = 'Cage';
+
+  @override
+  Iterable serialize(Serializers serializers, Cage object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'inhabitant',
+      serializers.serialize(object.inhabitant,
+          specifiedType: const FullType(Animal)),
+      'otherInhabitants',
+      serializers.serialize(object.otherInhabitants,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(Animal)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  Cage deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new CageBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'inhabitant':
+          result.inhabitant = serializers.deserialize(value,
+              specifiedType: const FullType(Animal)) as Animal;
+          break;
+        case 'otherInhabitants':
+          result.otherInhabitants.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Animal)]))
+              as BuiltList<Animal>);
           break;
       }
     }
@@ -532,12 +583,16 @@ class RobotBuilder implements Builder<Robot, RobotBuilder> {
 class _$Cage extends Cage {
   @override
   final Animal inhabitant;
+  @override
+  final BuiltList<Animal> otherInhabitants;
 
   factory _$Cage([void updates(CageBuilder b)]) =>
       (new CageBuilder()..update(updates)).build();
 
-  _$Cage._({this.inhabitant}) : super._() {
+  _$Cage._({this.inhabitant, this.otherInhabitants}) : super._() {
     if (inhabitant == null) throw new ArgumentError.notNull('inhabitant');
+    if (otherInhabitants == null)
+      throw new ArgumentError.notNull('otherInhabitants');
   }
 
   @override
@@ -551,17 +606,20 @@ class _$Cage extends Cage {
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
     if (other is! Cage) return false;
-    return inhabitant == other.inhabitant;
+    return inhabitant == other.inhabitant &&
+        otherInhabitants == other.otherInhabitants;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, inhabitant.hashCode));
+    return $jf($jc($jc(0, inhabitant.hashCode), otherInhabitants.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Cage')..add('inhabitant', inhabitant))
+    return (newBuiltValueToStringHelper('Cage')
+          ..add('inhabitant', inhabitant)
+          ..add('otherInhabitants', otherInhabitants))
         .toString();
   }
 }
@@ -573,11 +631,18 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
   Animal get inhabitant => _$this._inhabitant;
   set inhabitant(Animal inhabitant) => _$this._inhabitant = inhabitant;
 
+  ListBuilder<Animal> _otherInhabitants;
+  ListBuilder<Animal> get otherInhabitants =>
+      _$this._otherInhabitants ??= new ListBuilder<Animal>();
+  set otherInhabitants(ListBuilder<Animal> otherInhabitants) =>
+      _$this._otherInhabitants = otherInhabitants;
+
   CageBuilder();
 
   CageBuilder get _$this {
     if (_$v != null) {
       _inhabitant = _$v.inhabitant;
+      _otherInhabitants = _$v.otherInhabitants?.toBuilder();
       _$v = null;
     }
     return this;
@@ -596,7 +661,10 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
 
   @override
   _$Cage build() {
-    final _$result = _$v ?? new _$Cage._(inhabitant: inhabitant);
+    final _$result = _$v ??
+        new _$Cage._(
+            inhabitant: inhabitant,
+            otherInhabitants: otherInhabitants?.build());
     replace(_$result);
     return _$result;
   }
