@@ -544,8 +544,21 @@ class CollectionGenericValueBuilder<T>
 
   @override
   _$CollectionGenericValue<T> build() {
-    final _$result =
-        _$v ?? new _$CollectionGenericValue<T>._(values: values?.build());
+    _$CollectionGenericValue<T> _$result;
+    try {
+      _$result =
+          _$v ?? new _$CollectionGenericValue<T>._(values: values.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'values';
+        values.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'CollectionGenericValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -658,11 +671,28 @@ class GenericContainerBuilder
 
   @override
   _$GenericContainer build() {
-    final _$result = _$v ??
-        new _$GenericContainer._(
-            genericValue: genericValue?.build(),
-            boundGenericValue: boundGenericValue?.build(),
-            collectionGenericValue: collectionGenericValue?.build());
+    _$GenericContainer _$result;
+    try {
+      _$result = _$v ??
+          new _$GenericContainer._(
+              genericValue: genericValue.build(),
+              boundGenericValue: boundGenericValue.build(),
+              collectionGenericValue: collectionGenericValue.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'genericValue';
+        genericValue.build();
+        _$failedField = 'boundGenericValue';
+        boundGenericValue.build();
+        _$failedField = 'collectionGenericValue';
+        collectionGenericValue.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'GenericContainer', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -742,7 +772,20 @@ class NestedGenericContainerBuilder
 
   @override
   _$NestedGenericContainer build() {
-    final _$result = _$v ?? new _$NestedGenericContainer._(map: map?.build());
+    _$NestedGenericContainer _$result;
+    try {
+      _$result = _$v ?? new _$NestedGenericContainer._(map: map.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'map';
+        map.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'NestedGenericContainer', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

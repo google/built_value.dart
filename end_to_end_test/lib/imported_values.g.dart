@@ -153,10 +153,25 @@ class ImportedValueBuilder
 
   @override
   _$ImportedValue build() {
-    final _$result = _$v ??
-        new _$ImportedValue._(
-            simpleValue: simpleValue?.build(),
-            simpleValues: simpleValues?.build());
+    _$ImportedValue _$result;
+    try {
+      _$result = _$v ??
+          new _$ImportedValue._(
+              simpleValue: simpleValue.build(),
+              simpleValues: simpleValues.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        simpleValue.build();
+        _$failedField = 'simpleValues';
+        simpleValues.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ImportedValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

@@ -220,13 +220,30 @@ class StandardJsonValueBuilder
 
   @override
   _$StandardJsonValue build() {
-    final _$result = _$v ??
-        new _$StandardJsonValue._(
-            number: number,
-            text: text,
-            keyValues: keyValues?.build(),
-            zoo: zoo?.build(),
-            strings: _strings?.build());
+    _$StandardJsonValue _$result;
+    try {
+      _$result = _$v ??
+          new _$StandardJsonValue._(
+              number: number,
+              text: text,
+              keyValues: keyValues.build(),
+              zoo: zoo.build(),
+              strings: _strings?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'keyValues';
+        keyValues.build();
+        _$failedField = 'zoo';
+        zoo.build();
+        _$failedField = 'strings';
+        _strings?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'StandardJsonValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

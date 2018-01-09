@@ -662,10 +662,23 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
 
   @override
   _$Cage build() {
-    final _$result = _$v ??
-        new _$Cage._(
-            inhabitant: inhabitant,
-            otherInhabitants: otherInhabitants?.build());
+    _$Cage _$result;
+    try {
+      _$result = _$v ??
+          new _$Cage._(
+              inhabitant: inhabitant,
+              otherInhabitants: otherInhabitants.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'otherInhabitants';
+        otherInhabitants.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Cage', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

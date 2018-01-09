@@ -877,10 +877,25 @@ class CompoundValueBuilder
 
   @override
   _$CompoundValue build() {
-    final _$result = _$v ??
-        new _$CompoundValue._(
-            simpleValue: simpleValue?.build(),
-            validatedValue: _validatedValue?.build());
+    _$CompoundValue _$result;
+    try {
+      _$result = _$v ??
+          new _$CompoundValue._(
+              simpleValue: simpleValue.build(),
+              validatedValue: _validatedValue?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        simpleValue.build();
+        _$failedField = 'validatedValue';
+        _validatedValue?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'CompoundValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -1263,9 +1278,22 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   @override
   _$ValueWithDefaults build() {
-    final _$result = _$v ??
-        new _$ValueWithDefaults._(
-            anInt: anInt, aString: aString, value: value?.build());
+    _$ValueWithDefaults _$result;
+    try {
+      _$result = _$v ??
+          new _$ValueWithDefaults._(
+              anInt: anInt, aString: aString, value: value.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'value';
+        value.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ValueWithDefaults', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -1822,8 +1850,21 @@ class ListOfFunctionValueBuilder
 
   @override
   _$ListOfFunctionValue build() {
-    final _$result =
-        _$v ?? new _$ListOfFunctionValue._(functions: functions?.build());
+    _$ListOfFunctionValue _$result;
+    try {
+      _$result =
+          _$v ?? new _$ListOfFunctionValue._(functions: functions.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'functions';
+        functions.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ListOfFunctionValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -2171,11 +2212,28 @@ class FieldDiscoveryValueBuilder
 
   @override
   _$FieldDiscoveryValue build() {
-    final _$result = _$v ??
-        new _$FieldDiscoveryValue._(
-            value: value?.build(),
-            values: values?.build(),
-            recursiveValue: _recursiveValue?.build());
+    _$FieldDiscoveryValue _$result;
+    try {
+      _$result = _$v ??
+          new _$FieldDiscoveryValue._(
+              value: value.build(),
+              values: values.build(),
+              recursiveValue: _recursiveValue?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'value';
+        value.build();
+        _$failedField = 'values';
+        values.build();
+        _$failedField = 'recursiveValue';
+        _recursiveValue?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'FieldDiscoveryValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -2253,7 +2311,20 @@ class DiscoverableValueBuilder
 
   @override
   _$DiscoverableValue build() {
-    final _$result = _$v ?? new _$DiscoverableValue._(value: value?.build());
+    _$DiscoverableValue _$result;
+    try {
+      _$result = _$v ?? new _$DiscoverableValue._(value: value.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'value';
+        value.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'DiscoverableValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

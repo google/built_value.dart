@@ -283,3 +283,18 @@ class BuiltValueMissingGenericsError extends Error {
       'Tried to construct class "$type" with missing or dynamic '
       'type argument "$parameter". All type arguments must be specified.';
 }
+
+/// [Error] indicating that a built_value `build` method failed because a
+/// nested field builder failed.
+class BuiltValueNestedFieldError extends Error {
+  final String type;
+  final String field;
+  final String error;
+
+  BuiltValueNestedFieldError(this.type, this.field, this.error);
+
+  @override
+  String toString() =>
+      'Tried to build class "$type" but nested builder for field "$field" '
+      'threw: $error';
+}

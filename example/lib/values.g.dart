@@ -551,10 +551,25 @@ class CompoundValueBuilder
 
   @override
   _$CompoundValue build() {
-    final _$result = _$v ??
-        new _$CompoundValue._(
-            simpleValue: simpleValue?.build(),
-            validatedValue: _validatedValue?.build());
+    _$CompoundValue _$result;
+    try {
+      _$result = _$v ??
+          new _$CompoundValue._(
+              simpleValue: simpleValue.build(),
+              validatedValue: _validatedValue?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        simpleValue.build();
+        _$failedField = 'validatedValue';
+        _validatedValue?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'CompoundValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -1006,8 +1021,21 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
 
   @override
   _$Account build() {
-    final _$result = _$v ??
-        new _$Account._(id: id, name: name, keyValues: keyValues?.build());
+    _$Account _$result;
+    try {
+      _$result = _$v ??
+          new _$Account._(id: id, name: name, keyValues: keyValues.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'keyValues';
+        keyValues.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Account', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

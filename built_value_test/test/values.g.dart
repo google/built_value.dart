@@ -93,8 +93,20 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   _$SimpleValue build() {
-    final _$result =
-        _$v ?? new _$SimpleValue._(anInt: anInt, map: map?.build());
+    _$SimpleValue _$result;
+    try {
+      _$result = _$v ?? new _$SimpleValue._(anInt: anInt, map: map.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'map';
+        map.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SimpleValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -180,9 +192,22 @@ class CompoundValueBuilder
 
   @override
   _$CompoundValue build() {
-    final _$result = _$v ??
-        new _$CompoundValue._(
-            simpleValue: simpleValue?.build(), string: string);
+    _$CompoundValue _$result;
+    try {
+      _$result = _$v ??
+          new _$CompoundValue._(
+              simpleValue: simpleValue.build(), string: string);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        simpleValue.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'CompoundValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

@@ -520,7 +520,20 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
 
   @override
   _$Chat build() {
-    final _$result = _$v ?? new _$Chat._(text: text, targets: targets?.build());
+    _$Chat _$result;
+    try {
+      _$result = _$v ?? new _$Chat._(text: text, targets: targets.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'targets';
+        targets.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Chat', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -767,8 +780,20 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 
   @override
   _$ListUsers build() {
-    final _$result =
-        _$v ?? new _$ListUsers._(statusTypes: statusTypes?.build());
+    _$ListUsers _$result;
+    try {
+      _$result = _$v ?? new _$ListUsers._(statusTypes: statusTypes.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'statusTypes';
+        statusTypes.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ListUsers', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -950,8 +975,20 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
 
   @override
   _$Welcome build() {
-    final _$result =
-        _$v ?? new _$Welcome._(log: log?.build(), message: message);
+    _$Welcome _$result;
+    try {
+      _$result = _$v ?? new _$Welcome._(log: log.build(), message: message);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'log';
+        log.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Welcome', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -1030,8 +1067,20 @@ class ListUsersResponseBuilder
 
   @override
   _$ListUsersResponse build() {
-    final _$result =
-        _$v ?? new _$ListUsersResponse._(statuses: statuses?.build());
+    _$ListUsersResponse _$result;
+    try {
+      _$result = _$v ?? new _$ListUsersResponse._(statuses: statuses.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'statuses';
+        statuses.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ListUsersResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

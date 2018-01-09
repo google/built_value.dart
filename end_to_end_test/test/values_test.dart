@@ -129,6 +129,25 @@ void main() {
       new CompoundValue((b) => b..simpleValue.anInt = 1);
     });
 
+    test('throws on null for non-nullable nested fields on build', () {
+      expect(() => new CompoundValue(),
+          throwsA(new isInstanceOf<BuiltValueNestedFieldError>()));
+    });
+
+    test('includes helpful information in null error message', () {
+      expect(
+          () => new CompoundValue(),
+          throwsA(allOf(
+              // Mentions outer type.
+              isErrorContaining('"CompoundValue"'),
+              // Mentions field in outer type.
+              isErrorContaining('"simpleValue"'),
+              // Mentions inner type.
+              isErrorContaining('"SimpleValue"'),
+              // Mentions field in inner type.
+              isErrorContaining('"anInt"'))));
+    });
+
     test('allows nested updates', () {
       expect(
           new CompoundValue((b) => b
