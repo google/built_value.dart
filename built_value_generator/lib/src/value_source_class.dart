@@ -41,6 +41,9 @@ abstract class ValueSourceClass
       .any((interfaceType) => interfaceType.name == 'Built');
 
   @memoized
+  bool get extendsNonObject => element.supertype.displayName != 'Object';
+
+  @memoized
   BuiltValue get settings {
     final annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
@@ -200,13 +203,18 @@ abstract class ValueSourceClass
       result.add('Make class abstract.');
     }
 
-    if (settings.instantiable) {
-      final expectedBuildParameters =
-          '$name$_generics, ${name}Builder$_generics';
-      if (builtParameters != expectedBuildParameters) {
-        result.add('Make class implement Built<$expectedBuildParameters>. '
-            'Currently: Built<$builtParameters>');
-      }
+    final expectedBuiltParameters = '$name$_generics, ${name}Builder$_generics';
+    // Built parameters need fixing if they are not as expected, unless 1) the
+    // class is marked `@BuiltValue(instantiable: false)` and 2) the parameters
+    // are not wrong, they're completely missing.
+    if (builtParameters != expectedBuiltParameters &&
+        !(!settings.instantiable && builtParameters == null)) {
+      result.add('Make class implement Built<$expectedBuiltParameters>.');
+    }
+
+    if (extendsNonObject) {
+      result.add('Stop class extending other classes. '
+          'Only "implements" and "extends Object with" are allowed.');
     }
 
     if (settings.instantiable) {

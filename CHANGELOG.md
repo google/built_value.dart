@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.0.0
+
+Introduce restrictions on using `built_value` in unsupported ways:
+
+- Prohibit use of `extends` in `built_value` classes. Classes should inherit
+  API using `implements` and API+implementation using `extends Object with`.
+
 ## 4.6.1
 
 - Allow hand-coded base builders, that is, builders for classes with
