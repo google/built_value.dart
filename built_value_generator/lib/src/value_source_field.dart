@@ -16,6 +16,14 @@ import 'package:built_value_generator/src/metadata.dart'
 
 part 'value_source_field.g.dart';
 
+const _suggestedTypes = const <String, String>{
+  'List': 'BuiltList',
+  'Map': 'BuiltMap',
+  'Set': 'BuiltSet',
+  'ListMultimap': 'BuiltListMultimap',
+  'SetMultimap': 'BuiltSetMultimap',
+};
+
 abstract class ValueSourceField
     implements Built<ValueSourceField, ValueSourceFieldBuilder> {
   BuiltValue get settings;
@@ -157,6 +165,11 @@ abstract class ValueSourceField
 
     if (name.startsWith('_')) {
       result.add('Make field $name public; remove the underscore.');
+    }
+
+    if (_suggestedTypes.keys.contains(type)) {
+      result.add('Make field "$name" have type "${_suggestedTypes[type]}". '
+          'The current type, "$type", is not allowed.');
     }
 
     if (builderFieldExists &&

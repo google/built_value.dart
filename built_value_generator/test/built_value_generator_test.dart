@@ -473,6 +473,25 @@ abstract class Value implements Built<Value, ValueBuilder> {
   String toString() => 'hi!';
 }'''), isNot(contains('String toString()')));
   });
+
+  test('suggests built_collection fields instead of SDK fields', () async {
+    expect(
+        await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  List get list;
+  Set get set;
+  Map get map;
+}'''),
+        allOf(
+            contains('1. Make field "list" have type "BuiltList". '
+                'The current type, "List", is not allowed.'),
+            contains('2. Make field "set" have type "BuiltSet". '
+                'The current type, "Set", is not allowed.')));
+  });
 }
 
 // Test setup.

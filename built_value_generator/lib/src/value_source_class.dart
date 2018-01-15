@@ -15,6 +15,11 @@ import 'package:source_gen/source_gen.dart';
 
 part 'value_source_class.g.dart';
 
+const String _importWithSingleQuotes =
+    "import 'package:built_value/built_value.dart'";
+const String _importWithDoubleQuotes =
+    'import "package:built_value/built_value.dart"';
+
 abstract class ValueSourceClass
     implements Built<ValueSourceClass, ValueSourceClassBuilder> {
   ClassElement get element;
@@ -111,9 +116,8 @@ abstract class ValueSourceClass
     // It would be more accurate to check using the AST, but this is
     // potentially expensive. We already have the source for the "part of"
     // check, use that.
-    return source
-            .contains("import 'package:built_value/built_value.dart' show") ||
-        source.contains('import "package:built_value/built_value.dart" show');
+    return source.contains('$_importWithSingleQuotes show') ||
+        source.contains('$_importWithSingleQuotes show');
   }
 
   @memoized
@@ -121,9 +125,8 @@ abstract class ValueSourceClass
     // It would be more accurate to check using the AST, but this is
     // potentially expensive. We already have the source for the "part of"
     // check, use that.
-    return source
-            .contains("import 'package:built_value/built_value.dart' as") ||
-        source.contains('import "package:built_value/built_value.dart" as');
+    return source.contains('$_importWithSingleQuotes as') ||
+        source.contains('$_importWithDoubleQuotes as');
   }
 
   @memoized
