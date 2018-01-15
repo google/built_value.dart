@@ -12,6 +12,40 @@ import 'package:test/test.dart';
 
 void main() {
   group('generator', () {
+    test('rejects import with "show"', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart' show Built, Builder;
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Stop using "show" when importing '
+              '"package:built_value/built_value.dart".'));
+    });
+
+    test('rejects import with "as"', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart' as bv;
+part 'value.g.dart';
+abstract class Value implements bv.Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder implements bv.Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Stop using "as" when importing '
+              '"package:built_value/built_value.dart".'));
+    });
+
     test('suggests to import part file', () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
@@ -19,7 +53,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains("1. Import generated part: part 'value.g.dart';"));
@@ -462,7 +496,7 @@ Future<String> generate(String source) async {
 const String builtValueSource = r'''
 library built_value;
 
-abstract class Built<V extends Built<V, B>, B implements Builder<V, B>> {
+abstract class Built<V extends Built<V, B>, B extends Builder<V, B>> {
   V rebuild(updates(B builder));
   B toBuilder();
 }

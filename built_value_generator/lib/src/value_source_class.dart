@@ -91,6 +91,10 @@ abstract class ValueSourceClass
       ValueSourceField.fromClassElements(settings, element, builderElement);
 
   @memoized
+  String get source =>
+      element.library.definingCompilationUnit.source.contents.data;
+
+  @memoized
   String get partStatement {
     final fileName = element.library.source.shortName.replaceAll('.dart', '');
     return "part '$fileName.g.dart';";
@@ -99,7 +103,27 @@ abstract class ValueSourceClass
   @memoized
   bool get hasPartStatement {
     final expectedCode = partStatement;
-    return element.library.source.contents.data.contains(expectedCode);
+    return source.contains(expectedCode);
+  }
+
+  @memoized
+  bool get hasBuiltValueImportWithShow {
+    // It would be more accurate to check using the AST, but this is
+    // potentially expensive. We already have the source for the "part of"
+    // check, use that.
+    return source
+            .contains("import 'package:built_value/built_value.dart' show") ||
+        source.contains('import "package:built_value/built_value.dart" show');
+  }
+
+  @memoized
+  bool get hasBuiltValueImportWithAs {
+    // It would be more accurate to check using the AST, but this is
+    // potentially expensive. We already have the source for the "part of"
+    // check, use that.
+    return source
+            .contains("import 'package:built_value/built_value.dart' as") ||
+        source.contains('import "package:built_value/built_value.dart" as');
   }
 
   @memoized
@@ -201,6 +225,16 @@ abstract class ValueSourceClass
 
     if (!valueClassIsAbstract) {
       result.add('Make class abstract.');
+    }
+
+    if (hasBuiltValueImportWithShow) {
+      result.add('Stop using "show" when importing '
+          '"package:built_value/built_value.dart".');
+    }
+
+    if (hasBuiltValueImportWithAs) {
+      result.add('Stop using "as" when importing '
+          '"package:built_value/built_value.dart".');
     }
 
     if (settings.instantiable) {
