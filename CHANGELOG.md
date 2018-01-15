@@ -9,6 +9,12 @@ Introduce restrictions on using `built_value` in unsupported ways:
 - Prohibit use of `show` or `as` when importing
   'package:built_value/built_value.dart'. The generated code needs access to
   all symbols in the package with no import prefix.
+- Prohibit use of the mutable collection types `List`, `Set`, `Map`,
+  `ListMultimap` and `SetMultimap`. Suggest `built_collection` equivalents
+  instead.
+
+If any of these restrictions causes problem for you, please file an issue
+on github: https://github.com/google/built_value.dart/issues
 
 ## 4.6.1
 
