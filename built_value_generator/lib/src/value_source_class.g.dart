@@ -29,8 +29,11 @@ class _$ValueSourceClass extends ValueSourceClass {
   bool __hasBuilder;
   String __builderParameters;
   BuiltList<ValueSourceField> __fields;
+  String __source;
   String __partStatement;
   bool __hasPartStatement;
+  bool __hasBuiltValueImportWithShow;
+  bool __hasBuiltValueImportWithAs;
   bool __valueClassIsAbstract;
   BuiltList<String> __valueClassConstructors;
   BuiltList<String> __valueClassFactories;
@@ -92,10 +95,21 @@ class _$ValueSourceClass extends ValueSourceClass {
   BuiltList<ValueSourceField> get fields => __fields ??= super.fields;
 
   @override
+  String get source => __source ??= super.source;
+
+  @override
   String get partStatement => __partStatement ??= super.partStatement;
 
   @override
   bool get hasPartStatement => __hasPartStatement ??= super.hasPartStatement;
+
+  @override
+  bool get hasBuiltValueImportWithShow =>
+      __hasBuiltValueImportWithShow ??= super.hasBuiltValueImportWithShow;
+
+  @override
+  bool get hasBuiltValueImportWithAs =>
+      __hasBuiltValueImportWithAs ??= super.hasBuiltValueImportWithAs;
 
   @override
   bool get valueClassIsAbstract =>
