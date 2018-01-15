@@ -41,6 +41,9 @@ abstract class ValueSourceClass
       .any((interfaceType) => interfaceType.name == 'Built');
 
   @memoized
+  bool get extendsNonObject => element.supertype.displayName != 'Object';
+
+  @memoized
   BuiltValue get settings {
     final annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
@@ -207,6 +210,11 @@ abstract class ValueSourceClass
         result.add('Make class implement Built<$expectedBuildParameters>. '
             'Currently: Built<$builtParameters>');
       }
+    }
+
+    if (extendsNonObject) {
+      result.add('Stop class extending other classes. '
+          'Only "implements" and "extends Object with" are allowed.');
     }
 
     if (settings.instantiable) {

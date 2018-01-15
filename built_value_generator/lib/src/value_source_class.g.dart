@@ -21,6 +21,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   String __implName;
   ClassElement __builderElement;
   bool __implementsBuilt;
+  bool __extendsNonObject;
   BuiltValue __settings;
   BuiltList<String> __genericParameters;
   BuiltList<String> __genericBounds;
@@ -62,6 +63,9 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   bool get implementsBuilt => __implementsBuilt ??= super.implementsBuilt;
+
+  @override
+  bool get extendsNonObject => __extendsNonObject ??= super.extendsNonObject;
 
   @override
   BuiltValue get settings => __settings ??= super.settings;

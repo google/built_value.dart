@@ -10,11 +10,6 @@ class BuiltParametersVisitor extends RecursiveAstVisitor {
   String result;
 
   @override
-  void visitExtendsClause(ExtendsClause extendsClause) {
-    result ??= _extractParameters('extends Built<', extendsClause.toString());
-  }
-
-  @override
   void visitImplementsClause(ImplementsClause implementsClause) {
     for (final interface in implementsClause.interfaces) {
       result ??= _extractParameters('Built<', interface.toString());
