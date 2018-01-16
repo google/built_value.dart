@@ -145,3 +145,31 @@ abstract class UsesChainedInterface extends Object
       _$UsesChainedInterface;
   UsesChainedInterface._();
 }
+
+// Check that a non-instantiable `built` class is allow to omit `Built`, and
+// the corresponding hand-coded builder is allowed to omit `Builder`, to
+// choose which fields to specify, and to omit factory and constructor.
+@BuiltValue(instantiable: false)
+abstract class HandCoded {
+  int get fieldInBaseBuilder;
+  int get fieldNotInBaseBuilder;
+
+  HandCoded rebuild(updates(HandCodedBuilder b));
+}
+
+abstract class HandCodedBuilder {
+  int fieldInBaseBuilder;
+}
+
+abstract class UsesHandCoded
+    implements Built<UsesHandCoded, UsesHandCodedBuilder>, HandCoded {
+  static Serializer<UsesHandCoded> get serializer => _$usesHandCodedSerializer;
+
+  // If a field is not present in the base builder, we're free to supply an
+  // implementation rather than using the generated one.
+  @override
+  int get fieldNotInBaseBuilder => 37;
+
+  factory UsesHandCoded([updates(UsesHandCodedBuilder b)]) = _$UsesHandCoded;
+  UsesHandCoded._();
+}

@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.6.1
+
+- Allow hand-coded base builders, that is, builders for classes with
+  `@BuiltValue(instantaible: false)`. They are now allowed to not
+  implement `Builder` (as a workaround for a dart2js issue); they are
+  allowed to omit fields; and they must omit constructor and factory.
+
 ## 4.6.0
 
 - Add custom `Error` classes: `BuiltValueNullFieldError`,
