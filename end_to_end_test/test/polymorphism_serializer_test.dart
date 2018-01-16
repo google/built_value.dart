@@ -121,4 +121,21 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('UsesHandCoded', () {
+    final data = new UsesHandCoded((b) => b..fieldInBaseBuilder = 4);
+    final serialized = [
+      'UsesHandCoded',
+      'fieldInBaseBuilder',
+      4,
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }

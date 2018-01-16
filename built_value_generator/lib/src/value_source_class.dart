@@ -217,7 +217,7 @@ abstract class ValueSourceClass
             'Make class have exactly one constructor: $expectedConstructor;');
       }
     } else {
-      if (valueClassConstructors.length != 0) {
+      if (valueClassConstructors.isNotEmpty) {
         result.add('Remove all constructors or remove "instantiable: false".');
       }
     }
@@ -255,34 +255,50 @@ abstract class ValueSourceClass
       result.add('Make builder class abstract.');
     }
 
-    final expectedBuilderParameters =
-        '$name$_generics, ${name}Builder$_generics';
-    if (builderParameters != expectedBuilderParameters) {
-      result.add(
-          'Make builder class implement Builder<$expectedBuilderParameters>. '
-          'Currently: Builder<$builderParameters>');
+    if (settings.instantiable) {
+      final expectedBuilderParameters =
+          '$name$_generics, ${name}Builder$_generics';
+      if (builderParameters != expectedBuilderParameters) {
+        result.add(
+            'Make builder class implement Builder<$expectedBuilderParameters>. '
+            'Currently: Builder<$builderParameters>');
+      }
     }
 
-    final expectedConstructor = '${name}Builder._()';
-    if (builderClassConstructors.length != 1 ||
-        !(builderClassConstructors.single.startsWith(expectedConstructor))) {
-      result.add(
-          'Make builder class have exactly one constructor: $expectedConstructor;');
+    if (settings.instantiable) {
+      final expectedConstructor = '${name}Builder._()';
+      if (builderClassConstructors.length != 1 ||
+          !(builderClassConstructors.single.startsWith(expectedConstructor))) {
+        result.add(
+            'Make builder class have exactly one constructor: $expectedConstructor;');
+      }
+    } else {
+      if (builderClassConstructors.isNotEmpty) {
+        result.add('Remove all builder constructors '
+            'or remove "instantiable: false".');
+      }
     }
 
-    final expectedFactory =
-        'factory ${name}Builder() = _\$${name}Builder$_generics;';
-    if (builderClassFactories.length != 1 ||
-        builderClassFactories.single != expectedFactory) {
-      result
-          .add('Make builder class have exactly one factory: $expectedFactory');
+    if (settings.instantiable) {
+      final expectedFactory =
+          'factory ${name}Builder() = _\$${name}Builder$_generics;';
+      if (builderClassFactories.length != 1 ||
+          builderClassFactories.single != expectedFactory) {
+        result.add(
+            'Make builder class have exactly one factory: $expectedFactory');
+      }
+    } else {
+      if (builderClassFactories.isNotEmpty) {
+        result.add(
+            'Remove all builder factories or remove "instantiable: false".');
+      }
     }
 
     return result;
   }
 
   Iterable<String> _checkFieldList() {
-    if (!hasBuilder) return <String>[];
+    if (!hasBuilder || !settings.instantiable) return <String>[];
     return fields.any((field) => !field.builderFieldExists)
         ? [
             'Make builder have exactly these fields: ' +

@@ -44,6 +44,7 @@ part 'serializers.g.dart';
   StandardCat,
   StandardJsonValue,
   TestEnum,
+  UsesHandCoded,
   ValueUsingImportAs,
   ValueWithHasInt,
   ValueWithInt,
