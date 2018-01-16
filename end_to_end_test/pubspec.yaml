@@ -1,5 +1,5 @@
 name: end_to_end_test
-version: 4.6.0
+version: 4.6.1
 description: >
   Tests, not for publishing.
 authors:
@@ -11,16 +11,12 @@ environment:
 
 dependencies:
   built_collection: '>=2.0.0 <4.0.0'
-# built_value: ^4.6.0
-  built_value:
-    path: ../built_value
+  built_value: ^4.6.1
 
 dev_dependencies:
   build: ^0.11.1
   build_runner: ^0.6.0
-# built_value_generator: ^4.6.0
-  built_value_generator:
-    path: ../built_value_generator
+  built_value_generator: ^4.6.1
   fixnum: ^0.10.0
   source_gen: ^0.7.0
   quiver: '>=0.21.0 <0.26.0'
