@@ -129,4 +129,18 @@ void main() {
       expect(modifiedHasFields, expectedHasFields);
     });
   });
+
+  group('UsesHandCoded', () {
+    test('can be instantiated', () {
+      new UsesHandCoded((b) => b..fieldInBaseBuilder = 3);
+    });
+
+    test('can be updated via base interface', () {
+      final HandCoded handCoded =
+          new UsesHandCoded((b) => b..fieldInBaseBuilder = 3);
+      final updatedHandCoded =
+          handCoded.rebuild((b) => b..fieldInBaseBuilder = 4);
+      expect(updatedHandCoded.fieldInBaseBuilder, 4);
+    });
+  });
 }

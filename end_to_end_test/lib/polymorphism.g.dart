@@ -21,6 +21,8 @@ Serializer<Cage> _$cageSerializer = new _$CageSerializer();
 Serializer<StandardCat> _$standardCatSerializer = new _$StandardCatSerializer();
 Serializer<HasString> _$hasStringSerializer = new _$HasStringSerializer();
 Serializer<HasDouble> _$hasDoubleSerializer = new _$HasDoubleSerializer();
+Serializer<UsesHandCoded> _$usesHandCodedSerializer =
+    new _$UsesHandCodedSerializer();
 
 class _$CatSerializer implements StructuredSerializer<Cat> {
   @override
@@ -318,6 +320,46 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
         case 'field':
           result.field = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
+  @override
+  final Iterable<Type> types = const [UsesHandCoded, _$UsesHandCoded];
+  @override
+  final String wireName = 'UsesHandCoded';
+
+  @override
+  Iterable serialize(Serializers serializers, UsesHandCoded object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'fieldInBaseBuilder',
+      serializers.serialize(object.fieldInBaseBuilder,
+          specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  UsesHandCoded deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new UsesHandCodedBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'fieldInBaseBuilder':
+          result.fieldInBaseBuilder = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -994,6 +1036,84 @@ class UsesChainedInterfaceBuilder
   @override
   _$UsesChainedInterface build() {
     final _$result = _$v ?? new _$UsesChainedInterface._(bar: bar, foo: foo);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$UsesHandCoded extends UsesHandCoded {
+  @override
+  final int fieldInBaseBuilder;
+
+  factory _$UsesHandCoded([void updates(UsesHandCodedBuilder b)]) =>
+      (new UsesHandCodedBuilder()..update(updates)).build();
+
+  _$UsesHandCoded._({this.fieldInBaseBuilder}) : super._() {
+    if (fieldInBaseBuilder == null)
+      throw new BuiltValueNullFieldError('UsesHandCoded', 'fieldInBaseBuilder');
+  }
+
+  @override
+  UsesHandCoded rebuild(void updates(UsesHandCodedBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  UsesHandCodedBuilder toBuilder() => new UsesHandCodedBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! UsesHandCoded) return false;
+    return fieldInBaseBuilder == other.fieldInBaseBuilder;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, fieldInBaseBuilder.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('UsesHandCoded')
+          ..add('fieldInBaseBuilder', fieldInBaseBuilder))
+        .toString();
+  }
+}
+
+class UsesHandCodedBuilder
+    implements Builder<UsesHandCoded, UsesHandCodedBuilder>, HandCodedBuilder {
+  _$UsesHandCoded _$v;
+
+  int _fieldInBaseBuilder;
+  int get fieldInBaseBuilder => _$this._fieldInBaseBuilder;
+  set fieldInBaseBuilder(int fieldInBaseBuilder) =>
+      _$this._fieldInBaseBuilder = fieldInBaseBuilder;
+
+  UsesHandCodedBuilder();
+
+  UsesHandCodedBuilder get _$this {
+    if (_$v != null) {
+      _fieldInBaseBuilder = _$v.fieldInBaseBuilder;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant UsesHandCoded other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$UsesHandCoded;
+  }
+
+  @override
+  void update(void updates(UsesHandCodedBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$UsesHandCoded build() {
+    final _$result =
+        _$v ?? new _$UsesHandCoded._(fieldInBaseBuilder: fieldInBaseBuilder);
     replace(_$result);
     return _$result;
   }
