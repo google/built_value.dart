@@ -15,11 +15,11 @@ void main() {
     test('suggests to import part file', () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains("1. Import generated part: part 'value.g.dart';"));
@@ -29,36 +29,18 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-class Value extends Built<Value, ValueBuilder> {
+class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains("1. Make class abstract."));
     });
 
-    test('suggests correct Built type parameters', () async {
-      expect(
-          await generate('''library value;
-import 'package:built_value/built_value.dart';
-part 'value.g.dart';
-abstract class Value extends Built<Foo, Bar> {
-  Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
-}
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
-  ValueBuilder._();
-  factory ValueBuilder() = _\$ValueBuilder;
-}'''),
-          contains('1. Make class implement Built<Value, ValueBuilder>. '
-              'Currently: Built<Foo, Bar>'));
-    });
-
     test('suggests correct Built type parameters for implements', () async {
-      expect(
-          await generate('''library value;
+      expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Foo, Bar> {
@@ -68,9 +50,44 @@ abstract class Value implements Built<Foo, Bar> {
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
+}'''), contains('1. Make class implement Built<Value, ValueBuilder>.'));
+    });
+
+    test('rejects "extends"', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Foo {}
+abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
 }'''),
-          contains('1. Make class implement Built<Value, ValueBuilder>. '
-              'Currently: Built<Foo, Bar>'));
+          contains('1. Stop class extending other classes. '
+              'Only "implements" and "extends Object with" are allowed.'));
+    });
+
+    test('rejects "extends Built"', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value extends Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          allOf(
+              contains('Make class implement Built<Value, ValueBuilder>.'),
+              contains('Stop class extending other classes. '
+                  'Only "implements" and "extends Object with" are allowed.')));
     });
 
     test('works with multiple implements', () async {
@@ -97,7 +114,7 @@ abstract class Value implements Built<Value, ValueBuilder>, Object {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }'''), isNot(contains('1.')));
@@ -107,10 +124,10 @@ abstract class Value extends Built<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains("1. Make class have exactly one constructor: Value._();"));
@@ -121,9 +138,9 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains("1. Make class have exactly one constructor: Value._();"));
@@ -134,13 +151,13 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
           await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._() {
     print("hi");
   }
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''),
@@ -154,11 +171,11 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 @BuiltValue(instantiable: false)
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value() {}
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains('1. Remove all constructors or remove "instantiable: false".'));
@@ -169,10 +186,10 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
           await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''),
@@ -189,10 +206,10 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 @BuiltValue(instantiable: false)
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains('1. Remove all factories or remove "instantiable: false".'));
@@ -202,11 +219,11 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-class ValueBuilder extends Builder<Value, ValueBuilder> {
+class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains("1. Make builder class abstract"));
@@ -217,11 +234,11 @@ class ValueBuilder extends Builder<Value, ValueBuilder> {
           await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Foo, Bar> {
+abstract class ValueBuilder implements Builder<Foo, Bar> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''),
@@ -235,11 +252,11 @@ abstract class ValueBuilder extends Builder<Foo, Bar> {
           await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   factory ValueBuilder() = _\$ValueBuilder;
 }'''),
           contains("1. Make builder class "
@@ -252,11 +269,11 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
           await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 }'''),
           contains("1. Make builder class "
               "have exactly one constructor: ValueBuilder._();"));
@@ -267,11 +284,11 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
           await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
 }'''),
           contains("1. Make builder class have exactly one factory: "
@@ -282,12 +299,12 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   int foo;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   int foo;
@@ -298,7 +315,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   int get _foo;
   factory Value([updates(ValueBuilder b)]) = _\$Value;
@@ -310,7 +327,7 @@ abstract class Value extends Built<Value, ValueBuilder> {
           await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   get foo;
@@ -323,12 +340,12 @@ abstract class Value extends Built<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   int get foo;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   int get foo;
@@ -339,12 +356,12 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   int get foo;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }'''), contains("1. Make builder have exactly these fields: foo"));
@@ -354,12 +371,12 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   int get foo;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   String foo;
@@ -370,12 +387,12 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   set foo(int foo) => print(foo);
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   set foo(int foo) => print(foo);
@@ -386,11 +403,11 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
       final generated = await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
 }
-abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
 }
@@ -405,7 +422,7 @@ abstract class ValueBuilder extends Builder<Value, ValueBuilder> {
         await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   int get hashCode => 0;
@@ -419,7 +436,7 @@ abstract class Value extends Built<Value, ValueBuilder> {
         await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   bool operator==(other) => false;
@@ -432,7 +449,7 @@ abstract class Value extends Built<Value, ValueBuilder> {
     expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Value extends Built<Value, ValueBuilder> {
+abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
   String toString() => 'hi!';
