@@ -15,6 +15,11 @@ import 'package:source_gen/source_gen.dart';
 
 part 'value_source_class.g.dart';
 
+const String _importWithSingleQuotes =
+    "import 'package:built_value/built_value.dart'";
+const String _importWithDoubleQuotes =
+    'import "package:built_value/built_value.dart"';
+
 abstract class ValueSourceClass
     implements Built<ValueSourceClass, ValueSourceClassBuilder> {
   ClassElement get element;
@@ -91,6 +96,10 @@ abstract class ValueSourceClass
       ValueSourceField.fromClassElements(settings, element, builderElement);
 
   @memoized
+  String get source =>
+      element.library.definingCompilationUnit.source.contents.data;
+
+  @memoized
   String get partStatement {
     final fileName = element.library.source.shortName.replaceAll('.dart', '');
     return "part '$fileName.g.dart';";
@@ -99,7 +108,25 @@ abstract class ValueSourceClass
   @memoized
   bool get hasPartStatement {
     final expectedCode = partStatement;
-    return element.library.source.contents.data.contains(expectedCode);
+    return source.contains(expectedCode);
+  }
+
+  @memoized
+  bool get hasBuiltValueImportWithShow {
+    // It would be more accurate to check using the AST, but this is
+    // potentially expensive. We already have the source for the "part of"
+    // check, use that.
+    return source.contains('$_importWithSingleQuotes show') ||
+        source.contains('$_importWithDoubleQuotes show');
+  }
+
+  @memoized
+  bool get hasBuiltValueImportWithAs {
+    // It would be more accurate to check using the AST, but this is
+    // potentially expensive. We already have the source for the "part of"
+    // check, use that.
+    return source.contains('$_importWithSingleQuotes as') ||
+        source.contains('$_importWithDoubleQuotes as');
   }
 
   @memoized
@@ -203,6 +230,18 @@ abstract class ValueSourceClass
       result.add('Make class abstract.');
     }
 
+    if (hasBuiltValueImportWithShow) {
+      result.add('Stop using "show" when importing '
+          '"package:built_value/built_value.dart". It prevents the generated '
+          'code from finding helper methods.');
+    }
+
+    if (hasBuiltValueImportWithAs) {
+      result.add('Stop using "as" when importing '
+          '"package:built_value/built_value.dart". It prevents the generated '
+          'code from finding helper methods.');
+    }
+
     final expectedBuiltParameters = '$name$_generics, ${name}Builder$_generics';
     // Built parameters need fixing if they are not as expected, unless 1) the
     // class is marked `@BuiltValue(instantiable: false)` and 2) the parameters
@@ -210,6 +249,11 @@ abstract class ValueSourceClass
     if (builtParameters != expectedBuiltParameters &&
         !(!settings.instantiable && builtParameters == null)) {
       result.add('Make class implement Built<$expectedBuiltParameters>.');
+    }
+
+    if (extendsNonObject) {
+      result.add('Stop class extending other classes. '
+          'Only "implements" and "extends Object with" are allowed.');
     }
 
     if (extendsNonObject) {

@@ -6,6 +6,9 @@ Introduce restrictions on using `built_value` in unsupported ways:
 
 - Prohibit use of `extends` in `built_value` classes. Classes should inherit
   API using `implements` and API+implementation using `extends Object with`.
+- Prohibit use of `show` or `as` when importing
+  'package:built_value/built_value.dart'. The generated code needs access to
+  all symbols in the package with no import prefix.
 
 ## 4.6.1
 
