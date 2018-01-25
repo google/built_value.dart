@@ -256,11 +256,6 @@ abstract class ValueSourceClass
           'Only "implements" and "extends Object with" are allowed.');
     }
 
-    if (extendsNonObject) {
-      result.add('Stop class extending other classes. '
-          'Only "implements" and "extends Object with" are allowed.');
-    }
-
     if (settings.instantiable) {
       final expectedConstructor = '$name._()';
       if (valueClassConstructors.length != 1 ||
