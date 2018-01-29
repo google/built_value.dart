@@ -1,5 +1,5 @@
 name: built_value
-version: 5.0.0
+version: 5.0.1
 description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library is the runtime dependency.
@@ -14,7 +14,7 @@ dependencies:
   built_collection: '>=2.0.0 <4.0.0'
   collection: ^1.0.0
   fixnum: ^0.10.0
-  quiver: '>=0.21.0 <0.28.0'
+  quiver: '>=0.21.0 <0.29.0'
 
 dev_dependencies:
   test: any
