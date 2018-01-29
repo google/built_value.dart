@@ -46,7 +46,46 @@ abstract class ValueSourceClass
       .any((interfaceType) => interfaceType.name == 'Built');
 
   @memoized
-  bool get extendsNonObject => element.supertype.displayName != 'Object';
+  bool get extendsIsAllowed {
+    // Usually `extends` is not allowed. But, allow one special case:
+    //
+    // A `built_value` class may share code with a `const` class by extending
+    // a `const` base class. There's no other way to do this sharing because
+    // a `const` class is not allowed to use a mixin.
+    //
+    // To avoid causing problems for `built_value` the base class must be
+    // abstract, must have no fields, must have no abstract getters, and
+    // must not implement `operator==`, `hashCode` or `toString`.
+    // This means it _is_ allowed to have concrete getters as well as
+    // concrete and abstract methods.
+
+    for (var supertype in [element.supertype]
+      ..addAll(element.supertype.element.allSupertypes)) {
+      if (supertype.displayName == 'Object') continue;
+
+      // Base class must be abstract.
+      if (!supertype.element.isAbstract) return false;
+
+      // Base class must have no fields.
+      if (supertype.element.fields
+          .any((field) => !field.isStatic && !field.isSynthetic)) {
+        return false;
+      }
+
+      // Base class must have no abstract getters.
+      if (supertype.accessors.any((accessor) =>
+          !accessor.isStatic && accessor.isGetter && accessor.isAbstract)) {
+        return false;
+      }
+
+      // Base class must not implement operator==, hashCode or toString.
+      if (supertype.element.getMethod('hashCode') != null) return false;
+      if (supertype.element.getMethod('==') != null) return false;
+      if (supertype.element.getMethod('toString') != null) return false;
+    }
+
+    return true;
+  }
 
   @memoized
   BuiltValue get settings {
@@ -251,7 +290,7 @@ abstract class ValueSourceClass
       result.add('Make class implement Built<$expectedBuiltParameters>.');
     }
 
-    if (extendsNonObject) {
+    if (!extendsIsAllowed) {
       result.add('Stop class extending other classes. '
           'Only "implements" and "extends Object with" are allowed.');
     }

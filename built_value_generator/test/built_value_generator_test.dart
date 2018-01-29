@@ -121,12 +121,12 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 }'''), contains('1. Make class implement Built<Value, ValueBuilder>.'));
     });
 
-    test('rejects "extends"', () async {
+    test('rejects "extends" with concrete base', () async {
       expect(
           await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
-abstract class Foo {}
+class Foo {}
 abstract class Value implements Built<Value, ValueBuilder> extends Foo {
   Value._();
   factory Value([updates(ValueBuilder b)]) = _\$Value;
@@ -139,9 +139,89 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
               'Only "implements" and "extends Object with" are allowed.'));
     });
 
-    test('rejects "extends Built"', () async {
+    test('rejects "extends" with base with fields', () async {
       expect(
           await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Foo {
+  final int x;
+}
+abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Stop class extending other classes. '
+              'Only "implements" and "extends Object with" are allowed.'));
+    });
+
+    test('rejects "extends" with base with abstract getter', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Foo {
+  int get x;
+}
+abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Stop class extending other classes. '
+              'Only "implements" and "extends Object with" are allowed.'));
+    });
+
+    test('rejects "extends" with base with operator==', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Foo {
+  bool get operator==(other) => true;
+}
+abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Stop class extending other classes. '
+              'Only "implements" and "extends Object with" are allowed.'));
+    });
+
+    test(
+        'allows "extends" with base with abstract and concrete methods '
+        'and concrete getters', () async {
+      expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Foo {
+  int foo();
+  int bar() => 3;
+  int get baz => foo();
+}
+abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''), isNot(contains('1.')));
+    });
+
+    test('rejects "extends Built"', () async {
+      expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value extends Built<Value, ValueBuilder> {
@@ -151,11 +231,7 @@ abstract class Value extends Built<Value, ValueBuilder> {
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
-}'''),
-          allOf(
-              contains('Make class implement Built<Value, ValueBuilder>.'),
-              contains('Stop class extending other classes. '
-                  'Only "implements" and "extends Object with" are allowed.')));
+}'''), allOf(contains('Make class implement Built<Value, ValueBuilder>.')));
     });
 
     test('works with multiple implements', () async {
