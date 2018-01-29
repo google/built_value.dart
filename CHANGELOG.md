@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.1
+
+- Allow quiver 0.28.
+
 ## 5.0.0
 
 Introduce restrictions on using `built_value` in unsupported ways:
