@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.1.0
+
+- Relax restriction on `extends` to allow for one special case: sharing of
+  code between `built_value` and `const` classes. The base class in question
+  must be abstract, have no fields, have no abstract getters and must not
+  implement `operator==`, `hashCode` or `toString`.
+
 ## 5.0.1
 
 - Allow quiver 0.28.
