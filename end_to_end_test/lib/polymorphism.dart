@@ -173,3 +173,18 @@ abstract class UsesHandCoded
   factory UsesHandCoded([updates(UsesHandCodedBuilder b)]) = _$UsesHandCoded;
   UsesHandCoded._();
 }
+
+// Check generation when two @BuiltValue(instantiable: false) classes are
+// implemented. Currently needs a workaround due to analyzer issue:
+// https://github.com/dart-lang/sdk/issues/32025
+@BuiltValue(instantiable: false)
+abstract class One {}
+
+@BuiltValue(instantiable: false)
+abstract class Two {}
+
+abstract class ImplementsTwo
+    implements Built<ImplementsTwo, ImplementsTwoBuilder>, One, Two {
+  factory ImplementsTwo([updates(ImplementsTwoBuilder b)]) = _$ImplementsTwo;
+  ImplementsTwo._();
+}

@@ -12,12 +12,16 @@ environment:
 dependencies:
   browser: any
   built_collection: '>=2.0.0 <4.0.0'
-  built_value: ^5.1.0
+# built_value: ^5.1.0
+  built_value:
+    path: ../built_value
 
 dev_dependencies:
   build: ^0.11.1
   build_runner: ^0.6.0
-  built_value_generator: ^5.1.0
+# built_value_generator: ^5.1.0
+  built_value_generator:
+    path: ../built_value_generator
   source_gen: ^0.7.0
   quiver: '>=0.21.0 <0.29.0'
   test: any

@@ -1,5 +1,10 @@
 # Changelog
 
+# 5.1.1
+
+- Workaround for analyzer issue when `implement`ing multiple classes that
+  use `@BuiltValue(instantiable: false)`.
+
 ## 5.1.0
 
 - Relax restriction on `extends` to allow for one special case: sharing of

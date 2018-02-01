@@ -1118,3 +1118,73 @@ class UsesHandCodedBuilder
     return _$result;
   }
 }
+
+abstract class OneBuilder {
+  void replace(One other);
+  void update(void updates(OneBuilder b));
+}
+
+abstract class TwoBuilder {
+  void replace(Two other);
+  void update(void updates(TwoBuilder b));
+}
+
+class _$ImplementsTwo extends ImplementsTwo {
+  factory _$ImplementsTwo([void updates(ImplementsTwoBuilder b)]) =>
+      (new ImplementsTwoBuilder()..update(updates)).build();
+
+  _$ImplementsTwo._() : super._();
+
+  @override
+  ImplementsTwo rebuild(void updates(ImplementsTwoBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ImplementsTwoBuilder toBuilder() => new ImplementsTwoBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! ImplementsTwo) return false;
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    return 185492149;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('ImplementsTwo').toString();
+  }
+}
+
+class ImplementsTwoBuilder
+    implements
+        Builder<ImplementsTwo, ImplementsTwoBuilder>,
+        OneBuilder,
+        TwoBuilder {
+  _$ImplementsTwo _$v;
+
+  ImplementsTwoBuilder();
+
+  @override
+// ignore: override_on_non_overriding_method
+  void replace(covariant ImplementsTwo other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$ImplementsTwo;
+  }
+
+  @override
+  void update(void updates(ImplementsTwoBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ImplementsTwo build() {
+    final _$result = _$v ?? new _$ImplementsTwo._();
+    replace(_$result);
+    return _$result;
+  }
+}
