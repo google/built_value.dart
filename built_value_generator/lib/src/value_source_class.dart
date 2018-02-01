@@ -657,6 +657,12 @@ abstract class ValueSourceClass
       // If we're overriding `replace` from other builders, tell the analyzer
       // that this builder only accepts values of exactly the right type, by
       // marking the value `covariant`.
+
+      if (builderImplements.length > 2) {
+        // Add this `ignore` as a workaround for analyzer issue:
+        // https://github.com/dart-lang/sdk/issues/32025
+        result.writeln('// ignore: override_on_non_overriding_method');
+      }
       result.writeln('void replace(covariant $name$_generics other) {');
     } else {
       result.writeln('void replace($name$_generics other) {');
