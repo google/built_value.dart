@@ -25,6 +25,7 @@ part 'serializers.g.dart';
   CollectionGenericValue,
   Collections,
   CompoundValue,
+  CompoundValueExplicitNoNesting,
   CompoundValueNoNesting,
   EnumWithInt,
   FieldDiscoveryValue,

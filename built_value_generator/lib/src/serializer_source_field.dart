@@ -87,7 +87,7 @@ abstract class SerializerSourceField
   @memoized
   bool get builderFieldUsesNestedBuilder {
     final builderFieldElementIsValid =
-        (builderElement?.getter?.isAbstract ?? false) &&
+        (builderElement?.getter?.isAbstract == false) &&
             !builderElement.isStatic;
 
     // If the builder is present, check it to determine whether a nested

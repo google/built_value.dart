@@ -52,6 +52,37 @@ abstract class CompoundValueNoNesting
   CompoundValueNoNesting._();
 }
 
+abstract class CompoundValueExplicitNoNesting
+    implements
+        Built<CompoundValueExplicitNoNesting,
+            CompoundValueExplicitNoNestingBuilder> {
+  static Serializer<CompoundValueExplicitNoNesting> get serializer =>
+      _$compoundValueExplicitNoNestingSerializer;
+
+  SimpleValue get simpleValue;
+  @nullable
+  ValidatedValue get validatedValue;
+
+  factory CompoundValueExplicitNoNesting(
+          [updates(CompoundValueExplicitNoNestingBuilder b)]) =
+      _$CompoundValueExplicitNoNesting;
+  CompoundValueExplicitNoNesting._();
+}
+
+abstract class CompoundValueExplicitNoNestingBuilder
+    implements
+        Builder<CompoundValueExplicitNoNesting,
+            CompoundValueExplicitNoNestingBuilder> {
+  // One field using nesting.
+  SimpleValueBuilder simpleValue;
+  // One field not using nesting.
+  ValidatedValue validatedValue;
+
+  factory CompoundValueExplicitNoNestingBuilder() =
+      _$CompoundValueExplicitNoNestingBuilder;
+  CompoundValueExplicitNoNestingBuilder._();
+}
+
 abstract class DerivedValue
     implements Built<DerivedValue, DerivedValueBuilder> {
   int get anInt;
