@@ -19,6 +19,9 @@ Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
 Serializer<CompoundValueNoNesting> _$compoundValueNoNestingSerializer =
     new _$CompoundValueNoNestingSerializer();
+Serializer<CompoundValueExplicitNoNesting>
+    _$compoundValueExplicitNoNestingSerializer =
+    new _$CompoundValueExplicitNoNestingSerializer();
 Serializer<ValidatedValue> _$validatedValueSerializer =
     new _$ValidatedValueSerializer();
 Serializer<ValueUsingImportAs> _$valueUsingImportAsSerializer =
@@ -184,6 +187,62 @@ class _$CompoundValueNoNestingSerializer
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
               specifiedType: const FullType(SimpleValue)) as SimpleValue;
+          break;
+        case 'validatedValue':
+          result.validatedValue = serializers.deserialize(value,
+              specifiedType: const FullType(ValidatedValue)) as ValidatedValue;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$CompoundValueExplicitNoNestingSerializer
+    implements StructuredSerializer<CompoundValueExplicitNoNesting> {
+  @override
+  final Iterable<Type> types = const [
+    CompoundValueExplicitNoNesting,
+    _$CompoundValueExplicitNoNesting
+  ];
+  @override
+  final String wireName = 'CompoundValueExplicitNoNesting';
+
+  @override
+  Iterable serialize(
+      Serializers serializers, CompoundValueExplicitNoNesting object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'simpleValue',
+      serializers.serialize(object.simpleValue,
+          specifiedType: const FullType(SimpleValue)),
+    ];
+    if (object.validatedValue != null) {
+      result
+        ..add('validatedValue')
+        ..add(serializers.serialize(object.validatedValue,
+            specifiedType: const FullType(ValidatedValue)));
+    }
+
+    return result;
+  }
+
+  @override
+  CompoundValueExplicitNoNesting deserialize(
+      Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new CompoundValueExplicitNoNestingBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'simpleValue':
+          result.simpleValue.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue)) as SimpleValue);
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
@@ -989,6 +1048,128 @@ class CompoundValueNoNestingBuilder
     final _$result = _$v ??
         new _$CompoundValueNoNesting._(
             simpleValue: simpleValue, validatedValue: validatedValue);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$CompoundValueExplicitNoNesting extends CompoundValueExplicitNoNesting {
+  @override
+  final SimpleValue simpleValue;
+  @override
+  final ValidatedValue validatedValue;
+
+  factory _$CompoundValueExplicitNoNesting(
+          [void updates(CompoundValueExplicitNoNestingBuilder b)]) =>
+      (new CompoundValueExplicitNoNestingBuilder()..update(updates)).build()
+          as _$CompoundValueExplicitNoNesting;
+
+  _$CompoundValueExplicitNoNesting._({this.simpleValue, this.validatedValue})
+      : super._() {
+    if (simpleValue == null)
+      throw new BuiltValueNullFieldError(
+          'CompoundValueExplicitNoNesting', 'simpleValue');
+  }
+
+  @override
+  CompoundValueExplicitNoNesting rebuild(
+          void updates(CompoundValueExplicitNoNestingBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$CompoundValueExplicitNoNestingBuilder toBuilder() =>
+      new _$CompoundValueExplicitNoNestingBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! CompoundValueExplicitNoNesting) return false;
+    return simpleValue == other.simpleValue &&
+        validatedValue == other.validatedValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('CompoundValueExplicitNoNesting')
+          ..add('simpleValue', simpleValue)
+          ..add('validatedValue', validatedValue))
+        .toString();
+  }
+}
+
+class _$CompoundValueExplicitNoNestingBuilder
+    extends CompoundValueExplicitNoNestingBuilder {
+  _$CompoundValueExplicitNoNesting _$v;
+
+  @override
+  SimpleValueBuilder get simpleValue {
+    _$this;
+    return super.simpleValue ??= new SimpleValueBuilder();
+  }
+
+  @override
+  set simpleValue(SimpleValueBuilder simpleValue) {
+    _$this;
+    super.simpleValue = simpleValue;
+  }
+
+  @override
+  ValidatedValue get validatedValue {
+    _$this;
+    return super.validatedValue;
+  }
+
+  @override
+  set validatedValue(ValidatedValue validatedValue) {
+    _$this;
+    super.validatedValue = validatedValue;
+  }
+
+  _$CompoundValueExplicitNoNestingBuilder() : super._();
+
+  CompoundValueExplicitNoNestingBuilder get _$this {
+    if (_$v != null) {
+      super.simpleValue = _$v.simpleValue?.toBuilder();
+      super.validatedValue = _$v.validatedValue;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(CompoundValueExplicitNoNesting other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$CompoundValueExplicitNoNesting;
+  }
+
+  @override
+  void update(void updates(CompoundValueExplicitNoNestingBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$CompoundValueExplicitNoNesting build() {
+    _$CompoundValueExplicitNoNesting _$result;
+    try {
+      _$result = _$v ??
+          new _$CompoundValueExplicitNoNesting._(
+              simpleValue: simpleValue.build(), validatedValue: validatedValue);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        simpleValue.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'CompoundValueExplicitNoNesting', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

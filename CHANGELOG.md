@@ -1,5 +1,10 @@
 # Changelog
 
+# 5.1.2
+
+- Fix generated serialization code when a manually declared builder causes
+  a field to not use a nested builder.
+
 # 5.1.1
 
 - Workaround for analyzer issue when `implement`ing multiple classes that
