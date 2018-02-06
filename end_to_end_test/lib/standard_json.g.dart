@@ -76,19 +76,19 @@ class _$StandardJsonValueSerializer
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(String),
                 const FullType(JsonObject)
-              ])) as BuiltMap<String, JsonObject>);
+              ])) as BuiltMap);
           break;
         case 'zoo':
           result.zoo.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Animal)]))
-              as BuiltList<Animal>);
+              as BuiltList);
           break;
         case 'strings':
           result.strings.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList<String>);
+              as BuiltList);
           break;
       }
     }

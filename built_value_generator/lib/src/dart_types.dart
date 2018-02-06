@@ -38,4 +38,7 @@ class DartTypes {
     return _builtCollectionNames
         .any((name) => type.displayName.startsWith('$name<'));
   }
+
+  static bool isBuiltCollectionTypeName(String name) =>
+      _builtCollectionNames.contains(name);
 }

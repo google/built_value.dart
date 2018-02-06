@@ -59,7 +59,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
           result.simpleValues.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(prefix.SimpleValue)]))
-              as BuiltList<prefix.SimpleValue>);
+              as BuiltList);
           break;
       }
     }
