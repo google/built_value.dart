@@ -14,7 +14,9 @@ dependencies:
   analyzer: '>=0.29.0 <0.31.0'
   build: ^0.11.1
   built_collection: '>=2.0.0 <4.0.0'
-  built_value: ^5.1.2
+# built_value: ^5.1.2
+  built_value:
+    path: ../built_value
   source_gen: ^0.7.0
   quiver: '>=0.21.0 <0.29.0'
 
