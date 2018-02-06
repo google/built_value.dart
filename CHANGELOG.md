@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.1.3
+
+- Generate simpler deserialization code for `built_collection` instances.
+
 # 5.1.2
 
 - Fix generated serialization code when a manually declared builder causes

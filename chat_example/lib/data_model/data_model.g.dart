@@ -114,7 +114,7 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
           result.targets.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltSet, const [const FullType(String)]))
-              as BuiltSet<String>);
+              as BuiltSet);
           break;
       }
     }
@@ -266,9 +266,8 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
       switch (key) {
         case 'statusTypes':
           result.statusTypes.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltSet, const [const FullType(StatusType)]))
-              as BuiltSet<StatusType>);
+              specifiedType: const FullType(
+                  BuiltSet, const [const FullType(StatusType)])) as BuiltSet);
           break;
       }
     }
@@ -382,9 +381,8 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
       switch (key) {
         case 'log':
           result.log.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(Response)]))
-              as BuiltList<Response>);
+              specifiedType: const FullType(
+                  BuiltList, const [const FullType(Response)])) as BuiltList);
           break;
         case 'message':
           result.message = serializers.deserialize(value,
@@ -433,7 +431,7 @@ class _$ListUsersResponseSerializer
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(String),
                 const FullType(Status)
-              ])) as BuiltMap<String, Status>);
+              ])) as BuiltMap);
           break;
       }
     }

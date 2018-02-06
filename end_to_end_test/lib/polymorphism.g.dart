@@ -200,7 +200,7 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
           result.otherInhabitants.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Animal)]))
-              as BuiltList<Animal>);
+              as BuiltList);
           break;
       }
     }

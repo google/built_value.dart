@@ -154,9 +154,16 @@ abstract class SerializerSourceField
   }
 
   static String _generateCast(
-      String type, BuiltMap<String, String> classGenericBounds) {
+      String type, BuiltMap<String, String> classGenericBounds,
+      {bool topLevel: true}) {
     final bareType = _getBareType(type);
-    final generics = _getGenerics(type);
+
+    // For built collections we can cast to the bare type when deserializing,
+    // instead of the full generic type. This is because the `replace` method
+    // checks the generic type and copies if needed.
+    final generics = topLevel && DartTypes.isBuiltCollectionTypeName(bareType)
+        ? ''
+        : _getGenerics(type);
     final genericItems = _splitOnTopLevelCommas(generics);
 
     if (generics.isEmpty) {
@@ -165,7 +172,8 @@ abstract class SerializerSourceField
       return bareType;
     } else {
       final parameterFullTypes = genericItems
-          .map((item) => _generateCast(item, classGenericBounds))
+          .map((item) =>
+              _generateCast(item, classGenericBounds, topLevel: false))
           .join(', ');
       return '$bareType<$parameterFullTypes>';
     }

@@ -261,7 +261,7 @@ class _$AccountSerializer implements StructuredSerializer<Account> {
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(String),
                 const FullType(JsonObject)
-              ])) as BuiltMap<String, JsonObject>);
+              ])) as BuiltMap);
           break;
       }
     }
