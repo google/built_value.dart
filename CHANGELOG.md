@@ -1,5 +1,13 @@
 # Changelog
 
+# 5.2.0
+
+- Upgrade to latest `built_runner`. You no longer need `build.dart` or
+  `watch.dart`. Instead, make sure you have a dev dependency on
+  `built_value_generator` and `build_runner`, then run
+  `pub run build_runner build` or `pub run build_runner watch`.
+- Note: this version requires the pre release of the Dart 2 SDK.
+
 # 5.1.3
 
 - Generate simpler deserialization code for `built_collection` instances.
