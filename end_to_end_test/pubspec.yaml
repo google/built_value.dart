@@ -15,13 +15,7 @@ dependencies:
 
 dev_dependencies:
   build: ^0.12.0
-# built_value_generator: ^5.2.0
-  built_value_generator:
-    path: ../built_value_generator
+  built_value_generator: ^5.2.0
   fixnum: ^0.10.0
   quiver: '>=0.21.0 <0.29.0'
   test: any
-
-dependency_overrides:
-  built_value:
-    path: ../built_value
