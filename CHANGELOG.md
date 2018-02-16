@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.2.1
+
+- Type fixes for DDC.
+
 # 5.2.0
 
 - Upgrade to latest `built_runner`. You no longer need `build.dart` or

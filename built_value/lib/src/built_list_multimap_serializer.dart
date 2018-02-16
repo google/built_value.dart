@@ -64,11 +64,10 @@ class BuiltListMultimapSerializer
     for (int i = 0; i != serialized.length; i += 2) {
       final key = serializers.deserialize(serialized.elementAt(i),
           specifiedType: keyType);
-      result.addValues(
-          key,
-          serialized.elementAt(i + 1).map((value) =>
-                  serializers.deserialize(value, specifiedType: valueType))
-              as Iterable);
+      for (final value in serialized.elementAt(i + 1).map((value) =>
+          serializers.deserialize(value, specifiedType: valueType))) {
+        result.add(key, value);
+      }
     }
 
     return result.build();
