@@ -42,7 +42,7 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
         ? new ListBuilder<Object>()
         : serializers.newBuilder(specifiedType) as ListBuilder;
 
-    result.addAll(serialized.map(
+    result.replace(serialized.map(
         (item) => serializers.deserialize(item, specifiedType: elementType)));
     return result.build();
   }
