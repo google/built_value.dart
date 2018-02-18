@@ -12,24 +12,21 @@ fi
 version=$1
 
 for pubspec in */pubspec.yaml; do
-  # Remove any "path" imports.
-  cat $pubspec \
-      | grep -v 'path:' \
-      | egrep -v 'built_value:$' \
-      | egrep -v 'built_value_generator:$' \
-      > pubspec.tmp
+  # Remove any dependency overrides, strip trailing empty lines.
+  sed -i -n '/dependency_overrides:/q;p' \
+      "$pubspec"
+  sed -i -e :a -e '/^\n*$/{$d;N;};/\n$/ba' "$pubspec"
 
   # Update versions.
   sed -i -e \
       "s#^version: .*#version: $version#" \
-      pubspec.tmp
+      "$pubspec"
 
   # Update dependencies.
   sed -i -e \
       "s#.*built_value: .*#  built_value: ^$version#" \
-      pubspec.tmp
+      "$pubspec"
   sed -i -e \
       "s#.*built_value_generator: .*#  built_value_generator: ^$version#" \
-      pubspec.tmp
-  mv pubspec.tmp $pubspec
+      "$pubspec"
 done

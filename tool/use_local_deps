@@ -10,11 +10,23 @@ if [ $# -ne 0 ]; then
 fi
 
 for pubspec in */pubspec.yaml; do
-  # Update dependencies.
-  sed -i -e \
-      's/.*\(built_value: .*\)/# \1\n  built_value:\n    path: ..\/built_value/' \
-      $pubspec
-  sed -i -e \
-      's/.*\(built_value_generator: .*\)/# \1\n  built_value_generator:\n    path: ..\/built_value_generator/' \
-      $pubspec
+  if grep -qv dependency_overrides "$pubspec"; then
+    cat >> "$pubspec" <<EOM
+
+dependency_overrides:
+EOM
+
+    if [ "$pubspec" != built_value/pubspec.yaml ]; then
+      cat >> "$pubspec" <<EOM
+  built_value:
+    path: ../built_value
+EOM
+    fi
+    if [ "$pubspec" != built_value_generator/pubspec.yaml ]; then
+      cat >> "$pubspec" <<EOM
+  built_value_generator:
+    path: ../built_value_generator
+EOM
+    fi
+  fi
 done
