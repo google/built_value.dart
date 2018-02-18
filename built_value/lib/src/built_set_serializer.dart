@@ -41,7 +41,7 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
         ? new SetBuilder<Object>()
         : serializers.newBuilder(specifiedType) as SetBuilder;
 
-    result.addAll(serialized.map(
+    result.replace(serialized.map(
         (item) => serializers.deserialize(item, specifiedType: elementType)));
     return result.build();
   }
