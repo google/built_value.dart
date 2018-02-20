@@ -1,5 +1,10 @@
 # Changelog
 
+# 5.2.2 (not released)
+
+- Fix built_value_generator/build.yaml to run generator on self package.
+- Fix end_to_end_test/pubspec.yaml to include build_runner.
+
 # 5.2.1
 
 - Type fixes for DDC.

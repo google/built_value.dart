@@ -1,3 +1,9 @@
+targets:
+  $default:
+    builders:
+      built_value_generator|built_value:
+        enabled: true
+
 builders:
   built_value:
     target: ":built_value_generator"
