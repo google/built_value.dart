@@ -1,4 +1,5 @@
 .buildlog
+.dart_tool/
 .DS_Store
 .idea
 .pub/
