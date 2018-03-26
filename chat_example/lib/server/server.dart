@@ -35,7 +35,7 @@ class Server {
   }
 
   void _handleDataFromClient(ServerConnection connection, String data) {
-    final command = serializers.deserialize(JSON.decode(data));
+    final command = serializers.deserialize(json.decode(data));
 
     if (command is Chat) {
       _chat(connection, command);
@@ -125,6 +125,6 @@ class Server {
   }
 
   static void _send(ServerConnection connection, Response response) {
-    connection.sendToClient(JSON.encode(serializers.serialize(response)));
+    connection.sendToClient(json.encode(serializers.serialize(response)));
   }
 }

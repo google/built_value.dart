@@ -1,7 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
-import 'dart:convert' show JSON;
+import 'dart:convert' show json;
 
 /// Switches to "standard" JSON format.
 ///
@@ -128,7 +128,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// JSON-encodes an `Object` key so it can be stored as a `String`. Needed
   /// because JSON maps are only allowed strings as keys.
   String _encodeKey(Object key) {
-    return JSON.encode(key);
+    return json.encode(key);
   }
 
   /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
@@ -197,6 +197,6 @@ class StandardJsonPlugin implements SerializerPlugin {
 
   /// JSON-decodes a `String` encoded using [_encodeKey].
   Object _decodeKey(String key) {
-    return JSON.decode(key);
+    return json.decode(key);
   }
 }

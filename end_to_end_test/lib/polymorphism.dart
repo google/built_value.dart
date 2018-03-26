@@ -7,11 +7,12 @@ import 'package:built_value/serializer.dart';
 part 'polymorphism.g.dart';
 
 @BuiltValue(instantiable: false)
-abstract class Animal extends Object
-    with Walker
-    implements Built<Animal, AnimalBuilder> {
+abstract class Animal extends Object with Walker {
   @override
   int get legs;
+
+  Animal rebuild(void updates(AnimalBuilder b));
+  AnimalBuilder toBuilder();
 }
 
 abstract class Cat extends Object
@@ -93,8 +94,11 @@ abstract class StandardCat extends Object
 }
 
 @BuiltValue(instantiable: false)
-abstract class HasField<T> implements Built<HasField<T>, HasFieldBuilder<T>> {
+abstract class HasField<T> {
   T get field;
+
+  HasField<T> rebuild(void updates(HasFieldBuilder<T> b));
+  HasFieldBuilder<T> toBuilder();
 }
 
 abstract class HasString
