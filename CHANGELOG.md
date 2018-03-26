@@ -1,11 +1,12 @@
 # Changelog
 
-# 5.2.2 (not released)
+# 5.2.2
 
 - Fix built_value_generator/build.yaml to run generator on self package.
 - Fix end_to_end_test/pubspec.yaml to include build_runner.
 - Fix internal use of deprecated SDK constants.
 - Remove polymorphism examples that no longer work in Dart 2. Proper fix to come.
+- Allow quiver 0.29.
 
 # 5.2.1
 
