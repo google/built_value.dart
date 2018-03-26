@@ -19,28 +19,18 @@ part 'polymorphism.g.dart';
 /// interface for the builder. You can write this yourself if you prefer, then
 /// nothing will be generated.
 ///
-/// Note that this type of inheritance is currently not supported by dart2js.
-/// See [Dart2jsCompatibleAnimal].
+/// Note that dart2js has never supported implementing the same interface
+/// with different generics, and in Dart 2 none of the runtimes supports it.
+/// A correct fix for this is planned, but until then, the only way to make
+/// this work is to omit the `Built` interface from the base type as done
+/// here. See https://github.com/google/built_value.dart/issues/352
 @BuiltValue(instantiable: false)
-abstract class Animal extends Object
-    with Walker
-    implements Built<Animal, AnimalBuilder> {
-  @override
-  int get legs;
-}
-
-/// The dart2js issue https://github.com/dart-lang/sdk/issues/14729
-/// prevents this working when compiling to js. As a workaround, make `Animal`
-/// not implement `Built`, and add the `rebuild` and `toBuilder` methods to
-/// it explicitly if you need them.
-@BuiltValue(instantiable: false)
-abstract class Dart2jsCompatibleAnimal extends Object with Walker {
+abstract class Animal extends Object with Walker {
   @override
   int get legs;
 
-  Dart2jsCompatibleAnimal rebuild(
-      void updates(Dart2jsCompatibleAnimalBuilder b));
-  Dart2jsCompatibleAnimalBuilder toBuilder();
+  Animal rebuild(void updates(AnimalBuilder b));
+  AnimalBuilder toBuilder();
 }
 
 /// `Cat` implements the non-instantiable Built Value `Animal`. The generated

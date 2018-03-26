@@ -107,14 +107,9 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   }
 }
 
-abstract class AnimalBuilder implements Builder<Animal, AnimalBuilder> {
-  int get legs;
-  set legs(int legs);
-}
-
-abstract class Dart2jsCompatibleAnimalBuilder {
-  void replace(Dart2jsCompatibleAnimal other);
-  void update(void updates(Dart2jsCompatibleAnimalBuilder b));
+abstract class AnimalBuilder {
+  void replace(Animal other);
+  void update(void updates(AnimalBuilder b));
   int get legs;
   set legs(int legs);
 }

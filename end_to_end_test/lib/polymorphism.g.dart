@@ -368,7 +368,9 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
   }
 }
 
-abstract class AnimalBuilder implements Builder<Animal, AnimalBuilder> {
+abstract class AnimalBuilder {
+  void replace(Animal other);
+  void update(void updates(AnimalBuilder b));
   int get legs;
   set legs(int legs);
 }
@@ -799,8 +801,9 @@ class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
   }
 }
 
-abstract class HasFieldBuilder<T>
-    implements Builder<HasField<T>, HasFieldBuilder<T>> {
+abstract class HasFieldBuilder<T> {
+  void replace(HasField<T> other);
+  void update(void updates(HasFieldBuilder<T> b));
   T get field;
   set field(T field);
 }
