@@ -8,9 +8,9 @@ import 'package:built_value/serializer.dart';
 class DoubleSerializer implements PrimitiveSerializer<double> {
   // Constant names match those in [double].
   // ignore_for_file: non_constant_identifier_names
-  static final String NAN = 'NaN';
-  static final String INFINITY = 'INF';
-  static final String NEGATIVE_INFINITY = '-INF';
+  static final String nan = 'NaN';
+  static final String infinity = 'INF';
+  static final String negativeInfinity = '-INF';
 
   final bool structured = false;
   @override
@@ -22,9 +22,9 @@ class DoubleSerializer implements PrimitiveSerializer<double> {
   Object serialize(Serializers serializers, double aDouble,
       {FullType specifiedType: FullType.unspecified}) {
     if (aDouble.isNaN) {
-      return NAN;
+      return nan;
     } else if (aDouble.isInfinite) {
-      return aDouble.isNegative ? NEGATIVE_INFINITY : INFINITY;
+      return aDouble.isNegative ? negativeInfinity : infinity;
     } else {
       return aDouble;
     }
@@ -33,12 +33,12 @@ class DoubleSerializer implements PrimitiveSerializer<double> {
   @override
   double deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    if (serialized == NAN) {
-      return double.NAN;
-    } else if (serialized == NEGATIVE_INFINITY) {
-      return double.NEGATIVE_INFINITY;
-    } else if (serialized == INFINITY) {
-      return double.INFINITY;
+    if (serialized == nan) {
+      return double.nan;
+    } else if (serialized == negativeInfinity) {
+      return double.negativeInfinity;
+    } else if (serialized == infinity) {
+      return double.infinity;
     } else {
       return (serialized as num).toDouble();
     }

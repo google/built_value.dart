@@ -4,6 +4,7 @@
 
 - Fix built_value_generator/build.yaml to run generator on self package.
 - Fix end_to_end_test/pubspec.yaml to include build_runner.
+- Fix internal use of deprecated SDK constants.
 
 # 5.2.1
 

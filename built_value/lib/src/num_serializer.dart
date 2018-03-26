@@ -17,11 +17,11 @@ class NumSerializer implements PrimitiveSerializer<num> {
   Object serialize(Serializers serializers, num number,
       {FullType specifiedType: FullType.unspecified}) {
     if (number.isNaN) {
-      return DoubleSerializer.NAN;
+      return DoubleSerializer.nan;
     } else if (number.isInfinite) {
       return number.isNegative
-          ? DoubleSerializer.NEGATIVE_INFINITY
-          : DoubleSerializer.INFINITY;
+          ? DoubleSerializer.negativeInfinity
+          : DoubleSerializer.infinity;
     } else {
       return number;
     }
@@ -30,12 +30,12 @@ class NumSerializer implements PrimitiveSerializer<num> {
   @override
   num deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType: FullType.unspecified}) {
-    if (serialized == DoubleSerializer.NAN) {
-      return double.NAN;
-    } else if (serialized == DoubleSerializer.NEGATIVE_INFINITY) {
-      return double.NEGATIVE_INFINITY;
-    } else if (serialized == DoubleSerializer.INFINITY) {
-      return double.INFINITY;
+    if (serialized == DoubleSerializer.nan) {
+      return double.nan;
+    } else if (serialized == DoubleSerializer.negativeInfinity) {
+      return double.negativeInfinity;
+    } else if (serialized == DoubleSerializer.infinity) {
+      return double.infinity;
     } else {
       return (serialized as num).toDouble();
     }

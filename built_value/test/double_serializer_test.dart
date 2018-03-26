@@ -41,7 +41,7 @@ void main() {
   });
 
   group('double with NaN value', () {
-    final data = double.NAN;
+    final data = double.nan;
     final serialized = 'NaN';
     final specifiedType = const FullType(double);
 
@@ -61,7 +61,7 @@ void main() {
   });
 
   group('double with -INF value', () {
-    final data = double.NEGATIVE_INFINITY;
+    final data = double.negativeInfinity;
     final serialized = '-INF';
     final specifiedType = const FullType(double);
 
@@ -77,7 +77,7 @@ void main() {
   });
 
   group('double with INF value', () {
-    final data = double.INFINITY;
+    final data = double.infinity;
     final serialized = 'INF';
     final specifiedType = const FullType(double);
 

@@ -25,7 +25,7 @@ class Client {
   }
 
   void _handleServerData(String data) {
-    final response = serializers.deserialize(JSON.decode(data));
+    final response = serializers.deserialize(json.decode(data));
 
     if (response is Response) {
       _display.add(response.render());
@@ -122,6 +122,6 @@ class Client {
   }
 
   void _send(Command command) {
-    _connection.sendToServer(JSON.encode(serializers.serialize(command)));
+    _connection.sendToServer(json.encode(serializers.serialize(command)));
   }
 }
