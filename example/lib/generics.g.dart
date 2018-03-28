@@ -1,5 +1,4 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
+// This is generated code; please do not modify by hand.
 part of generics;
 
 // **************************************************************************

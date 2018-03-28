@@ -1,5 +1,10 @@
 # Changelog
 
+# 5.2.3 (not released)
+
+- Add support for setting the generated header in a `build.yaml` file in your
+  project. See `example/build.yaml` for an example.
+
 # 5.2.2
 
 - Fix built_value_generator/build.yaml to run generator on self package.

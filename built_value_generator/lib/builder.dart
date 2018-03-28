@@ -9,4 +9,4 @@ import 'package:source_gen/source_gen.dart';
 
 Builder builtValue(BuilderOptions options) => new PartBuilder([
       new BuiltValueGenerator(),
-    ]);
+    ], header: options.config['header'] as String);
