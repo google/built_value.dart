@@ -1,6 +1,8 @@
 # This file is only needed if you want to tweak the built_value generator
 # options. The only available option is "header", which sets the header of
 # each generated file.
+#
+# If you want to set a multiline value, see: https://yaml-multiline.info/
 targets:
   $default:
     builders:
