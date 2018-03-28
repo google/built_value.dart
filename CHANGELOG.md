@@ -1,14 +1,14 @@
 # Changelog
 
-# 5.2.3 (not released)
+# 5.3.0
 
+- Support serializing `BigInt`.
 - Add support for setting the generated header in a `build.yaml` file in your
   project. See `example/build.yaml` for an example.
-- Fix generation when a field picked up via inheritance is a function type
-  defined in another source file.
 - Explicitly forbid serialization of `Function` and `typedef` types; these
   fields need to be marked `@BuiltValueField(serialize: false)`.
-- Support serializing `BigInt`.
+- Fix generation when a field picked up via inheritance is a function type
+  defined in another source file.
 - Fail with a helpful error message if `@SerializersFor` annotation list
   contains an undefined symbol.
 
