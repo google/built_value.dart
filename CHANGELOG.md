@@ -9,6 +9,8 @@
 - Explicitly forbid serialization of `Function` and `typedef` types; these
   fields need to be marked `@BuiltValueField(serialize: false)`.
 - Support serializing `BigInt`.
+- Fail with a helpful error message if `@SerializersFor` annotation list
+  contains an undefined symbol.
 
 # 5.2.2
 
