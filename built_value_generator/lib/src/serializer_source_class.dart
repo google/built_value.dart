@@ -152,19 +152,22 @@ abstract class SerializerSourceClass
       element.library.definingCompilationUnit;
 
   Iterable<String> computeErrors() {
+    final result = <String>[];
     final camelCaseName =
         name.substring(0, 1).toLowerCase() + name.substring(1);
     final expectedSerializerDeclaration =
         'static Serializer<$name> get serializer => '
         '_\$${camelCaseName}Serializer;';
     if (serializerDeclaration != expectedSerializerDeclaration) {
-      return [
-        'Declare $name.serializer as: '
-            '$expectedSerializerDeclaration got $serializerDeclaration'
-      ];
+      result.add('Declare $name.serializer as: '
+          '$expectedSerializerDeclaration got $serializerDeclaration');
     }
 
-    return [];
+    for (final field in fields) {
+      result.addAll(field.computeErrors());
+    }
+
+    return result;
   }
 
   bool get needsBuiltJson => isBuiltValue || isEnumClass;

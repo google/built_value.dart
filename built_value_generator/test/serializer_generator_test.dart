@@ -137,6 +137,27 @@ abstract class OtherValue implements Built<Value, ValueBuilder> {
               'static Serializer<OtherValue> get serializer => '
               '_\$otherValueSerializer;'));
     });
+
+    test('suggests Function fields be marked not serializable', () async {
+      expect(
+          await generate(r'''
+library value;
+
+import 'package:test_support/test_support.dart';
+
+part 'value.g.dart';
+
+abstract class Value implements Built<Value, ValueBuilder> {
+  static Serializer<Value> get serializer => _$valueSerializer;
+  Function() get function;
+  
+  factory Value() => new _$Value();
+  Value._();
+}
+'''),
+          contains(r'1. Function fields are not serializable. Remove '
+              '"function" or mark it "@BuiltValueField(serialize: false)".'));
+    });
   });
 }
 

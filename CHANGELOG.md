@@ -4,6 +4,10 @@
 
 - Add support for setting the generated header in a `build.yaml` file in your
   project. See `example/build.yaml` for an example.
+- Fix generation when a field picked up via inheritance is a function type
+  defined in another source file.
+- Explicitly forbid serialization of `Function` and `typedef` types; these
+  fields need to be marked `@BuiltValueField(serialize: false)`.
 
 # 5.2.2
 

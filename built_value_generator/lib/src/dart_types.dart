@@ -41,4 +41,17 @@ class DartTypes {
 
   static bool isBuiltCollectionTypeName(String name) =>
       _builtCollectionNames.contains(name);
+
+  /// Gets the name of a `DartType`. Supports `Function` types, which will
+  /// be returned using the `Function()` syntax.
+  static String getName(DartType dartType) {
+    if (dartType is FunctionType) {
+      return getName(dartType.returnType) +
+          ' Function(' +
+          dartType.parameters.map((p) => getName(p.type)).join(', ') +
+          ')';
+    } else {
+      return dartType.displayName;
+    }
+  }
 }
