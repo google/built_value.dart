@@ -203,6 +203,7 @@ abstract class PrimitivesValue
   String get string;
   DateTime get dateTime;
   Uri get uri;
+  BigInt get bigInt;
 
   factory PrimitivesValue([updates(PrimitivesValueBuilder b)]) =
       _$PrimitivesValue;

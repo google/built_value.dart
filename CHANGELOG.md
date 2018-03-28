@@ -8,6 +8,7 @@
   defined in another source file.
 - Explicitly forbid serialization of `Function` and `typedef` types; these
   fields need to be marked `@BuiltValueField(serialize: false)`.
+- Support serializing `BigInt`.
 
 # 5.2.2
 
