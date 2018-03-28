@@ -1,0 +1,9 @@
+# This file is only needed if you want to tweak the built_value generator
+# options. The only available option is "header", which sets the header of
+# each generated file.
+targets:
+  $default:
+    builders:
+      built_value_generator|built_value:
+        options:
+          header: // This is generated code; please do not modify by hand.
