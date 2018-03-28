@@ -77,7 +77,13 @@ abstract class SerializerSourceLibrary
           .computeConstantValue()
           .getField('types')
           .toListValue()
-          .map((dartObject) => dartObject.toTypeValue());
+          ?.map((dartObject) => dartObject.toTypeValue());
+
+      if (types == null) {
+        // This only happens if the source code is invalid.
+        throw new InvalidGenerationSourceError(
+            'Broken @SerializersFor annotation. Are all the types imported?');
+      }
 
       result.addValues(
           field,
