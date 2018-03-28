@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/src/big_int_serializer.dart';
 import 'package:built_value/src/date_time_serializer.dart';
 import 'package:built_value/src/int64_serializer.dart';
 import 'package:built_value/src/json_object_serializer.dart';
@@ -51,6 +52,7 @@ abstract class Serializers {
   /// Use [toBuilder] to add more serializers.
   factory Serializers() {
     return (new SerializersBuilder()
+          ..add(new BigIntSerializer())
           ..add(new BoolSerializer())
           ..add(new BuiltListSerializer())
           ..add(new BuiltListMultimapSerializer())

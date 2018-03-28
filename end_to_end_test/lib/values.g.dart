@@ -396,6 +396,9 @@ class _$PrimitivesValueSerializer
           specifiedType: const FullType(DateTime)),
       'uri',
       serializers.serialize(object.uri, specifiedType: const FullType(Uri)),
+      'bigInt',
+      serializers.serialize(object.bigInt,
+          specifiedType: const FullType(BigInt)),
     ];
 
     return result;
@@ -443,6 +446,10 @@ class _$PrimitivesValueSerializer
         case 'uri':
           result.uri = serializers.deserialize(value,
               specifiedType: const FullType(Uri)) as Uri;
+          break;
+        case 'bigInt':
+          result.bigInt = serializers.deserialize(value,
+              specifiedType: const FullType(BigInt)) as BigInt;
           break;
       }
     }
@@ -1716,6 +1723,8 @@ class _$PrimitivesValue extends PrimitivesValue {
   final DateTime dateTime;
   @override
   final Uri uri;
+  @override
+  final BigInt bigInt;
 
   factory _$PrimitivesValue([void updates(PrimitivesValueBuilder b)]) =>
       (new PrimitivesValueBuilder()..update(updates)).build();
@@ -1728,7 +1737,8 @@ class _$PrimitivesValue extends PrimitivesValue {
       this.number,
       this.string,
       this.dateTime,
-      this.uri})
+      this.uri,
+      this.bigInt})
       : super._() {
     if (boolean == null)
       throw new BuiltValueNullFieldError('PrimitivesValue', 'boolean');
@@ -1746,6 +1756,8 @@ class _$PrimitivesValue extends PrimitivesValue {
       throw new BuiltValueNullFieldError('PrimitivesValue', 'dateTime');
     if (uri == null)
       throw new BuiltValueNullFieldError('PrimitivesValue', 'uri');
+    if (bigInt == null)
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'bigInt');
   }
 
   @override
@@ -1767,7 +1779,8 @@ class _$PrimitivesValue extends PrimitivesValue {
         number == other.number &&
         string == other.string &&
         dateTime == other.dateTime &&
-        uri == other.uri;
+        uri == other.uri &&
+        bigInt == other.bigInt;
   }
 
   @override
@@ -1777,13 +1790,15 @@ class _$PrimitivesValue extends PrimitivesValue {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, boolean.hashCode), integer.hashCode),
-                            int64.hashCode),
-                        dbl.hashCode),
-                    number.hashCode),
-                string.hashCode),
-            dateTime.hashCode),
-        uri.hashCode));
+                        $jc(
+                            $jc($jc($jc(0, boolean.hashCode), integer.hashCode),
+                                int64.hashCode),
+                            dbl.hashCode),
+                        number.hashCode),
+                    string.hashCode),
+                dateTime.hashCode),
+            uri.hashCode),
+        bigInt.hashCode));
   }
 
   @override
@@ -1796,7 +1811,8 @@ class _$PrimitivesValue extends PrimitivesValue {
           ..add('number', number)
           ..add('string', string)
           ..add('dateTime', dateTime)
-          ..add('uri', uri))
+          ..add('uri', uri)
+          ..add('bigInt', bigInt))
         .toString();
   }
 }
@@ -1837,6 +1853,10 @@ class PrimitivesValueBuilder
   Uri get uri => _$this._uri;
   set uri(Uri uri) => _$this._uri = uri;
 
+  BigInt _bigInt;
+  BigInt get bigInt => _$this._bigInt;
+  set bigInt(BigInt bigInt) => _$this._bigInt = bigInt;
+
   PrimitivesValueBuilder();
 
   PrimitivesValueBuilder get _$this {
@@ -1849,6 +1869,7 @@ class PrimitivesValueBuilder
       _string = _$v.string;
       _dateTime = _$v.dateTime;
       _uri = _$v.uri;
+      _bigInt = _$v.bigInt;
       _$v = null;
     }
     return this;
@@ -1876,7 +1897,8 @@ class PrimitivesValueBuilder
             number: number,
             string: string,
             dateTime: dateTime,
-            uri: uri);
+            uri: uri,
+            bigInt: bigInt);
     replace(_$result);
     return _$result;
   }
