@@ -41,7 +41,7 @@ abstract class ValueSourceField
   String get name => element.displayName;
 
   @memoized
-  String get type => element.getter.returnType.displayName;
+  String get type => DartTypes.getName(element.getter.returnType);
 
   /// The [type] plus any import prefix.
   @memoized

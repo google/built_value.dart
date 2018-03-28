@@ -6,6 +6,7 @@ library built_value_generator.source_field;
 
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
@@ -111,6 +112,17 @@ abstract class SerializerSourceField
 
   @memoized
   bool get needsBuilder => element.getter.returnType.displayName.contains('<');
+
+  Iterable<String> computeErrors() {
+    if (isSerializable && element.getter.returnType is FunctionType) {
+      return [
+        'Function fields are not serializable. '
+            'Remove "$name" or mark it "@BuiltValueField(serialize: false)".'
+      ];
+    }
+
+    return [];
+  }
 
   /// Generates a cast using 'as' to this field type.
   ///
