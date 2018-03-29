@@ -1,5 +1,10 @@
 # Changelog
 
+# 5.4.1
+
+- Fix analyzer plugin loading. It should now work, provided you modify your
+  `analysis_options.yaml` as suggested.
+
 # 5.4.0
 
 - Add an experimental analyzer plugin that surfaces compile time generation

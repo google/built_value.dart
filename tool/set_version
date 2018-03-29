@@ -11,7 +11,9 @@ fi
 
 version=$1
 
-for pubspec in */pubspec.yaml; do
+for pubspec in \
+    */pubspec.yaml \
+    built_value_generator/tools/analyzer_plugin/pubspec.yaml; do
   # Remove any dependency overrides, strip trailing empty lines.
   sed -i -n '/dependency_overrides:/q;p' \
       "$pubspec"
