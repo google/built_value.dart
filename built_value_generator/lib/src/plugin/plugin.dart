@@ -31,7 +31,7 @@ class BuiltValueAnalyzerPlugin extends ServerPlugin {
           ..performanceLog = performanceLog
           ..fileContentOverlay = fileContentOverlay;
     final result = contextBuilder.buildDriver(root);
-    result.results.listen(processResult);
+    result.results.listen(_processResult);
     return result;
   }
 
@@ -49,19 +49,24 @@ class BuiltValueAnalyzerPlugin extends ServerPlugin {
   @override
   String get contactInfo => 'https://github.com/google/built_value.dart/issues';
 
-  void processResult(AnalysisResult analysisResult) {
+  /// Computes errors based on an analysis result and notifies the analyzer.
+  void _processResult(AnalysisResult analysisResult) {
     try {
+      // If there is no relevant analysis result, notify the analyzer of no errors.
       if (analysisResult.unit == null ||
           analysisResult.libraryElement == null) {
         channel.sendNotification(
             new plugin.AnalysisErrorsParams(analysisResult.path, [])
                 .toNotification());
-        return;
+      } else {
+        // If there is something to analyze, do so and notify the analyzer.
+        // Note that notifying with an empty set of errors is important as
+        // this clears errors if they were fixed.
+        final checkResult = checker.check(analysisResult.libraryElement);
+        channel.sendNotification(new plugin.AnalysisErrorsParams(
+                analysisResult.path, checkResult.keys.toList())
+            .toNotification());
       }
-      final checkResult = checker.check(analysisResult.libraryElement);
-      channel.sendNotification(new plugin.AnalysisErrorsParams(
-              analysisResult.path, checkResult.keys.toList())
-          .toNotification());
     } catch (e, stackTrace) {
       // Notify the analyzer that an exception happened.
       channel.sendNotification(new plugin.PluginErrorParams(

@@ -301,8 +301,8 @@ abstract class ValueSourceClass
     if (hasBuiltValueImportWithShow) {
       result.add(new GeneratorError((b) => b
         ..message = 'Stop using "show" when importing '
-            '"package:built_value/built_value.dart". It prevents the generated '
-            'code from finding helper methods.'));
+            '"package:built_value/built_value.dart". It prevents the '
+            'generated code from finding helper methods.'));
     }
 
     if (hasBuiltValueImportWithAs) {

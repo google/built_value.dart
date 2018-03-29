@@ -48,9 +48,9 @@ class Checker {
                   errors.map((error) => error.message).join(' '),
               'BUILT_VALUE_NEEDS_FIXES');
 
-          // Fix consists of all the individual fixes, sorted so they apply from
-          // the end of the file backwards, so each fix does not invalidate the
-          // line numbers for the following fixes.
+          // Fix consists of all the individual fixes, sorted so they apply
+          // from the end of the file backwards, so each fix does not
+          // invalidate the line numbers for the following fixes.
           final edits = errors
               .where((error) => error.fix != null)
               .map((error) =>

@@ -5,6 +5,8 @@ analyzer:
 
   # Add this to your project `analysis_options.yaml` to enable the built_value
   # analyzer plugin. You should also add the top level `plugins` clause below.
+  # The plugin surfaces generator errors in your IDE, with suggested fixes
+  # where possible.
   plugins:
     built_value_generator
 
