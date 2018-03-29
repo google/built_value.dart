@@ -1,5 +1,12 @@
 # Changelog
 
+# 5.4.0
+
+- Add an experimental analyzer plugin that surfaces compile time generation
+  errors as suggestions in your IDE. Turn it on by modifying your
+  `analysis_options.yaml` file to add `plugins` entries,
+  [example](https://github.com/google/built_value.dart/blob/master/analysis_options.yaml).
+
 # 5.3.0
 
 - Support serializing `BigInt`.

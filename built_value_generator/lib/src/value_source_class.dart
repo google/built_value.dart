@@ -4,10 +4,11 @@
 
 library built_value_generator.source_class;
 
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/built_parameters_visitor.dart';
+import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/memoized_getter.dart';
 import 'package:built_value_generator/src/value_source_field.dart';
 import 'package:quiver/iterables.dart';
@@ -39,7 +40,14 @@ abstract class ValueSourceClass
       name.startsWith('_') ? '_\$${name.substring(1)}' : '_\$$name';
 
   @memoized
-  ClassElement get builderElement => element.library.getType(name + 'Builder');
+  ClassElement get builderElement {
+    final result = element.library.getType(name + 'Builder');
+    if (result == null) return null;
+    // If the builder is in a generated file, then we're analyzing _after_ code
+    // generation. Ignore it. This happens when running as an analyzer plugin.
+    if (result.source.fullName.endsWith('.g.dart')) return null;
+    return result;
+  }
 
   @memoized
   bool get implementsBuilt => element.allSupertypes
@@ -111,10 +119,8 @@ abstract class ValueSourceClass
           .map((element) => (element.bound ?? '').toString()));
 
   @memoized
-  String get builtParameters {
-    final visitor = new BuiltParametersVisitor();
-    element.computeNode().accept(visitor);
-    return visitor.result;
+  ClassDeclaration get classDeclaration {
+    return element.computeNode() as ClassDeclaration;
   }
 
   @memoized
@@ -172,17 +178,17 @@ abstract class ValueSourceClass
   bool get valueClassIsAbstract => element.isAbstract;
 
   @memoized
-  BuiltList<String> get valueClassConstructors => new BuiltList<String>(element
-      .constructors
-      .where(
-          (constructor) => !constructor.isFactory && !constructor.isSynthetic)
-      .map((constructor) => constructor.computeNode().toSource()));
+  BuiltList<ConstructorDeclaration> get valueClassConstructors =>
+      new BuiltList<ConstructorDeclaration>(element.constructors
+          .where((constructor) =>
+              !constructor.isFactory && !constructor.isSynthetic)
+          .map((constructor) => constructor.computeNode()));
 
   @memoized
-  BuiltList<String> get valueClassFactories =>
-      new BuiltList<String>(element.constructors
+  BuiltList<ConstructorDeclaration> get valueClassFactories =>
+      new BuiltList<ConstructorDeclaration>(element.constructors
           .where((constructor) => constructor.isFactory)
-          .map((factory) => factory.computeNode().toSource()));
+          .map((factory) => factory.computeNode()));
 
   @memoized
   bool get builderClassIsAbstract => builderElement.isAbstract;
@@ -248,7 +254,7 @@ abstract class ValueSourceClass
                 .any((value) => value?.type?.displayName == 'BuiltValue'));
   }
 
-  Iterable<String> _computeErrors() {
+  Iterable<GeneratorError> computeErrors() {
     return concat([
       _checkPart(),
       _checkValueClass(),
@@ -258,96 +264,197 @@ abstract class ValueSourceClass
     ]);
   }
 
-  Iterable<String> _checkPart() {
-    return hasPartStatement ? [] : ['Import generated part: $partStatement'];
+  Iterable<GeneratorError> _checkPart() {
+    if (hasPartStatement) return [];
+
+    final directives = (classDeclaration.parent as CompilationUnit).directives;
+    if (directives.isEmpty) {
+      return [
+        new GeneratorError((b) => b
+          ..message = 'Import generated part: $partStatement'
+          ..offset = 0
+          ..length = 0
+          ..fix = '$partStatement\n\n')
+      ];
+    } else {
+      return [
+        new GeneratorError((b) => b
+          ..message = 'Import generated part: $partStatement'
+          ..offset = directives.last.offset + directives.last.length
+          ..length = 0
+          ..fix = '\n\n$partStatement\n\n')
+      ];
+    }
   }
 
-  Iterable<String> _checkValueClass() {
-    final result = <String>[];
+  Iterable<GeneratorError> _checkValueClass() {
+    final result = <GeneratorError>[];
 
     if (!valueClassIsAbstract) {
-      result.add('Make class abstract.');
+      result.add(new GeneratorError((b) => b
+        ..message = 'Make class abstract.'
+        ..offset = classDeclaration.offset
+        ..length = 0
+        ..fix = 'abstract '));
     }
 
     if (hasBuiltValueImportWithShow) {
-      result.add('Stop using "show" when importing '
-          '"package:built_value/built_value.dart". It prevents the generated '
-          'code from finding helper methods.');
+      result.add(new GeneratorError((b) => b
+        ..message = 'Stop using "show" when importing '
+            '"package:built_value/built_value.dart". It prevents the '
+            'generated code from finding helper methods.'));
     }
 
     if (hasBuiltValueImportWithAs) {
-      result.add('Stop using "as" when importing '
-          '"package:built_value/built_value.dart". It prevents the generated '
-          'code from finding helper methods.');
+      result.add(new GeneratorError((b) => b
+        ..message = 'Stop using "as" when importing '
+            '"package:built_value/built_value.dart". It prevents the generated '
+            'code from finding helper methods.'));
     }
 
-    final expectedBuiltParameters = '$name$_generics, ${name}Builder$_generics';
+    final implementsClause = classDeclaration.implementsClause;
+    final expectedInterface =
+        'Built<$name$_generics, ${name}Builder$_generics>';
     // Built parameters need fixing if they are not as expected, unless 1) the
     // class is marked `@BuiltValue(instantiable: false)` and 2) the parameters
     // are not wrong, they're completely missing.
-    if (builtParameters != expectedBuiltParameters &&
-        !(!settings.instantiable && builtParameters == null)) {
-      result.add('Make class implement Built<$expectedBuiltParameters>.');
+    if ((implementsClause == null ||
+            !implementsClause.interfaces
+                .any((type) => type.toSource() == expectedInterface)) &&
+        !(!settings.instantiable && implementsClause == null)) {
+      if (implementsClause == null) {
+        result.add(new GeneratorError((b) => b
+          ..message = 'Make class implement $expectedInterface.'
+          ..offset = classDeclaration.leftBracket.offset - 1
+          ..length = 0
+          ..fix = 'implements $expectedInterface'));
+      } else {
+        var found = false;
+        final interfaces = implementsClause.interfaces.map((type) {
+          if (type.name.name == 'Built') {
+            found = true;
+            return expectedInterface;
+          } else {
+            return type.toSource();
+          }
+        }).toList();
+        if (!found) interfaces.add(expectedInterface);
+
+        result.add(new GeneratorError((b) => b
+          ..message = 'Make class implement $expectedInterface.'
+          ..offset = implementsClause.offset
+          ..length = implementsClause.length
+          ..fix = 'implements ${interfaces.join(", ")}'));
+      }
     }
 
     if (!extendsIsAllowed) {
-      result.add('Stop class extending other classes. '
-          'Only "implements" and "extends Object with" are allowed.');
+      result.add(new GeneratorError((b) => b
+        ..message = 'Stop class extending other classes. '
+            'Only "implements" and "extends Object with" are allowed.'));
     }
 
     if (settings.instantiable) {
       final expectedConstructor = '$name._()';
-      if (valueClassConstructors.length != 1 ||
-          !(valueClassConstructors.single.startsWith(expectedConstructor))) {
-        result.add(
-            'Make class have exactly one constructor: $expectedConstructor;');
+      if (valueClassConstructors.isEmpty) {
+        result.add(new GeneratorError((b) => b
+          ..message =
+              'Make class have exactly one constructor: $expectedConstructor;'
+          ..offset = classDeclaration.rightBracket.offset
+          ..length = 0
+          ..fix = '  $expectedConstructor;\n'));
+      } else if (valueClassConstructors.length > 1) {
+        var found = false;
+        for (final constructor in valueClassConstructors) {
+          if (constructor.toSource().startsWith(expectedConstructor)) {
+            found = true;
+          } else {
+            result.add(new GeneratorError((b) => b
+              ..message = 'Remove invalid constructor.'
+              ..offset = constructor.offset
+              ..length = constructor.length
+              ..fix = ''));
+          }
+        }
+        if (!found) {
+          result.add(new GeneratorError((b) => b
+            ..message =
+                'Make class have exactly one constructor: $expectedConstructor;'
+            ..offset = classDeclaration.rightBracket.offset
+            ..length = 0
+            ..fix = '  $expectedConstructor;\n'));
+        }
+      } else if (!(valueClassConstructors.single
+          .toSource()
+          .startsWith(expectedConstructor))) {
+        result.add(new GeneratorError((b) => b
+          ..message =
+              'Make class have exactly one constructor: $expectedConstructor;'
+          ..offset = valueClassConstructors.single.offset
+          ..length = valueClassConstructors.single.length
+          ..fix = expectedConstructor + ';'));
       }
     } else {
       if (valueClassConstructors.isNotEmpty) {
-        result.add('Remove all constructors or remove "instantiable: false".');
+        result.add(new GeneratorError((b) => b
+          ..message =
+              'Remove all constructors or remove "instantiable: false".'));
       }
     }
 
     if (settings.instantiable) {
-      if (!valueClassFactories
-          .any((factory) => factory.contains('$implName$_generics'))) {
-        result
-            .add('Add a factory so your class can be instantiated. Example:\n\n'
-                'factory $name([updates(${name}Builder$_generics b)]) = '
-                '$implName$_generics;');
+      if (!valueClassFactories.any(
+          (factory) => factory.toSource().contains('$implName$_generics'))) {
+        final exampleFactory =
+            'factory $name([updates(${name}Builder$_generics b)]) = '
+            '$implName$_generics;';
+        result.add(new GeneratorError((b) => b
+          ..message =
+              'Add a factory so your class can be instantiated. Example:\n\n'
+              '$exampleFactory'
+          ..offset = classDeclaration.rightBracket.offset
+          ..length = 0
+          ..fix = '  $exampleFactory\n'));
       }
     } else {
       if (valueClassFactories.isNotEmpty) {
-        result.add('Remove all factories or remove "instantiable: false".');
+        result.add(new GeneratorError((b) => b
+          ..message = 'Remove all factories or remove "instantiable: false".'));
       }
     }
 
     if (implementsHashCode) {
-      result.add('Stop implementing hashCode; it will be generated for you.');
+      result.add(new GeneratorError((b) => b
+        ..message =
+            'Stop implementing hashCode; it will be generated for you.'));
     }
 
     if (implementsOperatorEquals) {
-      result.add('Stop implementing operator==; it will be generated for you.');
+      result.add(new GeneratorError((b) => b
+        ..message =
+            'Stop implementing operator==; it will be generated for you.'));
     }
 
     return result;
   }
 
-  Iterable<String> _checkBuilderClass() {
-    final result = <String>[];
+  Iterable<GeneratorError> _checkBuilderClass() {
+    final result = <GeneratorError>[];
     if (!hasBuilder) return result;
 
     if (!builderClassIsAbstract) {
-      result.add('Make builder class abstract.');
+      result.add(new GeneratorError(
+          (b) => b..message = 'Make builder class abstract.'));
     }
 
     if (settings.instantiable) {
       final expectedBuilderParameters =
           '$name$_generics, ${name}Builder$_generics';
       if (builderParameters != expectedBuilderParameters) {
-        result.add(
-            'Make builder class implement Builder<$expectedBuilderParameters>. '
-            'Currently: Builder<$builderParameters>');
+        result.add(new GeneratorError((b) => b
+          ..message =
+              'Make builder class implement Builder<$expectedBuilderParameters>. '
+              'Currently: Builder<$builderParameters>'));
       }
     }
 
@@ -355,13 +462,15 @@ abstract class ValueSourceClass
       final expectedConstructor = '${name}Builder._()';
       if (builderClassConstructors.length != 1 ||
           !(builderClassConstructors.single.startsWith(expectedConstructor))) {
-        result.add(
-            'Make builder class have exactly one constructor: $expectedConstructor;');
+        result.add(new GeneratorError((b) => b
+          ..message =
+              'Make builder class have exactly one constructor: $expectedConstructor;'));
       }
     } else {
       if (builderClassConstructors.isNotEmpty) {
-        result.add('Remove all builder constructors '
-            'or remove "instantiable: false".');
+        result.add(new GeneratorError((b) => b
+          ..message = 'Remove all builder constructors '
+              'or remove "instantiable: false".'));
       }
     }
 
@@ -370,25 +479,28 @@ abstract class ValueSourceClass
           'factory ${name}Builder() = _\$${name}Builder$_generics;';
       if (builderClassFactories.length != 1 ||
           builderClassFactories.single != expectedFactory) {
-        result.add(
-            'Make builder class have exactly one factory: $expectedFactory');
+        result.add(new GeneratorError((b) => b
+          ..message =
+              'Make builder class have exactly one factory: $expectedFactory'));
       }
     } else {
       if (builderClassFactories.isNotEmpty) {
-        result.add(
-            'Remove all builder factories or remove "instantiable: false".');
+        result.add(new GeneratorError((b) => b
+          ..message =
+              'Remove all builder factories or remove "instantiable: false".'));
       }
     }
 
     return result;
   }
 
-  Iterable<String> _checkFieldList() {
-    if (!hasBuilder || !settings.instantiable) return <String>[];
+  Iterable<GeneratorError> _checkFieldList() {
+    if (!hasBuilder || !settings.instantiable) return <GeneratorError>[];
     return fields.any((field) => !field.builderFieldExists)
         ? [
-            'Make builder have exactly these fields: ' +
-                fields.map((field) => field.name).join(', ')
+            new GeneratorError((b) => b
+              ..message = 'Make builder have exactly these fields: ' +
+                  fields.map((field) => field.name).join(', '))
           ]
         : [];
   }
@@ -407,7 +519,7 @@ abstract class ValueSourceClass
           '>';
 
   String generateCode() {
-    final errors = _computeErrors();
+    final errors = computeErrors();
     if (errors.isNotEmpty) throw _makeError(errors);
 
     final result = new StringBuffer();
@@ -782,11 +894,11 @@ abstract class ValueSourceClass
   }
 }
 
-InvalidGenerationSourceError _makeError(Iterable<String> todos) {
+InvalidGenerationSourceError _makeError(Iterable<GeneratorError> todos) {
   final message = new StringBuffer(
       'Please make the following changes to use BuiltValue:\n');
   for (var i = 0; i != todos.length; ++i) {
-    message.write('\n${i + 1}. ${todos.elementAt(i)}');
+    message.write('\n${i + 1}. ${todos.elementAt(i).message}');
   }
 
   return new InvalidGenerationSourceError(message.toString());
