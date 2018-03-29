@@ -1,5 +1,5 @@
 name: built_value
-version: 5.3.0
+version: 5.4.0
 description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library is the runtime dependency.
@@ -19,7 +19,3 @@ dependencies:
 
 dev_dependencies:
   test: any
-
-dependency_overrides:
-  built_value_generator:
-    path: ../built_value_generator
