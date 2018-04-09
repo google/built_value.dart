@@ -73,11 +73,11 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// Converts serialization output, a `List`, to a `Map`, when the serialized
   /// type is known statically.
   Map _toMap(List list, bool needsEncodedKeys) {
-    final result = {};
+    final result = <String, Object>{};
     for (int i = 0; i != list.length ~/ 2; ++i) {
       final key = list[i * 2];
       final value = list[i * 2 + 1];
-      result[needsEncodedKeys ? _encodeKey(key) : key] = value;
+      result[needsEncodedKeys ? _encodeKey(key) : key as String] = value;
     }
     return result;
   }
@@ -92,12 +92,12 @@ class StandardJsonPlugin implements SerializerPlugin {
     // the value.
     if (list.length == 2) {
       // Just a type and a primitive value. Encode the value in the map.
-      return <Object, Object>{discriminator: type, valueKey: list[1]};
+      return <String, Object>{discriminator: type, valueKey: list[1]};
     }
 
     if (type == 'list') {
       // Embed the list in the map.
-      return <Object, Object>{discriminator: type, valueKey: list.sublist(1)};
+      return <String, Object>{discriminator: type, valueKey: list.sublist(1)};
     }
 
     // If a map has non-String keys then they need encoding to strings before
@@ -115,10 +115,11 @@ class StandardJsonPlugin implements SerializerPlugin {
       }
     }
 
-    final result = <Object, Object>{discriminator: type};
+    final result = <String, Object>{discriminator: type};
     for (int i = 0; i != (list.length - 1) ~/ 2; ++i) {
-      final key =
-          needToEncodeKeys ? _encodeKey(list[i * 2 + 1]) : list[i * 2 + 1];
+      final key = needToEncodeKeys
+          ? _encodeKey(list[i * 2 + 1])
+          : list[i * 2 + 1] as String;
       final value = list[i * 2 + 2];
       result[key] = value;
     }
