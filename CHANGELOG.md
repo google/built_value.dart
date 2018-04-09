@@ -1,5 +1,10 @@
 # Changelog
 
+# 5.4.2 (not released)
+
+- Make `StandardJsonPlugin` return `Map<String, Object>`, as the firebase
+  libraries expect, instead of `Map<Object, Object>`.
+
 # 5.4.1
 
 - Fix analyzer plugin loading. It should now work, provided you modify your
