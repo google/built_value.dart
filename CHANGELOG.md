@@ -1,6 +1,6 @@
 # Changelog
 
-# 5.4.2 (not released)
+# 5.4.2
 
 - Make `StandardJsonPlugin` return `Map<String, Object>`, as the firebase
   libraries expect, instead of `Map<Object, Object>`.
