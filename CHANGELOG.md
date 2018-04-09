@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.4.3
+
+- Allow source_gen 0.8.0.
+
 # 5.4.2
 
 - Make `StandardJsonPlugin` return `Map<String, Object>`, as the firebase
