@@ -7,7 +7,7 @@ authors:
 homepage: https://github.com/google/built_value.dart
 
 environment:
-  sdk: '>=2-0-0-dev <2.0.0'
+  sdk: '>=2.0.0-dev <2.0.0'
 
 dependencies:
   browser: any
