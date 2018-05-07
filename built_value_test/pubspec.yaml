@@ -1,5 +1,5 @@
 name: built_value_test
-version: 5.4.3
+version: 5.4.4-dev
 description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library provides test support.

@@ -1,5 +1,10 @@
 # Changelog
 
+# 5.4.4
+
+- Removed dependency on `build_config` from `built_value` and added it to
+  `built_value_generator`. 
+
 # 5.4.3
 
 - Allow source_gen 0.8.0.
