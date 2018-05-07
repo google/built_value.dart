@@ -570,7 +570,7 @@ abstract class ValueSourceClass
       result.writeln('{');
       for (final field in requiredFields) {
         result.writeln("if (${field.name} == null) "
-            "throw new BuiltValueNullFieldError('${name}', '${field.name}');");
+            "throw new BuiltValueNullFieldError('$name', '${field.name}');");
       }
       result.writeln('}');
     }
