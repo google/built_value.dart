@@ -18,6 +18,7 @@ Immutable collections are from
 - [Building a Chat App in Dart](https://medium.com/@davidmorgan_14314/building-a-chat-app-in-dart-815fcd0e5a31#.ku4vtbmk2)
 - [End to End Testing in One Short Second with Dart](https://medium.com/@davidmorgan_14314/end-to-end-testing-in-one-short-second-with-dart-e699c8146fd6#.c7xfxohg4)
 - [Moving Fast with Dart Immutable Values](https://medium.com/@davidmorgan_14314/moving-fast-with-dart-immutable-values-1e717925fafb)
+- [Flutter JSON Serialization](https://aloisdeniel.github.io/flutter-json-serialization/)
 
 ## Examples
 
