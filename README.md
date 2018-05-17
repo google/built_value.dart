@@ -19,6 +19,8 @@ Immutable collections are from
 - [End to End Testing in One Short Second with Dart](https://medium.com/@davidmorgan_14314/end-to-end-testing-in-one-short-second-with-dart-e699c8146fd6#.c7xfxohg4)
 - [Moving Fast with Dart Immutable Values](https://medium.com/@davidmorgan_14314/moving-fast-with-dart-immutable-values-1e717925fafb)
 - [Flutter JSON Serialization](https://aloisdeniel.github.io/flutter-json-serialization/)
+- [Flutter TODO App Example](https://gitlab.com/brianegan/flutter_architecture_samples/tree/master/example/built_redux)
+  using `built_value`, [built_redux](https://pub.dartlang.org/packages/built_redux), and [flutter_built_redux](https://pub.dartlang.org/packages/flutter_built_redux)
 
 ## Examples
 
