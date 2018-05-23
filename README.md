@@ -21,7 +21,12 @@ Immutable collections are from
 - [Flutter JSON Serialization](https://aloisdeniel.github.io/flutter-json-serialization/)
 - [Flutter TODO App Example](https://gitlab.com/brianegan/flutter_architecture_samples/tree/master/example/built_redux)
   using `built_value`, [built_redux](https://pub.dartlang.org/packages/built_redux), and [flutter_built_redux](https://pub.dartlang.org/packages/flutter_built_redux)
+  
+## Tutorials
 
+ - [Flutter + Reddit Tutorial (video)](https://www.youtube.com/watch?v=hNbOSSgpneI);
+   [source code](https://github.com/tensor-programming/built_flutter_tutorial)
+ 
 ## Examples
 
 For an end to end example see the
