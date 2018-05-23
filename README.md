@@ -41,6 +41,10 @@ source and update the generated output when it changes. Note that you need a
 dev dependency on `built_value_generator` and `build_runner`. See the example
 [pubspec.yaml](https://github.com/google/built_value.dart/blob/master/example/pubspec.yaml).
 
+If using Flutter, the equivalent command is `flutter packages pub run build_runner build`.
+Alternatively, put your `built_value` classes in a separate Dart package with no dependency
+on Flutter. You can then use `built_value` as normal.
+
 If using a version before v5.2.0, codegen is triggered via either a
 [build.dart](https://github.com/google/built_value.dart/blob/92783c27a08ac3c73f28bb08736b9d4a30fa3b7e/example/tool/build.dart)
 to do a one-off build or a
