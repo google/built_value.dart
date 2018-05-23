@@ -24,7 +24,8 @@ Immutable collections are from
   
 ## Tutorials
 
- - [Flutter + Reddit Tutorial (video)](https://www.youtube.com/watch?v=hNbOSSgpneI);
+ - [Flutter + built_value + Reddit Tutorial](https://steemit.com/utopian-io/@tensor/building-immutable-models-with-built-value-and-built-collection-in-dart-s-flutter-framework);
+   [video](https://www.youtube.com/watch?v=hNbOSSgpneI);
    [source code](https://github.com/tensor-programming/built_flutter_tutorial)
  
 ## Examples
