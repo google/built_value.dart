@@ -3,6 +3,9 @@
 # 5.5.0 (unreleased)
 
 - Improve error message on failure to deserialize.
+- Move check forbidding instantiation with `dynamic` type parameters from
+  builder to value class. Previously, you could avoid the check by using the
+  generated constructor called `_`.
 
 # 5.4.4
 

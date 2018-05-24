@@ -264,6 +264,8 @@ class _$GenericValue<T> extends GenericValue<T> {
   _$GenericValue._({this.value}) : super._() {
     if (value == null)
       throw new BuiltValueNullFieldError('GenericValue', 'value');
+    if (T == dynamic)
+      throw new BuiltValueMissingGenericsError('GenericValue', 'T');
   }
 
   @override
@@ -301,10 +303,7 @@ class GenericValueBuilder<T>
   T get value => _$this._value;
   set value(T value) => _$this._value = value;
 
-  GenericValueBuilder() {
-    if (T == dynamic)
-      throw new BuiltValueMissingGenericsError('GenericValue', 'T');
-  }
+  GenericValueBuilder();
 
   GenericValueBuilder<T> get _$this {
     if (_$v != null) {
@@ -343,6 +342,8 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
   _$BoundGenericValue._({this.value}) : super._() {
     if (value == null)
       throw new BuiltValueNullFieldError('BoundGenericValue', 'value');
+    if (T == dynamic)
+      throw new BuiltValueMissingGenericsError('BoundGenericValue', 'T');
   }
 
   @override
@@ -381,10 +382,7 @@ class BoundGenericValueBuilder<T extends num>
   T get value => _$this._value;
   set value(T value) => _$this._value = value;
 
-  BoundGenericValueBuilder() {
-    if (T == dynamic)
-      throw new BuiltValueMissingGenericsError('BoundGenericValue', 'T');
-  }
+  BoundGenericValueBuilder();
 
   BoundGenericValueBuilder<T> get _$this {
     if (_$v != null) {
@@ -424,6 +422,8 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
   _$CollectionGenericValue._({this.values}) : super._() {
     if (values == null)
       throw new BuiltValueNullFieldError('CollectionGenericValue', 'values');
+    if (T == dynamic)
+      throw new BuiltValueMissingGenericsError('CollectionGenericValue', 'T');
   }
 
   @override
@@ -464,10 +464,7 @@ class CollectionGenericValueBuilder<T>
   ListBuilder<T> get values => _$this._values ??= new ListBuilder<T>();
   set values(ListBuilder<T> values) => _$this._values = values;
 
-  CollectionGenericValueBuilder() {
-    if (T == dynamic)
-      throw new BuiltValueMissingGenericsError('CollectionGenericValue', 'T');
-  }
+  CollectionGenericValueBuilder();
 
   CollectionGenericValueBuilder<T> get _$this {
     if (_$v != null) {
