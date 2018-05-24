@@ -301,10 +301,7 @@ class GenericValueBuilder<T>
   T get value => _$this._value;
   set value(T value) => _$this._value = value;
 
-  GenericValueBuilder() {
-    if (T == dynamic)
-      throw new BuiltValueMissingGenericsError('GenericValue', 'T');
-  }
+  GenericValueBuilder();
 
   GenericValueBuilder<T> get _$this {
     if (_$v != null) {
@@ -381,10 +378,7 @@ class BoundGenericValueBuilder<T extends num>
   T get value => _$this._value;
   set value(T value) => _$this._value = value;
 
-  BoundGenericValueBuilder() {
-    if (T == dynamic)
-      throw new BuiltValueMissingGenericsError('BoundGenericValue', 'T');
-  }
+  BoundGenericValueBuilder();
 
   BoundGenericValueBuilder<T> get _$this {
     if (_$v != null) {
@@ -464,10 +458,7 @@ class CollectionGenericValueBuilder<T>
   ListBuilder<T> get values => _$this._values ??= new ListBuilder<T>();
   set values(ListBuilder<T> values) => _$this._values = values;
 
-  CollectionGenericValueBuilder() {
-    if (T == dynamic)
-      throw new BuiltValueMissingGenericsError('CollectionGenericValue', 'T');
-  }
+  CollectionGenericValueBuilder();
 
   CollectionGenericValueBuilder<T> get _$this {
     if (_$v != null) {
