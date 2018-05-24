@@ -117,9 +117,17 @@ class BuiltJsonSerializers implements Serializers {
       }
 
       if (serializer is StructuredSerializer) {
-        return serializer.deserialize(this, (object as List).sublist(1));
+        try {
+          return serializer.deserialize(this, (object as List).sublist(1));
+        } on Error catch (error) {
+          throw new DeserializationError(object, specifiedType, error);
+        }
       } else if (serializer is PrimitiveSerializer) {
-        return serializer.deserialize(this, (object as List)[1]);
+        try {
+          return serializer.deserialize(this, (object as List)[1]);
+        } on Error catch (error) {
+          throw new DeserializationError(object, specifiedType, error);
+        }
       } else {
         throw new StateError(
             'serializer must be StructuredSerializer or PrimitiveSerializer');
@@ -136,11 +144,19 @@ class BuiltJsonSerializers implements Serializers {
       }
 
       if (serializer is StructuredSerializer) {
-        return serializer.deserialize(this, object as Iterable,
-            specifiedType: specifiedType);
+        try {
+          return serializer.deserialize(this, object as Iterable,
+              specifiedType: specifiedType);
+        } on Error catch (error) {
+          throw new DeserializationError(object, specifiedType, error);
+        }
       } else if (serializer is PrimitiveSerializer) {
-        return serializer.deserialize(this, object,
-            specifiedType: specifiedType);
+        try {
+          return serializer.deserialize(this, object,
+              specifiedType: specifiedType);
+        } on Error catch (error) {
+          throw new DeserializationError(object, specifiedType, error);
+        }
       } else {
         throw new StateError(
             'serializer must be StructuredSerializer or PrimitiveSerializer');

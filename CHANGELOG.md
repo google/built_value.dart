@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.5.0 (unreleased)
+
+- Improve error message on failure to deserialize.
+
 # 5.4.4
 
 - Removed dependency on `build_config` from `built_value` and added it to

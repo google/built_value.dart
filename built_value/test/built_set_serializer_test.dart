@@ -25,7 +25,7 @@ void main() {
       expect(
           () =>
               serializers.deserialize(serialized, specifiedType: specifiedType),
-          throwsA(new isInstanceOf<StateError>()));
+          throwsA(new isInstanceOf<DeserializationError>()));
     });
   });
 
