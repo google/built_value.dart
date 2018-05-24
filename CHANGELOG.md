@@ -1,6 +1,6 @@
 # Changelog
 
-# 5.5.0 (unreleased)
+# 5.4.5
 
 - Improve error message on failure to deserialize.
 - Move check forbidding instantiation with `dynamic` type parameters from
