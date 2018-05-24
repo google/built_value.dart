@@ -17,6 +17,7 @@ abstract class GenericValue<T>
   T get value;
 
   factory GenericValue([updates(GenericValueBuilder<T> b)]) = _$GenericValue<T>;
+  factory GenericValue.of(T value) => new _$GenericValue._(value: value);
   GenericValue._();
 }
 

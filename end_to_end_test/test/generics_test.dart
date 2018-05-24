@@ -23,6 +23,11 @@ void main() {
           throwsA(new isInstanceOf<BuiltValueMissingGenericsError>()));
     });
 
+    test('throws on missing generic type parameter via constructor', () {
+      expect(() => new GenericValue<dynamic>.of(1),
+          throwsA(new isInstanceOf<BuiltValueMissingGenericsError>()));
+    });
+
     test('includes parameter name in missing generics error message', () {
       expect(() => new GenericValue<dynamic>((b) => b..value = 1),
           throwsA(isErrorContaining('"T"')));

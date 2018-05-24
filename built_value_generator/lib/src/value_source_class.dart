@@ -564,7 +564,7 @@ abstract class ValueSourceClass
       result.write('}) : super._()');
     }
     final requiredFields = fields.where((field) => !field.isNullable);
-    if (requiredFields.isEmpty) {
+    if (requiredFields.isEmpty && genericParameters.isEmpty) {
       result.writeln(';');
     } else {
       result.writeln('{');
@@ -572,6 +572,15 @@ abstract class ValueSourceClass
         result.writeln("if (${field.name} == null) "
             "throw new BuiltValueNullFieldError('$name', '${field.name}');");
       }
+      // If there are generic parameters, check they are not "dynamic".
+      if (genericParameters.isNotEmpty) {
+        for (final genericParameter in genericParameters) {
+          result.writeln('if ($genericParameter == dynamic) '
+              'throw new BuiltValueMissingGenericsError('
+              "'$name', '$genericParameter');");
+        }
+      }
+      result.writeln();
       result.writeln('}');
     }
     result.writeln();
@@ -727,23 +736,11 @@ abstract class ValueSourceClass
     result.writeln();
 
     if (hasBuilder) {
-      result.writeln('${implName}Builder() : super._()');
+      result.writeln('${implName}Builder() : super._();');
     } else {
-      result.writeln('${name}Builder()');
+      result.writeln('${name}Builder();');
     }
-    // If there are generic parameters, check they are not "dynamic".
-    if (genericParameters.isEmpty) {
-      result.writeln(';');
-    } else {
-      result.writeln('{');
-      for (final genericParameter in genericParameters) {
-        result.writeln('if ($genericParameter == dynamic) '
-            'throw new BuiltValueMissingGenericsError('
-            "'$name', '$genericParameter');");
-      }
-      result.writeln('}');
-    }
-    result.writeln();
+    result.writeln('');
 
     // Getter for "this" that does lazy copying if needed.
     if (fields.isNotEmpty) {
