@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_value/built_value.dart';
-import 'package:end_to_end_test/errors_matchers.dart';
 import 'package:end_to_end_test/generics.dart';
 import 'package:test/test.dart';
 
@@ -18,19 +17,8 @@ void main() {
           throwsA(new isInstanceOf<BuiltValueNullFieldError>()));
     });
 
-    test('throws on missing generic type parameter', () {
-      expect(() => new GenericValue<dynamic>((b) => b..value = 1),
-          throwsA(new isInstanceOf<BuiltValueMissingGenericsError>()));
-    });
-
-    test('includes parameter name in missing generics error message', () {
-      expect(() => new GenericValue<dynamic>((b) => b..value = 1),
-          throwsA(isErrorContaining('"T"')));
-    });
-
-    test('includes class name in missing generics null error message', () {
-      expect(() => new GenericValue<dynamic>((b) => b..value = 1),
-          throwsA(isErrorContaining('"GenericValue"')));
+    test('does not throw on missing generic type parameter', () {
+      new GenericValue<dynamic>((b) => b..value = 1);
     });
 
     test('fields can be set via build constructor', () {

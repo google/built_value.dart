@@ -3,6 +3,9 @@
 # 5.5.0 (unreleased)
 
 - Improve error message on failure to deserialize.
+- Values may now be instantiated as `<dynamic>`. This restriction was intended
+  to protect against misuse of `dynamic` in Dart 1; Dart 2 is stricter, so it's
+  no longer needed.
 
 # 5.4.4
 

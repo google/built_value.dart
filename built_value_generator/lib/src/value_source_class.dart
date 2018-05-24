@@ -727,21 +727,9 @@ abstract class ValueSourceClass
     result.writeln();
 
     if (hasBuilder) {
-      result.writeln('${implName}Builder() : super._()');
+      result.writeln('${implName}Builder() : super._();');
     } else {
-      result.writeln('${name}Builder()');
-    }
-    // If there are generic parameters, check they are not "dynamic".
-    if (genericParameters.isEmpty) {
-      result.writeln(';');
-    } else {
-      result.writeln('{');
-      for (final genericParameter in genericParameters) {
-        result.writeln('if ($genericParameter == dynamic) '
-            'throw new BuiltValueMissingGenericsError('
-            "'$name', '$genericParameter');");
-      }
-      result.writeln('}');
+      result.writeln('${name}Builder();');
     }
     result.writeln();
 

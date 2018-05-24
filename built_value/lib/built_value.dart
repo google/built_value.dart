@@ -271,7 +271,9 @@ class BuiltValueNullFieldError extends Error {
 }
 
 /// [Error] indicating that a built_value class constructor was called with
-/// a missing or `dynamic` type parameter.
+/// a missing or `dynamic` type parameter. Note that from v5.5.0 this check
+/// is no longer made; Dart 2 has strict types so it's no longer necessary to
+/// prohibit `dynamic`.
 class BuiltValueMissingGenericsError extends Error {
   final String type;
   final String parameter;
