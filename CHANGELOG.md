@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.4.6
+
+- Fix code generation when inherited generic fields are made non-generic.
+
 # 5.4.5
 
 - Improve error message on failure to deserialize.

@@ -24,6 +24,8 @@ Serializer<GenericContainer> _$genericContainerSerializer =
     new _$GenericContainerSerializer();
 Serializer<NestedGenericContainer> _$nestedGenericContainerSerializer =
     new _$NestedGenericContainerSerializer();
+Serializer<ConcreteGeneric> _$concreteGenericSerializer =
+    new _$ConcreteGenericSerializer();
 
 class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
   @override
@@ -300,6 +302,46 @@ class _$NestedGenericContainerSerializer
                 const FullType(BuiltMap,
                     const [const FullType(int), const FullType(String)])
               ])) as GenericValue<BuiltMap<int, String>>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ConcreteGenericSerializer
+    implements StructuredSerializer<ConcreteGeneric> {
+  @override
+  final Iterable<Type> types = const [ConcreteGeneric, _$ConcreteGeneric];
+  @override
+  final String wireName = 'ConcreteGeneric';
+
+  @override
+  Iterable serialize(Serializers serializers, ConcreteGeneric object,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  ConcreteGeneric deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType: FullType.unspecified}) {
+    final result = new ConcreteGenericBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -874,6 +916,82 @@ class _$CustomBuilderGenericValueBuilder<T>
   @override
   _$CustomBuilderGenericValue<T> build() {
     final _$result = _$v ?? new _$CustomBuilderGenericValue<T>._(value: value);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ConcreteGeneric extends ConcreteGeneric {
+  @override
+  final int value;
+
+  factory _$ConcreteGeneric([void updates(ConcreteGenericBuilder b)]) =>
+      (new ConcreteGenericBuilder()..update(updates)).build();
+
+  _$ConcreteGeneric._({this.value}) : super._() {
+    if (value == null)
+      throw new BuiltValueNullFieldError('ConcreteGeneric', 'value');
+  }
+
+  @override
+  ConcreteGeneric rebuild(void updates(ConcreteGenericBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ConcreteGenericBuilder toBuilder() =>
+      new ConcreteGenericBuilder()..replace(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(other, this)) return true;
+    if (other is! ConcreteGeneric) return false;
+    return value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ConcreteGeneric')..add('value', value))
+        .toString();
+  }
+}
+
+class ConcreteGenericBuilder
+    implements Builder<ConcreteGeneric, ConcreteGenericBuilder> {
+  _$ConcreteGeneric _$v;
+
+  int _value;
+  int get value => _$this._value;
+  set value(int value) => _$this._value = value;
+
+  ConcreteGenericBuilder();
+
+  ConcreteGenericBuilder get _$this {
+    if (_$v != null) {
+      _value = _$v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ConcreteGeneric other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$ConcreteGeneric;
+  }
+
+  @override
+  void update(void updates(ConcreteGenericBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ConcreteGeneric build() {
+    final _$result = _$v ?? new _$ConcreteGeneric._(value: value);
     replace(_$result);
     return _$result;
   }

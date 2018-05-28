@@ -95,3 +95,17 @@ abstract class CustomBuilderGenericValueBuilder<T>
       _$CustomBuilderGenericValueBuilder<T>;
   CustomBuilderGenericValueBuilder._();
 }
+
+abstract class Generic<T> {
+  T get value;
+}
+
+abstract class ConcreteGeneric
+    implements Built<ConcreteGeneric, ConcreteGenericBuilder>, Generic<int> {
+  static Serializer<ConcreteGeneric> get serializer =>
+      _$concreteGenericSerializer;
+
+  factory ConcreteGeneric([updates(ConcreteGenericBuilder b)]) =
+      _$ConcreteGeneric;
+  ConcreteGeneric._();
+}

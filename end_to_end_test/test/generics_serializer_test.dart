@@ -372,4 +372,17 @@ void main() {
           data);
     });
   });
+
+  group('ConcreteGeneric with unknown specifiedType', () {
+    final data = new ConcreteGeneric((b) => b..value = 1);
+    final serialized = ['ConcreteGeneric', 'value', 1];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }
