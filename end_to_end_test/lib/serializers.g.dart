@@ -105,6 +105,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(Animal)]),
           () => new ListBuilder<Animal>())
       ..addBuilderFactory(
+          const FullType(BuiltSet, const [const FullType(Animal)]),
+          () => new SetBuilder<Animal>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())
       ..addBuilderFactory(

@@ -22,7 +22,10 @@ void main() {
       ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2})
       ..zoo.add(new Cat((b) => b
         ..tail = true
-        ..legs = 4)));
+        ..legs = 4))
+      ..uniqueZoo.add(new Cat((b) => b
+        ..tail = false
+        ..legs = 3)));
     final specifiedType = new FullType(StandardJsonValue);
     final serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
@@ -38,6 +41,9 @@ void main() {
       },
       'zoo': [
         {r'$': 'Cat', 'tail': true, 'legs': 4}
+      ],
+      'uniqueZoo': [
+        {r'$': 'Cat', 'tail': false, 'legs': 3}
       ],
     };
 
@@ -124,6 +130,7 @@ void main() {
       'zoo': [
         {r'$': 'Cat', 'tail': true, 'legs': 4}
       ],
+      'uniqueZoo': [],
     };
 
     test('can be serialized', () {

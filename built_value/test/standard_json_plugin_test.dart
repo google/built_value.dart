@@ -19,6 +19,9 @@ void main() {
             ]),
             () => new ListBuilder<BuiltList<int>>())
         ..addBuilderFactory(
+            const FullType(BuiltSet, const [const FullType(int)]),
+            () => new SetBuilder<int>())
+        ..addBuilderFactory(
             const FullType(
                 BuiltMap, const [const FullType(int), const FullType(String)]),
             () => new MapBuilder<int, String>())
@@ -46,14 +49,6 @@ void main() {
       });
       final specifiedType = const FullType(BuiltListMultimap,
           const [const FullType(int), const FullType(String)]);
-      expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throwsA(new isInstanceOf<ArgumentError>()));
-    });
-
-    test('throws on serialize of sets', () {
-      final data = new BuiltSet<int>([1, 2, 3]);
-      final specifiedType =
-          const FullType(BuiltSet, const [const FullType(int)]);
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
           throwsA(new isInstanceOf<ArgumentError>()));
     });
@@ -92,6 +87,24 @@ void main() {
         final data = new BuiltList<int>([1, 2, 3]);
         final specifiedType =
             const FullType(BuiltList, const [const FullType(int)]);
+        final serialized = [1, 2, 3];
+
+        test('serialize it', () {
+          expect(serializers.serialize(data, specifiedType: specifiedType),
+              serialized);
+        });
+
+        test('deserialize it', () {
+          expect(
+              serializers.deserialize(serialized, specifiedType: specifiedType),
+              data);
+        });
+      });
+
+      group('can take a set and', () {
+        final data = new BuiltSet<int>([1, 2, 3]);
+        final specifiedType =
+            const FullType(BuiltSet, const [const FullType(int)]);
         final serialized = [1, 2, 3];
 
         test('serialize it', () {
