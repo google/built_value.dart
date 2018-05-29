@@ -18,7 +18,7 @@
 # 5.4.4
 
 - Removed dependency on `build_config` from `built_value` and added it to
-  `built_value_generator`. 
+  `built_value_generator`.
 
 # 5.4.3
 
