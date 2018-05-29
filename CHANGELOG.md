@@ -4,7 +4,10 @@
 
 - Support serializing `BuiltSet` with `StandardJsonPlugin`. It's serialized to
   a JSON list.
+- Add `Iso8601DateTimeSerializer` for use when you want ISO8601 serialization
+  instead of microseconds since epoch.
 - Fix code generation when inherited generic fields are made non-generic. 
+
 
 # 5.4.5
 

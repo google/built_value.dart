@@ -9,6 +9,10 @@ import 'dart:convert' show json;
 /// and support for more collection types. But, you may need to interact with
 /// other systems that use simple map-based JSON. If so, use
 /// [SerializersBuilder.addPlugin] to install this plugin.
+///
+/// When using this plugin you may wish to also install
+/// `Iso8601DateTimeSerializer` which switches serialization of `DateTime`
+/// from microseconds since epoch to ISO 8601 format.
 class StandardJsonPlugin implements SerializerPlugin {
   static final BuiltSet<Type> _unsupportedTypes =
       new BuiltSet<Type>([BuiltListMultimap, BuiltSetMultimap]);
