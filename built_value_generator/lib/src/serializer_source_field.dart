@@ -71,11 +71,23 @@ abstract class SerializerSourceField
 
   /// The [type] plus any import prefix.
   @memoized
-  String get typeWithPrefix =>
-      (element.getter.computeNode() as MethodDeclaration)
-          ?.returnType
-          ?.toString() ??
-      'dynamic';
+  String get typeWithPrefix {
+    final typeFromAst = (element.getter.computeNode() as MethodDeclaration)
+            ?.returnType
+            ?.toString() ??
+        'dynamic';
+    final typeFromElement = type;
+
+    // If the type is a function, we can't use the element result; it is
+    // formatted incorrectly.
+    if (typeFromElement.contains('(')) return typeFromAst;
+
+    // If the type does not have an import prefix, prefer the element result.
+    // It handles inherited generics correctly.
+    if (!typeFromAst.contains('.')) return typeFromElement;
+
+    return typeFromAst;
+  }
 
   /// Returns the type with import prefix if the compilation unit matches,
   /// otherwise the type with no import prefix.

@@ -27,6 +27,7 @@ part 'serializers.g.dart';
   CompoundValue,
   CompoundValueExplicitNoNesting,
   CompoundValueNoNesting,
+  ConcreteGeneric,
   EnumWithInt,
   FieldDiscoveryValue,
   Fish,
