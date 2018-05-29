@@ -21,6 +21,7 @@ abstract class StandardJsonValue
   String get text;
   BuiltMap<String, JsonObject> get keyValues;
   BuiltList<Animal> get zoo;
+  BuiltSet<Animal> get uniqueZoo;
 
   @nullable
   BuiltList<String> get strings;

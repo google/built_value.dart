@@ -40,6 +40,10 @@ class _$StandardJsonValueSerializer
       serializers.serialize(object.zoo,
           specifiedType:
               const FullType(BuiltList, const [const FullType(Animal)])),
+      'uniqueZoo',
+      serializers.serialize(object.uniqueZoo,
+          specifiedType:
+              const FullType(BuiltSet, const [const FullType(Animal)])),
     ];
     if (object.strings != null) {
       result
@@ -84,6 +88,12 @@ class _$StandardJsonValueSerializer
                       const FullType(BuiltList, const [const FullType(Animal)]))
               as BuiltList);
           break;
+        case 'uniqueZoo':
+          result.uniqueZoo.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltSet, const [const FullType(Animal)]))
+              as BuiltSet);
+          break;
         case 'strings':
           result.strings.replace(serializers.deserialize(value,
                   specifiedType:
@@ -107,13 +117,20 @@ class _$StandardJsonValue extends StandardJsonValue {
   @override
   final BuiltList<Animal> zoo;
   @override
+  final BuiltSet<Animal> uniqueZoo;
+  @override
   final BuiltList<String> strings;
 
   factory _$StandardJsonValue([void updates(StandardJsonValueBuilder b)]) =>
       (new StandardJsonValueBuilder()..update(updates)).build();
 
   _$StandardJsonValue._(
-      {this.number, this.text, this.keyValues, this.zoo, this.strings})
+      {this.number,
+      this.text,
+      this.keyValues,
+      this.zoo,
+      this.uniqueZoo,
+      this.strings})
       : super._() {
     if (number == null)
       throw new BuiltValueNullFieldError('StandardJsonValue', 'number');
@@ -123,6 +140,8 @@ class _$StandardJsonValue extends StandardJsonValue {
       throw new BuiltValueNullFieldError('StandardJsonValue', 'keyValues');
     if (zoo == null)
       throw new BuiltValueNullFieldError('StandardJsonValue', 'zoo');
+    if (uniqueZoo == null)
+      throw new BuiltValueNullFieldError('StandardJsonValue', 'uniqueZoo');
   }
 
   @override
@@ -141,6 +160,7 @@ class _$StandardJsonValue extends StandardJsonValue {
         text == other.text &&
         keyValues == other.keyValues &&
         zoo == other.zoo &&
+        uniqueZoo == other.uniqueZoo &&
         strings == other.strings;
   }
 
@@ -148,9 +168,11 @@ class _$StandardJsonValue extends StandardJsonValue {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, number.hashCode), text.hashCode),
-                keyValues.hashCode),
-            zoo.hashCode),
+            $jc(
+                $jc($jc($jc(0, number.hashCode), text.hashCode),
+                    keyValues.hashCode),
+                zoo.hashCode),
+            uniqueZoo.hashCode),
         strings.hashCode));
   }
 
@@ -161,6 +183,7 @@ class _$StandardJsonValue extends StandardJsonValue {
           ..add('text', text)
           ..add('keyValues', keyValues)
           ..add('zoo', zoo)
+          ..add('uniqueZoo', uniqueZoo)
           ..add('strings', strings))
         .toString();
   }
@@ -188,6 +211,11 @@ class StandardJsonValueBuilder
   ListBuilder<Animal> get zoo => _$this._zoo ??= new ListBuilder<Animal>();
   set zoo(ListBuilder<Animal> zoo) => _$this._zoo = zoo;
 
+  SetBuilder<Animal> _uniqueZoo;
+  SetBuilder<Animal> get uniqueZoo =>
+      _$this._uniqueZoo ??= new SetBuilder<Animal>();
+  set uniqueZoo(SetBuilder<Animal> uniqueZoo) => _$this._uniqueZoo = uniqueZoo;
+
   ListBuilder<String> _strings;
   ListBuilder<String> get strings =>
       _$this._strings ??= new ListBuilder<String>();
@@ -201,6 +229,7 @@ class StandardJsonValueBuilder
       _text = _$v.text;
       _keyValues = _$v.keyValues?.toBuilder();
       _zoo = _$v.zoo?.toBuilder();
+      _uniqueZoo = _$v.uniqueZoo?.toBuilder();
       _strings = _$v.strings?.toBuilder();
       _$v = null;
     }
@@ -228,6 +257,7 @@ class StandardJsonValueBuilder
               text: text,
               keyValues: keyValues.build(),
               zoo: zoo.build(),
+              uniqueZoo: uniqueZoo.build(),
               strings: _strings?.build());
     } catch (_) {
       String _$failedField;
@@ -236,6 +266,8 @@ class StandardJsonValueBuilder
         keyValues.build();
         _$failedField = 'zoo';
         zoo.build();
+        _$failedField = 'uniqueZoo';
+        uniqueZoo.build();
         _$failedField = 'strings';
         _strings?.build();
       } catch (e) {

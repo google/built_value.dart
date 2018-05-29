@@ -11,7 +11,7 @@ import 'dart:convert' show json;
 /// [SerializersBuilder.addPlugin] to install this plugin.
 class StandardJsonPlugin implements SerializerPlugin {
   static final BuiltSet<Type> _unsupportedTypes =
-      new BuiltSet<Type>([BuiltSet, BuiltListMultimap, BuiltSetMultimap]);
+      new BuiltSet<Type>([BuiltListMultimap, BuiltSetMultimap]);
 
   /// The field used to specify the value type if needed. Defaults to `$`.
   final String discriminator;
@@ -35,6 +35,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   Object afterSerialize(Object object, FullType specifiedType) {
     if (object is List &&
         specifiedType.root != BuiltList &&
+        specifiedType.root != BuiltSet &&
         specifiedType.root != JsonObject) {
       if (specifiedType.isUnspecified) {
         return _toMapWithDiscriminator(object);

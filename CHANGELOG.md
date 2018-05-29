@@ -1,8 +1,10 @@
 # Changelog
 
-# 5.4.6
+# 5.5.0
 
-- Fix code generation when inherited generic fields are made non-generic.
+- Support serializing `BuiltSet` with `StandardJsonPlugin`. It's serialized to
+  a JSON list.
+- Fix code generation when inherited generic fields are made non-generic. 
 
 # 5.4.5
 
