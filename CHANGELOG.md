@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.5.1
+
+- Bump versions of analyzer, analyzer_plugin.
+
 # 5.5.0
 
 - Support serializing `BuiltSet` with `StandardJsonPlugin`. It's serialized to
