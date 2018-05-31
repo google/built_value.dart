@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:analyzer/context/context_root.dart';
 import 'package:analyzer/file_system/file_system.dart';
 // ignore: implementation_imports
 import 'package:analyzer/src/context/builder.dart';
+// ignore: implementation_imports
+import 'package:analyzer/src/context/context_root.dart';
 // ignore: implementation_imports
 import 'package:analyzer/src/dart/analysis/driver.dart';
 import 'package:analyzer_plugin/plugin/plugin.dart';
@@ -22,7 +23,8 @@ class BuiltValueAnalyzerPlugin extends ServerPlugin {
 
   @override
   AnalysisDriverGeneric createAnalysisDriver(plugin.ContextRoot contextRoot) {
-    final root = new ContextRoot(contextRoot.root, contextRoot.exclude)
+    final root = new ContextRoot(contextRoot.root, contextRoot.exclude,
+        pathContext: resourceProvider.pathContext)
       ..optionsFilePath = contextRoot.optionsFile;
     final contextBuilder =
         new ContextBuilder(resourceProvider, sdkManager, null)
