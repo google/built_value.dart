@@ -101,7 +101,7 @@ can use following live template:
 ```
 abstract class $CLASS_NAME$ implements Built<$CLASS_NAME$, $CLASS_NAME$Builder> {
   $CLASS_NAME$._();
-  factory $CLASS_NAME$([updates($CLASS_NAME$Builder b)]) = _$$CLASS_NAME$;
+  factory $CLASS_NAME$([updates($CLASS_NAME$Builder b)]) = _$$$CLASS_NAME$;
 }
 ```
 
