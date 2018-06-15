@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.5.2
+
+- Fix violations of `prefer_equal_for_default_values` lint.
+
 # 5.5.1
 
 - Bump versions of `analyzer`, `analyzer_plugin`.

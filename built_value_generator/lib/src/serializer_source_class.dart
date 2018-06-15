@@ -211,7 +211,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
 
   @override
   Iterable serialize(Serializers serializers, $name object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     ${fields.isEmpty ? 'return <Object>[];' : '''
     ${_generateGenericsSerializerPreamble()}
     final result = <Object>[${_generateRequiredFieldSerializers()}];
@@ -222,7 +222,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
 
   @override
   $name deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     ${_generateGenericsSerializerPreamble()}
     ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
     final result = ${_generateNewBuilder()};
@@ -264,12 +264,12 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
 
   @override
   Object serialize(Serializers serializers, $name object,
-      {FullType specifiedType: FullType.unspecified}) =>
+      {FullType specifiedType = FullType.unspecified}) =>
     object.name;
 
   @override
   $name deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) =>
+      {FullType specifiedType = FullType.unspecified}) =>
     $name.valueOf(serialized as String);
 }''';
       } else {
@@ -297,12 +297,12 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
 
   @override
   Object serialize(Serializers serializers, $name object,
-      {FullType specifiedType: FullType.unspecified}) =>
+      {FullType specifiedType = FullType.unspecified}) =>
     _toWire[object.name] ?? object.name;
 
   @override
   $name deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) =>
+      {FullType specifiedType = FullType.unspecified}) =>
     $name.valueOf(_fromWire[serialized] ?? serialized as String);
 }''';
       }

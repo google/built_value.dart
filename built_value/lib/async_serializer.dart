@@ -13,7 +13,7 @@ import 'package:built_value/serializer.dart';
 /// deserialize to a [Stream] of objects.
 class BuiltListAsyncDeserializer {
   Stream<Object> deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) async* {
+      {FullType specifiedType = FullType.unspecified}) async* {
     final elementType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];

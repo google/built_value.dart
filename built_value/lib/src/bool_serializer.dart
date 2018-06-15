@@ -14,13 +14,13 @@ class BoolSerializer implements PrimitiveSerializer<bool> {
 
   @override
   Object serialize(Serializers serializers, bool boolean,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return boolean;
   }
 
   @override
   bool deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return serialized as bool;
   }
 }

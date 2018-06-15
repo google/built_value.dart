@@ -41,7 +41,7 @@ class BuiltJsonSerializers implements Serializers {
 
   @override
   Object serialize(Object object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     var transformedObject = object;
     for (final plugin in _plugins) {
       transformedObject =
@@ -93,7 +93,7 @@ class BuiltJsonSerializers implements Serializers {
 
   @override
   Object deserialize(Object object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     var transformedObject = object;
     for (final plugin in _plugins) {
       transformedObject =

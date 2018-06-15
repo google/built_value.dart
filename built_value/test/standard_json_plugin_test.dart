@@ -50,7 +50,7 @@ void main() {
       final specifiedType = const FullType(BuiltListMultimap,
           const [const FullType(int), const FullType(String)]);
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throwsA(new isInstanceOf<ArgumentError>()));
+          throwsA(const TypeMatcher<ArgumentError>()));
     });
 
     test('throws on serialize of set multimaps', () {
@@ -62,7 +62,7 @@ void main() {
       final specifiedType = const FullType(BuiltSetMultimap,
           const [const FullType(int), const FullType(String)]);
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throwsA(new isInstanceOf<ArgumentError>()));
+          throwsA(const TypeMatcher<ArgumentError>()));
     });
 
     group('and known specifiedType', () {

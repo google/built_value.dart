@@ -17,7 +17,7 @@ class BuiltListMultimapSerializer
   @override
   Iterable serialize(
       Serializers serializers, BuiltListMultimap builtListMultimap,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -42,7 +42,7 @@ class BuiltListMultimapSerializer
 
   @override
   BuiltListMultimap deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 

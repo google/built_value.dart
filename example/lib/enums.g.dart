@@ -3,7 +3,7 @@
 part of enums;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -111,12 +111,12 @@ class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
 
   @override
   Object serialize(Serializers serializers, TestEnum object,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       object.name;
 
   @override
   TestEnum deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       TestEnum.valueOf(serialized as String);
 }
 
@@ -139,11 +139,11 @@ class _$WireNameEnumSerializer implements PrimitiveSerializer<WireNameEnum> {
 
   @override
   Object serialize(Serializers serializers, WireNameEnum object,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       _toWire[object.name] ?? object.name;
 
   @override
   WireNameEnum deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       WireNameEnum.valueOf(_fromWire[serialized] ?? serialized as String);
 }

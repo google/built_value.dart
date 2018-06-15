@@ -24,7 +24,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   // an `int`.
   final String valueKey;
 
-  StandardJsonPlugin({this.discriminator: r'$', this.valueKey: ''});
+  StandardJsonPlugin({this.discriminator = r'$', this.valueKey = ''});
 
   @override
   Object beforeSerialize(Object object, FullType specifiedType) {

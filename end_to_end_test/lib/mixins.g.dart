@@ -3,7 +3,7 @@
 part of mixins;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -24,13 +24,13 @@ class _$UsesMixinSerializer implements StructuredSerializer<UsesMixin> {
 
   @override
   Iterable serialize(Serializers serializers, UsesMixin object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return <Object>[];
   }
 
   @override
   UsesMixin deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return new UsesMixinBuilder().build();
   }
 }

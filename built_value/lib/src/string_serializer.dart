@@ -14,13 +14,13 @@ class StringSerializer implements PrimitiveSerializer<String> {
 
   @override
   Object serialize(Serializers serializers, String string,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return string;
   }
 
   @override
   String deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return serialized as String;
   }
 }

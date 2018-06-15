@@ -3,7 +3,7 @@
 part of collections;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -24,7 +24,7 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
 
   @override
   Iterable serialize(Serializers serializers, Collections object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'list',
       serializers.serialize(object.list,
@@ -88,7 +88,7 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
 
   @override
   Collections deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new CollectionsBuilder();
 
     final iterator = serialized.iterator;

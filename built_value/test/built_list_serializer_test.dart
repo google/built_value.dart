@@ -16,14 +16,14 @@ void main() {
 
     test('serialize throws', () {
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
-          throwsA(new isInstanceOf<StateError>()));
+          throwsA(const TypeMatcher<StateError>()));
     });
 
     test('deserialize throws', () {
       expect(
           () =>
               serializers.deserialize(serialized, specifiedType: specifiedType),
-          throwsA(new isInstanceOf<DeserializationError>()));
+          throwsA(const TypeMatcher<DeserializationError>()));
     });
   });
 

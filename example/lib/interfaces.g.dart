@@ -3,7 +3,7 @@
 part of interfaces;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -50,7 +50,7 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
 
   @override
   Iterable serialize(Serializers serializers, ValueWithInt object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
@@ -63,7 +63,7 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
 
   @override
   ValueWithInt deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new ValueWithIntBuilder();
 
     final iterator = serialized.iterator;
@@ -95,12 +95,12 @@ class _$EnumWithIntSerializer implements PrimitiveSerializer<EnumWithInt> {
 
   @override
   Object serialize(Serializers serializers, EnumWithInt object,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       object.name;
 
   @override
   EnumWithInt deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       EnumWithInt.valueOf(serialized as String);
 }
 

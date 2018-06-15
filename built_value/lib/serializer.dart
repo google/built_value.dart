@@ -99,7 +99,7 @@ abstract class Serializers {
   ///
   /// TODO(davidmorgan): document the wire format.
   Object serialize(Object object,
-      {FullType specifiedType: FullType.unspecified});
+      {FullType specifiedType = FullType.unspecified});
 
   /// Convenience method for when you know the type you're serializing.
   /// Specify the type by specifying its [Serializer] class. Equivalent to
@@ -113,7 +113,7 @@ abstract class Serializers {
   /// If [serialized] was produced by calling [serialize] with [specifiedType],
   /// the exact same [specifiedType] must be provided to deserialize.
   Object deserialize(Object serialized,
-      {FullType specifiedType: FullType.unspecified});
+      {FullType specifiedType = FullType.unspecified});
 
   /// Convenience method for when you know the type you're deserializing.
   /// Specify the type by specifying its [Serializer] class. Equivalent to
@@ -244,7 +244,7 @@ abstract class PrimitiveSerializer<T> implements Serializer<T> {
   ///
   /// TODO(davidmorgan): document the wire format.
   Object serialize(Serializers serializers, T object,
-      {FullType specifiedType: FullType.unspecified});
+      {FullType specifiedType = FullType.unspecified});
 
   /// Deserializes [serialized].
   ///
@@ -253,7 +253,7 @@ abstract class PrimitiveSerializer<T> implements Serializer<T> {
   /// Use [serializers] as needed for nested deserialization. Information about
   /// the type being deserialized is provided in [specifiedType].
   T deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified});
+      {FullType specifiedType = FullType.unspecified});
 }
 
 /// A [Serializer] that serializes to and from an [Iterable] of primitive JSON
@@ -269,7 +269,7 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
   ///
   /// TODO(davidmorgan): document the wire format.
   Iterable serialize(Serializers serializers, T object,
-      {FullType specifiedType: FullType.unspecified});
+      {FullType specifiedType = FullType.unspecified});
 
   /// Deserializes [serialized].
   ///
@@ -279,7 +279,7 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
   /// Use [serializers] as needed for nested deserialization. Information about
   /// the type being deserialized is provided in [specifiedType].
   T deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified});
+      {FullType specifiedType = FullType.unspecified});
 }
 
 /// [Error] conveying why deserialization failed.
