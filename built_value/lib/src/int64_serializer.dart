@@ -15,13 +15,13 @@ class Int64Serializer implements PrimitiveSerializer<Int64> {
 
   @override
   Object serialize(Serializers serializers, Int64 int64,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return int64.toString();
   }
 
   @override
   Int64 deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return Int64.parseInt(serialized as String);
   }
 }

@@ -3,7 +3,7 @@
 part of polymorphism;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -25,7 +25,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
 
   @override
   Iterable serialize(Serializers serializers, Cat object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'tail',
       serializers.serialize(object.tail, specifiedType: const FullType(bool)),
@@ -38,7 +38,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
 
   @override
   Cat deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new CatBuilder();
 
     final iterator = serialized.iterator;
@@ -70,7 +70,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
 
   @override
   Iterable serialize(Serializers serializers, Fish object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'fins',
       serializers.serialize(object.fins, specifiedType: const FullType(int)),
@@ -83,7 +83,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
 
   @override
   Fish deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new FishBuilder();
 
     final iterator = serialized.iterator;

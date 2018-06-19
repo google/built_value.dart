@@ -3,7 +3,7 @@
 part of standard_json;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -26,7 +26,7 @@ class _$StandardJsonValueSerializer
 
   @override
   Iterable serialize(Serializers serializers, StandardJsonValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'number',
       serializers.serialize(object.number, specifiedType: const FullType(num)),
@@ -58,7 +58,7 @@ class _$StandardJsonValueSerializer
 
   @override
   StandardJsonValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new StandardJsonValueBuilder();
 
     final iterator = serialized.iterator;

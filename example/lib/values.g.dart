@@ -3,7 +3,7 @@
 part of values;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -33,7 +33,7 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
 
   @override
   Iterable serialize(Serializers serializers, SimpleValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
@@ -50,7 +50,7 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
 
   @override
   SimpleValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new SimpleValueBuilder();
 
     final iterator = serialized.iterator;
@@ -83,7 +83,7 @@ class _$VerySimpleValueSerializer
 
   @override
   Iterable serialize(Serializers serializers, VerySimpleValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'value',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
@@ -94,7 +94,7 @@ class _$VerySimpleValueSerializer
 
   @override
   VerySimpleValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new VerySimpleValueBuilder();
 
     final iterator = serialized.iterator;
@@ -122,7 +122,7 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
 
   @override
   Iterable serialize(Serializers serializers, CompoundValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
@@ -140,7 +140,7 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
 
   @override
   CompoundValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new CompoundValueBuilder();
 
     final iterator = serialized.iterator;
@@ -173,7 +173,7 @@ class _$ValidatedValueSerializer
 
   @override
   Iterable serialize(Serializers serializers, ValidatedValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
@@ -190,7 +190,7 @@ class _$ValidatedValueSerializer
 
   @override
   ValidatedValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new ValidatedValueBuilder();
 
     final iterator = serialized.iterator;
@@ -222,7 +222,7 @@ class _$AccountSerializer implements StructuredSerializer<Account> {
 
   @override
   Iterable serialize(Serializers serializers, Account object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
@@ -239,7 +239,7 @@ class _$AccountSerializer implements StructuredSerializer<Account> {
 
   @override
   Account deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new AccountBuilder();
 
     final iterator = serialized.iterator;
@@ -278,7 +278,7 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
 
   @override
   Iterable serialize(Serializers serializers, WireNameValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'v',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
@@ -289,7 +289,7 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
 
   @override
   WireNameValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new WireNameValueBuilder();
 
     final iterator = serialized.iterator;

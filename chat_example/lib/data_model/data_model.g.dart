@@ -3,7 +3,7 @@
 part of data_model;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -82,7 +82,7 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
 
   @override
   Iterable serialize(Serializers serializers, Chat object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'text',
       serializers.serialize(object.text, specifiedType: const FullType(String)),
@@ -97,7 +97,7 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
 
   @override
   Chat deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new ChatBuilder();
 
     final iterator = serialized.iterator;
@@ -131,7 +131,7 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
 
   @override
   Iterable serialize(Serializers serializers, Login object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'username',
       serializers.serialize(object.username,
@@ -146,7 +146,7 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
 
   @override
   Login deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new LoginBuilder();
 
     final iterator = serialized.iterator;
@@ -178,7 +178,7 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
 
   @override
   Iterable serialize(Serializers serializers, Status object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'message',
       serializers.serialize(object.message,
@@ -193,7 +193,7 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
 
   @override
   Status deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new StatusBuilder();
 
     final iterator = serialized.iterator;
@@ -225,12 +225,12 @@ class _$StatusTypeSerializer implements PrimitiveSerializer<StatusType> {
 
   @override
   Object serialize(Serializers serializers, StatusType object,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       object.name;
 
   @override
   StatusType deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       StatusType.valueOf(serialized as String);
 }
 
@@ -242,7 +242,7 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
 
   @override
   Iterable serialize(Serializers serializers, ListUsers object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'statusTypes',
       serializers.serialize(object.statusTypes,
@@ -255,7 +255,7 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
 
   @override
   ListUsers deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new ListUsersBuilder();
 
     final iterator = serialized.iterator;
@@ -284,12 +284,12 @@ class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
 
   @override
   Object serialize(Serializers serializers, LoginResponse object,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       object.name;
 
   @override
   LoginResponse deserialize(Serializers serializers, Object serialized,
-          {FullType specifiedType: FullType.unspecified}) =>
+          {FullType specifiedType = FullType.unspecified}) =>
       LoginResponse.valueOf(serialized as String);
 }
 
@@ -301,7 +301,7 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
 
   @override
   Iterable serialize(Serializers serializers, ShowChat object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'username',
       serializers.serialize(object.username,
@@ -318,7 +318,7 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
 
   @override
   ShowChat deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new ShowChatBuilder();
 
     final iterator = serialized.iterator;
@@ -354,7 +354,7 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
 
   @override
   Iterable serialize(Serializers serializers, Welcome object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'log',
       serializers.serialize(object.log,
@@ -370,7 +370,7 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
 
   @override
   Welcome deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new WelcomeBuilder();
 
     final iterator = serialized.iterator;
@@ -404,7 +404,7 @@ class _$ListUsersResponseSerializer
 
   @override
   Iterable serialize(Serializers serializers, ListUsersResponse object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'statuses',
       serializers.serialize(object.statuses,
@@ -417,7 +417,7 @@ class _$ListUsersResponseSerializer
 
   @override
   ListUsersResponse deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new ListUsersResponseBuilder();
 
     final iterator = serialized.iterator;

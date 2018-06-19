@@ -21,13 +21,13 @@ class UriSerializer implements PrimitiveSerializer<Uri> {
 
   @override
   Object serialize(Serializers serializers, Uri uri,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return uri.toString();
   }
 
   @override
   Uri deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return Uri.parse(serialized as String);
   }
 }

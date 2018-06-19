@@ -3,7 +3,7 @@
 part of generics;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -31,7 +31,7 @@ class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
 
   @override
   Iterable serialize(Serializers serializers, GenericValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -48,7 +48,7 @@ class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
 
   @override
   GenericValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -85,7 +85,7 @@ class _$BoundGenericValueSerializer
 
   @override
   Iterable serialize(Serializers serializers, BoundGenericValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -102,7 +102,7 @@ class _$BoundGenericValueSerializer
 
   @override
   BoundGenericValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -142,7 +142,7 @@ class _$CollectionGenericValueSerializer
 
   @override
   Iterable serialize(Serializers serializers, CollectionGenericValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -161,7 +161,7 @@ class _$CollectionGenericValueSerializer
   @override
   CollectionGenericValue deserialize(
       Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -200,7 +200,7 @@ class _$GenericContainerSerializer
 
   @override
   Iterable serialize(Serializers serializers, GenericContainer object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'genericValue',
       serializers.serialize(object.genericValue,
@@ -221,7 +221,7 @@ class _$GenericContainerSerializer
 
   @override
   GenericContainer deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new GenericContainerBuilder();
 
     final iterator = serialized.iterator;

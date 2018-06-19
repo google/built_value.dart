@@ -15,7 +15,7 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
 
   @override
   Iterable serialize(Serializers serializers, BuiltMap builtMap,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -38,7 +38,7 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
 
   @override
   BuiltMap deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 

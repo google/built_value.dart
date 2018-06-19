@@ -15,7 +15,7 @@ class NumSerializer implements PrimitiveSerializer<num> {
 
   @override
   Object serialize(Serializers serializers, num number,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     if (number.isNaN) {
       return DoubleSerializer.nan;
     } else if (number.isInfinite) {
@@ -29,7 +29,7 @@ class NumSerializer implements PrimitiveSerializer<num> {
 
   @override
   num deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     if (serialized == DoubleSerializer.nan) {
       return double.nan;
     } else if (serialized == DoubleSerializer.negativeInfinity) {

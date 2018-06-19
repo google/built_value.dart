@@ -83,7 +83,7 @@ class BuiltValue {
   final String wireName;
 
   const BuiltValue(
-      {this.instantiable: true, this.nestedBuilders: true, this.wireName});
+      {this.instantiable = true, this.nestedBuilders = true, this.wireName});
 }
 
 /// Nullable annotation for Built Value fields.
@@ -111,7 +111,7 @@ class BuiltValueField {
   final String wireName;
 
   const BuiltValueField(
-      {this.compare: true, this.serialize: true, this.wireName});
+      {this.compare = true, this.serialize = true, this.wireName});
 }
 
 /// Memoized annotation for Built Value getters and methods.

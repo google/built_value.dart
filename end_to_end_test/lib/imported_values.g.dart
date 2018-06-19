@@ -3,7 +3,7 @@
 part of imported_values;
 
 // **************************************************************************
-// Generator: BuiltValueGenerator
+// BuiltValueGenerator
 // **************************************************************************
 
 // ignore_for_file: always_put_control_body_on_new_line
@@ -25,7 +25,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
 
   @override
   Iterable serialize(Serializers serializers, ImportedValue object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
@@ -41,7 +41,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
 
   @override
   ImportedValue deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new ImportedValueBuilder();
 
     final iterator = serialized.iterator;

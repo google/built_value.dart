@@ -17,13 +17,13 @@ class BigIntSerializer implements PrimitiveSerializer<BigInt> {
 
   @override
   Object serialize(Serializers serializers, BigInt bigInt,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return bigInt.toString();
   }
 
   @override
   BigInt deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return BigInt.parse(serialized as String);
   }
 }

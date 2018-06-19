@@ -14,13 +14,13 @@ class IntSerializer implements PrimitiveSerializer<int> {
 
   @override
   Object serialize(Serializers serializers, int integer,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return integer;
   }
 
   @override
   int deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return serialized as int;
   }
 }

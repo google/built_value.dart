@@ -17,7 +17,7 @@ void main() {
 
     test('throws on null for non-nullable fields on build', () {
       expect(() => new SimpleValue(),
-          throwsA(new isInstanceOf<BuiltValueNullFieldError>()));
+          throwsA(const TypeMatcher<BuiltValueNullFieldError>()));
     });
 
     test('includes field name in null error message', () {
@@ -34,7 +34,7 @@ void main() {
           () => new SimpleValue((b) => b
             ..anInt = 1
             ..replace(null)),
-          throwsA(new isInstanceOf<ArgumentError>()));
+          throwsA(const TypeMatcher<ArgumentError>()));
     });
 
     test('fields can be set via build constructor', () {
@@ -131,7 +131,7 @@ void main() {
 
     test('throws on null for non-nullable nested fields on build', () {
       expect(() => new CompoundValue(),
-          throwsA(new isInstanceOf<BuiltValueNestedFieldError>()));
+          throwsA(const TypeMatcher<BuiltValueNestedFieldError>()));
     });
 
     test('includes helpful information in null error message', () {
@@ -208,7 +208,7 @@ void main() {
 
     test('does custom validation', () {
       expect(() => new ValidatedValue((b) => b..anInt = 7),
-          throwsA(new isInstanceOf<StateError>()));
+          throwsA(const TypeMatcher<StateError>()));
     });
   });
 

@@ -6,10 +6,10 @@ import 'package:test/test.dart';
 
 Matcher isErrorContaining(String string) => new _ErrorContaining(string);
 
-class _ErrorContaining extends TypeMatcher {
+class _ErrorContaining extends TypeMatcher<Error> {
   String string;
 
-  _ErrorContaining(this.string) : super("Error");
+  _ErrorContaining(this.string);
 
   @override
   Description describe(Description description) {

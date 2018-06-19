@@ -22,13 +22,13 @@ class JsonObjectSerializer implements PrimitiveSerializer<JsonObject> {
 
   @override
   Object serialize(Serializers serializers, JsonObject jsonObject,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return jsonObject.value;
   }
 
   @override
   JsonObject deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     return new JsonObject(serialized);
   }
 }

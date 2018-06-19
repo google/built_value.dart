@@ -179,7 +179,7 @@ abstract class SerializerSourceField
 
   static String _generateCast(
       String type, BuiltMap<String, String> classGenericBounds,
-      {bool topLevel: true}) {
+      {bool topLevel = true}) {
     final bareType = _getBareType(type);
 
     // For built collections we can cast to the bare type when deserializing,

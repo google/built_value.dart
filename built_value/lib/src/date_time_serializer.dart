@@ -18,7 +18,7 @@ class DateTimeSerializer implements PrimitiveSerializer<DateTime> {
 
   @override
   Object serialize(Serializers serializers, DateTime dateTime,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     if (!dateTime.isUtc) {
       throw new ArgumentError.value(
           dateTime, 'dateTime', 'Must be in utc for serialization.');
@@ -29,7 +29,7 @@ class DateTimeSerializer implements PrimitiveSerializer<DateTime> {
 
   @override
   DateTime deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final microsecondsSinceEpoch = serialized as int;
     return new DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
         isUtc: true);

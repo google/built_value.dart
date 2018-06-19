@@ -15,17 +15,17 @@ void main() {
 
     test('throws on null for non-nullable fields on build', () {
       expect(() => new GenericValue<int>(),
-          throwsA(new isInstanceOf<BuiltValueNullFieldError>()));
+          throwsA(const TypeMatcher<BuiltValueNullFieldError>()));
     });
 
     test('throws on missing generic type parameter', () {
       expect(() => new GenericValue<dynamic>((b) => b..value = 1),
-          throwsA(new isInstanceOf<BuiltValueMissingGenericsError>()));
+          throwsA(const TypeMatcher<BuiltValueMissingGenericsError>()));
     });
 
     test('throws on missing generic type parameter via constructor', () {
       expect(() => new GenericValue<dynamic>.of(1),
-          throwsA(new isInstanceOf<BuiltValueMissingGenericsError>()));
+          throwsA(const TypeMatcher<BuiltValueMissingGenericsError>()));
     });
 
     test('includes parameter name in missing generics error message', () {

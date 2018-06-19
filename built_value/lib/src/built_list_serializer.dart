@@ -15,7 +15,7 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
 
   @override
   Iterable serialize(Serializers serializers, BuiltList builtList,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -30,7 +30,7 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
 
   @override
   BuiltList deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 
