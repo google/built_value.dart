@@ -211,7 +211,7 @@ abstract class PrimitivesValue
   PrimitivesValue._();
 }
 
-typedef MyFunctionType = int Function<String>();
+typedef MyFunctionType = int Function(String);
 
 abstract class FunctionValue
     implements Built<FunctionValue, FunctionValueBuilder> {
