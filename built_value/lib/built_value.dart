@@ -46,8 +46,6 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
   ///
   /// The implementation of this method will be generated for you by the
   /// built_value generator.
-  ///
-  /// Override this method to add validation at build time.
   V build();
 }
 
