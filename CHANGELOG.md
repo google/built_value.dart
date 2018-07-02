@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.5.3
+
+- Bump versions of build_runner, build_config and shelf.
+
 # 5.5.2
 
 - Fix violations of `prefer_equal_for_default_values` lint.
