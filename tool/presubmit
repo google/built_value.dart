@@ -39,7 +39,11 @@ for directory in $directories; do
   echo
   cd "$parent_directory/$directory"
 
-  dartanalyzer --strong --fatal-warnings --fatal-infos \
+  dartanalyzer \
+      --strong \
+      --fatal-warnings \
+      --fatal-infos \
+      --packages="$PWD/.packages" \
       $(find bin lib test -name \*.dart 2>/dev/null)
 done
 

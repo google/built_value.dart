@@ -2,6 +2,8 @@
 
 # 5.5.4
 
+- Add ignores for lints 'lines_longer_than_80_chars' and
+  'avoid_catches_without_on_clauses' to generated code.
 - Bump version of quiver.
 
 # 5.5.3
