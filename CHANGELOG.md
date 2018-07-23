@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.5.4
+
+- Bump version of quiver.
+
 # 5.5.3
 
 - Bump versions of build_runner, build_config and shelf.
