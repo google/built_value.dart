@@ -14,7 +14,7 @@ dependencies:
   built_collection: '>=2.0.0 <4.0.0'
   collection: ^1.0.0
   fixnum: ^0.10.0
-  quiver: '>=0.21.0 <0.30.0'
+  quiver: '>=0.21.0 <3.0.0'
 
 dev_dependencies:
   test: any
