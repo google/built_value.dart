@@ -17,4 +17,4 @@ dependencies:
   quiver: '>=0.21.0 <3.0.0'
 
 dev_dependencies:
-  test: any
+  test: ^1.0.0
