@@ -19,4 +19,4 @@ dev_dependencies:
   built_value_generator: ^5.5.4
   fixnum: ^0.10.0
   quiver: '>=0.21.0 <3.0.0'
-  test: any
+  test: ^1.0.0
