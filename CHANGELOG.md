@@ -1,5 +1,9 @@
 # Changelog
 
+# 5.5.5
+
+- Allow SDK 2.0.0.
+
 # 5.5.4
 
 - Add ignores for lints 'lines_longer_than_80_chars' and
