@@ -590,7 +590,7 @@ final String pkgName = 'pkg';
 
 // Recreate BuiltValueGenerator for each test because we repeatedly create
 // enums with the same name in the same library, which will clash.
-Builder get builder => new PartBuilder([new BuiltValueGenerator()]);
+Builder get builder => new PartBuilder([new BuiltValueGenerator()], '.g.dart');
 
 Future<String> generate(String source) async {
   final srcs = <String, String>{
