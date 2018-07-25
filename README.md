@@ -28,6 +28,10 @@ Immutable collections are from
  - [Flutter + built_value + Reddit Tutorial](https://steemit.com/utopian-io/@tensor/building-immutable-models-with-built-value-and-built-collection-in-dart-s-flutter-framework);
    [video](https://www.youtube.com/watch?v=hNbOSSgpneI);
    [source code](https://github.com/tensor-programming/built_flutter_tutorial)
+   
+## Tools
+
+ - The [Json to Dart built_value class converter](https://charafau.github.io/json2builtvalue/) creates classes for you that correspond to a snippet of JSON
 
 ## Examples
 
