@@ -1,4 +1,4 @@
-// This is generated code; please do not modify by hand.
+// GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of collections;
 
