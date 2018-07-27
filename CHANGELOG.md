@@ -1,5 +1,12 @@
 # Changelog
 
+# 6.0.0
+
+- Update to the latest `source_gen`. This generator can now be used with other
+  generators that want to write to `.g.dart` files without a manual build
+  script.
+- Breaking change: The "header" configuration on this builder is now ignored.
+
 # 5.5.5
 
 - Allow SDK 2.0.0.

@@ -7,6 +7,5 @@ import 'package:build/build.dart';
 import 'package:built_value_generator/built_value_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
-Builder builtValue(BuilderOptions options) => new PartBuilder([
-      new BuiltValueGenerator(),
-    ], header: options.config['header'] as String);
+Builder builtValue(BuilderOptions _) =>
+    new SharedPartBuilder([new BuiltValueGenerator()], 'built_value');
