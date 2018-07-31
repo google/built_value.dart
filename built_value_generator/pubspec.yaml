@@ -12,7 +12,7 @@ environment:
 
 dependencies:
   analyzer: ^0.32.1
-  analyzer_plugin: '0.0.1-alpha.3'
+  analyzer_plugin: ^0.0.1-alpha.4
   build: ^0.12.0
   build_config: ^0.3.1
   built_collection: '>=2.0.0 <4.0.0'
