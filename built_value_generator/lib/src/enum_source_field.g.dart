@@ -62,10 +62,9 @@ class _$EnumSourceField extends EnumSourceField {
       new EnumSourceFieldBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! EnumSourceField) return false;
-    return element == other.element;
+    return other is EnumSourceField && element == other.element;
   }
 
   @override

@@ -276,13 +276,11 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
         // Generate maps between enum names and wire names.
         final toWire = '''
          static const Map<String, String> _toWire = const <String, String>{
-           ${wireNameMapping.keys.map(
-                (key) => "'$key': '${wireNameMapping[key]}',").join('\n')}
+           ${wireNameMapping.keys.map((key) => "'$key': '${wireNameMapping[key]}',").join('\n')}
          };''';
         final fromWire = '''
          static const Map<String, String> _fromWire = const <String, String>{
-           ${wireNameMapping.keys.map(
-                (key) => "'${wireNameMapping[key]}': '$key',").join('\n')}
+           ${wireNameMapping.keys.map((key) => "'${wireNameMapping[key]}': '$key',").join('\n')}
          };''';
 
         return '''

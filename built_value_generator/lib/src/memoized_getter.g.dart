@@ -41,10 +41,11 @@ class _$MemoizedGetter extends MemoizedGetter {
       new MemoizedGetterBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! MemoizedGetter) return false;
-    return returnType == other.returnType && name == other.name;
+    return other is MemoizedGetter &&
+        returnType == other.returnType &&
+        name == other.name;
   }
 
   @override

@@ -94,10 +94,10 @@ class _$ImportedValue extends ImportedValue {
   ImportedValueBuilder toBuilder() => new ImportedValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ImportedValue) return false;
-    return simpleValue == other.simpleValue &&
+    return other is ImportedValue &&
+        simpleValue == other.simpleValue &&
         simpleValues == other.simpleValues;
   }
 

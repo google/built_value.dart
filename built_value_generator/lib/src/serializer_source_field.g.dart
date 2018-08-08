@@ -87,10 +87,10 @@ class _$SerializerSourceField extends SerializerSourceField {
       new SerializerSourceFieldBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! SerializerSourceField) return false;
-    return settings == other.settings &&
+    return other is SerializerSourceField &&
+        settings == other.settings &&
         element == other.element &&
         builderElement == other.builderElement;
   }

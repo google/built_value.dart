@@ -171,10 +171,9 @@ class _$ValueSourceClass extends ValueSourceClass {
       new ValueSourceClassBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ValueSourceClass) return false;
-    return element == other.element;
+    return other is ValueSourceClass && element == other.element;
   }
 
   @override

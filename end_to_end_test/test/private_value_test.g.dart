@@ -36,10 +36,9 @@ class _$PrivateValue extends _PrivateValue {
   _PrivateValueBuilder toBuilder() => new _PrivateValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! _PrivateValue) return false;
-    return value == other.value;
+    return other is _PrivateValue && value == other.value;
   }
 
   @override

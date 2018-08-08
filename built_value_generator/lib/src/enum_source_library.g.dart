@@ -53,10 +53,9 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
       new EnumSourceLibraryBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! EnumSourceLibrary) return false;
-    return element == other.element;
+    return other is EnumSourceLibrary && element == other.element;
   }
 
   @override

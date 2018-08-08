@@ -95,10 +95,11 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       new SerializerSourceClassBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! SerializerSourceClass) return false;
-    return element == other.element && builderElement == other.builderElement;
+    return other is SerializerSourceClass &&
+        element == other.element &&
+        builderElement == other.builderElement;
   }
 
   @override

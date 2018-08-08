@@ -82,10 +82,9 @@ class _$EnumSourceClass extends EnumSourceClass {
       new EnumSourceClassBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! EnumSourceClass) return false;
-    return element == other.element;
+    return other is EnumSourceClass && element == other.element;
   }
 
   @override
