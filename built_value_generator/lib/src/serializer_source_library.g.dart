@@ -65,10 +65,9 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
       new SerializerSourceLibraryBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! SerializerSourceLibrary) return false;
-    return element == other.element;
+    return other is SerializerSourceLibrary && element == other.element;
   }
 
   @override

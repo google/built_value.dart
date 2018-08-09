@@ -44,10 +44,10 @@ class _$GeneratorError extends GeneratorError {
       new GeneratorErrorBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! GeneratorError) return false;
-    return message == other.message &&
+    return other is GeneratorError &&
+        message == other.message &&
         offset == other.offset &&
         length == other.length &&
         fix == other.fix;

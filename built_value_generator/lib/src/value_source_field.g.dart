@@ -87,10 +87,10 @@ class _$ValueSourceField extends ValueSourceField {
       new ValueSourceFieldBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ValueSourceField) return false;
-    return settings == other.settings &&
+    return other is ValueSourceField &&
+        settings == other.settings &&
         element == other.element &&
         builderElement == other.builderElement;
   }

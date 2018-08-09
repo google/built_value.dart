@@ -333,10 +333,11 @@ class _$SimpleValue extends SimpleValue {
   SimpleValueBuilder toBuilder() => new SimpleValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! SimpleValue) return false;
-    return anInt == other.anInt && aString == other.aString;
+    return other is SimpleValue &&
+        anInt == other.anInt &&
+        aString == other.aString;
   }
 
   @override
@@ -415,10 +416,9 @@ class _$VerySimpleValue extends VerySimpleValue {
       new VerySimpleValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! VerySimpleValue) return false;
-    return value == other.value;
+    return other is VerySimpleValue && value == other.value;
   }
 
   @override
@@ -492,10 +492,10 @@ class _$CompoundValue extends CompoundValue {
   CompoundValueBuilder toBuilder() => new CompoundValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! CompoundValue) return false;
-    return simpleValue == other.simpleValue &&
+    return other is CompoundValue &&
+        simpleValue == other.simpleValue &&
         validatedValue == other.validatedValue;
   }
 
@@ -600,10 +600,11 @@ class _$ValidatedValue extends ValidatedValue {
       new ValidatedValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ValidatedValue) return false;
-    return anInt == other.anInt && aString == other.aString;
+    return other is ValidatedValue &&
+        anInt == other.anInt &&
+        aString == other.aString;
   }
 
   @override
@@ -685,10 +686,11 @@ class _$ValueWithCode extends ValueWithCode {
   ValueWithCodeBuilder toBuilder() => new ValueWithCodeBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ValueWithCode) return false;
-    return anInt == other.anInt && aString == other.aString;
+    return other is ValueWithCode &&
+        anInt == other.anInt &&
+        aString == other.aString;
   }
 
   @override
@@ -772,10 +774,11 @@ class _$ValueWithDefaults extends ValueWithDefaults {
       new _$ValueWithDefaultsBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ValueWithDefaults) return false;
-    return anInt == other.anInt && aString == other.aString;
+    return other is ValueWithDefaults &&
+        anInt == other.anInt &&
+        aString == other.aString;
   }
 
   @override
@@ -878,10 +881,9 @@ class _$DerivedValue extends DerivedValue {
   DerivedValueBuilder toBuilder() => new DerivedValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! DerivedValue) return false;
-    return anInt == other.anInt;
+    return other is DerivedValue && anInt == other.anInt;
   }
 
   @override
@@ -959,10 +961,12 @@ class _$Account extends Account {
   AccountBuilder toBuilder() => new AccountBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! Account) return false;
-    return id == other.id && name == other.name && keyValues == other.keyValues;
+    return other is Account &&
+        id == other.id &&
+        name == other.name &&
+        keyValues == other.keyValues;
   }
 
   @override
@@ -1063,10 +1067,9 @@ class _$WireNameValue extends WireNameValue {
   WireNameValueBuilder toBuilder() => new WireNameValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! WireNameValue) return false;
-    return value == other.value;
+    return other is WireNameValue && value == other.value;
   }
 
   @override

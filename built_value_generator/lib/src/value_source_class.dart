@@ -611,20 +611,18 @@ abstract class ValueSourceClass
     result.writeln();
 
     result.writeln('@override');
-    result.writeln('bool operator==(dynamic other) {');
+    result.writeln('bool operator==(Object other) {');
     result.writeln('  if (identical(other, this)) return true;');
-    result.writeln('  if (other is! $name) return false;');
+    result.writeln('  return other is $name');
     final comparedFields =
         fields.where((field) => field.builtValueField.compare);
-    if (comparedFields.length == 0) {
-      result.writeln('return true;');
-    } else {
-      result.writeln('return');
+    if (comparedFields.isNotEmpty) {
+      result.writeln('&&');
       result.writeln(comparedFields
           .map((field) => '${field.name} == other.${field.name}')
           .join('&&'));
-      result.writeln(';');
     }
+    result.writeln(';');
     result.writeln('}');
     result.writeln();
 

@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.0.1 (unreleased)
+
+- Improve generation for `operator==`, don't use `dynamic`.
+
 # 6.0.0
 
 - Update to the latest `source_gen`. This generator can now be used with other
