@@ -3,6 +3,7 @@
 # 6.0.1 (unreleased)
 
 - Improve generation for `operator==`, don't use `dynamic`.
+- Improve error message and documentation for missing builder factory.
 
 # 6.0.0
 
