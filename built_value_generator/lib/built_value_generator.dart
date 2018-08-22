@@ -68,6 +68,8 @@ class BuiltValueGenerator extends Generator {
           '// ignore_for_file: omit_local_variable_types\n'
           '// ignore_for_file: prefer_expression_function_bodies\n'
           '// ignore_for_file: sort_constructors_first\n'
+          '// ignore_for_file: unnecessary_const\n'
+          '// ignore_for_file: unnecessary_new\n'
           '\n'
           '$result';
     } else {

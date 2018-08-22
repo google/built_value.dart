@@ -8,6 +8,8 @@
 - Fix code generation stack overflow when there is a loop in serializable
   types.
 - Fix library name output in generation error messages.
+- Add ignores for lints 'unnecessary_const' and 'unnecessary_new' to generated
+  code.
 
 # 6.0.0
 

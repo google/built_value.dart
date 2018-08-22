@@ -15,6 +15,8 @@ part of built_value_generator.enum_source_class;
 // ignore_for_file: omit_local_variable_types
 // ignore_for_file: prefer_expression_function_bodies
 // ignore_for_file: sort_constructors_first
+// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_new
 
 class _$EnumSourceClass extends EnumSourceClass {
   @override
