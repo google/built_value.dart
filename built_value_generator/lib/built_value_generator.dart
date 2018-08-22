@@ -32,10 +32,18 @@ class BuiltValueGenerator extends Generator {
       }
     } on InvalidGenerationSourceError catch (e, st) {
       result.writeln(_error(e.message));
-      log.severe('Error in BuiltValueGenerator for $library.', e, st);
+      log.severe(
+          'Error in BuiltValueGenerator for '
+          '${library.element.source.fullName}.',
+          e,
+          st);
     } catch (e, st) {
       result.writeln(_error(e.toString()));
-      log.severe('Error in BuiltValueGenerator for $library.', e, st);
+      log.severe(
+          'Unknown error in BuiltValueGenerator for '
+          '${library.element.source.fullName}.',
+          e,
+          st);
     }
 
     for (final element in library.allElements) {

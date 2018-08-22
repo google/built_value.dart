@@ -40,6 +40,8 @@ part 'serializers.g.dart';
   NestedGenericContainer,
   PartiallySerializableValue,
   PrimitivesValue,
+  RecursiveValueA,
+  RecursiveValueB,
   Robot,
   SecondTestEnum,
   SimpleValue,

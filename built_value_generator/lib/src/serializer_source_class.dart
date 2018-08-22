@@ -105,8 +105,19 @@ abstract class SerializerSourceClass
   /// Returns all the serializable classes used, transitively, by fields of
   /// this class.
   @memoized
-  BuiltSet<SerializerSourceClass> get fieldClasses {
-    final result = new SetBuilder<SerializerSourceClass>();
+  BuiltSet<SerializerSourceClass> get fieldClasses =>
+      _fieldClassesWith(new BuiltSet<SerializerSourceClass>());
+
+  /// Returns all the serializable classes used, transitively, by fields of
+  /// this class.
+  ///
+  /// [initialClasses] may be empty, or may include classes that are already
+  /// being evaluated. These will not be re-evaluated, preventing infinite
+  /// recursion when there is a loop in field types. For example, when `FooA`
+  /// has a field of type `FooB`, and `FooB `has a field of type `FooA`.
+  BuiltSet<SerializerSourceClass> _fieldClassesWith(
+      BuiltSet<SerializerSourceClass> initialClasses) {
+    final result = initialClasses.toBuilder();
     for (final fieldElement in collectFields(element)) {
       if (fieldElement.isStatic) continue;
       if (fieldElement.setter != null) continue;
@@ -129,7 +140,7 @@ abstract class SerializerSourceClass
               !result.build().contains(sourceClass) &&
               sourceClass.needsBuiltJson) {
             result.add(sourceClass);
-            result.addAll(sourceClass.fieldClasses);
+            result.replace(sourceClass._fieldClassesWith(result.build()));
           }
         }
       }
@@ -140,7 +151,7 @@ abstract class SerializerSourceClass
           !result.build().contains(sourceClass) &&
           sourceClass.needsBuiltJson) {
         result.add(sourceClass);
-        result.addAll(sourceClass.fieldClasses);
+        result.replace(sourceClass._fieldClassesWith(result.build()));
       }
     }
 
