@@ -40,11 +40,10 @@ class _$SimpleValue extends SimpleValue {
   SimpleValueBuilder toBuilder() => new SimpleValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is SimpleValue &&
-        anInt == other.anInt &&
-        aString == other.aString;
+    if (other is! SimpleValue) return false;
+    return anInt == other.anInt && aString == other.aString;
   }
 
   @override

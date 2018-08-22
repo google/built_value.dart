@@ -155,10 +155,10 @@ class _$StandardJsonValue extends StandardJsonValue {
       new StandardJsonValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is StandardJsonValue &&
-        number == other.number &&
+    if (other is! StandardJsonValue) return false;
+    return number == other.number &&
         text == other.text &&
         keyValues == other.keyValues &&
         zoo == other.zoo &&

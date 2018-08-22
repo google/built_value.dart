@@ -57,9 +57,10 @@ class _$UsesMixin extends UsesMixin {
   UsesMixinBuilder toBuilder() => new UsesMixinBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is UsesMixin && typeDef == other.typeDef;
+    if (other is! UsesMixin) return false;
+    return typeDef == other.typeDef;
   }
 
   @override

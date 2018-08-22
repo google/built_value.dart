@@ -4,6 +4,7 @@
 
 - Improve generation for `operator==`, don't use `dynamic`.
 - Improve error message and documentation for missing builder factory.
+- Allow built_collection 4.0.0.
 
 # 6.0.0
 
