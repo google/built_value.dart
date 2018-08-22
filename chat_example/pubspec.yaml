@@ -10,7 +10,6 @@ environment:
   sdk: '>=2.0.0-dev <3.0.0'
 
 dependencies:
-  browser: ^0.10.0
   built_collection: '>=2.0.0 <4.0.0'
   built_value: '>=5.5.5 <7.0.0'
   shelf: ^0.7.3

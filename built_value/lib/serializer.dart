@@ -154,10 +154,30 @@ abstract class SerializerPlugin {
 abstract class SerializersBuilder {
   factory SerializersBuilder() = BuiltJsonSerializersBuilder;
 
+  /// Adds a [Serializer]. It will be used to handle the type(s) it declares
+  /// via its `types` property.
   void add(Serializer serializer);
 
+  /// Adds a builder factory.
+  ///
+  /// Builder factories are needed when deserializing to types that use
+  /// generics. For example, to deserialize a `BuiltList<Foo>`, `built_value`
+  /// needs a builder factory for `BuiltList<Foo>`.
+  ///
+  /// `built_value` tries to generate code that will install all the builder
+  /// factories you need, but this support is incomplete. So you may need to
+  /// add your own. For example:
+  ///
+  /// ```dart
+  /// serializers = (serializers.toBuilder()..addBuilderFactory(
+  ///     const FullType(
+  ///         BuiltList,
+  ///         [FullType(Foo)]), () => new ListBuilder<Foo>)).build();
+  /// ```
   void addBuilderFactory(FullType specifiedType, Function function);
 
+  /// Installs a [SerializerPlugin] that applies to all serialization and
+  /// deserialization.
   void addPlugin(SerializerPlugin plugin);
 
   Serializers build();
@@ -205,8 +225,14 @@ class FullType {
   String toString() => isUnspecified
       ? 'unspecified'
       : parameters.isEmpty
-          ? root.toString()
-          : '${root.toString()}<${parameters.join(", ")}>';
+          ? _getRawName(root)
+          : '${_getRawName(root)}<${parameters.join(", ")}>';
+
+  static String _getRawName(Type type) {
+    final name = type.toString();
+    final genericsStart = name.indexOf('<');
+    return genericsStart == -1 ? name : name.substring(0, genericsStart);
+  }
 }
 
 /// Serializes a single type.
