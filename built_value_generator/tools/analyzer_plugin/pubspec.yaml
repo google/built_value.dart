@@ -1,7 +1,7 @@
 name: built_value_generator_plugin_loader
-version: 6.0.0
+version: 6.1.0
 description: This pubspec determines the version of the analyzer plugin to load.
 environment:
   sdk: '>=1.24.0-dev.1.0'
 dependencies:
-  built_value_generator: ^6.0.0
+  built_value_generator: ^6.1.0
