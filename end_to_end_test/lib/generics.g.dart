@@ -375,10 +375,9 @@ class _$GenericValue<T> extends GenericValue<T> {
       new GenericValueBuilder<T>()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! GenericValue) return false;
-    return value == other.value;
+    return other is GenericValue && value == other.value;
   }
 
   @override
@@ -453,10 +452,9 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
       new BoundGenericValueBuilder<T>()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! BoundGenericValue) return false;
-    return value == other.value;
+    return other is BoundGenericValue && value == other.value;
   }
 
   @override
@@ -534,10 +532,9 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
       new CollectionGenericValueBuilder<T>()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! CollectionGenericValue) return false;
-    return values == other.values;
+    return other is CollectionGenericValue && values == other.values;
   }
 
   @override
@@ -638,10 +635,10 @@ class _$GenericContainer extends GenericContainer {
       new GenericContainerBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! GenericContainer) return false;
-    return genericValue == other.genericValue &&
+    return other is GenericContainer &&
+        genericValue == other.genericValue &&
         boundGenericValue == other.boundGenericValue &&
         collectionGenericValue == other.collectionGenericValue;
   }
@@ -762,10 +759,9 @@ class _$NestedGenericContainer extends NestedGenericContainer {
       new NestedGenericContainerBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! NestedGenericContainer) return false;
-    return map == other.map;
+    return other is NestedGenericContainer && map == other.map;
   }
 
   @override
@@ -859,10 +855,9 @@ class _$CustomBuilderGenericValue<T> extends CustomBuilderGenericValue<T> {
       new _$CustomBuilderGenericValueBuilder<T>()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! CustomBuilderGenericValue) return false;
-    return value == other.value;
+    return other is CustomBuilderGenericValue && value == other.value;
   }
 
   @override
@@ -944,10 +939,9 @@ class _$ConcreteGeneric extends ConcreteGeneric {
       new ConcreteGenericBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ConcreteGeneric) return false;
-    return value == other.value;
+    return other is ConcreteGeneric && value == other.value;
   }
 
   @override

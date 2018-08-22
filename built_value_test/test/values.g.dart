@@ -39,10 +39,9 @@ class _$SimpleValue extends SimpleValue {
   SimpleValueBuilder toBuilder() => new SimpleValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! SimpleValue) return false;
-    return anInt == other.anInt && map == other.map;
+    return other is SimpleValue && anInt == other.anInt && map == other.map;
   }
 
   @override
@@ -136,10 +135,11 @@ class _$CompoundValue extends CompoundValue {
   CompoundValueBuilder toBuilder() => new CompoundValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! CompoundValue) return false;
-    return simpleValue == other.simpleValue && string == other.string;
+    return other is CompoundValue &&
+        simpleValue == other.simpleValue &&
+        string == other.string;
   }
 
   @override
@@ -239,10 +239,9 @@ class _$ComparedValue extends ComparedValue {
   ComparedValueBuilder toBuilder() => new ComparedValueBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ComparedValue) return false;
-    return name == other.name;
+    return other is ComparedValue && name == other.name;
   }
 
   @override
