@@ -5,6 +5,9 @@
 - Improve generation for `operator==`, don't use `dynamic`.
 - Improve error message and documentation for missing builder factory.
 - Allow built_collection 4.0.0.
+- Fix code generation stack overflow when there is a loop in serializable
+  types.
+- Fix library name output in generation error messages.
 
 # 6.0.0
 

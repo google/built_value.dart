@@ -333,3 +333,29 @@ abstract class ThirdDiscoverableValue
       _$ThirdDiscoverableValue;
   ThirdDiscoverableValue._();
 }
+
+// Check that discovery doesn't recurse forever when there is a loop in field
+// types.
+abstract class RecursiveValueA
+    implements Built<RecursiveValueA, RecursiveValueABuilder> {
+  static Serializer<RecursiveValueA> get serializer =>
+      _$recursiveValueASerializer;
+
+  RecursiveValueB get value;
+
+  factory RecursiveValueA([updates(RecursiveValueABuilder b)]) =
+      _$RecursiveValueA;
+  RecursiveValueA._();
+}
+
+abstract class RecursiveValueB
+    implements Built<RecursiveValueB, RecursiveValueBBuilder> {
+  static Serializer<RecursiveValueB> get serializer =>
+      _$recursiveValueBSerializer;
+
+  RecursiveValueA get value;
+
+  factory RecursiveValueB([updates(RecursiveValueBBuilder b)]) =
+      _$RecursiveValueB;
+  RecursiveValueB._();
+}
