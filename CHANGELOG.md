@@ -1,6 +1,6 @@
 # Changelog
 
-# 6.0.1 (unreleased)
+# 6.1.0
 
 - Improve generation for `operator==`, don't use `dynamic`.
 - Improve error message and documentation for missing builder factory.
