@@ -226,10 +226,10 @@ class _$Collections extends Collections {
   CollectionsBuilder toBuilder() => new CollectionsBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! Collections) return false;
-    return list == other.list &&
+    return other is Collections &&
+        list == other.list &&
         set == other.set &&
         map == other.map &&
         listMultimap == other.listMultimap &&

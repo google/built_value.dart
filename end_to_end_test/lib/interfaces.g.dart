@@ -173,10 +173,9 @@ class _$ValueWithInt extends ValueWithInt {
   ValueWithIntBuilder toBuilder() => new ValueWithIntBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ValueWithInt) return false;
-    return anInt == other.anInt && note == other.note;
+    return other is ValueWithInt && anInt == other.anInt && note == other.note;
   }
 
   @override
@@ -256,10 +255,9 @@ class _$ValueWithHasInt extends ValueWithHasInt {
       new ValueWithHasIntBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ValueWithHasInt) return false;
-    return hasInt == other.hasInt;
+    return other is ValueWithHasInt && hasInt == other.hasInt;
   }
 
   @override

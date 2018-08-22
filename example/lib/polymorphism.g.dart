@@ -138,10 +138,9 @@ class _$Cat extends Cat {
   CatBuilder toBuilder() => new CatBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! Cat) return false;
-    return tail == other.tail && legs == other.legs;
+    return other is Cat && tail == other.tail && legs == other.legs;
   }
 
   @override
@@ -221,10 +220,9 @@ class _$Fish extends Fish {
   FishBuilder toBuilder() => new FishBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! Fish) return false;
-    return fins == other.fins && legs == other.legs;
+    return other is Fish && fins == other.fins && legs == other.legs;
   }
 
   @override
