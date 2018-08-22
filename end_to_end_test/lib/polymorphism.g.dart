@@ -399,9 +399,10 @@ class _$Cat extends Cat {
   CatBuilder toBuilder() => new CatBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is Cat && tail == other.tail && legs == other.legs;
+    if (other is! Cat) return false;
+    return tail == other.tail && legs == other.legs;
   }
 
   @override
@@ -481,9 +482,10 @@ class _$Fish extends Fish {
   FishBuilder toBuilder() => new FishBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is Fish && fins == other.fins && legs == other.legs;
+    if (other is! Fish) return false;
+    return fins == other.fins && legs == other.legs;
   }
 
   @override
@@ -563,9 +565,10 @@ class _$Robot extends Robot {
   RobotBuilder toBuilder() => new RobotBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is Robot && fins == other.fins && legs == other.legs;
+    if (other is! Robot) return false;
+    return fins == other.fins && legs == other.legs;
   }
 
   @override
@@ -647,10 +650,10 @@ class _$Cage extends Cage {
   CageBuilder toBuilder() => new CageBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is Cage &&
-        inhabitant == other.inhabitant &&
+    if (other is! Cage) return false;
+    return inhabitant == other.inhabitant &&
         otherInhabitants == other.otherInhabitants;
   }
 
@@ -746,9 +749,10 @@ class _$StandardCat extends StandardCat {
   StandardCatBuilder toBuilder() => new StandardCatBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is StandardCat && tail == other.tail;
+    if (other is! StandardCat) return false;
+    return tail == other.tail;
   }
 
   @override
@@ -825,9 +829,10 @@ class _$HasString extends HasString {
   HasStringBuilder toBuilder() => new HasStringBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is HasString && field == other.field;
+    if (other is! HasString) return false;
+    return field == other.field;
   }
 
   @override
@@ -898,9 +903,10 @@ class _$HasDouble extends HasDouble {
   HasDoubleBuilder toBuilder() => new HasDoubleBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is HasDouble && field == other.field;
+    if (other is! HasDouble) return false;
+    return field == other.field;
   }
 
   @override
@@ -978,11 +984,10 @@ class _$UsesChainedInterface extends UsesChainedInterface {
       new UsesChainedInterfaceBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is UsesChainedInterface &&
-        bar == other.bar &&
-        foo == other.foo;
+    if (other is! UsesChainedInterface) return false;
+    return bar == other.bar && foo == other.foo;
   }
 
   @override
@@ -1061,10 +1066,10 @@ class _$UsesHandCoded extends UsesHandCoded {
   UsesHandCodedBuilder toBuilder() => new UsesHandCodedBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is UsesHandCoded &&
-        fieldInBaseBuilder == other.fieldInBaseBuilder;
+    if (other is! UsesHandCoded) return false;
+    return fieldInBaseBuilder == other.fieldInBaseBuilder;
   }
 
   @override
@@ -1143,9 +1148,10 @@ class _$ImplementsTwo extends ImplementsTwo {
   ImplementsTwoBuilder toBuilder() => new ImplementsTwoBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ImplementsTwo;
+    if (other is! ImplementsTwo) return false;
+    return true;
   }
 
   @override

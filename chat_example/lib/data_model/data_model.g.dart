@@ -464,9 +464,10 @@ class _$Chat extends Chat {
   ChatBuilder toBuilder() => new ChatBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is Chat && text == other.text && targets == other.targets;
+    if (other is! Chat) return false;
+    return text == other.text && targets == other.targets;
   }
 
   @override
@@ -562,11 +563,10 @@ class _$Login extends Login {
   LoginBuilder toBuilder() => new LoginBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is Login &&
-        username == other.username &&
-        password == other.password;
+    if (other is! Login) return false;
+    return username == other.username && password == other.password;
   }
 
   @override
@@ -648,9 +648,10 @@ class _$Status extends Status {
   StatusBuilder toBuilder() => new StatusBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is Status && message == other.message && type == other.type;
+    if (other is! Status) return false;
+    return message == other.message && type == other.type;
   }
 
   @override
@@ -728,9 +729,10 @@ class _$ListUsers extends ListUsers {
   ListUsersBuilder toBuilder() => new ListUsersBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ListUsers && statusTypes == other.statusTypes;
+    if (other is! ListUsers) return false;
+    return statusTypes == other.statusTypes;
   }
 
   @override
@@ -824,10 +826,10 @@ class _$ShowChat extends ShowChat {
   ShowChatBuilder toBuilder() => new ShowChatBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ShowChat &&
-        username == other.username &&
+    if (other is! ShowChat) return false;
+    return username == other.username &&
         private == other.private &&
         text == other.text;
   }
@@ -918,9 +920,10 @@ class _$Welcome extends Welcome {
   WelcomeBuilder toBuilder() => new WelcomeBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is Welcome && log == other.log && message == other.message;
+    if (other is! Welcome) return false;
+    return log == other.log && message == other.message;
   }
 
   @override
@@ -1012,9 +1015,10 @@ class _$ListUsersResponse extends ListUsersResponse {
       new ListUsersResponseBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ListUsersResponse && statuses == other.statuses;
+    if (other is! ListUsersResponse) return false;
+    return statuses == other.statuses;
   }
 
   @override

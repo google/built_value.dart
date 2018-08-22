@@ -37,12 +37,10 @@ class _$Node extends Node {
   NodeBuilder toBuilder() => new NodeBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is Node &&
-        label == other.label &&
-        left == other.left &&
-        right == other.right;
+    if (other is! Node) return false;
+    return label == other.label && left == other.left && right == other.right;
   }
 
   @override

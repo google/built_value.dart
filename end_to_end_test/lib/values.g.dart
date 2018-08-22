@@ -801,11 +801,10 @@ class _$SimpleValue extends SimpleValue {
   SimpleValueBuilder toBuilder() => new SimpleValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is SimpleValue &&
-        anInt == other.anInt &&
-        aString == other.aString;
+    if (other is! SimpleValue) return false;
+    return anInt == other.anInt && aString == other.aString;
   }
 
   @override
@@ -885,10 +884,10 @@ class _$CompoundValue extends CompoundValue {
   CompoundValueBuilder toBuilder() => new CompoundValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is CompoundValue &&
-        simpleValue == other.simpleValue &&
+    if (other is! CompoundValue) return false;
+    return simpleValue == other.simpleValue &&
         validatedValue == other.validatedValue;
   }
 
@@ -997,10 +996,10 @@ class _$CompoundValueNoNesting extends CompoundValueNoNesting {
       new CompoundValueNoNestingBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is CompoundValueNoNesting &&
-        simpleValue == other.simpleValue &&
+    if (other is! CompoundValueNoNesting) return false;
+    return simpleValue == other.simpleValue &&
         validatedValue == other.validatedValue;
   }
 
@@ -1091,10 +1090,10 @@ class _$CompoundValueExplicitNoNesting extends CompoundValueExplicitNoNesting {
       new _$CompoundValueExplicitNoNestingBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is CompoundValueExplicitNoNesting &&
-        simpleValue == other.simpleValue &&
+    if (other is! CompoundValueExplicitNoNesting) return false;
+    return simpleValue == other.simpleValue &&
         validatedValue == other.validatedValue;
   }
 
@@ -1213,9 +1212,10 @@ class _$DerivedValue extends DerivedValue {
   DerivedValueBuilder toBuilder() => new DerivedValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is DerivedValue && anInt == other.anInt;
+    if (other is! DerivedValue) return false;
+    return anInt == other.anInt;
   }
 
   @override
@@ -1289,11 +1289,10 @@ class _$ValueWithCode extends ValueWithCode {
   ValueWithCodeBuilder toBuilder() => new ValueWithCodeBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ValueWithCode &&
-        anInt == other.anInt &&
-        aString == other.aString;
+    if (other is! ValueWithCode) return false;
+    return anInt == other.anInt && aString == other.aString;
   }
 
   @override
@@ -1381,10 +1380,10 @@ class _$ValueWithDefaults extends ValueWithDefaults {
       new _$ValueWithDefaultsBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ValueWithDefaults &&
-        anInt == other.anInt &&
+    if (other is! ValueWithDefaults) return false;
+    return anInt == other.anInt &&
         aString == other.aString &&
         value == other.value;
   }
@@ -1513,11 +1512,10 @@ class _$ValidatedValue extends ValidatedValue {
       new ValidatedValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ValidatedValue &&
-        anInt == other.anInt &&
-        aString == other.aString;
+    if (other is! ValidatedValue) return false;
+    return anInt == other.anInt && aString == other.aString;
   }
 
   @override
@@ -1598,9 +1596,10 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
       new ValueUsingImportAsBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ValueUsingImportAs && value == other.value;
+    if (other is! ValueUsingImportAs) return false;
+    return value == other.value;
   }
 
   @override
@@ -1667,9 +1666,10 @@ class _$NoFieldsValue extends NoFieldsValue {
   NoFieldsValueBuilder toBuilder() => new NoFieldsValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is NoFieldsValue;
+    if (other is! NoFieldsValue) return false;
+    return true;
   }
 
   @override
@@ -1771,10 +1771,10 @@ class _$PrimitivesValue extends PrimitivesValue {
       new PrimitivesValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is PrimitivesValue &&
-        boolean == other.boolean &&
+    if (other is! PrimitivesValue) return false;
+    return boolean == other.boolean &&
         integer == other.integer &&
         int64 == other.int64 &&
         dbl == other.dbl &&
@@ -1926,9 +1926,10 @@ class _$FunctionValue extends FunctionValue {
   FunctionValueBuilder toBuilder() => new FunctionValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is FunctionValue && function == other.function;
+    if (other is! FunctionValue) return false;
+    return function == other.function;
   }
 
   @override
@@ -2002,9 +2003,10 @@ class _$ListOfFunctionValue extends ListOfFunctionValue {
       new ListOfFunctionValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ListOfFunctionValue && functions == other.functions;
+    if (other is! ListOfFunctionValue) return false;
+    return functions == other.functions;
   }
 
   @override
@@ -2099,11 +2101,10 @@ class _$PartiallySerializableValue extends PartiallySerializableValue {
       new PartiallySerializableValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is PartiallySerializableValue &&
-        value == other.value &&
-        transientValue == other.transientValue;
+    if (other is! PartiallySerializableValue) return false;
+    return value == other.value && transientValue == other.transientValue;
   }
 
   @override
@@ -2187,9 +2188,10 @@ class _$NamedFactoryValue extends NamedFactoryValue {
       new NamedFactoryValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is NamedFactoryValue && value == other.value;
+    if (other is! NamedFactoryValue) return false;
+    return value == other.value;
   }
 
   @override
@@ -2262,9 +2264,10 @@ class _$WireNameValue extends WireNameValue {
   WireNameValueBuilder toBuilder() => new WireNameValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is WireNameValue && value == other.value;
+    if (other is! WireNameValue) return false;
+    return value == other.value;
   }
 
   @override
@@ -2344,10 +2347,10 @@ class _$FieldDiscoveryValue extends FieldDiscoveryValue {
       new FieldDiscoveryValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is FieldDiscoveryValue &&
-        value == other.value &&
+    if (other is! FieldDiscoveryValue) return false;
+    return value == other.value &&
         values == other.values &&
         recursiveValue == other.recursiveValue;
   }
@@ -2462,9 +2465,10 @@ class _$DiscoverableValue extends DiscoverableValue {
       new DiscoverableValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is DiscoverableValue && value == other.value;
+    if (other is! DiscoverableValue) return false;
+    return value == other.value;
   }
 
   @override
@@ -2554,9 +2558,10 @@ class _$SecondDiscoverableValue extends SecondDiscoverableValue {
       new SecondDiscoverableValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is SecondDiscoverableValue && value == other.value;
+    if (other is! SecondDiscoverableValue) return false;
+    return value == other.value;
   }
 
   @override
@@ -2633,9 +2638,10 @@ class _$ThirdDiscoverableValue extends ThirdDiscoverableValue {
       new ThirdDiscoverableValueBuilder()..replace(this);
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     if (identical(other, this)) return true;
-    return other is ThirdDiscoverableValue && value == other.value;
+    if (other is! ThirdDiscoverableValue) return false;
+    return value == other.value;
   }
 
   @override
