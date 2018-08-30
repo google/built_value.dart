@@ -19,7 +19,7 @@ dependencies:
 
 dev_dependencies:
   built_value_generator: ^6.1.0
-  build_runner: ^0.9.0
+  build_runner: '>=0.9.0 <0.11.0'
 
 dependency_overrides:
   built_value:

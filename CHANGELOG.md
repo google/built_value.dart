@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.1.1
+
+- Allow `build_runner` 0.10.0.
+
 # 6.1.0
 
 - Improve generation for `operator==`, don't use `dynamic`.
