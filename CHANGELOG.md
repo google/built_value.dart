@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.1.2
+
+- Fix generated `operator==` when a type uses generic functions.
+
 # 6.1.1
 
 - Allow `build_runner` 0.10.0.

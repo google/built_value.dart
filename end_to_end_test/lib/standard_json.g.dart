@@ -17,6 +17,7 @@ part of standard_json;
 // ignore_for_file: sort_constructors_first
 // ignore_for_file: unnecessary_const
 // ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
 
 Serializer<StandardJsonValue> _$standardJsonValueSerializer =
     new _$StandardJsonValueSerializer();

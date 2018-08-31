@@ -17,6 +17,7 @@ part of built_value_generator.enum_source_field;
 // ignore_for_file: sort_constructors_first
 // ignore_for_file: unnecessary_const
 // ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
 
 class _$EnumSourceField extends EnumSourceField {
   @override

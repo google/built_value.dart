@@ -109,3 +109,12 @@ abstract class ConcreteGeneric
       _$ConcreteGeneric;
   ConcreteGeneric._();
 }
+
+abstract class GenericFunction<T>
+    implements Built<GenericFunction<T>, GenericFunctionBuilder<T>> {
+  Function(T) get function;
+
+  factory GenericFunction([updates(GenericFunctionBuilder<T> b)]) =
+      _$GenericFunction<T>;
+  GenericFunction._();
+}

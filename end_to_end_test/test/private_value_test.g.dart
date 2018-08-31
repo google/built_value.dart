@@ -17,6 +17,7 @@ part of value_test;
 // ignore_for_file: sort_constructors_first
 // ignore_for_file: unnecessary_const
 // ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
 
 class _$PrivateValue extends _PrivateValue {
   @override

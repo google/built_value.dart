@@ -59,4 +59,16 @@ void main() {
       new BoundGenericValue<int>((b) => b.value = 0);
     });
   });
+
+  group('GenericFunction', () {
+    test('can be compared', () {
+      // Generic functions have troublesome behaviour when casting. Check that
+      // operator== does not throw due to a disallowed cast.
+      final function = (int x) {};
+      expect(
+          new GenericFunction<int>((b) => b..function = function) ==
+              new GenericFunction<int>((b) => b..function = function),
+          true);
+    });
+  });
 }

@@ -17,6 +17,7 @@ part of mixins;
 // ignore_for_file: sort_constructors_first
 // ignore_for_file: unnecessary_const
 // ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
 
 Serializer<UsesMixin> _$usesMixinSerializer = new _$UsesMixinSerializer();
 
@@ -61,7 +62,8 @@ class _$UsesMixin extends UsesMixin {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UsesMixin && typeDef == other.typeDef;
+    final _$dynamicOther = other as dynamic;
+    return other is UsesMixin && typeDef == _$dynamicOther.typeDef;
   }
 
   @override

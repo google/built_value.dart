@@ -44,6 +44,9 @@ abstract class ValueSourceField
   @memoized
   String get type => DartTypes.getName(element.getter.returnType);
 
+  @memoized
+  bool get isFunctionType => type.contains('(');
+
   /// The [type] plus any import prefix.
   @memoized
   String get typeWithPrefix {
@@ -55,7 +58,7 @@ abstract class ValueSourceField
 
     // If the type is a function, we can't use the element result; it is
     // formatted incorrectly.
-    if (typeFromElement.contains('(')) return typeFromAst;
+    if (isFunctionType) return typeFromAst;
 
     // If the type does not have an import prefix, prefer the element result.
     // It handles inherited generics correctly.

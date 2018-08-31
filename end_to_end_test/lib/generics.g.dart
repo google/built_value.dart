@@ -17,6 +17,7 @@ part of generics;
 // ignore_for_file: sort_constructors_first
 // ignore_for_file: unnecessary_const
 // ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
 
 Serializer<GenericValue> _$genericValueSerializer =
     new _$GenericValueSerializer();
@@ -990,6 +991,85 @@ class ConcreteGenericBuilder
   @override
   _$ConcreteGeneric build() {
     final _$result = _$v ?? new _$ConcreteGeneric._(value: value);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GenericFunction<T> extends GenericFunction<T> {
+  @override
+  final Function(T) function;
+
+  factory _$GenericFunction([void updates(GenericFunctionBuilder<T> b)]) =>
+      (new GenericFunctionBuilder<T>()..update(updates)).build();
+
+  _$GenericFunction._({this.function}) : super._() {
+    if (function == null)
+      throw new BuiltValueNullFieldError('GenericFunction', 'function');
+    if (T == dynamic)
+      throw new BuiltValueMissingGenericsError('GenericFunction', 'T');
+  }
+
+  @override
+  GenericFunction<T> rebuild(void updates(GenericFunctionBuilder<T> b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GenericFunctionBuilder<T> toBuilder() =>
+      new GenericFunctionBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    final _$dynamicOther = other as dynamic;
+    return other is GenericFunction && function == _$dynamicOther.function;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, function.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('GenericFunction')
+          ..add('function', function))
+        .toString();
+  }
+}
+
+class GenericFunctionBuilder<T>
+    implements Builder<GenericFunction<T>, GenericFunctionBuilder<T>> {
+  _$GenericFunction<T> _$v;
+
+  Function(T) _function;
+  Function(T) get function => _$this._function;
+  set function(Function(T) function) => _$this._function = function;
+
+  GenericFunctionBuilder();
+
+  GenericFunctionBuilder<T> get _$this {
+    if (_$v != null) {
+      _function = _$v.function;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GenericFunction<T> other) {
+    if (other == null) throw new ArgumentError.notNull('other');
+    _$v = other as _$GenericFunction<T>;
+  }
+
+  @override
+  void update(void updates(GenericFunctionBuilder<T> b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$GenericFunction<T> build() {
+    final _$result = _$v ?? new _$GenericFunction<T>._(function: function);
     replace(_$result);
     return _$result;
   }
