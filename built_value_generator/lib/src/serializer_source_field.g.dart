@@ -43,10 +43,12 @@ class _$SerializerSourceField extends SerializerSourceField {
 
   _$SerializerSourceField._({this.settings, this.element, this.builderElement})
       : super._() {
-    if (settings == null)
+    if (settings == null) {
       throw new BuiltValueNullFieldError('SerializerSourceField', 'settings');
-    if (element == null)
+    }
+    if (element == null) {
       throw new BuiltValueNullFieldError('SerializerSourceField', 'element');
+    }
   }
 
   @override
@@ -145,7 +147,9 @@ class SerializerSourceFieldBuilder
 
   @override
   void replace(SerializerSourceField other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$SerializerSourceField;
   }
 

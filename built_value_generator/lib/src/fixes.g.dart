@@ -34,8 +34,9 @@ class _$GeneratorError extends GeneratorError {
 
   _$GeneratorError._({this.message, this.offset, this.length, this.fix})
       : super._() {
-    if (message == null)
+    if (message == null) {
       throw new BuiltValueNullFieldError('GeneratorError', 'message');
+    }
   }
 
   @override
@@ -109,7 +110,9 @@ class GeneratorErrorBuilder
 
   @override
   void replace(GeneratorError other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$GeneratorError;
   }
 

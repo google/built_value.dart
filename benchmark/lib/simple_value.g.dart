@@ -29,10 +29,12 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null)
+    if (anInt == null) {
       throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
-    if (aString == null)
+    }
+    if (aString == null) {
       throw new BuiltValueNullFieldError('SimpleValue', 'aString');
+    }
   }
 
   @override
@@ -88,7 +90,9 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$SimpleValue;
   }
 

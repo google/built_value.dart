@@ -119,10 +119,12 @@ class _$ValueWithInt extends ValueWithInt {
       (new ValueWithIntBuilder()..update(updates)).build() as _$ValueWithInt;
 
   _$ValueWithInt._({this.anInt, this.note}) : super._() {
-    if (anInt == null)
+    if (anInt == null) {
       throw new BuiltValueNullFieldError('ValueWithInt', 'anInt');
-    if (note == null)
+    }
+    if (note == null) {
       throw new BuiltValueNullFieldError('ValueWithInt', 'note');
+    }
   }
 
   @override
@@ -193,7 +195,9 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
 
   @override
   void replace(ValueWithInt other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$ValueWithInt;
   }
 

@@ -129,8 +129,12 @@ class _$Cat extends Cat {
       (new CatBuilder()..update(updates)).build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
-    if (tail == null) throw new BuiltValueNullFieldError('Cat', 'tail');
-    if (legs == null) throw new BuiltValueNullFieldError('Cat', 'legs');
+    if (tail == null) {
+      throw new BuiltValueNullFieldError('Cat', 'tail');
+    }
+    if (legs == null) {
+      throw new BuiltValueNullFieldError('Cat', 'legs');
+    }
   }
 
   @override
@@ -184,7 +188,9 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
 
   @override
   void replace(covariant Cat other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$Cat;
   }
 
@@ -211,8 +217,12 @@ class _$Fish extends Fish {
       (new FishBuilder()..update(updates)).build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
-    if (fins == null) throw new BuiltValueNullFieldError('Fish', 'fins');
-    if (legs == null) throw new BuiltValueNullFieldError('Fish', 'legs');
+    if (fins == null) {
+      throw new BuiltValueNullFieldError('Fish', 'fins');
+    }
+    if (legs == null) {
+      throw new BuiltValueNullFieldError('Fish', 'legs');
+    }
   }
 
   @override
@@ -266,7 +276,9 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   @override
   void replace(covariant Fish other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$Fish;
   }
 

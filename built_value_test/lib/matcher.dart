@@ -29,8 +29,9 @@ class _BuiltValueMatcher implements Matcher {
   @override
   Description describeMismatch(dynamic item, Description mismatchDescription,
       Map matchState, bool verbose) {
-    if (_expected.runtimeType != item.runtimeType)
+    if (_expected.runtimeType != item.runtimeType) {
       return mismatchDescription.add('is the wrong type');
+    }
 
     return _delegate.describeMismatch(
         _toMap(item), mismatchDescription, matchState, verbose);

@@ -27,8 +27,9 @@ class _$PrivateValue extends _PrivateValue {
       (new _PrivateValueBuilder()..update(updates)).build();
 
   _$PrivateValue._({this.value}) : super._() {
-    if (value == null)
+    if (value == null) {
       throw new BuiltValueNullFieldError('_PrivateValue', 'value');
+    }
   }
 
   @override
@@ -76,7 +77,9 @@ class _PrivateValueBuilder
 
   @override
   void replace(_PrivateValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$PrivateValue;
   }
 

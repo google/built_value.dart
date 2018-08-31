@@ -137,16 +137,21 @@ class _$StandardJsonValue extends StandardJsonValue {
       this.uniqueZoo,
       this.strings})
       : super._() {
-    if (number == null)
+    if (number == null) {
       throw new BuiltValueNullFieldError('StandardJsonValue', 'number');
-    if (text == null)
+    }
+    if (text == null) {
       throw new BuiltValueNullFieldError('StandardJsonValue', 'text');
-    if (keyValues == null)
+    }
+    if (keyValues == null) {
       throw new BuiltValueNullFieldError('StandardJsonValue', 'keyValues');
-    if (zoo == null)
+    }
+    if (zoo == null) {
       throw new BuiltValueNullFieldError('StandardJsonValue', 'zoo');
-    if (uniqueZoo == null)
+    }
+    if (uniqueZoo == null) {
       throw new BuiltValueNullFieldError('StandardJsonValue', 'uniqueZoo');
+    }
   }
 
   @override
@@ -243,7 +248,9 @@ class StandardJsonValueBuilder
 
   @override
   void replace(StandardJsonValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$StandardJsonValue;
   }
 

@@ -212,13 +212,21 @@ class _$Collections extends Collections {
       this.nullableListMultimap,
       this.nullableSetMultimap})
       : super._() {
-    if (list == null) throw new BuiltValueNullFieldError('Collections', 'list');
-    if (set == null) throw new BuiltValueNullFieldError('Collections', 'set');
-    if (map == null) throw new BuiltValueNullFieldError('Collections', 'map');
-    if (listMultimap == null)
+    if (list == null) {
+      throw new BuiltValueNullFieldError('Collections', 'list');
+    }
+    if (set == null) {
+      throw new BuiltValueNullFieldError('Collections', 'set');
+    }
+    if (map == null) {
+      throw new BuiltValueNullFieldError('Collections', 'map');
+    }
+    if (listMultimap == null) {
       throw new BuiltValueNullFieldError('Collections', 'listMultimap');
-    if (setMultimap == null)
+    }
+    if (setMultimap == null) {
       throw new BuiltValueNullFieldError('Collections', 'setMultimap');
+    }
   }
 
   @override
@@ -362,7 +370,9 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
 
   @override
   void replace(Collections other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$Collections;
   }
 

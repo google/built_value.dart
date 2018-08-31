@@ -390,8 +390,12 @@ class _$Cat extends Cat {
       (new CatBuilder()..update(updates)).build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
-    if (tail == null) throw new BuiltValueNullFieldError('Cat', 'tail');
-    if (legs == null) throw new BuiltValueNullFieldError('Cat', 'legs');
+    if (tail == null) {
+      throw new BuiltValueNullFieldError('Cat', 'tail');
+    }
+    if (legs == null) {
+      throw new BuiltValueNullFieldError('Cat', 'legs');
+    }
   }
 
   @override
@@ -445,7 +449,9 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
 
   @override
   void replace(covariant Cat other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$Cat;
   }
 
@@ -472,8 +478,12 @@ class _$Fish extends Fish {
       (new FishBuilder()..update(updates)).build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
-    if (fins == null) throw new BuiltValueNullFieldError('Fish', 'fins');
-    if (legs == null) throw new BuiltValueNullFieldError('Fish', 'legs');
+    if (fins == null) {
+      throw new BuiltValueNullFieldError('Fish', 'fins');
+    }
+    if (legs == null) {
+      throw new BuiltValueNullFieldError('Fish', 'legs');
+    }
   }
 
   @override
@@ -527,7 +537,9 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   @override
   void replace(covariant Fish other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$Fish;
   }
 
@@ -554,8 +566,12 @@ class _$Robot extends Robot {
       (new RobotBuilder()..update(updates)).build();
 
   _$Robot._({this.fins, this.legs}) : super._() {
-    if (fins == null) throw new BuiltValueNullFieldError('Robot', 'fins');
-    if (legs == null) throw new BuiltValueNullFieldError('Robot', 'legs');
+    if (fins == null) {
+      throw new BuiltValueNullFieldError('Robot', 'fins');
+    }
+    if (legs == null) {
+      throw new BuiltValueNullFieldError('Robot', 'legs');
+    }
   }
 
   @override
@@ -609,7 +625,9 @@ class RobotBuilder implements Builder<Robot, RobotBuilder> {
 
   @override
   void replace(Robot other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$Robot;
   }
 
@@ -636,10 +654,12 @@ class _$Cage extends Cage {
       (new CageBuilder()..update(updates)).build();
 
   _$Cage._({this.inhabitant, this.otherInhabitants}) : super._() {
-    if (inhabitant == null)
+    if (inhabitant == null) {
       throw new BuiltValueNullFieldError('Cage', 'inhabitant');
-    if (otherInhabitants == null)
+    }
+    if (otherInhabitants == null) {
       throw new BuiltValueNullFieldError('Cage', 'otherInhabitants');
+    }
   }
 
   @override
@@ -697,7 +717,9 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
 
   @override
   void replace(Cage other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$Cage;
   }
 
@@ -738,7 +760,9 @@ class _$StandardCat extends StandardCat {
       (new StandardCatBuilder()..update(updates)).build();
 
   _$StandardCat._({this.tail}) : super._() {
-    if (tail == null) throw new BuiltValueNullFieldError('StandardCat', 'tail');
+    if (tail == null) {
+      throw new BuiltValueNullFieldError('StandardCat', 'tail');
+    }
   }
 
   @override
@@ -785,7 +809,9 @@ class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
 
   @override
   void replace(StandardCat other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$StandardCat;
   }
 
@@ -817,7 +843,9 @@ class _$HasString extends HasString {
       (new HasStringBuilder()..update(updates)).build();
 
   _$HasString._({this.field}) : super._() {
-    if (field == null) throw new BuiltValueNullFieldError('HasString', 'field');
+    if (field == null) {
+      throw new BuiltValueNullFieldError('HasString', 'field');
+    }
   }
 
   @override
@@ -865,7 +893,9 @@ class HasStringBuilder
 
   @override
   void replace(covariant HasString other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$HasString;
   }
 
@@ -890,7 +920,9 @@ class _$HasDouble extends HasDouble {
       (new HasDoubleBuilder()..update(updates)).build();
 
   _$HasDouble._({this.field}) : super._() {
-    if (field == null) throw new BuiltValueNullFieldError('HasDouble', 'field');
+    if (field == null) {
+      throw new BuiltValueNullFieldError('HasDouble', 'field');
+    }
   }
 
   @override
@@ -938,7 +970,9 @@ class HasDoubleBuilder
 
   @override
   void replace(covariant HasDouble other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$HasDouble;
   }
 
@@ -966,10 +1000,12 @@ class _$UsesChainedInterface extends UsesChainedInterface {
       (new UsesChainedInterfaceBuilder()..update(updates)).build();
 
   _$UsesChainedInterface._({this.bar, this.foo}) : super._() {
-    if (bar == null)
+    if (bar == null) {
       throw new BuiltValueNullFieldError('UsesChainedInterface', 'bar');
-    if (foo == null)
+    }
+    if (foo == null) {
       throw new BuiltValueNullFieldError('UsesChainedInterface', 'foo');
+    }
   }
 
   @override
@@ -1027,7 +1063,9 @@ class UsesChainedInterfaceBuilder
 
   @override
   void replace(UsesChainedInterface other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$UsesChainedInterface;
   }
 
@@ -1052,8 +1090,9 @@ class _$UsesHandCoded extends UsesHandCoded {
       (new UsesHandCodedBuilder()..update(updates)).build();
 
   _$UsesHandCoded._({this.fieldInBaseBuilder}) : super._() {
-    if (fieldInBaseBuilder == null)
+    if (fieldInBaseBuilder == null) {
       throw new BuiltValueNullFieldError('UsesHandCoded', 'fieldInBaseBuilder');
+    }
   }
 
   @override
@@ -1104,7 +1143,9 @@ class UsesHandCodedBuilder
 
   @override
   void replace(covariant UsesHandCoded other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$UsesHandCoded;
   }
 
@@ -1174,7 +1215,9 @@ class ImplementsTwoBuilder
   @override
 // ignore: override_on_non_overriding_method
   void replace(covariant ImplementsTwo other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$ImplementsTwo;
   }
 
