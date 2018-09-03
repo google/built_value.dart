@@ -17,6 +17,7 @@ part of values;
 // ignore_for_file: sort_constructors_first
 // ignore_for_file: unnecessary_const
 // ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
 
 Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
 Serializer<CompoundValue> _$compoundValueSerializer =
@@ -2018,7 +2019,8 @@ class _$FunctionValue extends FunctionValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is FunctionValue && function == other.function;
+    final _$dynamicOther = other as dynamic;
+    return other is FunctionValue && function == _$dynamicOther.function;
   }
 
   @override
@@ -2094,7 +2096,9 @@ class _$ListOfFunctionValue extends ListOfFunctionValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ListOfFunctionValue && functions == other.functions;
+    final _$dynamicOther = other as dynamic;
+    return other is ListOfFunctionValue &&
+        functions == _$dynamicOther.functions;
   }
 
   @override

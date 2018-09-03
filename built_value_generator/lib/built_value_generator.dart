@@ -70,6 +70,7 @@ class BuiltValueGenerator extends Generator {
           '// ignore_for_file: sort_constructors_first\n'
           '// ignore_for_file: unnecessary_const\n'
           '// ignore_for_file: unnecessary_new\n'
+          '// ignore_for_file: test_types_in_equals\n'
           '\n'
           '$result';
     } else {

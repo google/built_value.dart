@@ -17,6 +17,7 @@ part of built_value_generator.source_field;
 // ignore_for_file: sort_constructors_first
 // ignore_for_file: unnecessary_const
 // ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
 
 class _$ValueSourceField extends ValueSourceField {
   @override
@@ -27,6 +28,7 @@ class _$ValueSourceField extends ValueSourceField {
   final FieldElement builderElement;
   String __name;
   String __type;
+  bool __isFunctionType;
   String __typeWithPrefix;
   bool __isGetter;
   bool __isNullable;
@@ -52,6 +54,9 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   String get type => __type ??= super.type;
+
+  @override
+  bool get isFunctionType => __isFunctionType ??= super.isFunctionType;
 
   @override
   String get typeWithPrefix => __typeWithPrefix ??= super.typeWithPrefix;

@@ -610,16 +610,23 @@ abstract class ValueSourceClass
     }
     result.writeln();
 
+    final comparedFields =
+        fields.where((field) => field.builtValueField.compare).toList();
+    final comparedFunctionFields =
+        comparedFields.where((field) => field.isFunctionType).toList();
     result.writeln('@override');
     result.writeln('bool operator==(Object other) {');
     result.writeln('  if (identical(other, this)) return true;');
+    if (comparedFunctionFields.isNotEmpty) {
+      result.writeln('  final _\$dynamicOther = other as dynamic;');
+    }
     result.writeln('  return other is $name');
-    final comparedFields =
-        fields.where((field) => field.builtValueField.compare);
     if (comparedFields.isNotEmpty) {
       result.writeln('&&');
       result.writeln(comparedFields
-          .map((field) => '${field.name} == other.${field.name}')
+          .map((field) => field.isFunctionType
+              ? '${field.name} == _\$dynamicOther.${field.name}'
+              : '${field.name} == other.${field.name}')
           .join('&&'));
     }
     result.writeln(';');

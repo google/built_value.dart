@@ -17,6 +17,7 @@ part of 'fixes.dart';
 // ignore_for_file: sort_constructors_first
 // ignore_for_file: unnecessary_const
 // ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
 
 class _$GeneratorError extends GeneratorError {
   @override
