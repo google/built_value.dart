@@ -26,9 +26,6 @@ for pubspec in \
 
   # Update dependencies.
   sed -i -e \
-      "s#.*built_value: .*#  built_value: ^$version#" \
-      "$pubspec"
-  sed -i -e \
       "s#.*built_value_generator: .*#  built_value_generator: ^$version#" \
       "$pubspec"
 done

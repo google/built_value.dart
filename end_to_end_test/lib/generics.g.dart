@@ -1031,10 +1031,12 @@ class _$GenericFunction<T> extends GenericFunction<T> {
       (new GenericFunctionBuilder<T>()..update(updates)).build();
 
   _$GenericFunction._({this.function}) : super._() {
-    if (function == null)
+    if (function == null) {
       throw new BuiltValueNullFieldError('GenericFunction', 'function');
-    if (T == dynamic)
+    }
+    if (T == dynamic) {
       throw new BuiltValueMissingGenericsError('GenericFunction', 'T');
+    }
   }
 
   @override
