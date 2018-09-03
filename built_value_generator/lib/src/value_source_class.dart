@@ -569,15 +569,18 @@ abstract class ValueSourceClass
     } else {
       result.writeln('{');
       for (final field in requiredFields) {
-        result.writeln("if (${field.name} == null) "
+        result.writeln('if (${field.name} == null) {');
+        result.writeln(
             "throw new BuiltValueNullFieldError('$name', '${field.name}');");
+        result.writeln('}');
       }
       // If there are generic parameters, check they are not "dynamic".
       if (genericParameters.isNotEmpty) {
         for (final genericParameter in genericParameters) {
-          result.writeln('if ($genericParameter == dynamic) '
-              'throw new BuiltValueMissingGenericsError('
+          result.writeln('if ($genericParameter == dynamic) {');
+          result.writeln('throw new BuiltValueMissingGenericsError('
               "'$name', '$genericParameter');");
+          result.writeln('}');
         }
       }
       result.writeln();
@@ -782,8 +785,9 @@ abstract class ValueSourceClass
       result.writeln('void replace($name$_generics other) {');
     }
 
-    result.writeln("if (other == null) "
-        "throw new ArgumentError.notNull('other');");
+    result.writeln('if (other == null) {');
+    result.writeln("throw new ArgumentError.notNull('other');");
+    result.writeln('}');
     result.writeln('_\$v = other as $implName$_generics;');
     result.writeln('}');
 

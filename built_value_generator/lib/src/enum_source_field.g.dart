@@ -33,8 +33,9 @@ class _$EnumSourceField extends EnumSourceField {
       (new EnumSourceFieldBuilder()..update(updates)).build();
 
   _$EnumSourceField._({this.element}) : super._() {
-    if (element == null)
+    if (element == null) {
       throw new BuiltValueNullFieldError('EnumSourceField', 'element');
+    }
   }
 
   @override
@@ -103,7 +104,9 @@ class EnumSourceFieldBuilder
 
   @override
   void replace(EnumSourceField other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$EnumSourceField;
   }
 

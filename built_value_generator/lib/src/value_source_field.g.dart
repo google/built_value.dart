@@ -43,10 +43,12 @@ class _$ValueSourceField extends ValueSourceField {
 
   _$ValueSourceField._({this.settings, this.element, this.builderElement})
       : super._() {
-    if (settings == null)
+    if (settings == null) {
       throw new BuiltValueNullFieldError('ValueSourceField', 'settings');
-    if (element == null)
+    }
+    if (element == null) {
       throw new BuiltValueNullFieldError('ValueSourceField', 'element');
+    }
   }
 
   @override
@@ -149,7 +151,9 @@ class ValueSourceFieldBuilder
 
   @override
   void replace(ValueSourceField other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$ValueSourceField;
   }
 

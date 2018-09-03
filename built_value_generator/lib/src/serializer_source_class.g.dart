@@ -42,8 +42,9 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       (new SerializerSourceClassBuilder()..update(updates)).build();
 
   _$SerializerSourceClass._({this.element, this.builderElement}) : super._() {
-    if (element == null)
+    if (element == null) {
       throw new BuiltValueNullFieldError('SerializerSourceClass', 'element');
+    }
   }
 
   @override
@@ -145,7 +146,9 @@ class SerializerSourceClassBuilder
 
   @override
   void replace(SerializerSourceClass other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$SerializerSourceClass;
   }
 

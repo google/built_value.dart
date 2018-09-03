@@ -29,10 +29,12 @@ class _$MemoizedGetter extends MemoizedGetter {
       (new MemoizedGetterBuilder()..update(updates)).build();
 
   _$MemoizedGetter._({this.returnType, this.name}) : super._() {
-    if (returnType == null)
+    if (returnType == null) {
       throw new BuiltValueNullFieldError('MemoizedGetter', 'returnType');
-    if (name == null)
+    }
+    if (name == null) {
       throw new BuiltValueNullFieldError('MemoizedGetter', 'name');
+    }
   }
 
   @override
@@ -90,7 +92,9 @@ class MemoizedGetterBuilder
 
   @override
   void replace(MemoizedGetter other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$MemoizedGetter;
   }
 

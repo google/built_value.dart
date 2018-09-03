@@ -38,8 +38,9 @@ class _$EnumSourceClass extends EnumSourceClass {
       (new EnumSourceClassBuilder()..update(updates)).build();
 
   _$EnumSourceClass._({this.element}) : super._() {
-    if (element == null)
+    if (element == null) {
       throw new BuiltValueNullFieldError('EnumSourceClass', 'element');
+    }
   }
 
   @override
@@ -123,7 +124,9 @@ class EnumSourceClassBuilder
 
   @override
   void replace(EnumSourceClass other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$EnumSourceClass;
   }
 

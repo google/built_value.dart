@@ -324,8 +324,9 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null)
+    if (anInt == null) {
       throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
+    }
   }
 
   @override
@@ -381,7 +382,9 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$SimpleValue;
   }
 
@@ -406,8 +409,9 @@ class _$VerySimpleValue extends VerySimpleValue {
       (new VerySimpleValueBuilder()..update(updates)).build();
 
   _$VerySimpleValue._({this.value}) : super._() {
-    if (value == null)
+    if (value == null) {
       throw new BuiltValueNullFieldError('VerySimpleValue', 'value');
+    }
   }
 
   @override
@@ -456,7 +460,9 @@ class VerySimpleValueBuilder
 
   @override
   void replace(VerySimpleValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$VerySimpleValue;
   }
 
@@ -483,8 +489,9 @@ class _$CompoundValue extends CompoundValue {
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
-    if (simpleValue == null)
+    if (simpleValue == null) {
       throw new BuiltValueNullFieldError('CompoundValue', 'simpleValue');
+    }
   }
 
   @override
@@ -545,7 +552,9 @@ class CompoundValueBuilder
 
   @override
   void replace(CompoundValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$CompoundValue;
   }
 
@@ -590,8 +599,9 @@ class _$ValidatedValue extends ValidatedValue {
       (new ValidatedValueBuilder()..update(updates)).build();
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
-    if (anInt == null)
+    if (anInt == null) {
       throw new BuiltValueNullFieldError('ValidatedValue', 'anInt');
+    }
   }
 
   @override
@@ -649,7 +659,9 @@ class ValidatedValueBuilder
 
   @override
   void replace(ValidatedValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$ValidatedValue;
   }
 
@@ -677,8 +689,9 @@ class _$ValueWithCode extends ValueWithCode {
       (new ValueWithCodeBuilder()..update(updates)).build();
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
-    if (anInt == null)
+    if (anInt == null) {
       throw new BuiltValueNullFieldError('ValueWithCode', 'anInt');
+    }
   }
 
   @override
@@ -735,7 +748,9 @@ class ValueWithCodeBuilder
 
   @override
   void replace(ValueWithCode other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$ValueWithCode;
   }
 
@@ -764,8 +779,9 @@ class _$ValueWithDefaults extends ValueWithDefaults {
           as _$ValueWithDefaults;
 
   _$ValueWithDefaults._({this.anInt, this.aString}) : super._() {
-    if (anInt == null)
+    if (anInt == null) {
       throw new BuiltValueNullFieldError('ValueWithDefaults', 'anInt');
+    }
   }
 
   @override
@@ -838,7 +854,9 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   @override
   void replace(ValueWithDefaults other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$ValueWithDefaults;
   }
 
@@ -866,8 +884,9 @@ class _$DerivedValue extends DerivedValue {
       (new DerivedValueBuilder()..update(updates)).build();
 
   _$DerivedValue._({this.anInt}) : super._() {
-    if (anInt == null)
+    if (anInt == null) {
       throw new BuiltValueNullFieldError('DerivedValue', 'anInt');
+    }
   }
 
   @override
@@ -921,7 +940,9 @@ class DerivedValueBuilder
 
   @override
   void replace(DerivedValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$DerivedValue;
   }
 
@@ -950,10 +971,15 @@ class _$Account extends Account {
       (new AccountBuilder()..update(updates)).build();
 
   _$Account._({this.id, this.name, this.keyValues}) : super._() {
-    if (id == null) throw new BuiltValueNullFieldError('Account', 'id');
-    if (name == null) throw new BuiltValueNullFieldError('Account', 'name');
-    if (keyValues == null)
+    if (id == null) {
+      throw new BuiltValueNullFieldError('Account', 'id');
+    }
+    if (name == null) {
+      throw new BuiltValueNullFieldError('Account', 'name');
+    }
+    if (keyValues == null) {
       throw new BuiltValueNullFieldError('Account', 'keyValues');
+    }
   }
 
   @override
@@ -1019,7 +1045,9 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
 
   @override
   void replace(Account other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$Account;
   }
 
@@ -1058,8 +1086,9 @@ class _$WireNameValue extends WireNameValue {
       (new WireNameValueBuilder()..update(updates)).build();
 
   _$WireNameValue._({this.value}) : super._() {
-    if (value == null)
+    if (value == null) {
       throw new BuiltValueNullFieldError('WireNameValue', 'value');
+    }
   }
 
   @override
@@ -1107,7 +1136,9 @@ class WireNameValueBuilder
 
   @override
   void replace(WireNameValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$WireNameValue;
   }
 

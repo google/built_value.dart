@@ -34,8 +34,9 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
       (new SerializerSourceLibraryBuilder()..update(updates)).build();
 
   _$SerializerSourceLibrary._({this.element}) : super._() {
-    if (element == null)
+    if (element == null) {
       throw new BuiltValueNullFieldError('SerializerSourceLibrary', 'element');
+    }
   }
 
   @override
@@ -107,7 +108,9 @@ class SerializerSourceLibraryBuilder
 
   @override
   void replace(SerializerSourceLibrary other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$SerializerSourceLibrary;
   }
 

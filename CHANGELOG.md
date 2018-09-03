@@ -3,6 +3,7 @@
 # 6.1.2
 
 - Fix generated `operator==` when a type uses generic functions.
+- Fix generated code for `curly_braces_in_control_flow` lint.
 
 # 6.1.1
 

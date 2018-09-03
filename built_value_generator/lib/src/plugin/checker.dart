@@ -15,8 +15,9 @@ class Checker {
       if (compilationUnit.source.fullName.endsWith('.g.dart')) continue;
 
       for (final type in compilationUnit.types) {
-        if (!type.interfaces.any((i) => i.displayName.startsWith('Built')))
+        if (!type.interfaces.any((i) => i.displayName.startsWith('Built'))) {
           continue;
+        }
 
         final ValueSourceClass sourceClass = new ValueSourceClass(type);
         final errors = sourceClass.computeErrors();

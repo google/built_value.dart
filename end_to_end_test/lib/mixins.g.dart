@@ -48,8 +48,9 @@ class _$UsesMixin extends UsesMixin {
       (new UsesMixinBuilder()..update(updates)).build();
 
   _$UsesMixin._({this.typeDef}) : super._() {
-    if (typeDef == null)
+    if (typeDef == null) {
       throw new BuiltValueNullFieldError('UsesMixin', 'typeDef');
+    }
   }
 
   @override
@@ -97,7 +98,9 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
 
   @override
   void replace(UsesMixin other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$UsesMixin;
   }
 

@@ -29,9 +29,12 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.map}) : super._() {
-    if (anInt == null)
+    if (anInt == null) {
       throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
-    if (map == null) throw new BuiltValueNullFieldError('SimpleValue', 'map');
+    }
+    if (map == null) {
+      throw new BuiltValueNullFieldError('SimpleValue', 'map');
+    }
   }
 
   @override
@@ -86,7 +89,9 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$SimpleValue;
   }
 
@@ -126,8 +131,9 @@ class _$CompoundValue extends CompoundValue {
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.string}) : super._() {
-    if (simpleValue == null)
+    if (simpleValue == null) {
       throw new BuiltValueNullFieldError('CompoundValue', 'simpleValue');
+    }
   }
 
   @override
@@ -186,7 +192,9 @@ class CompoundValueBuilder
 
   @override
   void replace(CompoundValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$CompoundValue;
   }
 
@@ -228,10 +236,12 @@ class _$ComparedValue extends ComparedValue {
       (new ComparedValueBuilder()..update(updates)).build();
 
   _$ComparedValue._({this.name, this.onChanged}) : super._() {
-    if (name == null)
+    if (name == null) {
       throw new BuiltValueNullFieldError('ComparedValue', 'name');
-    if (onChanged == null)
+    }
+    if (onChanged == null) {
       throw new BuiltValueNullFieldError('ComparedValue', 'onChanged');
+    }
   }
 
   @override
@@ -286,7 +296,9 @@ class ComparedValueBuilder
 
   @override
   void replace(ComparedValue other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$ComparedValue;
   }
 

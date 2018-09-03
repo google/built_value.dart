@@ -31,8 +31,9 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
       (new EnumSourceLibraryBuilder()..update(updates)).build();
 
   _$EnumSourceLibrary._({this.element}) : super._() {
-    if (element == null)
+    if (element == null) {
       throw new BuiltValueNullFieldError('EnumSourceLibrary', 'element');
+    }
   }
 
   @override
@@ -94,7 +95,9 @@ class EnumSourceLibraryBuilder
 
   @override
   void replace(EnumSourceLibrary other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$EnumSourceLibrary;
   }
 

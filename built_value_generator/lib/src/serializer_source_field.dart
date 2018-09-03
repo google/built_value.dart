@@ -163,8 +163,9 @@ abstract class SerializerSourceField
     final genericItems = _splitOnTopLevelCommas(generics);
 
     if (generics.isEmpty) {
-      if (classGenericParameters.contains(bareType))
+      if (classGenericParameters.contains(bareType)) {
         return 'parameter$bareType';
+      }
       return 'const FullType($bareType)';
     } else {
       final parameterFullTypes = genericItems
@@ -191,8 +192,9 @@ abstract class SerializerSourceField
     final genericItems = _splitOnTopLevelCommas(generics);
 
     if (generics.isEmpty) {
-      if (classGenericBounds.keys.contains(bareType))
+      if (classGenericBounds.keys.contains(bareType)) {
         return classGenericBounds[bareType];
+      }
       return bareType;
     } else {
       final parameterFullTypes = genericItems

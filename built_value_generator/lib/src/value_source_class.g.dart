@@ -56,8 +56,9 @@ class _$ValueSourceClass extends ValueSourceClass {
       (new ValueSourceClassBuilder()..update(updates)).build();
 
   _$ValueSourceClass._({this.element}) : super._() {
-    if (element == null)
+    if (element == null) {
       throw new BuiltValueNullFieldError('ValueSourceClass', 'element');
+    }
   }
 
   @override
@@ -212,7 +213,9 @@ class ValueSourceClassBuilder
 
   @override
   void replace(ValueSourceClass other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$ValueSourceClass;
   }
 
