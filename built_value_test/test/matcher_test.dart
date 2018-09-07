@@ -5,6 +5,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value_test/matcher.dart';
 import 'package:test/test.dart';
+
 import 'values.dart';
 
 void main() {
@@ -27,6 +28,32 @@ void main() {
           "was <3> instead of <5> at location ['simpleValue']['anInt']");
     });
 
+    test('reports deep match on lists if not same', () {
+      final value = new CompoundValue((b) => b
+        ..simpleValue.anInt = 3
+        ..simpleValue.list.add('foo')
+        ..string = 'str');
+      final otherValue = value.rebuild((b) => b..simpleValue.list.add('bar'));
+
+      _expectMismatch(value, otherValue,
+          "shorter than expected at location ['simpleValue']['list'][1]");
+    });
+
+    test('reports deep match on list multimaps if not same', () {
+      final value = new CompoundValue((b) => b
+        ..simpleValue.anInt = 3
+        ..simpleValue.multimap.add(42, true)
+        ..string = 'str');
+      final otherValue =
+          value.rebuild((b) => b..simpleValue.multimap.add(42, false));
+
+      _expectMismatch(
+          value,
+          otherValue,
+          "shorter than expected at location"
+          " ['simpleValue']['multimap']['42'][1]");
+    });
+
     test('reports deep match on maps if not same', () {
       final value = new CompoundValue((b) => b
         ..simpleValue.anInt = 3
@@ -37,6 +64,32 @@ void main() {
 
       _expectMismatch(value, otherValue,
           "was <4> instead of <5> at location ['simpleValue']['map']['bar']");
+    });
+
+    test('reports deep match on sets if not same', () {
+      final value = new CompoundValue((b) => b
+        ..simpleValue.anInt = 3
+        ..simpleValue.aSet.add(42)
+        ..string = 'str');
+      final otherValue = value.rebuild((b) => b..simpleValue.aSet.remove(42));
+
+      _expectMismatch(value, otherValue,
+          "larger than expected at location ['simpleValue']['aSet']");
+    });
+
+    test('reports deep match on set multimaps if not same', () {
+      final value = new CompoundValue((b) => b
+        ..simpleValue.anInt = 3
+        ..simpleValue.setMultimap.add(42, true)
+        ..string = 'str');
+      final otherValue =
+          value.rebuild((b) => b..simpleValue.setMultimap.add(42, false));
+
+      _expectMismatch(
+          value,
+          otherValue,
+          "shorter than expected at location"
+          " ['simpleValue']['setMultimap']['42'][1]");
     });
 
     test('reports if the wrong type', () {
