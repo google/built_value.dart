@@ -11,7 +11,11 @@ part 'values.g.dart';
 
 abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
   int get anInt;
+  BuiltList<String> get list;
+  BuiltListMultimap<int, bool> get multimap;
   BuiltMap<String, int> get map;
+  BuiltSet<int> get aSet;
+  BuiltSetMultimap<int, bool> get setMultimap;
 
   factory SimpleValue([updates(SimpleValueBuilder b)]) = _$SimpleValue;
   SimpleValue._();

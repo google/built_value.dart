@@ -78,7 +78,15 @@ class _CapturingToStringHelper implements BuiltValueToStringHelper {
   void add(String field, Object value) {
     if (value is Built) {
       map[field] = _toMap(value);
+    } else if (value is BuiltList) {
+      map[field] = value.asList();
+    } else if (value is BuiltListMultimap) {
+      map[field] = value.asMap();
     } else if (value is BuiltMap) {
+      map[field] = value.asMap();
+    } else if (value is BuiltSet) {
+      map[field] = value.asSet();
+    } else if (value is BuiltSetMultimap) {
       map[field] = value.asMap();
     } else {
       map[field] = value;

@@ -23,17 +23,44 @@ class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;
   @override
+  final BuiltList<String> list;
+  @override
+  final BuiltListMultimap<int, bool> multimap;
+  @override
   final BuiltMap<String, int> map;
+  @override
+  final BuiltSet<int> aSet;
+  @override
+  final BuiltSetMultimap<int, bool> setMultimap;
 
   factory _$SimpleValue([void updates(SimpleValueBuilder b)]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
-  _$SimpleValue._({this.anInt, this.map}) : super._() {
+  _$SimpleValue._(
+      {this.anInt,
+      this.list,
+      this.multimap,
+      this.map,
+      this.aSet,
+      this.setMultimap})
+      : super._() {
     if (anInt == null) {
       throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
     }
+    if (list == null) {
+      throw new BuiltValueNullFieldError('SimpleValue', 'list');
+    }
+    if (multimap == null) {
+      throw new BuiltValueNullFieldError('SimpleValue', 'multimap');
+    }
     if (map == null) {
       throw new BuiltValueNullFieldError('SimpleValue', 'map');
+    }
+    if (aSet == null) {
+      throw new BuiltValueNullFieldError('SimpleValue', 'aSet');
+    }
+    if (setMultimap == null) {
+      throw new BuiltValueNullFieldError('SimpleValue', 'setMultimap');
     }
   }
 
@@ -47,19 +74,36 @@ class _$SimpleValue extends SimpleValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is SimpleValue && anInt == other.anInt && map == other.map;
+    return other is SimpleValue &&
+        anInt == other.anInt &&
+        list == other.list &&
+        multimap == other.multimap &&
+        map == other.map &&
+        aSet == other.aSet &&
+        setMultimap == other.setMultimap;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), map.hashCode));
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc($jc($jc(0, anInt.hashCode), list.hashCode),
+                    multimap.hashCode),
+                map.hashCode),
+            aSet.hashCode),
+        setMultimap.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SimpleValue')
           ..add('anInt', anInt)
-          ..add('map', map))
+          ..add('list', list)
+          ..add('multimap', multimap)
+          ..add('map', map)
+          ..add('aSet', aSet)
+          ..add('setMultimap', setMultimap))
         .toString();
   }
 }
@@ -71,17 +115,41 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   int get anInt => _$this._anInt;
   set anInt(int anInt) => _$this._anInt = anInt;
 
+  ListBuilder<String> _list;
+  ListBuilder<String> get list => _$this._list ??= new ListBuilder<String>();
+  set list(ListBuilder<String> list) => _$this._list = list;
+
+  ListMultimapBuilder<int, bool> _multimap;
+  ListMultimapBuilder<int, bool> get multimap =>
+      _$this._multimap ??= new ListMultimapBuilder<int, bool>();
+  set multimap(ListMultimapBuilder<int, bool> multimap) =>
+      _$this._multimap = multimap;
+
   MapBuilder<String, int> _map;
   MapBuilder<String, int> get map =>
       _$this._map ??= new MapBuilder<String, int>();
   set map(MapBuilder<String, int> map) => _$this._map = map;
+
+  SetBuilder<int> _aSet;
+  SetBuilder<int> get aSet => _$this._aSet ??= new SetBuilder<int>();
+  set aSet(SetBuilder<int> aSet) => _$this._aSet = aSet;
+
+  SetMultimapBuilder<int, bool> _setMultimap;
+  SetMultimapBuilder<int, bool> get setMultimap =>
+      _$this._setMultimap ??= new SetMultimapBuilder<int, bool>();
+  set setMultimap(SetMultimapBuilder<int, bool> setMultimap) =>
+      _$this._setMultimap = setMultimap;
 
   SimpleValueBuilder();
 
   SimpleValueBuilder get _$this {
     if (_$v != null) {
       _anInt = _$v.anInt;
+      _list = _$v.list?.toBuilder();
+      _multimap = _$v.multimap?.toBuilder();
       _map = _$v.map?.toBuilder();
+      _aSet = _$v.aSet?.toBuilder();
+      _setMultimap = _$v.setMultimap?.toBuilder();
       _$v = null;
     }
     return this;
@@ -104,12 +172,27 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   _$SimpleValue build() {
     _$SimpleValue _$result;
     try {
-      _$result = _$v ?? new _$SimpleValue._(anInt: anInt, map: map.build());
+      _$result = _$v ??
+          new _$SimpleValue._(
+              anInt: anInt,
+              list: list.build(),
+              multimap: multimap.build(),
+              map: map.build(),
+              aSet: aSet.build(),
+              setMultimap: setMultimap.build());
     } catch (_) {
       String _$failedField;
       try {
+        _$failedField = 'list';
+        list.build();
+        _$failedField = 'multimap';
+        multimap.build();
         _$failedField = 'map';
         map.build();
+        _$failedField = 'aSet';
+        aSet.build();
+        _$failedField = 'setMultimap';
+        setMultimap.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'SimpleValue', _$failedField, e.toString());

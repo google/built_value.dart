@@ -1087,7 +1087,9 @@ class GenericFunctionBuilder<T>
 
   @override
   void replace(GenericFunction<T> other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$GenericFunction<T>;
   }
 
