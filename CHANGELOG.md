@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.1.3
+
+- Add `built_value_test` support for remaining built collections.
+
 # 6.1.2
 
 - Fix generated `operator==` when a type uses generic functions.
