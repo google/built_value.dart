@@ -213,6 +213,8 @@ import 'package:built_collection/built_collection.dart';
 part 'person.g.dart';
 
 abstract class Person implements Built<Person, PersonBuilder> {
+  static Serializer<Person> get serializer => _$personSerializer;
+
   // Can never be null.
   int get id;
 
@@ -228,7 +230,6 @@ abstract class Person implements Built<Person, PersonBuilder> {
 
   Person._();
   factory Person([updates(PersonBuilder b)]) = _$Person;
-  static Serializer<Person> get serializer => _$personSerializer;
 }
 ```
 
