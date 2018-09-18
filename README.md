@@ -180,6 +180,59 @@ which run before and after all serializers. This could be used to
 interoperate with other tools or to add hand coded high performance serializers
 for specific classes. Some other libraries are not so extensible.
 
+## Common Usage
+
+While full, compiled examples are available in
+[`example/lib`](https://github.com/google/built_value.dart/tree/master/example/lib),
+a common usage example is shown here. This example assumes that you are writing
+a client for a JSON API representing a person that looks like the following:
+
+```
+{
+  id: 12345,
+  age: 35,
+  first_name: 'Jimmy',
+  hobbies: ['jumping', 'basketball']
+}
+```
+
+The corresponding dart class employing `built_value` might look like this. Note
+that it is using the
+[`@nullable`](https://pub.dartlang.org/documentation/built_value/latest/built_value/nullable-constant.html)
+annotation to indicate that the field does not have to be present on the
+response, as well as the
+[`@BuiltValueField`](https://pub.dartlang.org/documentation/built_value/latest/built_value/BuiltValueField-class.html)
+annotation to map between the property name on the response and the name of the
+member variable in the `Person` class.
+
+```
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:built_collection/built_collection.dart';
+
+part 'person.g.dart';
+
+abstract class Person implements Built<Person, PersonBuilder> {
+  static Serializer<Person> get serializer => _$personSerializer;
+
+  // Can never be null.
+  int get id;
+
+  @nullable
+  int get age;
+
+  @nullable
+  @BuiltValueField(wireName: 'first_name')
+  String get firstName;
+
+  @nullable
+  BuiltList<String> get hobbies;
+
+  Person._();
+  factory Person([updates(PersonBuilder b)]) = _$Person;
+}
+```
+
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
