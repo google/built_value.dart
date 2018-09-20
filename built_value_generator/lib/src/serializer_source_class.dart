@@ -218,7 +218,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
   @override
   final Iterable<Type> types = const [$name, _\$$name];
   @override
-  final String wireName = '$wireName';
+  final String wireName = '${_escapeString(wireName)}';
 
   @override
   Iterable serialize(Serializers serializers, $name object,
@@ -271,7 +271,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   @override
   final Iterable<Type> types = const <Type>[$name];
   @override
-  final String wireName = '$wireName';
+  final String wireName = '${_escapeString(wireName)}';
 
   @override
   Object serialize(Serializers serializers, $name object,
@@ -302,7 +302,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   @override
   final Iterable<Type> types = const <Type>[$name];
   @override
-  final String wireName = '$wireName';
+  final String wireName = '${_escapeString(wireName)}';
 
   @override
   Object serialize(Serializers serializers, $name object,
@@ -358,7 +358,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   String _generateRequiredFieldSerializers() {
     return fields
         .where((field) => !field.isNullable)
-        .map((field) => "'${field.wireName}', "
+        .map((field) => "'${_escapeString(field.wireName)}', "
             'serializers.serialize(object.${field.name}, '
             'specifiedType: '
             '${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())}),')
@@ -369,7 +369,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
     return fields.where((field) => field.isNullable).map((field) => '''
     if (object.${field.name} != null) {
       result
-          ..add('${field.wireName}')
+          ..add('${_escapeString(field.wireName)}')
           ..add(serializers.serialize(
           object.${field.name}, 
           specifiedType:
@@ -398,14 +398,14 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
       final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
       if (field.builderFieldUsesNestedBuilder) {
         return '''
-case '${field.wireName}':
+case '${_escapeString(field.wireName)}':
   result.${field.name}.replace(serializers.deserialize(
       value, specifiedType: $fullType) $cast);
   break;
 ''';
       } else {
         return '''
-case '${field.wireName}':
+case '${_escapeString(field.wireName)}':
   result.${field.name} = serializers.deserialize(
       value, specifiedType: $fullType) $cast;
   break;
@@ -432,3 +432,6 @@ case '${field.wireName}':
     return result;
   }
 }
+
+/// Escapes dollar signs in a string with backslashes.
+String _escapeString(String string) => string.replaceAll(r'$', r'\$');
