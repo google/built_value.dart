@@ -315,13 +315,23 @@ abstract class ValueSourceClass
     final implementsClause = classDeclaration.implementsClause;
     final expectedInterface =
         'Built<$name$_generics, ${name}Builder$_generics>';
+
+    final implementsClauseIsCorrect = implementsClause != null &&
+        implementsClause.interfaces
+            .any((type) => type.toSource() == expectedInterface);
+
     // Built parameters need fixing if they are not as expected, unless 1) the
-    // class is marked `@BuiltValue(instantiable: false)` and 2) the parameters
-    // are not wrong, they're completely missing.
-    if ((implementsClause == null ||
-            !implementsClause.interfaces
-                .any((type) => type.toSource() == expectedInterface)) &&
-        !(!settings.instantiable && implementsClause == null)) {
+    // class is marked `@BuiltValue(instantiable: false)` and 2) there is no
+    // case of the `Built` interface being implemented. This is to allow
+    // omitting the `Built` interface to work around having to implement the
+    // same interface twice with different type parameters.
+    final implementsClauseIsAllowedToBeIncorrect = !settings.instantiable &&
+        (implementsClause == null ||
+            !implementsClause.interfaces.any((type) =>
+                type.toSource() == 'Built' ||
+                type.toSource().startsWith('Built<')));
+
+    if (!implementsClauseIsCorrect && !implementsClauseIsAllowedToBeIncorrect) {
       if (implementsClause == null) {
         result.add(new GeneratorError((b) => b
           ..message = 'Make class implement $expectedInterface.'
