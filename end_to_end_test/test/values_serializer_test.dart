@@ -308,8 +308,8 @@ void main() {
   group('WireNameValue', () {
     final data = new WireNameValue((b) => b..value = 1);
     final serialized = [
-      'V',
-      'v',
+      r'$V',
+      r'$v',
       1,
     ];
 

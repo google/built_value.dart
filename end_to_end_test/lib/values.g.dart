@@ -555,13 +555,13 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
   @override
   final Iterable<Type> types = const [WireNameValue, _$WireNameValue];
   @override
-  final String wireName = 'V';
+  final String wireName = '\$V';
 
   @override
   Iterable serialize(Serializers serializers, WireNameValue object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'v',
+      '\$v',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
     ];
 
@@ -579,7 +579,7 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'v':
+        case '\$v':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;

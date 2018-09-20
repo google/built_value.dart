@@ -264,12 +264,12 @@ abstract class NamedFactoryValue
   NamedFactoryValue._();
 }
 
-@BuiltValue(wireName: 'V')
+@BuiltValue(wireName: r'$V')
 abstract class WireNameValue
     implements Built<WireNameValue, WireNameValueBuilder> {
   static Serializer<WireNameValue> get serializer => _$wireNameValueSerializer;
 
-  @BuiltValueField(wireName: 'v')
+  @BuiltValueField(wireName: r'$v')
   int get value;
 
   factory WireNameValue([updates(WireNameValueBuilder b)]) = _$WireNameValue;

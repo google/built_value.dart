@@ -4,6 +4,7 @@
 
 - Allow polymorphic base classes to omit implementing `Built` while still
   implementing any other interface(s).
+- Allow the dollar character in `wireName` settings.
 
 # 6.1.3
 
