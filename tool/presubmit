@@ -40,7 +40,6 @@ for directory in $directories; do
   cd "$parent_directory/$directory"
 
   dartanalyzer \
-      --strong \
       --fatal-warnings \
       --fatal-infos \
       --packages="$PWD/.packages" \
