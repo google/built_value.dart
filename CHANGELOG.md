@@ -1,5 +1,10 @@
 # Changelog
 
+# 6.1.4
+
+- Allow polymorphic base classes to omit implementing `Built` while still
+  implementing any other interface(s).
+
 # 6.1.3
 
 - Add `built_value_test` support for remaining built collections.

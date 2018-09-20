@@ -7,13 +7,17 @@ import 'package:built_value/serializer.dart';
 part 'polymorphism.g.dart';
 
 @BuiltValue(instantiable: false)
-abstract class Animal extends Object with Walker {
+abstract class Animal extends Object with Walker implements OtherInterface {
   @override
   int get legs;
 
   Animal rebuild(void updates(AnimalBuilder b));
   AnimalBuilder toBuilder();
 }
+
+// Polymorphic base classes are allowed to omit implementing `Built` while
+// still being allowed to implement any other interface.
+abstract class OtherInterface {}
 
 abstract class Cat extends Object
     with Walker
