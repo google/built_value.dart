@@ -71,6 +71,7 @@ class BuiltValueGenerator extends Generator {
           '// ignore_for_file: unnecessary_const\n'
           '// ignore_for_file: unnecessary_new\n'
           '// ignore_for_file: test_types_in_equals\n'
+          '// ignore_for_file: avoid_as\n'        
           '\n'
           '$result';
     } else {
