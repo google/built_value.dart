@@ -10,7 +10,24 @@ import 'package:built_value_generator/built_value_generator.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
-final String correctInput = r'''
+const String ignoreLintStatements = r'''
+
+// ignore_for_file: always_put_control_body_on_new_line
+// ignore_for_file: annotate_overrides
+// ignore_for_file: avoid_as
+// ignore_for_file: avoid_annotating_with_dynamic
+// ignore_for_file: avoid_catches_without_on_clauses
+// ignore_for_file: avoid_returning_this
+// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: prefer_expression_function_bodies
+// ignore_for_file: sort_constructors_first
+// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
+''';
+
+const String correctInput = r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -31,7 +48,7 @@ class TestEnum extends EnumClass {
 abstract class TestEnumMixin = Object with _$TestEnumMixin;
 ''';
 
-final String correctOutput = r'''
+const String correctOutput = r'''
 const TestEnum _$yes = const TestEnum._('yes');
 const TestEnum _$no = const TestEnum._('no');
 const TestEnum _$maybe = const TestEnum._('maybe');
@@ -68,7 +85,8 @@ abstract class _$TestEnumMixin {
   // ignore: non_constant_identifier_names
   _$TestEnumMeta get TestEnum => const _$TestEnumMeta();
 }
-''';
+'''
+    '$ignoreLintStatements';
 
 void main() {
   group('generator', () {
@@ -109,11 +127,13 @@ void main() {
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Specify a type for field "aNull".
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on missing built_value import', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 part 'test_enum.g.dart';
@@ -128,15 +148,18 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Import EnumClass: import 'package:built_value/built_value.dart';
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on missing part statement', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -153,15 +176,18 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), contains(r'''
+'''),
+          contains(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Import generated part: part 'test_enum.g.dart';
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on non-const static fields', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -178,17 +204,20 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Make field "yes" const.
 //        2. Make field "no" const.
 //        3. Make field "maybe" const.
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on non-const non-static fields', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -205,17 +234,20 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Make field "yes" static const.
 //        2. Make field "no" static const.
 //        3. Make field "maybe" static const.
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('ignores static const fields of wrong type', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -235,11 +267,14 @@ class TestEnum extends EnumClass {
 }
 
 abstract class TestEnumMixin = Object with _$TestEnumMixin;
-'''), endsWith(correctOutput));
+'''
+              '$ignoreLintStatements'),
+          endsWith(correctOutput));
     });
 
     test('matches generated names to rhs for field names', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -256,7 +291,8 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 const TestEnum _$no = const TestEnum._('yes');
 const TestEnum _$maybe = const TestEnum._('no');
 const TestEnum _$yes = const TestEnum._('maybe');
@@ -279,11 +315,13 @@ final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const <TestEnum>[
   _$maybe,
   _$yes,
 ]);
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('matches generated names to values and valueOf', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -300,7 +338,8 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$vls;
   static TestEnum valueOf(String name) => _$vlOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 const TestEnum _$yes = const TestEnum._('yes');
 const TestEnum _$no = const TestEnum._('no');
 const TestEnum _$maybe = const TestEnum._('maybe');
@@ -323,11 +362,13 @@ final BuiltSet<TestEnum> _$vls = new BuiltSet<TestEnum>(const <TestEnum>[
   _$no,
   _$maybe,
 ]);
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on name clash for field rhs', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -344,15 +385,18 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on name clash for values', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -369,11 +413,13 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$no;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('does not fail with clash across multiple files', () async {
@@ -384,7 +430,8 @@ class TestEnum extends EnumClass {
     });
 
     test('fails with error on missing constructor', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -399,15 +446,18 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Have exactly one constructor: const TestEnum._(String name) : super(name);
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on incorrect constructor', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -424,15 +474,18 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Have exactly one constructor: const TestEnum._(String name) : super(name);
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on too many constructors', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -453,15 +506,18 @@ class TestEnum extends EnumClass {
 
 abstract class BuiltSet<T> {
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Have exactly one constructor: const TestEnum._(String name) : super(name);
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on missing values getter', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -477,15 +533,18 @@ class TestEnum extends EnumClass {
 
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Add getter: static BuiltSet<TestEnum> get values => _$values
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on missing valueOf', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -501,15 +560,18 @@ class TestEnum extends EnumClass {
 
   static BuiltSet<TestEnum> get values => _$values;
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Add method: static TestEnum valueOf(String name) => _$valueOf(name)
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on wrong mixin declaration', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -526,15 +588,18 @@ class TestEnum extends EnumClass {
 }
 
 class TestEnumMixin = Object with _$TestEnumMixin;
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Remove mixin or declare using exactly: abstract class TestEnumMixin = Object with _$TestEnumMixin;
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('fails with error on abstract class', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -549,11 +614,13 @@ abstract class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''),
+          endsWith(r'''
 // Error: Please make the following changes to use EnumClass:
 //
 //        1. Make TestEnum concrete; remove "abstract".
-'''));
+'''
+              '$ignoreLintStatements'));
     });
 
     test('is robust to newlines in input', () async {

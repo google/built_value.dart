@@ -59,8 +59,10 @@ class BuiltValueGenerator extends Generator {
     }
 
     if (result.isNotEmpty) {
-      return '// ignore_for_file: always_put_control_body_on_new_line\n'
+      return '$result\n'
+          '// ignore_for_file: always_put_control_body_on_new_line\n'
           '// ignore_for_file: annotate_overrides\n'
+          '// ignore_for_file: avoid_as\n'
           '// ignore_for_file: avoid_annotating_with_dynamic\n'
           '// ignore_for_file: avoid_catches_without_on_clauses\n'
           '// ignore_for_file: avoid_returning_this\n'
@@ -71,9 +73,7 @@ class BuiltValueGenerator extends Generator {
           '// ignore_for_file: unnecessary_const\n'
           '// ignore_for_file: unnecessary_new\n'
           '// ignore_for_file: test_types_in_equals\n'
-          '// ignore_for_file: avoid_as\n'        
-          '\n'
-          '$result';
+          '\n';
     } else {
       return null;
     }
