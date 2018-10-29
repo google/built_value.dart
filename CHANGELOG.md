@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.1.5
+
+- Bump versions of `analyzer`, `analyzer_plugin`, `build`, `build_runner`.
+
 # 6.1.4
 
 - Allow polymorphic base classes to omit implementing `Built` while still
