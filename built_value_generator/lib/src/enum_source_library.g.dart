@@ -22,6 +22,7 @@ part of built_value_generator.enum_source_library;
 class _$EnumSourceLibrary extends EnumSourceLibrary {
   @override
   final LibraryElement element;
+  ParsedLibraryResult __parsedLibrary;
   String __name;
   String __fileName;
   String __source;
@@ -35,6 +36,10 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
       throw new BuiltValueNullFieldError('EnumSourceLibrary', 'element');
     }
   }
+
+  @override
+  ParsedLibraryResult get parsedLibrary =>
+      __parsedLibrary ??= super.parsedLibrary;
 
   @override
   String get name => __name ??= super.name;

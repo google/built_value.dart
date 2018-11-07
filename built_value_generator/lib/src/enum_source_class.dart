@@ -4,7 +4,9 @@
 
 library built_value_generator.enum_source_class;
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/src/dart/analysis/results.dart'; // ignore: implementation_imports
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/enum_source_field.dart';
@@ -16,9 +18,15 @@ abstract class EnumSourceClass
     implements Built<EnumSourceClass, EnumSourceClassBuilder> {
   ClassElement get element;
 
-  factory EnumSourceClass(ClassElement element) =>
+  factory EnumSourceClass(
+          ParsedLibraryResult parsedLibrary, ClassElement element) =>
       new _$EnumSourceClass._(element: element);
   EnumSourceClass._();
+
+  @memoized
+  ParsedLibraryResult get parsedLibrary =>
+      // ignore: deprecated_member_use
+      ParsedLibraryResultImpl.tmp(element.library);
 
   @memoized
   String get name => element.name;
@@ -42,17 +50,20 @@ abstract class EnumSourceClass
 
   @memoized
   BuiltList<EnumSourceField> get fields =>
-      EnumSourceField.fromClassElement(element);
+      EnumSourceField.fromClassElement(parsedLibrary, element);
 
   @memoized
-  BuiltList<String> get constructors => new BuiltList<String>(
-      element.constructors.map((element) => element.computeNode().toString()));
+  BuiltList<String> get constructors =>
+      new BuiltList<String>(element.constructors.map((element) {
+        final declaration = parsedLibrary.getElementDeclaration(element);
+        return declaration?.node?.toSource() ?? '';
+      }));
 
   @memoized
   String get valuesIdentifier {
     final getter = element.getGetter('values');
     if (getter == null) return null;
-    final source = getter.computeNode().toSource();
+    final source = parsedLibrary.getElementDeclaration(getter).node.toSource();
     final matches = new RegExp(r'static BuiltSet<' +
             element.displayName +
             r'> get values => (_\$\w+)\;')
@@ -64,7 +75,7 @@ abstract class EnumSourceClass
   String get valueOfIdentifier {
     final getter = element.getMethod('valueOf');
     if (getter == null) return null;
-    final source = getter.computeNode().toSource();
+    final source = parsedLibrary.getElementDeclaration(getter).node.toSource();
     final matches = new RegExp(r'static ' +
             element.displayName +
             r' valueOf\(String name\) \=\> (\_\$\w+)\(name\)\;')
@@ -76,8 +87,11 @@ abstract class EnumSourceClass
   bool get usesMixin => element.library.getType(name + 'Mixin') != null;
 
   @memoized
-  String get mixinDeclaration =>
-      element.library.getType(name + 'Mixin')?.computeNode()?.toString();
+  String get mixinDeclaration {
+    final mixinElement = element.library.getType(name + 'Mixin');
+    if (mixinElement == null) return null;
+    return parsedLibrary.getElementDeclaration(mixinElement).node.toSource();
+  }
 
   @memoized
   Iterable<String> get identifiers {
@@ -87,10 +101,12 @@ abstract class EnumSourceClass
     ]);
   }
 
-  static bool isMissingImportFor(ClassElement classElement) {
+  static bool isMissingImportFor(
+      ParsedLibraryResult parsedLibrary, ClassElement classElement) {
     return classElement.supertype.displayName != 'EnumClass' &&
-        classElement
-            .computeNode()
+        parsedLibrary
+            .getElementDeclaration(classElement)
+            .node
             .toSource()
             .contains('class ${classElement.displayName} extends EnumClass');
   }

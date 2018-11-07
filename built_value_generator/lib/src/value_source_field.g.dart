@@ -23,6 +23,8 @@ class _$ValueSourceField extends ValueSourceField {
   @override
   final BuiltValue settings;
   @override
+  final ParsedLibraryResult parsedLibrary;
+  @override
   final FieldElement element;
   @override
   final FieldElement builderElement;
@@ -41,10 +43,14 @@ class _$ValueSourceField extends ValueSourceField {
   factory _$ValueSourceField([void updates(ValueSourceFieldBuilder b)]) =>
       (new ValueSourceFieldBuilder()..update(updates)).build();
 
-  _$ValueSourceField._({this.settings, this.element, this.builderElement})
+  _$ValueSourceField._(
+      {this.settings, this.parsedLibrary, this.element, this.builderElement})
       : super._() {
     if (settings == null) {
       throw new BuiltValueNullFieldError('ValueSourceField', 'settings');
+    }
+    if (parsedLibrary == null) {
+      throw new BuiltValueNullFieldError('ValueSourceField', 'parsedLibrary');
     }
     if (element == null) {
       throw new BuiltValueNullFieldError('ValueSourceField', 'element');
@@ -100,13 +106,16 @@ class _$ValueSourceField extends ValueSourceField {
     if (identical(other, this)) return true;
     return other is ValueSourceField &&
         settings == other.settings &&
+        parsedLibrary == other.parsedLibrary &&
         element == other.element &&
         builderElement == other.builderElement;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, settings.hashCode), element.hashCode),
+    return $jf($jc(
+        $jc($jc($jc(0, settings.hashCode), parsedLibrary.hashCode),
+            element.hashCode),
         builderElement.hashCode));
   }
 
@@ -114,6 +123,7 @@ class _$ValueSourceField extends ValueSourceField {
   String toString() {
     return (newBuiltValueToStringHelper('ValueSourceField')
           ..add('settings', settings)
+          ..add('parsedLibrary', parsedLibrary)
           ..add('element', element)
           ..add('builderElement', builderElement))
         .toString();
@@ -127,6 +137,11 @@ class ValueSourceFieldBuilder
   BuiltValue _settings;
   BuiltValue get settings => _$this._settings;
   set settings(BuiltValue settings) => _$this._settings = settings;
+
+  ParsedLibraryResult _parsedLibrary;
+  ParsedLibraryResult get parsedLibrary => _$this._parsedLibrary;
+  set parsedLibrary(ParsedLibraryResult parsedLibrary) =>
+      _$this._parsedLibrary = parsedLibrary;
 
   FieldElement _element;
   FieldElement get element => _$this._element;
@@ -142,6 +157,7 @@ class ValueSourceFieldBuilder
   ValueSourceFieldBuilder get _$this {
     if (_$v != null) {
       _settings = _$v.settings;
+      _parsedLibrary = _$v.parsedLibrary;
       _element = _$v.element;
       _builderElement = _$v.builderElement;
       _$v = null;
@@ -167,6 +183,7 @@ class ValueSourceFieldBuilder
     final _$result = _$v ??
         new _$ValueSourceField._(
             settings: settings,
+            parsedLibrary: parsedLibrary,
             element: element,
             builderElement: builderElement);
     replace(_$result);

@@ -4,6 +4,7 @@
 
 library built_value_generator.enum_source_field;
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -12,10 +13,12 @@ part 'enum_source_field.g.dart';
 
 abstract class EnumSourceField
     implements Built<EnumSourceField, EnumSourceFieldBuilder> {
+  ParsedLibraryResult get parsedLibrary;
   FieldElement get element;
 
-  factory EnumSourceField(FieldElement element) =>
-      new _$EnumSourceField._(element: element);
+  factory EnumSourceField(
+          ParsedLibraryResult parsedLibrary, FieldElement element) =>
+      new _$EnumSourceField._(parsedLibrary: parsedLibrary, element: element);
   EnumSourceField._();
 
   @memoized
@@ -38,7 +41,11 @@ abstract class EnumSourceField
   @memoized
   String get generatedIdentifier {
     final fieldName = element.displayName;
-    return element.computeNode().toString().substring('$fieldName = '.length);
+    return parsedLibrary
+        .getElementDeclaration(element)
+        .node
+        .toSource()
+        .substring('$fieldName = '.length);
   }
 
   @memoized
@@ -48,7 +55,7 @@ abstract class EnumSourceField
   bool get isStatic => element.isStatic;
 
   static BuiltList<EnumSourceField> fromClassElement(
-      ClassElement classElement) {
+      ParsedLibraryResult parsedLibrary, ClassElement classElement) {
     final result = new ListBuilder<EnumSourceField>();
 
     final enumName = classElement.displayName;
@@ -56,7 +63,7 @@ abstract class EnumSourceField
       final type = fieldElement.getter.returnType.displayName;
       if (!fieldElement.isSynthetic &&
           (type == enumName || type == 'dynamic')) {
-        result.add(new EnumSourceField(fieldElement));
+        result.add(new EnumSourceField(parsedLibrary, fieldElement));
       }
     }
 

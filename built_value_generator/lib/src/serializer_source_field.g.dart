@@ -23,6 +23,8 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   final BuiltValue settings;
   @override
+  final ParsedLibraryResult parsedLibrary;
+  @override
   final FieldElement element;
   @override
   final FieldElement builderElement;
@@ -41,10 +43,15 @@ class _$SerializerSourceField extends SerializerSourceField {
           [void updates(SerializerSourceFieldBuilder b)]) =>
       (new SerializerSourceFieldBuilder()..update(updates)).build();
 
-  _$SerializerSourceField._({this.settings, this.element, this.builderElement})
+  _$SerializerSourceField._(
+      {this.settings, this.parsedLibrary, this.element, this.builderElement})
       : super._() {
     if (settings == null) {
       throw new BuiltValueNullFieldError('SerializerSourceField', 'settings');
+    }
+    if (parsedLibrary == null) {
+      throw new BuiltValueNullFieldError(
+          'SerializerSourceField', 'parsedLibrary');
     }
     if (element == null) {
       throw new BuiltValueNullFieldError('SerializerSourceField', 'element');
@@ -96,13 +103,16 @@ class _$SerializerSourceField extends SerializerSourceField {
     if (identical(other, this)) return true;
     return other is SerializerSourceField &&
         settings == other.settings &&
+        parsedLibrary == other.parsedLibrary &&
         element == other.element &&
         builderElement == other.builderElement;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, settings.hashCode), element.hashCode),
+    return $jf($jc(
+        $jc($jc($jc(0, settings.hashCode), parsedLibrary.hashCode),
+            element.hashCode),
         builderElement.hashCode));
   }
 
@@ -110,6 +120,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   String toString() {
     return (newBuiltValueToStringHelper('SerializerSourceField')
           ..add('settings', settings)
+          ..add('parsedLibrary', parsedLibrary)
           ..add('element', element)
           ..add('builderElement', builderElement))
         .toString();
@@ -123,6 +134,11 @@ class SerializerSourceFieldBuilder
   BuiltValue _settings;
   BuiltValue get settings => _$this._settings;
   set settings(BuiltValue settings) => _$this._settings = settings;
+
+  ParsedLibraryResult _parsedLibrary;
+  ParsedLibraryResult get parsedLibrary => _$this._parsedLibrary;
+  set parsedLibrary(ParsedLibraryResult parsedLibrary) =>
+      _$this._parsedLibrary = parsedLibrary;
 
   FieldElement _element;
   FieldElement get element => _$this._element;
@@ -138,6 +154,7 @@ class SerializerSourceFieldBuilder
   SerializerSourceFieldBuilder get _$this {
     if (_$v != null) {
       _settings = _$v.settings;
+      _parsedLibrary = _$v.parsedLibrary;
       _element = _$v.element;
       _builderElement = _$v.builderElement;
       _$v = null;
@@ -163,6 +180,7 @@ class SerializerSourceFieldBuilder
     final _$result = _$v ??
         new _$SerializerSourceField._(
             settings: settings,
+            parsedLibrary: parsedLibrary,
             element: element,
             builderElement: builderElement);
     replace(_$result);

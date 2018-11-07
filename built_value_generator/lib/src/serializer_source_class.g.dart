@@ -24,6 +24,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   final ClassElement element;
   @override
   final ClassElement builderElement;
+  ParsedLibraryResult __parsedLibrary;
   BuiltValue __builtValueSettings;
   BuiltValueEnum __enumClassSettings;
   String __name;
@@ -46,6 +47,10 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       throw new BuiltValueNullFieldError('SerializerSourceClass', 'element');
     }
   }
+
+  @override
+  ParsedLibraryResult get parsedLibrary =>
+      __parsedLibrary ??= super.parsedLibrary;
 
   @override
   BuiltValue get builtValueSettings =>
