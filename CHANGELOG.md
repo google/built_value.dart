@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.1.6
+
+- Switch to new analyzer API in version `0.33.3`.
+
 # 6.1.5
 
 - Bump versions of `analyzer`, `analyzer_plugin`, `build`, `build_runner`.

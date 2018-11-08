@@ -21,6 +21,7 @@ class BuiltValueGenerator extends Generator {
   @override
   Future<String> generate(LibraryReader library, BuildStep buildStep) async {
     final result = new StringBuffer();
+
     try {
       final enumCode = new EnumSourceLibrary(library.element).generateCode();
       if (enumCode != null) result.writeln(enumCode);

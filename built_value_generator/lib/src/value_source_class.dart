@@ -4,8 +4,10 @@
 
 library built_value_generator.source_class;
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/src/dart/analysis/results.dart'; // ignore: implementation_imports
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/fixes.dart';
@@ -28,6 +30,11 @@ abstract class ValueSourceClass
   factory ValueSourceClass(ClassElement element) =>
       new _$ValueSourceClass._(element: element);
   ValueSourceClass._();
+
+  @memoized
+  ParsedLibraryResult get parsedLibrary =>
+      // ignore: deprecated_member_use
+      ParsedLibraryResultImpl.tmp(element.library);
 
   @memoized
   String get name => element.displayName;
@@ -110,8 +117,7 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltList<String> get genericParameters =>
-      new BuiltList<String>(element.typeParameters
-          .map((element) => element.computeNode().toString()));
+      new BuiltList<String>(element.typeParameters.map((e) => e.name));
 
   @memoized
   BuiltList<String> get genericBounds =>
@@ -120,7 +126,8 @@ abstract class ValueSourceClass
 
   @memoized
   ClassDeclaration get classDeclaration {
-    return element.computeNode() as ClassDeclaration;
+    return parsedLibrary.getElementDeclaration(element).node
+        as ClassDeclaration;
   }
 
   @memoized
@@ -137,8 +144,8 @@ abstract class ValueSourceClass
   }
 
   @memoized
-  BuiltList<ValueSourceField> get fields =>
-      ValueSourceField.fromClassElements(settings, element, builderElement);
+  BuiltList<ValueSourceField> get fields => ValueSourceField.fromClassElements(
+      settings, parsedLibrary, element, builderElement);
 
   @memoized
   String get source =>
@@ -182,13 +189,14 @@ abstract class ValueSourceClass
       new BuiltList<ConstructorDeclaration>(element.constructors
           .where((constructor) =>
               !constructor.isFactory && !constructor.isSynthetic)
-          .map((constructor) => constructor.computeNode()));
+          .map((constructor) =>
+              parsedLibrary.getElementDeclaration(constructor).node));
 
   @memoized
   BuiltList<ConstructorDeclaration> get valueClassFactories =>
       new BuiltList<ConstructorDeclaration>(element.constructors
           .where((constructor) => constructor.isFactory)
-          .map((factory) => factory.computeNode()));
+          .map((factory) => parsedLibrary.getElementDeclaration(factory).node));
 
   @memoized
   bool get builderClassIsAbstract => builderElement.isAbstract;
@@ -198,13 +206,17 @@ abstract class ValueSourceClass
       new BuiltList<String>(builderElement.constructors
           .where((constructor) =>
               !constructor.isFactory && !constructor.isSynthetic)
-          .map((constructor) => constructor.computeNode().toSource()));
+          .map((constructor) => parsedLibrary
+              .getElementDeclaration(constructor)
+              .node
+              .toSource()));
 
   @memoized
   BuiltList<String> get builderClassFactories =>
       new BuiltList<String>(builderElement.constructors
           .where((constructor) => constructor.isFactory)
-          .map((factory) => factory.computeNode().toSource()));
+          .map((factory) =>
+              parsedLibrary.getElementDeclaration(factory).node.toSource()));
 
   @memoized
   BuiltList<MemoizedGetter> get memoizedGetters =>

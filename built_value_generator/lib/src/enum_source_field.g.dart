@@ -21,6 +21,8 @@ part of built_value_generator.enum_source_field;
 
 class _$EnumSourceField extends EnumSourceField {
   @override
+  final ParsedLibraryResult parsedLibrary;
+  @override
   final FieldElement element;
   String __name;
   String __type;
@@ -32,7 +34,10 @@ class _$EnumSourceField extends EnumSourceField {
   factory _$EnumSourceField([void updates(EnumSourceFieldBuilder b)]) =>
       (new EnumSourceFieldBuilder()..update(updates)).build();
 
-  _$EnumSourceField._({this.element}) : super._() {
+  _$EnumSourceField._({this.parsedLibrary, this.element}) : super._() {
+    if (parsedLibrary == null) {
+      throw new BuiltValueNullFieldError('EnumSourceField', 'parsedLibrary');
+    }
     if (element == null) {
       throw new BuiltValueNullFieldError('EnumSourceField', 'element');
     }
@@ -68,17 +73,20 @@ class _$EnumSourceField extends EnumSourceField {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is EnumSourceField && element == other.element;
+    return other is EnumSourceField &&
+        parsedLibrary == other.parsedLibrary &&
+        element == other.element;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, element.hashCode));
+    return $jf($jc($jc(0, parsedLibrary.hashCode), element.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('EnumSourceField')
+          ..add('parsedLibrary', parsedLibrary)
           ..add('element', element))
         .toString();
   }
@@ -88,6 +96,11 @@ class EnumSourceFieldBuilder
     implements Builder<EnumSourceField, EnumSourceFieldBuilder> {
   _$EnumSourceField _$v;
 
+  ParsedLibraryResult _parsedLibrary;
+  ParsedLibraryResult get parsedLibrary => _$this._parsedLibrary;
+  set parsedLibrary(ParsedLibraryResult parsedLibrary) =>
+      _$this._parsedLibrary = parsedLibrary;
+
   FieldElement _element;
   FieldElement get element => _$this._element;
   set element(FieldElement element) => _$this._element = element;
@@ -96,6 +109,7 @@ class EnumSourceFieldBuilder
 
   EnumSourceFieldBuilder get _$this {
     if (_$v != null) {
+      _parsedLibrary = _$v.parsedLibrary;
       _element = _$v.element;
       _$v = null;
     }
@@ -117,7 +131,8 @@ class EnumSourceFieldBuilder
 
   @override
   _$EnumSourceField build() {
-    final _$result = _$v ?? new _$EnumSourceField._(element: element);
+    final _$result = _$v ??
+        new _$EnumSourceField._(parsedLibrary: parsedLibrary, element: element);
     replace(_$result);
     return _$result;
   }

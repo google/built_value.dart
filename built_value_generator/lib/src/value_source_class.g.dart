@@ -22,6 +22,7 @@ part of built_value_generator.source_class;
 class _$ValueSourceClass extends ValueSourceClass {
   @override
   final ClassElement element;
+  ParsedLibraryResult __parsedLibrary;
   String __name;
   String __implName;
   ClassElement __builderElement;
@@ -60,6 +61,10 @@ class _$ValueSourceClass extends ValueSourceClass {
       throw new BuiltValueNullFieldError('ValueSourceClass', 'element');
     }
   }
+
+  @override
+  ParsedLibraryResult get parsedLibrary =>
+      __parsedLibrary ??= super.parsedLibrary;
 
   @override
   String get name => __name ??= super.name;

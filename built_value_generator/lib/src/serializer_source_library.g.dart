@@ -22,6 +22,7 @@ part of built_value_generator.source_library;
 class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   @override
   final LibraryElement element;
+  ParsedLibraryResult __parsedLibrary;
   bool __hasSerializers;
   BuiltMap<String, ElementAnnotation> __serializersForAnnotations;
   BuiltSet<SerializerSourceClass> __sourceClasses;
@@ -38,6 +39,10 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
       throw new BuiltValueNullFieldError('SerializerSourceLibrary', 'element');
     }
   }
+
+  @override
+  ParsedLibraryResult get parsedLibrary =>
+      __parsedLibrary ??= super.parsedLibrary;
 
   @override
   bool get hasSerializers => __hasSerializers ??= super.hasSerializers;

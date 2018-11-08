@@ -4,8 +4,10 @@
 
 library built_value_generator.source_class;
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:analyzer/src/dart/analysis/results.dart'; // ignore: implementation_imports
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/enum_source_class.dart';
@@ -29,13 +31,19 @@ abstract class SerializerSourceClass
               element.library.getType(element.displayName + 'Builder'));
   SerializerSourceClass._();
 
+  @memoized
+  ParsedLibraryResult get parsedLibrary =>
+      // ignore: deprecated_member_use
+      ParsedLibraryResultImpl.tmp(element.library);
+
   // TODO(davidmorgan): share common code in a nicer way.
   @memoized
   BuiltValue get builtValueSettings => new ValueSourceClass(element).settings;
 
   // TODO(davidmorgan): share common code in a nicer way.
   @memoized
-  BuiltValueEnum get enumClassSettings => new EnumSourceClass(element).settings;
+  BuiltValueEnum get enumClassSettings =>
+      new EnumSourceClass(parsedLibrary, element).settings;
 
   @memoized
   String get name => element.name;
@@ -57,12 +65,16 @@ abstract class SerializerSourceClass
         element.fields.where((field) => field.name == 'serializer').toList();
     if (serializerFields.isEmpty) return '';
     final serializerField = serializerFields.single;
-    return serializerField.getter?.computeNode()?.toString() ?? '';
+    return parsedLibrary
+            .getElementDeclaration(serializerField.getter)
+            ?.node
+            ?.toSource() ??
+        '';
   }
 
   @memoized
-  BuiltList<String> get genericParameters => new BuiltList<String>(
-      element.typeParameters.map((e) => e.computeNode().toString()));
+  BuiltList<String> get genericParameters =>
+      new BuiltList<String>(element.typeParameters.map((e) => e.name));
 
   @memoized
   BuiltList<String> get genericBounds =>
@@ -94,7 +106,7 @@ abstract class SerializerSourceClass
       final builderFieldElement =
           builderElement?.getField(fieldElement.displayName);
       final sourceField = new SerializerSourceField(
-          builtValueSettings, fieldElement, builderFieldElement);
+          builtValueSettings, parsedLibrary, fieldElement, builderFieldElement);
       if (sourceField.isSerializable) {
         result.add(sourceField);
       }
@@ -258,7 +270,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
               .fields
               .where((field) => field.isConst && field.isStatic)
               .forEach((field) {
-            final enumSourceField = new EnumSourceField(field);
+            final enumSourceField = new EnumSourceField(parsedLibrary, field);
             if (enumSourceField.settings.wireName != null) {
               b[field.name] = enumSourceField.settings.wireName;
             }

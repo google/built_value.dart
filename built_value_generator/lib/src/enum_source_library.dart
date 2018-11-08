@@ -4,7 +4,9 @@
 
 library built_value_generator.enum_source_library;
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/src/dart/analysis/results.dart'; // ignore: implementation_imports
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/enum_source_class.dart';
@@ -23,6 +25,11 @@ abstract class EnumSourceLibrary
   EnumSourceLibrary._();
 
   @memoized
+  ParsedLibraryResult get parsedLibrary =>
+      // ignore: deprecated_member_use
+      ParsedLibraryResultImpl.tmp(element.library);
+
+  @memoized
   String get name => element.name;
 
   @memoized
@@ -36,12 +43,12 @@ abstract class EnumSourceLibrary
     final result = new ListBuilder<EnumSourceClass>();
 
     for (final classElement in LibraryElements.getClassElements(element)) {
-      if (EnumSourceClass.isMissingImportFor(classElement)) {
+      if (EnumSourceClass.isMissingImportFor(parsedLibrary, classElement)) {
         throw _makeError([
           "Import EnumClass: import 'package:built_value/built_value.dart';"
         ]);
       } else if (EnumSourceClass.needsEnumClass(classElement)) {
-        result.add(new EnumSourceClass(classElement));
+        result.add(new EnumSourceClass(parsedLibrary, classElement));
       }
     }
     return result.build();

@@ -4,7 +4,9 @@
 
 library built_value_generator.source_library;
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/src/dart/analysis/results.dart'; // ignore: implementation_imports
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/library_elements.dart';
@@ -21,6 +23,11 @@ abstract class SerializerSourceLibrary
   factory SerializerSourceLibrary(LibraryElement element) =>
       new _$SerializerSourceLibrary._(element: element);
   SerializerSourceLibrary._();
+
+  @memoized
+  ParsedLibraryResult get parsedLibrary =>
+      // ignore: deprecated_member_use
+      ParsedLibraryResultImpl.tmp(element.library);
 
   @memoized
   bool get hasSerializers => serializersForAnnotations.isNotEmpty;

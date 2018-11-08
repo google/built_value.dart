@@ -4,6 +4,7 @@
 
 library built_value_generator.source_field;
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
@@ -28,14 +29,21 @@ const _suggestedTypes = const <String, String>{
 abstract class ValueSourceField
     implements Built<ValueSourceField, ValueSourceFieldBuilder> {
   BuiltValue get settings;
+  ParsedLibraryResult get parsedLibrary;
   FieldElement get element;
   @nullable
   FieldElement get builderElement;
 
-  factory ValueSourceField(BuiltValue settings, FieldElement element,
+  factory ValueSourceField(
+          BuiltValue settings,
+          ParsedLibraryResult parsedLibrary,
+          FieldElement element,
           FieldElement builderElement) =>
       new _$ValueSourceField._(
-          settings: settings, element: element, builderElement: builderElement);
+          settings: settings,
+          parsedLibrary: parsedLibrary,
+          element: element,
+          builderElement: builderElement);
   ValueSourceField._();
 
   @memoized
@@ -50,9 +58,11 @@ abstract class ValueSourceField
   /// The [type] plus any import prefix.
   @memoized
   String get typeWithPrefix {
-    final typeFromAst = (element.getter.computeNode() as MethodDeclaration)
+    final typeFromAst = (parsedLibrary
+                .getElementDeclaration(element.getter)
+                .node as MethodDeclaration)
             ?.returnType
-            ?.toString() ??
+            ?.toSource() ??
         'dynamic';
     final typeFromElement = type;
 
@@ -111,8 +121,9 @@ abstract class ValueSourceField
     final result = builderElement.getter?.returnType?.displayName;
     if (result != null && result != 'dynamic') return result;
     // Go via AST to allow use of unresolvable types not yet generated.
-    return builderElement
-            ?.computeNode()
+    return parsedLibrary
+            .getElementDeclaration(builderElement)
+            ?.node
             ?.parent
             ?.childEntities
             ?.first
@@ -136,8 +147,11 @@ abstract class ValueSourceField
       : settings.nestedBuilders &&
           DartTypes.needsNestedBuilder(element.getter.returnType);
 
-  static BuiltList<ValueSourceField> fromClassElements(BuiltValue settings,
-      ClassElement classElement, ClassElement builderClassElement) {
+  static BuiltList<ValueSourceField> fromClassElements(
+      BuiltValue settings,
+      ParsedLibraryResult parsedLibrary,
+      ClassElement classElement,
+      ClassElement builderClassElement) {
     final result = new ListBuilder<ValueSourceField>();
 
     for (final field in collectFields(classElement)) {
@@ -145,7 +159,8 @@ abstract class ValueSourceField
           field.getter != null &&
           (field.getter.isAbstract || field.getter.isSynthetic)) {
         final builderField = builderClassElement?.getField(field.name);
-        result.add(new ValueSourceField(settings, field, builderField));
+        result.add(
+            new ValueSourceField(settings, parsedLibrary, field, builderField));
       }
     }
 

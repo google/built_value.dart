@@ -4,6 +4,7 @@
 
 library built_value_generator.source_field;
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
@@ -26,14 +27,21 @@ abstract class SerializerSourceField
     'BuiltSetMultimap': 'SetMultimapBuilder',
   });
   BuiltValue get settings;
+  ParsedLibraryResult get parsedLibrary;
   FieldElement get element;
   @nullable
   FieldElement get builderElement;
 
-  factory SerializerSourceField(BuiltValue settings, FieldElement element,
+  factory SerializerSourceField(
+          BuiltValue settings,
+          ParsedLibraryResult parsedLibrary,
+          FieldElement element,
           FieldElement builderElement) =>
       new _$SerializerSourceField._(
-          settings: settings, element: element, builderElement: builderElement);
+          settings: settings,
+          parsedLibrary: parsedLibrary,
+          element: element,
+          builderElement: builderElement);
   SerializerSourceField._();
 
   @memoized
@@ -72,10 +80,10 @@ abstract class SerializerSourceField
   /// The [type] plus any import prefix.
   @memoized
   String get typeWithPrefix {
-    final typeFromAst = (element.getter.computeNode() as MethodDeclaration)
-            ?.returnType
-            ?.toString() ??
-        'dynamic';
+    final declaration = parsedLibrary.getElementDeclaration(element.getter);
+    final typeFromAst =
+        (declaration.node as MethodDeclaration)?.returnType?.toString() ??
+            'dynamic';
     final typeFromElement = type;
 
     // If the type is a function, we can't use the element result; it is
