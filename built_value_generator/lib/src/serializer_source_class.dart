@@ -74,12 +74,7 @@ abstract class SerializerSourceClass
 
   @memoized
   BuiltList<String> get genericParameters =>
-      new BuiltList<String>(element.typeParameters.map((e) {
-        final result = parsedLibrary.getElementDeclaration(e).node.toSource();
-        // Strip off any bounds.
-        final index = result.indexOf(' extends ');
-        return index == -1 ? result : result.substring(0, index);
-      }));
+      new BuiltList<String>(element.typeParameters.map((e) => e.name));
 
   @memoized
   BuiltList<String> get genericBounds =>

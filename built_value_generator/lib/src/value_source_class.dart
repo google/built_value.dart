@@ -116,11 +116,8 @@ abstract class ValueSourceClass
   }
 
   @memoized
-  BuiltList<String> get genericParameters => new BuiltList<String>(
-      element.typeParameters.map((element) => element.name));
-//  BuiltList<String> get genericParameters =>
-//      new BuiltList<String>(element.typeParameters.map((element) =>
-//          parsedLibrary.getElementDeclaration(element).node.toSource()));
+  BuiltList<String> get genericParameters =>
+      new BuiltList<String>(element.typeParameters.map((e) => e.name));
 
   @memoized
   BuiltList<String> get genericBounds =>
