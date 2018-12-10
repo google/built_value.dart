@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:built_value_generator/built_value_generator.dart';
+import 'package:logging/logging.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
@@ -38,10 +39,14 @@ abstract class Value implements Built<Value, ValueBuilder> {}
       expect(await generate(r'''
 library value;
 
+part 'value.g.dart';
+
 import 'package:test_support/test_support.dart';
 
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _$Value;
 }
 '''), contains('implements StructuredSerializer<Value>'));
     });
@@ -105,9 +110,14 @@ library value;
 
 import 'package:test_support/test_support.dart';
 
+part 'value.g.dart';
+
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
   bool get aBool;
+  
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _$Value;
 }
 
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
@@ -123,14 +133,22 @@ library value;
 
 import 'package:test_support/test_support.dart';
 
+part 'value.g.dart';
+
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
   bool get aBool;
+  
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _$Value;
 }
 
-abstract class OtherValue implements Built<Value, ValueBuilder> {
+abstract class OtherValue implements Built<OtherValue, OtherValueBuilder> {
   static Serializer<Value> get serializer => _$serializer;
   bool get aBool;
+  
+  OtherValue._();
+  factory OtherValue([updates(OtherValueBuilder b)]) = _$OtherValue;
 }
 '''),
           contains(r'1. Declare OtherValue.serializer as: '
@@ -173,10 +191,22 @@ Future<String> generate(String source) async {
     '$pkgName|lib/value.dart': source,
   };
 
+  // Capture any error from generation; if there is one, return that instead of
+  // the generated output.
+  String error;
+  void captureError(LogRecord logRecord) {
+    if (logRecord.error is InvalidGenerationSourceError) {
+      if (error != null) throw StateError('Expected at most one error.');
+      error = logRecord.error.toString();
+    }
+  }
+
   final writer = new InMemoryAssetWriter();
-  await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
-  return new String.fromCharCodes(
-      writer.assets[new AssetId(pkgName, 'lib/value.g.dart')] ?? []);
+  await testBuilder(builder, srcs,
+      rootPackage: pkgName, writer: writer, onLog: captureError);
+  return error ??
+      new String.fromCharCodes(
+          writer.assets[new AssetId(pkgName, 'lib/value.g.dart')] ?? []);
 }
 
 // Classes mentioned in the test input need to exist, but we don't need the
