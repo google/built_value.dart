@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:built_value_generator/built_value_generator.dart';
+import 'package:logging/logging.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
@@ -105,11 +106,9 @@ void main() {
               'class TestEnum extends EnumClass {',
               'class TestEnum extends EnumClass {\n'
               '  static const aNull = null;')),
-          endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Specify a type for field "aNull".
-'''));
+          endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Specify a type for field "aNull".'''));
     });
 
     test('fails with error on missing built_value import', () async {
@@ -128,11 +127,9 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Import EnumClass: import 'package:built_value/built_value.dart';
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Import EnumClass: import 'package:built_value/built_value.dart';'''));
     });
 
     test('fails with error on missing part statement', () async {
@@ -153,11 +150,9 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), contains(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Import generated part: part 'test_enum.g.dart';
-'''));
+'''), contains(r'''Please make the following changes to use EnumClass:
+
+1. Import generated part: part 'test_enum.g.dart';'''));
     });
 
     test('fails with error on non-const static fields', () async {
@@ -178,13 +173,11 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Make field "yes" const.
-//        2. Make field "no" const.
-//        3. Make field "maybe" const.
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Make field "yes" const.
+2. Make field "no" const.
+3. Make field "maybe" const.'''));
     });
 
     test('fails with error on non-const non-static fields', () async {
@@ -205,13 +198,11 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Make field "yes" static const.
-//        2. Make field "no" static const.
-//        3. Make field "maybe" static const.
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Make field "yes" static const.
+2. Make field "no" static const.
+3. Make field "maybe" static const.'''));
     });
 
     test('ignores static const fields of wrong type', () async {
@@ -344,11 +335,9 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.'''));
     });
 
     test('fails with error on name clash for values', () async {
@@ -369,11 +358,9 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$no;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.'''));
     });
 
     test('does not fail with clash across multiple files', () async {
@@ -399,11 +386,9 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Have exactly one constructor: const TestEnum._(String name) : super(name);
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
     });
 
     test('fails with error on incorrect constructor', () async {
@@ -424,11 +409,9 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Have exactly one constructor: const TestEnum._(String name) : super(name);
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
     });
 
     test('fails with error on too many constructors', () async {
@@ -453,11 +436,9 @@ class TestEnum extends EnumClass {
 
 abstract class BuiltSet<T> {
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Have exactly one constructor: const TestEnum._(String name) : super(name);
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
     });
 
     test('fails with error on missing values getter', () async {
@@ -477,11 +458,9 @@ class TestEnum extends EnumClass {
 
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Add getter: static BuiltSet<TestEnum> get values => _$values
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Add getter: static BuiltSet<TestEnum> get values => _$values'''));
     });
 
     test('fails with error on missing valueOf', () async {
@@ -501,11 +480,9 @@ class TestEnum extends EnumClass {
 
   static BuiltSet<TestEnum> get values => _$values;
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Add method: static TestEnum valueOf(String name) => _$valueOf(name)
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Add method: static TestEnum valueOf(String name) => _$valueOf(name)'''));
     });
 
     test('fails with error on wrong mixin declaration', () async {
@@ -526,11 +503,9 @@ class TestEnum extends EnumClass {
 }
 
 class TestEnumMixin = Object with _$TestEnumMixin;
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Remove mixin or declare using exactly: abstract class TestEnumMixin = Object with _$TestEnumMixin;
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Remove mixin or declare using exactly: abstract class TestEnumMixin = Object with _$TestEnumMixin;'''));
     });
 
     test('fails with error on abstract class', () async {
@@ -549,11 +524,9 @@ abstract class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
-// Error: Please make the following changes to use EnumClass:
-//
-//        1. Make TestEnum concrete; remove "abstract".
-'''));
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Make TestEnum concrete; remove "abstract".'''));
     });
 
     test('is robust to newlines in input', () async {
@@ -598,10 +571,22 @@ Future<String> generate(String source) async {
     '$pkgName|lib/test_enum.dart': source,
   };
 
+  // Capture any error from generation; if there is one, return that instead of
+  // the generated output.
+  String error;
+  void captureError(LogRecord logRecord) {
+    if (logRecord.error is InvalidGenerationSourceError) {
+      if (error != null) throw StateError('Expected at most one error.');
+      error = logRecord.error.toString();
+    }
+  }
+
   final writer = new InMemoryAssetWriter();
-  await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
-  return new String.fromCharCodes(
-      writer.assets[new AssetId(pkgName, 'lib/test_enum.g.dart')]);
+  await testBuilder(builder, srcs,
+      rootPackage: pkgName, writer: writer, onLog: captureError);
+  return error ??
+      new String.fromCharCodes(
+          writer.assets[new AssetId(pkgName, 'lib/test_enum.g.dart')] ?? []);
 }
 
 Future<String> generateTwo(String source, String source2) async {

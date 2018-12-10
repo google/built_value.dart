@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:built_value_generator/built_value_generator.dart';
+import 'package:logging/logging.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
@@ -339,8 +340,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 }'''),
           contains(
               '1. Add a factory so your class can be instantiated. Example:\n'
-              '//\n'
-              '//        '
+              '\n'
               'factory Value([updates(ValueBuilder b)]) = _\$Value;'));
     });
 
@@ -634,10 +634,22 @@ Future<String> generate(String source) async {
     '$pkgName|lib/value.dart': source,
   };
 
+  // Capture any error from generation; if there is one, return that instead of
+  // the generated output.
+  String error;
+  void captureError(LogRecord logRecord) {
+    if (logRecord.error is InvalidGenerationSourceError) {
+      if (error != null) throw StateError('Expected at most one error.');
+      error = logRecord.error.toString();
+    }
+  }
+
   final writer = new InMemoryAssetWriter();
-  await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
-  return new String.fromCharCodes(
-      writer.assets[new AssetId(pkgName, 'lib/value.g.dart')]);
+  await testBuilder(builder, srcs,
+      rootPackage: pkgName, writer: writer, onLog: captureError);
+  return error ??
+      new String.fromCharCodes(
+          writer.assets[new AssetId(pkgName, 'lib/value.g.dart')] ?? []);
 }
 
 const String builtValueSource = r'''

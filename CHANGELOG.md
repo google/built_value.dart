@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.1.7
+
+- Fix tests following changes to source_gen error output.
+
 # 6.1.6
 
 - Switch to new analyzer API in version `0.33.3`.
