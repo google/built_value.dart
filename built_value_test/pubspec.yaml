@@ -20,3 +20,9 @@ dependencies:
 dev_dependencies:
   built_value_generator: ^6.1.6
   build_runner: ^1.0.0
+
+dependency_overrides:
+  built_value:
+    path: ../built_value
+  built_value_generator:
+    path: ../built_value_generator
