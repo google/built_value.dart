@@ -12,3 +12,6 @@ abstract class Mixin {
   @BuiltValueField(serialize: false)
   TypeDef get typeDef;
 }
+
+// Don't fail on encountering new mixin syntax.
+mixin Foo {}

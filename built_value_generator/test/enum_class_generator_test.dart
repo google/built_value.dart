@@ -111,27 +111,6 @@ void main() {
 1. Specify a type for field "aNull".'''));
     });
 
-    test('fails with error on missing built_value import', () async {
-      expect(await generate(r'''
-library test_enum;
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-  static const TestEnum no = _$no;
-  static const TestEnum maybe = _$maybe;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Import EnumClass: import 'package:built_value/built_value.dart';'''));
-    });
-
     test('fails with error on missing part statement', () async {
       expect(await generate(r'''
 library test_enum;

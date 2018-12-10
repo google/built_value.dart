@@ -43,11 +43,7 @@ abstract class EnumSourceLibrary
     final result = new ListBuilder<EnumSourceClass>();
 
     for (final classElement in LibraryElements.getClassElements(element)) {
-      if (EnumSourceClass.isMissingImportFor(parsedLibrary, classElement)) {
-        throw _makeError([
-          "Import EnumClass: import 'package:built_value/built_value.dart';"
-        ]);
-      } else if (EnumSourceClass.needsEnumClass(classElement)) {
+      if (EnumSourceClass.needsEnumClass(classElement)) {
         result.add(new EnumSourceClass(parsedLibrary, classElement));
       }
     }

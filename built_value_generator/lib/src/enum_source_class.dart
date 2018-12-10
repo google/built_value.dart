@@ -101,18 +101,9 @@ abstract class EnumSourceClass
     ]);
   }
 
-  static bool isMissingImportFor(
-      ParsedLibraryResult parsedLibrary, ClassElement classElement) {
-    return classElement.supertype.displayName != 'EnumClass' &&
-        parsedLibrary
-            .getElementDeclaration(classElement)
-            .node
-            .toSource()
-            .contains('class ${classElement.displayName} extends EnumClass');
-  }
-
   static bool needsEnumClass(ClassElement classElement) {
-    return classElement.supertype.displayName == 'EnumClass';
+    // `Object` and mixins return `null` for `supertype`.
+    return classElement.supertype?.displayName == 'EnumClass';
   }
 
   Iterable<String> computeErrors() {
