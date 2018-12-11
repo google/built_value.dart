@@ -3,6 +3,9 @@
 # 6.1.7
 
 - Fix tests following changes to source_gen error output.
+- Fix generation when new `mixin` declarations are used.
+- Stop checking for import of `built_value.dart` when `EnumClass` is used; this
+  was expensive.
 
 # 6.1.6
 
