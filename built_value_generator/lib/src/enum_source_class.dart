@@ -10,6 +10,7 @@ import 'package:analyzer/src/dart/analysis/results.dart'; // ignore: implementat
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/enum_source_field.dart';
+import 'package:built_value_generator/src/strings.dart';
 import 'package:quiver/iterables.dart';
 
 part 'enum_source_class.g.dart';
@@ -165,7 +166,7 @@ abstract class EnumSourceClass
 
     for (final field in fields) {
       result.writeln('const $name ${field.generatedIdentifier} = '
-          'const $name._(\'${field.name}\');');
+          'const $name._(\'${escapeString(field.name)}\');');
     }
 
     result.writeln('');
@@ -173,8 +174,8 @@ abstract class EnumSourceClass
     result.writeln('$name $valueOfIdentifier(String name) {'
         'switch (name) {');
     for (final field in fields) {
-      result.writeln(
-          'case \'${field.name}\': return ${field.generatedIdentifier};');
+      result.writeln("case '${escapeString(field.name)}':"
+          ' return ${field.generatedIdentifier};');
     }
     result.writeln('default: throw new ArgumentError(name);');
     result.writeln('}}');
