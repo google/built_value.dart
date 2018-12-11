@@ -403,6 +403,9 @@ class _$PrimitivesValueSerializer
       'dateTime',
       serializers.serialize(object.dateTime,
           specifiedType: const FullType(DateTime)),
+      'duration',
+      serializers.serialize(object.duration,
+          specifiedType: const FullType(Duration)),
       'uri',
       serializers.serialize(object.uri, specifiedType: const FullType(Uri)),
       'bigInt',
@@ -451,6 +454,10 @@ class _$PrimitivesValueSerializer
         case 'dateTime':
           result.dateTime = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'duration':
+          result.duration = serializers.deserialize(value,
+              specifiedType: const FullType(Duration)) as Duration;
           break;
         case 'uri':
           result.uri = serializers.deserialize(value,
@@ -1845,6 +1852,8 @@ class _$PrimitivesValue extends PrimitivesValue {
   @override
   final DateTime dateTime;
   @override
+  final Duration duration;
+  @override
   final Uri uri;
   @override
   final BigInt bigInt;
@@ -1860,6 +1869,7 @@ class _$PrimitivesValue extends PrimitivesValue {
       this.number,
       this.string,
       this.dateTime,
+      this.duration,
       this.uri,
       this.bigInt})
       : super._() {
@@ -1883,6 +1893,9 @@ class _$PrimitivesValue extends PrimitivesValue {
     }
     if (dateTime == null) {
       throw new BuiltValueNullFieldError('PrimitivesValue', 'dateTime');
+    }
+    if (duration == null) {
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'duration');
     }
     if (uri == null) {
       throw new BuiltValueNullFieldError('PrimitivesValue', 'uri');
@@ -1911,6 +1924,7 @@ class _$PrimitivesValue extends PrimitivesValue {
         number == other.number &&
         string == other.string &&
         dateTime == other.dateTime &&
+        duration == other.duration &&
         uri == other.uri &&
         bigInt == other.bigInt;
   }
@@ -1923,12 +1937,16 @@ class _$PrimitivesValue extends PrimitivesValue {
                 $jc(
                     $jc(
                         $jc(
-                            $jc($jc($jc(0, boolean.hashCode), integer.hashCode),
-                                int64.hashCode),
-                            dbl.hashCode),
-                        number.hashCode),
-                    string.hashCode),
-                dateTime.hashCode),
+                            $jc(
+                                $jc(
+                                    $jc($jc(0, boolean.hashCode),
+                                        integer.hashCode),
+                                    int64.hashCode),
+                                dbl.hashCode),
+                            number.hashCode),
+                        string.hashCode),
+                    dateTime.hashCode),
+                duration.hashCode),
             uri.hashCode),
         bigInt.hashCode));
   }
@@ -1943,6 +1961,7 @@ class _$PrimitivesValue extends PrimitivesValue {
           ..add('number', number)
           ..add('string', string)
           ..add('dateTime', dateTime)
+          ..add('duration', duration)
           ..add('uri', uri)
           ..add('bigInt', bigInt))
         .toString();
@@ -1981,6 +2000,10 @@ class PrimitivesValueBuilder
   DateTime get dateTime => _$this._dateTime;
   set dateTime(DateTime dateTime) => _$this._dateTime = dateTime;
 
+  Duration _duration;
+  Duration get duration => _$this._duration;
+  set duration(Duration duration) => _$this._duration = duration;
+
   Uri _uri;
   Uri get uri => _$this._uri;
   set uri(Uri uri) => _$this._uri = uri;
@@ -2000,6 +2023,7 @@ class PrimitivesValueBuilder
       _number = _$v.number;
       _string = _$v.string;
       _dateTime = _$v.dateTime;
+      _duration = _$v.duration;
       _uri = _$v.uri;
       _bigInt = _$v.bigInt;
       _$v = null;
@@ -2031,6 +2055,7 @@ class PrimitivesValueBuilder
             number: number,
             string: string,
             dateTime: dateTime,
+            duration: duration,
             uri: uri,
             bigInt: bigInt);
     replace(_$result);

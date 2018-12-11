@@ -202,6 +202,7 @@ abstract class PrimitivesValue
   num get number;
   String get string;
   DateTime get dateTime;
+  Duration get duration;
   Uri get uri;
   BigInt get bigInt;
 

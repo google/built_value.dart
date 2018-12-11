@@ -210,6 +210,7 @@ void main() {
       ..number = 17.5
       ..string = 'test'
       ..dateTime = new DateTime.fromMillisecondsSinceEpoch(1000, isUtc: true)
+      ..duration = new Duration(microseconds: 12345)
       ..uri = Uri.parse('https://github.com/google/built_value.dart')
       ..bigInt = BigInt.parse('123456789012345678901234567890'));
     final serialized = [
@@ -228,6 +229,8 @@ void main() {
       'test',
       'dateTime',
       1000000,
+      'duration',
+      12345,
       'uri',
       'https://github.com/google/built_value.dart',
       'bigInt',
