@@ -207,14 +207,13 @@ abstract class ValueSourceField
             'The current type, "$type", is not allowed because it is mutable.'));
     }
 
-    if (builderFieldExists &&
-        type != typeInBuilder(null) &&
-        // TODO(davidmorgan): smarter check for builder types.
-        type.replaceAll('Built', '') !=
-            typeInBuilder(null).replaceAll('Builder', '')) {
-      result.add(new GeneratorError((b) => b
-        ..message = 'Make builder field $name have type: '
-            '$type (or, if applicable, builder)'));
+    if (builderFieldExists) {
+      if (buildElementType != type &&
+          buildElementType != _toBuilderType(element.type, type)) {
+        result.add(new GeneratorError((b) => b
+          ..message = 'Make builder field $name have type: '
+              '$type (or, if applicable, builder)'));
+      }
     }
 
     if (builderFieldExists && !builderFieldIsNormalField) {
