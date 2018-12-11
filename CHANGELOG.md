@@ -8,6 +8,8 @@
   was expensive.
 - Support dollar signs in enum value names.
 - Add serializer for `Duration` fields.
+- Add ignore for `avoid_as` lint to generated code.
+- Put ignored lints on a single line at the end of the generated output.
 - Add `serializerForType` and `serializerForWireName` methods to `Serializers`.
 - Fix nested collections when using a custom builder.
 
