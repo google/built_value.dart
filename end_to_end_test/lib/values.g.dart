@@ -11,6 +11,9 @@ Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
 Serializer<CompoundValueNoNesting> _$compoundValueNoNestingSerializer =
     new _$CompoundValueNoNestingSerializer();
+Serializer<CompoundValueComparableBuilders>
+    _$compoundValueComparableBuildersSerializer =
+    new _$CompoundValueComparableBuildersSerializer();
 Serializer<CompoundValueExplicitNoNesting>
     _$compoundValueExplicitNoNestingSerializer =
     new _$CompoundValueExplicitNoNestingSerializer();
@@ -173,6 +176,62 @@ class _$CompoundValueNoNestingSerializer
       Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CompoundValueNoNestingBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'simpleValue':
+          result.simpleValue = serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue)) as SimpleValue;
+          break;
+        case 'validatedValue':
+          result.validatedValue = serializers.deserialize(value,
+              specifiedType: const FullType(ValidatedValue)) as ValidatedValue;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$CompoundValueComparableBuildersSerializer
+    implements StructuredSerializer<CompoundValueComparableBuilders> {
+  @override
+  final Iterable<Type> types = const [
+    CompoundValueComparableBuilders,
+    _$CompoundValueComparableBuilders
+  ];
+  @override
+  final String wireName = 'CompoundValueComparableBuilders';
+
+  @override
+  Iterable serialize(
+      Serializers serializers, CompoundValueComparableBuilders object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'simpleValue',
+      serializers.serialize(object.simpleValue,
+          specifiedType: const FullType(SimpleValue)),
+    ];
+    if (object.validatedValue != null) {
+      result
+        ..add('validatedValue')
+        ..add(serializers.serialize(object.validatedValue,
+            specifiedType: const FullType(ValidatedValue)));
+    }
+
+    return result;
+  }
+
+  @override
+  CompoundValueComparableBuilders deserialize(
+      Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new CompoundValueComparableBuildersBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -1154,6 +1213,118 @@ class CompoundValueNoNestingBuilder
             simpleValue: simpleValue, validatedValue: validatedValue);
     replace(_$result);
     return _$result;
+  }
+}
+
+class _$CompoundValueComparableBuilders
+    extends CompoundValueComparableBuilders {
+  @override
+  final SimpleValue simpleValue;
+  @override
+  final ValidatedValue validatedValue;
+
+  factory _$CompoundValueComparableBuilders(
+          [void updates(CompoundValueComparableBuildersBuilder b)]) =>
+      (new CompoundValueComparableBuildersBuilder()..update(updates)).build();
+
+  _$CompoundValueComparableBuilders._({this.simpleValue, this.validatedValue})
+      : super._() {
+    if (simpleValue == null) {
+      throw new BuiltValueNullFieldError(
+          'CompoundValueComparableBuilders', 'simpleValue');
+    }
+  }
+
+  @override
+  CompoundValueComparableBuilders rebuild(
+          void updates(CompoundValueComparableBuildersBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  CompoundValueComparableBuildersBuilder toBuilder() =>
+      new CompoundValueComparableBuildersBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is CompoundValueComparableBuilders &&
+        simpleValue == other.simpleValue &&
+        validatedValue == other.validatedValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('CompoundValueComparableBuilders')
+          ..add('simpleValue', simpleValue)
+          ..add('validatedValue', validatedValue))
+        .toString();
+  }
+}
+
+class CompoundValueComparableBuildersBuilder
+    implements
+        Builder<CompoundValueComparableBuilders,
+            CompoundValueComparableBuildersBuilder> {
+  _$CompoundValueComparableBuilders _$v;
+
+  SimpleValue _simpleValue;
+  SimpleValue get simpleValue => _$this._simpleValue;
+  set simpleValue(SimpleValue simpleValue) => _$this._simpleValue = simpleValue;
+
+  ValidatedValue _validatedValue;
+  ValidatedValue get validatedValue => _$this._validatedValue;
+  set validatedValue(ValidatedValue validatedValue) =>
+      _$this._validatedValue = validatedValue;
+
+  CompoundValueComparableBuildersBuilder();
+
+  CompoundValueComparableBuildersBuilder get _$this {
+    if (_$v != null) {
+      _simpleValue = _$v.simpleValue;
+      _validatedValue = _$v.validatedValue;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(CompoundValueComparableBuilders other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$CompoundValueComparableBuilders;
+  }
+
+  @override
+  void update(void updates(CompoundValueComparableBuildersBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$CompoundValueComparableBuilders build() {
+    final _$result = _$v ??
+        new _$CompoundValueComparableBuilders._(
+            simpleValue: simpleValue, validatedValue: validatedValue);
+    replace(_$result);
+    return _$result;
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is CompoundValueComparableBuildersBuilder &&
+        simpleValue == other.simpleValue &&
+        validatedValue == other.validatedValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
   }
 }
 

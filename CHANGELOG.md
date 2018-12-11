@@ -7,6 +7,7 @@
 - Stop checking for import of `built_value.dart` when `EnumClass` is used; this
   was expensive.
 - Support dollar signs in enum value names.
+- Add an option to `@BuiltValue` to generate comparable builders.
 - Add serializer for `Duration` fields.
 - Add ignore for `avoid_as` lint to generated code.
 - Put ignored lints on a single line at the end of the generated output.

@@ -181,6 +181,24 @@ void main() {
     });
   });
 
+  group('CompoundValueComparableBuilders', () {
+    test('builder implements operator==', () {
+      final left = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+      final right = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+      expect(left.toBuilder() == right.toBuilder(), true);
+    });
+
+    test('builder implements hashCode', () {
+      final left = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+      final right = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+      expect(left.toBuilder().hashCode == right.toBuilder().hashCode, true);
+    });
+  });
+
   group('DerivedValue', () {
     test('caches derivedValue', () {
       final value = new DerivedValue((b) => b..anInt = 7);
