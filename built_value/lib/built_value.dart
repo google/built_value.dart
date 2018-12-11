@@ -76,12 +76,22 @@ class BuiltValue {
   /// builder.
   final bool nestedBuilders;
 
+  /// Whether builders should implement `operator==` and `hashCode`, making
+  /// them comparable.
+  ///
+  /// May only be used with `nestedBuilders: false` and if the builder class
+  /// is fully generated.
+  final bool comparableBuilders;
+
   /// The wire name when the class is serialized. Defaults to `null` which
   /// indicates that the name is to be taken from the literal class name.
   final String wireName;
 
   const BuiltValue(
-      {this.instantiable = true, this.nestedBuilders = true, this.wireName});
+      {this.instantiable = true,
+      this.nestedBuilders = true,
+      this.comparableBuilders = false,
+      this.wireName});
 }
 
 /// Nullable annotation for Built Value fields.

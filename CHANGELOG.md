@@ -6,6 +6,7 @@
 - Fix generation when new `mixin` declarations are used.
 - Stop checking for import of `built_value.dart` when `EnumClass` is used; this
   was expensive.
+- Add an option to `@BuiltValue` to generate comparable builders.
 
 # 6.1.6
 

@@ -620,6 +620,20 @@ abstract class Value implements Built<Value, ValueBuilder> {
                 'The current type, "Set", is not allowed '
                 'because it is mutable.')));
   });
+
+  test('rejects comparableBuilders with nestedBuilders', () async {
+    expect(
+        await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+@BuiltValue(comparableBuilders: true)
+abstract class Value implements Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  }'''),
+        contains(
+            '1. Set `nestedBuilders: false` in order to use `comparableBuilders: true`.'));
+  });
 }
 
 // Test setup.
@@ -667,11 +681,15 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
 }
 
 class BuiltValue {
+  final bool comparableBuilders;
   final bool instantiable;
   final bool nestedBuilders;
   final String wireName;
 
   const BuiltValue({
-      this.instantiable: true, this.nestedBuilders: true, this.wireName});
+      this.comparableBuilders: false,
+      this.instantiable: true,
+      this.nestedBuilders: true,
+      this.wireName});
 }
 ''';
