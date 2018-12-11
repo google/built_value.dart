@@ -120,6 +120,14 @@ abstract class Serializers {
   /// calling [deserialize] with a `specifiedType`.
   T deserializeWith<T>(Serializer<T> serializer, Object serialized);
 
+  /// Gets a serializer; returns `null` if none is found. For use in plugins
+  /// and other extension code.
+  Serializer serializerForType(Type type);
+
+  /// Gets a serializer; returns `null` if none is found. For use in plugins
+  /// and other extension code.
+  Serializer serializerForWireName(String wireName);
+
   /// Creates a new builder for the type represented by [fullType].
   ///
   /// For example, if [fullType] is `BuiltList<int, String>`, returns a

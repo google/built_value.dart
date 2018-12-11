@@ -7,6 +7,7 @@
 - Stop checking for import of `built_value.dart` when `EnumClass` is used; this
   was expensive.
 - Support dollar signs in enum value names.
+- Add `serializerForType` and `serializerForWireName` methods to `Serializers`.
 
 # 6.1.6
 
