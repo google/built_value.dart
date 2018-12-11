@@ -56,7 +56,7 @@ class BuiltJsonSerializers implements Serializers {
 
   Object _serialize(Object object, FullType specifiedType) {
     if (specifiedType.isUnspecified) {
-      final serializer = _getSerializerByType(object.runtimeType);
+      final serializer = serializerForType(object.runtimeType);
       if (serializer == null) {
         throw new StateError("No serializer for '${object.runtimeType}'.");
       }
@@ -73,7 +73,7 @@ class BuiltJsonSerializers implements Serializers {
             'serializer must be StructuredSerializer or PrimitiveSerializer');
       }
     } else {
-      final serializer = _getSerializerByType(specifiedType.root);
+      final serializer = serializerForType(specifiedType.root);
       if (serializer == null) {
         // Might be an interface; try resolving using the runtime type.
         return serialize(object);
@@ -111,7 +111,7 @@ class BuiltJsonSerializers implements Serializers {
     if (specifiedType.isUnspecified) {
       final String wireName = (object as List).first as String;
 
-      final serializer = _wireNameToSerializer[wireName];
+      final serializer = serializerForWireName(wireName);
       if (serializer == null) {
         throw new StateError("No serializer for '$wireName'.");
       }
@@ -133,7 +133,7 @@ class BuiltJsonSerializers implements Serializers {
             'serializer must be StructuredSerializer or PrimitiveSerializer');
       }
     } else {
-      final serializer = _getSerializerByType(specifiedType.root);
+      final serializer = serializerForType(specifiedType.root);
       if (serializer == null) {
         if (object is List && object.first is String) {
           // Might be an interface; try resolving using the type on the wire.
@@ -165,6 +165,14 @@ class BuiltJsonSerializers implements Serializers {
   }
 
   @override
+  Serializer serializerForType(Type type) =>
+      _typeToSerializer[type] ?? _typeNameToSerializer[_getRawName(type)];
+
+  @override
+  Serializer serializerForWireName(String wireName) =>
+      _wireNameToSerializer[wireName];
+
+  @override
   Object newBuilder(FullType fullType) {
     final builderFactory = _builderFactories[fullType];
     if (builderFactory == null) _throwMissingBuilderFactory(fullType);
@@ -194,10 +202,6 @@ class BuiltJsonSerializers implements Serializers {
         _typeNameToSerializer.toBuilder(),
         _builderFactories.toBuilder(),
         _plugins.toBuilder());
-  }
-
-  Serializer _getSerializerByType(Type type) {
-    return _typeToSerializer[type] ?? _typeNameToSerializer[_getRawName(type)];
   }
 }
 
