@@ -104,9 +104,27 @@ final BuiltSet<WireNameEnum> _$wireValues =
   _$wireDefinitely,
 ]);
 
+const DollarValueEnum _$value$ = const DollarValueEnum._('value\$');
+
+DollarValueEnum _$dollarValueOf(String name) {
+  switch (name) {
+    case 'value\$':
+      return _$value$;
+    default:
+      throw new ArgumentError(name);
+  }
+}
+
+final BuiltSet<DollarValueEnum> _$dollarValues =
+    new BuiltSet<DollarValueEnum>(const <DollarValueEnum>[
+  _$value$,
+]);
+
 Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
 Serializer<WireNameEnum> _$wireNameEnumSerializer =
     new _$WireNameEnumSerializer();
+Serializer<DollarValueEnum> _$dollarValueEnumSerializer =
+    new _$DollarValueEnumSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   @override
@@ -151,4 +169,22 @@ class _$WireNameEnumSerializer implements PrimitiveSerializer<WireNameEnum> {
   WireNameEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
       WireNameEnum.valueOf(_fromWire[serialized] ?? serialized as String);
+}
+
+class _$DollarValueEnumSerializer
+    implements PrimitiveSerializer<DollarValueEnum> {
+  @override
+  final Iterable<Type> types = const <Type>[DollarValueEnum];
+  @override
+  final String wireName = 'DollarValueEnum';
+
+  @override
+  Object serialize(Serializers serializers, DollarValueEnum object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      object.name;
+
+  @override
+  DollarValueEnum deserialize(Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      DollarValueEnum.valueOf(serialized as String);
 }

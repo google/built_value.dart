@@ -54,3 +54,16 @@ class WireNameEnum extends EnumClass {
   static BuiltSet<WireNameEnum> get values => _$wireValues;
   static WireNameEnum valueOf(String name) => _$wireValueOf(name);
 }
+
+// Check escaping for dollar sign in enum values.
+class DollarValueEnum extends EnumClass {
+  static Serializer<DollarValueEnum> get serializer =>
+      _$dollarValueEnumSerializer;
+
+  static const DollarValueEnum value$ = _$value$;
+
+  const DollarValueEnum._(String name) : super(name);
+
+  static BuiltSet<DollarValueEnum> get values => _$dollarValues;
+  static DollarValueEnum valueOf(String name) => _$dollarValueOf(name);
+}
