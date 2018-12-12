@@ -74,21 +74,21 @@ abstract class _$TestEnumMixin {
 void main() {
   group('generator', () {
     test('produces correct output for correct input', () async {
-      expect(await generate(correctInput), endsWith(correctOutput));
+      expect(await generate(correctInput), contains(correctOutput));
     });
 
     test('produces two correct output for two correct inputs', () async {
       expect(
           await generateTwo(correctInput,
               correctInput.replaceAll('test_enum', 'test_enum_two')),
-          endsWith(correctOutput.replaceAll('test_enum', 'test_enum_two')));
+          contains(correctOutput.replaceAll('test_enum', 'test_enum_two')));
     });
 
     test('allows part statement with double quotes', () async {
       expect(
           await generate(correctInput.replaceAll(
               "part 'test_enum.g.dart'", 'part "test_enum.g.dart"')),
-          endsWith(correctOutput));
+          contains(correctOutput));
     });
 
     test('ignores fields of different type', () async {
@@ -97,7 +97,7 @@ void main() {
               'class TestEnum extends EnumClass {',
               'class TestEnum extends EnumClass {\n'
               '  static const int anInt = 3;')),
-          endsWith(correctOutput));
+          contains(correctOutput));
     });
 
     test('fails on dynamic fields', () async {
@@ -106,7 +106,7 @@ void main() {
               'class TestEnum extends EnumClass {',
               'class TestEnum extends EnumClass {\n'
               '  static const aNull = null;')),
-          endsWith(r'''Please make the following changes to use EnumClass:
+          contains(r'''Please make the following changes to use EnumClass:
 
 1. Specify a type for field "aNull".'''));
     });
@@ -205,7 +205,7 @@ class TestEnum extends EnumClass {
 }
 
 abstract class TestEnumMixin = Object with _$TestEnumMixin;
-'''), endsWith(correctOutput));
+'''), contains(correctOutput));
     });
 
     test('matches generated names to rhs for field names', () async {
@@ -226,7 +226,7 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''
+'''), contains(r'''
 const TestEnum _$no = const TestEnum._('yes');
 const TestEnum _$maybe = const TestEnum._('no');
 const TestEnum _$yes = const TestEnum._('maybe');
@@ -270,7 +270,7 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$vls;
   static TestEnum valueOf(String name) => _$vlOf(name);
 }
-'''), endsWith(r'''
+'''), contains(r'''
 const TestEnum _$yes = const TestEnum._('yes');
 const TestEnum _$no = const TestEnum._('no');
 const TestEnum _$maybe = const TestEnum._('maybe');
@@ -346,7 +346,7 @@ class TestEnum extends EnumClass {
       expect(
           await generateTwo(correctInput,
               correctInput.replaceAll('test_enum', 'test_enum_two')),
-          endsWith(correctOutput.replaceAll('test_enum', 'test_enum_two')));
+          contains(correctOutput.replaceAll('test_enum', 'test_enum_two')));
     });
 
     test('fails with error on missing constructor', () async {
@@ -531,7 +531,7 @@ class TestEnum extends EnumClass {
 }
 
 abstract class TestEnumMixin = Object with _$TestEnumMixin;
-'''), endsWith(correctOutput));
+'''), contains(correctOutput));
     });
   });
 }
