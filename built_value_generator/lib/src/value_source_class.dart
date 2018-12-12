@@ -307,6 +307,9 @@ abstract class ValueSourceClass
   }
 
   Iterable<GeneratorError> _checkSettings() {
+    // Not allowed to have comparable builders with nested builders; this
+    // would break comparing because the nested builders may not be comparable.
+    // (Collection builders, in particularly, are definitely not comparable).
     if (settings.comparableBuilders && settings.nestedBuilders) {
       return [
         new GeneratorError((b) => b
@@ -913,7 +916,9 @@ abstract class ValueSourceClass
     } else {
       result.writeln(r'return $jf(');
       result.writeln(r'$jc(' * comparedFields.length);
-      result.writeln('0, ');
+      // Use a different seed for builders than for values, so they do not have
+      // identical hashCodes if the values are identical.
+      result.writeln(forBuilder ? '1, ' : '0, ');
       result.write(
           comparedFields.map((field) => '${field.name}.hashCode').join('), '));
       result.writeln('));');

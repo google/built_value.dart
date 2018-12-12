@@ -1324,7 +1324,7 @@ class CompoundValueComparableBuildersBuilder
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
+    return $jf($jc($jc(1, simpleValue.hashCode), validatedValue.hashCode));
   }
 }
 
