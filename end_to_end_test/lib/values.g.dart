@@ -1295,6 +1295,107 @@ class _$CompoundValueExplicitNoNestingBuilder
   }
 }
 
+class _$ExplicitNestedList extends ExplicitNestedList {
+  @override
+  final BuiltList<BuiltList<int>> nestedList;
+
+  factory _$ExplicitNestedList([void updates(ExplicitNestedListBuilder b)]) =>
+      (new ExplicitNestedListBuilder()..update(updates)).build()
+          as _$ExplicitNestedList;
+
+  _$ExplicitNestedList._({this.nestedList}) : super._() {
+    if (nestedList == null) {
+      throw new BuiltValueNullFieldError('ExplicitNestedList', 'nestedList');
+    }
+  }
+
+  @override
+  ExplicitNestedList rebuild(void updates(ExplicitNestedListBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$ExplicitNestedListBuilder toBuilder() =>
+      new _$ExplicitNestedListBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ExplicitNestedList && nestedList == other.nestedList;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, nestedList.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ExplicitNestedList')
+          ..add('nestedList', nestedList))
+        .toString();
+  }
+}
+
+class _$ExplicitNestedListBuilder extends ExplicitNestedListBuilder {
+  _$ExplicitNestedList _$v;
+
+  @override
+  ListBuilder<BuiltList<int>> get nestedList {
+    _$this;
+    return super.nestedList ??= new ListBuilder<BuiltList<int>>();
+  }
+
+  @override
+  set nestedList(ListBuilder<BuiltList<int>> nestedList) {
+    _$this;
+    super.nestedList = nestedList;
+  }
+
+  _$ExplicitNestedListBuilder() : super._();
+
+  ExplicitNestedListBuilder get _$this {
+    if (_$v != null) {
+      super.nestedList = _$v.nestedList?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ExplicitNestedList other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$ExplicitNestedList;
+  }
+
+  @override
+  void update(void updates(ExplicitNestedListBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ExplicitNestedList build() {
+    _$ExplicitNestedList _$result;
+    try {
+      _$result =
+          _$v ?? new _$ExplicitNestedList._(nestedList: nestedList.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'nestedList';
+        nestedList.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ExplicitNestedList', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$DerivedValue extends DerivedValue {
   @override
   final int anInt;

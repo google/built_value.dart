@@ -9,6 +9,7 @@
 - Support dollar signs in enum value names.
 - Add serializer for `Duration` fields.
 - Add `serializerForType` and `serializerForWireName` methods to `Serializers`.
+- Fix nested collections when using a custom builder.
 
 # 6.1.6
 

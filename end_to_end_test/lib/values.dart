@@ -83,6 +83,24 @@ abstract class CompoundValueExplicitNoNestingBuilder
   CompoundValueExplicitNoNestingBuilder._();
 }
 
+// Check that nested collections work with a manually declared builder.
+abstract class ExplicitNestedList
+    implements Built<ExplicitNestedList, ExplicitNestedListBuilder> {
+  BuiltList<BuiltList<int>> get nestedList;
+
+  factory ExplicitNestedList([updates(ExplicitNestedListBuilder b)]) =
+      _$ExplicitNestedList;
+  ExplicitNestedList._();
+}
+
+abstract class ExplicitNestedListBuilder
+    implements Builder<ExplicitNestedList, ExplicitNestedListBuilder> {
+  ListBuilder<BuiltList<int>> nestedList;
+
+  factory ExplicitNestedListBuilder() = _$ExplicitNestedListBuilder;
+  ExplicitNestedListBuilder._();
+}
+
 abstract class DerivedValue
     implements Built<DerivedValue, DerivedValueBuilder> {
   int get anInt;
