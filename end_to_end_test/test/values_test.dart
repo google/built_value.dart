@@ -181,6 +181,43 @@ void main() {
     });
   });
 
+  group('CompoundValueComparableBuilders', () {
+    test('builder implements operator==', () {
+      final left = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+      final right = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+      expect(left.toBuilder() == right.toBuilder(), true);
+    });
+
+    test('built does not equal builder', () {
+      final value = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+
+      /// ignore: unrelated_type_equality_checks
+      expect(value == value.toBuilder(), false);
+    });
+
+    test('builder implements hashCode', () {
+      final left = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+      final right = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+      expect(left.toBuilder().hashCode == right.toBuilder().hashCode, true);
+    });
+
+    test('built hashCode does not equal builder hashCode', () {
+      final value = new CompoundValueComparableBuilders(
+          (b) => b..simpleValue = new SimpleValue((b) => b..anInt = 1));
+
+      // It's not actually required that the hash codes differ; but since
+      // they are not equal, it's better if the hash codes _do_ differ. This
+      // helps performance if you put both built and builder in a hash set or
+      // map.
+      expect(value.hashCode, isNot(value.toBuilder().hashCode));
+    });
+  });
+
   group('DerivedValue', () {
     test('caches derivedValue', () {
       final value = new DerivedValue((b) => b..anInt = 7);

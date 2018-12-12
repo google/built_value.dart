@@ -109,10 +109,16 @@ abstract class ValueSourceClass
         .where((value) => value?.type?.displayName == 'BuiltValue');
     if (annotations.isEmpty) return const BuiltValue();
     final annotation = annotations.single;
+    // If a field does not exist, that means an old `built_value` version; use
+    // the default.
     return new BuiltValue(
-        instantiable: annotation.getField('instantiable').toBoolValue(),
-        nestedBuilders: annotation.getField('nestedBuilders').toBoolValue(),
-        wireName: annotation.getField('wireName').toStringValue());
+        comparableBuilders:
+            annotation.getField('comparableBuilders')?.toBoolValue() ?? false,
+        instantiable:
+            annotation.getField('instantiable')?.toBoolValue() ?? true,
+        nestedBuilders:
+            annotation.getField('nestedBuilders')?.toBoolValue() ?? true,
+        wireName: annotation.getField('wireName')?.toStringValue());
   }
 
   @memoized
@@ -269,6 +275,7 @@ abstract class ValueSourceClass
   Iterable<GeneratorError> computeErrors() {
     return concat([
       _checkPart(),
+      _checkSettings(),
       _checkValueClass(),
       _checkBuilderClass(),
       _checkFieldList(),
@@ -296,6 +303,21 @@ abstract class ValueSourceClass
           ..length = 0
           ..fix = '\n\n$partStatement\n\n')
       ];
+    }
+  }
+
+  Iterable<GeneratorError> _checkSettings() {
+    // Not allowed to have comparable builders with nested builders; this
+    // would break comparing because the nested builders may not be comparable.
+    // (Collection builders, in particularly, are definitely not comparable).
+    if (settings.comparableBuilders && settings.nestedBuilders) {
+      return [
+        new GeneratorError((b) => b
+          ..message = 'Set `nestedBuilders: false`'
+              ' in order to use `comparableBuilders: true`.')
+      ];
+    } else {
+      return [];
     }
   }
 
@@ -635,44 +657,7 @@ abstract class ValueSourceClass
     }
     result.writeln();
 
-    final comparedFields =
-        fields.where((field) => field.builtValueField.compare).toList();
-    final comparedFunctionFields =
-        comparedFields.where((field) => field.isFunctionType).toList();
-    result.writeln('@override');
-    result.writeln('bool operator==(Object other) {');
-    result.writeln('  if (identical(other, this)) return true;');
-    if (comparedFunctionFields.isNotEmpty) {
-      result.writeln('  final _\$dynamicOther = other as dynamic;');
-    }
-    result.writeln('  return other is $name');
-    if (comparedFields.isNotEmpty) {
-      result.writeln('&&');
-      result.writeln(comparedFields
-          .map((field) => field.isFunctionType
-              ? '${field.name} == _\$dynamicOther.${field.name}'
-              : '${field.name} == other.${field.name}')
-          .join('&&'));
-    }
-    result.writeln(';');
-    result.writeln('}');
-    result.writeln();
-
-    result.writeln('@override');
-    result.writeln('int get hashCode {');
-
-    if (comparedFields.length == 0) {
-      result.writeln('return ${name.hashCode};');
-    } else {
-      result.writeln(r'return $jf(');
-      result.writeln(r'$jc(' * comparedFields.length);
-      result.writeln('0, ');
-      result.write(
-          comparedFields.map((field) => '${field.name}.hashCode').join('), '));
-      result.writeln('));');
-    }
-    result.writeln('}');
-    result.writeln();
+    result.write(_generateEqualsAndHashcode());
 
     // Only generate toString() if there wasn't one already.
     if (!implementsToString) {
@@ -886,7 +871,60 @@ abstract class ValueSourceClass
     result.writeln('replace(_\$result);');
     result.writeln('return _\$result;');
     result.writeln('}');
+
+    if (settings.comparableBuilders) {
+      result.write(_generateEqualsAndHashcode(forBuilder: true));
+    }
+
     result.writeln('}');
+
+    return result.toString();
+  }
+
+  String _generateEqualsAndHashcode({bool forBuilder = false}) {
+    final result = StringBuffer();
+
+    final comparedFields =
+        fields.where((field) => field.builtValueField.compare).toList();
+    final comparedFunctionFields =
+        comparedFields.where((field) => field.isFunctionType).toList();
+    result.writeln('@override');
+    result.writeln('bool operator==(Object other) {');
+    result.writeln('  if (identical(other, this)) return true;');
+
+    if (comparedFunctionFields.isNotEmpty) {
+      result.writeln('  final _\$dynamicOther = other as dynamic;');
+    }
+    result.writeln('  return other is $name${forBuilder ? 'Builder' : ''}');
+    if (comparedFields.isNotEmpty) {
+      result.writeln('&&');
+      result.writeln(comparedFields
+          .map((field) => field.isFunctionType
+              ? '${field.name} == _\$dynamicOther.${field.name}'
+              : '${field.name} == other.${field.name}')
+          .join('&&'));
+    }
+    result.writeln(';');
+    result.writeln('}');
+    result.writeln();
+
+    result.writeln('@override');
+    result.writeln('int get hashCode {');
+
+    if (comparedFields.length == 0) {
+      result.writeln('return ${name.hashCode};');
+    } else {
+      result.writeln(r'return $jf(');
+      result.writeln(r'$jc(' * comparedFields.length);
+      // Use a different seed for builders than for values, so they do not have
+      // identical hashCodes if the values are identical.
+      result.writeln(forBuilder ? '1, ' : '0, ');
+      result.write(
+          comparedFields.map((field) => '${field.name}.hashCode').join('), '));
+      result.writeln('));');
+    }
+    result.writeln('}');
+    result.writeln();
 
     return result.toString();
   }
