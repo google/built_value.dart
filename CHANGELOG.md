@@ -1,17 +1,25 @@
 # Changelog
 
-# 6.1.7
+# 6.2.0
+
+New features:
+
+- Add an option to `@BuiltValue` to generate comparable builders.
+- Add serializer for `Duration` fields.
+- Add `serializerForType` and `serializerForWireName` methods to `Serializers`.
+
+Improvements:
+
+- Add ignore for `avoid_as` lint to generated code.
+- Put ignored lints on a single line at the end of the generated output.
+- Stop checking for import of `built_value.dart` when `EnumClass` is used; this
+  was expensive.
+
+Fixes:
 
 - Fix tests following changes to source_gen error output.
 - Fix generation when new `mixin` declarations are used.
-- Stop checking for import of `built_value.dart` when `EnumClass` is used; this
-  was expensive.
 - Support dollar signs in enum value names.
-- Add an option to `@BuiltValue` to generate comparable builders.
-- Add serializer for `Duration` fields.
-- Add ignore for `avoid_as` lint to generated code.
-- Put ignored lints on a single line at the end of the generated output.
-- Add `serializerForType` and `serializerForWireName` methods to `Serializers`.
 - Fix nested collections when using a custom builder.
 
 # 6.1.6
