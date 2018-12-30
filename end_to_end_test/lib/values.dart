@@ -473,3 +473,18 @@ class ValueWithCustomSerializerSerializer
     return object.value;
   }
 }
+
+// ignore: camel_case_types
+abstract class Value_With_Underscore_In_Name
+    implements
+        Built<Value_With_Underscore_In_Name,
+            Value_With_Underscore_In_NameBuilder> {
+  static Serializer<Value_With_Underscore_In_Name> get serializer =>
+      _$value_With_Underscore_In_NameSerializer;
+  int get anInt;
+
+  factory Value_With_Underscore_In_Name(
+          [updates(Value_With_Underscore_In_NameBuilder b)]) =
+      _$Value_With_Underscore_In_Name;
+  Value_With_Underscore_In_Name._();
+}

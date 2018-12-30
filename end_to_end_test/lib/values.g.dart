@@ -45,6 +45,9 @@ Serializer<RecursiveValueA> _$recursiveValueASerializer =
     new _$RecursiveValueASerializer();
 Serializer<RecursiveValueB> _$recursiveValueBSerializer =
     new _$RecursiveValueBSerializer();
+Serializer<Value_With_Underscore_In_Name>
+    _$value_With_Underscore_In_NameSerializer =
+    new _$Value_With_Underscore_In_NameSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -962,6 +965,51 @@ class _$RecursiveValueBSerializer
           result.value.replace(serializers.deserialize(value,
                   specifiedType: const FullType(RecursiveValueA))
               as RecursiveValueA);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$Value_With_Underscore_In_NameSerializer
+    implements StructuredSerializer<Value_With_Underscore_In_Name> {
+  @override
+  final Iterable<Type> types = const [
+    Value_With_Underscore_In_Name,
+    _$Value_With_Underscore_In_Name
+  ];
+  @override
+  final String wireName = 'Value_With_Underscore_In_Name';
+
+  @override
+  Iterable serialize(
+      Serializers serializers, Value_With_Underscore_In_Name object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'anInt',
+      serializers.serialize(object.anInt, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  Value_With_Underscore_In_Name deserialize(
+      Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new Value_With_Underscore_In_NameBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'anInt':
+          result.anInt = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -3628,6 +3676,90 @@ class ValueWithCustomSerializerBuilder
   @override
   _$ValueWithCustomSerializer build() {
     final _$result = _$v ?? new _$ValueWithCustomSerializer._(value: value);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$Value_With_Underscore_In_Name extends Value_With_Underscore_In_Name {
+  @override
+  final int anInt;
+
+  factory _$Value_With_Underscore_In_Name(
+          [void updates(Value_With_Underscore_In_NameBuilder b)]) =>
+      (new Value_With_Underscore_In_NameBuilder()..update(updates)).build();
+
+  _$Value_With_Underscore_In_Name._({this.anInt}) : super._() {
+    if (anInt == null) {
+      throw new BuiltValueNullFieldError(
+          'Value_With_Underscore_In_Name', 'anInt');
+    }
+  }
+
+  @override
+  Value_With_Underscore_In_Name rebuild(
+          void updates(Value_With_Underscore_In_NameBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  Value_With_Underscore_In_NameBuilder toBuilder() =>
+      new Value_With_Underscore_In_NameBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Value_With_Underscore_In_Name && anInt == other.anInt;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, anInt.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Value_With_Underscore_In_Name')
+          ..add('anInt', anInt))
+        .toString();
+  }
+}
+
+class Value_With_Underscore_In_NameBuilder
+    implements
+        Builder<Value_With_Underscore_In_Name,
+            Value_With_Underscore_In_NameBuilder> {
+  _$Value_With_Underscore_In_Name _$v;
+
+  int _anInt;
+  int get anInt => _$this._anInt;
+  set anInt(int anInt) => _$this._anInt = anInt;
+
+  Value_With_Underscore_In_NameBuilder();
+
+  Value_With_Underscore_In_NameBuilder get _$this {
+    if (_$v != null) {
+      _anInt = _$v.anInt;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Value_With_Underscore_In_Name other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$Value_With_Underscore_In_Name;
+  }
+
+  @override
+  void update(void updates(Value_With_Underscore_In_NameBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Value_With_Underscore_In_Name build() {
+    final _$result = _$v ?? new _$Value_With_Underscore_In_Name._(anInt: anInt);
     replace(_$result);
     return _$result;
   }

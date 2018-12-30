@@ -337,4 +337,28 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('Value_With_Underscore_In_Name', () {
+    final data = new Value_With_Underscore_In_Name((b) => b..anInt = 1);
+    final serialized = [
+      'Value_With_Underscore_In_Name',
+      'anInt',
+      1,
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+
+    test('underscore in class name matches serializer declaration', () {
+      expect(
+          serializers.serialize(serialized),
+          contains(
+              r'Serializer<Value_With_Underscore_In_Name> _$value_With_Underscore_In_NameSerializer ='));
+    });
+  });
 }

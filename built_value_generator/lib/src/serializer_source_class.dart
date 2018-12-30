@@ -246,7 +246,8 @@ abstract class SerializerSourceClass
   }
 
   String generateSerializerDeclaration() {
-    final camelCaseName = _toCamelCase(name);
+    final camelCaseName =
+        name.substring(0, 1).toLowerCase() + name.substring(1);
     return 'Serializer<$name> '
         '_\$${camelCaseName}Serializer = '
         'new _\$${name}Serializer();';
@@ -453,23 +454,5 @@ case '${escapeString(field.wireName)}':
 ''';
       }
     }).join('');
-  }
-
-  static String _toCamelCase(String name) {
-    var result = '';
-    var upperCase = false;
-    var firstCharacter = true;
-    for (final char in name.split('')) {
-      if (char == '_') {
-        upperCase = true;
-      } else {
-        result += firstCharacter
-            ? char.toLowerCase()
-            : (upperCase ? char.toUpperCase() : char);
-        upperCase = false;
-        firstCharacter = false;
-      }
-    }
-    return result;
   }
 }
