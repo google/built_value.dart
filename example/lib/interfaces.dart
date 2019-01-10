@@ -7,7 +7,6 @@ library interfaces;
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:meta/meta.dart';
 
 part 'interfaces.g.dart';
 
@@ -46,9 +45,7 @@ abstract class ValueWithInt
 /// Builder class for [ValueWithInt].
 abstract class ValueWithIntBuilder
     implements Builder<ValueWithInt, ValueWithIntBuilder> {
-  @virtual
   int anInt;
-  @virtual
   String note;
 
   factory ValueWithIntBuilder() = _$ValueWithIntBuilder;
