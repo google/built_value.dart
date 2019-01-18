@@ -480,8 +480,9 @@ abstract class Value implements Built<Value, ValueBuilder> {
               'already specifying a type, please make sure the type is correctly imported.'));
     });
 
-    test('suggests builder fields must be getters', () async {
-      expect(await generate('''library value;
+    test('suggests builder fields must be normal fields', () async {
+      expect(
+          await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
@@ -493,7 +494,9 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   int get foo;
-}'''), contains("1. Make builder field foo a normal field."));
+}'''),
+          contains('1. Make builder field foo a normal field or a '
+              'getter/setter pair.'));
     });
 
     test('suggests builder fields must be in sync', () async {

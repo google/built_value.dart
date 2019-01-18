@@ -116,6 +116,11 @@ abstract class ValueSourceField
       builderElement.getter.isSynthetic;
 
   @memoized
+  bool get builderFieldIsGetterSetterPair =>
+      builderFieldExists &&
+      (builderElement.getter != null && builderElement.setter != null);
+
+  @memoized
   String get buildElementType {
     // Try to get a resolved type first, it's faster.
     final result = builderElement.getter?.returnType?.displayName;
@@ -216,9 +221,13 @@ abstract class ValueSourceField
       }
     }
 
-    if (builderFieldExists && !builderFieldIsNormalField) {
-      result.add(new GeneratorError(
-          (b) => b..message = 'Make builder field $name a normal field.'));
+    if (builderFieldExists &&
+        !builderFieldIsNormalField &&
+        !builderFieldIsGetterSetterPair) {
+      result.add(new GeneratorError((b) => b
+        ..message =
+            'Make builder field $name a normal field or a getter/setter '
+            'pair.'));
     }
 
     return result;

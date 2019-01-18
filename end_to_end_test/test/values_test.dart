@@ -278,6 +278,17 @@ void main() {
     });
   });
 
+  group(ValueWithBuilderSmarts, () {
+    test('can be instantiated', () {
+      ValueWithBuilderSmarts((b) => b..value = 'hi');
+    });
+
+    test('validates on set', () {
+      expect(() => ValueWithBuilderSmarts((b) => b..value = 'not allowed'),
+          throwsA(const TypeMatcher<ArgumentError>()));
+    });
+  });
+
   group('ValueUsingImportAs', () {
     test('can be instantiated', () {
       new ValueUsingImportAs((b) => b..value = TestEnum.yes);

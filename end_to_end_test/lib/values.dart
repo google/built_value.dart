@@ -188,6 +188,28 @@ abstract class ValueWithDefaultsBuilder
   ValueWithDefaultsBuilder._();
 }
 
+abstract class ValueWithBuilderSmarts
+    implements Built<ValueWithBuilderSmarts, ValueWithBuilderSmartsBuilder> {
+  String get value;
+
+  factory ValueWithBuilderSmarts([updates(ValueWithBuilderSmartsBuilder b)]) =
+      _$ValueWithBuilderSmarts;
+  ValueWithBuilderSmarts._();
+}
+
+abstract class ValueWithBuilderSmartsBuilder
+    implements Builder<ValueWithBuilderSmarts, ValueWithBuilderSmartsBuilder> {
+  String _value;
+  String get value => _value;
+  set value(String v) {
+    if (v == 'not allowed') throw ArgumentError('not allowed');
+    _value = v;
+  }
+
+  factory ValueWithBuilderSmartsBuilder() = _$ValueWithBuilderSmartsBuilder;
+  ValueWithBuilderSmartsBuilder._();
+}
+
 abstract class ValidatedValue
     implements Built<ValidatedValue, ValidatedValueBuilder> {
   static Serializer<ValidatedValue> get serializer =>
