@@ -118,6 +118,9 @@ abstract class ValueSourceClass
             annotation.getField('instantiable')?.toBoolValue() ?? true,
         nestedBuilders:
             annotation.getField('nestedBuilders')?.toBoolValue() ?? true,
+        autoCreateNestedBuilders:
+            annotation.getField('autoCreateNestedBuilders')?.toBoolValue() ??
+                true,
         wireName: annotation.getField('wireName')?.toStringValue());
   }
 
@@ -705,9 +708,13 @@ abstract class ValueSourceClass
         if (field.isNestedBuilder) {
           result.writeln('@override');
           result.writeln('$typeInBuilder get $name {'
-              '_\$this;'
-              'return super.$name ??= new $typeInBuilder();'
-              '}');
+              '_\$this;');
+          if (settings.autoCreateNestedBuilders) {
+            result.writeln('return super.$name ??= new $typeInBuilder();');
+          } else {
+            result.writeln('return super.$name;');
+          }
+          result.writeln('}');
           result.writeln('@override');
           result.writeln('set $name($typeInBuilder $name) {'
               '_\$this;'
@@ -735,8 +742,12 @@ abstract class ValueSourceClass
 
         if (field.isNestedBuilder) {
           result.writeln('$typeInBuilder _$name;');
-          result.writeln('$typeInBuilder get $name =>'
-              '_\$this._$name ??= new $typeInBuilder();');
+          result.writeln('$typeInBuilder get $name =>');
+          if (settings.autoCreateNestedBuilders) {
+            result.writeln('_\$this._$name ??= new $typeInBuilder();');
+          } else {
+            result.writeln('_\$this._$name;');
+          }
           result.writeln('set $name($typeInBuilder $name) =>'
               '_\$this._$name = $name;');
         } else {

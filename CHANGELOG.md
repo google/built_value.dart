@@ -3,6 +3,8 @@
 # 6.3.0
 
 - Allow custom builders to use setter/getter pairs instead of normal fields.
+- Add an option to `@BuiltValue` to turn off auto instantiation of nested
+  builders.
 
 # 6.2.0
 
