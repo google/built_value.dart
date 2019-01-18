@@ -41,6 +41,26 @@ abstract class SerializerSourceClass
   @memoized
   BuiltValue get builtValueSettings => new ValueSourceClass(element).settings;
 
+  @memoized
+  BuiltValueSerializer get serializerSettings {
+    final serializerFields =
+        element.fields.where((field) => field.name == 'serializer').toList();
+    if (serializerFields.isEmpty) return const BuiltValueSerializer();
+    final serializerField = serializerFields.single;
+    if (serializerField.getter == null) return const BuiltValueSerializer();
+
+    final annotations = serializerField.getter.metadata
+        .map((annotation) => annotation.computeConstantValue())
+        .where((value) => value?.type?.displayName == 'BuiltValueSerializer');
+    if (annotations.isEmpty) return const BuiltValueSerializer();
+
+    final annotation = annotations.single;
+    // If a field does not exist, that means an old `built_value` version; use
+    // the default.
+    return new BuiltValueSerializer(
+        custom: annotation.getField('custom')?.toBoolValue() ?? false);
+  }
+
   // TODO(davidmorgan): share common code in a nicer way.
   @memoized
   BuiltValueEnum get enumClassSettings =>
@@ -151,7 +171,7 @@ abstract class SerializerSourceClass
 
           if (sourceClass != this &&
               !result.build().contains(sourceClass) &&
-              sourceClass.needsBuiltJson) {
+              sourceClass.isSerializable) {
             result.add(sourceClass);
             result.replace(sourceClass._fieldClassesWith(result.build()));
           }
@@ -162,7 +182,7 @@ abstract class SerializerSourceClass
           new SerializerSourceClass(fieldElement.type.element as ClassElement);
       if (sourceClass != this &&
           !result.build().contains(sourceClass) &&
-          sourceClass.needsBuiltJson) {
+          sourceClass.isSerializable) {
         result.add(sourceClass);
         result.replace(sourceClass._fieldClassesWith(result.build()));
       }
@@ -177,14 +197,18 @@ abstract class SerializerSourceClass
 
   Iterable<String> computeErrors() {
     final result = <String>[];
-    final camelCaseName =
-        name.substring(0, 1).toLowerCase() + name.substring(1);
-    final expectedSerializerDeclaration =
-        'static Serializer<$name> get serializer => '
-        '_\$${camelCaseName}Serializer;';
-    if (serializerDeclaration != expectedSerializerDeclaration) {
-      result.add('Declare $name.serializer as: '
-          '$expectedSerializerDeclaration got $serializerDeclaration');
+
+    if (!serializerSettings.custom) {
+      final camelCaseName =
+          name.substring(0, 1).toLowerCase() + name.substring(1);
+
+      final expectedSerializerDeclaration =
+          'static Serializer<$name> get serializer => '
+          '_\$${camelCaseName}Serializer;';
+      if (serializerDeclaration != expectedSerializerDeclaration) {
+        result.add('Declare $name.serializer as: '
+            '$expectedSerializerDeclaration got $serializerDeclaration');
+      }
     }
 
     for (final field in fields) {
@@ -194,7 +218,11 @@ abstract class SerializerSourceClass
     return result;
   }
 
-  bool get needsBuiltJson => isBuiltValue || isEnumClass;
+  @memoized
+  bool get isSerializable => isBuiltValue || isEnumClass;
+
+  @memoized
+  bool get needsGeneratedSerializer => !serializerSettings.custom;
 
   String generateTransitiveSerializerAdder() {
     return '..add($name.serializer)';

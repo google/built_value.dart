@@ -131,7 +131,18 @@ class BuiltValueField {
       {this.compare = true, this.serialize = true, this.wireName});
 }
 
-/// Memoized annotation for Built Value getters and methods.
+/// Optionally, annotate a Built Value `Serializer` getters with this to
+/// specify settings. This is only needed for advanced use.
+class BuiltValueSerializer {
+  /// Set this to `true` to stop Built Value from generating a serializer for
+  /// you. The getter may then return any compatible `Serializer`. Defaults
+  /// to `false`.
+  final bool custom;
+
+  const BuiltValueSerializer({this.custom = false});
+}
+
+/// Memoized annotation for Built Value getters.
 ///
 /// Getters marked with this annotation are memoized: the result is calculated
 /// once on first access and stored in the instance.

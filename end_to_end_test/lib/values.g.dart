@@ -3551,4 +3551,86 @@ class RecursiveValueBBuilder
   }
 }
 
+class _$ValueWithCustomSerializer extends ValueWithCustomSerializer {
+  @override
+  final int value;
+
+  factory _$ValueWithCustomSerializer(
+          [void updates(ValueWithCustomSerializerBuilder b)]) =>
+      (new ValueWithCustomSerializerBuilder()..update(updates)).build();
+
+  _$ValueWithCustomSerializer._({this.value}) : super._() {
+    if (value == null) {
+      throw new BuiltValueNullFieldError('ValueWithCustomSerializer', 'value');
+    }
+  }
+
+  @override
+  ValueWithCustomSerializer rebuild(
+          void updates(ValueWithCustomSerializerBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ValueWithCustomSerializerBuilder toBuilder() =>
+      new ValueWithCustomSerializerBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithCustomSerializer && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueWithCustomSerializer')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class ValueWithCustomSerializerBuilder
+    implements
+        Builder<ValueWithCustomSerializer, ValueWithCustomSerializerBuilder> {
+  _$ValueWithCustomSerializer _$v;
+
+  int _value;
+  int get value => _$this._value;
+  set value(int value) => _$this._value = value;
+
+  ValueWithCustomSerializerBuilder();
+
+  ValueWithCustomSerializerBuilder get _$this {
+    if (_$v != null) {
+      _value = _$v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithCustomSerializer other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$ValueWithCustomSerializer;
+  }
+
+  @override
+  void update(void updates(ValueWithCustomSerializerBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ValueWithCustomSerializer build() {
+    final _$result = _$v ?? new _$ValueWithCustomSerializer._(value: value);
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

@@ -433,3 +433,43 @@ abstract class RecursiveValueB
       _$RecursiveValueB;
   RecursiveValueB._();
 }
+
+abstract class ValueWithCustomSerializer
+    implements
+        Built<ValueWithCustomSerializer, ValueWithCustomSerializerBuilder> {
+  @BuiltValueSerializer(custom: true)
+  static Serializer<ValueWithCustomSerializer> get serializer =>
+      const ValueWithCustomSerializerSerializer();
+
+  int get value;
+
+  factory ValueWithCustomSerializer(
+          [updates(ValueWithCustomSerializerBuilder b)]) =
+      _$ValueWithCustomSerializer;
+  ValueWithCustomSerializer._();
+}
+
+class ValueWithCustomSerializerSerializer
+    implements PrimitiveSerializer<ValueWithCustomSerializer> {
+  @override
+  Iterable<Type> get types =>
+      [ValueWithCustomSerializer, _$ValueWithCustomSerializer];
+
+  const ValueWithCustomSerializerSerializer();
+
+  @override
+  String get wireName => 'ValueWithCustomSerializer';
+
+  @override
+  ValueWithCustomSerializer deserialize(
+      Serializers serializers, Object serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    return ValueWithCustomSerializer((b) => b.value = serialized as int);
+  }
+
+  @override
+  Object serialize(Serializers serializers, ValueWithCustomSerializer object,
+      {FullType specifiedType = FullType.unspecified}) {
+    return object.value;
+  }
+}
