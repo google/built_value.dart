@@ -181,6 +181,13 @@ void main() {
     });
   });
 
+  group(CompoundValueNoAutoNesting, () {
+    test('does not auto create nested builders', () {
+      expect(() => new CompoundValueNoAutoNesting((b) => b..value),
+          throwsA(const TypeMatcher<BuiltValueNestedFieldError>()));
+    });
+  });
+
   group('CompoundValueComparableBuilders', () {
     test('builder implements operator==', () {
       final left = new CompoundValueComparableBuilders(

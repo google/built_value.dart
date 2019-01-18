@@ -11,6 +11,8 @@ Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
 Serializer<CompoundValueNoNesting> _$compoundValueNoNestingSerializer =
     new _$CompoundValueNoNestingSerializer();
+Serializer<CompoundValueNoAutoNesting> _$compoundValueNoAutoNestingSerializer =
+    new _$CompoundValueNoAutoNestingSerializer();
 Serializer<CompoundValueComparableBuilders>
     _$compoundValueComparableBuildersSerializer =
     new _$CompoundValueComparableBuildersSerializer();
@@ -190,6 +192,51 @@ class _$CompoundValueNoNestingSerializer
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
               specifiedType: const FullType(ValidatedValue)) as ValidatedValue;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$CompoundValueNoAutoNestingSerializer
+    implements StructuredSerializer<CompoundValueNoAutoNesting> {
+  @override
+  final Iterable<Type> types = const [
+    CompoundValueNoAutoNesting,
+    _$CompoundValueNoAutoNesting
+  ];
+  @override
+  final String wireName = 'CompoundValueNoAutoNesting';
+
+  @override
+  Iterable serialize(Serializers serializers, CompoundValueNoAutoNesting object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value,
+          specifiedType: const FullType(NoFieldsValue)),
+    ];
+
+    return result;
+  }
+
+  @override
+  CompoundValueNoAutoNesting deserialize(
+      Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new CompoundValueNoAutoNestingBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value.replace(serializers.deserialize(value,
+              specifiedType: const FullType(NoFieldsValue)) as NoFieldsValue);
           break;
       }
     }
@@ -1211,6 +1258,102 @@ class CompoundValueNoNestingBuilder
     final _$result = _$v ??
         new _$CompoundValueNoNesting._(
             simpleValue: simpleValue, validatedValue: validatedValue);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$CompoundValueNoAutoNesting extends CompoundValueNoAutoNesting {
+  @override
+  final NoFieldsValue value;
+
+  factory _$CompoundValueNoAutoNesting(
+          [void updates(CompoundValueNoAutoNestingBuilder b)]) =>
+      (new CompoundValueNoAutoNestingBuilder()..update(updates)).build();
+
+  _$CompoundValueNoAutoNesting._({this.value}) : super._() {
+    if (value == null) {
+      throw new BuiltValueNullFieldError('CompoundValueNoAutoNesting', 'value');
+    }
+  }
+
+  @override
+  CompoundValueNoAutoNesting rebuild(
+          void updates(CompoundValueNoAutoNestingBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  CompoundValueNoAutoNestingBuilder toBuilder() =>
+      new CompoundValueNoAutoNestingBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is CompoundValueNoAutoNesting && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('CompoundValueNoAutoNesting')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class CompoundValueNoAutoNestingBuilder
+    implements
+        Builder<CompoundValueNoAutoNesting, CompoundValueNoAutoNestingBuilder> {
+  _$CompoundValueNoAutoNesting _$v;
+
+  NoFieldsValueBuilder _value;
+  NoFieldsValueBuilder get value => _$this._value;
+  set value(NoFieldsValueBuilder value) => _$this._value = value;
+
+  CompoundValueNoAutoNestingBuilder();
+
+  CompoundValueNoAutoNestingBuilder get _$this {
+    if (_$v != null) {
+      _value = _$v.value?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(CompoundValueNoAutoNesting other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$CompoundValueNoAutoNesting;
+  }
+
+  @override
+  void update(void updates(CompoundValueNoAutoNestingBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$CompoundValueNoAutoNesting build() {
+    _$CompoundValueNoAutoNesting _$result;
+    try {
+      _$result =
+          _$v ?? new _$CompoundValueNoAutoNesting._(value: value.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'value';
+        value.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'CompoundValueNoAutoNesting', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

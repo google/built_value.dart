@@ -52,6 +52,21 @@ abstract class CompoundValueNoNesting
   CompoundValueNoNesting._();
 }
 
+@BuiltValue(autoCreateNestedBuilders: false)
+abstract class CompoundValueNoAutoNesting
+    implements
+        Built<CompoundValueNoAutoNesting, CompoundValueNoAutoNestingBuilder> {
+  static Serializer<CompoundValueNoAutoNesting> get serializer =>
+      _$compoundValueNoAutoNestingSerializer;
+
+  NoFieldsValue get value;
+
+  factory CompoundValueNoAutoNesting(
+          [updates(CompoundValueNoAutoNestingBuilder b)]) =
+      _$CompoundValueNoAutoNesting;
+  CompoundValueNoAutoNesting._();
+}
+
 @BuiltValue(nestedBuilders: false, comparableBuilders: true)
 abstract class CompoundValueComparableBuilders
     implements

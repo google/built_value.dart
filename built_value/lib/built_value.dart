@@ -76,6 +76,14 @@ class BuiltValue {
   /// builder.
   final bool nestedBuilders;
 
+  /// Whether to auto create nested builders. Defaults to `true`.
+  ///
+  /// When this is enabled, accessing a nested builder via a getter causes it
+  /// to be instantiated if it's `null`. In most cases this is convenient, but
+  /// if you are using builders for data processing then you might need to
+  /// check for `null`. If so you should set this to `false`.
+  final bool autoCreateNestedBuilders;
+
   /// Whether builders should implement `operator==` and `hashCode`, making
   /// them comparable.
   ///
@@ -90,6 +98,7 @@ class BuiltValue {
   const BuiltValue(
       {this.instantiable = true,
       this.nestedBuilders = true,
+      this.autoCreateNestedBuilders = true,
       this.comparableBuilders = false,
       this.wireName});
 }
