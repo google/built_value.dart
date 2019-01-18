@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.3.0
+
+- Allow custom builders to use setter/getter pairs instead of normal fields.
+
 # 6.2.0
 
 New features:

@@ -27,6 +27,11 @@ for directory in $directories; do
 
   pub get
   pub upgrade
+
+  # Clear any pre-existing build output so package:build doesn't get confused
+  # when we use built_value to build itself.
+  rm -rf .dart_tool/build/
+
   grep -q build_runner pubspec.yaml && \
       pub run build_runner build \
           --delete-conflicting-outputs \
