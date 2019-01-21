@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/file_system/file_system.dart';
 // ignore: implementation_imports
 import 'package:analyzer/src/context/builder.dart';
@@ -52,7 +53,8 @@ class BuiltValueAnalyzerPlugin extends ServerPlugin {
   String get contactInfo => 'https://github.com/google/built_value.dart/issues';
 
   /// Computes errors based on an analysis result and notifies the analyzer.
-  void _processResult(AnalysisResult analysisResult) {
+  // ignore: deprecated_member_use
+  void _processResult(ResolveResult analysisResult) {
     try {
       // If there is no relevant analysis result, notify the analyzer of no errors.
       if (analysisResult.unit == null ||
