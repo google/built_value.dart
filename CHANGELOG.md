@@ -9,8 +9,8 @@
   custom serializer for a class.
 - Make it possible to merge `Serializers` instances: add a `serializers`
   getter that returns the installed serializers.
-- Allow `analyzer` 0.34.0.
 - Add serializer for `RegExp` fields.
+- Allow `analyzer` 0.34.0.
 
 # 6.2.0
 
