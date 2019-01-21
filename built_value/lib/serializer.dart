@@ -89,6 +89,9 @@ abstract class Serializers {
         .build();
   }
 
+  /// The installed [Serializer]s.
+  Iterable<Serializer> get serializers;
+
   /// Serializes [object].
   ///
   /// A [Serializer] must have been provided for every type the object uses.
@@ -167,6 +170,9 @@ abstract class SerializersBuilder {
   /// Adds a [Serializer]. It will be used to handle the type(s) it declares
   /// via its `types` property.
   void add(Serializer serializer);
+
+  /// Adds an iterable of [Serializer].
+  void addAll(Iterable<Serializer> serializers);
 
   /// Adds a builder factory.
   ///

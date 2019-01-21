@@ -7,6 +7,8 @@
   builders.
 - Add `@BuiltValueSerializer` annotation which gives the option to specify a
   custom serializer for a class.
+- Make it possible to merge `Serializers` instances: add a `serializers`
+  getter that returns the installed serializers.
 
 # 6.2.0
 
