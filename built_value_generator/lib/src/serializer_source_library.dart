@@ -57,14 +57,15 @@ abstract class SerializerSourceLibrary
   }
 
   /// Returns the set of serializable classes in this library. A serializer
-  /// needs to be generated for each of these.
+  /// needs to be installed for each of these. A serialized needs to be
+  /// generated for each, except where the serializer is marked `custom`.
   @memoized
   BuiltSet<SerializerSourceClass> get sourceClasses {
     final result = new SetBuilder<SerializerSourceClass>();
     final classElements = LibraryElements.getClassElements(element);
     for (final classElement in classElements) {
       final sourceClass = new SerializerSourceClass(classElement);
-      if (sourceClass.needsBuiltJson) {
+      if (sourceClass.isSerializable) {
         result.add(sourceClass);
       }
     }
@@ -110,7 +111,7 @@ abstract class SerializerSourceLibrary
     for (final field in serializersForAnnotations.keys) {
       var currentResult = new BuiltSet<SerializerSourceClass>(
           serializeForClasses[field].where(
-              (serializerSourceClass) => serializerSourceClass.needsBuiltJson));
+              (serializerSourceClass) => serializerSourceClass.isSerializable));
       BuiltSet<SerializerSourceClass> expandedResult;
 
       while (currentResult != expandedResult) {
@@ -118,7 +119,7 @@ abstract class SerializerSourceLibrary
         expandedResult = currentResult.rebuild((b) => b
           ..addAll(currentResult.expand((sourceClass) => sourceClass
               .fieldClasses
-              .where((fieldClass) => fieldClass.needsBuiltJson))));
+              .where((fieldClass) => fieldClass.isSerializable))));
       }
 
       result.addValues(field, currentResult);
@@ -139,9 +140,11 @@ abstract class SerializerSourceLibrary
 
     return _generateSerializersTopLevelFields() +
         sourceClasses
+            .where((sourceClass) => sourceClass.needsGeneratedSerializer)
             .map((sourceClass) => sourceClass.generateSerializerDeclaration())
             .join('\n') +
         sourceClasses
+            .where((sourceClass) => sourceClass.needsGeneratedSerializer)
             .map((sourceClass) => sourceClass.generateSerializer())
             .join('\n');
   }

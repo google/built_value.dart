@@ -5,6 +5,8 @@
 - Allow custom builders to use setter/getter pairs instead of normal fields.
 - Add an option to `@BuiltValue` to turn off auto instantiation of nested
   builders.
+- Add `@BuiltValueSerializer` annotation which gives the option to specify a
+  custom serializer for a class.
 
 # 6.2.0
 

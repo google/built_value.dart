@@ -50,6 +50,7 @@ part 'serializers.g.dart';
   TestEnum,
   UsesHandCoded,
   ValueUsingImportAs,
+  ValueWithCustomSerializer,
   ValueWithHasInt,
   ValueWithInt,
   WireNameEnum,

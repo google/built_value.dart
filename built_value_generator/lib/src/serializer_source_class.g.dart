@@ -13,6 +13,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   final ClassElement builderElement;
   ParsedLibraryResult __parsedLibrary;
   BuiltValue __builtValueSettings;
+  BuiltValueSerializer __serializerSettings;
   BuiltValueEnum __enumClassSettings;
   String __name;
   String __wireName;
@@ -24,6 +25,8 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   BuiltList<SerializerSourceField> __fields;
   BuiltSet<SerializerSourceClass> __fieldClasses;
   CompilationUnitElement __compilationUnit;
+  bool __isSerializable;
+  bool __needsGeneratedSerializer;
 
   factory _$SerializerSourceClass(
           [void updates(SerializerSourceClassBuilder b)]) =>
@@ -42,6 +45,10 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   BuiltValue get builtValueSettings =>
       __builtValueSettings ??= super.builtValueSettings;
+
+  @override
+  BuiltValueSerializer get serializerSettings =>
+      __serializerSettings ??= super.serializerSettings;
 
   @override
   BuiltValueEnum get enumClassSettings =>
@@ -81,6 +88,13 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   CompilationUnitElement get compilationUnit =>
       __compilationUnit ??= super.compilationUnit;
+
+  @override
+  bool get isSerializable => __isSerializable ??= super.isSerializable;
+
+  @override
+  bool get needsGeneratedSerializer =>
+      __needsGeneratedSerializer ??= super.needsGeneratedSerializer;
 
   @override
   SerializerSourceClass rebuild(void updates(SerializerSourceClassBuilder b)) =>
