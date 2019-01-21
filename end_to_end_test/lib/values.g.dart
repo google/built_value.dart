@@ -499,6 +499,9 @@ class _$PrimitivesValueSerializer
       'duration',
       serializers.serialize(object.duration,
           specifiedType: const FullType(Duration)),
+      'regExp',
+      serializers.serialize(object.regExp,
+          specifiedType: const FullType(RegExp)),
       'uri',
       serializers.serialize(object.uri, specifiedType: const FullType(Uri)),
       'bigInt',
@@ -551,6 +554,10 @@ class _$PrimitivesValueSerializer
         case 'duration':
           result.duration = serializers.deserialize(value,
               specifiedType: const FullType(Duration)) as Duration;
+          break;
+        case 'regExp':
+          result.regExp = serializers.deserialize(value,
+              specifiedType: const FullType(RegExp)) as RegExp;
           break;
         case 'uri':
           result.uri = serializers.deserialize(value,
@@ -2345,6 +2352,8 @@ class _$PrimitivesValue extends PrimitivesValue {
   @override
   final Duration duration;
   @override
+  final RegExp regExp;
+  @override
   final Uri uri;
   @override
   final BigInt bigInt;
@@ -2361,6 +2370,7 @@ class _$PrimitivesValue extends PrimitivesValue {
       this.string,
       this.dateTime,
       this.duration,
+      this.regExp,
       this.uri,
       this.bigInt})
       : super._() {
@@ -2387,6 +2397,9 @@ class _$PrimitivesValue extends PrimitivesValue {
     }
     if (duration == null) {
       throw new BuiltValueNullFieldError('PrimitivesValue', 'duration');
+    }
+    if (regExp == null) {
+      throw new BuiltValueNullFieldError('PrimitivesValue', 'regExp');
     }
     if (uri == null) {
       throw new BuiltValueNullFieldError('PrimitivesValue', 'uri');
@@ -2416,6 +2429,7 @@ class _$PrimitivesValue extends PrimitivesValue {
         string == other.string &&
         dateTime == other.dateTime &&
         duration == other.duration &&
+        regExp == other.regExp &&
         uri == other.uri &&
         bigInt == other.bigInt;
   }
@@ -2430,14 +2444,16 @@ class _$PrimitivesValue extends PrimitivesValue {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, boolean.hashCode),
-                                        integer.hashCode),
-                                    int64.hashCode),
-                                dbl.hashCode),
-                            number.hashCode),
-                        string.hashCode),
-                    dateTime.hashCode),
-                duration.hashCode),
+                                    $jc(
+                                        $jc($jc(0, boolean.hashCode),
+                                            integer.hashCode),
+                                        int64.hashCode),
+                                    dbl.hashCode),
+                                number.hashCode),
+                            string.hashCode),
+                        dateTime.hashCode),
+                    duration.hashCode),
+                regExp.hashCode),
             uri.hashCode),
         bigInt.hashCode));
   }
@@ -2453,6 +2469,7 @@ class _$PrimitivesValue extends PrimitivesValue {
           ..add('string', string)
           ..add('dateTime', dateTime)
           ..add('duration', duration)
+          ..add('regExp', regExp)
           ..add('uri', uri)
           ..add('bigInt', bigInt))
         .toString();
@@ -2495,6 +2512,10 @@ class PrimitivesValueBuilder
   Duration get duration => _$this._duration;
   set duration(Duration duration) => _$this._duration = duration;
 
+  RegExp _regExp;
+  RegExp get regExp => _$this._regExp;
+  set regExp(RegExp regExp) => _$this._regExp = regExp;
+
   Uri _uri;
   Uri get uri => _$this._uri;
   set uri(Uri uri) => _$this._uri = uri;
@@ -2515,6 +2536,7 @@ class PrimitivesValueBuilder
       _string = _$v.string;
       _dateTime = _$v.dateTime;
       _duration = _$v.duration;
+      _regExp = _$v.regExp;
       _uri = _$v.uri;
       _bigInt = _$v.bigInt;
       _$v = null;
@@ -2547,6 +2569,7 @@ class PrimitivesValueBuilder
             string: string,
             dateTime: dateTime,
             duration: duration,
+            regExp: regExp,
             uri: uri,
             bigInt: bigInt);
     replace(_$result);
