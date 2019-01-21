@@ -276,6 +276,7 @@ abstract class PrimitivesValue
   String get string;
   DateTime get dateTime;
   Duration get duration;
+  RegExp get regExp;
   Uri get uri;
   BigInt get bigInt;
 

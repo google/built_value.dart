@@ -21,6 +21,7 @@ import 'src/built_set_multimap_serializer.dart';
 import 'src/built_set_serializer.dart';
 import 'src/double_serializer.dart';
 import 'src/int_serializer.dart';
+import 'src/regexp_serializer.dart';
 import 'src/string_serializer.dart';
 
 /// Annotation to trigger code generation of a [Serializers] instance.
@@ -67,6 +68,7 @@ abstract class Serializers {
           ..add(new Int64Serializer())
           ..add(new JsonObjectSerializer())
           ..add(new NumSerializer())
+          ..add(RegExpSerializer())
           ..add(new StringSerializer())
           ..add(new UriSerializer())
           ..addBuilderFactory(
