@@ -28,6 +28,9 @@ class BuiltJsonSerializers implements Serializers {
       this._typeNameToSerializer, this._builderFactories, this._plugins);
 
   @override
+  Iterable<Serializer> get serializers => _wireNameToSerializer.values;
+
+  @override
   T deserializeWith<T>(Serializer<T> serializer, Object serialized) {
     return deserialize(serialized,
         specifiedType: new FullType(serializer.types.first)) as T;
@@ -242,6 +245,11 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
       _typeToSerializer[type] = serializer;
       _typeNameToSerializer[_getRawName(type)] = serializer;
     }
+  }
+
+  @override
+  void addAll(Iterable<Serializer> serializers) {
+    serializers.forEach(add);
   }
 
   @override
