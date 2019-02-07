@@ -64,6 +64,7 @@ class BuiltValueGenerator extends Generator {
           '\n'
           '// ignore_for_file: '
           'always_put_control_body_on_new_line,'
+          'always_specify_types,'
           'annotate_overrides,'
           'avoid_annotating_with_dynamic,'
           'avoid_as,'
