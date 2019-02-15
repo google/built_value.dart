@@ -32,15 +32,15 @@ abstract class ValueSourceClass
   ValueSourceClass._();
 
   @memoized
-  String get asName{
+  String get asPrefix{
     if(source.contains('$_importWithSingleQuotes as')){
       final index = source.indexOf('$_importWithSingleQuotes as');
       final endIndex = source.indexOf(';', index);
-      return source.substring(index + '$_importWithSingleQuotes as'.length, endIndex).trim();
+      return '.' + source.substring(index + '$_importWithSingleQuotes as'.length, endIndex).trim();
     }else if(source.contains('$_importWithDoubleQuotes as')){
       final index = source.indexOf('$_importWithDoubleQuotes as');
       final endIndex = source.indexOf(';', index);
-      return source.substring(index + '$_importWithDoubleQuotes as'.length, endIndex).trim();
+      return '.' + source.substring(index + '$_importWithDoubleQuotes as'.length, endIndex).trim();
     }
     return "";
   }
@@ -254,7 +254,7 @@ abstract class ValueSourceClass
   @memoized
   BuiltList<String> get builderImplements =>
       new BuiltList<String>.build((b) => b
-        ..add('$asName.Builder<$name$_generics, ${name}Builder$_generics>')
+        ..add('${asPrefix}Builder<$name$_generics, ${name}Builder$_generics>')
         ..addAll(element.interfaces
             .where((interface) => needsBuiltValue(interface.element))
             .map((interface) {
@@ -632,7 +632,7 @@ abstract class ValueSourceClass
       for (final field in requiredFields) {
         result.writeln('if (${field.name} == null) {');
         result.writeln(
-            "throw new $asName.BuiltValueNullFieldError('$name', '${field.name}');");
+            "throw new ${asPrefix}BuiltValueNullFieldError('$name', '${field.name}');");
         result.writeln('}');
       }
       // If there are generic parameters, check they are not "dynamic".
@@ -682,9 +682,9 @@ abstract class ValueSourceClass
       result.writeln('String toString() {');
       if (fields.length == 0) {
         result
-            .writeln("return $asName.newBuiltValueToStringHelper('$name').toString();");
+            .writeln("return ${asPrefix}newBuiltValueToStringHelper('$name').toString();");
       } else {
-        result.writeln("return ($asName.newBuiltValueToStringHelper('$name')");
+        result.writeln("return (${asPrefix}newBuiltValueToStringHelper('$name')");
         result.writeln(fields
             .map((field) => "..add('${field.name}',  ${field.name})")
             .join(''));
@@ -939,8 +939,8 @@ abstract class ValueSourceClass
     if (comparedFields.length == 0) {
       result.writeln('return ${name.hashCode};');
     } else {
-      result.writeln('return $asName.\$jf(');
-      result.writeln('$asName.\$jc(' * comparedFields.length);
+      result.writeln('return $asPrefix\$jf(');
+      result.writeln('$asPrefix\$jc(' * comparedFields.length);
       // Use a different seed for builders than for values, so they do not have
       // identical hashCodes if the values are identical.
       result.writeln(forBuilder ? '1, ' : '0, ');
