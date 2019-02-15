@@ -32,6 +32,20 @@ abstract class ValueSourceClass
   ValueSourceClass._();
 
   @memoized
+  String get asName{
+    if(source.contains('$_importWithSingleQuotes as')){
+      final index = source.indexOf('$_importWithSingleQuotes as');
+      final endIndex = source.indexOf(';', index);
+      return source.substring(index + '$_importWithSingleQuotes as'.length, endIndex).trim();
+    }else if(source.contains('$_importWithDoubleQuotes as')){
+      final index = source.indexOf('$_importWithDoubleQuotes as');
+      final endIndex = source.indexOf(';', index);
+      return source.substring(index + '$_importWithDoubleQuotes as'.length, endIndex).trim();
+    }
+    return "";
+  }
+
+  @memoized
   ParsedLibraryResult get parsedLibrary =>
       // ignore: deprecated_member_use
       ParsedLibraryResultImpl.tmp(element.library);
@@ -240,7 +254,7 @@ abstract class ValueSourceClass
   @memoized
   BuiltList<String> get builderImplements =>
       new BuiltList<String>.build((b) => b
-        ..add('Builder<$name$_generics, ${name}Builder$_generics>')
+        ..add('$asName.Builder<$name$_generics, ${name}Builder$_generics>')
         ..addAll(element.interfaces
             .where((interface) => needsBuiltValue(interface.element))
             .map((interface) {
@@ -342,12 +356,12 @@ abstract class ValueSourceClass
             'generated code from finding helper methods.'));
     }
 
-    if (hasBuiltValueImportWithAs) {
-      result.add(new GeneratorError((b) => b
-        ..message = 'Stop using "as" when importing '
-            '"package:built_value/built_value.dart". It prevents the generated '
-            'code from finding helper methods.'));
-    }
+//    if (hasBuiltValueImportWithAs) {
+//      result.add(new GeneratorError((b) => b
+//        ..message = 'Stop using "as" when importing '
+//            '"package:built_value/built_value.dart". It prevents the generated '
+//            'code from finding helper methods.'));
+//    }
 
     final implementsClause = classDeclaration.implementsClause;
     final expectedInterface =
@@ -367,33 +381,33 @@ abstract class ValueSourceClass
             !implementsClause.interfaces.any((type) =>
                 type.toSource() == 'Built' ||
                 type.toSource().startsWith('Built<')));
-
-    if (!implementsClauseIsCorrect && !implementsClauseIsAllowedToBeIncorrect) {
-      if (implementsClause == null) {
-        result.add(new GeneratorError((b) => b
-          ..message = 'Make class implement $expectedInterface.'
-          ..offset = classDeclaration.leftBracket.offset - 1
-          ..length = 0
-          ..fix = 'implements $expectedInterface'));
-      } else {
-        var found = false;
-        final interfaces = implementsClause.interfaces.map((type) {
-          if (type.name.name == 'Built') {
-            found = true;
-            return expectedInterface;
-          } else {
-            return type.toSource();
-          }
-        }).toList();
-        if (!found) interfaces.add(expectedInterface);
-
-        result.add(new GeneratorError((b) => b
-          ..message = 'Make class implement $expectedInterface.'
-          ..offset = implementsClause.offset
-          ..length = implementsClause.length
-          ..fix = 'implements ${interfaces.join(", ")}'));
-      }
-    }
+//TODO
+//    if (!implementsClauseIsCorrect && !implementsClauseIsAllowedToBeIncorrect) {
+//      if (implementsClause == null) {
+//        result.add(new GeneratorError((b) => b
+//          ..message = 'Make class implement $expectedInterface.'
+//          ..offset = classDeclaration.leftBracket.offset - 1
+//          ..length = 0
+//          ..fix = 'implements $expectedInterface'));
+//      } else {
+//        var found = false;
+//        final interfaces = implementsClause.interfaces.map((type) {
+//          if (type.name.name == 'Built') {
+//            found = true;
+//            return expectedInterface;
+//          } else {
+//            return type.toSource();
+//          }
+//        }).toList();
+//        if (!found) interfaces.add(expectedInterface);
+//
+//        result.add(new GeneratorError((b) => b
+//          ..message = 'Make class implement $expectedInterface.'
+//          ..offset = implementsClause.offset
+//          ..length = implementsClause.length
+//          ..fix = 'implements ${interfaces.join(", ")}'));
+//      }
+//    }
 
     if (!extendsIsAllowed) {
       result.add(new GeneratorError((b) => b
@@ -618,7 +632,7 @@ abstract class ValueSourceClass
       for (final field in requiredFields) {
         result.writeln('if (${field.name} == null) {');
         result.writeln(
-            "throw new BuiltValueNullFieldError('$name', '${field.name}');");
+            "throw new $asName.BuiltValueNullFieldError('$name', '${field.name}');");
         result.writeln('}');
       }
       // If there are generic parameters, check they are not "dynamic".
@@ -668,9 +682,9 @@ abstract class ValueSourceClass
       result.writeln('String toString() {');
       if (fields.length == 0) {
         result
-            .writeln("return newBuiltValueToStringHelper('$name').toString();");
+            .writeln("return $asName.newBuiltValueToStringHelper('$name').toString();");
       } else {
-        result.writeln("return (newBuiltValueToStringHelper('$name')");
+        result.writeln("return ($asName.newBuiltValueToStringHelper('$name')");
         result.writeln(fields
             .map((field) => "..add('${field.name}',  ${field.name})")
             .join(''));
@@ -925,8 +939,8 @@ abstract class ValueSourceClass
     if (comparedFields.length == 0) {
       result.writeln('return ${name.hashCode};');
     } else {
-      result.writeln(r'return $jf(');
-      result.writeln(r'$jc(' * comparedFields.length);
+      result.writeln('return $asName.\$jf(');
+      result.writeln('$asName.\$jc(' * comparedFields.length);
       // Use a different seed for builders than for values, so they do not have
       // identical hashCodes if the values are identical.
       result.writeln(forBuilder ? '1, ' : '0, ');
