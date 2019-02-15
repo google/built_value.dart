@@ -36,11 +36,11 @@ abstract class ValueSourceClass
     if(source.contains('$_importWithSingleQuotes as')){
       final index = source.indexOf('$_importWithSingleQuotes as');
       final endIndex = source.indexOf(';', index);
-      return '.' + source.substring(index + '$_importWithSingleQuotes as'.length, endIndex).trim();
+      return source.substring(index + '$_importWithSingleQuotes as'.length, endIndex).trim() + '.';
     }else if(source.contains('$_importWithDoubleQuotes as')){
       final index = source.indexOf('$_importWithDoubleQuotes as');
       final endIndex = source.indexOf(';', index);
-      return '.' + source.substring(index + '$_importWithDoubleQuotes as'.length, endIndex).trim();
+      return source.substring(index + '$_importWithDoubleQuotes as'.length, endIndex).trim() + '.';
     }
     return "";
   }
