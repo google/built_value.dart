@@ -885,7 +885,7 @@ abstract class ValueSourceClass
       }).join('\n'));
 
       result.writeln('} catch (e) {');
-      result.writeln('throw new BuiltValueNestedFieldError('
+      result.writeln('throw new ${asPrefix}BuiltValueNestedFieldError('
           "'$name', _\$failedField, e.toString());");
       result.writeln('}');
       result.writeln('rethrow;');
