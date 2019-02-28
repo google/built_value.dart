@@ -247,6 +247,24 @@ void main() {
         });
       });
 
+      group('can take a list of length 1 and', () {
+        final data = new BuiltList<int>([1]);
+        final serialized = {
+          r'$': 'list',
+          '': [
+            {r'$': 'int', '': 1},
+          ]
+        };
+
+        test('serialize it', () {
+          expect(serializers.serialize(data), serialized);
+        });
+
+        test('deserialize it', () {
+          expect(serializers.deserialize(serialized), data);
+        });
+      });
+
       group('can take a nested list and', () {
         final data = new BuiltList<BuiltList<int>>([
           new BuiltList<int>([1, 2, 3]),

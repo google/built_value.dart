@@ -93,16 +93,16 @@ class StandardJsonPlugin implements SerializerPlugin {
   Map _toMapWithDiscriminator(List list) {
     var type = list[0];
 
+    if (type == 'list') {
+      // Embed the list in the map.
+      return <String, Object>{discriminator: type, valueKey: list.sublist(1)};
+    }
+
     // Length is at least two because we have one entry for type and one for
     // the value.
     if (list.length == 2) {
       // Just a type and a primitive value. Encode the value in the map.
       return <String, Object>{discriminator: type, valueKey: list[1]};
-    }
-
-    if (type == 'list') {
-      // Embed the list in the map.
-      return <String, Object>{discriminator: type, valueKey: list.sublist(1)};
     }
 
     // If a map has non-String keys then they need encoding to strings before
