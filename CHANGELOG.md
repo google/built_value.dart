@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.3.2
+
+- Allow `analyzer` 0.35.0.
+
 # 6.3.1
 
 - Fix `BuiltList` serialization when using `StandardJsonPlugin` with

@@ -11,6 +11,8 @@ class Checker {
     final result = <AnalysisError, PrioritizedSourceChange>{};
 
     for (final compilationUnit in libraryElement.units) {
+      // Don't analyze if there's no source; there's nothing to do.
+      if (compilationUnit.source == null) continue;
       // Don't analyze generated source; there's nothing to do.
       if (compilationUnit.source.fullName.endsWith('.g.dart')) continue;
 
