@@ -27,47 +27,47 @@ abstract class JsonObject {
   bool get isBool => false;
 
   /// The value as a [bool], or throw if not.
-  bool get asBool => throw new StateError('Not a bool.');
+  bool get asBool => throw StateError('Not a bool.');
 
   /// Whether the value is a [List].
   bool get isList => false;
 
   /// The value as a [List], or throw if not.
-  List get asList => throw new StateError('Not a List.');
+  List get asList => throw StateError('Not a List.');
 
   /// Whether the value is a [Map].
   bool get isMap => false;
 
   /// The value as a [Map], or throw if not.
-  Map get asMap => throw new StateError('Not a Map.');
+  Map get asMap => throw StateError('Not a Map.');
 
   /// Whether the value is a [num].
   bool get isNum => false;
 
   /// The value as a [num], or throw if not.
-  num get asNum => throw new StateError('Not a num.');
+  num get asNum => throw StateError('Not a num.');
 
   /// Whether the value is a [String].
   bool get isString => false;
 
   /// The value as a [String], or throw if not.
-  String get asString => throw new StateError('Not a String.');
+  String get asString => throw StateError('Not a String.');
 
   /// Instantiates with [value], which must be a bool, a List, a Map, a num
   /// or a String. Otherwise, an [ArgumentError] is thrown.
   factory JsonObject(Object value) {
     if (value is num) {
-      return new NumJsonObject(value);
+      return NumJsonObject(value);
     } else if (value is String) {
-      return new StringJsonObject(value);
+      return StringJsonObject(value);
     } else if (value is bool) {
-      return new BoolJsonObject(value);
+      return BoolJsonObject(value);
     } else if (value is List<Object>) {
-      return new ListJsonObject(value);
+      return ListJsonObject(value);
     } else if (value is Map<String, Object>) {
-      return new MapJsonObject(value);
+      return MapJsonObject(value);
     } else {
-      throw new ArgumentError.value(value, 'value',
+      throw ArgumentError.value(value, 'value',
           'Must be bool, List<Object>, Map<String, Object>, num or String');
     }
   }
@@ -110,7 +110,7 @@ class ListJsonObject extends JsonObject {
   final List<Object> value;
 
   ListJsonObject(List<Object> value)
-      : this.value = new UnmodifiableListView<Object>(value),
+      : this.value = UnmodifiableListView<Object>(value),
         super._();
 
   @override
@@ -136,7 +136,7 @@ class MapJsonObject extends JsonObject {
   final Map<String, Object> value;
 
   MapJsonObject(Map<String, Object> value)
-      : this.value = new UnmodifiableMapView(value),
+      : this.value = UnmodifiableMapView(value),
         super._();
 
   @override

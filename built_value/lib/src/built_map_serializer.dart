@@ -8,8 +8,8 @@ import 'package:built_value/serializer.dart';
 class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
   final bool structured = true;
   @override
-  final Iterable<Type> types = new BuiltList<Type>(
-      [BuiltMap, new BuiltMap<Object, Object>().runtimeType]);
+  final Iterable<Type> types =
+      BuiltList<Type>([BuiltMap, BuiltMap<Object, Object>().runtimeType]);
   @override
   final String wireName = 'map';
 
@@ -50,11 +50,11 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
         : specifiedType.parameters[1];
 
     final MapBuilder result = isUnderspecified
-        ? new MapBuilder<Object, Object>()
+        ? MapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as MapBuilder;
 
     if (serialized.length % 2 == 1) {
-      throw new ArgumentError('odd length');
+      throw ArgumentError('odd length');
     }
 
     for (int i = 0; i != serialized.length; i += 2) {

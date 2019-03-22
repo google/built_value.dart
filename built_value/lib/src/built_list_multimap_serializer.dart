@@ -9,8 +9,8 @@ class BuiltListMultimapSerializer
     implements StructuredSerializer<BuiltListMultimap> {
   final bool structured = true;
   @override
-  final Iterable<Type> types = new BuiltList<Type>(
-      [BuiltListMultimap, new BuiltListMultimap<Object, Object>().runtimeType]);
+  final Iterable<Type> types = BuiltList<Type>(
+      [BuiltListMultimap, BuiltListMultimap<Object, Object>().runtimeType]);
   @override
   final String wireName = 'listMultimap';
 
@@ -54,11 +54,11 @@ class BuiltListMultimapSerializer
         : specifiedType.parameters[1];
 
     final ListMultimapBuilder result = isUnderspecified
-        ? new ListMultimapBuilder<Object, Object>()
+        ? ListMultimapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as ListMultimapBuilder;
 
     if (serialized.length % 2 == 1) {
-      throw new ArgumentError('odd length');
+      throw ArgumentError('odd length');
     }
 
     for (int i = 0; i != serialized.length; i += 2) {

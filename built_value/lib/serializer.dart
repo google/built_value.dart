@@ -53,41 +53,39 @@ abstract class Serializers {
   ///
   /// Use [toBuilder] to add more serializers.
   factory Serializers() {
-    return (new SerializersBuilder()
-          ..add(new BigIntSerializer())
-          ..add(new BoolSerializer())
-          ..add(new BuiltListSerializer())
-          ..add(new BuiltListMultimapSerializer())
-          ..add(new BuiltMapSerializer())
-          ..add(new BuiltSetSerializer())
-          ..add(new BuiltSetMultimapSerializer())
-          ..add(new DateTimeSerializer())
-          ..add(new DoubleSerializer())
-          ..add(new DurationSerializer())
-          ..add(new IntSerializer())
-          ..add(new Int64Serializer())
-          ..add(new JsonObjectSerializer())
-          ..add(new NumSerializer())
-          ..add(new RegExpSerializer())
-          ..add(new StringSerializer())
-          ..add(new UriSerializer())
-          ..addBuilderFactory(
-              const FullType(BuiltList, const [FullType.object]),
-              () => new ListBuilder<Object>())
-          ..addBuilderFactory(
-              const FullType(
-                  BuiltListMultimap, const [FullType.object, FullType.object]),
-              () => new ListMultimapBuilder<Object, Object>())
+    return (SerializersBuilder()
+          ..add(BigIntSerializer())
+          ..add(BoolSerializer())
+          ..add(BuiltListSerializer())
+          ..add(BuiltListMultimapSerializer())
+          ..add(BuiltMapSerializer())
+          ..add(BuiltSetSerializer())
+          ..add(BuiltSetMultimapSerializer())
+          ..add(DateTimeSerializer())
+          ..add(DoubleSerializer())
+          ..add(DurationSerializer())
+          ..add(IntSerializer())
+          ..add(Int64Serializer())
+          ..add(JsonObjectSerializer())
+          ..add(NumSerializer())
+          ..add(RegExpSerializer())
+          ..add(StringSerializer())
+          ..add(UriSerializer())
+          ..addBuilderFactory(const FullType(BuiltList, [FullType.object]),
+              () => ListBuilder<Object>())
           ..addBuilderFactory(
               const FullType(
-                  BuiltMap, const [FullType.object, FullType.object]),
-              () => new MapBuilder<Object, Object>())
-          ..addBuilderFactory(const FullType(BuiltSet, const [FullType.object]),
-              () => new SetBuilder<Object>())
+                  BuiltListMultimap, [FullType.object, FullType.object]),
+              () => ListMultimapBuilder<Object, Object>())
+          ..addBuilderFactory(
+              const FullType(BuiltMap, [FullType.object, FullType.object]),
+              () => MapBuilder<Object, Object>())
+          ..addBuilderFactory(const FullType(BuiltSet, [FullType.object]),
+              () => SetBuilder<Object>())
           ..addBuilderFactory(
               const FullType(
-                  BuiltSetMultimap, const [FullType.object, FullType.object]),
-              () => new SetMultimapBuilder<Object, Object>()))
+                  BuiltSetMultimap, [FullType.object, FullType.object]),
+              () => SetMultimapBuilder<Object, Object>()))
         .build();
   }
 
@@ -207,10 +205,10 @@ abstract class SerializersBuilder {
 /// available.
 class FullType {
   /// An unspecified type.
-  static const FullType unspecified = const FullType(null);
+  static const FullType unspecified = FullType(null);
 
   /// The [Object] type.
-  static const FullType object = const FullType(Object);
+  static const FullType object = FullType(Object);
 
   /// The root of the type.
   final Type root;
@@ -337,7 +335,7 @@ class DeserializationError extends Error {
     if (limitedJson.length > 80) {
       limitedJson = limitedJson.replaceRange(77, limitedJson.length, '...');
     }
-    return new DeserializationError._(limitedJson, type, error);
+    return DeserializationError._(limitedJson, type, error);
   }
 
   DeserializationError._(this.json, this.type, this.error);

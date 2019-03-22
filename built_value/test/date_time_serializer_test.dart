@@ -6,10 +6,10 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = new Serializers();
+  final serializers = Serializers();
 
   group('DateTime with known specifiedType', () {
-    final data = new DateTime.utc(1980, 1, 2, 3, 4, 5, 6, 7);
+    final data = DateTime.utc(1980, 1, 2, 3, 4, 5, 6, 7);
     final serialized = data.microsecondsSinceEpoch;
     final specifiedType = const FullType(DateTime);
 
@@ -24,13 +24,13 @@ void main() {
     });
 
     test('serialize throws if not UTC', () {
-      expect(() => serializers.serialize(new DateTime.now()),
+      expect(() => serializers.serialize(DateTime.now()),
           throwsA(const TypeMatcher<ArgumentError>()));
     });
   });
 
   group('DateTime with unknown specifiedType', () {
-    final data = new DateTime.utc(1980, 1, 2, 3, 4, 5, 6, 7);
+    final data = DateTime.utc(1980, 1, 2, 3, 4, 5, 6, 7);
     final serialized = ['DateTime', data.microsecondsSinceEpoch];
     final specifiedType = FullType.unspecified;
 

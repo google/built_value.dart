@@ -9,7 +9,7 @@ import 'package:built_value/src/double_serializer.dart';
 class NumSerializer implements PrimitiveSerializer<num> {
   final bool structured = false;
   @override
-  final Iterable<Type> types = new BuiltList<Type>([num]);
+  final Iterable<Type> types = BuiltList<Type>([num]);
   @override
   final String wireName = 'num';
 

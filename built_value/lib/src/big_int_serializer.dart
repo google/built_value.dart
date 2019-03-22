@@ -11,7 +11,7 @@ class BigIntSerializer implements PrimitiveSerializer<BigInt> {
   // [BigInt] has a private implementation type; register it via [BigInt.zero].
   @override
   final Iterable<Type> types =
-      new BuiltList<Type>([BigInt, BigInt.zero.runtimeType]);
+      BuiltList<Type>([BigInt, BigInt.zero.runtimeType]);
   @override
   final String wireName = 'BigInt';
 

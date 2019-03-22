@@ -14,7 +14,7 @@ class DoubleSerializer implements PrimitiveSerializer<double> {
 
   final bool structured = false;
   @override
-  final Iterable<Type> types = new BuiltList<Type>([double]);
+  final Iterable<Type> types = BuiltList<Type>([double]);
   @override
   final String wireName = 'double';
 
