@@ -8,7 +8,7 @@ import 'package:built_value/serializer.dart';
 class BoolSerializer implements PrimitiveSerializer<bool> {
   final bool structured = false;
   @override
-  final Iterable<Type> types = new BuiltList<Type>([bool]);
+  final Iterable<Type> types = BuiltList<Type>([bool]);
   @override
   final String wireName = 'bool';
 

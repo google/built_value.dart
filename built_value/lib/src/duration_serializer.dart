@@ -12,7 +12,7 @@ import 'package:built_value/serializer.dart';
 class DurationSerializer implements PrimitiveSerializer<Duration> {
   final bool structured = false;
   @override
-  final Iterable<Type> types = new BuiltList<Type>([Duration]);
+  final Iterable<Type> types = BuiltList<Type>([Duration]);
   @override
   final String wireName = 'Duration';
 

@@ -6,7 +6,7 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = new Serializers();
+  final serializers = Serializers();
 
   group('BigInt with known specifiedType', () {
     final data = BigInt.parse('123456789012345678901234567890');

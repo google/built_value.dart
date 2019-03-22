@@ -9,7 +9,7 @@ import 'package:fixnum/fixnum.dart';
 class Int64Serializer implements PrimitiveSerializer<Int64> {
   final bool structured = false;
   @override
-  final Iterable<Type> types = new BuiltList<Type>([Int64]);
+  final Iterable<Type> types = BuiltList<Type>([Int64]);
   @override
   final String wireName = 'Int64';
 

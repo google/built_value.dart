@@ -8,16 +8,16 @@ import 'package:test/test.dart';
 
 void main() {
   group('BuiltSetMultimap with known specifiedType and correct builder', () {
-    final data = new BuiltSetMultimap<int, String>({
+    final data = BuiltSetMultimap<int, String>({
       1: ['one'],
       2: ['two'],
       3: ['three', '3hree']
     });
-    final specifiedType = const FullType(
-        BuiltSetMultimap, const [const FullType(int), const FullType(String)]);
-    final serializers = (new Serializers().toBuilder()
+    final specifiedType =
+        const FullType(BuiltSetMultimap, [FullType(int), FullType(String)]);
+    final serializers = (Serializers().toBuilder()
           ..addBuilderFactory(
-              specifiedType, () => new SetMultimapBuilder<int, String>()))
+              specifiedType, () => SetMultimapBuilder<int, String>()))
         .build();
     final serialized = [
       1,
@@ -43,7 +43,7 @@ void main() {
           serializers
               .deserialize(serialized, specifiedType: specifiedType)
               .runtimeType,
-          new BuiltSetMultimap<int, String>().runtimeType);
+          BuiltSetMultimap<int, String>().runtimeType);
     });
   });
 }

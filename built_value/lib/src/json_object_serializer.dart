@@ -9,7 +9,7 @@ import 'package:built_value/serializer.dart';
 class JsonObjectSerializer implements PrimitiveSerializer<JsonObject> {
   final bool structured = false;
   @override
-  final Iterable<Type> types = new BuiltList<Type>([
+  final Iterable<Type> types = BuiltList<Type>([
     JsonObject,
     BoolJsonObject,
     ListJsonObject,
@@ -29,6 +29,6 @@ class JsonObjectSerializer implements PrimitiveSerializer<JsonObject> {
   @override
   JsonObject deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    return new JsonObject(serialized);
+    return JsonObject(serialized);
   }
 }

@@ -9,7 +9,7 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
   final bool structured = true;
   @override
   final Iterable<Type> types =
-      new BuiltList<Type>([BuiltList, new BuiltList<Object>().runtimeType]);
+      BuiltList<Type>([BuiltList, BuiltList<Object>().runtimeType]);
   @override
   final String wireName = 'list';
 
@@ -39,7 +39,7 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
         : specifiedType.parameters[0];
 
     final ListBuilder result = isUnderspecified
-        ? new ListBuilder<Object>()
+        ? ListBuilder<Object>()
         : serializers.newBuilder(specifiedType) as ListBuilder;
 
     result.replace(serialized.map(
