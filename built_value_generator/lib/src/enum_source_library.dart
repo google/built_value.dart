@@ -21,7 +21,7 @@ abstract class EnumSourceLibrary
   LibraryElement get element;
 
   factory EnumSourceLibrary(LibraryElement element) =>
-      new _$EnumSourceLibrary._(element: element);
+      _$EnumSourceLibrary._(element: element);
   EnumSourceLibrary._();
 
   @memoized
@@ -40,11 +40,11 @@ abstract class EnumSourceLibrary
 
   @memoized
   BuiltList<EnumSourceClass> get classes {
-    final result = new ListBuilder<EnumSourceClass>();
+    final result = ListBuilder<EnumSourceClass>();
 
     for (final classElement in LibraryElements.getClassElements(element)) {
       if (EnumSourceClass.needsEnumClass(classElement)) {
-        result.add(new EnumSourceClass(parsedLibrary, classElement));
+        result.add(EnumSourceClass(parsedLibrary, classElement));
       }
     }
     return result.build();
@@ -78,8 +78,8 @@ abstract class EnumSourceLibrary
 
   Iterable<String> _checkIdentifiers() {
     final result = <String>[];
-    final seenIdentifiers = new Set<String>();
-    final reportedIdentifiers = new Set<String>();
+    final seenIdentifiers = Set<String>();
+    final reportedIdentifiers = Set<String>();
 
     for (final sourceClass in classes) {
       for (final identifier in sourceClass.identifiers) {
@@ -100,10 +100,10 @@ abstract class EnumSourceLibrary
 
 InvalidGenerationSourceError _makeError(Iterable<String> todos) {
   final message =
-      new StringBuffer('Please make the following changes to use EnumClass:\n');
+      StringBuffer('Please make the following changes to use EnumClass:\n');
   for (var i = 0; i != todos.length; ++i) {
     message.write('\n${i + 1}. ${todos.elementAt(i)}');
   }
 
-  return new InvalidGenerationSourceError(message.toString());
+  return InvalidGenerationSourceError(message.toString());
 }

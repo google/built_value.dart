@@ -21,7 +21,7 @@ class Checker {
           continue;
         }
 
-        final ValueSourceClass sourceClass = new ValueSourceClass(type);
+        final ValueSourceClass sourceClass = ValueSourceClass(type);
         final errors = sourceClass.computeErrors();
 
         if (errors.isNotEmpty) {
@@ -38,10 +38,10 @@ class Checker {
           final offset = builtNode.offset;
           final length = builtNode.length;
           final offsetLineLocation = lineInfo.getLocation(offset);
-          final error = new AnalysisError(
+          final error = AnalysisError(
               AnalysisErrorSeverity.ERROR,
               AnalysisErrorType.LINT,
-              new Location(
+              Location(
                   compilationUnit.source.fullName,
                   offset,
                   length,
@@ -56,17 +56,16 @@ class Checker {
           // invalidate the line numbers for the following fixes.
           final edits = errors
               .where((error) => error.fix != null)
-              .map((error) =>
-                  new SourceEdit(error.offset, error.length, error.fix))
+              .map((error) => SourceEdit(error.offset, error.length, error.fix))
               .toList();
           edits.sort((left, right) => right.offset.compareTo(left.offset));
 
-          final fix = new PrioritizedSourceChange(
+          final fix = PrioritizedSourceChange(
               1000000,
-              new SourceChange(
+              SourceChange(
                 'Apply fixes for built_value.',
                 edits: [
-                  new SourceFileEdit(
+                  SourceFileEdit(
                     compilationUnit.source.fullName,
                     compilationUnit.source.modificationStamp,
                     edits: edits,

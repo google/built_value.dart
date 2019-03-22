@@ -5,7 +5,7 @@ import 'package:analyzer_plugin/starter.dart';
 import 'package:built_value_generator/src/plugin/plugin.dart';
 
 void start(List<String> args, SendPort sendPort) {
-  new ServerPluginStarter(
-          new BuiltValueAnalyzerPlugin(PhysicalResourceProvider.INSTANCE))
+  ServerPluginStarter(
+          BuiltValueAnalyzerPlugin(PhysicalResourceProvider.INSTANCE))
       .start(sendPort);
 }

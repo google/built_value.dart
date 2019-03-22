@@ -20,13 +20,12 @@ class BuiltValueGenerator extends Generator {
 
   @override
   Future<String> generate(LibraryReader library, BuildStep buildStep) async {
-    final result = new StringBuffer();
+    final result = StringBuffer();
 
     try {
-      final enumCode = new EnumSourceLibrary(library.element).generateCode();
+      final enumCode = EnumSourceLibrary(library.element).generateCode();
       if (enumCode != null) result.writeln(enumCode);
-      final serializerSourceLibrary =
-          new SerializerSourceLibrary(library.element);
+      final serializerSourceLibrary = SerializerSourceLibrary(library.element);
       if (serializerSourceLibrary.needsBuiltJson ||
           serializerSourceLibrary.hasSerializers) {
         result.writeln(serializerSourceLibrary.generateCode());
@@ -51,7 +50,7 @@ class BuiltValueGenerator extends Generator {
       if (element is ClassElement &&
           ValueSourceClass.needsBuiltValue(element)) {
         try {
-          result.writeln(new ValueSourceClass(element).generateCode() ?? '');
+          result.writeln(ValueSourceClass(element).generateCode() ?? '');
         } catch (e, st) {
           result.writeln(_error(e));
           log.severe('Error in BuiltValueGenerator for $element.', e, st);
