@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('Collections', () {
-    final data = new Collections((b) => b
+    final data = Collections((b) => b
       ..list.add(1)
       ..set.add('two')
       ..map['three'] = 4

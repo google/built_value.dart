@@ -52,7 +52,7 @@ class EnumWithInt extends EnumClass implements HasInt {
       case three:
         return 3;
       default:
-        throw new StateError(this.toString());
+        throw StateError(this.toString());
     }
   }
 }

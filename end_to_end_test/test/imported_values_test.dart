@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 void main() {
   group('ImportedValue', () {
     test('can be instantiated', () {
-      new ImportedValue((b) => b..simpleValue.anInt = 3);
+      ImportedValue((b) => b..simpleValue.anInt = 3);
     });
   });
 }

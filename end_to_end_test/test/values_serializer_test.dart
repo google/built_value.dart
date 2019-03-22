@@ -13,7 +13,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('SimpleValue', () {
-    final data = new SimpleValue((b) => b
+    final data = SimpleValue((b) => b
       ..anInt = 1
       ..aString = 'two');
     final serialized = [
@@ -34,10 +34,10 @@ void main() {
   });
 
   group('CompoundValue', () {
-    final data = new CompoundValue((b) => b
+    final data = CompoundValue((b) => b
       ..simpleValue.anInt = 1
       ..simpleValue.aString = 'two'
-      ..validatedValue = new ValidatedValue((b) => b.anInt = 3).toBuilder());
+      ..validatedValue = ValidatedValue((b) => b.anInt = 3).toBuilder());
     final serialized = [
       'CompoundValue',
       'simpleValue',
@@ -91,11 +91,11 @@ void main() {
   });
 
   group('CompoundValueNoNesting', () {
-    final data = new CompoundValueNoNesting((b) => b
-      ..simpleValue = new SimpleValue((b) => b
+    final data = CompoundValueNoNesting((b) => b
+      ..simpleValue = SimpleValue((b) => b
         ..anInt = 1
         ..aString = 'two')
-      ..validatedValue = new ValidatedValue((b) => b.anInt = 3));
+      ..validatedValue = ValidatedValue((b) => b.anInt = 3));
     final serialized = [
       'CompoundValueNoNesting',
       'simpleValue',
@@ -122,11 +122,11 @@ void main() {
   });
 
   group('CompoundValueExplicitNoNesting', () {
-    final data = new CompoundValueExplicitNoNesting((b) => b
-      ..simpleValue.replace(new SimpleValue((b) => b
+    final data = CompoundValueExplicitNoNesting((b) => b
+      ..simpleValue.replace(SimpleValue((b) => b
         ..anInt = 1
         ..aString = 'two'))
-      ..validatedValue = new ValidatedValue((b) => b.anInt = 3));
+      ..validatedValue = ValidatedValue((b) => b.anInt = 3));
     final serialized = [
       'CompoundValueExplicitNoNesting',
       'simpleValue',
@@ -153,13 +153,13 @@ void main() {
   });
 
   group('CompoundValue using StandardJsonPlugin', () {
-    final data = new CompoundValue((b) => b
+    final data = CompoundValue((b) => b
       ..simpleValue.anInt = 1
       ..simpleValue.aString = 'two'
-      ..validatedValue = new ValidatedValue((b) => b.anInt = 3).toBuilder());
+      ..validatedValue = ValidatedValue((b) => b.anInt = 3).toBuilder());
     final specifiedType = const FullType(CompoundValue);
     final serializersWithPlugin =
-        (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
+        (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
     final serialized = {
       'simpleValue': {
         'anInt': 1,
@@ -185,7 +185,7 @@ void main() {
   });
 
   group('ValueUsingImportAs', () {
-    final data = new ValueUsingImportAs((b) => b.value = TestEnum.yes);
+    final data = ValueUsingImportAs((b) => b.value = TestEnum.yes);
     final serialized = [
       'ValueUsingImportAs',
       'value',
@@ -202,15 +202,15 @@ void main() {
   });
 
   group('PrimitivesValue', () {
-    final data = new PrimitivesValue((b) => b
+    final data = PrimitivesValue((b) => b
       ..boolean = true
       ..integer = 42
       ..int64 = Int64.MAX_VALUE
       ..dbl = 2.5
       ..number = 17.5
       ..string = 'test'
-      ..dateTime = new DateTime.fromMillisecondsSinceEpoch(1000, isUtc: true)
-      ..duration = new Duration(microseconds: 12345)
+      ..dateTime = DateTime.fromMillisecondsSinceEpoch(1000, isUtc: true)
+      ..duration = Duration(microseconds: 12345)
       ..regExp = RegExp(r'\w+@\d+')
       ..uri = Uri.parse('https://github.com/google/built_value.dart')
       ..bigInt = BigInt.parse('123456789012345678901234567890'));
@@ -250,7 +250,7 @@ void main() {
   });
 
   group('NamedFactoryValue', () {
-    final data = new NamedFactoryValue(3);
+    final data = NamedFactoryValue(3);
     final serialized = ['NamedFactoryValue', 'value', 3];
 
     test('can be serialized', () {
@@ -263,9 +263,9 @@ void main() {
   });
 
   group('FieldDiscoveryValue', () {
-    final data = new FieldDiscoveryValue((b) => b
+    final data = FieldDiscoveryValue((b) => b
       ..value.value.value = 1
-      ..values.add(new ThirdDiscoverableValue((b) => b..value = 4)));
+      ..values.add(ThirdDiscoverableValue((b) => b..value = 4)));
     final serialized = [
       'FieldDiscoveryValue',
       'value',
@@ -292,7 +292,7 @@ void main() {
   });
 
   group('PartiallySerializableValue', () {
-    final data = new PartiallySerializableValue((b) => b
+    final data = PartiallySerializableValue((b) => b
       ..value = 1
       ..transientValue = 2);
     final serialized = [
@@ -312,7 +312,7 @@ void main() {
   });
 
   group('WireNameValue', () {
-    final data = new WireNameValue((b) => b..value = 1);
+    final data = WireNameValue((b) => b..value = 1);
     final serialized = [
       r'$V',
       r'$v',
@@ -329,7 +329,7 @@ void main() {
   });
 
   group('ValueWithCustomSerializer', () {
-    final data = new ValueWithCustomSerializer((b) => b..value = 1);
+    final data = ValueWithCustomSerializer((b) => b..value = 1);
     final serialized = ['ValueWithCustomSerializer', 1];
 
     test('can be serialized', () {

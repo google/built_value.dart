@@ -9,7 +9,7 @@ import 'package:test/test.dart';
 void main() {
   group('toString', () {
     test('omits nulls', () {
-      final value = new CompoundValue((b) => b..simpleValue.anInt = 1);
+      final value = CompoundValue((b) => b..simpleValue.anInt = 1);
 
       expect(value.toString(), '''CompoundValue {
   simpleValue=SimpleValue {
@@ -20,8 +20,8 @@ void main() {
 
     test('can be customized', () {
       newBuiltValueToStringHelper =
-          (className) => new FlatBuiltValueToStringHelper(className);
-      final value = new CompoundValue((b) => b..simpleValue.anInt = 1);
+          (className) => FlatBuiltValueToStringHelper(className);
+      final value = CompoundValue((b) => b..simpleValue.anInt = 1);
 
       expect(value.toString(),
           '''CompoundValue {simpleValue=SimpleValue {anInt=1}}''');

@@ -173,10 +173,9 @@ abstract class ValueWithCode
   factory ValueWithCode([updates(ValueWithCodeBuilder b)]) = _$ValueWithCode;
   ValueWithCode._();
 
-  factory ValueWithCode.fromCustomFactory(int anInt) =>
-      new ValueWithCode((b) => b
-        ..anInt = anInt
-        ..aString = 'two');
+  factory ValueWithCode.fromCustomFactory(int anInt) => ValueWithCode((b) => b
+    ..anInt = anInt
+    ..aString = 'two');
 }
 
 abstract class ValueWithDefaults
@@ -197,7 +196,7 @@ abstract class ValueWithDefaultsBuilder
 
   @nullable
   String aString;
-  SimpleValueBuilder value = new SimpleValue((b) => b..anInt = 3).toBuilder();
+  SimpleValueBuilder value = SimpleValue((b) => b..anInt = 3).toBuilder();
 
   factory ValueWithDefaultsBuilder() = _$ValueWithDefaultsBuilder;
   ValueWithDefaultsBuilder._();
@@ -237,7 +236,7 @@ abstract class ValidatedValue
   factory ValidatedValue([updates(ValidatedValueBuilder b)]) = _$ValidatedValue;
 
   ValidatedValue._() {
-    if (anInt == 7) throw new StateError('anInt may not be 7');
+    if (anInt == 7) throw StateError('anInt may not be 7');
   }
 }
 
@@ -333,8 +332,7 @@ abstract class NamedFactoryValue
 
   int get value;
 
-  factory NamedFactoryValue(int value) =>
-      new _$NamedFactoryValue._(value: value);
+  factory NamedFactoryValue(int value) => _$NamedFactoryValue._(value: value);
 
   NamedFactoryValue._();
 }

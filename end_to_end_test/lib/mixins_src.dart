@@ -6,7 +6,7 @@
 
 import 'package:built_value/built_value.dart';
 
-typedef String TypeDef(String a);
+typedef TypeDef = String Function(String a);
 
 abstract class Mixin {
   @BuiltValueField(serialize: false)

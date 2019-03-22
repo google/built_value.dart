@@ -22,7 +22,7 @@ abstract class _PrivateValue
 void main() {
   group('PrivateValue', () {
     test('can be instantiated', () {
-      new _PrivateValue((b) => b..value = 0);
+      _PrivateValue((b) => b..value = 0);
     });
   });
 }
