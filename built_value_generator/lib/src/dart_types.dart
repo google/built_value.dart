@@ -7,7 +7,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value_generator/src/value_source_class.dart';
 
-BuiltSet<String> _builtCollectionNames = new BuiltSet<String>([
+BuiltSet<String> _builtCollectionNames = BuiltSet<String>([
   'BuiltList',
   'BuiltListMultimap',
   'BuiltMap',
@@ -22,9 +22,7 @@ class DartTypes {
 
   static bool isInstantiableBuiltValue(DartType type) {
     return isBuiltValue(type) &&
-        new ValueSourceClass(type.element as ClassElement)
-            .settings
-            .instantiable;
+        ValueSourceClass(type.element as ClassElement).settings.instantiable;
   }
 
   static bool isBuiltValue(DartType type) {
