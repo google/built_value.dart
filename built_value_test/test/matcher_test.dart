@@ -11,7 +11,7 @@ import 'values.dart';
 void main() {
   group('built_value matcher', () {
     test('matches if same', () {
-      final value = new CompoundValue((b) => b
+      final value = CompoundValue((b) => b
         ..simpleValue.anInt = 3
         ..string = 'str');
 
@@ -19,7 +19,7 @@ void main() {
     });
 
     test('reports if not same', () {
-      final value = new CompoundValue((b) => b
+      final value = CompoundValue((b) => b
         ..simpleValue.anInt = 3
         ..string = 'str');
       final otherValue = value.rebuild((b) => b..simpleValue.anInt = 5);
@@ -29,7 +29,7 @@ void main() {
     });
 
     test('reports deep match on lists if not same', () {
-      final value = new CompoundValue((b) => b
+      final value = CompoundValue((b) => b
         ..simpleValue.anInt = 3
         ..simpleValue.list.add('foo')
         ..string = 'str');
@@ -40,7 +40,7 @@ void main() {
     });
 
     test('reports deep match on list multimaps if not same', () {
-      final value = new CompoundValue((b) => b
+      final value = CompoundValue((b) => b
         ..simpleValue.anInt = 3
         ..simpleValue.multimap.add(42, true)
         ..string = 'str');
@@ -55,7 +55,7 @@ void main() {
     });
 
     test('reports deep match on maps if not same', () {
-      final value = new CompoundValue((b) => b
+      final value = CompoundValue((b) => b
         ..simpleValue.anInt = 3
         ..simpleValue.map['foo'] = 3
         ..simpleValue.map['bar'] = 4
@@ -67,7 +67,7 @@ void main() {
     });
 
     test('reports deep match on sets if not same', () {
-      final value = new CompoundValue((b) => b
+      final value = CompoundValue((b) => b
         ..simpleValue.anInt = 3
         ..simpleValue.aSet.add(42)
         ..string = 'str');
@@ -78,7 +78,7 @@ void main() {
     });
 
     test('reports deep match on set multimaps if not same', () {
-      final value = new CompoundValue((b) => b
+      final value = CompoundValue((b) => b
         ..simpleValue.anInt = 3
         ..simpleValue.setMultimap.add(42, true)
         ..string = 'str');
@@ -94,16 +94,16 @@ void main() {
 
     test('reports if the wrong type', () {
       final value = 42;
-      final otherValue = new CompoundValue((b) => b..simpleValue.anInt = 5);
+      final otherValue = CompoundValue((b) => b..simpleValue.anInt = 5);
 
       _expectMismatch(value, otherValue, 'is the wrong type');
     });
 
     test('compared value matcher', () {
-      final value = new ComparedValue((b) => b
+      final value = ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change happened!');
-      final otherValue = new ComparedValue((b) => b
+      final otherValue = ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change happened!');
 
@@ -111,10 +111,10 @@ void main() {
     });
 
     test('compared value matcher with different onChanged outcomes', () {
-      final value = new ComparedValue((b) => b
+      final value = ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change happened!');
-      final otherValue = new ComparedValue((b) => b
+      final otherValue = ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change did not happen!');
 
@@ -122,10 +122,10 @@ void main() {
     });
 
     test('compared value matcher with different names', () {
-      final value = new ComparedValue((b) => b
+      final value = ComparedValue((b) => b
         ..name = 'foo'
         ..onChanged = () => 'Change happened!');
-      final otherValue = new ComparedValue((b) => b
+      final otherValue = ComparedValue((b) => b
         ..name = 'bar'
         ..onChanged = () => 'Change did not happen!');
 
@@ -142,5 +142,5 @@ void _expectMismatch(
     expect(exception.toString(), contains(expectedMismatchMessage));
     return;
   }
-  throw new StateError('Expected mismatch.');
+  throw StateError('Expected mismatch.');
 }
