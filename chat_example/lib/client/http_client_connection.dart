@@ -10,12 +10,10 @@ import 'package:chat_example/client/client_connection.dart';
 /// [ClientConnection] using a web socket.
 class HttpClientConnection implements ClientConnection {
   final WebSocket _websocket;
-  final StreamController<String> _streamController =
-      new StreamController<String>();
+  final StreamController<String> _streamController = StreamController<String>();
 
   factory HttpClientConnection() {
-    return new HttpClientConnection._(
-        new WebSocket('ws://${window.location.host}/ws'));
+    return HttpClientConnection._(WebSocket('ws://${window.location.host}/ws'));
   }
 
   HttpClientConnection._(this._websocket) {

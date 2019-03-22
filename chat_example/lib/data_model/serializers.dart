@@ -11,7 +11,7 @@ import 'package:chat_example/data_model/data_model.dart';
 part 'serializers.g.dart';
 
 /// Collection of generated serializers for the built_value chat example.
-@SerializersFor(const [
+@SerializersFor([
   Chat,
   ListUsers,
   ListUsersResponse,

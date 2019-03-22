@@ -10,8 +10,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 /// [ServerConnection] using a web socket.
 class HttpServerConnection implements ServerConnection {
   final WebSocketChannel _webSocketChannel;
-  final StreamController<String> _streamController =
-      new StreamController<String>();
+  final StreamController<String> _streamController = StreamController<String>();
 
   @override
   String username;
