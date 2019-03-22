@@ -10,7 +10,7 @@ void main() {
   FakeEnvironment environment;
 
   setUp(() {
-    environment = new FakeEnvironment();
+    environment = FakeEnvironment();
   });
 
   group('on connect', () {

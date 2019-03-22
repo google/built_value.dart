@@ -10,7 +10,7 @@ import 'package:shelf_proxy/shelf_proxy.dart';
 import 'package:shelf_web_socket/shelf_web_socket.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-typedef void SocketReceiver(WebSocketChannel webSocket);
+typedef SocketReceiver = void Function(WebSocketChannel webSocket);
 
 /// Resource server for the built_value chat example.
 ///
@@ -18,7 +18,7 @@ typedef void SocketReceiver(WebSocketChannel webSocket);
 class ResourceServer {
   /// Serves resources, passing new sockets to [socketReceiver].
   Future start(SocketReceiver socketReceiver) async {
-    final cascade = new Cascade()
+    final cascade = Cascade()
         // Web socket handler will do nothing for non-websocket requests, so
         // just add it in the cascade at the top.
         .add(webSocketHandler(socketReceiver))
@@ -27,7 +27,7 @@ class ResourceServer {
         // If that didn't work, must be a problem with pub serve.
         .add((_) {
       print('Request failed. Check pub serve output for errors.');
-      return new Response.notFound('');
+      return Response.notFound('');
     });
 
     await io.serve(cascade.handler, 'localhost', 26199).then((server) {

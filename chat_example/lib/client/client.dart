@@ -10,7 +10,7 @@ import 'package:chat_example/client/display.dart';
 import 'package:chat_example/data_model/data_model.dart';
 import 'package:chat_example/data_model/serializers.dart';
 
-typedef void CommandRunner(String command);
+typedef CommandRunner = void Function(String command);
 
 /// Client-side logic for built_value chat example.
 class Client {
@@ -30,7 +30,7 @@ class Client {
     if (response is Response) {
       _display.add(response.render());
     } else {
-      throw new StateError('Invalid data from server: $response');
+      throw StateError('Invalid data from server: $response');
     }
   }
 
@@ -60,12 +60,12 @@ class Client {
       return;
     }
 
-    _send(new Chat((b) => b..text = command));
+    _send(Chat((b) => b..text = command));
   }
 
   void _runAway(String command) {
     _display.addLocal(command);
-    _send(new Status((b) => b
+    _send(Status((b) => b
       ..message = command.substring('/away '.length)
       ..type = StatusType.away));
   }
@@ -86,28 +86,28 @@ class Client {
 
   void _runList(String command) {
     _display.addLocal(command);
-    _send(new ListUsers(
+    _send(ListUsers(
         (b) => b..statusTypes.replace([StatusType.online, StatusType.away])));
   }
 
   void _runLogin(String command) {
     final words = command.split(' ');
     _display.addLocal('/login ${words[1]} ********');
-    _send(new Login((b) => b
+    _send(Login((b) => b
       ..username = words[1]
       ..password = words[2]));
   }
 
   void _runQuit(String command) {
     _display.addLocal(command);
-    _send(new Status((b) => b
+    _send(Status((b) => b
       ..message = command.substring('/quit '.length)
       ..type = StatusType.offline));
   }
 
   void _runStatus(String command) {
     _display.addLocal(command);
-    _send(new Status((b) => b
+    _send(Status((b) => b
       ..message = command.substring('/status '.length)
       ..type = StatusType.online));
   }
@@ -116,7 +116,7 @@ class Client {
     _display.addLocal(command);
     final words = command.split(' ');
     final targets = words[1].split(',');
-    _send(new Chat((b) => b
+    _send(Chat((b) => b
       ..text = words.sublist(2).join(' ')
       ..targets.replace(targets)));
   }

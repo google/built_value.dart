@@ -7,8 +7,7 @@ import 'dart:html';
 
 /// An input box using `dart:html`.
 class Input {
-  final StreamController<String> _streamController =
-      new StreamController<String>();
+  final StreamController<String> _streamController = StreamController<String>();
 
   Input() {
     final input = querySelector('#input') as InputElement;

@@ -9,9 +9,9 @@ import 'package:chat_example/client/client_connection.dart';
 /// Fake [ClientConnection] that exposes stream controllers.
 class FakeClientConnection implements ClientConnection {
   final StreamController<String> toServerStreamController =
-      new StreamController<String>(sync: true);
+      StreamController<String>(sync: true);
   final StreamController<String> fromServerStreamController =
-      new StreamController<String>(sync: true);
+      StreamController<String>(sync: true);
 
   @override
   void sendToServer(String string) {

@@ -7,7 +7,7 @@ import 'package:chat_example/server/resource_server.dart';
 import 'package:chat_example/server/server.dart';
 
 void main() {
-  final server = new Server();
-  new ResourceServer().start(
-      (webSocket) => server.addConnection(new HttpServerConnection(webSocket)));
+  final server = Server();
+  ResourceServer().start(
+      (webSocket) => server.addConnection(HttpServerConnection(webSocket)));
 }
