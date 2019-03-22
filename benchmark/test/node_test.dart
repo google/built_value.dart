@@ -8,40 +8,40 @@ import 'package:test/test.dart';
 void main() {
   group('Node', () {
     test('can be instantiated', () {
-      new Node();
+      Node();
     });
 
     test('label can be updated', () {
-      final node = new Node((b) => b.label = 'updated');
+      final node = Node((b) => b.label = 'updated');
       expect(node.label, 'updated');
     });
 
     test('label update does not affect original', () {
-      final node = new Node();
+      final node = Node();
       node.rebuild((b) => b.label = 'updated');
       expect(node.label, isNull);
     });
 
     test('builder use after build does not affect original', () {
-      final builder = new NodeBuilder();
+      final builder = NodeBuilder();
       final node = builder.build();
       builder.label = 'updated';
       expect(node.label, isNull);
     });
 
     test('nested label can be updated', () {
-      final node = new Node((b) => b.left.label = 'updated');
+      final node = Node((b) => b.left.label = 'updated');
       expect(node.left.label, 'updated');
     });
 
     test('nested label update does not affect original', () {
-      final node = new Node();
+      final node = Node();
       node.rebuild((b) => b.left.label = 'updated');
       expect(node.left, null);
     });
 
     test('nested builder use after build does not affect original', () {
-      final builder = new NodeBuilder();
+      final builder = NodeBuilder();
       final nestedBuilder = builder.left;
       nestedBuilder.label = 'leaf';
       final node = builder.build();
@@ -50,18 +50,18 @@ void main() {
     });
 
     test('doubly nested label can be updated', () {
-      final node = new Node((b) => b.left.left.label = 'updated');
+      final node = Node((b) => b.left.left.label = 'updated');
       expect(node.left.left.label, 'updated');
     });
 
     test('doubly nested label update does not affect original', () {
-      final node = new Node();
+      final node = Node();
       node.rebuild((b) => b.left.left.label = 'updated');
       expect(node.left, null);
     });
 
     test('doubly nested builder use after build does not affect original', () {
-      final builder = new NodeBuilder();
+      final builder = NodeBuilder();
       final nestedBuilder = builder.left.left;
       nestedBuilder.label = 'leaf';
       final node = builder.build();
@@ -70,7 +70,7 @@ void main() {
     });
 
     test('structure can be created', () {
-      final node = new Node((b) => b
+      final node = Node((b) => b
         ..left.left.label = 'one'
         ..left.right.left.label = 'two'
         ..right.right.right.label = 'three');
@@ -80,7 +80,7 @@ void main() {
     });
 
     test('derived structure can be created without affecting original', () {
-      final node = new Node((b) => b
+      final node = Node((b) => b
         ..left.left.label = 'one'
         ..left.right.left.label = 'two'
         ..right.right.right.label = 'three');
@@ -103,7 +103,7 @@ void main() {
     });
 
     test('supports setting builders to null to clear', () {
-      final node = new Node((b) => b..left.left.label = 'leaf');
+      final node = Node((b) => b..left.left.label = 'leaf');
       final updatedNode = node.rebuild((b) => b..left = null);
       expect(updatedNode.left, null);
     });
@@ -111,7 +111,7 @@ void main() {
     test(
         'derived structure including deletes can be created without affecting '
         'original', () {
-      final node = new Node((b) => b
+      final node = Node((b) => b
         ..left.left.label = 'one'
         ..left.right.left.label = 'two'
         ..right.right.right.label = 'three');
