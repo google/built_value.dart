@@ -52,7 +52,7 @@ abstract class VerySimpleValue
 
   /// If you won't usually use the generated builder -- for example, for a
   /// class with one field -- you can write a simpler factory.
-  factory VerySimpleValue(int value) => new _$VerySimpleValue._(value: value);
+  factory VerySimpleValue(int value) => _$VerySimpleValue._(value: value);
   VerySimpleValue._();
 }
 
@@ -87,7 +87,7 @@ abstract class ValidatedValue
   factory ValidatedValue([updates(ValidatedValueBuilder b)]) = _$ValidatedValue;
 
   ValidatedValue._() {
-    if (anInt == 7) throw new StateError('anInt may not be 7');
+    if (anInt == 7) throw StateError('anInt may not be 7');
   }
 }
 
@@ -105,10 +105,9 @@ abstract class ValueWithCode
   factory ValueWithCode([updates(ValueWithCodeBuilder b)]) = _$ValueWithCode;
   ValueWithCode._();
 
-  factory ValueWithCode.fromCustomFactory(int anInt) =>
-      new ValueWithCode((b) => b
-        ..anInt = anInt
-        ..aString = 'two');
+  factory ValueWithCode.fromCustomFactory(int anInt) => ValueWithCode((b) => b
+    ..anInt = anInt
+    ..aString = 'two');
 }
 
 /// Defaults for fields go in an explicit builder class.

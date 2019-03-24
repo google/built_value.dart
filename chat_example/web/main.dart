@@ -9,8 +9,7 @@ import 'package:chat_example/client/input.dart';
 import 'package:chat_example/client/layout.dart';
 
 void main() {
-  new Layout();
-  final input = new Input();
-  new Client(
-      input.keyboardInput, new HtmlDisplay(), new HttpClientConnection());
+  Layout();
+  final input = Input();
+  Client(input.keyboardInput, HtmlDisplay(), HttpClientConnection());
 }

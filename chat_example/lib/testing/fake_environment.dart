@@ -19,17 +19,17 @@ class FakeEnvironment {
   final Server server;
 
   factory FakeEnvironment() {
-    final server = new Server();
+    final server = Server();
 
-    return new FakeEnvironment._(server);
+    return FakeEnvironment._(server);
   }
 
   FakeEnvironment._(this.server);
 
   /// Creates a new user connected to this environment.
   TestUser newUser() {
-    final clientConnection = new FakeClientConnection();
-    final serverConnection = new FakeServerConnection();
+    final clientConnection = FakeClientConnection();
+    final serverConnection = FakeServerConnection();
 
     clientConnection.toServerStreamController.stream.listen((string) {
       serverConnection.fromClientStreamController.add(string);
@@ -38,10 +38,10 @@ class FakeEnvironment {
       clientConnection.fromServerStreamController.add(string);
     });
 
-    final keyboardInputController = new StreamController<String>(sync: true);
-    final display = new FakeDisplay();
-    new Client(keyboardInputController.stream, display, clientConnection);
+    final keyboardInputController = StreamController<String>(sync: true);
+    final display = FakeDisplay();
+    Client(keyboardInputController.stream, display, clientConnection);
     server.addConnection(serverConnection);
-    return new TestUser(display, keyboardInputController);
+    return TestUser(display, keyboardInputController);
   }
 }

@@ -26,6 +26,7 @@ Immutable collections are from
 
 ## Tutorials
 
+ - [Custom Serializers](https://medium.com/@solid.goncalo/creating-custom-built-value-serializers-with-builtvalueserializer-46a52c75d4c5)
  - [Flutter + built_value + Reddit Tutorial](https://steemit.com/utopian-io/@tensor/building-immutable-models-with-built-value-and-built-collection-in-dart-s-flutter-framework);
    [video](https://www.youtube.com/watch?v=hNbOSSgpneI);
    [source code](https://github.com/tensor-programming/built_flutter_tutorial)

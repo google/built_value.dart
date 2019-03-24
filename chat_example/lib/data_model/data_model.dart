@@ -103,7 +103,7 @@ class LoginResponse extends EnumClass implements Response {
       case reset:
         return 'You have been logged out.';
       default:
-        throw new StateError(this.name);
+        throw StateError(this.name);
     }
   }
 }
@@ -158,7 +158,7 @@ abstract class ListUsersResponse
 
   @override
   String render() {
-    final result = new StringBuffer('The following users are online:\n\n');
+    final result = StringBuffer('The following users are online:\n\n');
     for (final username in statuses.keys) {
       final status = statuses[username];
       result.write(

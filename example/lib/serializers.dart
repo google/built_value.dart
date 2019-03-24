@@ -24,7 +24,7 @@ part 'serializers.g.dart';
 /// types needed transitively via fields.
 ///
 /// You usually only need to do this once per project.
-@SerializersFor(const [
+@SerializersFor([
   Account,
   Cat,
   CompoundValue,

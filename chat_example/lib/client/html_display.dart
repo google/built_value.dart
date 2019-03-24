@@ -13,7 +13,7 @@ class HtmlDisplay implements Display {
   final HtmlEscape _htmlEscape = const HtmlEscape();
 
   factory HtmlDisplay() {
-    return new HtmlDisplay._(querySelector('#text'));
+    return HtmlDisplay._(querySelector('#text'));
   }
 
   HtmlDisplay._(this._element) {

@@ -12,8 +12,8 @@ import 'package:chat_example/server/server_connection.dart';
 
 /// Server-side logic for the built_value chat example.
 class Server {
-  final Random random = new Random();
-  final Set<ServerConnection> _connections = new Set<ServerConnection>();
+  final Random random = Random();
+  final Set<ServerConnection> _connections = Set<ServerConnection>();
   final Map<String, String> _passwords = <String, String>{};
   final Map<String, Status> _statuses = <String, Status>{};
   final List<Response> _log = <Response>[];
@@ -27,7 +27,7 @@ class Server {
     _connections.add(connection);
     _send(
         connection,
-        new Welcome((b) => b
+        Welcome((b) => b
           ..log.addAll(_log)
           ..message = 'You are connected as $username.'));
     connection.dataFromClient
@@ -46,20 +46,20 @@ class Server {
     } else if (command is ListUsers) {
       _listUsers(connection, command);
     } else {
-      throw new StateError('Invalid data from client: $command');
+      throw StateError('Invalid data from client: $command');
     }
   }
 
   void _chat(ServerConnection connection, Chat chat) {
     if (chat.targets.isEmpty) {
-      _sendToAll(new ShowChat((b) => b
+      _sendToAll(ShowChat((b) => b
         ..username = connection.username
         ..private = false
         ..text = chat.text));
     } else {
       _sendTo(
           chat.targets,
-          new ShowChat((b) => b
+          ShowChat((b) => b
             ..username = connection.username
             ..private = true
             ..text = chat.text));
@@ -69,7 +69,7 @@ class Server {
   void _listUsers(ServerConnection connection, ListUsers listUsers) {
     _send(
         connection,
-        new ListUsersResponse((b) => _statuses.forEach((username, status) {
+        ListUsersResponse((b) => _statuses.forEach((username, status) {
               if (listUsers.statusTypes.contains(status.type)) {
                 b.statuses[username] = status;
               }
@@ -93,7 +93,7 @@ class Server {
       }
     }
 
-    _statuses[login.username] = new Status((b) => b
+    _statuses[login.username] = Status((b) => b
       ..message = ''
       ..type = StatusType.online);
 

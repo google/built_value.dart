@@ -1,5 +1,14 @@
 # Changelog
 
+# 6.3.2
+
+- Allow `analyzer` 0.35.0.
+
+# 6.3.1
+
+- Fix `BuiltList` serialization when using `StandardJsonPlugin` with
+  unspecified type and when list length is 1.
+
 # 6.3.0
 
 - Allow custom builders to use setter/getter pairs instead of normal fields.
