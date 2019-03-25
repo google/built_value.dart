@@ -10,15 +10,15 @@ import 'package:built_collection/built_collection.dart';
 class LibraryElements {
   static BuiltList<ClassElement> getClassElements(
       LibraryElement libraryElement) {
-    final result = _GetClassesVisitor();
+    final result = new _GetClassesVisitor();
     libraryElement.visitChildren(result);
-    return BuiltList<ClassElement>(result.classElements);
+    return new BuiltList<ClassElement>(result.classElements);
   }
 }
 
 /// Visitor that gets all [ClassElement]s.
 class _GetClassesVisitor extends SimpleElementVisitor {
-  final List<ClassElement> classElements = List<ClassElement>();
+  final List<ClassElement> classElements = new List<ClassElement>();
 
   @override
   void visitClassElement(ClassElement element) {

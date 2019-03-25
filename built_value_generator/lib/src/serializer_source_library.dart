@@ -21,7 +21,7 @@ abstract class SerializerSourceLibrary
   LibraryElement get element;
 
   factory SerializerSourceLibrary(LibraryElement element) =>
-      _$SerializerSourceLibrary._(element: element);
+      new _$SerializerSourceLibrary._(element: element);
   SerializerSourceLibrary._();
 
   @memoized
@@ -36,7 +36,7 @@ abstract class SerializerSourceLibrary
   /// and the values are the `@SerializersFor` annotations.
   @memoized
   BuiltMap<String, ElementAnnotation> get serializersForAnnotations {
-    final result = MapBuilder<String, ElementAnnotation>();
+    final result = new MapBuilder<String, ElementAnnotation>();
     final accessors = element.definingCompilationUnit.accessors
         .where((element) =>
             element.isGetter && element.returnType.displayName == 'Serializers')
@@ -61,10 +61,10 @@ abstract class SerializerSourceLibrary
   /// generated for each, except where the serializer is marked `custom`.
   @memoized
   BuiltSet<SerializerSourceClass> get sourceClasses {
-    final result = SetBuilder<SerializerSourceClass>();
+    final result = new SetBuilder<SerializerSourceClass>();
     final classElements = LibraryElements.getClassElements(element);
     for (final classElement in classElements) {
-      final sourceClass = SerializerSourceClass(classElement);
+      final sourceClass = new SerializerSourceClass(classElement);
       if (sourceClass.isSerializable) {
         result.add(sourceClass);
       }
@@ -76,7 +76,7 @@ abstract class SerializerSourceLibrary
   /// that each serializer is required to be able to serialize.
   @memoized
   BuiltSetMultimap<String, SerializerSourceClass> get serializeForClasses {
-    final result = SetMultimapBuilder<String, SerializerSourceClass>();
+    final result = new SetMultimapBuilder<String, SerializerSourceClass>();
 
     for (final field in serializersForAnnotations.keys) {
       final serializersForAnnotation = serializersForAnnotations[field];
@@ -89,14 +89,14 @@ abstract class SerializerSourceLibrary
 
       if (types == null) {
         // This only happens if the source code is invalid.
-        throw InvalidGenerationSourceError(
+        throw new InvalidGenerationSourceError(
             'Broken @SerializersFor annotation. Are all the types imported?');
       }
 
       result.addValues(
           field,
-          types.map(
-              (type) => SerializerSourceClass(type.element as ClassElement)));
+          types.map((type) =>
+              new SerializerSourceClass(type.element as ClassElement)));
     }
     return result.build();
   }
@@ -106,10 +106,10 @@ abstract class SerializerSourceLibrary
   @memoized
   BuiltSetMultimap<String, SerializerSourceClass>
       get serializeForTransitiveClasses {
-    final result = SetMultimapBuilder<String, SerializerSourceClass>();
+    final result = new SetMultimapBuilder<String, SerializerSourceClass>();
 
     for (final field in serializersForAnnotations.keys) {
-      var currentResult = BuiltSet<SerializerSourceClass>(
+      var currentResult = new BuiltSet<SerializerSourceClass>(
           serializeForClasses[field].where(
               (serializerSourceClass) => serializerSourceClass.isSerializable));
       BuiltSet<SerializerSourceClass> expandedResult;
@@ -170,11 +170,11 @@ abstract class SerializerSourceLibrary
 }
 
 InvalidGenerationSourceError _makeError(Iterable<String> todos) {
-  final message = StringBuffer(
+  final message = new StringBuffer(
       'Please make the following changes to use built_value serialization:\n');
   for (var i = 0; i != todos.length; ++i) {
     message.write('\n${i + 1}. ${todos.elementAt(i)}');
   }
 
-  return InvalidGenerationSourceError(message.toString());
+  return new InvalidGenerationSourceError(message.toString());
 }

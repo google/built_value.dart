@@ -19,7 +19,7 @@ part 'serializer_source_field.g.dart';
 abstract class SerializerSourceField
     implements Built<SerializerSourceField, SerializerSourceFieldBuilder> {
   static final BuiltMap<String, String> typesWithBuilder =
-      BuiltMap<String, String>({
+      new BuiltMap<String, String>({
     'BuiltList': 'ListBuilder',
     'BuiltListMultimap': 'ListMultimapBuilder',
     'BuiltMap': 'MapBuilder',
@@ -37,7 +37,7 @@ abstract class SerializerSourceField
           ParsedLibraryResult parsedLibrary,
           FieldElement element,
           FieldElement builderElement) =>
-      _$SerializerSourceField._(
+      new _$SerializerSourceField._(
           settings: settings,
           parsedLibrary: parsedLibrary,
           element: element,
@@ -58,7 +58,7 @@ abstract class SerializerSourceField
         .where((value) => value?.type?.displayName == 'BuiltValueField');
     if (annotations.isEmpty) return const BuiltValueField();
     final annotation = annotations.single;
-    return BuiltValueField(
+    return new BuiltValueField(
         compare: annotation.getField('compare').toBoolValue(),
         serialize: annotation.getField('serialize').toBoolValue(),
         wireName: annotation.getField('wireName').toStringValue());
@@ -127,7 +127,7 @@ abstract class SerializerSourceField
   String generateFullType(CompilationUnitElement compilationUnit,
       [BuiltSet<String> classGenericParameters]) {
     return _generateFullType(typeInCompilationUnit(compilationUnit),
-        classGenericParameters ?? BuiltSet<String>());
+        classGenericParameters ?? new BuiltSet<String>());
   }
 
   @memoized
@@ -230,8 +230,8 @@ abstract class SerializerSourceField
   /// Splits a generic parameter string on top level commas; that means
   /// commas nested inside '<' and '>' are ignored.
   static BuiltList<String> _splitOnTopLevelCommas(String string) {
-    final result = ListBuilder<String>();
-    final accumulator = StringBuffer();
+    final result = new ListBuilder<String>();
+    final accumulator = new StringBuffer();
     var depth = 0;
     for (var i = 0; i != string.length; ++i) {
       if (string[i] == '<') ++depth;

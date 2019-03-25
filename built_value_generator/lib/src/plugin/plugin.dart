@@ -18,20 +18,21 @@ import 'package:built_value_generator/src/plugin/checker.dart';
 /// Surfaces the same errors as the generator at compile time, with fixes
 /// where possible.
 class BuiltValueAnalyzerPlugin extends ServerPlugin {
-  final Checker checker = Checker();
+  final Checker checker = new Checker();
 
   BuiltValueAnalyzerPlugin(ResourceProvider provider) : super(provider);
 
   @override
   AnalysisDriverGeneric createAnalysisDriver(plugin.ContextRoot contextRoot) {
-    final root = ContextRoot(contextRoot.root, contextRoot.exclude,
+    final root = new ContextRoot(contextRoot.root, contextRoot.exclude,
         pathContext: resourceProvider.pathContext)
       ..optionsFilePath = contextRoot.optionsFile;
-    final contextBuilder = ContextBuilder(resourceProvider, sdkManager, null)
-      ..analysisDriverScheduler = analysisDriverScheduler
-      ..byteStore = byteStore
-      ..performanceLog = performanceLog
-      ..fileContentOverlay = fileContentOverlay;
+    final contextBuilder =
+        new ContextBuilder(resourceProvider, sdkManager, null)
+          ..analysisDriverScheduler = analysisDriverScheduler
+          ..byteStore = byteStore
+          ..performanceLog = performanceLog
+          ..fileContentOverlay = fileContentOverlay;
     final result = contextBuilder.buildDriver(root);
     result.results.listen(_processResult);
     return result;
@@ -59,22 +60,22 @@ class BuiltValueAnalyzerPlugin extends ServerPlugin {
       if (analysisResult.unit == null ||
           analysisResult.libraryElement == null) {
         channel.sendNotification(
-            plugin.AnalysisErrorsParams(analysisResult.path, [])
+            new plugin.AnalysisErrorsParams(analysisResult.path, [])
                 .toNotification());
       } else {
         // If there is something to analyze, do so and notify the analyzer.
         // Note that notifying with an empty set of errors is important as
         // this clears errors if they were fixed.
         final checkResult = checker.check(analysisResult.libraryElement);
-        channel.sendNotification(plugin.AnalysisErrorsParams(
+        channel.sendNotification(new plugin.AnalysisErrorsParams(
                 analysisResult.path, checkResult.keys.toList())
             .toNotification());
       }
     } catch (e, stackTrace) {
       // Notify the analyzer that an exception happened.
-      channel.sendNotification(
-          plugin.PluginErrorParams(false, e.toString(), stackTrace.toString())
-              .toNotification());
+      channel.sendNotification(new plugin.PluginErrorParams(
+              false, e.toString(), stackTrace.toString())
+          .toNotification());
     }
   }
 
@@ -99,18 +100,18 @@ class BuiltValueAnalyzerPlugin extends ServerPlugin {
       for (final error in checkResult.keys) {
         if (error.location.file == parameters.file &&
             checkResult[error].change.edits.single.edits.isNotEmpty) {
-          fixes.add(
-              plugin.AnalysisErrorFixes(error, fixes: [checkResult[error]]));
+          fixes.add(new plugin.AnalysisErrorFixes(error,
+              fixes: [checkResult[error]]));
         }
       }
 
-      return plugin.EditGetFixesResult(fixes);
+      return new plugin.EditGetFixesResult(fixes);
     } catch (e, stackTrace) {
       // Notify the analyzer that an exception happened.
-      channel.sendNotification(
-          plugin.PluginErrorParams(false, e.toString(), stackTrace.toString())
-              .toNotification());
-      return plugin.EditGetFixesResult([]);
+      channel.sendNotification(new plugin.PluginErrorParams(
+              false, e.toString(), stackTrace.toString())
+          .toNotification());
+      return new plugin.EditGetFixesResult([]);
     }
   }
 }

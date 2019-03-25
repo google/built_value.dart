@@ -643,7 +643,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
 
 final String pkgName = 'pkg';
 
-final Builder builder = PartBuilder([BuiltValueGenerator()], '.g.dart');
+final Builder builder = new PartBuilder([new BuiltValueGenerator()], '.g.dart');
 
 Future<String> generate(String source) async {
   final srcs = <String, String>{
@@ -661,12 +661,12 @@ Future<String> generate(String source) async {
     }
   }
 
-  final writer = InMemoryAssetWriter();
+  final writer = new InMemoryAssetWriter();
   await testBuilder(builder, srcs,
       rootPackage: pkgName, writer: writer, onLog: captureError);
   return error ??
-      String.fromCharCodes(
-          writer.assets[AssetId(pkgName, 'lib/value.g.dart')] ?? []);
+      new String.fromCharCodes(
+          writer.assets[new AssetId(pkgName, 'lib/value.g.dart')] ?? []);
 }
 
 const String builtValueSource = r'''

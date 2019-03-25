@@ -21,7 +21,7 @@ abstract class EnumSourceClass
 
   factory EnumSourceClass(
           ParsedLibraryResult parsedLibrary, ClassElement element) =>
-      _$EnumSourceClass._(element: element);
+      new _$EnumSourceClass._(element: element);
   EnumSourceClass._();
 
   @memoized
@@ -42,7 +42,7 @@ abstract class EnumSourceClass
         .where((value) => value?.type?.displayName == 'BuiltValueEnum');
     if (annotations.isEmpty) return const BuiltValueEnum();
     final annotation = annotations.single;
-    return BuiltValueEnum(
+    return new BuiltValueEnum(
         wireName: annotation.getField('wireName').toStringValue());
   }
 
@@ -55,7 +55,7 @@ abstract class EnumSourceClass
 
   @memoized
   BuiltList<String> get constructors =>
-      BuiltList<String>(element.constructors.map((element) {
+      new BuiltList<String>(element.constructors.map((element) {
         final declaration = parsedLibrary.getElementDeclaration(element);
         return declaration?.node?.toSource() ?? '';
       }));
@@ -65,7 +65,7 @@ abstract class EnumSourceClass
     final getter = element.getGetter('values');
     if (getter == null) return null;
     final source = parsedLibrary.getElementDeclaration(getter).node.toSource();
-    final matches = RegExp(r'static BuiltSet<' +
+    final matches = new RegExp(r'static BuiltSet<' +
             element.displayName +
             r'> get values => (_\$\w+)\;')
         .allMatches(source);
@@ -77,7 +77,7 @@ abstract class EnumSourceClass
     final getter = element.getMethod('valueOf');
     if (getter == null) return null;
     final source = parsedLibrary.getElementDeclaration(getter).node.toSource();
-    final matches = RegExp(r'static ' +
+    final matches = new RegExp(r'static ' +
             element.displayName +
             r' valueOf\(String name\) \=\> (\_\$\w+)\(name\)\;')
         .allMatches(source);
@@ -162,7 +162,7 @@ abstract class EnumSourceClass
   }
 
   String generateCode() {
-    final result = StringBuffer();
+    final result = new StringBuffer();
 
     for (final field in fields) {
       result.writeln('const $name ${field.generatedIdentifier} = '
@@ -197,7 +197,7 @@ abstract class EnumSourceClass
   }
 
   String _generateMixin() {
-    final result = StringBuffer();
+    final result = new StringBuffer();
 
     result
       ..writeln('class _\$${name}Meta {')

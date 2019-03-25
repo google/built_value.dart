@@ -22,7 +22,7 @@ abstract class MemoizedGetter
             !field.getter.isAbstract &&
             field.getter.metadata.any(
                 (metadata) => metadataToStringValue(metadata) == 'memoized'))
-        .map((field) => MemoizedGetter((b) => b
+        .map((field) => new MemoizedGetter((b) => b
           ..returnType = field.getter.returnType.toString()
           ..name = field.displayName))
         .toList();

@@ -9,7 +9,7 @@ import 'package:source_gen/source_gen.dart';
 DartObject getConstantValueFromAnnotation(ElementAnnotation annotation) {
   final value = annotation.computeConstantValue();
   if (value == null) {
-    throw InvalidGenerationSourceError(
+    throw new InvalidGenerationSourceError(
         'Can’t process annotation “${annotation.toSource()}” in '
         '“${annotation.librarySource.uri}”. Please check for a missing import.');
   }
