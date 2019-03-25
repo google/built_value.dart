@@ -6,7 +6,7 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = Serializers();
+  final serializers = new Serializers();
 
   group('double with known specifiedType', () {
     final data = 3.141592653589793;

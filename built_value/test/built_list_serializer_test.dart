@@ -8,9 +8,10 @@ import 'package:test/test.dart';
 
 void main() {
   group('BuiltList with known specifiedType but missing builder', () {
-    final data = BuiltList<int>([1, 2, 3]);
-    final specifiedType = const FullType(BuiltList, [FullType(int)]);
-    final serializers = Serializers();
+    final data = new BuiltList<int>([1, 2, 3]);
+    final specifiedType =
+        const FullType(BuiltList, const [const FullType(int)]);
+    final serializers = new Serializers();
     final serialized = [1, 2, 3];
 
     test('serialize throws', () {
@@ -27,10 +28,11 @@ void main() {
   });
 
   group('BuiltList with known specifiedType and correct builder', () {
-    final data = BuiltList<int>([1, 2, 3]);
-    final specifiedType = const FullType(BuiltList, [FullType(int)]);
-    final serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(specifiedType, () => ListBuilder<int>()))
+    final data = new BuiltList<int>([1, 2, 3]);
+    final specifiedType =
+        const FullType(BuiltList, const [const FullType(int)]);
+    final serializers = (new Serializers().toBuilder()
+          ..addBuilderFactory(specifiedType, () => new ListBuilder<int>()))
         .build();
     final serialized = [1, 2, 3];
 
@@ -49,24 +51,25 @@ void main() {
           serializers
               .deserialize(serialized, specifiedType: specifiedType)
               .runtimeType,
-          BuiltList<int>().runtimeType);
+          new BuiltList<int>().runtimeType);
     });
   });
 
   group('BuiltList nested with known specifiedType and correct builders', () {
-    final data = BuiltList<BuiltList<int>>([
-      BuiltList<int>([1, 2, 3]),
-      BuiltList<int>([4, 5, 6]),
-      BuiltList<int>([7, 8, 9])
+    final data = new BuiltList<BuiltList<int>>([
+      new BuiltList<int>([1, 2, 3]),
+      new BuiltList<int>([4, 5, 6]),
+      new BuiltList<int>([7, 8, 9])
     ]);
-    final specifiedType = const FullType(BuiltList, [
-      FullType(BuiltList, [FullType(int)])
+    final specifiedType = const FullType(BuiltList, const [
+      const FullType(BuiltList, const [const FullType(int)])
     ]);
-    final serializers = (Serializers().toBuilder()
+    final serializers = (new Serializers().toBuilder()
           ..addBuilderFactory(
-              specifiedType, () => ListBuilder<BuiltList<int>>())
-          ..addBuilderFactory(const FullType(BuiltList, [FullType(int)]),
-              () => ListBuilder<int>()))
+              specifiedType, () => new ListBuilder<BuiltList<int>>())
+          ..addBuilderFactory(
+              const FullType(BuiltList, const [const FullType(int)]),
+              () => new ListBuilder<int>()))
         .build();
     final serialized = [
       [1, 2, 3],
@@ -86,9 +89,9 @@ void main() {
   });
 
   group('BuiltList with unknown specifiedType and no builders', () {
-    final data = BuiltList<int>([1, 2, 3]);
+    final data = new BuiltList<int>([1, 2, 3]);
     final specifiedType = FullType.unspecified;
-    final serializers = Serializers();
+    final serializers = new Serializers();
     final serialized = [
       'list',
       ['int', 1],

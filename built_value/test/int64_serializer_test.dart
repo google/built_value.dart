@@ -7,7 +7,7 @@ import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = Serializers();
+  final serializers = new Serializers();
 
   group('int64 with known specifiedType', () {
     final data = Int64.MAX_VALUE;

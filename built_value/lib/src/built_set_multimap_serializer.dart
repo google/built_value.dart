@@ -9,7 +9,7 @@ class BuiltSetMultimapSerializer
     implements StructuredSerializer<BuiltSetMultimap> {
   final bool structured = true;
   @override
-  final Iterable<Type> types = BuiltSet<Type>([BuiltSetMultimap]);
+  final Iterable<Type> types = new BuiltSet<Type>([BuiltSetMultimap]);
   @override
   final String wireName = 'setMultimap';
 
@@ -52,11 +52,11 @@ class BuiltSetMultimapSerializer
         : specifiedType.parameters[1];
 
     final SetMultimapBuilder result = isUnderspecified
-        ? SetMultimapBuilder<Object, Object>()
+        ? new SetMultimapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as SetMultimapBuilder;
 
     if (serialized.length % 2 == 1) {
-      throw ArgumentError('odd length');
+      throw new ArgumentError('odd length');
     }
 
     for (int i = 0; i != serialized.length; i += 2) {

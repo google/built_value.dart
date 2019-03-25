@@ -8,52 +8,59 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = (Serializers().toBuilder()
-        ..addPlugin(StandardJsonPlugin())
-        ..addBuilderFactory(const FullType(BuiltList, [FullType(int)]),
-            () => ListBuilder<int>())
+  final serializers = (new Serializers().toBuilder()
+        ..addPlugin(new StandardJsonPlugin())
         ..addBuilderFactory(
-            const FullType(BuiltList, [
-              FullType(BuiltList, [FullType(int)])
+            const FullType(BuiltList, const [const FullType(int)]),
+            () => new ListBuilder<int>())
+        ..addBuilderFactory(
+            const FullType(BuiltList, const [
+              const FullType(BuiltList, const [const FullType(int)])
             ]),
-            () => ListBuilder<BuiltList<int>>())
+            () => new ListBuilder<BuiltList<int>>())
         ..addBuilderFactory(
-            const FullType(BuiltSet, [FullType(int)]), () => SetBuilder<int>())
+            const FullType(BuiltSet, const [const FullType(int)]),
+            () => new SetBuilder<int>())
         ..addBuilderFactory(
-            const FullType(BuiltMap, [FullType(int), FullType(String)]),
-            () => MapBuilder<int, String>())
+            const FullType(
+                BuiltMap, const [const FullType(int), const FullType(String)]),
+            () => new MapBuilder<int, String>())
         ..addBuilderFactory(
-            const FullType(BuiltMap, [FullType(String), FullType(String)]),
-            () => MapBuilder<String, String>())
+            const FullType(BuiltMap,
+                const [const FullType(String), const FullType(String)]),
+            () => new MapBuilder<String, String>())
         ..addBuilderFactory(
-            const FullType(BuiltMap, [
-              FullType(BuiltMap, [FullType(int), FullType(String)]),
-              FullType(BuiltMap, [FullType(int), FullType(String)])
+            const FullType(BuiltMap, const [
+              const FullType(BuiltMap,
+                  const [const FullType(int), const FullType(String)]),
+              const FullType(
+                  BuiltMap, const [const FullType(int), const FullType(String)])
             ]),
-            () => MapBuilder<BuiltMap<int, String>, BuiltMap<int, String>>()))
+            () =>
+                new MapBuilder<BuiltMap<int, String>, BuiltMap<int, String>>()))
       .build();
 
   group('Serializers with StandardJsonPlugin', () {
     test('throws on serialize of list multimaps', () {
-      final data = BuiltListMultimap<int, String>({
+      final data = new BuiltListMultimap<int, String>({
         1: ['one'],
         2: ['two'],
         3: ['three']
       });
-      final specifiedType =
-          const FullType(BuiltListMultimap, [FullType(int), FullType(String)]);
+      final specifiedType = const FullType(BuiltListMultimap,
+          const [const FullType(int), const FullType(String)]);
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
           throwsA(const TypeMatcher<ArgumentError>()));
     });
 
     test('throws on serialize of set multimaps', () {
-      final data = BuiltSetMultimap<int, String>({
+      final data = new BuiltSetMultimap<int, String>({
         1: ['one'],
         2: ['two'],
         3: ['three']
       });
-      final specifiedType =
-          const FullType(BuiltSetMultimap, [FullType(int), FullType(String)]);
+      final specifiedType = const FullType(BuiltSetMultimap,
+          const [const FullType(int), const FullType(String)]);
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
           throwsA(const TypeMatcher<ArgumentError>()));
     });
@@ -77,8 +84,9 @@ void main() {
       });
 
       group('can take a list and', () {
-        final data = BuiltList<int>([1, 2, 3]);
-        final specifiedType = const FullType(BuiltList, [FullType(int)]);
+        final data = new BuiltList<int>([1, 2, 3]);
+        final specifiedType =
+            const FullType(BuiltList, const [const FullType(int)]);
         final serialized = [1, 2, 3];
 
         test('serialize it', () {
@@ -94,8 +102,9 @@ void main() {
       });
 
       group('can take a set and', () {
-        final data = BuiltSet<int>([1, 2, 3]);
-        final specifiedType = const FullType(BuiltSet, [FullType(int)]);
+        final data = new BuiltSet<int>([1, 2, 3]);
+        final specifiedType =
+            const FullType(BuiltSet, const [const FullType(int)]);
         final serialized = [1, 2, 3];
 
         test('serialize it', () {
@@ -111,13 +120,13 @@ void main() {
       });
 
       group('can take a nested list and', () {
-        final data = BuiltList<BuiltList<int>>([
-          BuiltList<int>([1, 2, 3]),
-          BuiltList<int>([4, 5, 6]),
-          BuiltList<int>([7, 8, 9])
+        final data = new BuiltList<BuiltList<int>>([
+          new BuiltList<int>([1, 2, 3]),
+          new BuiltList<int>([4, 5, 6]),
+          new BuiltList<int>([7, 8, 9])
         ]);
-        final specifiedType = const FullType(BuiltList, [
-          FullType(BuiltList, [FullType(int)])
+        final specifiedType = const FullType(BuiltList, const [
+          const FullType(BuiltList, const [const FullType(int)])
         ]);
         final serialized = [
           [1, 2, 3],
@@ -138,9 +147,10 @@ void main() {
       });
 
       group('can take a map and', () {
-        final data = BuiltMap<int, String>({1: 'one', 2: 'two', 3: 'three'});
-        final specifiedType =
-            const FullType(BuiltMap, [FullType(int), FullType(String)]);
+        final data =
+            new BuiltMap<int, String>({1: 'one', 2: 'two', 3: 'three'});
+        final specifiedType = const FullType(
+            BuiltMap, const [const FullType(int), const FullType(String)]);
         final serialized = {'1': 'one', '2': 'two', '3': 'three'};
 
         test('serialize it', () {
@@ -156,10 +166,10 @@ void main() {
       });
 
       group('can take a map with String keys and', () {
-        final data =
-            BuiltMap<String, String>({'1': 'one', '2': 'two', '3': 'three'});
-        final specifiedType =
-            const FullType(BuiltMap, [FullType(String), FullType(String)]);
+        final data = new BuiltMap<String, String>(
+            {'1': 'one', '2': 'two', '3': 'three'});
+        final specifiedType = const FullType(
+            BuiltMap, const [const FullType(String), const FullType(String)]);
         final serialized = {'1': 'one', '2': 'two', '3': 'three'};
 
         test('serialize it', () {
@@ -175,13 +185,16 @@ void main() {
       });
 
       group('can take a nested map and', () {
-        final data = BuiltMap<BuiltMap<int, String>, BuiltMap<int, String>>({
-          BuiltMap<int, String>({1: 'one'}):
-              BuiltMap<int, String>({2: 'two', 3: 'three'})
+        final data =
+            new BuiltMap<BuiltMap<int, String>, BuiltMap<int, String>>({
+          new BuiltMap<int, String>({1: 'one'}):
+              new BuiltMap<int, String>({2: 'two', 3: 'three'})
         });
-        final specifiedType = const FullType(BuiltMap, [
-          FullType(BuiltMap, [FullType(int), FullType(String)]),
-          FullType(BuiltMap, [FullType(int), FullType(String)])
+        final specifiedType = const FullType(BuiltMap, const [
+          const FullType(
+              BuiltMap, const [const FullType(int), const FullType(String)]),
+          const FullType(
+              BuiltMap, const [const FullType(int), const FullType(String)])
         ]);
         final serialized = {
           '{"1":"one"}': {'2': 'two', '3': 'three'}
@@ -215,7 +228,7 @@ void main() {
       });
 
       group('can take a list and', () {
-        final data = BuiltList<int>([1, 2, 3]);
+        final data = new BuiltList<int>([1, 2, 3]);
         final serialized = {
           r'$': 'list',
           '': [
@@ -235,7 +248,7 @@ void main() {
       });
 
       group('can take a list of length 1 and', () {
-        final data = BuiltList<int>([1]);
+        final data = new BuiltList<int>([1]);
         final serialized = {
           r'$': 'list',
           '': [
@@ -253,10 +266,10 @@ void main() {
       });
 
       group('can take a nested list and', () {
-        final data = BuiltList<BuiltList<int>>([
-          BuiltList<int>([1, 2, 3]),
-          BuiltList<int>([4, 5, 6]),
-          BuiltList<int>([7, 8, 9])
+        final data = new BuiltList<BuiltList<int>>([
+          new BuiltList<int>([1, 2, 3]),
+          new BuiltList<int>([4, 5, 6]),
+          new BuiltList<int>([7, 8, 9])
         ]);
         final serialized = {
           r'$': 'list',
@@ -298,7 +311,8 @@ void main() {
       });
 
       group('can take a map and', () {
-        final data = BuiltMap<int, String>({1: 'one', 2: 'two', 3: 'three'});
+        final data =
+            new BuiltMap<int, String>({1: 'one', 2: 'two', 3: 'three'});
         final serialized = {
           r'$': 'encoded_map',
           r'{"$":"int","":1}': {r'$': 'String', '': 'one'},
@@ -316,8 +330,8 @@ void main() {
       });
 
       group('can take a map with String keys and', () {
-        final data =
-            BuiltMap<String, String>({'1': 'one', '2': 'two', '3': 'three'});
+        final data = new BuiltMap<String, String>(
+            {'1': 'one', '2': 'two', '3': 'three'});
         final serialized = {
           r'$': 'encoded_map',
           r'{"$":"String","":"1"}': {r'$': 'String', '': 'one'},
@@ -335,9 +349,10 @@ void main() {
       });
 
       group('can take a nested map and', () {
-        final data = BuiltMap<BuiltMap<int, String>, BuiltMap<int, String>>({
-          BuiltMap<int, String>({1: 'one'}):
-              BuiltMap<int, String>({2: 'two', 3: 'three'})
+        final data =
+            new BuiltMap<BuiltMap<int, String>, BuiltMap<int, String>>({
+          new BuiltMap<int, String>({1: 'one'}):
+              new BuiltMap<int, String>({2: 'two', 3: 'three'})
         });
         final serialized = {
           r'$': 'encoded_map',

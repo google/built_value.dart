@@ -9,15 +9,16 @@ import 'package:test/test.dart';
 
 void main() {
   group('BuiltList', () {
-    final data = BuiltList<int>([1, 2, 3]);
-    final specifiedType = const FullType(BuiltList, [FullType(int)]);
-    final serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(specifiedType, () => ListBuilder<int>()))
+    final data = new BuiltList<int>([1, 2, 3]);
+    final specifiedType =
+        const FullType(BuiltList, const [const FullType(int)]);
+    final serializers = (new Serializers().toBuilder()
+          ..addBuilderFactory(specifiedType, () => new ListBuilder<int>()))
         .build();
     final serialized = [1, 2, 3];
 
     test('can be deserialized asynchronously', () async {
-      final deserialized = await BuiltListAsyncDeserializer()
+      final deserialized = await new BuiltListAsyncDeserializer()
           .deserialize(serializers, serialized, specifiedType: specifiedType)
           .toList();
 

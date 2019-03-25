@@ -12,7 +12,7 @@ import 'package:built_value/serializer.dart';
 class DateTimeSerializer implements PrimitiveSerializer<DateTime> {
   final bool structured = false;
   @override
-  final Iterable<Type> types = BuiltList<Type>([DateTime]);
+  final Iterable<Type> types = new BuiltList<Type>([DateTime]);
   @override
   final String wireName = 'DateTime';
 
@@ -20,7 +20,7 @@ class DateTimeSerializer implements PrimitiveSerializer<DateTime> {
   Object serialize(Serializers serializers, DateTime dateTime,
       {FullType specifiedType = FullType.unspecified}) {
     if (!dateTime.isUtc) {
-      throw ArgumentError.value(
+      throw new ArgumentError.value(
           dateTime, 'dateTime', 'Must be in utc for serialization.');
     }
 
@@ -31,7 +31,7 @@ class DateTimeSerializer implements PrimitiveSerializer<DateTime> {
   DateTime deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final microsecondsSinceEpoch = serialized as int;
-    return DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
+    return new DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
         isUtc: true);
   }
 }

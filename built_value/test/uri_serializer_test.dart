@@ -6,7 +6,7 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = Serializers();
+  final serializers = new Serializers();
 
   group('SimpleUri with known specifiedType', () {
     final data = Uri.parse('https://github.com/google/built_value.dart');

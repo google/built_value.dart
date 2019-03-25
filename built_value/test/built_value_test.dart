@@ -23,8 +23,8 @@ void main() {
 //
 // See https://github.com/google/built_value.dart/tree/master/example
 class YesNoEnum extends EnumClass {
-  static const YesNoEnum yes = YesNoEnum._('yes');
-  static const YesNoEnum no = YesNoEnum._('no');
+  static const YesNoEnum yes = const YesNoEnum._('yes');
+  static const YesNoEnum no = const YesNoEnum._('no');
 
   const YesNoEnum._(String name) : super(name);
 }

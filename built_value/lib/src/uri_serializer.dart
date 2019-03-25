@@ -8,7 +8,7 @@ import 'package:built_value/serializer.dart';
 class UriSerializer implements PrimitiveSerializer<Uri> {
   final bool structured = false;
   @override
-  final Iterable<Type> types = BuiltList<Type>([
+  final Iterable<Type> types = new BuiltList<Type>([
     Uri,
     // `Uri` is just an interface. Need to record actual implementation types
     // here. This is a `_SimpleUri`:

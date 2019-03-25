@@ -200,7 +200,7 @@ int $jf(int hash) {
 }
 
 /// Function that returns a [BuiltValueToStringHelper].
-typedef BuiltValueToStringHelperProvider = BuiltValueToStringHelper Function(
+typedef BuiltValueToStringHelper BuiltValueToStringHelperProvider(
     String className);
 
 /// Function used by generated code to get a [BuiltValueToStringHelper].
@@ -208,7 +208,7 @@ typedef BuiltValueToStringHelperProvider = BuiltValueToStringHelper Function(
 /// are [IndentingBuiltValueToStringHelper], which is the default, and
 /// [FlatBuiltValueToStringHelper].
 BuiltValueToStringHelperProvider newBuiltValueToStringHelper =
-    (String className) => IndentingBuiltValueToStringHelper(className);
+    (String className) => new IndentingBuiltValueToStringHelper(className);
 
 /// Interface for built_value toString() output helpers.
 ///
@@ -226,7 +226,7 @@ abstract class BuiltValueToStringHelper {
 
 /// A [BuiltValueToStringHelper] that produces multi-line indented output.
 class IndentingBuiltValueToStringHelper implements BuiltValueToStringHelper {
-  StringBuffer _result = StringBuffer();
+  StringBuffer _result = new StringBuffer();
 
   IndentingBuiltValueToStringHelper(String className) {
     _result..write(className)..write(' {\n');
@@ -259,7 +259,7 @@ int _indentingBuiltValueToStringHelperIndent = 0;
 
 /// A [BuiltValueToStringHelper] that produces single line output.
 class FlatBuiltValueToStringHelper implements BuiltValueToStringHelper {
-  StringBuffer _result = StringBuffer();
+  StringBuffer _result = new StringBuffer();
   bool _previousField = false;
 
   FlatBuiltValueToStringHelper(String className) {

@@ -33,12 +33,13 @@ class BuiltJsonSerializers implements Serializers {
   @override
   T deserializeWith<T>(Serializer<T> serializer, Object serialized) {
     return deserialize(serialized,
-        specifiedType: FullType(serializer.types.first)) as T;
+        specifiedType: new FullType(serializer.types.first)) as T;
   }
 
   @override
   Object serializeWith<T>(Serializer<T> serializer, T object) {
-    return serialize(object, specifiedType: FullType(serializer.types.first));
+    return serialize(object,
+        specifiedType: new FullType(serializer.types.first));
   }
 
   @override
@@ -60,7 +61,7 @@ class BuiltJsonSerializers implements Serializers {
     if (specifiedType.isUnspecified) {
       final serializer = serializerForType(object.runtimeType);
       if (serializer == null) {
-        throw StateError("No serializer for '${object.runtimeType}'.");
+        throw new StateError("No serializer for '${object.runtimeType}'.");
       }
       if (serializer is StructuredSerializer) {
         final result = <Object>[serializer.wireName];
@@ -71,7 +72,7 @@ class BuiltJsonSerializers implements Serializers {
           serializer.serialize(this, object)
         ];
       } else {
-        throw StateError(
+        throw new StateError(
             'serializer must be StructuredSerializer or PrimitiveSerializer');
       }
     } else {
@@ -87,7 +88,7 @@ class BuiltJsonSerializers implements Serializers {
       } else if (serializer is PrimitiveSerializer) {
         return serializer.serialize(this, object, specifiedType: specifiedType);
       } else {
-        throw StateError(
+        throw new StateError(
             'serializer must be StructuredSerializer or PrimitiveSerializer');
       }
     }
@@ -115,23 +116,23 @@ class BuiltJsonSerializers implements Serializers {
 
       final serializer = serializerForWireName(wireName);
       if (serializer == null) {
-        throw StateError("No serializer for '$wireName'.");
+        throw new StateError("No serializer for '$wireName'.");
       }
 
       if (serializer is StructuredSerializer) {
         try {
           return serializer.deserialize(this, (object as List).sublist(1));
         } on Error catch (error) {
-          throw DeserializationError(object, specifiedType, error);
+          throw new DeserializationError(object, specifiedType, error);
         }
       } else if (serializer is PrimitiveSerializer) {
         try {
           return serializer.deserialize(this, (object as List)[1]);
         } on Error catch (error) {
-          throw DeserializationError(object, specifiedType, error);
+          throw new DeserializationError(object, specifiedType, error);
         }
       } else {
-        throw StateError(
+        throw new StateError(
             'serializer must be StructuredSerializer or PrimitiveSerializer');
       }
     } else {
@@ -141,7 +142,7 @@ class BuiltJsonSerializers implements Serializers {
           // Might be an interface; try resolving using the type on the wire.
           return deserialize(objectBeforePlugins);
         } else {
-          throw StateError("No serializer for '${specifiedType.root}'.");
+          throw new StateError("No serializer for '${specifiedType.root}'.");
         }
       }
 
@@ -150,17 +151,17 @@ class BuiltJsonSerializers implements Serializers {
           return serializer.deserialize(this, object as Iterable,
               specifiedType: specifiedType);
         } on Error catch (error) {
-          throw DeserializationError(object, specifiedType, error);
+          throw new DeserializationError(object, specifiedType, error);
         }
       } else if (serializer is PrimitiveSerializer) {
         try {
           return serializer.deserialize(this, object,
               specifiedType: specifiedType);
         } on Error catch (error) {
-          throw DeserializationError(object, specifiedType, error);
+          throw new DeserializationError(object, specifiedType, error);
         }
       } else {
-        throw StateError(
+        throw new StateError(
             'serializer must be StructuredSerializer or PrimitiveSerializer');
       }
     }
@@ -187,7 +188,7 @@ class BuiltJsonSerializers implements Serializers {
   }
 
   void _throwMissingBuilderFactory(FullType fullType) {
-    throw StateError('No builder factory for $fullType. '
+    throw new StateError('No builder factory for $fullType. '
         'Fix by adding one, see SerializersBuilder.addBuilderFactory.');
   }
 
@@ -198,7 +199,7 @@ class BuiltJsonSerializers implements Serializers {
 
   @override
   SerializersBuilder toBuilder() {
-    return BuiltJsonSerializersBuilder._(
+    return new BuiltJsonSerializersBuilder._(
         _typeToSerializer.toBuilder(),
         _wireNameToSerializer.toBuilder(),
         _typeNameToSerializer.toBuilder(),
@@ -217,12 +218,12 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
 
   final ListBuilder<SerializerPlugin> _plugins;
 
-  factory BuiltJsonSerializersBuilder() => BuiltJsonSerializersBuilder._(
-      MapBuilder<Type, Serializer>(),
-      MapBuilder<String, Serializer>(),
-      MapBuilder<String, Serializer>(),
-      MapBuilder<FullType, Function>(),
-      ListBuilder<SerializerPlugin>());
+  factory BuiltJsonSerializersBuilder() => new BuiltJsonSerializersBuilder._(
+      new MapBuilder<Type, Serializer>(),
+      new MapBuilder<String, Serializer>(),
+      new MapBuilder<String, Serializer>(),
+      new MapBuilder<FullType, Function>(),
+      new ListBuilder<SerializerPlugin>());
 
   BuiltJsonSerializersBuilder._(
       this._typeToSerializer,
@@ -235,7 +236,7 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   void add(Serializer serializer) {
     if (serializer is! StructuredSerializer &&
         serializer is! PrimitiveSerializer) {
-      throw ArgumentError(
+      throw new ArgumentError(
           'serializer must be StructuredSerializer or PrimitiveSerializer');
     }
 
@@ -263,7 +264,7 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
 
   @override
   Serializers build() {
-    return BuiltJsonSerializers._(
+    return new BuiltJsonSerializers._(
         _typeToSerializer.build(),
         _wireNameToSerializer.build(),
         _typeNameToSerializer.build(),
