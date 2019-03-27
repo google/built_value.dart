@@ -18,7 +18,7 @@ import 'package:end_to_end_test/values.dart';
 
 part 'serializers.g.dart';
 
-@SerializersFor(const [
+@SerializersFor([
   BoundGenericValue,
   Cat,
   Cage,
@@ -59,7 +59,7 @@ part 'serializers.g.dart';
 final Serializers serializers = _$serializers;
 
 // Check that multiple `Serializers` can be declared in one file.
-@SerializersFor(const [
+@SerializersFor([
   Cat,
 ])
 final Serializers moreSerializers = _$moreSerializers;

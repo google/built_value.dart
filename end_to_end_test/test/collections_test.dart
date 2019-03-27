@@ -9,27 +9,27 @@ import 'package:test/test.dart';
 void main() {
   group('Collections', () {
     test('can be instantiated', () {
-      new Collections();
+      Collections();
     });
 
     test('default to empty if not nullable', () {
-      expect(new Collections().list.isEmpty, true);
-      expect(new Collections().set.isEmpty, true);
-      expect(new Collections().map.isEmpty, true);
-      expect(new Collections().listMultimap.isEmpty, true);
-      expect(new Collections().setMultimap.isEmpty, true);
+      expect(Collections().list.isEmpty, true);
+      expect(Collections().set.isEmpty, true);
+      expect(Collections().map.isEmpty, true);
+      expect(Collections().listMultimap.isEmpty, true);
+      expect(Collections().setMultimap.isEmpty, true);
     });
 
     test('default to null if nullable', () {
-      expect(new Collections().nullableList, null);
-      expect(new Collections().nullableSet, null);
-      expect(new Collections().nullableMap, null);
-      expect(new Collections().nullableListMultimap, null);
-      expect(new Collections().nullableSetMultimap, null);
+      expect(Collections().nullableList, null);
+      expect(Collections().nullableSet, null);
+      expect(Collections().nullableMap, null);
+      expect(Collections().nullableListMultimap, null);
+      expect(Collections().nullableSetMultimap, null);
     });
 
     test('can be updated via builder', () {
-      final collections = new Collections((b) => b
+      final collections = Collections((b) => b
         ..list.add(1)
         ..set.add('two')
         ..map['three'] = 4
@@ -48,7 +48,7 @@ void main() {
     });
 
     test('can be set from null via builder', () {
-      final collections = new Collections((b) => b
+      final collections = Collections((b) => b
         ..nullableList.add(1)
         ..nullableSet.add('two')
         ..nullableMap['three'] = 4
@@ -67,7 +67,7 @@ void main() {
     });
 
     test('hash matches quiver hash', () {
-      final collections = new Collections((b) => b
+      final collections = Collections((b) => b
         ..list.add(1)
         ..set.add('two')
         ..map['three'] = 4

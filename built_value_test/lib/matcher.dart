@@ -10,7 +10,7 @@ import 'package:test/test.dart';
 /// [expected].
 ///
 /// Improves on a simple equality test by offering a detailed mismatch message.
-Matcher equalsBuilt(Built expected) => new _BuiltValueMatcher(expected);
+Matcher equalsBuilt(Built expected) => _BuiltValueMatcher(expected);
 
 /// Matcher for [Built] instances.
 ///
@@ -53,7 +53,7 @@ Map<String, Object> _toMap(Object built) {
 
   // Create a ToStringHelper that will capture values instead of converting
   // them to String.
-  final capturingToStringHelper = new _CapturingToStringHelper();
+  final capturingToStringHelper = _CapturingToStringHelper();
   newBuiltValueToStringHelper = (String className) {
     // Store the class name in the map, so we check types as well as fields
     // and values.

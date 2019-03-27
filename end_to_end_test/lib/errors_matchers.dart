@@ -4,7 +4,7 @@
 
 import 'package:test/test.dart';
 
-Matcher isErrorContaining(String string) => new _ErrorContaining(string);
+Matcher isErrorContaining(String string) => _ErrorContaining(string);
 
 class _ErrorContaining extends TypeMatcher<Error> {
   String string;

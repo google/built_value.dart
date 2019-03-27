@@ -12,23 +12,23 @@ import 'package:test/test.dart';
 
 void main() {
   group('StandardJsonValue', () {
-    final data = new StandardJsonValue((b) => b
+    final data = StandardJsonValue((b) => b
       ..number = 3
       ..text = 'some text'
-      ..keyValues['one'] = new JsonObject(1)
-      ..keyValues['two'] = new JsonObject('two')
-      ..keyValues['three'] = new JsonObject(true)
-      ..keyValues['four'] = new JsonObject([1, 2, 3])
-      ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2})
-      ..zoo.add(new Cat((b) => b
+      ..keyValues['one'] = JsonObject(1)
+      ..keyValues['two'] = JsonObject('two')
+      ..keyValues['three'] = JsonObject(true)
+      ..keyValues['four'] = JsonObject([1, 2, 3])
+      ..keyValues['five'] = JsonObject({'one': 1, 'two': 2})
+      ..zoo.add(Cat((b) => b
         ..tail = true
         ..legs = 4))
-      ..uniqueZoo.add(new Cat((b) => b
+      ..uniqueZoo.add(Cat((b) => b
         ..tail = false
         ..legs = 3)));
-    final specifiedType = new FullType(StandardJsonValue);
+    final specifiedType = FullType(StandardJsonValue);
     final serializersWithPlugin =
-        (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
+        (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
     final serialized = {
       'number': 3,
       'text': 'some text',
@@ -70,17 +70,17 @@ void main() {
   });
 
   group('StandardJsonValue with extraneous nulls', () {
-    final data = new StandardJsonValue((b) => b
+    final data = StandardJsonValue((b) => b
       ..number = 3
       ..text = 'some text'
-      ..keyValues['one'] = new JsonObject(1)
-      ..keyValues['two'] = new JsonObject('two')
-      ..keyValues['three'] = new JsonObject(true)
-      ..keyValues['four'] = new JsonObject([1, 2, 3])
-      ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2}));
-    final specifiedType = new FullType(StandardJsonValue);
+      ..keyValues['one'] = JsonObject(1)
+      ..keyValues['two'] = JsonObject('two')
+      ..keyValues['three'] = JsonObject(true)
+      ..keyValues['four'] = JsonObject([1, 2, 3])
+      ..keyValues['five'] = JsonObject({'one': 1, 'two': 2}));
+    final specifiedType = FullType(StandardJsonValue);
     final serializersWithPlugin =
-        (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
+        (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
     final serialized = {
       'number': 3,
       'text': 'some text',
@@ -103,19 +103,19 @@ void main() {
   });
 
   group('StandardJsonValue with unknown specifiedType', () {
-    final data = new StandardJsonValue((b) => b
+    final data = StandardJsonValue((b) => b
       ..number = 3
       ..text = 'some text'
-      ..keyValues['one'] = new JsonObject(1)
-      ..keyValues['two'] = new JsonObject('two')
-      ..keyValues['three'] = new JsonObject(true)
-      ..keyValues['four'] = new JsonObject([1, 2, 3])
-      ..keyValues['five'] = new JsonObject({'one': 1, 'two': 2})
-      ..zoo.add(new Cat((b) => b
+      ..keyValues['one'] = JsonObject(1)
+      ..keyValues['two'] = JsonObject('two')
+      ..keyValues['three'] = JsonObject(true)
+      ..keyValues['four'] = JsonObject([1, 2, 3])
+      ..keyValues['five'] = JsonObject({'one': 1, 'two': 2})
+      ..zoo.add(Cat((b) => b
         ..tail = true
         ..legs = 4)));
     final serializersWithPlugin =
-        (serializers.toBuilder()..addPlugin(new StandardJsonPlugin())).build();
+        (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
     final serialized = {
       r'$': 'StandardJsonValue',
       'number': 3,

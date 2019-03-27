@@ -11,7 +11,7 @@ void benchmark() {
 }
 
 void benchmarkHashCode() {
-  final value = new SimpleValue((b) => b
+  final value = SimpleValue((b) => b
     ..anInt = 0
     ..aString = 'zero');
   _benchmark('hashCode', () => value.hashCode);
@@ -19,7 +19,7 @@ void benchmarkHashCode() {
 
 void benchmarkNestedRebuilds() {
   for (var depth = 0; depth != 10; ++depth) {
-    final value = new Node((b) => _buildNested(b, depth));
+    final value = Node((b) => _buildNested(b, depth));
 
     _benchmark('nested rebuild $depth', () {
       final topBuilder = value.toBuilder();
@@ -50,7 +50,7 @@ void _benchmark(String name, function()) {
 
   // Time.
   for (int i = 0; i != 3; ++i) {
-    final stopwatch = new Stopwatch()..start();
+    final stopwatch = Stopwatch()..start();
     final reps = 10000000;
     for (var i = 0; i != reps; ++i) {
       function();
