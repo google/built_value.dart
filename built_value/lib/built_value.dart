@@ -103,10 +103,17 @@ class BuiltValue {
       this.wireName});
 }
 
-/// Nullable annotation for Built Value fields.
+/// NullableAnnotation used by nullable
+///
+/// Can be extended/implemented by another annotation
+class NullableAnnotation {
+  const NullableAnnotation();
+}
+
+/// nullable annotation for Built Value fields.
 ///
 /// Fields marked with this annotation are allowed to be null.
-const String nullable = 'nullable';
+const NullableAnnotation nullable = NullableAnnotation();
 
 /// Optionally, annotate a Built Value field with this to specify settings.
 /// This is only needed for advanced use.

@@ -13,8 +13,9 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
+import 'package:source_gen/source_gen.dart';
 import 'package:built_value_generator/src/metadata.dart'
-    show metadataToStringValue;
+    show metadataToObjectValue;
 
 part 'value_source_field.g.dart';
 
@@ -89,8 +90,9 @@ abstract class ValueSourceField
   bool get isGetter => element.getter != null && !element.getter.isSynthetic;
 
   @memoized
-  bool get isNullable => element.getter.metadata
-      .any((metadata) => metadataToStringValue(metadata) == 'nullable');
+  bool get isNullable => element.getter.metadata.any((metadata) =>
+      TypeChecker.fromRuntime(nullable.runtimeType)
+          .isAssignableFromType(metadataToObjectValue(metadata).type));
 
   @memoized
   BuiltValueField get builtValueField {

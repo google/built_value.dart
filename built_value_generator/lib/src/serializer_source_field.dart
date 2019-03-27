@@ -11,8 +11,9 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
+import 'package:source_gen/source_gen.dart';
 import 'package:built_value_generator/src/metadata.dart'
-    show metadataToStringValue;
+    show metadataToObjectValue;
 
 part 'serializer_source_field.g.dart';
 
@@ -65,8 +66,9 @@ abstract class SerializerSourceField
   }
 
   @memoized
-  bool get isNullable => element.getter.metadata
-      .any((metadata) => metadataToStringValue(metadata) == 'nullable');
+  bool get isNullable => element.getter.metadata.any((metadata) =>
+      TypeChecker.fromRuntime(nullable.runtimeType)
+          .isAssignableFromType(metadataToObjectValue(metadata).type));
 
   @memoized
   String get name => element.displayName;

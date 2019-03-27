@@ -23,6 +23,13 @@ String metadataToStringValue(ElementAnnotation annotation) {
   return value.toStringValue();
 }
 
+/// Gets the `Type` value of an annotation. Throws a descriptive
+/// [InvalidGenerationSourceError] if the annotation can't be resolved.
+DartObject metadataToObjectValue(ElementAnnotation annotation) {
+  final value = getConstantValueFromAnnotation(annotation);
+  return value;
+}
+
 /// Gets a field from an annotation. Throws a descriptive
 /// [InvalidGenerationSourceError] if the annotation can't be resolved.
 DartObject getMetadataField(ElementAnnotation annotation, String name) {
