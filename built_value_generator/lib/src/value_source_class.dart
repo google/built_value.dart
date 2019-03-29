@@ -686,7 +686,13 @@ abstract class ValueSourceClass
       } else {
         result.writeln("return (${asPrefix}newBuiltValueToStringHelper('$name')");
         result.writeln(fields
-            .map((field) => "..add('${field.name}',  ${field.name})")
+            .map((field){
+                if(field.builtValueField.string){
+                  return "..add('${field.name}',  ${field.name})";
+                }
+                return "";
+              }
+            )
             .join(''));
         result.writeln(").toString();");
       }

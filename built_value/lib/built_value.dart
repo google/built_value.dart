@@ -127,8 +127,11 @@ class BuiltValueField {
   /// indicates the name is to be taken from the literal field name.
   final String wireName;
 
+  /// Whether the field is toString. Defaults to `true`.
+  final bool string;
+
   const BuiltValueField(
-      {this.compare = true, this.serialize = true, this.wireName});
+      {this.compare = true, this.serialize = true, this.wireName, this.string = true});
 }
 
 /// Optionally, annotate a Built Value `Serializer` getters with this to
