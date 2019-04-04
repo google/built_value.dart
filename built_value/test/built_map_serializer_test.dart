@@ -8,11 +8,11 @@ import 'package:test/test.dart';
 
 void main() {
   group('BuiltMap with known specifiedType but missing builder', () {
-    final data = BuiltMap<int, String>({1: 'one', 2: 'two', 3: 'three'});
-    final specifiedType =
+    var data = BuiltMap<int, String>({1: 'one', 2: 'two', 3: 'three'});
+    var specifiedType =
         const FullType(BuiltMap, [FullType(int), FullType(String)]);
-    final serializers = Serializers();
-    final serialized = [1, 'one', 2, 'two', 3, 'three'];
+    var serializers = Serializers();
+    var serialized = [1, 'one', 2, 'two', 3, 'three'];
 
     test('cannot be serialized', () {
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
@@ -28,13 +28,13 @@ void main() {
   });
 
   group('BuiltMap with known specifiedType and correct builder', () {
-    final data = BuiltMap<int, String>({1: 'one', 2: 'two', 3: 'three'});
-    final specifiedType =
+    var data = BuiltMap<int, String>({1: 'one', 2: 'two', 3: 'three'});
+    var specifiedType =
         const FullType(BuiltMap, [FullType(int), FullType(String)]);
-    final serializers = (Serializers().toBuilder()
+    var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(specifiedType, () => MapBuilder<int, String>()))
         .build();
-    final serialized = [1, 'one', 2, 'two', 3, 'three'];
+    var serialized = [1, 'one', 2, 'two', 3, 'three'];
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -56,19 +56,19 @@ void main() {
   });
 
   group('BuiltMap nested left with known specifiedType', () {
-    final data = BuiltMap<BuiltMap<int, String>, String>({
+    var data = BuiltMap<BuiltMap<int, String>, String>({
       BuiltMap<int, String>({1: 'one'}): 'one!',
       BuiltMap<int, String>({2: 'two'}): 'two!'
     });
     const innerTypeLeft = FullType(BuiltMap, [FullType(int), FullType(String)]);
-    final specifiedType =
+    var specifiedType =
         const FullType(BuiltMap, [innerTypeLeft, FullType(String)]);
-    final serializers = (Serializers().toBuilder()
+    var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(innerTypeLeft, () => MapBuilder<int, String>())
           ..addBuilderFactory(
               specifiedType, () => MapBuilder<BuiltMap<int, String>, String>()))
         .build();
-    final serialized = [
+    var serialized = [
       [1, 'one'],
       'one!',
       [2, 'two'],
@@ -87,21 +87,21 @@ void main() {
   });
 
   group('BuiltMap nested right with known specifiedType', () {
-    final data = BuiltMap<int, BuiltMap<String, String>>({
+    var data = BuiltMap<int, BuiltMap<String, String>>({
       1: BuiltMap<String, String>({'one': 'one!'}),
       2: BuiltMap<String, String>({'two': 'two!'})
     });
     const innerTypeRight =
         FullType(BuiltMap, [FullType(String), FullType(String)]);
-    final specifiedType =
+    var specifiedType =
         const FullType(BuiltMap, [FullType(int), innerTypeRight]);
-    final serializers = (Serializers().toBuilder()
+    var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(
               innerTypeRight, () => MapBuilder<String, String>())
           ..addBuilderFactory(
               specifiedType, () => MapBuilder<int, BuiltMap<String, String>>()))
         .build();
-    final serialized = [
+    var serialized = [
       1,
       ['one', 'one!'],
       2,
@@ -120,7 +120,7 @@ void main() {
   });
 
   group('BuiltMap nested both with known specifiedType', () {
-    final data = BuiltMap<BuiltMap<int, int>, BuiltMap<String, String>>({
+    var data = BuiltMap<BuiltMap<int, int>, BuiltMap<String, String>>({
       BuiltMap<int, int>({1: 1}): BuiltMap<String, String>({'one': 'one!'}),
       BuiltMap<int, int>({2: 2}): BuiltMap<String, String>({'two': 'two!'})
     });
@@ -128,9 +128,9 @@ void main() {
         FullType(BuiltMap, [FullType(int), FullType(int)]);
     const builtMapOfStringStringGenericType =
         FullType(BuiltMap, [FullType(String), FullType(String)]);
-    final specifiedType = const FullType(BuiltMap,
+    var specifiedType = const FullType(BuiltMap,
         [builtMapOfIntIntGenericType, builtMapOfStringStringGenericType]);
-    final serializers = (Serializers().toBuilder()
+    var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(
               builtMapOfIntIntGenericType, () => MapBuilder<int, int>())
           ..addBuilderFactory(builtMapOfStringStringGenericType,
@@ -138,7 +138,7 @@ void main() {
           ..addBuilderFactory(specifiedType,
               () => MapBuilder<BuiltMap<int, int>, BuiltMap<String, String>>()))
         .build();
-    final serialized = [
+    var serialized = [
       [1, 1],
       ['one', 'one!'],
       [2, 2],
@@ -176,13 +176,13 @@ void main() {
   });
 
   group('BuiltMap with Object values', () {
-    final data = BuiltMap<int, Object>({1: 'one', 2: 2, 3: 'three'});
-    final specifiedType =
+    var data = BuiltMap<int, Object>({1: 'one', 2: 2, 3: 'three'});
+    var specifiedType =
         const FullType(BuiltMap, [FullType(int), FullType.unspecified]);
-    final serializers = (Serializers().toBuilder()
+    var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(specifiedType, () => MapBuilder<int, Object>()))
         .build();
-    final serialized = [
+    var serialized = [
       1,
       ['String', 'one'],
       2,
@@ -203,14 +203,14 @@ void main() {
   });
 
   group('BuiltMap with Object keys', () {
-    final data = BuiltMap<Object, String>({1: 'one', 'two': 'two', 3: 'three'});
-    final specifiedType =
+    var data = BuiltMap<Object, String>({1: 'one', 'two': 'two', 3: 'three'});
+    var specifiedType =
         const FullType(BuiltMap, [FullType.unspecified, FullType(String)]);
-    final serializers = (Serializers().toBuilder()
+    var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(
               specifiedType, () => MapBuilder<Object, String>()))
         .build();
-    final serialized = [
+    var serialized = [
       ['int', 1],
       'one',
       ['String', 'two'],
@@ -231,10 +231,10 @@ void main() {
   });
 
   group('BuiltMap with Object keys and values', () {
-    final data = BuiltMap<Object, Object>({1: 'one', 'two': 2, 3: 'three'});
-    final specifiedType = const FullType(BuiltMap);
-    final serializers = Serializers();
-    final serialized = [
+    var data = BuiltMap<Object, Object>({1: 'one', 'two': 2, 3: 'three'});
+    var specifiedType = const FullType(BuiltMap);
+    var serializers = Serializers();
+    var serialized = [
       ['int', 1],
       ['String', 'one'],
       ['String', 'two'],
@@ -255,10 +255,10 @@ void main() {
   });
 
   group('BuiltMap with unknown specifiedType', () {
-    final data = BuiltMap<Object, Object>({1: 'one', 'two': 2, 3: 'three'});
-    final specifiedType = FullType.unspecified;
-    final serializers = Serializers();
-    final serialized = [
+    var data = BuiltMap<Object, Object>({1: 'one', 'two': 2, 3: 'three'});
+    var specifiedType = FullType.unspecified;
+    var serializers = Serializers();
+    var serialized = [
       'map',
       ['int', 1],
       ['String', 'one'],

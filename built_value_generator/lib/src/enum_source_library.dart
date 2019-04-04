@@ -40,9 +40,9 @@ abstract class EnumSourceLibrary
 
   @memoized
   BuiltList<EnumSourceClass> get classes {
-    final result = ListBuilder<EnumSourceClass>();
+    var result = ListBuilder<EnumSourceClass>();
 
-    for (final classElement in LibraryElements.getClassElements(element)) {
+    for (var classElement in LibraryElements.getClassElements(element)) {
       if (EnumSourceClass.needsEnumClass(classElement)) {
         result.add(EnumSourceClass(parsedLibrary, classElement));
       }
@@ -53,7 +53,7 @@ abstract class EnumSourceLibrary
   String generateCode() {
     if (classes.isEmpty) return null;
 
-    final errors = _computeErrors();
+    var errors = _computeErrors();
     if (errors.isNotEmpty) throw _makeError(errors);
 
     return classes.map((c) => c.generateCode()).join('\n');
@@ -68,8 +68,8 @@ abstract class EnumSourceLibrary
   }
 
   Iterable<String> _checkPart() {
-    final expectedCode = "part '$fileName.g.dart';";
-    final alternativeExpectedCode = 'part "$fileName.g.dart";';
+    var expectedCode = "part '$fileName.g.dart';";
+    var alternativeExpectedCode = 'part "$fileName.g.dart";';
     return source.contains(expectedCode) ||
             source.contains(alternativeExpectedCode)
         ? <String>[]
@@ -77,12 +77,12 @@ abstract class EnumSourceLibrary
   }
 
   Iterable<String> _checkIdentifiers() {
-    final result = <String>[];
-    final seenIdentifiers = Set<String>();
-    final reportedIdentifiers = Set<String>();
+    var result = <String>[];
+    var seenIdentifiers = Set<String>();
+    var reportedIdentifiers = Set<String>();
 
-    for (final sourceClass in classes) {
-      for (final identifier in sourceClass.identifiers) {
+    for (var sourceClass in classes) {
+      for (var identifier in sourceClass.identifiers) {
         if (seenIdentifiers.contains(identifier) &&
             !reportedIdentifiers.contains(identifier)) {
           reportedIdentifiers.add(identifier);

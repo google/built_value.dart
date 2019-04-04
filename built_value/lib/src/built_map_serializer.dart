@@ -16,19 +16,19 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
   @override
   Iterable serialize(Serializers serializers, BuiltMap builtMap,
       {FullType specifiedType = FullType.unspecified}) {
-    final isUnderspecified =
+    var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
 
-    final keyType = specifiedType.parameters.isEmpty
+    var keyType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];
-    final valueType = specifiedType.parameters.isEmpty
+    var valueType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[1];
 
-    final result = <Object>[];
-    for (final key in builtMap.keys) {
+    var result = <Object>[];
+    for (var key in builtMap.keys) {
       result.add(serializers.serialize(key, specifiedType: keyType));
       final value = builtMap[key];
       result.add(serializers.serialize(value, specifiedType: valueType));
@@ -39,17 +39,17 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
   @override
   BuiltMap deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final isUnderspecified =
+    var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 
-    final keyType = specifiedType.parameters.isEmpty
+    var keyType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];
-    final valueType = specifiedType.parameters.isEmpty
+    var valueType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[1];
 
-    final MapBuilder result = isUnderspecified
+    MapBuilder result = isUnderspecified
         ? MapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as MapBuilder;
 

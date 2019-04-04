@@ -43,18 +43,18 @@ abstract class SerializerSourceClass
 
   @memoized
   BuiltValueSerializer get serializerSettings {
-    final serializerFields =
+    var serializerFields =
         element.fields.where((field) => field.name == 'serializer').toList();
     if (serializerFields.isEmpty) return const BuiltValueSerializer();
-    final serializerField = serializerFields.single;
+    var serializerField = serializerFields.single;
     if (serializerField.getter == null) return const BuiltValueSerializer();
 
-    final annotations = serializerField.getter.metadata
+    var annotations = serializerField.getter.metadata
         .map((annotation) => annotation.computeConstantValue())
         .where((value) => value?.type?.displayName == 'BuiltValueSerializer');
     if (annotations.isEmpty) return const BuiltValueSerializer();
 
-    final annotation = annotations.single;
+    var annotation = annotations.single;
     // If a field does not exist, that means an old `built_value` version; use
     // the default.
     return BuiltValueSerializer(
@@ -82,10 +82,10 @@ abstract class SerializerSourceClass
 
   @memoized
   String get serializerDeclaration {
-    final serializerFields =
+    var serializerFields =
         element.fields.where((field) => field.name == 'serializer').toList();
     if (serializerFields.isEmpty) return '';
-    final serializerField = serializerFields.single;
+    var serializerField = serializerFields.single;
     return parsedLibrary
             .getElementDeclaration(serializerField.getter)
             ?.node
@@ -122,8 +122,8 @@ abstract class SerializerSourceClass
 
   @memoized
   BuiltList<SerializerSourceField> get fields {
-    final result = ListBuilder<SerializerSourceField>();
-    for (final fieldElement in collectFields(element)) {
+    var result = ListBuilder<SerializerSourceField>();
+    for (var fieldElement in collectFields(element)) {
       final builderFieldElement =
           builderElement?.getField(fieldElement.displayName);
       final sourceField = SerializerSourceField(
@@ -150,8 +150,8 @@ abstract class SerializerSourceClass
   /// has a field of type `FooB`, and `FooB `has a field of type `FooA`.
   BuiltSet<SerializerSourceClass> _fieldClassesWith(
       BuiltSet<SerializerSourceClass> initialClasses) {
-    final result = initialClasses.toBuilder();
-    for (final fieldElement in collectFields(element)) {
+    var result = initialClasses.toBuilder();
+    for (var fieldElement in collectFields(element)) {
       if (fieldElement.isStatic) continue;
       if (fieldElement.setter != null) continue;
 
@@ -161,7 +161,7 @@ abstract class SerializerSourceClass
       // Also find classes used as generic parameters; for example a field
       // of type List<Foo> means we need to be able to serialize Foo.
       if (fieldElement.type is ParameterizedType) {
-        for (final type
+        for (var type
             in (fieldElement.type as ParameterizedType).typeArguments) {
           // Type is not fully specified, ignore.
           if (type.element is! ClassElement) continue;
@@ -196,7 +196,7 @@ abstract class SerializerSourceClass
       element.library.definingCompilationUnit;
 
   Iterable<String> computeErrors() {
-    final result = <String>[];
+    var result = <String>[];
 
     if (!serializerSettings.custom) {
       final camelCaseName =
@@ -211,7 +211,7 @@ abstract class SerializerSourceClass
       }
     }
 
-    for (final field in fields) {
+    for (var field in fields) {
       result.addAll(field.computeErrors());
     }
 
@@ -246,7 +246,7 @@ abstract class SerializerSourceClass
   }
 
   String generateSerializerDeclaration() {
-    final camelCaseName = _toCamelCase(name);
+    var camelCaseName = _toCamelCase(name);
     return 'Serializer<$name> '
         '_\$${camelCaseName}Serializer = '
         'new _\$${name}Serializer();';
@@ -266,7 +266,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
       {FullType specifiedType = FullType.unspecified}) {
     ${fields.isEmpty ? 'return <Object>[];' : '''
     ${_generateGenericsSerializerPreamble()}
-    final result = <Object>[${_generateRequiredFieldSerializers()}];
+    var result = <Object>[${_generateRequiredFieldSerializers()}];
     ${_generateNullableFieldSerializers()}
     return result;
     '''}
@@ -277,9 +277,9 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
       {FullType specifiedType = FullType.unspecified}) {
     ${_generateGenericsSerializerPreamble()}
     ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
-    final result = ${_generateNewBuilder()};
+    var result = ${_generateNewBuilder()};
 
-    final iterator = serialized.iterator;
+    var iterator = serialized.iterator;
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
@@ -362,9 +362,9 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   }
 
   String _generateNewBuilder() {
-    final parameters = _genericParametersUsedInFields;
+    var parameters = _genericParametersUsedInFields;
     if (parameters.isEmpty) return 'new ${name}Builder()';
-    final boundsOrObject = genericBounds
+    var boundsOrObject = genericBounds
         .map((bound) => bound.isEmpty ? 'Object' : bound)
         .join(', ');
     return 'isUnderspecified ? '
@@ -378,14 +378,14 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
           field.type.contains(RegExp('[<, \n]$parameter[>, \n]')))));
 
   String _generateGenericsSerializerPreamble() {
-    final parameters = _genericParametersUsedInFields;
+    var parameters = _genericParametersUsedInFields;
     if (parameters.isEmpty) return '';
-    final result = StringBuffer();
+    var result = StringBuffer();
     result.writeln('final isUnderspecified = specifiedType.isUnspecified || '
         'specifiedType.parameters.isEmpty;');
     result.writeln(
         'if (!isUnderspecified) serializers.expectBuilder(specifiedType);');
-    for (final parameter in parameters) {
+    for (var parameter in parameters) {
       final index = genericParameters.indexOf(parameter);
       result.writeln('final parameter$parameter = '
           'isUnderspecified '
@@ -423,9 +423,9 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   ///
   /// 'Object' is substituted where there is no bound.
   BuiltMap<String, String> get _genericBoundsAsMap {
-    final genericBoundsOrObject =
+    var genericBoundsOrObject =
         genericBounds.map((bound) => bound.isEmpty ? 'Object' : bound).toList();
-    final result = MapBuilder<String, String>();
+    var result = MapBuilder<String, String>();
     for (var i = 0; i != genericParameters.length; ++i) {
       result[genericParameters[i]] = genericBoundsOrObject[i];
     }
@@ -459,7 +459,7 @@ case '${escapeString(field.wireName)}':
     var result = '';
     var upperCase = false;
     var firstCharacter = true;
-    for (final char in name.split('')) {
+    for (var char in name.split('')) {
       if (char == '_') {
         upperCase = true;
       } else {

@@ -6,12 +6,12 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = Serializers();
+  var serializers = Serializers();
 
   group('double with known specifiedType', () {
-    final data = 3.141592653589793;
-    final serialized = data;
-    final specifiedType = const FullType(double);
+    var data = 3.141592653589793;
+    var serialized = data;
+    var specifiedType = const FullType(double);
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -25,9 +25,9 @@ void main() {
   });
 
   group('double with unknown specifiedType', () {
-    final data = 3.141592653589793;
-    final serialized = ['double', data];
-    final specifiedType = FullType.unspecified;
+    var data = 3.141592653589793;
+    var serialized = ['double', data];
+    var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -41,9 +41,9 @@ void main() {
   });
 
   group('double with NaN value', () {
-    final data = double.nan;
-    final serialized = 'NaN';
-    final specifiedType = const FullType(double);
+    var data = double.nan;
+    var serialized = 'NaN';
+    var specifiedType = const FullType(double);
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -61,9 +61,9 @@ void main() {
   });
 
   group('double with -INF value', () {
-    final data = double.negativeInfinity;
-    final serialized = '-INF';
-    final specifiedType = const FullType(double);
+    var data = double.negativeInfinity;
+    var serialized = '-INF';
+    var specifiedType = const FullType(double);
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -77,9 +77,9 @@ void main() {
   });
 
   group('double with INF value', () {
-    final data = double.infinity;
-    final serialized = 'INF';
-    final specifiedType = const FullType(double);
+    var data = double.infinity;
+    var serialized = 'INF';
+    var specifiedType = const FullType(double);
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),

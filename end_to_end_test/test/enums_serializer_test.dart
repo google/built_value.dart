@@ -8,8 +8,8 @@ import 'package:test/test.dart';
 
 void main() {
   group('TestEnum', () {
-    final data = TestEnum.yes;
-    final serialized = ['TestEnum', 'yes'];
+    var data = TestEnum.yes;
+    var serialized = ['TestEnum', 'yes'];
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -21,8 +21,8 @@ void main() {
   });
 
   group('WireNameEnum', () {
-    final data = WireNameEnum.yes;
-    final serialized = ['E', 'y'];
+    var data = WireNameEnum.yes;
+    var serialized = ['E', 'y'];
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);

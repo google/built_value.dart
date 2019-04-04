@@ -7,7 +7,7 @@ import 'package:built_value/src/int_serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = Serializers();
+  var serializers = Serializers();
 
   group(Serializers, () {
     test('exposes iterable of serializer', () {

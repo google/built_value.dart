@@ -249,7 +249,7 @@ class IndentingBuiltValueToStringHelper implements BuiltValueToStringHelper {
   String toString() {
     _indentingBuiltValueToStringHelperIndent -= 2;
     _result..write(' ' * _indentingBuiltValueToStringHelperIndent)..write('}');
-    final stringResult = _result.toString();
+    var stringResult = _result.toString();
     _result = null;
     return stringResult;
   }
@@ -278,7 +278,7 @@ class FlatBuiltValueToStringHelper implements BuiltValueToStringHelper {
   @override
   String toString() {
     _result..write('}');
-    final stringResult = _result.toString();
+    var stringResult = _result.toString();
     _result = null;
     return stringResult;
   }

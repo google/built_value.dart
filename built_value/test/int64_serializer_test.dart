@@ -7,12 +7,12 @@ import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = Serializers();
+  var serializers = Serializers();
 
   group('int64 with known specifiedType', () {
-    final data = Int64.MAX_VALUE;
-    final serialized = Int64.MAX_VALUE.toString();
-    final specifiedType = const FullType(Int64);
+    var data = Int64.MAX_VALUE;
+    var serialized = Int64.MAX_VALUE.toString();
+    var specifiedType = const FullType(Int64);
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -26,9 +26,9 @@ void main() {
   });
 
   group('int64 with unknown specifiedType', () {
-    final data = Int64.MIN_VALUE;
-    final serialized = ['Int64', Int64.MIN_VALUE.toString()];
-    final specifiedType = FullType.unspecified;
+    var data = Int64.MIN_VALUE;
+    var serialized = ['Int64', Int64.MIN_VALUE.toString()];
+    var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),

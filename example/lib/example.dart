@@ -52,7 +52,7 @@ void example() {
       animals.map((animal) => animal.rebuild((b) => b.legs++)).toList();
 
   // Everything is serializable.
-  for (final object in [
+  for (var object in [
     value,
     value2,
     value3,
@@ -64,7 +64,7 @@ void example() {
     modifiedAnimals[0],
     modifiedAnimals[1],
   ]) {
-    final serialized = serializers.serialize(object);
+    var serialized = serializers.serialize(object);
     print(serialized);
     assert(serializers.deserialize(serialized) == object);
   }

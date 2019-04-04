@@ -9,13 +9,13 @@ import 'package:test/test.dart';
 
 void main() {
   group('HasInt', () {
-    final data = BuiltList<ValueWithHasInt>([
+    var data = BuiltList<ValueWithHasInt>([
       ValueWithHasInt((b) => b.hasInt = ValueWithInt((b) => b
         ..anInt = 2
         ..note = 'two')),
       ValueWithHasInt((b) => b.hasInt = EnumWithInt.one),
     ]);
-    final serialized = [
+    var serialized = [
       'list',
       [
         'ValueWithHasInt',

@@ -29,18 +29,18 @@ abstract class EnumSourceField
 
   @memoized
   BuiltValueEnumConst get settings {
-    final annotations = element.metadata
+    var annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
         .where((value) => value?.type?.displayName == 'BuiltValueEnumConst');
     if (annotations.isEmpty) return const BuiltValueEnumConst();
-    final annotation = annotations.single;
+    var annotation = annotations.single;
     return BuiltValueEnumConst(
         wireName: annotation.getField('wireName').toStringValue());
   }
 
   @memoized
   String get generatedIdentifier {
-    final fieldName = element.displayName;
+    var fieldName = element.displayName;
     return parsedLibrary
         .getElementDeclaration(element)
         .node
@@ -56,10 +56,10 @@ abstract class EnumSourceField
 
   static BuiltList<EnumSourceField> fromClassElement(
       ParsedLibraryResult parsedLibrary, ClassElement classElement) {
-    final result = ListBuilder<EnumSourceField>();
+    var result = ListBuilder<EnumSourceField>();
 
-    final enumName = classElement.displayName;
-    for (final fieldElement in classElement.fields) {
+    var enumName = classElement.displayName;
+    for (var fieldElement in classElement.fields) {
       final type = fieldElement.getter.returnType.displayName;
       if (!fieldElement.isSynthetic &&
           (type == enumName || type == 'dynamic')) {
@@ -71,7 +71,7 @@ abstract class EnumSourceField
   }
 
   Iterable<String> get errors {
-    final result = <String>[];
+    var result = <String>[];
 
     if (type == 'dynamic') {
       result.add('Specify a type for field "$name".');

@@ -24,15 +24,15 @@ class BuiltValueAnalyzerPlugin extends ServerPlugin {
 
   @override
   AnalysisDriverGeneric createAnalysisDriver(plugin.ContextRoot contextRoot) {
-    final root = ContextRoot(contextRoot.root, contextRoot.exclude,
+    var root = ContextRoot(contextRoot.root, contextRoot.exclude,
         pathContext: resourceProvider.pathContext)
       ..optionsFilePath = contextRoot.optionsFile;
-    final contextBuilder = ContextBuilder(resourceProvider, sdkManager, null)
+    var contextBuilder = ContextBuilder(resourceProvider, sdkManager, null)
       ..analysisDriverScheduler = analysisDriverScheduler
       ..byteStore = byteStore
       ..performanceLog = performanceLog
       ..fileContentOverlay = fileContentOverlay;
-    final result = contextBuilder.buildDriver(root);
+    var result = contextBuilder.buildDriver(root);
     result.results.listen(_processResult);
     return result;
   }
@@ -96,7 +96,7 @@ class BuiltValueAnalyzerPlugin extends ServerPlugin {
 
       // Return any fixes that are for the expected file.
       final fixes = <plugin.AnalysisErrorFixes>[];
-      for (final error in checkResult.keys) {
+      for (var error in checkResult.keys) {
         if (error.location.file == parameters.file &&
             checkResult[error].change.edits.single.edits.isNotEmpty) {
           fixes.add(

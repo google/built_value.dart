@@ -16,11 +16,11 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
   @override
   Iterable serialize(Serializers serializers, BuiltSet builtSet,
       {FullType specifiedType = FullType.unspecified}) {
-    final isUnderspecified =
+    var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
 
-    final elementType = specifiedType.parameters.isEmpty
+    var elementType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];
 
@@ -31,13 +31,13 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
   @override
   BuiltSet deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final isUnderspecified =
+    var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 
-    final elementType = specifiedType.parameters.isEmpty
+    var elementType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];
-    final SetBuilder result = isUnderspecified
+    SetBuilder result = isUnderspecified
         ? SetBuilder<Object>()
         : serializers.newBuilder(specifiedType) as SetBuilder;
 

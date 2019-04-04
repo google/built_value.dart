@@ -13,10 +13,10 @@ import 'package:test/test.dart';
 
 void main() {
   group('SimpleValue', () {
-    final data = SimpleValue((b) => b
+    var data = SimpleValue((b) => b
       ..anInt = 1
       ..aString = 'two');
-    final serialized = [
+    var serialized = [
       'SimpleValue',
       'anInt',
       1,
@@ -34,11 +34,11 @@ void main() {
   });
 
   group('CompoundValue', () {
-    final data = CompoundValue((b) => b
+    var data = CompoundValue((b) => b
       ..simpleValue.anInt = 1
       ..simpleValue.aString = 'two'
       ..validatedValue = ValidatedValue((b) => b.anInt = 3).toBuilder());
-    final serialized = [
+    var serialized = [
       'CompoundValue',
       'simpleValue',
       [
@@ -91,12 +91,12 @@ void main() {
   });
 
   group('CompoundValueNoNesting', () {
-    final data = CompoundValueNoNesting((b) => b
+    var data = CompoundValueNoNesting((b) => b
       ..simpleValue = SimpleValue((b) => b
         ..anInt = 1
         ..aString = 'two')
       ..validatedValue = ValidatedValue((b) => b.anInt = 3));
-    final serialized = [
+    var serialized = [
       'CompoundValueNoNesting',
       'simpleValue',
       [
@@ -122,12 +122,12 @@ void main() {
   });
 
   group('CompoundValueExplicitNoNesting', () {
-    final data = CompoundValueExplicitNoNesting((b) => b
+    var data = CompoundValueExplicitNoNesting((b) => b
       ..simpleValue.replace(SimpleValue((b) => b
         ..anInt = 1
         ..aString = 'two'))
       ..validatedValue = ValidatedValue((b) => b.anInt = 3));
-    final serialized = [
+    var serialized = [
       'CompoundValueExplicitNoNesting',
       'simpleValue',
       [
@@ -153,14 +153,14 @@ void main() {
   });
 
   group('CompoundValue using StandardJsonPlugin', () {
-    final data = CompoundValue((b) => b
+    var data = CompoundValue((b) => b
       ..simpleValue.anInt = 1
       ..simpleValue.aString = 'two'
       ..validatedValue = ValidatedValue((b) => b.anInt = 3).toBuilder());
-    final specifiedType = const FullType(CompoundValue);
-    final serializersWithPlugin =
+    var specifiedType = const FullType(CompoundValue);
+    var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
-    final serialized = {
+    var serialized = {
       'simpleValue': {
         'anInt': 1,
         'aString': 'two',
@@ -185,8 +185,8 @@ void main() {
   });
 
   group('ValueUsingImportAs', () {
-    final data = ValueUsingImportAs((b) => b.value = TestEnum.yes);
-    final serialized = [
+    var data = ValueUsingImportAs((b) => b.value = TestEnum.yes);
+    var serialized = [
       'ValueUsingImportAs',
       'value',
       'yes',
@@ -202,7 +202,7 @@ void main() {
   });
 
   group('PrimitivesValue', () {
-    final data = PrimitivesValue((b) => b
+    var data = PrimitivesValue((b) => b
       ..boolean = true
       ..integer = 42
       ..int64 = Int64.MAX_VALUE
@@ -214,7 +214,7 @@ void main() {
       ..regExp = RegExp(r'\w+@\d+')
       ..uri = Uri.parse('https://github.com/google/built_value.dart')
       ..bigInt = BigInt.parse('123456789012345678901234567890'));
-    final serialized = [
+    var serialized = [
       'PrimitivesValue',
       'boolean',
       true,
@@ -250,8 +250,8 @@ void main() {
   });
 
   group('NamedFactoryValue', () {
-    final data = NamedFactoryValue(3);
-    final serialized = ['NamedFactoryValue', 'value', 3];
+    var data = NamedFactoryValue(3);
+    var serialized = ['NamedFactoryValue', 'value', 3];
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -263,10 +263,10 @@ void main() {
   });
 
   group('FieldDiscoveryValue', () {
-    final data = FieldDiscoveryValue((b) => b
+    var data = FieldDiscoveryValue((b) => b
       ..value.value.value = 1
       ..values.add(ThirdDiscoverableValue((b) => b..value = 4)));
-    final serialized = [
+    var serialized = [
       'FieldDiscoveryValue',
       'value',
       [
@@ -292,10 +292,10 @@ void main() {
   });
 
   group('PartiallySerializableValue', () {
-    final data = PartiallySerializableValue((b) => b
+    var data = PartiallySerializableValue((b) => b
       ..value = 1
       ..transientValue = 2);
-    final serialized = [
+    var serialized = [
       'PartiallySerializableValue',
       'value',
       1,
@@ -312,8 +312,8 @@ void main() {
   });
 
   group('WireNameValue', () {
-    final data = WireNameValue((b) => b..value = 1);
-    final serialized = [
+    var data = WireNameValue((b) => b..value = 1);
+    var serialized = [
       r'$V',
       r'$v',
       1,
@@ -329,8 +329,8 @@ void main() {
   });
 
   group('ValueWithCustomSerializer', () {
-    final data = ValueWithCustomSerializer((b) => b..value = 1);
-    final serialized = ['ValueWithCustomSerializer', 1];
+    var data = ValueWithCustomSerializer((b) => b..value = 1);
+    var serialized = ['ValueWithCustomSerializer', 1];
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);

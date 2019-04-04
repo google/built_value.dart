@@ -8,10 +8,10 @@ import 'package:test/test.dart';
 
 void main() {
   group('BuiltList with known specifiedType but missing builder', () {
-    final data = BuiltList<int>([1, 2, 3]);
-    final specifiedType = const FullType(BuiltList, [FullType(int)]);
-    final serializers = Serializers();
-    final serialized = [1, 2, 3];
+    var data = BuiltList<int>([1, 2, 3]);
+    var specifiedType = const FullType(BuiltList, [FullType(int)]);
+    var serializers = Serializers();
+    var serialized = [1, 2, 3];
 
     test('serialize throws', () {
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
@@ -27,12 +27,12 @@ void main() {
   });
 
   group('BuiltList with known specifiedType and correct builder', () {
-    final data = BuiltList<int>([1, 2, 3]);
-    final specifiedType = const FullType(BuiltList, [FullType(int)]);
-    final serializers = (Serializers().toBuilder()
+    var data = BuiltList<int>([1, 2, 3]);
+    var specifiedType = const FullType(BuiltList, [FullType(int)]);
+    var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(specifiedType, () => ListBuilder<int>()))
         .build();
-    final serialized = [1, 2, 3];
+    var serialized = [1, 2, 3];
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -54,21 +54,21 @@ void main() {
   });
 
   group('BuiltList nested with known specifiedType and correct builders', () {
-    final data = BuiltList<BuiltList<int>>([
+    var data = BuiltList<BuiltList<int>>([
       BuiltList<int>([1, 2, 3]),
       BuiltList<int>([4, 5, 6]),
       BuiltList<int>([7, 8, 9])
     ]);
-    final specifiedType = const FullType(BuiltList, [
+    var specifiedType = const FullType(BuiltList, [
       FullType(BuiltList, [FullType(int)])
     ]);
-    final serializers = (Serializers().toBuilder()
+    var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(
               specifiedType, () => ListBuilder<BuiltList<int>>())
           ..addBuilderFactory(const FullType(BuiltList, [FullType(int)]),
               () => ListBuilder<int>()))
         .build();
-    final serialized = [
+    var serialized = [
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9]
@@ -86,10 +86,10 @@ void main() {
   });
 
   group('BuiltList with unknown specifiedType and no builders', () {
-    final data = BuiltList<int>([1, 2, 3]);
-    final specifiedType = FullType.unspecified;
-    final serializers = Serializers();
-    final serialized = [
+    var data = BuiltList<int>([1, 2, 3]);
+    var specifiedType = FullType.unspecified;
+    var serializers = Serializers();
+    var serialized = [
       'list',
       ['int', 1],
       ['int', 2],

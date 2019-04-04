@@ -6,12 +6,12 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = Serializers();
+  var serializers = Serializers();
 
   group('BigInt with known specifiedType', () {
-    final data = BigInt.parse('123456789012345678901234567890');
-    final serialized = '123456789012345678901234567890';
-    final specifiedType = const FullType(BigInt);
+    var data = BigInt.parse('123456789012345678901234567890');
+    var serialized = '123456789012345678901234567890';
+    var specifiedType = const FullType(BigInt);
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -25,9 +25,9 @@ void main() {
   });
 
   group('BigInt with unknown specifiedType', () {
-    final data = BigInt.parse('123456789012345678901234567890');
-    final serialized = ['BigInt', '123456789012345678901234567890'];
-    final specifiedType = FullType.unspecified;
+    var data = BigInt.parse('123456789012345678901234567890');
+    var serialized = ['BigInt', '123456789012345678901234567890'];
+    var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),

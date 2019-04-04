@@ -8,10 +8,10 @@ import 'package:test/test.dart';
 
 void main() {
   group('ImportedValue', () {
-    final data = ImportedValue((b) => b.simpleValue
+    var data = ImportedValue((b) => b.simpleValue
       ..anInt = 1
       ..aString = 'two');
-    final serialized = [
+    var serialized = [
       'ImportedValue',
       'simpleValue',
       [

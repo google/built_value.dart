@@ -22,7 +22,7 @@ BuiltList<FieldElement> collectFields(ClassElement element) =>
 /// If a field is overridden then just the closest (overriding) field is
 /// returned.
 BuiltList<FieldElement> collectFieldsForType(InterfaceType type) {
-  final fields = <FieldElement>[];
+  var fields = <FieldElement>[];
   // Add fields from this class before interfaces, so they're added to the set
   // first below. Re-added fields from interfaces are ignored.
   fields.addAll(_fieldElementsForType(type));
@@ -33,7 +33,7 @@ BuiltList<FieldElement> collectFieldsForType(InterfaceType type) {
 
   // Overridden fields have multiple declarations, so deduplicate by adding
   // to a set that compares on field name.
-  final fieldSet = LinkedHashSet<FieldElement>(
+  var fieldSet = LinkedHashSet<FieldElement>(
       equals: (a, b) => a.displayName == b.displayName,
       hashCode: (a) => a.displayName.hashCode);
   fieldSet.addAll(fields);
@@ -47,8 +47,8 @@ BuiltList<FieldElement> collectFieldsForType(InterfaceType type) {
 }
 
 BuiltList<FieldElement> _fieldElementsForType(InterfaceType type) {
-  final result = ListBuilder<FieldElement>();
-  for (final accessor in type.accessors) {
+  var result = ListBuilder<FieldElement>();
+  for (var accessor in type.accessors) {
     if (accessor.isSetter) continue;
     result.add(accessor.variable as FieldElement);
   }

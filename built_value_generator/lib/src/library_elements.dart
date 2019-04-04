@@ -10,7 +10,7 @@ import 'package:built_collection/built_collection.dart';
 class LibraryElements {
   static BuiltList<ClassElement> getClassElements(
       LibraryElement libraryElement) {
-    final result = _GetClassesVisitor();
+    var result = _GetClassesVisitor();
     libraryElement.visitChildren(result);
     return BuiltList<ClassElement>(result.classElements);
   }

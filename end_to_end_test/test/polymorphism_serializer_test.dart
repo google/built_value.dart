@@ -9,10 +9,10 @@ import 'package:test/test.dart';
 
 void main() {
   group('Cat', () {
-    final data = Cat((b) => b
+    var data = Cat((b) => b
       ..legs = 4
       ..tail = true);
-    final serialized = [
+    var serialized = [
       'Cat',
       'tail',
       true,
@@ -38,10 +38,10 @@ void main() {
   });
 
   group('Robot', () {
-    final data = Robot((b) => b
+    var data = Robot((b) => b
       ..legs = 4
       ..fins = 3);
-    final serialized = [
+    var serialized = [
       'Robot',
       'fins',
       3,
@@ -59,8 +59,8 @@ void main() {
   });
 
   group('StandardCat', () {
-    final data = StandardCat((b) => b..tail = true);
-    final serialized = [
+    var data = StandardCat((b) => b..tail = true);
+    var serialized = [
       'StandardCat',
       'tail',
       true,
@@ -76,11 +76,11 @@ void main() {
   });
 
   group('HasField', () {
-    final data = BuiltList<HasField<dynamic>>([
+    var data = BuiltList<HasField<dynamic>>([
       HasString((b) => b..field = 'hello'),
       HasDouble((b) => b..field = 3.14)
     ]);
-    final serialized = [
+    var serialized = [
       'list',
       ['HasString', 'field', 'hello'],
       ['HasDouble', 'field', 3.14]
@@ -96,14 +96,14 @@ void main() {
   });
 
   group('Cage', () {
-    final data = Cage((b) => b
+    var data = Cage((b) => b
       ..inhabitant = Cat((b) => b
         ..tail = true
         ..legs = 4)
       ..otherInhabitants.add(Fish((b) => b
         ..legs = 0
         ..fins = 4)));
-    final serialized = [
+    var serialized = [
       'Cage',
       'inhabitant',
       ['Cat', 'tail', true, 'legs', 4],
@@ -123,8 +123,8 @@ void main() {
   });
 
   group('UsesHandCoded', () {
-    final data = UsesHandCoded((b) => b..fieldInBaseBuilder = 4);
-    final serialized = [
+    var data = UsesHandCoded((b) => b..fieldInBaseBuilder = 4);
+    var serialized = [
       'UsesHandCoded',
       'fieldInBaseBuilder',
       4,
