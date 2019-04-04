@@ -32,7 +32,7 @@ Future expectCorrection(String src, String expectedFixedSource) async {
       .expand((correction) =>
           correction.change.edits.expand((edits) => edits.edits))
       .toList();
-  for (final edit in edits) {
+  for (var edit in edits) {
     fixedSrc = fixedSrc.replaceRange(
         edit.offset, edit.offset + edit.length, edit.replacement);
   }

@@ -30,7 +30,7 @@ class DateTimeSerializer implements PrimitiveSerializer<DateTime> {
   @override
   DateTime deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final microsecondsSinceEpoch = serialized as int;
+    var microsecondsSinceEpoch = serialized as int;
     return DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
         isUtc: true);
   }

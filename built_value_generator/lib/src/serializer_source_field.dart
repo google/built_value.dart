@@ -53,11 +53,11 @@ abstract class SerializerSourceField
 
   @memoized
   BuiltValueField get builtValueField {
-    final annotations = element.getter.metadata
+    var annotations = element.getter.metadata
         .map((annotation) => annotation.computeConstantValue())
         .where((value) => value?.type?.displayName == 'BuiltValueField');
     if (annotations.isEmpty) return const BuiltValueField();
-    final annotation = annotations.single;
+    var annotation = annotations.single;
     return BuiltValueField(
         compare: annotation.getField('compare').toBoolValue(),
         serialize: annotation.getField('serialize').toBoolValue(),
@@ -80,11 +80,11 @@ abstract class SerializerSourceField
   /// The [type] plus any import prefix.
   @memoized
   String get typeWithPrefix {
-    final declaration = parsedLibrary.getElementDeclaration(element.getter);
-    final typeFromAst =
+    var declaration = parsedLibrary.getElementDeclaration(element.getter);
+    var typeFromAst =
         (declaration.node as MethodDeclaration)?.returnType?.toString() ??
             'dynamic';
-    final typeFromElement = type;
+    var typeFromElement = type;
 
     // If the type is a function, we can't use the element result; it is
     // formatted incorrectly.
@@ -107,7 +107,7 @@ abstract class SerializerSourceField
 
   @memoized
   bool get builderFieldUsesNestedBuilder {
-    final builderFieldElementIsValid =
+    var builderFieldElementIsValid =
         (builderElement?.getter?.isAbstract == false) &&
             !builderElement.isStatic;
 
@@ -150,13 +150,13 @@ abstract class SerializerSourceField
   /// no cast is needed, and an empty string is returned.
   String generateCast(CompilationUnitElement compilationUnit,
       BuiltMap<String, String> classGenericBounds) {
-    final result = _generateCast(
+    var result = _generateCast(
         typeInCompilationUnit(compilationUnit), classGenericBounds);
     return result == 'Object' ? '' : 'as $result';
   }
 
   String generateBuilder() {
-    final bareType = _getBareType(type);
+    var bareType = _getBareType(type);
     if (typesWithBuilder.containsKey(bareType)) {
       return 'new ${typesWithBuilder[bareType]}<${_getGenerics(type)}>()';
     } else {
@@ -166,9 +166,9 @@ abstract class SerializerSourceField
 
   static String _generateFullType(
       String type, BuiltSet<String> classGenericParameters) {
-    final bareType = _getBareType(type);
-    final generics = _getGenerics(type);
-    final genericItems = _splitOnTopLevelCommas(generics);
+    var bareType = _getBareType(type);
+    var generics = _getGenerics(type);
+    var genericItems = _splitOnTopLevelCommas(generics);
 
     if (generics.isEmpty) {
       if (classGenericParameters.contains(bareType)) {
@@ -189,15 +189,15 @@ abstract class SerializerSourceField
   static String _generateCast(
       String type, BuiltMap<String, String> classGenericBounds,
       {bool topLevel = true}) {
-    final bareType = _getBareType(type);
+    var bareType = _getBareType(type);
 
     // For built collections we can cast to the bare type when deserializing,
     // instead of the full generic type. This is because the `replace` method
     // checks the generic type and copies if needed.
-    final generics = topLevel && DartTypes.isBuiltCollectionTypeName(bareType)
+    var generics = topLevel && DartTypes.isBuiltCollectionTypeName(bareType)
         ? ''
         : _getGenerics(type);
-    final genericItems = _splitOnTopLevelCommas(generics);
+    var genericItems = _splitOnTopLevelCommas(generics);
 
     if (generics.isEmpty) {
       if (classGenericBounds.keys.contains(bareType)) {
@@ -214,12 +214,12 @@ abstract class SerializerSourceField
   }
 
   static String _getBareType(String name) {
-    final genericsStart = name.indexOf('<');
+    var genericsStart = name.indexOf('<');
     return genericsStart == -1 ? name : name.substring(0, genericsStart);
   }
 
   static String _getGenerics(String name) {
-    final genericsStart = name.indexOf('<');
+    var genericsStart = name.indexOf('<');
     return genericsStart == -1
         ? ''
         : name
@@ -230,8 +230,8 @@ abstract class SerializerSourceField
   /// Splits a generic parameter string on top level commas; that means
   /// commas nested inside '<' and '>' are ignored.
   static BuiltList<String> _splitOnTopLevelCommas(String string) {
-    final result = ListBuilder<String>();
-    final accumulator = StringBuffer();
+    var result = ListBuilder<String>();
+    var accumulator = StringBuffer();
     var depth = 0;
     for (var i = 0; i != string.length; ++i) {
       if (string[i] == '<') ++depth;

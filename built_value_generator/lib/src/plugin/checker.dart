@@ -8,15 +8,15 @@ import 'package:built_value_generator/src/value_source_class.dart';
 class Checker {
   Map<AnalysisError, PrioritizedSourceChange> check(
       LibraryElement libraryElement) {
-    final result = <AnalysisError, PrioritizedSourceChange>{};
+    var result = <AnalysisError, PrioritizedSourceChange>{};
 
-    for (final compilationUnit in libraryElement.units) {
+    for (var compilationUnit in libraryElement.units) {
       // Don't analyze if there's no source; there's nothing to do.
       if (compilationUnit.source == null) continue;
       // Don't analyze generated source; there's nothing to do.
       if (compilationUnit.source.fullName.endsWith('.g.dart')) continue;
 
-      for (final type in compilationUnit.types) {
+      for (var type in compilationUnit.types) {
         if (!type.interfaces.any((i) => i.displayName.startsWith('Built'))) {
           continue;
         }

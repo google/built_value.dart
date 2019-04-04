@@ -6,12 +6,12 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = Serializers();
+  var serializers = Serializers();
 
   group('String with known specifiedType', () {
-    final data = 'testing, testing';
-    final serialized = 'testing, testing';
-    final specifiedType = const FullType(String);
+    var data = 'testing, testing';
+    var serialized = 'testing, testing';
+    var specifiedType = const FullType(String);
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -25,9 +25,9 @@ void main() {
   });
 
   group('String with unknown specifiedType', () {
-    final data = 'testing, testing';
-    final serialized = ['String', 'testing, testing'];
-    final specifiedType = FullType.unspecified;
+    var data = 'testing, testing';
+    var serialized = ['String', 'testing, testing'];
+    var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),

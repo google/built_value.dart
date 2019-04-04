@@ -58,13 +58,12 @@ abstract class ValueSourceField
   /// The [type] plus any import prefix.
   @memoized
   String get typeWithPrefix {
-    final typeFromAst = (parsedLibrary
-                .getElementDeclaration(element.getter)
-                .node as MethodDeclaration)
+    var typeFromAst = (parsedLibrary.getElementDeclaration(element.getter).node
+                as MethodDeclaration)
             ?.returnType
             ?.toSource() ??
         'dynamic';
-    final typeFromElement = type;
+    var typeFromElement = type;
 
     // If the type is a function, we can't use the element result; it is
     // formatted incorrectly.
@@ -94,11 +93,11 @@ abstract class ValueSourceField
 
   @memoized
   BuiltValueField get builtValueField {
-    final annotations = element.getter.metadata
+    var annotations = element.getter.metadata
         .map((annotation) => annotation.computeConstantValue())
         .where((value) => value?.type?.displayName == 'BuiltValueField');
     if (annotations.isEmpty) return const BuiltValueField();
-    final annotation = annotations.single;
+    var annotation = annotations.single;
     return BuiltValueField(
         compare: annotation.getField('compare').toBoolValue(),
         serialize: annotation.getField('serialize').toBoolValue(),
@@ -123,7 +122,7 @@ abstract class ValueSourceField
   @memoized
   String get buildElementType {
     // Try to get a resolved type first, it's faster.
-    final result = builderElement.getter?.returnType?.displayName;
+    var result = builderElement.getter?.returnType?.displayName;
     if (result != null && result != 'dynamic') return result;
     // Go via AST to allow use of unresolvable types not yet generated.
     return parsedLibrary
@@ -157,9 +156,9 @@ abstract class ValueSourceField
       ParsedLibraryResult parsedLibrary,
       ClassElement classElement,
       ClassElement builderClassElement) {
-    final result = ListBuilder<ValueSourceField>();
+    var result = ListBuilder<ValueSourceField>();
 
-    for (final field in collectFields(classElement)) {
+    for (var field in collectFields(classElement)) {
       if (!field.isStatic &&
           field.getter != null &&
           (field.getter.isAbstract || field.getter.isSynthetic)) {
@@ -187,7 +186,7 @@ abstract class ValueSourceField
   }
 
   Iterable<GeneratorError> computeErrors() {
-    final result = <GeneratorError>[];
+    var result = <GeneratorError>[];
 
     if (!isGetter) {
       result.add(

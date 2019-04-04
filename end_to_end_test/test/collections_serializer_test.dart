@@ -8,13 +8,13 @@ import 'package:test/test.dart';
 
 void main() {
   group('Collections', () {
-    final data = Collections((b) => b
+    var data = Collections((b) => b
       ..list.add(1)
       ..set.add('two')
       ..map['three'] = 4
       ..listMultimap.addValues(4, [true, false])
       ..setMultimap.addValues('five', [true, false]));
-    final serialized = [
+    var serialized = [
       'Collections',
       'list',
       [1],

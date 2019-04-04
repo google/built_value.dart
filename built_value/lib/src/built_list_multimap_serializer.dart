@@ -18,19 +18,19 @@ class BuiltListMultimapSerializer
   Iterable serialize(
       Serializers serializers, BuiltListMultimap builtListMultimap,
       {FullType specifiedType = FullType.unspecified}) {
-    final isUnderspecified =
+    var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
 
-    final keyType = specifiedType.parameters.isEmpty
+    var keyType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];
-    final valueType = specifiedType.parameters.isEmpty
+    var valueType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[1];
 
-    final result = <Object>[];
-    for (final key in builtListMultimap.keys) {
+    var result = <Object>[];
+    for (var key in builtListMultimap.keys) {
       result.add(serializers.serialize(key, specifiedType: keyType));
       result.add(builtListMultimap[key]
           .map(
@@ -43,17 +43,17 @@ class BuiltListMultimapSerializer
   @override
   BuiltListMultimap deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final isUnderspecified =
+    var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 
-    final keyType = specifiedType.parameters.isEmpty
+    var keyType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];
-    final valueType = specifiedType.parameters.isEmpty
+    var valueType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[1];
 
-    final ListMultimapBuilder result = isUnderspecified
+    ListMultimapBuilder result = isUnderspecified
         ? ListMultimapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as ListMultimapBuilder;
 
@@ -66,7 +66,7 @@ class BuiltListMultimapSerializer
           specifiedType: keyType);
       final values = serialized.elementAt(i + 1).map(
           (value) => serializers.deserialize(value, specifiedType: valueType));
-      for (final value in values) {
+      for (var value in values) {
         result.add(key, value);
       }
     }

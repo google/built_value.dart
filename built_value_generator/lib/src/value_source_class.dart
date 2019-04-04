@@ -48,7 +48,7 @@ abstract class ValueSourceClass
 
   @memoized
   ClassElement get builderElement {
-    final result = element.library.getType(name + 'Builder');
+    var result = element.library.getType(name + 'Builder');
     if (result == null) return null;
     // If the builder is in a generated file, then we're analyzing _after_ code
     // generation. Ignore it. This happens when running as an analyzer plugin.
@@ -104,11 +104,11 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltValue get settings {
-    final annotations = element.metadata
+    var annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
         .where((value) => value?.type?.displayName == 'BuiltValue');
     if (annotations.isEmpty) return const BuiltValue();
-    final annotation = annotations.single;
+    var annotation = annotations.single;
     // If a field does not exist, that means an old `built_value` version; use
     // the default.
     return BuiltValue(
@@ -162,13 +162,13 @@ abstract class ValueSourceClass
 
   @memoized
   String get partStatement {
-    final fileName = element.library.source.shortName.replaceAll('.dart', '');
+    var fileName = element.library.source.shortName.replaceAll('.dart', '');
     return "part '$fileName.g.dart';";
   }
 
   @memoized
   bool get hasPartStatement {
-    final expectedCode = partStatement;
+    var expectedCode = partStatement;
     return source.contains(expectedCode);
   }
 
@@ -288,7 +288,7 @@ abstract class ValueSourceClass
   Iterable<GeneratorError> _checkPart() {
     if (hasPartStatement) return [];
 
-    final directives = (classDeclaration.parent as CompilationUnit).directives;
+    var directives = (classDeclaration.parent as CompilationUnit).directives;
     if (directives.isEmpty) {
       return [
         GeneratorError((b) => b
@@ -324,7 +324,7 @@ abstract class ValueSourceClass
   }
 
   Iterable<GeneratorError> _checkValueClass() {
-    final result = <GeneratorError>[];
+    var result = <GeneratorError>[];
 
     if (!valueClassIsAbstract) {
       result.add(GeneratorError((b) => b
@@ -348,11 +348,10 @@ abstract class ValueSourceClass
             'code from finding helper methods.'));
     }
 
-    final implementsClause = classDeclaration.implementsClause;
-    final expectedInterface =
-        'Built<$name$_generics, ${name}Builder$_generics>';
+    var implementsClause = classDeclaration.implementsClause;
+    var expectedInterface = 'Built<$name$_generics, ${name}Builder$_generics>';
 
-    final implementsClauseIsCorrect = implementsClause != null &&
+    var implementsClauseIsCorrect = implementsClause != null &&
         implementsClause.interfaces
             .any((type) => type.toSource() == expectedInterface);
 
@@ -361,7 +360,7 @@ abstract class ValueSourceClass
     // case of the `Built` interface being implemented. This is to allow
     // omitting the `Built` interface to work around having to implement the
     // same interface twice with different type parameters.
-    final implementsClauseIsAllowedToBeIncorrect = !settings.instantiable &&
+    var implementsClauseIsAllowedToBeIncorrect = !settings.instantiable &&
         (implementsClause == null ||
             !implementsClause.interfaces.any((type) =>
                 type.toSource() == 'Built' ||
@@ -411,7 +410,7 @@ abstract class ValueSourceClass
           ..fix = '  $expectedConstructor;\n'));
       } else if (valueClassConstructors.length > 1) {
         var found = false;
-        for (final constructor in valueClassConstructors) {
+        for (var constructor in valueClassConstructors) {
           if (constructor.toSource().startsWith(expectedConstructor)) {
             found = true;
           } else {
@@ -485,7 +484,7 @@ abstract class ValueSourceClass
   }
 
   Iterable<GeneratorError> _checkBuilderClass() {
-    final result = <GeneratorError>[];
+    var result = <GeneratorError>[];
     if (!hasBuilder) return result;
 
     if (!builderClassIsAbstract) {
@@ -565,10 +564,10 @@ abstract class ValueSourceClass
           '>';
 
   String generateCode() {
-    final errors = computeErrors();
+    var errors = computeErrors();
     if (errors.isNotEmpty) throw _makeError(errors);
 
-    final result = StringBuffer();
+    var result = StringBuffer();
     if (settings.instantiable) result.write(_generateImpl());
     if (settings.instantiable) {
       result.write(_generateBuilder());
@@ -580,15 +579,15 @@ abstract class ValueSourceClass
 
   /// Generates the value class implementation.
   String _generateImpl() {
-    final result = StringBuffer();
+    var result = StringBuffer();
     result.writeln('class $implName$_boundedGenerics '
         'extends $name$_generics {');
-    for (final field in fields) {
+    for (var field in fields) {
       final type = field.typeInCompilationUnit(compilationUnit);
       result.writeln('@override');
       result.writeln('final $type ${field.name};');
     }
-    for (final memoizedGetter in memoizedGetters) {
+    for (var memoizedGetter in memoizedGetters) {
       result.writeln('${memoizedGetter.returnType} __${memoizedGetter.name};');
     }
     result.writeln();
@@ -596,7 +595,7 @@ abstract class ValueSourceClass
     // If there is a manually maintained builder we have to cast the "build()"
     // result to the generated value class. If the builder is generated, that
     // can return the right type directly and needs no cast.
-    final cast = hasBuilder ? 'as _\$$name$_generics' : '';
+    var cast = hasBuilder ? 'as _\$$name$_generics' : '';
     result.writeln('factory $implName(['
         'void updates(${name}Builder$_generics b)]) '
         '=> (new ${name}Builder$_generics()..update(updates)).build() $cast;');
@@ -609,12 +608,12 @@ abstract class ValueSourceClass
       result.write(fields.map((field) => 'this.${field.name}').join(', '));
       result.write('}) : super._()');
     }
-    final requiredFields = fields.where((field) => !field.isNullable);
+    var requiredFields = fields.where((field) => !field.isNullable);
     if (requiredFields.isEmpty && genericParameters.isEmpty) {
       result.writeln(';');
     } else {
       result.writeln('{');
-      for (final field in requiredFields) {
+      for (var field in requiredFields) {
         result.writeln('if (${field.name} == null) {');
         result.writeln(
             "throw new BuiltValueNullFieldError('$name', '${field.name}');");
@@ -622,7 +621,7 @@ abstract class ValueSourceClass
       }
       // If there are generic parameters, check they are not "dynamic".
       if (genericParameters.isNotEmpty) {
-        for (final genericParameter in genericParameters) {
+        for (var genericParameter in genericParameters) {
           result.writeln('if ($genericParameter == dynamic) {');
           result.writeln('throw new BuiltValueMissingGenericsError('
               "'$name', '$genericParameter');");
@@ -634,7 +633,7 @@ abstract class ValueSourceClass
     }
     result.writeln();
 
-    for (final memoizedGetter in memoizedGetters) {
+    for (var memoizedGetter in memoizedGetters) {
       result.writeln('@override');
       result.writeln(
           '${memoizedGetter.returnType} get ${memoizedGetter.name} =>');
@@ -685,7 +684,7 @@ abstract class ValueSourceClass
 
   /// Generates the builder implementation.
   String _generateBuilder() {
-    final result = StringBuffer();
+    var result = StringBuffer();
     if (hasBuilder) {
       result.writeln('class ${implName}Builder$_boundedGenerics '
           'extends ${name}Builder$_generics {');
@@ -699,7 +698,7 @@ abstract class ValueSourceClass
     result.writeln('');
 
     if (hasBuilder) {
-      for (final field in fields) {
+      for (var field in fields) {
         final type = field.typeInCompilationUnit(compilationUnit);
         final typeInBuilder = field.typeInBuilder(compilationUnit);
         final name = field.name;
@@ -734,7 +733,7 @@ abstract class ValueSourceClass
         result.writeln();
       }
     } else {
-      for (final field in fields) {
+      for (var field in fields) {
         final type = field.typeInCompilationUnit(compilationUnit);
         final typeInBuilder = field.typeInBuilder(compilationUnit);
         final name = field.name;
@@ -771,7 +770,7 @@ abstract class ValueSourceClass
     if (fields.isNotEmpty) {
       result.writeln('${name}Builder$_generics get _\$this {');
       result.writeln('if (_\$v != null) {');
-      for (final field in fields) {
+      for (var field in fields) {
         final name = field.name;
         final nameInBuilder = hasBuilder ? 'super.$name' : '_$name';
         if (field.isNestedBuilder) {
@@ -819,7 +818,7 @@ abstract class ValueSourceClass
     // Construct a map from field to how it's built. If it's a normal field,
     // this is just the field name; if it's a nested builder, this is an
     // invocation of the nested builder taking into account nullability.
-    final fieldBuilders = <String, String>{};
+    var fieldBuilders = <String, String>{};
     fields.forEach((field) {
       final name = field.name;
       if (!field.isNestedBuilder) {
@@ -840,7 +839,7 @@ abstract class ValueSourceClass
 
     // If there are nested builders then wrap the build in a try/catch so we
     // can add information should a nested builder fail.
-    final needsTryCatchOnBuild =
+    var needsTryCatchOnBuild =
         fieldBuilders.keys.any((field) => fieldBuilders[field] != field);
 
     if (needsTryCatchOnBuild) {
@@ -892,11 +891,11 @@ abstract class ValueSourceClass
   }
 
   String _generateEqualsAndHashcode({bool forBuilder = false}) {
-    final result = StringBuffer();
+    var result = StringBuffer();
 
-    final comparedFields =
+    var comparedFields =
         fields.where((field) => field.builtValueField.compare).toList();
-    final comparedFunctionFields =
+    var comparedFunctionFields =
         comparedFields.where((field) => field.isFunctionType).toList();
     result.writeln('@override');
     result.writeln('bool operator==(Object other) {');
@@ -941,7 +940,7 @@ abstract class ValueSourceClass
 
   /// Generates an abstract builder with just abstract setters and getters.
   String _generateAbstractBuilder() {
-    final result = StringBuffer();
+    var result = StringBuffer();
 
     if (implementsBuilt) {
       result.writeln('abstract class ${name}Builder$_boundedGenerics '
@@ -956,7 +955,7 @@ abstract class ValueSourceClass
       result.writeln('void update(void updates(${name}Builder$_generics b));');
     }
 
-    for (final field in fields) {
+    for (var field in fields) {
       final typeInBuilder = field.typeInBuilder(compilationUnit);
       final name = field.name;
 
@@ -971,7 +970,7 @@ abstract class ValueSourceClass
 }
 
 InvalidGenerationSourceError _makeError(Iterable<GeneratorError> todos) {
-  final message =
+  var message =
       StringBuffer('Please make the following changes to use BuiltValue:\n');
   for (var i = 0; i != todos.length; ++i) {
     message.write('\n${i + 1}. ${todos.elementAt(i).message}');

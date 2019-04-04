@@ -45,12 +45,12 @@ class BuiltJsonSerializers implements Serializers {
   Object serialize(Object object,
       {FullType specifiedType = FullType.unspecified}) {
     var transformedObject = object;
-    for (final plugin in _plugins) {
+    for (var plugin in _plugins) {
       transformedObject =
           plugin.beforeSerialize(transformedObject, specifiedType);
     }
     var result = _serialize(transformedObject, specifiedType);
-    for (final plugin in _plugins) {
+    for (var plugin in _plugins) {
       result = plugin.afterSerialize(result, specifiedType);
     }
     return result;
@@ -97,12 +97,12 @@ class BuiltJsonSerializers implements Serializers {
   Object deserialize(Object object,
       {FullType specifiedType = FullType.unspecified}) {
     var transformedObject = object;
-    for (final plugin in _plugins) {
+    for (var plugin in _plugins) {
       transformedObject =
           plugin.beforeDeserialize(transformedObject, specifiedType);
     }
     var result = _deserialize(object, transformedObject, specifiedType);
-    for (final plugin in _plugins) {
+    for (var plugin in _plugins) {
       result = plugin.afterDeserialize(result, specifiedType);
     }
     return result;
@@ -176,7 +176,7 @@ class BuiltJsonSerializers implements Serializers {
 
   @override
   Object newBuilder(FullType fullType) {
-    final builderFactory = _builderFactories[fullType];
+    var builderFactory = _builderFactories[fullType];
     if (builderFactory == null) _throwMissingBuilderFactory(fullType);
     return builderFactory();
   }
@@ -240,7 +240,7 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
     }
 
     _wireNameToSerializer[serializer.wireName] = serializer;
-    for (final type in serializer.types) {
+    for (var type in serializer.types) {
       _typeToSerializer[type] = serializer;
       _typeNameToSerializer[_getRawName(type)] = serializer;
     }
@@ -273,7 +273,7 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
 }
 
 String _getRawName(Type type) {
-  final name = type.toString();
-  final genericsStart = name.indexOf('<');
+  var name = type.toString();
+  var genericsStart = name.indexOf('<');
   return genericsStart == -1 ? name : name.substring(0, genericsStart);
 }

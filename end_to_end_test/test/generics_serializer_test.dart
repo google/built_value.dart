@@ -11,9 +11,9 @@ import 'package:test/test.dart';
 
 void main() {
   group('GenericValue with known specifiedType but missing builder', () {
-    final data = GenericValue<int>((b) => b..value = 1);
-    final specifiedType = const FullType(GenericValue, [FullType(int)]);
-    final serialized = [
+    var data = GenericValue<int>((b) => b..value = 1);
+    var specifiedType = const FullType(GenericValue, [FullType(int)]);
+    var serialized = [
       'value',
       1,
     ];
@@ -32,12 +32,12 @@ void main() {
   });
 
   group('GenericValue with known specifiedType and correct builder', () {
-    final data = GenericValue<int>((b) => b..value = 1);
-    final specifiedType = const FullType(GenericValue, [FullType(int)]);
-    final serializersWithBuilder = (serializers.toBuilder()
+    var data = GenericValue<int>((b) => b..value = 1);
+    var specifiedType = const FullType(GenericValue, [FullType(int)]);
+    var serializersWithBuilder = (serializers.toBuilder()
           ..addBuilderFactory(specifiedType, () => GenericValueBuilder<int>()))
         .build();
-    final serialized = [
+    var serialized = [
       'value',
       1,
     ];
@@ -66,8 +66,8 @@ void main() {
   });
 
   group('GenericValue with unknown specifiedType', () {
-    final data = GenericValue<int>((b) => b..value = 1);
-    final serialized = [
+    var data = GenericValue<int>((b) => b..value = 1);
+    var serialized = [
       'GenericValue',
       'value',
       ['int', 1],
@@ -88,9 +88,9 @@ void main() {
   });
 
   group('BoundGenericValue with known specifiedType but missing builder', () {
-    final data = BoundGenericValue<int>((b) => b..value = 1);
-    final specifiedType = const FullType(BoundGenericValue, [FullType(int)]);
-    final serialized = [
+    var data = BoundGenericValue<int>((b) => b..value = 1);
+    var specifiedType = const FullType(BoundGenericValue, [FullType(int)]);
+    var serialized = [
       'value',
       1,
     ];
@@ -109,13 +109,13 @@ void main() {
   });
 
   group('BoundGenericValue with known specifiedType and correct builder', () {
-    final data = BoundGenericValue<int>((b) => b..value = 1);
-    final specifiedType = const FullType(BoundGenericValue, [FullType(int)]);
-    final serializersWithBuilder = (serializers.toBuilder()
+    var data = BoundGenericValue<int>((b) => b..value = 1);
+    var specifiedType = const FullType(BoundGenericValue, [FullType(int)]);
+    var serializersWithBuilder = (serializers.toBuilder()
           ..addBuilderFactory(
               specifiedType, () => BoundGenericValueBuilder<int>()))
         .build();
-    final serialized = [
+    var serialized = [
       'value',
       1,
     ];
@@ -144,8 +144,8 @@ void main() {
   });
 
   group('BoundGenericValue with unknown specifiedType', () {
-    final data = BoundGenericValue<int>((b) => b..value = 1);
-    final serialized = [
+    var data = BoundGenericValue<int>((b) => b..value = 1);
+    var serialized = [
       'BoundGenericValue',
       'value',
       ['int', 1],
@@ -167,10 +167,9 @@ void main() {
 
   group('CollectionGenericValue with known specifiedType but missing builder',
       () {
-    final data = CollectionGenericValue<int>((b) => b..values.add(1));
-    final specifiedType =
-        const FullType(CollectionGenericValue, [FullType(int)]);
-    final serialized = [
+    var data = CollectionGenericValue<int>((b) => b..values.add(1));
+    var specifiedType = const FullType(CollectionGenericValue, [FullType(int)]);
+    var serialized = [
       'values',
       [
         1,
@@ -192,16 +191,15 @@ void main() {
 
   group('CollectionGenericValue with known specifiedType and correct builder',
       () {
-    final data = CollectionGenericValue<int>((b) => b..values.add(1));
-    final specifiedType =
-        const FullType(CollectionGenericValue, [FullType(int)]);
-    final serializersWithBuilder = (serializers.toBuilder()
+    var data = CollectionGenericValue<int>((b) => b..values.add(1));
+    var specifiedType = const FullType(CollectionGenericValue, [FullType(int)]);
+    var serializersWithBuilder = (serializers.toBuilder()
           ..addBuilderFactory(
               specifiedType, () => CollectionGenericValueBuilder<int>())
           ..addBuilderFactory(const FullType(BuiltList, [FullType(int)]),
               () => ListBuilder<int>()))
         .build();
-    final serialized = [
+    var serialized = [
       'values',
       [
         1,
@@ -234,8 +232,8 @@ void main() {
   });
 
   group('CollectionGenericValue with unknown specifiedType', () {
-    final data = CollectionGenericValue<int>((b) => b..values.add(1));
-    final serialized = [
+    var data = CollectionGenericValue<int>((b) => b..values.add(1));
+    var serialized = [
       'CollectionGenericValue',
       'values',
       [
@@ -258,18 +256,18 @@ void main() {
   });
 
   group('GenericContainer with known specifiedType', () {
-    final data = GenericContainer((b) => b
+    var data = GenericContainer((b) => b
       ..genericValue.value = '1'
       ..boundGenericValue.value = 2.2
       ..collectionGenericValue.values.add('3'));
-    final specifiedType = const FullType(GenericContainer, [FullType(int)]);
+    var specifiedType = const FullType(GenericContainer, [FullType(int)]);
     // TODO(davidmorgan): adding this builder manually shouldn't be necessary.
     // Auto-add builders for nested generic types.
-    final serializersWithBuilder = (serializers.toBuilder()
+    var serializersWithBuilder = (serializers.toBuilder()
           ..addBuilderFactory(const FullType(BuiltList, [FullType(String)]),
               () => ListBuilder<String>()))
         .build();
-    final serialized = [
+    var serialized = [
       'genericValue',
       ['value', '1'],
       'boundGenericValue',
@@ -298,17 +296,17 @@ void main() {
   });
 
   group('GenericContainer with unknown specifiedType', () {
-    final data = GenericContainer((b) => b
+    var data = GenericContainer((b) => b
       ..genericValue.value = '1'
       ..boundGenericValue.value = 2.2
       ..collectionGenericValue.values.add('3'));
     // TODO(davidmorgan): adding this builder manually shouldn't be necessary.
     // Auto-add builders for nested generic types.
-    final serializersWithBuilder = (serializers.toBuilder()
+    var serializersWithBuilder = (serializers.toBuilder()
           ..addBuilderFactory(const FullType(BuiltList, [FullType(String)]),
               () => ListBuilder<String>()))
         .build();
-    final serialized = [
+    var serialized = [
       'GenericContainer',
       'genericValue',
       ['value', '1'],
@@ -331,17 +329,17 @@ void main() {
   });
 
   group('NestedGenericContainer with known specifiedType', () {
-    final data = NestedGenericContainer(
+    var data = NestedGenericContainer(
         (b) => b..map.value = BuiltMap<int, String>({1: 'one'}));
-    final specifiedType = const FullType(NestedGenericContainer);
+    var specifiedType = const FullType(NestedGenericContainer);
     // TODO(davidmorgan): adding this builder manually shouldn't be necessary.
     // Auto-add builders for nested generic types.
-    final serializersWithBuilder = (serializers.toBuilder()
+    var serializersWithBuilder = (serializers.toBuilder()
           ..addBuilderFactory(
               const FullType(BuiltMap, [FullType(int), FullType(String)]),
               () => MapBuilder<int, String>()))
         .build();
-    final serialized = [
+    var serialized = [
       'map',
       [
         'value',
@@ -364,8 +362,8 @@ void main() {
   });
 
   group('ConcreteGeneric with unknown specifiedType', () {
-    final data = ConcreteGeneric((b) => b..value = 1);
-    final serialized = ['ConcreteGeneric', 'value', 1];
+    var data = ConcreteGeneric((b) => b..value = 1);
+    var serialized = ['ConcreteGeneric', 'value', 1];
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);

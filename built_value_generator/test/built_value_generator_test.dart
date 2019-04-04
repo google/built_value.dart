@@ -646,7 +646,7 @@ final String pkgName = 'pkg';
 final Builder builder = PartBuilder([BuiltValueGenerator()], '.g.dart');
 
 Future<String> generate(String source) async {
-  final srcs = <String, String>{
+  var srcs = <String, String>{
     'built_value|lib/built_value.dart': builtValueSource,
     '$pkgName|lib/value.dart': source,
   };
@@ -661,7 +661,7 @@ Future<String> generate(String source) async {
     }
   }
 
-  final writer = InMemoryAssetWriter();
+  var writer = InMemoryAssetWriter();
   await testBuilder(builder, srcs,
       rootPackage: pkgName, writer: writer, onLog: captureError);
   return error ??

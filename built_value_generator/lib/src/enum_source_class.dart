@@ -37,11 +37,11 @@ abstract class EnumSourceClass
 
   @memoized
   BuiltValueEnum get settings {
-    final annotations = element.metadata
+    var annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
         .where((value) => value?.type?.displayName == 'BuiltValueEnum');
     if (annotations.isEmpty) return const BuiltValueEnum();
-    final annotation = annotations.single;
+    var annotation = annotations.single;
     return BuiltValueEnum(
         wireName: annotation.getField('wireName').toStringValue());
   }
@@ -62,10 +62,10 @@ abstract class EnumSourceClass
 
   @memoized
   String get valuesIdentifier {
-    final getter = element.getGetter('values');
+    var getter = element.getGetter('values');
     if (getter == null) return null;
-    final source = parsedLibrary.getElementDeclaration(getter).node.toSource();
-    final matches = RegExp(r'static BuiltSet<' +
+    var source = parsedLibrary.getElementDeclaration(getter).node.toSource();
+    var matches = RegExp(r'static BuiltSet<' +
             element.displayName +
             r'> get values => (_\$\w+)\;')
         .allMatches(source);
@@ -74,10 +74,10 @@ abstract class EnumSourceClass
 
   @memoized
   String get valueOfIdentifier {
-    final getter = element.getMethod('valueOf');
+    var getter = element.getMethod('valueOf');
     if (getter == null) return null;
-    final source = parsedLibrary.getElementDeclaration(getter).node.toSource();
-    final matches = RegExp(r'static ' +
+    var source = parsedLibrary.getElementDeclaration(getter).node.toSource();
+    var matches = RegExp(r'static ' +
             element.displayName +
             r' valueOf\(String name\) \=\> (\_\$\w+)\(name\)\;')
         .allMatches(source);
@@ -89,7 +89,7 @@ abstract class EnumSourceClass
 
   @memoized
   String get mixinDeclaration {
-    final mixinElement = element.library.getType(name + 'Mixin');
+    var mixinElement = element.library.getType(name + 'Mixin');
     if (mixinElement == null) return null;
     return parsedLibrary.getElementDeclaration(mixinElement).node.toSource();
   }
@@ -127,14 +127,14 @@ abstract class EnumSourceClass
   }
 
   Iterable<String> _checkConstructor() {
-    final expectedCode = 'const $name._(String name) : super(name);';
+    var expectedCode = 'const $name._(String name) : super(name);';
     return constructors.length == 1 && constructors.single == expectedCode
         ? <String>[]
         : <String>['Have exactly one constructor: $expectedCode'];
   }
 
   Iterable<String> _checkValuesGetter() {
-    final result = <String>[];
+    var result = <String>[];
     if (valuesIdentifier == null) {
       result.add('Add getter: static BuiltSet<$name> get values => _\$values');
     }
@@ -142,7 +142,7 @@ abstract class EnumSourceClass
   }
 
   Iterable<String> _checkValueOf() {
-    final result = <String>[];
+    var result = <String>[];
     if (valueOfIdentifier == null) {
       result.add('Add method: '
           'static $name valueOf(String name) => _\$valueOf(name)');
@@ -162,9 +162,9 @@ abstract class EnumSourceClass
   }
 
   String generateCode() {
-    final result = StringBuffer();
+    var result = StringBuffer();
 
-    for (final field in fields) {
+    for (var field in fields) {
       result.writeln('const $name ${field.generatedIdentifier} = '
           'const $name._(\'${escapeString(field.name)}\');');
     }
@@ -173,7 +173,7 @@ abstract class EnumSourceClass
 
     result.writeln('$name $valueOfIdentifier(String name) {'
         'switch (name) {');
-    for (final field in fields) {
+    for (var field in fields) {
       result.writeln("case '${escapeString(field.name)}':"
           ' return ${field.generatedIdentifier};');
     }
@@ -184,7 +184,7 @@ abstract class EnumSourceClass
 
     result.writeln('final BuiltSet<$name> $valuesIdentifier ='
         'new BuiltSet<$name>(const <$name>[');
-    for (final field in fields) {
+    for (var field in fields) {
       result.writeln('${field.generatedIdentifier},');
     }
     result.writeln(']);');
@@ -197,12 +197,12 @@ abstract class EnumSourceClass
   }
 
   String _generateMixin() {
-    final result = StringBuffer();
+    var result = StringBuffer();
 
     result
       ..writeln('class _\$${name}Meta {')
       ..writeln('const _\$${name}Meta();');
-    for (final field in fields) {
+    for (var field in fields) {
       result
           .writeln('$name get ${field.name} => ${field.generatedIdentifier};');
     }

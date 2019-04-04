@@ -78,7 +78,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// Converts serialization output, a `List`, to a `Map`, when the serialized
   /// type is known statically.
   Map _toMap(List list, bool needsEncodedKeys) {
-    final result = <String, Object>{};
+    var result = <String, Object>{};
     for (int i = 0; i != list.length ~/ 2; ++i) {
       final key = list[i * 2];
       final value = list[i * 2 + 1];
@@ -120,7 +120,7 @@ class StandardJsonPlugin implements SerializerPlugin {
       }
     }
 
-    final result = <String, Object>{discriminator: type};
+    var result = <String, Object>{discriminator: type};
     for (int i = 0; i != (list.length - 1) ~/ 2; ++i) {
       final key = needToEncodeKeys
           ? _encodeKey(list[i * 2 + 1])
@@ -140,7 +140,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
   /// when the serialized type is known statically.
   List _toList(Map map, bool hasEncodedKeys) {
-    final result = List(map.length * 2);
+    var result = List(map.length * 2);
     var i = 0;
     map.forEach((key, value) {
       // Drop null values, they are represented by missing keys.
@@ -179,12 +179,12 @@ class StandardJsonPlugin implements SerializerPlugin {
     // A type name of `encoded_map` indicates that the map has non-String keys
     // that have been serialized and JSON-encoded; decode the keys when
     // converting back to a `List`.
-    final needToDecodeKeys = type == 'encoded_map';
+    var needToDecodeKeys = type == 'encoded_map';
     if (needToDecodeKeys) {
       type = 'map';
     }
 
-    final result = List(map.length * 2 - 1);
+    var result = List(map.length * 2 - 1);
     result[0] = type;
 
     var i = 1;

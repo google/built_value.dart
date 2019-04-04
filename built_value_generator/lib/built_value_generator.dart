@@ -20,7 +20,7 @@ class BuiltValueGenerator extends Generator {
 
   @override
   Future<String> generate(LibraryReader library, BuildStep buildStep) async {
-    final result = StringBuffer();
+    var result = StringBuffer();
 
     try {
       final enumCode = EnumSourceLibrary(library.element).generateCode();
@@ -46,7 +46,7 @@ class BuiltValueGenerator extends Generator {
           st);
     }
 
-    for (final element in library.allElements) {
+    for (var element in library.allElements) {
       if (element is ClassElement &&
           ValueSourceClass.needsBuiltValue(element)) {
         try {
@@ -83,7 +83,7 @@ class BuiltValueGenerator extends Generator {
 }
 
 String _error(Object error) {
-  final lines = '$error'.split('\n');
-  final indented = lines.skip(1).map((l) => '//        $l'.trim()).join('\n');
+  var lines = '$error'.split('\n');
+  var indented = lines.skip(1).map((l) => '//        $l'.trim()).join('\n');
   return '// Error: ${lines.first}\n$indented';
 }

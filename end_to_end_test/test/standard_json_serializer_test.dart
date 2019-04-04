@@ -12,7 +12,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('StandardJsonValue', () {
-    final data = StandardJsonValue((b) => b
+    var data = StandardJsonValue((b) => b
       ..number = 3
       ..text = 'some text'
       ..keyValues['one'] = JsonObject(1)
@@ -26,10 +26,10 @@ void main() {
       ..uniqueZoo.add(Cat((b) => b
         ..tail = false
         ..legs = 3)));
-    final specifiedType = FullType(StandardJsonValue);
-    final serializersWithPlugin =
+    var specifiedType = FullType(StandardJsonValue);
+    var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
-    final serialized = {
+    var serialized = {
       'number': 3,
       'text': 'some text',
       'keyValues': {
@@ -70,7 +70,7 @@ void main() {
   });
 
   group('StandardJsonValue with extraneous nulls', () {
-    final data = StandardJsonValue((b) => b
+    var data = StandardJsonValue((b) => b
       ..number = 3
       ..text = 'some text'
       ..keyValues['one'] = JsonObject(1)
@@ -78,10 +78,10 @@ void main() {
       ..keyValues['three'] = JsonObject(true)
       ..keyValues['four'] = JsonObject([1, 2, 3])
       ..keyValues['five'] = JsonObject({'one': 1, 'two': 2}));
-    final specifiedType = FullType(StandardJsonValue);
-    final serializersWithPlugin =
+    var specifiedType = FullType(StandardJsonValue);
+    var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
-    final serialized = {
+    var serialized = {
       'number': 3,
       'text': 'some text',
       'keyValues': {
@@ -103,7 +103,7 @@ void main() {
   });
 
   group('StandardJsonValue with unknown specifiedType', () {
-    final data = StandardJsonValue((b) => b
+    var data = StandardJsonValue((b) => b
       ..number = 3
       ..text = 'some text'
       ..keyValues['one'] = JsonObject(1)
@@ -114,9 +114,9 @@ void main() {
       ..zoo.add(Cat((b) => b
         ..tail = true
         ..legs = 4)));
-    final serializersWithPlugin =
+    var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
-    final serialized = {
+    var serialized = {
       r'$': 'StandardJsonValue',
       'number': 3,
       'text': 'some text',

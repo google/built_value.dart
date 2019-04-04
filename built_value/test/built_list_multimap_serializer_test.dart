@@ -8,18 +8,18 @@ import 'package:test/test.dart';
 
 void main() {
   group('BuiltListMultimap with known specifiedType and correct builder', () {
-    final data = BuiltListMultimap<int, String>({
+    var data = BuiltListMultimap<int, String>({
       1: ['one'],
       2: ['two'],
       3: ['three', '3hree']
     });
-    final specifiedType =
+    var specifiedType =
         const FullType(BuiltListMultimap, [FullType(int), FullType(String)]);
-    final serializers = (Serializers().toBuilder()
+    var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(
               specifiedType, () => ListMultimapBuilder<int, String>()))
         .build();
-    final serialized = [
+    var serialized = [
       1,
       ['one'],
       2,

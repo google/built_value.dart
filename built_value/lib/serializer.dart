@@ -245,8 +245,8 @@ class FullType {
           : '${_getRawName(root)}<${parameters.join(", ")}>';
 
   static String _getRawName(Type type) {
-    final name = type.toString();
-    final genericsStart = name.indexOf('<');
+    var name = type.toString();
+    var genericsStart = name.indexOf('<');
     return genericsStart == -1 ? name : name.substring(0, genericsStart);
   }
 }
