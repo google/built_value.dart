@@ -665,7 +665,7 @@ abstract class ValueSourceClass
     if (!implementsToString) {
       result.writeln('@override');
       result.writeln('String toString() {');
-      if (fields.length == 0) {
+      if (fields.isEmpty) {
         result
             .writeln("return newBuiltValueToStringHelper('$name').toString();");
       } else {
@@ -921,7 +921,7 @@ abstract class ValueSourceClass
     result.writeln('@override');
     result.writeln('int get hashCode {');
 
-    if (comparedFields.length == 0) {
+    if (comparedFields.isEmpty) {
       result.writeln('return ${name.hashCode};');
     } else {
       result.writeln(r'return $jf(');
