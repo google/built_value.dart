@@ -27,19 +27,19 @@ BuiltList<FieldElement> collectFieldsForType(InterfaceType type) {
   // first below. Re-added fields from interfaces are ignored.
   fields.addAll(_fieldElementsForType(type));
 
-  new Set<InterfaceType>.from(type.interfaces)
+  Set<InterfaceType>.from(type.interfaces)
     ..addAll(type.mixins)
     ..forEach((interface) => fields.addAll(collectFieldsForType(interface)));
 
   // Overridden fields have multiple declarations, so deduplicate by adding
   // to a set that compares on field name.
-  final fieldSet = new LinkedHashSet<FieldElement>(
+  final fieldSet = LinkedHashSet<FieldElement>(
       equals: (a, b) => a.displayName == b.displayName,
       hashCode: (a) => a.displayName.hashCode);
   fieldSet.addAll(fields);
 
   // Filter to fields that are not implemented by a mixin.
-  return new BuiltList<FieldElement>.build((b) => b
+  return BuiltList<FieldElement>.build((b) => b
     ..addAll(fieldSet)
     ..where((field) =>
         type.lookUpInheritedGetter(field.name, thisType: false)?.isAbstract ??
@@ -47,7 +47,7 @@ BuiltList<FieldElement> collectFieldsForType(InterfaceType type) {
 }
 
 BuiltList<FieldElement> _fieldElementsForType(InterfaceType type) {
-  final result = new ListBuilder<FieldElement>();
+  final result = ListBuilder<FieldElement>();
   for (final accessor in type.accessors) {
     if (accessor.isSetter) continue;
     result.add(accessor.variable as FieldElement);

@@ -10,7 +10,7 @@ final _runtimeType = RegExp('').runtimeType;
 
 class RegExpSerializer implements PrimitiveSerializer<RegExp> {
   @override
-  final Iterable<Type> types = new BuiltList<Type>([RegExp, _runtimeType]);
+  final Iterable<Type> types = BuiltList<Type>([RegExp, _runtimeType]);
   @override
   final String wireName = 'RegExp';
 
@@ -23,6 +23,6 @@ class RegExpSerializer implements PrimitiveSerializer<RegExp> {
   @override
   RegExp deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    return new RegExp(serialized as String);
+    return RegExp(serialized as String);
   }
 }

@@ -9,7 +9,7 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
   final bool structured = true;
   @override
   final Iterable<Type> types =
-      new BuiltList<Type>([BuiltSet, new BuiltSet<Object>().runtimeType]);
+      BuiltList<Type>([BuiltSet, BuiltSet<Object>().runtimeType]);
   @override
   final String wireName = 'set';
 
@@ -38,7 +38,7 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
         ? FullType.unspecified
         : specifiedType.parameters[0];
     final SetBuilder result = isUnderspecified
-        ? new SetBuilder<Object>()
+        ? SetBuilder<Object>()
         : serializers.newBuilder(specifiedType) as SetBuilder;
 
     result.replace(serialized.map(

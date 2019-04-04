@@ -6,7 +6,7 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = new Serializers();
+  final serializers = Serializers();
 
   group('String with known specifiedType', () {
     final data = 'testing, testing';

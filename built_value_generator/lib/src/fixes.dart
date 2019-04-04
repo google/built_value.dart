@@ -31,7 +31,7 @@ abstract class GeneratorError
   GeneratorError._() {
     if (((offset == null) != (length == null)) ||
         ((offset == null) != (fix == null))) {
-      throw new ArgumentError(
+      throw ArgumentError(
           'Offset, length and fix must either all be null or all non-null. '
           'Got: offset $offset, length $length, fix $fix');
     }

@@ -15,7 +15,7 @@ import 'dart:convert' show json;
 /// from microseconds since epoch to ISO 8601 format.
 class StandardJsonPlugin implements SerializerPlugin {
   static final BuiltSet<Type> _unsupportedTypes =
-      new BuiltSet<Type>([BuiltListMultimap, BuiltSetMultimap]);
+      BuiltSet<Type>([BuiltListMultimap, BuiltSetMultimap]);
 
   /// The field used to specify the value type if needed. Defaults to `$`.
   final String discriminator;
@@ -29,7 +29,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   @override
   Object beforeSerialize(Object object, FullType specifiedType) {
     if (_unsupportedTypes.contains(specifiedType.root)) {
-      throw new ArgumentError(
+      throw ArgumentError(
           'Standard JSON cannot serialize type ${specifiedType.root}.');
     }
     return object;
@@ -140,7 +140,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
   /// when the serialized type is known statically.
   List _toList(Map map, bool hasEncodedKeys) {
-    final result = new List(map.length * 2);
+    final result = List(map.length * 2);
     var i = 0;
     map.forEach((key, value) {
       // Drop null values, they are represented by missing keys.
@@ -160,7 +160,7 @@ class StandardJsonPlugin implements SerializerPlugin {
     var type = map[discriminator];
 
     if (type == null) {
-      throw new ArgumentError('Unknown type on deserialization. '
+      throw ArgumentError('Unknown type on deserialization. '
           'Need either specifiedType or discriminator field.');
     }
 
@@ -170,7 +170,7 @@ class StandardJsonPlugin implements SerializerPlugin {
 
     if (map.containsKey(valueKey)) {
       // Just a type and a primitive value. Retrieve the value in the map.
-      final result = new List(2);
+      final result = List(2);
       result[0] = type;
       result[1] = map[valueKey];
       return result;
@@ -184,7 +184,7 @@ class StandardJsonPlugin implements SerializerPlugin {
       type = 'map';
     }
 
-    final result = new List(map.length * 2 - 1);
+    final result = List(map.length * 2 - 1);
     result[0] = type;
 
     var i = 1;

@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 /// Applies fixes from the plugin to [src], and compares the result to
 /// [expectedFixedSource].
 Future expectCorrection(String src, String expectedFixedSource) async {
-  final checker = new Checker();
+  final checker = Checker();
 
   // We need a library name to use `findLibraryByName` from `build_test`.
   final srcPrefix = 'library test_library;';
@@ -50,7 +50,7 @@ Future expectCorrection(String src, String expectedFixedSource) async {
 
 /// Check that the plugin will not modify [src].
 Future expectNoCorrection(String src) async {
-  final checker = new Checker();
+  final checker = Checker();
   final srcPrefix = 'library test_library; class Built {};';
   final totalSrc = '$srcPrefix$src';
 

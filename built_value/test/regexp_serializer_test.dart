@@ -6,7 +6,7 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = new Serializers();
+  final serializers = Serializers();
 
   group('RegExp with known specifiedType', () {
     final data = RegExp(r'\d+, [A-Z](foo)?');

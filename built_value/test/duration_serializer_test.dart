@@ -6,10 +6,10 @@ import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final serializers = new Serializers();
+  final serializers = Serializers();
 
   group('Duration with known specifiedType', () {
-    final data = new Duration(
+    final data = Duration(
         days: 1,
         hours: 2,
         minutes: 3,
@@ -36,7 +36,7 @@ void main() {
   });
 
   group('Duration with unknown specifiedType', () {
-    final data = new Duration(
+    final data = Duration(
         days: 1,
         hours: 2,
         minutes: 3,
