@@ -20,12 +20,12 @@ class BuiltJsonSerializers implements Serializers {
   final BuiltMap<String, Serializer> _wireNameToSerializer;
   final BuiltMap<String, Serializer> _typeNameToSerializer;
 
-  final BuiltMap<FullType, Function> _builderFactories;
+  final BuiltMap<FullType, Function> builderFactories;
 
   final BuiltList<SerializerPlugin> _plugins;
 
   BuiltJsonSerializers._(this._typeToSerializer, this._wireNameToSerializer,
-      this._typeNameToSerializer, this._builderFactories, this._plugins);
+      this._typeNameToSerializer, this.builderFactories, this._plugins);
 
   @override
   Iterable<Serializer> get serializers => _wireNameToSerializer.values;
@@ -176,7 +176,7 @@ class BuiltJsonSerializers implements Serializers {
 
   @override
   Object newBuilder(FullType fullType) {
-    var builderFactory = _builderFactories[fullType];
+    var builderFactory = builderFactories[fullType];
     if (builderFactory == null) _throwMissingBuilderFactory(fullType);
     return builderFactory();
   }
@@ -193,7 +193,7 @@ class BuiltJsonSerializers implements Serializers {
 
   @override
   bool hasBuilder(FullType fullType) {
-    return _builderFactories.containsKey(fullType);
+    return builderFactories.containsKey(fullType);
   }
 
   @override
@@ -202,7 +202,7 @@ class BuiltJsonSerializers implements Serializers {
         _typeToSerializer.toBuilder(),
         _wireNameToSerializer.toBuilder(),
         _typeNameToSerializer.toBuilder(),
-        _builderFactories.toBuilder(),
+        builderFactories.toBuilder(),
         _plugins.toBuilder());
   }
 }

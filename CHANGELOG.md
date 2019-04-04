@@ -1,5 +1,10 @@
 # Changelog
 
+# 6.4.0 (unreleased)
+
+- Make it possible to merge `Serializers` instances: add a `builderFactories`
+  getter that returns installed builder factories.
+
 # 6.3.2
 
 - Allow `analyzer` 0.35.0.

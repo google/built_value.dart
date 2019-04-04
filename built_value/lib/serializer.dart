@@ -148,6 +148,9 @@ abstract class Serializers {
   /// Throws if a builder for [fullType] is not available via [newBuilder].
   void expectBuilder(FullType fullType);
 
+  /// The installed builder factories.
+  BuiltMap<FullType, Function> get builderFactories;
+
   SerializersBuilder toBuilder();
 }
 
