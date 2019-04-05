@@ -37,6 +37,9 @@ class DartTypes {
         .any((name) => type.displayName.startsWith('$name<'));
   }
 
+  static bool isBuilt(DartType type) =>
+      isBuiltValue(type) || isBuiltCollection(type);
+
   static bool isBuiltCollectionTypeName(String name) =>
       _builtCollectionNames.contains(name);
 
