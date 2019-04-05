@@ -107,7 +107,7 @@ can use following live template:
 ```
 abstract class $CLASS_NAME$ implements Built<$CLASS_NAME$, $CLASS_NAME$Builder> {
   $CLASS_NAME$._();
-  factory $CLASS_NAME$([updates($CLASS_NAME$Builder b)]) = _$$$CLASS_NAME$;
+  factory $CLASS_NAME$([void Function($CLASS_NAME$Builder) updates]) = _$$$CLASS_NAME$;
 }
 ```
 
@@ -230,9 +230,17 @@ abstract class Person implements Built<Person, PersonBuilder> {
   BuiltList<String> get hobbies;
 
   Person._();
-  factory Person([updates(PersonBuilder b)]) = _$Person;
+  factory Person([void Function(PersonBuilder) updates]) = _$Person;
 }
 ```
+
+## FAQ
+
+### Should I check in and/or publish in the generated `.g.dart` files?
+
+See the [build_runner](https://pub.dartlang.org/packages/build_runner#source-control)
+docs. You usually should not check in generated files, but you _do_ need to publish
+them.
 
 ## Features and bugs
 
