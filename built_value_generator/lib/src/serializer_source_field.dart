@@ -13,7 +13,6 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/metadata.dart'
     show metadataToStringValue;
-import 'package:source_gen/source_gen.dart';
 
 part 'serializer_source_field.g.dart';
 
