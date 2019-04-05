@@ -236,7 +236,7 @@ abstract class Person implements Built<Person, PersonBuilder> {
 
 ## FAQ
 
-### Should I check/publish in the generated `.g.dart` files?
+### Should I check in and/or publish in the generated `.g.dart` files?
 
 See the [build_runner](https://pub.dartlang.org/packages/build_runner#source-control)
 docs. You usually should not check in generated files, but you _do_ need to publish
