@@ -39,6 +39,7 @@ abstract class Collections implements Built<Collections, CollectionsBuilder> {
   @nullable
   BuiltSetMultimap<String, bool> get nullableSetMultimap;
 
-  factory Collections([updates(CollectionsBuilder b)]) = _$Collections;
+  factory Collections([void Function(CollectionsBuilder) updates]) =
+      _$Collections;
   Collections._();
 }

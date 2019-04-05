@@ -18,6 +18,7 @@ abstract class ImportedValue
   prefix.SimpleValue get simpleValue;
   BuiltList<prefix.SimpleValue> get simpleValues;
 
-  factory ImportedValue([updates(ImportedValueBuilder b)]) = _$ImportedValue;
+  factory ImportedValue([void Function(ImportedValueBuilder) updates]) =
+      _$ImportedValue;
   ImportedValue._();
 }

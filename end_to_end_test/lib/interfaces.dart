@@ -24,7 +24,8 @@ abstract class ValueWithInt
 
   String get note;
 
-  factory ValueWithInt([updates(ValueWithIntBuilder b)]) = _$ValueWithInt;
+  factory ValueWithInt([void Function(ValueWithIntBuilder) updates]) =
+      _$ValueWithInt;
   ValueWithInt._();
 }
 
@@ -62,7 +63,7 @@ abstract class ValueWithHasInt
   static Serializer<ValueWithHasInt> get serializer =>
       _$valueWithHasIntSerializer;
 
-  factory ValueWithHasInt([updates(ValueWithHasIntBuilder b)]) =
+  factory ValueWithHasInt([void Function(ValueWithHasIntBuilder) updates]) =
       _$ValueWithHasInt;
   ValueWithHasInt._();
 

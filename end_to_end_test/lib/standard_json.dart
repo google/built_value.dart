@@ -26,7 +26,7 @@ abstract class StandardJsonValue
   @nullable
   BuiltList<String> get strings;
 
-  factory StandardJsonValue([updates(StandardJsonValueBuilder b)]) =
+  factory StandardJsonValue([void Function(StandardJsonValueBuilder) updates]) =
       _$StandardJsonValue;
   StandardJsonValue._();
 }

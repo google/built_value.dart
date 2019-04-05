@@ -14,13 +14,13 @@ class _$Node extends Node {
   @override
   final Node right;
 
-  factory _$Node([void updates(NodeBuilder b)]) =>
+  factory _$Node([void Function(NodeBuilder) updates]) =>
       (new NodeBuilder()..update(updates)).build();
 
   _$Node._({this.label, this.left, this.right}) : super._();
 
   @override
-  Node rebuild(void updates(NodeBuilder b)) =>
+  Node rebuild(void Function(NodeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -86,7 +86,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
   }
 
   @override
-  void update(void updates(NodeBuilder b)) {
+  void update(void Function(NodeBuilder) updates) {
     if (updates != null) updates(this);
   }
 

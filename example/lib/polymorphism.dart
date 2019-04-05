@@ -29,7 +29,7 @@ abstract class Animal extends Object with Walker {
   @override
   int get legs;
 
-  Animal rebuild(void updates(AnimalBuilder b));
+  Animal rebuild(void Function(AnimalBuilder) updates);
   AnimalBuilder toBuilder();
 }
 
@@ -44,7 +44,7 @@ abstract class Cat extends Object
 
   bool get tail;
 
-  factory Cat([updates(CatBuilder b)]) = _$Cat;
+  factory Cat([void Function(CatBuilder) updates]) = _$Cat;
   Cat._();
 }
 
@@ -60,7 +60,7 @@ abstract class Fish extends Object
   @override
   int get fins;
 
-  factory Fish([updates(FishBuilder b)]) = _$Fish;
+  factory Fish([void Function(FishBuilder) updates]) = _$Fish;
   Fish._();
 }
 

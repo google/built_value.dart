@@ -438,7 +438,7 @@ class _$Chat extends Chat {
   @override
   final BuiltSet<String> targets;
 
-  factory _$Chat([void updates(ChatBuilder b)]) =>
+  factory _$Chat([void Function(ChatBuilder) updates]) =>
       (new ChatBuilder()..update(updates)).build();
 
   _$Chat._({this.text, this.targets}) : super._() {
@@ -451,7 +451,7 @@ class _$Chat extends Chat {
   }
 
   @override
-  Chat rebuild(void updates(ChatBuilder b)) =>
+  Chat rebuild(void Function(ChatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -509,7 +509,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   }
 
   @override
-  void update(void updates(ChatBuilder b)) {
+  void update(void Function(ChatBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -540,7 +540,7 @@ class _$Login extends Login {
   @override
   final String password;
 
-  factory _$Login([void updates(LoginBuilder b)]) =>
+  factory _$Login([void Function(LoginBuilder) updates]) =>
       (new LoginBuilder()..update(updates)).build();
 
   _$Login._({this.username, this.password}) : super._() {
@@ -553,7 +553,7 @@ class _$Login extends Login {
   }
 
   @override
-  Login rebuild(void updates(LoginBuilder b)) =>
+  Login rebuild(void Function(LoginBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -612,7 +612,7 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   }
 
   @override
-  void update(void updates(LoginBuilder b)) {
+  void update(void Function(LoginBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -631,7 +631,7 @@ class _$Status extends Status {
   @override
   final StatusType type;
 
-  factory _$Status([void updates(StatusBuilder b)]) =>
+  factory _$Status([void Function(StatusBuilder) updates]) =>
       (new StatusBuilder()..update(updates)).build();
 
   _$Status._({this.message, this.type}) : super._() {
@@ -644,7 +644,7 @@ class _$Status extends Status {
   }
 
   @override
-  Status rebuild(void updates(StatusBuilder b)) =>
+  Status rebuild(void Function(StatusBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -701,7 +701,7 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   }
 
   @override
-  void update(void updates(StatusBuilder b)) {
+  void update(void Function(StatusBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -717,7 +717,7 @@ class _$ListUsers extends ListUsers {
   @override
   final BuiltSet<StatusType> statusTypes;
 
-  factory _$ListUsers([void updates(ListUsersBuilder b)]) =>
+  factory _$ListUsers([void Function(ListUsersBuilder) updates]) =>
       (new ListUsersBuilder()..update(updates)).build();
 
   _$ListUsers._({this.statusTypes}) : super._() {
@@ -727,7 +727,7 @@ class _$ListUsers extends ListUsers {
   }
 
   @override
-  ListUsers rebuild(void updates(ListUsersBuilder b)) =>
+  ListUsers rebuild(void Function(ListUsersBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -780,7 +780,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
   }
 
   @override
-  void update(void updates(ListUsersBuilder b)) {
+  void update(void Function(ListUsersBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -813,7 +813,7 @@ class _$ShowChat extends ShowChat {
   @override
   final String text;
 
-  factory _$ShowChat([void updates(ShowChatBuilder b)]) =>
+  factory _$ShowChat([void Function(ShowChatBuilder) updates]) =>
       (new ShowChatBuilder()..update(updates)).build();
 
   _$ShowChat._({this.username, this.private, this.text}) : super._() {
@@ -829,7 +829,7 @@ class _$ShowChat extends ShowChat {
   }
 
   @override
-  ShowChat rebuild(void updates(ShowChatBuilder b)) =>
+  ShowChat rebuild(void Function(ShowChatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -896,7 +896,7 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   }
 
   @override
-  void update(void updates(ShowChatBuilder b)) {
+  void update(void Function(ShowChatBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -915,7 +915,7 @@ class _$Welcome extends Welcome {
   @override
   final String message;
 
-  factory _$Welcome([void updates(WelcomeBuilder b)]) =>
+  factory _$Welcome([void Function(WelcomeBuilder) updates]) =>
       (new WelcomeBuilder()..update(updates)).build();
 
   _$Welcome._({this.log, this.message}) : super._() {
@@ -928,7 +928,7 @@ class _$Welcome extends Welcome {
   }
 
   @override
-  Welcome rebuild(void updates(WelcomeBuilder b)) =>
+  Welcome rebuild(void Function(WelcomeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -985,7 +985,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   }
 
   @override
-  void update(void updates(WelcomeBuilder b)) {
+  void update(void Function(WelcomeBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -1014,7 +1014,8 @@ class _$ListUsersResponse extends ListUsersResponse {
   @override
   final BuiltMap<String, Status> statuses;
 
-  factory _$ListUsersResponse([void updates(ListUsersResponseBuilder b)]) =>
+  factory _$ListUsersResponse(
+          [void Function(ListUsersResponseBuilder) updates]) =>
       (new ListUsersResponseBuilder()..update(updates)).build();
 
   _$ListUsersResponse._({this.statuses}) : super._() {
@@ -1024,7 +1025,7 @@ class _$ListUsersResponse extends ListUsersResponse {
   }
 
   @override
-  ListUsersResponse rebuild(void updates(ListUsersResponseBuilder b)) =>
+  ListUsersResponse rebuild(void Function(ListUsersResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1079,7 +1080,7 @@ class ListUsersResponseBuilder
   }
 
   @override
-  void update(void updates(ListUsersResponseBuilder b)) {
+  void update(void Function(ListUsersResponseBuilder) updates) {
     if (updates != null) updates(this);
   }
 

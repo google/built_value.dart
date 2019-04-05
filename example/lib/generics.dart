@@ -80,7 +80,7 @@ abstract class GenericContainer
   BoundGenericValue<double> get boundGenericValue;
   CollectionGenericValue<String> get collectionGenericValue;
 
-  factory GenericContainer([updates(GenericContainerBuilder b)]) =
+  factory GenericContainer([void Function(GenericContainerBuilder) updates]) =
       _$GenericContainer;
   GenericContainer._();
 }

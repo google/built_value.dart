@@ -20,7 +20,7 @@ import 'package:built_value/built_value.dart' show Built, Builder;
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -37,7 +37,7 @@ import "package:built_value/built_value.dart" show Built, Builder;
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -54,7 +54,7 @@ import 'package:built_value/built_value.dart' as bv;
 part 'value.g.dart';
 abstract class Value implements bv.Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements bv.Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -71,7 +71,7 @@ import "package:built_value/built_value.dart" as bv;
 part 'value.g.dart';
 abstract class Value implements bv.Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements bv.Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -86,7 +86,7 @@ abstract class ValueBuilder implements bv.Builder<Value, ValueBuilder> {
 import 'package:built_value/built_value.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -100,7 +100,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -114,7 +114,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Foo, Bar> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -130,7 +130,7 @@ part 'value.g.dart';
 class Foo {}
 abstract class Value implements Built<Value, ValueBuilder> extends Foo {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -150,7 +150,7 @@ abstract class Foo {
 }
 abstract class Value implements Built<Value, ValueBuilder> extends Foo {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -170,7 +170,7 @@ abstract class Foo {
 }
 abstract class Value implements Built<Value, ValueBuilder> extends Foo {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -190,7 +190,7 @@ abstract class Foo {
 }
 abstract class Value implements Built<Value, ValueBuilder> extends Foo {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -213,7 +213,7 @@ abstract class Foo {
 }
 abstract class Value implements Built<Value, ValueBuilder> extends Foo {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -227,7 +227,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value extends Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -241,7 +241,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder>, Object {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }'''), isNot(contains('1.')));
     });
 
@@ -251,7 +251,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder>, Object {
   Value._();
-  factory Value([void updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }'''), isNot(contains('1.')));
     });
 
@@ -261,7 +261,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }'''), isNot(contains('1.')));
     });
 
@@ -270,7 +270,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -300,7 +300,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
   Value._() {
     print("hi");
   }
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -318,7 +318,7 @@ part 'value.g.dart';
 @BuiltValue(instantiable: false)
 abstract class Value implements Built<Value, ValueBuilder> {
   Value() {}
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -341,7 +341,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
           contains(
               '1. Add a factory so your class can be instantiated. Example:\n'
               '\n'
-              'factory Value([updates(ValueBuilder b)]) = _\$Value;'));
+              'factory Value([void Function(ValueBuilder) updates]) = _\$Value;'));
     });
 
     test('suggests to remove factory from non-instantiable value class',
@@ -351,7 +351,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 @BuiltValue(instantiable: false)
 abstract class Value implements Built<Value, ValueBuilder> {
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -365,7 +365,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -380,7 +380,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Foo, Bar> {
   ValueBuilder._();
@@ -398,7 +398,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   factory ValueBuilder() = _\$ValueBuilder;
@@ -415,7 +415,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 }'''),
@@ -430,7 +430,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -445,7 +445,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   int foo;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
@@ -462,7 +462,7 @@ part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   int get _foo;
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }'''), contains('1. Make field _foo public; remove the underscore.'));
     });
 
@@ -473,7 +473,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   get foo;
 }'''),
           contains('1. Make field foo have non-dynamic type. If you are '
@@ -487,7 +487,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   int get foo;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
@@ -505,7 +505,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   int get foo;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
@@ -520,7 +520,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   int get foo;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
@@ -536,7 +536,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   set foo(int foo) => print(foo);
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
@@ -552,7 +552,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
@@ -571,7 +571,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   int get hashCode => 0;
 }'''),
         contains(
@@ -585,7 +585,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   bool operator==(other) => false;
 }'''),
         contains(
@@ -598,7 +598,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   String toString() => 'hi!';
 }'''), isNot(contains('String toString()')));
   });
@@ -610,7 +610,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   List get list;
   Set get set;
   Map get map;
@@ -632,7 +632,7 @@ part 'value.g.dart';
 @BuiltValue(comparableBuilders: true)
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _\$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
   }'''),
         contains(
             '1. Set `nestedBuilders: false` in order to use `comparableBuilders: true`.'));

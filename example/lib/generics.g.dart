@@ -251,7 +251,7 @@ class _$GenericValue<T> extends GenericValue<T> {
   @override
   final T value;
 
-  factory _$GenericValue([void updates(GenericValueBuilder<T> b)]) =>
+  factory _$GenericValue([void Function(GenericValueBuilder<T>) updates]) =>
       (new GenericValueBuilder<T>()..update(updates)).build();
 
   _$GenericValue._({this.value}) : super._() {
@@ -264,7 +264,7 @@ class _$GenericValue<T> extends GenericValue<T> {
   }
 
   @override
-  GenericValue<T> rebuild(void updates(GenericValueBuilder<T> b)) =>
+  GenericValue<T> rebuild(void Function(GenericValueBuilder<T>) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -316,7 +316,7 @@ class GenericValueBuilder<T>
   }
 
   @override
-  void update(void updates(GenericValueBuilder<T> b)) {
+  void update(void Function(GenericValueBuilder<T>) updates) {
     if (updates != null) updates(this);
   }
 
@@ -332,7 +332,8 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
   @override
   final T value;
 
-  factory _$BoundGenericValue([void updates(BoundGenericValueBuilder<T> b)]) =>
+  factory _$BoundGenericValue(
+          [void Function(BoundGenericValueBuilder<T>) updates]) =>
       (new BoundGenericValueBuilder<T>()..update(updates)).build();
 
   _$BoundGenericValue._({this.value}) : super._() {
@@ -345,7 +346,8 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
   }
 
   @override
-  BoundGenericValue<T> rebuild(void updates(BoundGenericValueBuilder<T> b)) =>
+  BoundGenericValue<T> rebuild(
+          void Function(BoundGenericValueBuilder<T>) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -398,7 +400,7 @@ class BoundGenericValueBuilder<T extends num>
   }
 
   @override
-  void update(void updates(BoundGenericValueBuilder<T> b)) {
+  void update(void Function(BoundGenericValueBuilder<T>) updates) {
     if (updates != null) updates(this);
   }
 
@@ -415,7 +417,7 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
   final BuiltList<T> values;
 
   factory _$CollectionGenericValue(
-          [void updates(CollectionGenericValueBuilder<T> b)]) =>
+          [void Function(CollectionGenericValueBuilder<T>) updates]) =>
       (new CollectionGenericValueBuilder<T>()..update(updates)).build();
 
   _$CollectionGenericValue._({this.values}) : super._() {
@@ -429,7 +431,7 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
 
   @override
   CollectionGenericValue<T> rebuild(
-          void updates(CollectionGenericValueBuilder<T> b)) =>
+          void Function(CollectionGenericValueBuilder<T>) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -483,7 +485,7 @@ class CollectionGenericValueBuilder<T>
   }
 
   @override
-  void update(void updates(CollectionGenericValueBuilder<T> b)) {
+  void update(void Function(CollectionGenericValueBuilder<T>) updates) {
     if (updates != null) updates(this);
   }
 
@@ -517,7 +519,8 @@ class _$GenericContainer extends GenericContainer {
   @override
   final CollectionGenericValue<String> collectionGenericValue;
 
-  factory _$GenericContainer([void updates(GenericContainerBuilder b)]) =>
+  factory _$GenericContainer(
+          [void Function(GenericContainerBuilder) updates]) =>
       (new GenericContainerBuilder()..update(updates)).build();
 
   _$GenericContainer._(
@@ -537,7 +540,7 @@ class _$GenericContainer extends GenericContainer {
   }
 
   @override
-  GenericContainer rebuild(void updates(GenericContainerBuilder b)) =>
+  GenericContainer rebuild(void Function(GenericContainerBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -615,7 +618,7 @@ class GenericContainerBuilder
   }
 
   @override
-  void update(void updates(GenericContainerBuilder b)) {
+  void update(void Function(GenericContainerBuilder) updates) {
     if (updates != null) updates(this);
   }
 

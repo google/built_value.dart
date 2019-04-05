@@ -28,7 +28,8 @@ class _$ValueSourceField extends ValueSourceField {
   String __buildElementType;
   bool __isNestedBuilder;
 
-  factory _$ValueSourceField([void updates(ValueSourceFieldBuilder b)]) =>
+  factory _$ValueSourceField(
+          [void Function(ValueSourceFieldBuilder) updates]) =>
       (new ValueSourceFieldBuilder()..update(updates)).build();
 
   _$ValueSourceField._(
@@ -86,7 +87,7 @@ class _$ValueSourceField extends ValueSourceField {
   bool get isNestedBuilder => __isNestedBuilder ??= super.isNestedBuilder;
 
   @override
-  ValueSourceField rebuild(void updates(ValueSourceFieldBuilder b)) =>
+  ValueSourceField rebuild(void Function(ValueSourceFieldBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -166,7 +167,7 @@ class ValueSourceFieldBuilder
   }
 
   @override
-  void update(void updates(ValueSourceFieldBuilder b)) {
+  void update(void Function(ValueSourceFieldBuilder) updates) {
     if (updates != null) updates(this);
   }
 

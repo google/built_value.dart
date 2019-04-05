@@ -101,7 +101,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
 
 abstract class AnimalBuilder {
   void replace(Animal other);
-  void update(void updates(AnimalBuilder b));
+  void update(void Function(AnimalBuilder) updates);
   int get legs;
   set legs(int legs);
 }
@@ -112,7 +112,7 @@ class _$Cat extends Cat {
   @override
   final int legs;
 
-  factory _$Cat([void updates(CatBuilder b)]) =>
+  factory _$Cat([void Function(CatBuilder) updates]) =>
       (new CatBuilder()..update(updates)).build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
@@ -125,7 +125,7 @@ class _$Cat extends Cat {
   }
 
   @override
-  Cat rebuild(void updates(CatBuilder b)) =>
+  Cat rebuild(void Function(CatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -182,7 +182,7 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   }
 
   @override
-  void update(void updates(CatBuilder b)) {
+  void update(void Function(CatBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -200,7 +200,7 @@ class _$Fish extends Fish {
   @override
   final int legs;
 
-  factory _$Fish([void updates(FishBuilder b)]) =>
+  factory _$Fish([void Function(FishBuilder) updates]) =>
       (new FishBuilder()..update(updates)).build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
@@ -213,7 +213,7 @@ class _$Fish extends Fish {
   }
 
   @override
-  Fish rebuild(void updates(FishBuilder b)) =>
+  Fish rebuild(void Function(FishBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -270,7 +270,7 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 
   @override
-  void update(void updates(FishBuilder b)) {
+  void update(void Function(FishBuilder) updates) {
     if (updates != null) updates(this);
   }
 

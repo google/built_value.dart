@@ -21,7 +21,8 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
   @nullable
   String get aString;
 
-  factory SimpleValue([updates(SimpleValueBuilder b)]) = _$SimpleValue;
+  factory SimpleValue([void Function(SimpleValueBuilder) updates]) =
+      _$SimpleValue;
   SimpleValue._();
 }
 
@@ -33,7 +34,8 @@ abstract class CompoundValue
   @nullable
   ValidatedValue get validatedValue;
 
-  factory CompoundValue([updates(CompoundValueBuilder b)]) = _$CompoundValue;
+  factory CompoundValue([void Function(CompoundValueBuilder) updates]) =
+      _$CompoundValue;
   CompoundValue._();
 }
 
@@ -47,7 +49,8 @@ abstract class CompoundValueNoNesting
   @nullable
   ValidatedValue get validatedValue;
 
-  factory CompoundValueNoNesting([updates(CompoundValueNoNestingBuilder b)]) =
+  factory CompoundValueNoNesting(
+          [void Function(CompoundValueNoNestingBuilder) updates]) =
       _$CompoundValueNoNesting;
   CompoundValueNoNesting._();
 }
@@ -62,7 +65,7 @@ abstract class CompoundValueNoAutoNesting
   NoFieldsValue get value;
 
   factory CompoundValueNoAutoNesting(
-          [updates(CompoundValueNoAutoNestingBuilder b)]) =
+          [void Function(CompoundValueNoAutoNestingBuilder) updates]) =
       _$CompoundValueNoAutoNesting;
   CompoundValueNoAutoNesting._();
 }
@@ -80,7 +83,7 @@ abstract class CompoundValueComparableBuilders
   ValidatedValue get validatedValue;
 
   factory CompoundValueComparableBuilders(
-          [updates(CompoundValueComparableBuildersBuilder b)]) =
+          [void Function(CompoundValueComparableBuildersBuilder) updates]) =
       _$CompoundValueComparableBuilders;
   CompoundValueComparableBuilders._();
 }
@@ -97,7 +100,7 @@ abstract class CompoundValueExplicitNoNesting
   ValidatedValue get validatedValue;
 
   factory CompoundValueExplicitNoNesting(
-          [updates(CompoundValueExplicitNoNestingBuilder b)]) =
+          [void Function(CompoundValueExplicitNoNestingBuilder) updates]) =
       _$CompoundValueExplicitNoNesting;
   CompoundValueExplicitNoNesting._();
 }
@@ -121,7 +124,8 @@ abstract class ExplicitNestedList
     implements Built<ExplicitNestedList, ExplicitNestedListBuilder> {
   BuiltList<BuiltList<int>> get nestedList;
 
-  factory ExplicitNestedList([updates(ExplicitNestedListBuilder b)]) =
+  factory ExplicitNestedList(
+          [void Function(ExplicitNestedListBuilder) updates]) =
       _$ExplicitNestedList;
   ExplicitNestedList._();
 }
@@ -152,7 +156,8 @@ abstract class DerivedValue
     return [toString()];
   }
 
-  factory DerivedValue([updates(DerivedValueBuilder b)]) = _$DerivedValue;
+  factory DerivedValue([void Function(DerivedValueBuilder) updates]) =
+      _$DerivedValue;
   DerivedValue._();
 }
 
@@ -170,7 +175,8 @@ abstract class ValueWithCode
 
   String get youCanWriteDerivedGetters => anInt.toString() + aString;
 
-  factory ValueWithCode([updates(ValueWithCodeBuilder b)]) = _$ValueWithCode;
+  factory ValueWithCode([void Function(ValueWithCodeBuilder) updates]) =
+      _$ValueWithCode;
   ValueWithCode._();
 
   factory ValueWithCode.fromCustomFactory(int anInt) => ValueWithCode((b) => b
@@ -185,7 +191,7 @@ abstract class ValueWithDefaults
   String get aString;
   SimpleValue get value;
 
-  factory ValueWithDefaults([updates(ValueWithDefaultsBuilder b)]) =
+  factory ValueWithDefaults([void Function(ValueWithDefaultsBuilder) updates]) =
       _$ValueWithDefaults;
   ValueWithDefaults._();
 }
@@ -206,7 +212,8 @@ abstract class ValueWithBuilderSmarts
     implements Built<ValueWithBuilderSmarts, ValueWithBuilderSmartsBuilder> {
   String get value;
 
-  factory ValueWithBuilderSmarts([updates(ValueWithBuilderSmartsBuilder b)]) =
+  factory ValueWithBuilderSmarts(
+          [void Function(ValueWithBuilderSmartsBuilder) updates]) =
       _$ValueWithBuilderSmarts;
   ValueWithBuilderSmarts._();
 }
@@ -233,7 +240,8 @@ abstract class ValidatedValue
   @nullable
   String get aString;
 
-  factory ValidatedValue([updates(ValidatedValueBuilder b)]) = _$ValidatedValue;
+  factory ValidatedValue([void Function(ValidatedValueBuilder) updates]) =
+      _$ValidatedValue;
 
   ValidatedValue._() {
     if (anInt == 7) throw StateError('anInt may not be 7');
@@ -247,7 +255,8 @@ abstract class ValueUsingImportAs
 
   using_import_as.TestEnum get value;
 
-  factory ValueUsingImportAs([updates(ValueUsingImportAsBuilder b)]) =
+  factory ValueUsingImportAs(
+          [void Function(ValueUsingImportAsBuilder) updates]) =
       _$ValueUsingImportAs;
 
   ValueUsingImportAs._();
@@ -257,7 +266,8 @@ abstract class NoFieldsValue
     implements Built<NoFieldsValue, NoFieldsValueBuilder> {
   static Serializer<NoFieldsValue> get serializer => _$noFieldsValueSerializer;
 
-  factory NoFieldsValue([updates(NoFieldsValueBuilder b)]) = _$NoFieldsValue;
+  factory NoFieldsValue([void Function(NoFieldsValueBuilder) updates]) =
+      _$NoFieldsValue;
 
   NoFieldsValue._();
 }
@@ -279,7 +289,7 @@ abstract class PrimitivesValue
   Uri get uri;
   BigInt get bigInt;
 
-  factory PrimitivesValue([updates(PrimitivesValueBuilder b)]) =
+  factory PrimitivesValue([void Function(PrimitivesValueBuilder) updates]) =
       _$PrimitivesValue;
 
   PrimitivesValue._();
@@ -291,7 +301,8 @@ abstract class FunctionValue
     implements Built<FunctionValue, FunctionValueBuilder> {
   MyFunctionType get function;
 
-  factory FunctionValue([updates(FunctionValueBuilder b)]) = _$FunctionValue;
+  factory FunctionValue([void Function(FunctionValueBuilder) updates]) =
+      _$FunctionValue;
 
   FunctionValue._();
 }
@@ -300,7 +311,8 @@ abstract class ListOfFunctionValue
     implements Built<ListOfFunctionValue, ListOfFunctionValueBuilder> {
   BuiltList<MyFunctionType> get functions;
 
-  factory ListOfFunctionValue([updates(ListOfFunctionValueBuilder b)]) =
+  factory ListOfFunctionValue(
+          [void Function(ListOfFunctionValueBuilder) updates]) =
       _$ListOfFunctionValue;
 
   ListOfFunctionValue._();
@@ -319,7 +331,7 @@ abstract class PartiallySerializableValue
   int get transientValue;
 
   factory PartiallySerializableValue(
-          [updates(PartiallySerializableValueBuilder b)]) =
+          [void Function(PartiallySerializableValueBuilder) updates]) =
       _$PartiallySerializableValue;
 
   PartiallySerializableValue._();
@@ -345,7 +357,8 @@ abstract class WireNameValue
   @BuiltValueField(wireName: r'$v')
   int get value;
 
-  factory WireNameValue([updates(WireNameValueBuilder b)]) = _$WireNameValue;
+  factory WireNameValue([void Function(WireNameValueBuilder) updates]) =
+      _$WireNameValue;
 
   WireNameValue._();
 }
@@ -363,7 +376,8 @@ abstract class FieldDiscoveryValue
   @nullable
   FieldDiscoveryValue get recursiveValue;
 
-  factory FieldDiscoveryValue([updates(FieldDiscoveryValueBuilder b)]) =
+  factory FieldDiscoveryValue(
+          [void Function(FieldDiscoveryValueBuilder) updates]) =
       _$FieldDiscoveryValue;
   FieldDiscoveryValue._();
 }
@@ -376,7 +390,7 @@ abstract class DiscoverableValue
 
   SecondDiscoverableValue get value;
 
-  factory DiscoverableValue([updates(DiscoverableValueBuilder b)]) =
+  factory DiscoverableValue([void Function(DiscoverableValueBuilder) updates]) =
       _$DiscoverableValue;
   DiscoverableValue._();
 }
@@ -389,7 +403,8 @@ abstract class SecondDiscoverableValue
 
   int get value;
 
-  factory SecondDiscoverableValue([updates(SecondDiscoverableValueBuilder b)]) =
+  factory SecondDiscoverableValue(
+          [void Function(SecondDiscoverableValueBuilder) updates]) =
       _$SecondDiscoverableValue;
   SecondDiscoverableValue._();
 }
@@ -402,7 +417,8 @@ abstract class ThirdDiscoverableValue
 
   int get value;
 
-  factory ThirdDiscoverableValue([updates(ThirdDiscoverableValueBuilder b)]) =
+  factory ThirdDiscoverableValue(
+          [void Function(ThirdDiscoverableValueBuilder) updates]) =
       _$ThirdDiscoverableValue;
   ThirdDiscoverableValue._();
 }
@@ -416,7 +432,7 @@ abstract class RecursiveValueA
 
   RecursiveValueB get value;
 
-  factory RecursiveValueA([updates(RecursiveValueABuilder b)]) =
+  factory RecursiveValueA([void Function(RecursiveValueABuilder) updates]) =
       _$RecursiveValueA;
   RecursiveValueA._();
 }
@@ -428,7 +444,7 @@ abstract class RecursiveValueB
 
   RecursiveValueA get value;
 
-  factory RecursiveValueB([updates(RecursiveValueBBuilder b)]) =
+  factory RecursiveValueB([void Function(RecursiveValueBBuilder) updates]) =
       _$RecursiveValueB;
   RecursiveValueB._();
 }
@@ -443,7 +459,7 @@ abstract class ValueWithCustomSerializer
   int get value;
 
   factory ValueWithCustomSerializer(
-          [updates(ValueWithCustomSerializerBuilder b)]) =
+          [void Function(ValueWithCustomSerializerBuilder) updates]) =
       _$ValueWithCustomSerializer;
   ValueWithCustomSerializer._();
 }

@@ -38,7 +38,8 @@ abstract class ValueWithInt
 
   String get note;
 
-  factory ValueWithInt([updates(ValueWithIntBuilder b)]) = _$ValueWithInt;
+  factory ValueWithInt([void Function(ValueWithIntBuilder) updates]) =
+      _$ValueWithInt;
   ValueWithInt._();
 }
 

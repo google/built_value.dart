@@ -27,7 +27,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   bool __needsBuilder;
 
   factory _$SerializerSourceField(
-          [void updates(SerializerSourceFieldBuilder b)]) =>
+          [void Function(SerializerSourceFieldBuilder) updates]) =>
       (new SerializerSourceFieldBuilder()..update(updates)).build();
 
   _$SerializerSourceField._(
@@ -78,7 +78,8 @@ class _$SerializerSourceField extends SerializerSourceField {
   bool get needsBuilder => __needsBuilder ??= super.needsBuilder;
 
   @override
-  SerializerSourceField rebuild(void updates(SerializerSourceFieldBuilder b)) =>
+  SerializerSourceField rebuild(
+          void Function(SerializerSourceFieldBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -158,7 +159,7 @@ class SerializerSourceFieldBuilder
   }
 
   @override
-  void update(void updates(SerializerSourceFieldBuilder b)) {
+  void update(void Function(SerializerSourceFieldBuilder) updates) {
     if (updates != null) updates(this);
   }
 

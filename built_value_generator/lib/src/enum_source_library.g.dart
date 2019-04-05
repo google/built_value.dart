@@ -15,7 +15,8 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
   String __source;
   BuiltList<EnumSourceClass> __classes;
 
-  factory _$EnumSourceLibrary([void updates(EnumSourceLibraryBuilder b)]) =>
+  factory _$EnumSourceLibrary(
+          [void Function(EnumSourceLibraryBuilder) updates]) =>
       (new EnumSourceLibraryBuilder()..update(updates)).build();
 
   _$EnumSourceLibrary._({this.element}) : super._() {
@@ -41,7 +42,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
   BuiltList<EnumSourceClass> get classes => __classes ??= super.classes;
 
   @override
-  EnumSourceLibrary rebuild(void updates(EnumSourceLibraryBuilder b)) =>
+  EnumSourceLibrary rebuild(void Function(EnumSourceLibraryBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -94,7 +95,7 @@ class EnumSourceLibraryBuilder
   }
 
   @override
-  void update(void updates(EnumSourceLibraryBuilder b)) {
+  void update(void Function(EnumSourceLibraryBuilder) updates) {
     if (updates != null) updates(this);
   }
 
