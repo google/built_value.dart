@@ -58,7 +58,9 @@ abstract class SerializerSourceClass
     // If a field does not exist, that means an old `built_value` version; use
     // the default.
     return BuiltValueSerializer(
-        custom: annotation.getField('custom')?.toBoolValue() ?? false);
+        custom: annotation.getField('custom')?.toBoolValue() ?? false,
+        serializeNulls:
+            annotation.getField('serializeNulls')?.toBoolValue() ?? false);
   }
 
   // TODO(davidmorgan): share common code in a nicer way.
@@ -86,11 +88,19 @@ abstract class SerializerSourceClass
         element.fields.where((field) => field.name == 'serializer').toList();
     if (serializerFields.isEmpty) return '';
     var serializerField = serializerFields.single;
-    return parsedLibrary
+    var result = parsedLibrary
             .getElementDeclaration(serializerField.getter)
             ?.node
             ?.toSource() ??
         '';
+    // Strip off annotations.
+    if (result.startsWith('@')) {
+      // First thing after the annotations should be `static`.
+      if (result.contains(' static ')) {
+        result = result.substring(result.indexOf(' static ') + 1);
+      }
+    }
+    return result;
   }
 
   @memoized
@@ -407,16 +417,25 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   }
 
   String _generateNullableFieldSerializers() {
-    return fields.where((field) => field.isNullable).map((field) => '''
-    if (object.${field.name} != null) {
+    return fields.where((field) => field.isNullable).map((field) {
+      // By default, omit nulls; but if we were asked to include nulls, just
+      // write them.
+      var prefix = serializerSettings.serializeNulls
+          ? ''
+          : 'if (object.${field.name} != null) {';
+      var postfix = serializerSettings.serializeNulls ? '' : '}';
+
+      return '''
+    $prefix
       result
           ..add('${escapeString(field.wireName)}')
           ..add(serializers.serialize(
           object.${field.name}, 
           specifiedType:
               ${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())}));
-    }
-''').join('');
+     $postfix
+''';
+    }).join('');
   }
 
   /// Gets a map from generic parameter to its bound.

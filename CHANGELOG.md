@@ -6,6 +6,8 @@
   listen for `set` calls on generated builders.
 - Add `@BuiltValueEnumConst(fallback: true)` as a way to mark an enum const
   as the fallback when `valueOf` or deserialization fails.
+- Add `@BuiltValueSerializer(serializeNulls: true` as a way to modify the wire
+  format to explicitly contain `null` values.
 - Make it possible to merge `Serializers` instances: add a `builderFactories`
   getter that returns installed builder factories.
 - Use new `Function` syntax everywhere.
