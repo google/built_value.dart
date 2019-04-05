@@ -118,3 +118,19 @@ abstract class GenericFunction<T>
       _$GenericFunction<T>;
   GenericFunction._();
 }
+
+// Check that we do not generate builder factories for generic fields that are
+// not `Built` types.
+abstract class NonBuiltGeneric
+    implements Built<NonBuiltGeneric, NonBuiltGenericBuilder> {
+  static Serializer<NonBuiltGeneric> get serializer =>
+      _$nonBuiltGenericSerializer;
+
+  NonBuilt<int> get value;
+
+  factory NonBuiltGeneric([updates(NonBuiltGenericBuilder b)]) =
+      _$NonBuiltGeneric;
+  NonBuiltGeneric._();
+}
+
+class NonBuilt<T> {}

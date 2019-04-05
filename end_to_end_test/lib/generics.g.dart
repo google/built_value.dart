@@ -18,6 +18,8 @@ Serializer<NestedGenericContainer> _$nestedGenericContainerSerializer =
     new _$NestedGenericContainerSerializer();
 Serializer<ConcreteGeneric> _$concreteGenericSerializer =
     new _$ConcreteGenericSerializer();
+Serializer<NonBuiltGeneric> _$nonBuiltGenericSerializer =
+    new _$NonBuiltGenericSerializer();
 
 class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
   @override
@@ -334,6 +336,49 @@ class _$ConcreteGenericSerializer
         case 'value':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$NonBuiltGenericSerializer
+    implements StructuredSerializer<NonBuiltGeneric> {
+  @override
+  final Iterable<Type> types = const [NonBuiltGeneric, _$NonBuiltGeneric];
+  @override
+  final String wireName = 'NonBuiltGeneric';
+
+  @override
+  Iterable serialize(Serializers serializers, NonBuiltGeneric object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value,
+          specifiedType: const FullType(NonBuilt, const [const FullType(int)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  NonBuiltGeneric deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new NonBuiltGenericBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(NonBuilt, const [const FullType(int)]))
+              as NonBuilt<int>;
           break;
       }
     }
@@ -1088,6 +1133,84 @@ class GenericFunctionBuilder<T>
   @override
   _$GenericFunction<T> build() {
     final _$result = _$v ?? new _$GenericFunction<T>._(function: function);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$NonBuiltGeneric extends NonBuiltGeneric {
+  @override
+  final NonBuilt<int> value;
+
+  factory _$NonBuiltGeneric([void updates(NonBuiltGenericBuilder b)]) =>
+      (new NonBuiltGenericBuilder()..update(updates)).build();
+
+  _$NonBuiltGeneric._({this.value}) : super._() {
+    if (value == null) {
+      throw new BuiltValueNullFieldError('NonBuiltGeneric', 'value');
+    }
+  }
+
+  @override
+  NonBuiltGeneric rebuild(void updates(NonBuiltGenericBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  NonBuiltGenericBuilder toBuilder() =>
+      new NonBuiltGenericBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is NonBuiltGeneric && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('NonBuiltGeneric')..add('value', value))
+        .toString();
+  }
+}
+
+class NonBuiltGenericBuilder
+    implements Builder<NonBuiltGeneric, NonBuiltGenericBuilder> {
+  _$NonBuiltGeneric _$v;
+
+  NonBuilt<int> _value;
+  NonBuilt<int> get value => _$this._value;
+  set value(NonBuilt<int> value) => _$this._value = value;
+
+  NonBuiltGenericBuilder();
+
+  NonBuiltGenericBuilder get _$this {
+    if (_$v != null) {
+      _value = _$v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(NonBuiltGeneric other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$NonBuiltGeneric;
+  }
+
+  @override
+  void update(void updates(NonBuiltGenericBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$NonBuiltGeneric build() {
+    final _$result = _$v ?? new _$NonBuiltGeneric._(value: value);
     replace(_$result);
     return _$result;
   }

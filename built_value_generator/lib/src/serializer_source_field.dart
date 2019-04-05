@@ -131,7 +131,9 @@ abstract class SerializerSourceField
   }
 
   @memoized
-  bool get needsBuilder => element.getter.returnType.displayName.contains('<');
+  bool get needsBuilder =>
+      element.getter.returnType.displayName.contains('<') &&
+      DartTypes.isBuilt(element.getter.returnType);
 
   Iterable<String> computeErrors() {
     if (isSerializable && element.getter.returnType is FunctionType) {
