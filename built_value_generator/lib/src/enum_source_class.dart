@@ -111,10 +111,11 @@ abstract class EnumSourceClass
     return concat([
       _checkAbstract(),
       _checkFields(),
+      _checkFallbackFields(),
       _checkConstructor(),
       _checkValuesGetter(),
       _checkValueOf(),
-      _checkMixin()
+      _checkMixin(),
     ]).toList();
   }
 
@@ -124,6 +125,20 @@ abstract class EnumSourceClass
 
   Iterable<String> _checkFields() {
     return concat(fields.map((field) => field.errors));
+  }
+
+  Iterable<String> _checkFallbackFields() {
+    var result = <String>[];
+
+    var fallbackFields =
+        fields.where((field) => field.settings.fallback).toList();
+    if (fallbackFields.length > 1) {
+      result.add('Remove `fallback = true` '
+          'so that at most one constant is the fallback. '
+          'Currently on "$name" fields '
+          '${fallbackFields.map((field) => '"${field.name}"').join(', ')}.');
+    }
+    return result;
   }
 
   Iterable<String> _checkConstructor() {
@@ -177,7 +192,14 @@ abstract class EnumSourceClass
       result.writeln("case '${escapeString(field.name)}':"
           ' return ${field.generatedIdentifier};');
     }
-    result.writeln('default: throw new ArgumentError(name);');
+
+    var fallback = fields.firstWhere((field) => field.settings.fallback,
+        orElse: () => null);
+    if (fallback == null) {
+      result.writeln('default: throw new ArgumentError(name);');
+    } else {
+      result.writeln('default: return ${fallback.generatedIdentifier};');
+    }
     result.writeln('}}');
 
     result.writeln('');

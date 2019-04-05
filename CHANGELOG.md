@@ -2,6 +2,8 @@
 
 # 6.4.0 (unreleased)
 
+- Add `@BuiltValueEnumConst(fallback: true)` as a way to mark an enum const
+  as the fallback when `valueOf` or deserialization fails.
 - Make it possible to merge `Serializers` instances: add a `builderFactories`
   getter that returns installed builder factories.
 

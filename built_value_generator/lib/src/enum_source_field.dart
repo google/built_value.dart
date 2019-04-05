@@ -35,6 +35,7 @@ abstract class EnumSourceField
     if (annotations.isEmpty) return const BuiltValueEnumConst();
     var annotation = annotations.single;
     return BuiltValueEnumConst(
+        fallback: annotation.getField('fallback')?.toBoolValue() ?? false,
         wireName: annotation.getField('wireName').toStringValue());
   }
 

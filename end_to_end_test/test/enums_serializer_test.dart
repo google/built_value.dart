@@ -32,4 +32,13 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('FallbackEnum', () {
+    var data = FallbackEnum.no;
+    var serialized = ['FallbackEnum', 'some_unrecognized_value'];
+
+    test('deserializes using fallback', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }

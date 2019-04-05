@@ -67,3 +67,17 @@ class DollarValueEnum extends EnumClass {
   static BuiltSet<DollarValueEnum> get values => _$dollarValues;
   static DollarValueEnum valueOf(String name) => _$dollarValueOf(name);
 }
+
+class FallbackEnum extends EnumClass {
+  static Serializer<FallbackEnum> get serializer => _$fallbackEnumSerializer;
+
+  static const FallbackEnum yes = _$fbYes;
+
+  @BuiltValueEnumConst(fallback: true)
+  static const FallbackEnum no = _$fbNo;
+
+  const FallbackEnum._(String name) : super(name);
+
+  static BuiltSet<FallbackEnum> get values => _$fbValues;
+  static FallbackEnum valueOf(String name) => _$fbValueOf(name);
+}

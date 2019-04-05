@@ -107,11 +107,33 @@ final BuiltSet<DollarValueEnum> _$dollarValues =
   _$value$,
 ]);
 
+const FallbackEnum _$fbYes = const FallbackEnum._('yes');
+const FallbackEnum _$fbNo = const FallbackEnum._('no');
+
+FallbackEnum _$fbValueOf(String name) {
+  switch (name) {
+    case 'yes':
+      return _$fbYes;
+    case 'no':
+      return _$fbNo;
+    default:
+      return _$fbNo;
+  }
+}
+
+final BuiltSet<FallbackEnum> _$fbValues =
+    new BuiltSet<FallbackEnum>(const <FallbackEnum>[
+  _$fbYes,
+  _$fbNo,
+]);
+
 Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
 Serializer<WireNameEnum> _$wireNameEnumSerializer =
     new _$WireNameEnumSerializer();
 Serializer<DollarValueEnum> _$dollarValueEnumSerializer =
     new _$DollarValueEnumSerializer();
+Serializer<FallbackEnum> _$fallbackEnumSerializer =
+    new _$FallbackEnumSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   @override
@@ -174,6 +196,23 @@ class _$DollarValueEnumSerializer
   DollarValueEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
       DollarValueEnum.valueOf(serialized as String);
+}
+
+class _$FallbackEnumSerializer implements PrimitiveSerializer<FallbackEnum> {
+  @override
+  final Iterable<Type> types = const <Type>[FallbackEnum];
+  @override
+  final String wireName = 'FallbackEnum';
+
+  @override
+  Object serialize(Serializers serializers, FallbackEnum object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      object.name;
+
+  @override
+  FallbackEnum deserialize(Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      FallbackEnum.valueOf(serialized as String);
 }
 
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
