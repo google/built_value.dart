@@ -56,7 +56,7 @@ abstract class GenericContainer
   BoundGenericValue<double> get boundGenericValue;
   CollectionGenericValue<String> get collectionGenericValue;
 
-  factory GenericContainer([updates(GenericContainerBuilder b)]) =
+  factory GenericContainer([void Function(GenericContainerBuilder) updates]) =
       _$GenericContainer;
   GenericContainer._();
 }
@@ -68,7 +68,8 @@ abstract class NestedGenericContainer
 
   GenericValue<BuiltMap<int, String>> get map;
 
-  factory NestedGenericContainer([updates(NestedGenericContainerBuilder b)]) =
+  factory NestedGenericContainer(
+          [void Function(NestedGenericContainerBuilder) updates]) =
       _$NestedGenericContainer;
   NestedGenericContainer._();
 }
@@ -105,7 +106,7 @@ abstract class ConcreteGeneric
   static Serializer<ConcreteGeneric> get serializer =>
       _$concreteGenericSerializer;
 
-  factory ConcreteGeneric([updates(ConcreteGenericBuilder b)]) =
+  factory ConcreteGeneric([void Function(ConcreteGenericBuilder) updates]) =
       _$ConcreteGeneric;
   ConcreteGeneric._();
 }

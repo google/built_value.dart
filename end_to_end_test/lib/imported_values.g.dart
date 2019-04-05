@@ -66,7 +66,7 @@ class _$ImportedValue extends ImportedValue {
   @override
   final BuiltList<prefix.SimpleValue> simpleValues;
 
-  factory _$ImportedValue([void updates(ImportedValueBuilder b)]) =>
+  factory _$ImportedValue([void Function(ImportedValueBuilder) updates]) =>
       (new ImportedValueBuilder()..update(updates)).build();
 
   _$ImportedValue._({this.simpleValue, this.simpleValues}) : super._() {
@@ -79,7 +79,7 @@ class _$ImportedValue extends ImportedValue {
   }
 
   @override
-  ImportedValue rebuild(void updates(ImportedValueBuilder b)) =>
+  ImportedValue rebuild(void Function(ImportedValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -143,7 +143,7 @@ class ImportedValueBuilder
   }
 
   @override
-  void update(void updates(ImportedValueBuilder b)) {
+  void update(void Function(ImportedValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 

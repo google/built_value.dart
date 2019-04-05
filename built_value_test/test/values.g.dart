@@ -20,7 +20,7 @@ class _$SimpleValue extends SimpleValue {
   @override
   final BuiltSetMultimap<int, bool> setMultimap;
 
-  factory _$SimpleValue([void updates(SimpleValueBuilder b)]) =>
+  factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._(
@@ -52,7 +52,7 @@ class _$SimpleValue extends SimpleValue {
   }
 
   @override
-  SimpleValue rebuild(void updates(SimpleValueBuilder b)) =>
+  SimpleValue rebuild(void Function(SimpleValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -151,7 +151,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 
   @override
-  void update(void updates(SimpleValueBuilder b)) {
+  void update(void Function(SimpleValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -197,7 +197,7 @@ class _$CompoundValue extends CompoundValue {
   @override
   final String string;
 
-  factory _$CompoundValue([void updates(CompoundValueBuilder b)]) =>
+  factory _$CompoundValue([void Function(CompoundValueBuilder) updates]) =>
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.string}) : super._() {
@@ -207,7 +207,7 @@ class _$CompoundValue extends CompoundValue {
   }
 
   @override
-  CompoundValue rebuild(void updates(CompoundValueBuilder b)) =>
+  CompoundValue rebuild(void Function(CompoundValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -269,7 +269,7 @@ class CompoundValueBuilder
   }
 
   @override
-  void update(void updates(CompoundValueBuilder b)) {
+  void update(void Function(CompoundValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -302,7 +302,7 @@ class _$ComparedValue extends ComparedValue {
   @override
   final Function onChanged;
 
-  factory _$ComparedValue([void updates(ComparedValueBuilder b)]) =>
+  factory _$ComparedValue([void Function(ComparedValueBuilder) updates]) =>
       (new ComparedValueBuilder()..update(updates)).build();
 
   _$ComparedValue._({this.name, this.onChanged}) : super._() {
@@ -315,7 +315,7 @@ class _$ComparedValue extends ComparedValue {
   }
 
   @override
-  ComparedValue rebuild(void updates(ComparedValueBuilder b)) =>
+  ComparedValue rebuild(void Function(ComparedValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -373,7 +373,7 @@ class ComparedValueBuilder
   }
 
   @override
-  void update(void updates(ComparedValueBuilder b)) {
+  void update(void Function(ComparedValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 

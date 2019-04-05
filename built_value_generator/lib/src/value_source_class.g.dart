@@ -40,7 +40,8 @@ class _$ValueSourceClass extends ValueSourceClass {
   bool __implementsToString;
   CompilationUnitElement __compilationUnit;
 
-  factory _$ValueSourceClass([void updates(ValueSourceClassBuilder b)]) =>
+  factory _$ValueSourceClass(
+          [void Function(ValueSourceClassBuilder) updates]) =>
       (new ValueSourceClassBuilder()..update(updates)).build();
 
   _$ValueSourceClass._({this.element}) : super._() {
@@ -159,7 +160,7 @@ class _$ValueSourceClass extends ValueSourceClass {
       __compilationUnit ??= super.compilationUnit;
 
   @override
-  ValueSourceClass rebuild(void updates(ValueSourceClassBuilder b)) =>
+  ValueSourceClass rebuild(void Function(ValueSourceClassBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -212,7 +213,7 @@ class ValueSourceClassBuilder
   }
 
   @override
-  void update(void updates(ValueSourceClassBuilder b)) {
+  void update(void Function(ValueSourceClassBuilder) updates) {
     if (updates != null) updates(this);
   }
 

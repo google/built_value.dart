@@ -113,7 +113,8 @@ class _$StandardJsonValue extends StandardJsonValue {
   @override
   final BuiltList<String> strings;
 
-  factory _$StandardJsonValue([void updates(StandardJsonValueBuilder b)]) =>
+  factory _$StandardJsonValue(
+          [void Function(StandardJsonValueBuilder) updates]) =>
       (new StandardJsonValueBuilder()..update(updates)).build();
 
   _$StandardJsonValue._(
@@ -142,7 +143,7 @@ class _$StandardJsonValue extends StandardJsonValue {
   }
 
   @override
-  StandardJsonValue rebuild(void updates(StandardJsonValueBuilder b)) =>
+  StandardJsonValue rebuild(void Function(StandardJsonValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -242,7 +243,7 @@ class StandardJsonValueBuilder
   }
 
   @override
-  void update(void updates(StandardJsonValueBuilder b)) {
+  void update(void Function(StandardJsonValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 

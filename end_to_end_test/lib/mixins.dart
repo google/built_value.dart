@@ -15,6 +15,6 @@ abstract class UsesMixin extends Object
     implements Built<UsesMixin, UsesMixinBuilder> {
   static Serializer<UsesMixin> get serializer => _$usesMixinSerializer;
 
-  factory UsesMixin([updates(UsesMixinBuilder b)]) = _$UsesMixin;
+  factory UsesMixin([void Function(UsesMixinBuilder) updates]) = _$UsesMixin;
   UsesMixin._();
 }

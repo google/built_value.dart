@@ -102,7 +102,7 @@ class _$ValueWithInt extends ValueWithInt {
   @override
   final String note;
 
-  factory _$ValueWithInt([void updates(ValueWithIntBuilder b)]) =>
+  factory _$ValueWithInt([void Function(ValueWithIntBuilder) updates]) =>
       (new ValueWithIntBuilder()..update(updates)).build() as _$ValueWithInt;
 
   _$ValueWithInt._({this.anInt, this.note}) : super._() {
@@ -115,7 +115,7 @@ class _$ValueWithInt extends ValueWithInt {
   }
 
   @override
-  ValueWithInt rebuild(void updates(ValueWithIntBuilder b)) =>
+  ValueWithInt rebuild(void Function(ValueWithIntBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -189,7 +189,7 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
   }
 
   @override
-  void update(void updates(ValueWithIntBuilder b)) {
+  void update(void Function(ValueWithIntBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -11,7 +11,7 @@ abstract class Animal extends Object with Walker implements OtherInterface {
   @override
   int get legs;
 
-  Animal rebuild(void updates(AnimalBuilder b));
+  Animal rebuild(void Function(AnimalBuilder) updates);
   AnimalBuilder toBuilder();
 }
 
@@ -26,7 +26,7 @@ abstract class Cat extends Object
 
   bool get tail;
 
-  factory Cat([updates(CatBuilder b)]) = _$Cat;
+  factory Cat([void Function(CatBuilder) updates]) = _$Cat;
   Cat._();
 }
 
@@ -38,7 +38,7 @@ abstract class Fish extends Object
   @override
   int get fins;
 
-  factory Fish([updates(FishBuilder b)]) = _$Fish;
+  factory Fish([void Function(FishBuilder) updates]) = _$Fish;
   Fish._();
 }
 
@@ -48,7 +48,7 @@ abstract class Robot extends Object
     implements Built<Robot, RobotBuilder> {
   static Serializer<Robot> get serializer => _$robotSerializer;
 
-  factory Robot([updates(RobotBuilder b)]) = _$Robot;
+  factory Robot([void Function(RobotBuilder) updates]) = _$Robot;
   Robot._();
 }
 
@@ -70,7 +70,7 @@ abstract class Cage implements Built<Cage, CageBuilder> {
   Animal get inhabitant;
   BuiltList<Animal> get otherInhabitants;
 
-  factory Cage([updates(CageBuilder b)]) = _$Cage;
+  factory Cage([void Function(CageBuilder) updates]) = _$Cage;
   Cage._();
 }
 
@@ -93,7 +93,8 @@ abstract class StandardCat extends Object
 
   bool get tail;
 
-  factory StandardCat([updates(StandardCatBuilder b)]) = _$StandardCat;
+  factory StandardCat([void Function(StandardCatBuilder) updates]) =
+      _$StandardCat;
   StandardCat._();
 }
 
@@ -112,7 +113,7 @@ abstract class HasString
   @override
   String get field;
 
-  factory HasString([updates(HasStringBuilder b)]) = _$HasString;
+  factory HasString([void Function(HasStringBuilder) updates]) = _$HasString;
   HasString._();
 }
 
@@ -123,7 +124,7 @@ abstract class HasDouble
   @override
   double get field;
 
-  factory HasDouble([updates(HasDoubleBuilder b)]) = _$HasDouble;
+  factory HasDouble([void Function(HasDoubleBuilder) updates]) = _$HasDouble;
   HasDouble._();
 }
 
@@ -149,7 +150,8 @@ abstract class UsesChainedInterface extends Object
     implements
         Built<UsesChainedInterface, UsesChainedInterfaceBuilder>,
         ChainedInterface2 {
-  factory UsesChainedInterface([updates(UsesChainedInterfaceBuilder b)]) =
+  factory UsesChainedInterface(
+          [void Function(UsesChainedInterfaceBuilder) updates]) =
       _$UsesChainedInterface;
   UsesChainedInterface._();
 }
@@ -162,7 +164,7 @@ abstract class HandCoded {
   int get fieldInBaseBuilder;
   int get fieldNotInBaseBuilder;
 
-  HandCoded rebuild(updates(HandCodedBuilder b));
+  HandCoded rebuild(void Function(HandCodedBuilder) updates);
 }
 
 abstract class HandCodedBuilder {
@@ -178,7 +180,8 @@ abstract class UsesHandCoded
   @override
   int get fieldNotInBaseBuilder => 37;
 
-  factory UsesHandCoded([updates(UsesHandCodedBuilder b)]) = _$UsesHandCoded;
+  factory UsesHandCoded([void Function(UsesHandCodedBuilder) updates]) =
+      _$UsesHandCoded;
   UsesHandCoded._();
 }
 
@@ -193,6 +196,7 @@ abstract class Two {}
 
 abstract class ImplementsTwo
     implements Built<ImplementsTwo, ImplementsTwoBuilder>, One, Two {
-  factory ImplementsTwo([updates(ImplementsTwoBuilder b)]) = _$ImplementsTwo;
+  factory ImplementsTwo([void Function(ImplementsTwoBuilder) updates]) =
+      _$ImplementsTwo;
   ImplementsTwo._();
 }

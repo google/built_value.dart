@@ -451,7 +451,7 @@ abstract class ValueSourceClass
       if (!valueClassFactories.any(
           (factory) => factory.toSource().contains('$implName$_generics'))) {
         final exampleFactory =
-            'factory $name([updates(${name}Builder$_generics b)]) = '
+            'factory $name([void Function(${name}Builder$_generics) updates]) = '
             '$implName$_generics;';
         result.add(GeneratorError((b) => b
           ..message =
@@ -597,7 +597,7 @@ abstract class ValueSourceClass
     // can return the right type directly and needs no cast.
     var cast = hasBuilder ? 'as _\$$name$_generics' : '';
     result.writeln('factory $implName(['
-        'void updates(${name}Builder$_generics b)]) '
+        'void Function(${name}Builder$_generics) updates]) '
         '=> (new ${name}Builder$_generics()..update(updates)).build() $cast;');
     result.writeln();
 
@@ -644,7 +644,7 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     result.writeln(
-        '$name$_generics rebuild(void updates(${name}Builder$_generics b)) '
+        '$name$_generics rebuild(void Function(${name}Builder$_generics) updates) '
         '=> (toBuilder()..update(updates)).build();');
     result.writeln();
 
@@ -808,7 +808,8 @@ abstract class ValueSourceClass
     result.writeln('}');
 
     result.writeln('@override');
-    result.writeln('void update(void updates(${name}Builder$_generics b)) {'
+    result.writeln(
+        'void update(void Function(${name}Builder$_generics) updates) {'
         ' if (updates != null) updates(this); }');
     result.writeln();
 
@@ -952,7 +953,8 @@ abstract class ValueSourceClass
       result.writeln('abstract class ${name}Builder$_boundedGenerics {');
 
       result.writeln('void replace($name$_generics other);');
-      result.writeln('void update(void updates(${name}Builder$_generics b));');
+      result.writeln(
+          'void update(void Function(${name}Builder$_generics) updates);');
     }
 
     for (var field in fields) {

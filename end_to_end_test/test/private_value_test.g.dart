@@ -10,7 +10,7 @@ class _$PrivateValue extends _PrivateValue {
   @override
   final int value;
 
-  factory _$PrivateValue([void updates(_PrivateValueBuilder b)]) =>
+  factory _$PrivateValue([void Function(_PrivateValueBuilder) updates]) =>
       (new _PrivateValueBuilder()..update(updates)).build();
 
   _$PrivateValue._({this.value}) : super._() {
@@ -20,7 +20,7 @@ class _$PrivateValue extends _PrivateValue {
   }
 
   @override
-  _PrivateValue rebuild(void updates(_PrivateValueBuilder b)) =>
+  _PrivateValue rebuild(void Function(_PrivateValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -71,7 +71,7 @@ class _PrivateValueBuilder
   }
 
   @override
-  void update(void updates(_PrivateValueBuilder b)) {
+  void update(void Function(_PrivateValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -4,6 +4,7 @@
 
 - Make it possible to merge `Serializers` instances: add a `builderFactories`
   getter that returns installed builder factories.
+- Use new `Function` syntax everywhere.
 
 # 6.3.2
 

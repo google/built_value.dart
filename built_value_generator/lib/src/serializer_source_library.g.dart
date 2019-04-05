@@ -18,7 +18,7 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
       __serializeForTransitiveClasses;
 
   factory _$SerializerSourceLibrary(
-          [void updates(SerializerSourceLibraryBuilder b)]) =>
+          [void Function(SerializerSourceLibraryBuilder) updates]) =>
       (new SerializerSourceLibraryBuilder()..update(updates)).build();
 
   _$SerializerSourceLibrary._({this.element}) : super._() {
@@ -53,7 +53,7 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
 
   @override
   SerializerSourceLibrary rebuild(
-          void updates(SerializerSourceLibraryBuilder b)) =>
+          void Function(SerializerSourceLibraryBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -107,7 +107,7 @@ class SerializerSourceLibraryBuilder
   }
 
   @override
-  void update(void updates(SerializerSourceLibraryBuilder b)) {
+  void update(void Function(SerializerSourceLibraryBuilder) updates) {
     if (updates != null) updates(this);
   }
 

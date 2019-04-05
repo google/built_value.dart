@@ -18,7 +18,7 @@ class _$EnumSourceField extends EnumSourceField {
   bool __isConst;
   bool __isStatic;
 
-  factory _$EnumSourceField([void updates(EnumSourceFieldBuilder b)]) =>
+  factory _$EnumSourceField([void Function(EnumSourceFieldBuilder) updates]) =>
       (new EnumSourceFieldBuilder()..update(updates)).build();
 
   _$EnumSourceField._({this.parsedLibrary, this.element}) : super._() {
@@ -50,7 +50,7 @@ class _$EnumSourceField extends EnumSourceField {
   bool get isStatic => __isStatic ??= super.isStatic;
 
   @override
-  EnumSourceField rebuild(void updates(EnumSourceFieldBuilder b)) =>
+  EnumSourceField rebuild(void Function(EnumSourceFieldBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -112,7 +112,7 @@ class EnumSourceFieldBuilder
   }
 
   @override
-  void update(void updates(EnumSourceFieldBuilder b)) {
+  void update(void Function(EnumSourceFieldBuilder) updates) {
     if (updates != null) updates(this);
   }
 
