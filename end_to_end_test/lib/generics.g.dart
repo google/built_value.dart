@@ -1147,7 +1147,7 @@ class _$NonBuiltGeneric extends NonBuiltGeneric {
   @override
   final NonBuilt<int> value;
 
-  factory _$NonBuiltGeneric([void updates(NonBuiltGenericBuilder b)]) =>
+  factory _$NonBuiltGeneric([void Function(NonBuiltGenericBuilder) updates]) =>
       (new NonBuiltGenericBuilder()..update(updates)).build();
 
   _$NonBuiltGeneric._({this.value}) : super._() {
@@ -1157,7 +1157,7 @@ class _$NonBuiltGeneric extends NonBuiltGeneric {
   }
 
   @override
-  NonBuiltGeneric rebuild(void updates(NonBuiltGenericBuilder b)) =>
+  NonBuiltGeneric rebuild(void Function(NonBuiltGenericBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1209,7 +1209,7 @@ class NonBuiltGenericBuilder
   }
 
   @override
-  void update(void updates(NonBuiltGenericBuilder b)) {
+  void update(void Function(NonBuiltGenericBuilder) updates) {
     if (updates != null) updates(this);
   }
 
