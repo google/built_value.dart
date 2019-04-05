@@ -4,6 +4,8 @@
 
 - Make it possible to merge `Serializers` instances: add a `builderFactories`
   getter that returns installed builder factories.
+- Bug fix: only generate builder factories for fields that are `Built`
+  types or `built_collection` collections.
 
 # 6.3.2
 

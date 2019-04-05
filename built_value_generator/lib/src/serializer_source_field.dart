@@ -13,6 +13,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/metadata.dart'
     show metadataToStringValue;
+import 'package:source_gen/source_gen.dart';
 
 part 'serializer_source_field.g.dart';
 
@@ -131,7 +132,9 @@ abstract class SerializerSourceField
   }
 
   @memoized
-  bool get needsBuilder => element.getter.returnType.displayName.contains('<');
+  bool get needsBuilder =>
+      element.getter.returnType.displayName.contains('<') &&
+      DartTypes.isBuilt(element.getter.returnType);
 
   Iterable<String> computeErrors() {
     if (isSerializable && element.getter.returnType is FunctionType) {
