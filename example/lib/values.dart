@@ -34,7 +34,8 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
   /// works well for classes with many fields, or for classes that might be
   /// changed to have more fields later. For very simple classes, you might
   /// want something simpler. See [VerySimpleValue].
-  factory SimpleValue([updates(SimpleValueBuilder b)]) = _$SimpleValue;
+  factory SimpleValue([void Function(SimpleValueBuilder) updates]) =
+      _$SimpleValue;
   SimpleValue._();
 }
 
@@ -70,7 +71,8 @@ abstract class CompoundValue
   @nullable
   ValidatedValue get validatedValue;
 
-  factory CompoundValue([updates(CompoundValueBuilder b)]) = _$CompoundValue;
+  factory CompoundValue([void Function(CompoundValueBuilder) updates]) =
+      _$CompoundValue;
   CompoundValue._();
 }
 
@@ -84,7 +86,8 @@ abstract class ValidatedValue
   @nullable
   String get aString;
 
-  factory ValidatedValue([updates(ValidatedValueBuilder b)]) = _$ValidatedValue;
+  factory ValidatedValue([void Function(ValidatedValueBuilder) updates]) =
+      _$ValidatedValue;
 
   ValidatedValue._() {
     if (anInt == 7) throw StateError('anInt may not be 7');
@@ -102,7 +105,8 @@ abstract class ValueWithCode
 
   String get youCanWriteDerivedGetters => anInt.toString() + aString;
 
-  factory ValueWithCode([updates(ValueWithCodeBuilder b)]) = _$ValueWithCode;
+  factory ValueWithCode([void Function(ValueWithCodeBuilder) updates]) =
+      _$ValueWithCode;
   ValueWithCode._();
 
   factory ValueWithCode.fromCustomFactory(int anInt) => ValueWithCode((b) => b
@@ -121,7 +125,7 @@ abstract class ValueWithDefaults
   @nullable
   String get aString;
 
-  factory ValueWithDefaults([updates(ValueWithDefaultsBuilder b)]) =
+  factory ValueWithDefaults([void Function(ValueWithDefaultsBuilder) updates]) =
       _$ValueWithDefaults;
   ValueWithDefaults._();
 }
@@ -157,7 +161,8 @@ abstract class DerivedValue
   @memoized
   Iterable<String> get derivedString => [toString()];
 
-  factory DerivedValue([updates(DerivedValueBuilder b)]) = _$DerivedValue;
+  factory DerivedValue([void Function(DerivedValueBuilder) updates]) =
+      _$DerivedValue;
   DerivedValue._();
 }
 
@@ -169,7 +174,7 @@ abstract class Account implements Built<Account, AccountBuilder> {
   String get name;
   BuiltMap<String, JsonObject> get keyValues;
 
-  factory Account([updates(AccountBuilder b)]) = _$Account;
+  factory Account([void Function(AccountBuilder) updates]) = _$Account;
   Account._();
 }
 
@@ -183,7 +188,8 @@ abstract class WireNameValue
   @BuiltValueField(wireName: 'v')
   int get value;
 
-  factory WireNameValue([updates(WireNameValueBuilder b)]) = _$WireNameValue;
+  factory WireNameValue([void Function(WireNameValueBuilder) updates]) =
+      _$WireNameValue;
 
   WireNameValue._();
 }

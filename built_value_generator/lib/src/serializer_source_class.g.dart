@@ -29,7 +29,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   bool __needsGeneratedSerializer;
 
   factory _$SerializerSourceClass(
-          [void updates(SerializerSourceClassBuilder b)]) =>
+          [void Function(SerializerSourceClassBuilder) updates]) =>
       (new SerializerSourceClassBuilder()..update(updates)).build();
 
   _$SerializerSourceClass._({this.element, this.builderElement}) : super._() {
@@ -97,7 +97,8 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       __needsGeneratedSerializer ??= super.needsGeneratedSerializer;
 
   @override
-  SerializerSourceClass rebuild(void updates(SerializerSourceClassBuilder b)) =>
+  SerializerSourceClass rebuild(
+          void Function(SerializerSourceClassBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -159,7 +160,7 @@ class SerializerSourceClassBuilder
   }
 
   @override
-  void update(void updates(SerializerSourceClassBuilder b)) {
+  void update(void Function(SerializerSourceClassBuilder) updates) {
     if (updates != null) updates(this);
   }
 

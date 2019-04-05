@@ -31,7 +31,7 @@ class _$UsesMixin extends UsesMixin {
   @override
   final String Function(String) typeDef;
 
-  factory _$UsesMixin([void updates(UsesMixinBuilder b)]) =>
+  factory _$UsesMixin([void Function(UsesMixinBuilder) updates]) =>
       (new UsesMixinBuilder()..update(updates)).build();
 
   _$UsesMixin._({this.typeDef}) : super._() {
@@ -41,7 +41,7 @@ class _$UsesMixin extends UsesMixin {
   }
 
   @override
-  UsesMixin rebuild(void updates(UsesMixinBuilder b)) =>
+  UsesMixin rebuild(void Function(UsesMixinBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -92,7 +92,7 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
   }
 
   @override
-  void update(void updates(UsesMixinBuilder b)) {
+  void update(void Function(UsesMixinBuilder) updates) {
     if (updates != null) updates(this);
   }
 

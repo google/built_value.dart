@@ -12,7 +12,7 @@ class _$SimpleValue extends SimpleValue {
   @override
   final String aString;
 
-  factory _$SimpleValue([void updates(SimpleValueBuilder b)]) =>
+  factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
@@ -25,7 +25,7 @@ class _$SimpleValue extends SimpleValue {
   }
 
   @override
-  SimpleValue rebuild(void updates(SimpleValueBuilder b)) =>
+  SimpleValue rebuild(void Function(SimpleValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -84,7 +84,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 
   @override
-  void update(void updates(SimpleValueBuilder b)) {
+  void update(void Function(SimpleValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 

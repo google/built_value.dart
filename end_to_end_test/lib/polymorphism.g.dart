@@ -362,7 +362,7 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
 
 abstract class AnimalBuilder {
   void replace(Animal other);
-  void update(void updates(AnimalBuilder b));
+  void update(void Function(AnimalBuilder) updates);
   int get legs;
   set legs(int legs);
 }
@@ -373,7 +373,7 @@ class _$Cat extends Cat {
   @override
   final int legs;
 
-  factory _$Cat([void updates(CatBuilder b)]) =>
+  factory _$Cat([void Function(CatBuilder) updates]) =>
       (new CatBuilder()..update(updates)).build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
@@ -386,7 +386,7 @@ class _$Cat extends Cat {
   }
 
   @override
-  Cat rebuild(void updates(CatBuilder b)) =>
+  Cat rebuild(void Function(CatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -443,7 +443,7 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   }
 
   @override
-  void update(void updates(CatBuilder b)) {
+  void update(void Function(CatBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -461,7 +461,7 @@ class _$Fish extends Fish {
   @override
   final int legs;
 
-  factory _$Fish([void updates(FishBuilder b)]) =>
+  factory _$Fish([void Function(FishBuilder) updates]) =>
       (new FishBuilder()..update(updates)).build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
@@ -474,7 +474,7 @@ class _$Fish extends Fish {
   }
 
   @override
-  Fish rebuild(void updates(FishBuilder b)) =>
+  Fish rebuild(void Function(FishBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -531,7 +531,7 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 
   @override
-  void update(void updates(FishBuilder b)) {
+  void update(void Function(FishBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -549,7 +549,7 @@ class _$Robot extends Robot {
   @override
   final int legs;
 
-  factory _$Robot([void updates(RobotBuilder b)]) =>
+  factory _$Robot([void Function(RobotBuilder) updates]) =>
       (new RobotBuilder()..update(updates)).build();
 
   _$Robot._({this.fins, this.legs}) : super._() {
@@ -562,7 +562,7 @@ class _$Robot extends Robot {
   }
 
   @override
-  Robot rebuild(void updates(RobotBuilder b)) =>
+  Robot rebuild(void Function(RobotBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -619,7 +619,7 @@ class RobotBuilder implements Builder<Robot, RobotBuilder> {
   }
 
   @override
-  void update(void updates(RobotBuilder b)) {
+  void update(void Function(RobotBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -637,7 +637,7 @@ class _$Cage extends Cage {
   @override
   final BuiltList<Animal> otherInhabitants;
 
-  factory _$Cage([void updates(CageBuilder b)]) =>
+  factory _$Cage([void Function(CageBuilder) updates]) =>
       (new CageBuilder()..update(updates)).build();
 
   _$Cage._({this.inhabitant, this.otherInhabitants}) : super._() {
@@ -650,7 +650,7 @@ class _$Cage extends Cage {
   }
 
   @override
-  Cage rebuild(void updates(CageBuilder b)) =>
+  Cage rebuild(void Function(CageBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -711,7 +711,7 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
   }
 
   @override
-  void update(void updates(CageBuilder b)) {
+  void update(void Function(CageBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -743,7 +743,7 @@ class _$StandardCat extends StandardCat {
   @override
   final bool tail;
 
-  factory _$StandardCat([void updates(StandardCatBuilder b)]) =>
+  factory _$StandardCat([void Function(StandardCatBuilder) updates]) =>
       (new StandardCatBuilder()..update(updates)).build();
 
   _$StandardCat._({this.tail}) : super._() {
@@ -753,7 +753,7 @@ class _$StandardCat extends StandardCat {
   }
 
   @override
-  StandardCat rebuild(void updates(StandardCatBuilder b)) =>
+  StandardCat rebuild(void Function(StandardCatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -803,7 +803,7 @@ class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
   }
 
   @override
-  void update(void updates(StandardCatBuilder b)) {
+  void update(void Function(StandardCatBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -817,7 +817,7 @@ class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
 
 abstract class HasFieldBuilder<T> {
   void replace(HasField<T> other);
-  void update(void updates(HasFieldBuilder<T> b));
+  void update(void Function(HasFieldBuilder<T>) updates);
   T get field;
   set field(T field);
 }
@@ -826,7 +826,7 @@ class _$HasString extends HasString {
   @override
   final String field;
 
-  factory _$HasString([void updates(HasStringBuilder b)]) =>
+  factory _$HasString([void Function(HasStringBuilder) updates]) =>
       (new HasStringBuilder()..update(updates)).build();
 
   _$HasString._({this.field}) : super._() {
@@ -836,7 +836,7 @@ class _$HasString extends HasString {
   }
 
   @override
-  HasString rebuild(void updates(HasStringBuilder b)) =>
+  HasString rebuild(void Function(HasStringBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -887,7 +887,7 @@ class HasStringBuilder
   }
 
   @override
-  void update(void updates(HasStringBuilder b)) {
+  void update(void Function(HasStringBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -903,7 +903,7 @@ class _$HasDouble extends HasDouble {
   @override
   final double field;
 
-  factory _$HasDouble([void updates(HasDoubleBuilder b)]) =>
+  factory _$HasDouble([void Function(HasDoubleBuilder) updates]) =>
       (new HasDoubleBuilder()..update(updates)).build();
 
   _$HasDouble._({this.field}) : super._() {
@@ -913,7 +913,7 @@ class _$HasDouble extends HasDouble {
   }
 
   @override
-  HasDouble rebuild(void updates(HasDoubleBuilder b)) =>
+  HasDouble rebuild(void Function(HasDoubleBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -964,7 +964,7 @@ class HasDoubleBuilder
   }
 
   @override
-  void update(void updates(HasDoubleBuilder b)) {
+  void update(void Function(HasDoubleBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -983,7 +983,7 @@ class _$UsesChainedInterface extends UsesChainedInterface {
   final int foo;
 
   factory _$UsesChainedInterface(
-          [void updates(UsesChainedInterfaceBuilder b)]) =>
+          [void Function(UsesChainedInterfaceBuilder) updates]) =>
       (new UsesChainedInterfaceBuilder()..update(updates)).build();
 
   _$UsesChainedInterface._({this.bar, this.foo}) : super._() {
@@ -996,7 +996,8 @@ class _$UsesChainedInterface extends UsesChainedInterface {
   }
 
   @override
-  UsesChainedInterface rebuild(void updates(UsesChainedInterfaceBuilder b)) =>
+  UsesChainedInterface rebuild(
+          void Function(UsesChainedInterfaceBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1057,7 +1058,7 @@ class UsesChainedInterfaceBuilder
   }
 
   @override
-  void update(void updates(UsesChainedInterfaceBuilder b)) {
+  void update(void Function(UsesChainedInterfaceBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -1073,7 +1074,7 @@ class _$UsesHandCoded extends UsesHandCoded {
   @override
   final int fieldInBaseBuilder;
 
-  factory _$UsesHandCoded([void updates(UsesHandCodedBuilder b)]) =>
+  factory _$UsesHandCoded([void Function(UsesHandCodedBuilder) updates]) =>
       (new UsesHandCodedBuilder()..update(updates)).build();
 
   _$UsesHandCoded._({this.fieldInBaseBuilder}) : super._() {
@@ -1083,7 +1084,7 @@ class _$UsesHandCoded extends UsesHandCoded {
   }
 
   @override
-  UsesHandCoded rebuild(void updates(UsesHandCodedBuilder b)) =>
+  UsesHandCoded rebuild(void Function(UsesHandCodedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1137,7 +1138,7 @@ class UsesHandCodedBuilder
   }
 
   @override
-  void update(void updates(UsesHandCodedBuilder b)) {
+  void update(void Function(UsesHandCodedBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -1152,22 +1153,22 @@ class UsesHandCodedBuilder
 
 abstract class OneBuilder {
   void replace(One other);
-  void update(void updates(OneBuilder b));
+  void update(void Function(OneBuilder) updates);
 }
 
 abstract class TwoBuilder {
   void replace(Two other);
-  void update(void updates(TwoBuilder b));
+  void update(void Function(TwoBuilder) updates);
 }
 
 class _$ImplementsTwo extends ImplementsTwo {
-  factory _$ImplementsTwo([void updates(ImplementsTwoBuilder b)]) =>
+  factory _$ImplementsTwo([void Function(ImplementsTwoBuilder) updates]) =>
       (new ImplementsTwoBuilder()..update(updates)).build();
 
   _$ImplementsTwo._() : super._();
 
   @override
-  ImplementsTwo rebuild(void updates(ImplementsTwoBuilder b)) =>
+  ImplementsTwo rebuild(void Function(ImplementsTwoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1209,7 +1210,7 @@ class ImplementsTwoBuilder
   }
 
   @override
-  void update(void updates(ImplementsTwoBuilder b)) {
+  void update(void Function(ImplementsTwoBuilder) updates) {
     if (updates != null) updates(this);
   }
 

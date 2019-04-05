@@ -16,7 +16,7 @@ class _$GeneratorError extends GeneratorError {
   @override
   final String fix;
 
-  factory _$GeneratorError([void updates(GeneratorErrorBuilder b)]) =>
+  factory _$GeneratorError([void Function(GeneratorErrorBuilder) updates]) =>
       (new GeneratorErrorBuilder()..update(updates)).build();
 
   _$GeneratorError._({this.message, this.offset, this.length, this.fix})
@@ -27,7 +27,7 @@ class _$GeneratorError extends GeneratorError {
   }
 
   @override
-  GeneratorError rebuild(void updates(GeneratorErrorBuilder b)) =>
+  GeneratorError rebuild(void Function(GeneratorErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -104,7 +104,7 @@ class GeneratorErrorBuilder
   }
 
   @override
-  void update(void updates(GeneratorErrorBuilder b)) {
+  void update(void Function(GeneratorErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 

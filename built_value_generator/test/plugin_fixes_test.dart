@@ -17,7 +17,7 @@ class Foo implements Built {
 part '_resolve_source.g.dart';
 
 abstract class Foo implements Built<Foo, FooBuilder> {
-  factory Foo([updates(FooBuilder b)]) = _$Foo;
+  factory Foo([void Function(FooBuilder) updates]) = _$Foo;
   Foo._();
 }''');
     });

@@ -6,6 +6,7 @@
   as the fallback when `valueOf` or deserialization fails.
 - Make it possible to merge `Serializers` instances: add a `builderFactories`
   getter that returns installed builder factories.
+- Use new `Function` syntax everywhere.
 - Bug fix: only generate builder factories for fields that are `Built`
   types or `built_collection` collections.
 

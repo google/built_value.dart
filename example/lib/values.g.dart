@@ -307,7 +307,7 @@ class _$SimpleValue extends SimpleValue {
   @override
   final String aString;
 
-  factory _$SimpleValue([void updates(SimpleValueBuilder b)]) =>
+  factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
@@ -317,7 +317,7 @@ class _$SimpleValue extends SimpleValue {
   }
 
   @override
-  SimpleValue rebuild(void updates(SimpleValueBuilder b)) =>
+  SimpleValue rebuild(void Function(SimpleValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -376,7 +376,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 
   @override
-  void update(void updates(SimpleValueBuilder b)) {
+  void update(void Function(SimpleValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -392,7 +392,7 @@ class _$VerySimpleValue extends VerySimpleValue {
   @override
   final int value;
 
-  factory _$VerySimpleValue([void updates(VerySimpleValueBuilder b)]) =>
+  factory _$VerySimpleValue([void Function(VerySimpleValueBuilder) updates]) =>
       (new VerySimpleValueBuilder()..update(updates)).build();
 
   _$VerySimpleValue._({this.value}) : super._() {
@@ -402,7 +402,7 @@ class _$VerySimpleValue extends VerySimpleValue {
   }
 
   @override
-  VerySimpleValue rebuild(void updates(VerySimpleValueBuilder b)) =>
+  VerySimpleValue rebuild(void Function(VerySimpleValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -454,7 +454,7 @@ class VerySimpleValueBuilder
   }
 
   @override
-  void update(void updates(VerySimpleValueBuilder b)) {
+  void update(void Function(VerySimpleValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -472,7 +472,7 @@ class _$CompoundValue extends CompoundValue {
   @override
   final ValidatedValue validatedValue;
 
-  factory _$CompoundValue([void updates(CompoundValueBuilder b)]) =>
+  factory _$CompoundValue([void Function(CompoundValueBuilder) updates]) =>
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
@@ -482,7 +482,7 @@ class _$CompoundValue extends CompoundValue {
   }
 
   @override
-  CompoundValue rebuild(void updates(CompoundValueBuilder b)) =>
+  CompoundValue rebuild(void Function(CompoundValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -546,7 +546,7 @@ class CompoundValueBuilder
   }
 
   @override
-  void update(void updates(CompoundValueBuilder b)) {
+  void update(void Function(CompoundValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -582,7 +582,7 @@ class _$ValidatedValue extends ValidatedValue {
   @override
   final String aString;
 
-  factory _$ValidatedValue([void updates(ValidatedValueBuilder b)]) =>
+  factory _$ValidatedValue([void Function(ValidatedValueBuilder) updates]) =>
       (new ValidatedValueBuilder()..update(updates)).build();
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
@@ -592,7 +592,7 @@ class _$ValidatedValue extends ValidatedValue {
   }
 
   @override
-  ValidatedValue rebuild(void updates(ValidatedValueBuilder b)) =>
+  ValidatedValue rebuild(void Function(ValidatedValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -653,7 +653,7 @@ class ValidatedValueBuilder
   }
 
   @override
-  void update(void updates(ValidatedValueBuilder b)) {
+  void update(void Function(ValidatedValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -672,7 +672,7 @@ class _$ValueWithCode extends ValueWithCode {
   @override
   final String aString;
 
-  factory _$ValueWithCode([void updates(ValueWithCodeBuilder b)]) =>
+  factory _$ValueWithCode([void Function(ValueWithCodeBuilder) updates]) =>
       (new ValueWithCodeBuilder()..update(updates)).build();
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
@@ -682,7 +682,7 @@ class _$ValueWithCode extends ValueWithCode {
   }
 
   @override
-  ValueWithCode rebuild(void updates(ValueWithCodeBuilder b)) =>
+  ValueWithCode rebuild(void Function(ValueWithCodeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -742,7 +742,7 @@ class ValueWithCodeBuilder
   }
 
   @override
-  void update(void updates(ValueWithCodeBuilder b)) {
+  void update(void Function(ValueWithCodeBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -761,7 +761,8 @@ class _$ValueWithDefaults extends ValueWithDefaults {
   @override
   final String aString;
 
-  factory _$ValueWithDefaults([void updates(ValueWithDefaultsBuilder b)]) =>
+  factory _$ValueWithDefaults(
+          [void Function(ValueWithDefaultsBuilder) updates]) =>
       (new ValueWithDefaultsBuilder()..update(updates)).build()
           as _$ValueWithDefaults;
 
@@ -772,7 +773,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
   }
 
   @override
-  ValueWithDefaults rebuild(void updates(ValueWithDefaultsBuilder b)) =>
+  ValueWithDefaults rebuild(void Function(ValueWithDefaultsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -848,7 +849,7 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   }
 
   @override
-  void update(void updates(ValueWithDefaultsBuilder b)) {
+  void update(void Function(ValueWithDefaultsBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -867,7 +868,7 @@ class _$DerivedValue extends DerivedValue {
   int __derivedValue;
   Iterable<String> __derivedString;
 
-  factory _$DerivedValue([void updates(DerivedValueBuilder b)]) =>
+  factory _$DerivedValue([void Function(DerivedValueBuilder) updates]) =>
       (new DerivedValueBuilder()..update(updates)).build();
 
   _$DerivedValue._({this.anInt}) : super._() {
@@ -883,7 +884,7 @@ class _$DerivedValue extends DerivedValue {
   Iterable<String> get derivedString => __derivedString ??= super.derivedString;
 
   @override
-  DerivedValue rebuild(void updates(DerivedValueBuilder b)) =>
+  DerivedValue rebuild(void Function(DerivedValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -934,7 +935,7 @@ class DerivedValueBuilder
   }
 
   @override
-  void update(void updates(DerivedValueBuilder b)) {
+  void update(void Function(DerivedValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -954,7 +955,7 @@ class _$Account extends Account {
   @override
   final BuiltMap<String, JsonObject> keyValues;
 
-  factory _$Account([void updates(AccountBuilder b)]) =>
+  factory _$Account([void Function(AccountBuilder) updates]) =>
       (new AccountBuilder()..update(updates)).build();
 
   _$Account._({this.id, this.name, this.keyValues}) : super._() {
@@ -970,7 +971,7 @@ class _$Account extends Account {
   }
 
   @override
-  Account rebuild(void updates(AccountBuilder b)) =>
+  Account rebuild(void Function(AccountBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1039,7 +1040,7 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
   }
 
   @override
-  void update(void updates(AccountBuilder b)) {
+  void update(void Function(AccountBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -1069,7 +1070,7 @@ class _$WireNameValue extends WireNameValue {
   @override
   final int value;
 
-  factory _$WireNameValue([void updates(WireNameValueBuilder b)]) =>
+  factory _$WireNameValue([void Function(WireNameValueBuilder) updates]) =>
       (new WireNameValueBuilder()..update(updates)).build();
 
   _$WireNameValue._({this.value}) : super._() {
@@ -1079,7 +1080,7 @@ class _$WireNameValue extends WireNameValue {
   }
 
   @override
-  WireNameValue rebuild(void updates(WireNameValueBuilder b)) =>
+  WireNameValue rebuild(void Function(WireNameValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1130,7 +1131,7 @@ class WireNameValueBuilder
   }
 
   @override
-  void update(void updates(WireNameValueBuilder b)) {
+  void update(void Function(WireNameValueBuilder) updates) {
     if (updates != null) updates(this);
   }
 

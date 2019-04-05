@@ -12,7 +12,8 @@ abstract class MemoizedGetter
   String get returnType;
   String get name;
 
-  factory MemoizedGetter([updates(MemoizedGetterBuilder b)]) = _$MemoizedGetter;
+  factory MemoizedGetter([void Function(MemoizedGetterBuilder) updates]) =
+      _$MemoizedGetter;
   MemoizedGetter._();
 
   static Iterable<MemoizedGetter> fromClassElement(ClassElement classElement) {

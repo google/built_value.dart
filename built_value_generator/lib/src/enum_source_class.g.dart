@@ -22,7 +22,7 @@ class _$EnumSourceClass extends EnumSourceClass {
   String __mixinDeclaration;
   Iterable<String> __identifiers;
 
-  factory _$EnumSourceClass([void updates(EnumSourceClassBuilder b)]) =>
+  factory _$EnumSourceClass([void Function(EnumSourceClassBuilder) updates]) =>
       (new EnumSourceClassBuilder()..update(updates)).build();
 
   _$EnumSourceClass._({this.element}) : super._() {
@@ -70,7 +70,7 @@ class _$EnumSourceClass extends EnumSourceClass {
   Iterable<String> get identifiers => __identifiers ??= super.identifiers;
 
   @override
-  EnumSourceClass rebuild(void updates(EnumSourceClassBuilder b)) =>
+  EnumSourceClass rebuild(void Function(EnumSourceClassBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -123,7 +123,7 @@ class EnumSourceClassBuilder
   }
 
   @override
-  void update(void updates(EnumSourceClassBuilder b)) {
+  void update(void Function(EnumSourceClassBuilder) updates) {
     if (updates != null) updates(this);
   }
 

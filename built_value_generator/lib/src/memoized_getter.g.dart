@@ -12,7 +12,7 @@ class _$MemoizedGetter extends MemoizedGetter {
   @override
   final String name;
 
-  factory _$MemoizedGetter([void updates(MemoizedGetterBuilder b)]) =>
+  factory _$MemoizedGetter([void Function(MemoizedGetterBuilder) updates]) =>
       (new MemoizedGetterBuilder()..update(updates)).build();
 
   _$MemoizedGetter._({this.returnType, this.name}) : super._() {
@@ -25,7 +25,7 @@ class _$MemoizedGetter extends MemoizedGetter {
   }
 
   @override
-  MemoizedGetter rebuild(void updates(MemoizedGetterBuilder b)) =>
+  MemoizedGetter rebuild(void Function(MemoizedGetterBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -86,7 +86,7 @@ class MemoizedGetterBuilder
   }
 
   @override
-  void update(void updates(MemoizedGetterBuilder b)) {
+  void update(void Function(MemoizedGetterBuilder) updates) {
     if (updates != null) updates(this);
   }
 

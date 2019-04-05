@@ -46,7 +46,7 @@ import 'package:test_support/test_support.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _$Value;
 }
 '''), contains('implements StructuredSerializer<Value>'));
     });
@@ -99,7 +99,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
   bool get aBool;
   
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _$Value;
 }
 '''), contains(r'_$serializers'));
     });
@@ -117,7 +117,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
   bool get aBool;
   
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _$Value;
 }
 
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
@@ -140,7 +140,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
   bool get aBool;
   
   Value._();
-  factory Value([updates(ValueBuilder b)]) = _$Value;
+  factory Value([void Function(ValueBuilder) updates]) = _$Value;
 }
 
 abstract class OtherValue implements Built<OtherValue, OtherValueBuilder> {
@@ -148,7 +148,7 @@ abstract class OtherValue implements Built<OtherValue, OtherValueBuilder> {
   bool get aBool;
   
   OtherValue._();
-  factory OtherValue([updates(OtherValueBuilder b)]) = _$OtherValue;
+  factory OtherValue([void Function(OtherValueBuilder) updates]) = _$OtherValue;
 }
 '''),
           contains(r'1. Declare OtherValue.serializer as: '

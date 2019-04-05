@@ -14,13 +14,13 @@ part '_resolve_source.g.dart';
 
 class Foo implements Built<Foo, FooBuilder> {
   Foo._();
-  factory Foo([updates(FooBuilder b)]) = _$Foo;
+  factory Foo([void Function(FooBuilder) updates]) = _$Foo;
 }''', r'''
 part '_resolve_source.g.dart';
 
 abstract class Foo implements Built<Foo, FooBuilder> {
   Foo._();
-  factory Foo([updates(FooBuilder b)]) = _$Foo;
+  factory Foo([void Function(FooBuilder) updates]) = _$Foo;
 }''');
     });
   });

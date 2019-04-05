@@ -27,7 +27,8 @@ abstract class GeneratorError
   @nullable
   String get fix;
 
-  factory GeneratorError([updates(GeneratorErrorBuilder b)]) = _$GeneratorError;
+  factory GeneratorError([void Function(GeneratorErrorBuilder) updates]) =
+      _$GeneratorError;
   GeneratorError._() {
     if (((offset == null) != (length == null)) ||
         ((offset == null) != (fix == null))) {
