@@ -165,7 +165,16 @@ class BuiltValueEnumConst {
   /// indicates the name is to be taken from the literal field name.
   final String wireName;
 
-  const BuiltValueEnumConst({this.wireName});
+  /// Marks a value that is used as a fallback when an unrecognized value
+  /// is encountered.
+  ///
+  /// Defaults to `false`. At most one fallback is allowed per `EnumClass`.
+  ///
+  /// Applies to the `valueOf` method and to deserialization; both will use
+  /// the fallback, if available, rather than throwing an exception.
+  final bool fallback;
+
+  const BuiltValueEnumConst({this.wireName, this.fallback = false});
 }
 
 /// Enum Class base class.

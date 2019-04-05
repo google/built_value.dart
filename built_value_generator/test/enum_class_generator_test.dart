@@ -533,6 +533,30 @@ class TestEnum extends EnumClass {
 abstract class TestEnumMixin = Object with _$TestEnumMixin;
 '''), contains(correctOutput));
     });
+
+    test('fails if there is more than one fallback field', () async {
+      expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  @BuiltValueEnumConst(fallback: true)
+  static const TestEnum yes = _$yes;
+  @BuiltValueEnumConst(fallback: true)
+  static const TestEnum no = _$no;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Remove `fallback = true` so that at most one constant is the fallback.'''));
+    });
   });
 }
 
@@ -593,5 +617,12 @@ class EnumClass {
 
   @override
   String toString() => name;
+}
+
+class BuiltValueEnumConst {
+  final String wireName;
+  final bool fallback;
+
+  const BuiltValueEnumConst({this.wireName, this.fallback = false});
 }
 ''';

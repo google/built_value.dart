@@ -266,7 +266,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
       {FullType specifiedType = FullType.unspecified}) {
     ${fields.isEmpty ? 'return <Object>[];' : '''
     ${_generateGenericsSerializerPreamble()}
-    var result = <Object>[${_generateRequiredFieldSerializers()}];
+    final result = <Object>[${_generateRequiredFieldSerializers()}];
     ${_generateNullableFieldSerializers()}
     return result;
     '''}
@@ -277,9 +277,9 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
       {FullType specifiedType = FullType.unspecified}) {
     ${_generateGenericsSerializerPreamble()}
     ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
-    var result = ${_generateNewBuilder()};
+    final result = ${_generateNewBuilder()};
 
-    var iterator = serialized.iterator;
+    final iterator = serialized.iterator;
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
