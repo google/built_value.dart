@@ -535,7 +535,8 @@ abstract class TestEnumMixin = Object with _$TestEnumMixin;
     });
 
     test('fails if there is more than one fallback field', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -553,9 +554,11 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''),
+          endsWith(r'''Please make the following changes to use EnumClass:
 
-1. Remove `fallback = true` so that at most one constant is the fallback.'''));
+1. Remove `fallback = true` so that at most one constant is the fallback.'''
+              ' Currently on "TestEnum" fields "yes", "no".'));
     });
   });
 }

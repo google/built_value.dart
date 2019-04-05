@@ -134,7 +134,9 @@ abstract class EnumSourceClass
         fields.where((field) => field.settings.fallback).toList();
     if (fallbackFields.length > 1) {
       result.add('Remove `fallback = true` '
-          'so that at most one constant is the fallback.');
+          'so that at most one constant is the fallback. '
+          'Currently on "$name" fields '
+          '${fallbackFields.map((field) => '"${field.name}"').join(', ')}.');
     }
     return result;
   }
