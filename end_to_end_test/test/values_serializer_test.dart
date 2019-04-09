@@ -340,4 +340,17 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('SerializesNullsValue', () {
+    var data = SerializesNullsValue();
+    var serialized = ['SerializesNullsValue', 'value', null];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }
