@@ -1,6 +1,6 @@
 # Changelog
 
-# 6.4.0 (unreleased)
+# 6.4.0
 
 - Add `@BuiltValue(generateBuilderOnSetField: true)` which provides a way to
   listen for `set` calls on generated builders.
