@@ -121,6 +121,9 @@ abstract class ValueSourceClass
         autoCreateNestedBuilders:
             annotation.getField('autoCreateNestedBuilders')?.toBoolValue() ??
                 true,
+        generateBuilderOnSetField:
+            annotation.getField('generateBuilderOnSetField')?.toBoolValue() ??
+                false,
         wireName: annotation.getField('wireName')?.toStringValue());
   }
 
@@ -733,27 +736,39 @@ abstract class ValueSourceClass
         result.writeln();
       }
     } else {
-      for (var field in fields) {
-        final type = field.typeInCompilationUnit(compilationUnit);
-        final typeInBuilder = field.typeInBuilder(compilationUnit);
-        final name = field.name;
+      if (settings.generateBuilderOnSetField) {
+        result.writeln('void Function() onSet = () {};');
+        result.writeln();
+      }
 
-        if (field.isNestedBuilder) {
-          result.writeln('$typeInBuilder _$name;');
-          result.writeln('$typeInBuilder get $name =>');
-          if (settings.autoCreateNestedBuilders) {
-            result.writeln('_\$this._$name ??= new $typeInBuilder();');
-          } else {
-            result.writeln('_\$this._$name;');
-          }
-          result.writeln('set $name($typeInBuilder $name) =>'
-              '_\$this._$name = $name;');
+      for (var field in fields) {
+        var type = field.typeInCompilationUnit(compilationUnit);
+        var typeInBuilder = field.typeInBuilder(compilationUnit);
+        var fieldType = field.isNestedBuilder ? typeInBuilder : type;
+        var name = field.name;
+
+        // Field.
+        result.writeln('$fieldType _$name;');
+
+        // Getter.
+        result.writeln('$fieldType get $name =>');
+        if (field.isNestedBuilder && settings.autoCreateNestedBuilders) {
+          result.writeln('_\$this._$name ??= new $typeInBuilder();');
         } else {
-          result.writeln('$type _$name;');
-          result.writeln('$type get $name => _\$this._$name;');
-          result.writeln('set $name($type $name) =>'
+          result.writeln('_\$this._$name;');
+        }
+
+        // Setter.
+        if (settings.generateBuilderOnSetField) {
+          result.writeln('set $name($fieldType $name) {'
+              '_\$this._$name = $name;'
+              'onSet();'
+              '}');
+        } else {
+          result.writeln('set $name($fieldType $name) =>'
               '_\$this._$name = $name;');
         }
+
         result.writeln();
       }
     }

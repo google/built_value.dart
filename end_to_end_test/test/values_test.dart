@@ -300,4 +300,14 @@ void main() {
       ValueUsingImportAs((b) => b..value = TestEnum.yes);
     });
   });
+
+  group('ValueWithOnSet', () {
+    test('notifies on sets', () {
+      var notified = false;
+      var builder = ValueWithOnSet((b) => b..value = 2).toBuilder();
+      builder.onSet = () => notified = true;
+      builder.value = 3;
+      expect(notified, true);
+    });
+  });
 }

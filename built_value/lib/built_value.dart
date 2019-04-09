@@ -91,6 +91,15 @@ class BuiltValue {
   /// is fully generated.
   final bool comparableBuilders;
 
+  /// Whether to generate an `onSet` field in the builder.
+  ///
+  /// Defaults to `false`.
+  ///
+  /// If generated the `onSet` field will have type `void Function()`, and will
+  /// be called after any setter is called. Assign your own function to
+  /// `onSet` to respond to changes to the builder.
+  final bool generateBuilderOnSetField;
+
   /// The wire name when the class is serialized. Defaults to `null` which
   /// indicates that the name is to be taken from the literal class name.
   final String wireName;
@@ -100,6 +109,7 @@ class BuiltValue {
       this.nestedBuilders = true,
       this.autoCreateNestedBuilders = true,
       this.comparableBuilders = false,
+      this.generateBuilderOnSetField = false,
       this.wireName});
 }
 
