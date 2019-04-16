@@ -1,3 +1,7 @@
+// Copyright (c) 2019, Google Inc. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 import 'package:built_value/iso_8601_duration_serializer.dart';
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
@@ -35,7 +39,7 @@ void main() {
   ];
 
   group('Duration with known specifiedType', () {
-    var specifiedType = const FullType(Duration);
+    final specifiedType = const FullType(Duration);
     testTable.forEach((testValue) {
       test('can be serialized', () {
         expect(
@@ -60,7 +64,7 @@ void main() {
   });
 
   group('Duration with unknown specifiedType', () {
-    var specifiedType = FullType.unspecified;
+    final specifiedType = FullType.unspecified;
     testTable.forEach((testValue) {
       test('can be serialized', () {
         expect(
@@ -73,6 +77,15 @@ void main() {
             serializers.deserialize(['Duration', testValue[#s]],
                 specifiedType: specifiedType),
             testValue[#d]);
+      });
+    });
+
+    group('Duration with subsecond data', () {
+      final data = Duration(seconds: 2, milliseconds: 4);
+      final specifiedType = const FullType(Duration);
+      test('throws an error upon serialization', () {
+        expect(() => serializers.serialize(data, specifiedType: specifiedType),
+            throwsArgumentError);
       });
     });
   });

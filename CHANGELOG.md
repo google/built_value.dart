@@ -1,5 +1,10 @@
 # Changelog
 
+# 6.5.0
+
+- Add `Iso8601DurationSerializer` for use when you want ISO8601 serialization
+  instead of the default microseconds serialization.
+
 # 6.4.0
 
 - Add `@BuiltValue(generateBuilderOnSetField: true)` which provides a way to
