@@ -96,7 +96,7 @@ void main() {
           await generate(correctInput.replaceAll(
               'class TestEnum extends EnumClass {',
               'class TestEnum extends EnumClass {\n'
-              '  static const int anInt = 3;')),
+                  '  static const int anInt = 3;')),
           contains(correctOutput));
     });
 
@@ -105,7 +105,7 @@ void main() {
           await generate(correctInput.replaceAll(
               'class TestEnum extends EnumClass {',
               'class TestEnum extends EnumClass {\n'
-              '  static const aNull = null;')),
+                  '  static const aNull = null;')),
           contains(r'''Please make the following changes to use EnumClass:
 
 1. Specify a type for field "aNull".'''));

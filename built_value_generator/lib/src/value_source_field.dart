@@ -226,7 +226,7 @@ abstract class ValueSourceField
       result.add(GeneratorError((b) => b
         ..message =
             'Make builder field $name a normal field or a getter/setter '
-            'pair.'));
+                'pair.'));
     }
 
     return result;
