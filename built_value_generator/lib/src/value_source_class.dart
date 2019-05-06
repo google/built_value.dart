@@ -459,7 +459,7 @@ abstract class ValueSourceClass
         result.add(GeneratorError((b) => b
           ..message =
               'Add a factory so your class can be instantiated. Example:\n\n'
-              '$exampleFactory'
+                  '$exampleFactory'
           ..offset = classDeclaration.rightBracket.offset
           ..length = 0
           ..fix = '  $exampleFactory\n'));
@@ -502,7 +502,7 @@ abstract class ValueSourceClass
         result.add(GeneratorError((b) => b
           ..message =
               'Make builder class implement Builder<$expectedBuilderParameters>. '
-              'Currently: Builder<$builderParameters>'));
+                  'Currently: Builder<$builderParameters>'));
       }
     }
 

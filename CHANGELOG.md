@@ -4,6 +4,7 @@
 
 - Add `Iso8601DurationSerializer` for use when you want ISO8601 serialization
   instead of the default microseconds serialization.
+- Bump versions of `analyzer`, `analyzer_plugin` and `build_config`.
 
 # 6.4.0
 
