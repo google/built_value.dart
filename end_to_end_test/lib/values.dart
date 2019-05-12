@@ -513,3 +513,17 @@ abstract class SerializesNullsValue
       _$SerializesNullsValue;
   SerializesNullsValue._();
 }
+
+// Check that `toString` from a mixin is not redefined.
+abstract class CustomToStringValue extends Object
+    with CustomToString
+    implements Built<CustomToStringValue, CustomToStringValueBuilder> {
+  factory CustomToStringValue(
+          [void Function(CustomToStringValueBuilder) updates]) =
+      _$CustomToStringValue;
+  CustomToStringValue._();
+}
+
+mixin CustomToString {
+  String toString() => 'custom';
+}

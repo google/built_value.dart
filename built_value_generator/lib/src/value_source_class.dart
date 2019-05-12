@@ -261,7 +261,13 @@ abstract class ValueSourceClass
   bool get implementsOperatorEquals => element.getMethod('==') != null;
 
   @memoized
-  bool get implementsToString => element.getMethod('toString') != null;
+  bool get implementsToString {
+    // Check for any `toString` implementation apart from the one defined on
+    // `Object`.
+    var method = element.lookUpConcreteMethod('toString', element.library);
+    var clazz = method.enclosingElement;
+    return clazz is! ClassElement || clazz.name != 'Object';
+  }
 
   @memoized
   CompilationUnitElement get compilationUnit =>
