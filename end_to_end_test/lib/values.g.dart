@@ -67,7 +67,6 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
         ..add(serializers.serialize(object.aString,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 
@@ -117,7 +116,6 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
         ..add(serializers.serialize(object.validatedValue,
             specifiedType: const FullType(ValidatedValue)));
     }
-
     return result;
   }
 
@@ -171,7 +169,6 @@ class _$CompoundValueNoNestingSerializer
         ..add(serializers.serialize(object.validatedValue,
             specifiedType: const FullType(ValidatedValue)));
     }
-
     return result;
   }
 
@@ -272,7 +269,6 @@ class _$CompoundValueComparableBuildersSerializer
         ..add(serializers.serialize(object.validatedValue,
             specifiedType: const FullType(ValidatedValue)));
     }
-
     return result;
   }
 
@@ -328,7 +324,6 @@ class _$CompoundValueExplicitNoNestingSerializer
         ..add(serializers.serialize(object.validatedValue,
             specifiedType: const FullType(ValidatedValue)));
     }
-
     return result;
   }
 
@@ -379,7 +374,6 @@ class _$ValidatedValueSerializer
         ..add(serializers.serialize(object.aString,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 
@@ -727,7 +721,6 @@ class _$FieldDiscoveryValueSerializer
         ..add(serializers.serialize(object.recursiveValue,
             specifiedType: const FullType(FieldDiscoveryValue)));
     }
-
     return result;
   }
 
@@ -993,12 +986,13 @@ class _$SerializesNullsValueSerializer
   Iterable serialize(Serializers serializers, SerializesNullsValue object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
-
-    result
-      ..add('value')
-      ..add(serializers.serialize(object.value,
+    result.add('value');
+    if (object.value == null) {
+      result.add(null);
+    } else {
+      result.add(serializers.serialize(object.value,
           specifiedType: const FullType(String)));
-
+    }
     return result;
   }
 
@@ -1012,6 +1006,7 @@ class _$SerializesNullsValueSerializer
       final key = iterator.current as String;
       iterator.moveNext();
       final dynamic value = iterator.current;
+      if (value == null) continue;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
