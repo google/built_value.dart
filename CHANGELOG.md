@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.6.0
+
+- Allow providing your own `toString` via a mixin.
+
 # 6.5.0
 
 - Add `Iso8601DurationSerializer` for use when you want ISO8601 serialization
