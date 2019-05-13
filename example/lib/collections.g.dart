@@ -74,7 +74,6 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
             specifiedType: const FullType(BuiltSetMultimap,
                 const [const FullType(String), const FullType(bool)])));
     }
-
     return result;
   }
 

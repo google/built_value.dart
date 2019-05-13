@@ -36,7 +36,6 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
         ..add(serializers.serialize(object.aString,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 
@@ -126,7 +125,6 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
         ..add(serializers.serialize(object.validatedValue,
             specifiedType: const FullType(ValidatedValue)));
     }
-
     return result;
   }
 
@@ -176,7 +174,6 @@ class _$ValidatedValueSerializer
         ..add(serializers.serialize(object.aString,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 

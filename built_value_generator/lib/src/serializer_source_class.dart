@@ -294,7 +294,8 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
       final key = iterator.current as String;
       iterator.moveNext();
       final dynamic value = iterator.current;
-      switch (key) {
+      ${serializerSettings.serializeNulls ? 'if (value == null) continue;' : ''}'''
+              '''switch (key) {
         ${_generateFieldDeserializers()}
       }
     }
@@ -418,23 +419,29 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
 
   String _generateNullableFieldSerializers() {
     return fields.where((field) => field.isNullable).map((field) {
+      var serializeField = '''serializers.serialize(
+          object.${field.name},
+          specifiedType:
+          ${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())})''';
+
       // By default, omit nulls; but if we were asked to include nulls, just
       // write them.
-      var prefix = serializerSettings.serializeNulls
-          ? ''
-          : 'if (object.${field.name} != null) {';
-      var postfix = serializerSettings.serializeNulls ? '' : '}';
-
-      return '''
-    $prefix
-      result
-          ..add('${escapeString(field.wireName)}')
-          ..add(serializers.serialize(
-          object.${field.name}, 
-          specifiedType:
-              ${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())}));
-     $postfix
-''';
+      if (serializerSettings.serializeNulls) {
+        return '''
+          result.add('${escapeString(field.wireName)}');
+          if (object.${field.name} == null) {
+            result.add(null);
+          } else {
+            result.add($serializeField);
+          }''';
+      } else {
+        return '''
+          if (object.${field.name} != null) {
+            result
+              ..add('${escapeString(field.wireName)}')
+              ..add($serializeField);           
+          }''';
+      }
     }).join('');
   }
 

@@ -44,7 +44,6 @@ class _$StandardJsonValueSerializer
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
-
     return result;
   }
 

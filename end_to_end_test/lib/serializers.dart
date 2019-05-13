@@ -24,6 +24,7 @@ part 'serializers.g.dart';
   Cage,
   CollectionGenericValue,
   Collections,
+  CollectionsWithNulls,
   CompoundValue,
   CompoundValueExplicitNoNesting,
   CompoundValueNoNesting,
