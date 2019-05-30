@@ -437,7 +437,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
           if (object.${field.name} != null) {
             result
               ..add('${escapeString(field.wireName)}')
-              ..add($serializeField);           
+              ..add($serializeField);
           }''';
       }
     }).join('');
