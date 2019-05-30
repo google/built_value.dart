@@ -1,9 +1,10 @@
 # Changelog
 
-# 6.6.0 (unreleased)
+# 6.6.0
 
 - Allow providing your own `toString` via a mixin.
 - Fix `BuiltValueSerializer(serializeNulls: true)` for non-primitive fields.
+- Stop using old analyzer API; require analyzer `0.34.0`.
 
 # 6.5.0
 
