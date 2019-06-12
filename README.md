@@ -188,12 +188,12 @@ While full, compiled examples are available in
 a common usage example is shown here. This example assumes that you are writing
 a client for a JSON API representing a person that looks like the following:
 
-```js
+```json
 {
-  id: 12345,
-  age: 35,
-  first_name: 'Jimmy',
-  hobbies: ['jumping', 'basketball']
+  "id": 12345,
+  "age": 35,
+  "first_name": "Jimmy",
+  "hobbies": ["jumping", "basketball"]
 }
 ```
 
