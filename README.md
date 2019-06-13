@@ -104,7 +104,7 @@ code. Luckily, even this bit of boilerplate can be got automated using code
 snippets support in your favourite text editor. For example, in IntelliJ you
 can use following live template:
 
-```
+```dart
 abstract class $CLASS_NAME$ implements Built<$CLASS_NAME$, $CLASS_NAME$Builder> {
   $CLASS_NAME$._();
   factory $CLASS_NAME$([void Function($CLASS_NAME$Builder) updates]) = _$$$CLASS_NAME$;
@@ -188,12 +188,12 @@ While full, compiled examples are available in
 a common usage example is shown here. This example assumes that you are writing
 a client for a JSON API representing a person that looks like the following:
 
-```
+```json
 {
-  id: 12345,
-  age: 35,
-  first_name: 'Jimmy',
-  hobbies: ['jumping', 'basketball']
+  "id": 12345,
+  "age": 35,
+  "first_name": "Jimmy",
+  "hobbies": ["jumping", "basketball"]
 }
 ```
 
@@ -206,7 +206,7 @@ response, as well as the
 annotation to map between the property name on the response and the name of the
 member variable in the `Person` class.
 
-```
+```dart
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_collection/built_collection.dart';
