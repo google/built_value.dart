@@ -270,7 +270,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
   final String wireName = '${escapeString(wireName)}';
 
   @override
-  Iterable serialize(Serializers serializers, $name object,
+  Iterable<Object> serialize(Serializers serializers, $name object,
       {FullType specifiedType = FullType.unspecified}) {
     ${fields.isEmpty ? 'return <Object>[];' : '''
     ${_generateGenericsSerializerPreamble()}
@@ -281,7 +281,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
   }
 
   @override
-  $name deserialize(Serializers serializers, Iterable serialized,
+  $name deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     ${_generateGenericsSerializerPreamble()}
     ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
