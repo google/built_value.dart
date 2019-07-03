@@ -17,7 +17,7 @@ class _$StandardJsonValueSerializer
   final String wireName = 'StandardJsonValue';
 
   @override
-  Iterable serialize(Serializers serializers, StandardJsonValue object,
+  Iterable<Object> serialize(Serializers serializers, StandardJsonValue object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'number',
@@ -48,7 +48,8 @@ class _$StandardJsonValueSerializer
   }
 
   @override
-  StandardJsonValue deserialize(Serializers serializers, Iterable serialized,
+  StandardJsonValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new StandardJsonValueBuilder();
 
@@ -71,25 +72,25 @@ class _$StandardJsonValueSerializer
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(String),
                 const FullType(JsonObject)
-              ])) as BuiltMap);
+              ])) as BuiltMap<dynamic, dynamic>);
           break;
         case 'zoo':
           result.zoo.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Animal)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
         case 'uniqueZoo':
           result.uniqueZoo.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltSet, const [const FullType(Animal)]))
-              as BuiltSet);
+              as BuiltSet<dynamic>);
           break;
         case 'strings':
           result.strings.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }

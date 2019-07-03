@@ -23,7 +23,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   final String wireName = 'Cat';
 
   @override
-  Iterable serialize(Serializers serializers, Cat object,
+  Iterable<Object> serialize(Serializers serializers, Cat object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'tail',
@@ -36,7 +36,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   }
 
   @override
-  Cat deserialize(Serializers serializers, Iterable serialized,
+  Cat deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CatBuilder();
 
@@ -68,7 +68,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   final String wireName = 'Fish';
 
   @override
-  Iterable serialize(Serializers serializers, Fish object,
+  Iterable<Object> serialize(Serializers serializers, Fish object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'fins',
@@ -81,7 +81,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   }
 
   @override
-  Fish deserialize(Serializers serializers, Iterable serialized,
+  Fish deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new FishBuilder();
 
@@ -113,7 +113,7 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
   final String wireName = 'Robot';
 
   @override
-  Iterable serialize(Serializers serializers, Robot object,
+  Iterable<Object> serialize(Serializers serializers, Robot object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'fins',
@@ -126,7 +126,7 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
   }
 
   @override
-  Robot deserialize(Serializers serializers, Iterable serialized,
+  Robot deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new RobotBuilder();
 
@@ -158,7 +158,7 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
   final String wireName = 'Cage';
 
   @override
-  Iterable serialize(Serializers serializers, Cage object,
+  Iterable<Object> serialize(Serializers serializers, Cage object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'inhabitant',
@@ -174,7 +174,7 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
   }
 
   @override
-  Cage deserialize(Serializers serializers, Iterable serialized,
+  Cage deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CageBuilder();
 
@@ -192,7 +192,7 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
           result.otherInhabitants.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Animal)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -208,7 +208,7 @@ class _$StandardCatSerializer implements StructuredSerializer<StandardCat> {
   final String wireName = 'StandardCat';
 
   @override
-  Iterable serialize(Serializers serializers, StandardCat object,
+  Iterable<Object> serialize(Serializers serializers, StandardCat object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'tail',
@@ -219,7 +219,7 @@ class _$StandardCatSerializer implements StructuredSerializer<StandardCat> {
   }
 
   @override
-  StandardCat deserialize(Serializers serializers, Iterable serialized,
+  StandardCat deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new StandardCatBuilder();
 
@@ -247,7 +247,7 @@ class _$HasStringSerializer implements StructuredSerializer<HasString> {
   final String wireName = 'HasString';
 
   @override
-  Iterable serialize(Serializers serializers, HasString object,
+  Iterable<Object> serialize(Serializers serializers, HasString object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'field',
@@ -259,7 +259,7 @@ class _$HasStringSerializer implements StructuredSerializer<HasString> {
   }
 
   @override
-  HasString deserialize(Serializers serializers, Iterable serialized,
+  HasString deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new HasStringBuilder();
 
@@ -287,7 +287,7 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
   final String wireName = 'HasDouble';
 
   @override
-  Iterable serialize(Serializers serializers, HasDouble object,
+  Iterable<Object> serialize(Serializers serializers, HasDouble object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'field',
@@ -299,7 +299,7 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
   }
 
   @override
-  HasDouble deserialize(Serializers serializers, Iterable serialized,
+  HasDouble deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new HasDoubleBuilder();
 
@@ -327,7 +327,7 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
   final String wireName = 'UsesHandCoded';
 
   @override
-  Iterable serialize(Serializers serializers, UsesHandCoded object,
+  Iterable<Object> serialize(Serializers serializers, UsesHandCoded object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'fieldInBaseBuilder',
@@ -339,7 +339,8 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
   }
 
   @override
-  UsesHandCoded deserialize(Serializers serializers, Iterable serialized,
+  UsesHandCoded deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UsesHandCodedBuilder();
 

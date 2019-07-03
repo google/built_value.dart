@@ -16,7 +16,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   final String wireName = 'Cat';
 
   @override
-  Iterable serialize(Serializers serializers, Cat object,
+  Iterable<Object> serialize(Serializers serializers, Cat object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'tail',
@@ -29,7 +29,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   }
 
   @override
-  Cat deserialize(Serializers serializers, Iterable serialized,
+  Cat deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CatBuilder();
 
@@ -61,7 +61,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   final String wireName = 'Fish';
 
   @override
-  Iterable serialize(Serializers serializers, Fish object,
+  Iterable<Object> serialize(Serializers serializers, Fish object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'fins',
@@ -74,7 +74,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   }
 
   @override
-  Fish deserialize(Serializers serializers, Iterable serialized,
+  Fish deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new FishBuilder();
 

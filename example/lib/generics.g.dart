@@ -22,7 +22,7 @@ class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
   final String wireName = 'GenericValue';
 
   @override
-  Iterable serialize(Serializers serializers, GenericValue object,
+  Iterable<Object> serialize(Serializers serializers, GenericValue object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -39,7 +39,7 @@ class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
   }
 
   @override
-  GenericValue deserialize(Serializers serializers, Iterable serialized,
+  GenericValue deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -76,7 +76,7 @@ class _$BoundGenericValueSerializer
   final String wireName = 'BoundGenericValue';
 
   @override
-  Iterable serialize(Serializers serializers, BoundGenericValue object,
+  Iterable<Object> serialize(Serializers serializers, BoundGenericValue object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -93,7 +93,8 @@ class _$BoundGenericValueSerializer
   }
 
   @override
-  BoundGenericValue deserialize(Serializers serializers, Iterable serialized,
+  BoundGenericValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -133,7 +134,8 @@ class _$CollectionGenericValueSerializer
   final String wireName = 'CollectionGenericValue';
 
   @override
-  Iterable serialize(Serializers serializers, CollectionGenericValue object,
+  Iterable<Object> serialize(
+      Serializers serializers, CollectionGenericValue object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -152,7 +154,7 @@ class _$CollectionGenericValueSerializer
 
   @override
   CollectionGenericValue deserialize(
-      Serializers serializers, Iterable serialized,
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -174,7 +176,7 @@ class _$CollectionGenericValueSerializer
         case 'values':
           result.values.replace(serializers.deserialize(value,
                   specifiedType: new FullType(BuiltList, [parameterT]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -191,7 +193,7 @@ class _$GenericContainerSerializer
   final String wireName = 'GenericContainer';
 
   @override
-  Iterable serialize(Serializers serializers, GenericContainer object,
+  Iterable<Object> serialize(Serializers serializers, GenericContainer object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'genericValue',
@@ -212,7 +214,8 @@ class _$GenericContainerSerializer
   }
 
   @override
-  GenericContainer deserialize(Serializers serializers, Iterable serialized,
+  GenericContainer deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new GenericContainerBuilder();
 
