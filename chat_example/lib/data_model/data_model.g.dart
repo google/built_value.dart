@@ -73,7 +73,7 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
   final String wireName = 'Chat';
 
   @override
-  Iterable serialize(Serializers serializers, Chat object,
+  Iterable<Object> serialize(Serializers serializers, Chat object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'text',
@@ -88,7 +88,7 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
   }
 
   @override
-  Chat deserialize(Serializers serializers, Iterable serialized,
+  Chat deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ChatBuilder();
 
@@ -106,7 +106,7 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
           result.targets.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltSet, const [const FullType(String)]))
-              as BuiltSet);
+              as BuiltSet<dynamic>);
           break;
       }
     }
@@ -122,7 +122,7 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
   final String wireName = 'Login';
 
   @override
-  Iterable serialize(Serializers serializers, Login object,
+  Iterable<Object> serialize(Serializers serializers, Login object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'username',
@@ -137,7 +137,7 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
   }
 
   @override
-  Login deserialize(Serializers serializers, Iterable serialized,
+  Login deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new LoginBuilder();
 
@@ -169,7 +169,7 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
   final String wireName = 'Status';
 
   @override
-  Iterable serialize(Serializers serializers, Status object,
+  Iterable<Object> serialize(Serializers serializers, Status object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'message',
@@ -184,7 +184,7 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
   }
 
   @override
-  Status deserialize(Serializers serializers, Iterable serialized,
+  Status deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new StatusBuilder();
 
@@ -233,7 +233,7 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
   final String wireName = 'ListUsers';
 
   @override
-  Iterable serialize(Serializers serializers, ListUsers object,
+  Iterable<Object> serialize(Serializers serializers, ListUsers object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'statusTypes',
@@ -246,7 +246,7 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
   }
 
   @override
-  ListUsers deserialize(Serializers serializers, Iterable serialized,
+  ListUsers deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ListUsersBuilder();
 
@@ -258,8 +258,9 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
       switch (key) {
         case 'statusTypes':
           result.statusTypes.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltSet, const [const FullType(StatusType)])) as BuiltSet);
+                  specifiedType: const FullType(
+                      BuiltSet, const [const FullType(StatusType)]))
+              as BuiltSet<dynamic>);
           break;
       }
     }
@@ -292,7 +293,7 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
   final String wireName = 'ShowChat';
 
   @override
-  Iterable serialize(Serializers serializers, ShowChat object,
+  Iterable<Object> serialize(Serializers serializers, ShowChat object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'username',
@@ -309,7 +310,7 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
   }
 
   @override
-  ShowChat deserialize(Serializers serializers, Iterable serialized,
+  ShowChat deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ShowChatBuilder();
 
@@ -345,7 +346,7 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
   final String wireName = 'Welcome';
 
   @override
-  Iterable serialize(Serializers serializers, Welcome object,
+  Iterable<Object> serialize(Serializers serializers, Welcome object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'log',
@@ -361,7 +362,7 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
   }
 
   @override
-  Welcome deserialize(Serializers serializers, Iterable serialized,
+  Welcome deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new WelcomeBuilder();
 
@@ -373,8 +374,9 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
       switch (key) {
         case 'log':
           result.log.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(Response)])) as BuiltList);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Response)]))
+              as BuiltList<dynamic>);
           break;
         case 'message':
           result.message = serializers.deserialize(value,
@@ -395,7 +397,7 @@ class _$ListUsersResponseSerializer
   final String wireName = 'ListUsersResponse';
 
   @override
-  Iterable serialize(Serializers serializers, ListUsersResponse object,
+  Iterable<Object> serialize(Serializers serializers, ListUsersResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'statuses',
@@ -408,7 +410,8 @@ class _$ListUsersResponseSerializer
   }
 
   @override
-  ListUsersResponse deserialize(Serializers serializers, Iterable serialized,
+  ListUsersResponse deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ListUsersResponseBuilder();
 
@@ -423,7 +426,7 @@ class _$ListUsersResponseSerializer
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(String),
                 const FullType(Status)
-              ])) as BuiltMap);
+              ])) as BuiltMap<dynamic, dynamic>);
           break;
       }
     }

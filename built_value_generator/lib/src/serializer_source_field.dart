@@ -205,8 +205,8 @@ abstract class SerializerSourceField
           bareType == 'BuiltSetMultimap') {
         generics = 'dynamic, dynamic';
       } else {
-        // Should not get here; only 5 classes satisfy
-        // `isBuiltCollectionTypeName`.
+        throw UnsupportedError('Bare type is a built_collection type, but not '
+            'one of the known built_collection types: $bareType.');
       }
     } else {
       generics = _getGenerics(type);

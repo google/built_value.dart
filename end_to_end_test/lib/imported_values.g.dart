@@ -16,7 +16,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
   final String wireName = 'ImportedValue';
 
   @override
-  Iterable serialize(Serializers serializers, ImportedValue object,
+  Iterable<Object> serialize(Serializers serializers, ImportedValue object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'simpleValue',
@@ -32,7 +32,8 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
   }
 
   @override
-  ImportedValue deserialize(Serializers serializers, Iterable serialized,
+  ImportedValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ImportedValueBuilder();
 
@@ -51,7 +52,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
           result.simpleValues.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(prefix.SimpleValue)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }

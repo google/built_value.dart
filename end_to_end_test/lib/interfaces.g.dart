@@ -43,7 +43,7 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   final String wireName = 'ValueWithInt';
 
   @override
-  Iterable serialize(Serializers serializers, ValueWithInt object,
+  Iterable<Object> serialize(Serializers serializers, ValueWithInt object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'anInt',
@@ -56,7 +56,7 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   }
 
   @override
-  ValueWithInt deserialize(Serializers serializers, Iterable serialized,
+  ValueWithInt deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ValueWithIntBuilder();
 
@@ -106,7 +106,7 @@ class _$ValueWithHasIntSerializer
   final String wireName = 'ValueWithHasInt';
 
   @override
-  Iterable serialize(Serializers serializers, ValueWithHasInt object,
+  Iterable<Object> serialize(Serializers serializers, ValueWithHasInt object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'hasInt',
@@ -118,7 +118,8 @@ class _$ValueWithHasIntSerializer
   }
 
   @override
-  ValueWithHasInt deserialize(Serializers serializers, Iterable serialized,
+  ValueWithHasInt deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ValueWithHasIntBuilder();
 
