@@ -10,7 +10,7 @@ void main() {
   var serializers =
       (Serializers().toBuilder()..add(Iso8601DurationSerializer())).build();
 
-  const testTable = const [
+  const testTable = [
     {
       #s: 'P1DT2H3M4S',
       #d: Duration(days: 1, hours: 2, minutes: 3, seconds: 4),
@@ -32,7 +32,7 @@ void main() {
       #d: Duration(days: 2),
     },
   ];
-  const badOnes = const [
+  const badOnes = [
     'P',
     'P0',
     'PT2S567',
