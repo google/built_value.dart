@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.7.0
+
+- Generate code compatible with 'no raw types'.
+
 # 6.6.0
 
 - Allow providing your own `toString` via a mixin.
