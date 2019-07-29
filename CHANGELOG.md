@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.7.1
+
+- Bump version of `analyzer_plugin`.
+
 # 6.7.0
 
 - Generate code compatible with 'no raw types'.
