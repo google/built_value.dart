@@ -188,10 +188,12 @@ abstract class SerializersBuilder {
   /// add your own. For example:
   ///
   /// ```dart
-  /// serializers = (serializers.toBuilder()..addBuilderFactory(
-  ///     const FullType(
-  ///         BuiltList,
-  ///         [FullType(Foo)]), () => new ListBuilder<Foo>)).build();
+  /// serializers = (serializers.toBuilder()
+  ///       ..addBuilderFactory(
+  ///         const FullType(BuiltList, [FullType(Foo)]),
+  ///         () => ListBuilder<Foo>(),
+  ///       ))
+  ///     .build();
   /// ```
   void addBuilderFactory(FullType specifiedType, Function function);
 
