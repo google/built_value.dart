@@ -160,7 +160,7 @@ be serialized.
 It _supports changes to the data model_. Optional fields can be added or
 removed, and fields can be switched from optional to required, allowing your
 data model to evolve without breaking compatbility. Some other libraries break
-compatability on any change to any serializable class.
+compatibility on any change to any serializable class.
 
 It's _modular_. Each endpoint can choose which classes to know about;
 for example, you can have multiple clients that each know about only a subset of
