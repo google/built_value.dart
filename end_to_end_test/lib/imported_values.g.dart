@@ -8,6 +8,10 @@ part of imported_values;
 
 Serializer<ImportedValue> _$importedValueSerializer =
     new _$ImportedValueSerializer();
+Serializer<ImportedCustomValue> _$importedCustomValueSerializer =
+    new _$ImportedCustomValueSerializer();
+Serializer<ImportedCustomNestedValue> _$importedCustomNestedValueSerializer =
+    new _$ImportedCustomNestedValueSerializer();
 
 class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
   @override
@@ -36,6 +40,120 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
       Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ImportedValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'simpleValue':
+          result.simpleValue.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(prefix.SimpleValue))
+              as prefix.SimpleValue);
+          break;
+        case 'simpleValues':
+          result.simpleValues.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(prefix.SimpleValue)]))
+              as BuiltList<dynamic>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ImportedCustomValueSerializer
+    implements StructuredSerializer<ImportedCustomValue> {
+  @override
+  final Iterable<Type> types = const [
+    ImportedCustomValue,
+    _$ImportedCustomValue
+  ];
+  @override
+  final String wireName = 'ImportedCustomValue';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, ImportedCustomValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'simpleValue',
+      serializers.serialize(object.simpleValue,
+          specifiedType: const FullType(prefix.SimpleValue)),
+      'simpleValues',
+      serializers.serialize(object.simpleValues,
+          specifiedType: const FullType(
+              BuiltList, const [const FullType(prefix.SimpleValue)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  ImportedCustomValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new ImportedCustomValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'simpleValue':
+          result.simpleValue = serializers.deserialize(value,
+                  specifiedType: const FullType(prefix.SimpleValue))
+              as prefix.SimpleValue;
+          break;
+        case 'simpleValues':
+          result.simpleValues = serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(prefix.SimpleValue)]))
+              as BuiltList<dynamic>;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ImportedCustomNestedValueSerializer
+    implements StructuredSerializer<ImportedCustomNestedValue> {
+  @override
+  final Iterable<Type> types = const [
+    ImportedCustomNestedValue,
+    _$ImportedCustomNestedValue
+  ];
+  @override
+  final String wireName = 'ImportedCustomNestedValue';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, ImportedCustomNestedValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'simpleValue',
+      serializers.serialize(object.simpleValue,
+          specifiedType: const FullType(prefix.SimpleValue)),
+      'simpleValues',
+      serializers.serialize(object.simpleValues,
+          specifiedType: const FullType(
+              BuiltList, const [const FullType(prefix.SimpleValue)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  ImportedCustomNestedValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new ImportedCustomNestedValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -166,6 +284,250 @@ class ImportedValueBuilder
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'ImportedValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ImportedCustomValue extends ImportedCustomValue {
+  @override
+  final prefix.SimpleValue simpleValue;
+  @override
+  final BuiltList<prefix.SimpleValue> simpleValues;
+
+  factory _$ImportedCustomValue(
+          [void Function(ImportedCustomValueBuilder) updates]) =>
+      (new ImportedCustomValueBuilder()..update(updates)).build()
+          as _$ImportedCustomValue;
+
+  _$ImportedCustomValue._({this.simpleValue, this.simpleValues}) : super._() {
+    if (simpleValue == null) {
+      throw new BuiltValueNullFieldError('ImportedCustomValue', 'simpleValue');
+    }
+    if (simpleValues == null) {
+      throw new BuiltValueNullFieldError('ImportedCustomValue', 'simpleValues');
+    }
+  }
+
+  @override
+  ImportedCustomValue rebuild(
+          void Function(ImportedCustomValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$ImportedCustomValueBuilder toBuilder() =>
+      new _$ImportedCustomValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ImportedCustomValue &&
+        simpleValue == other.simpleValue &&
+        simpleValues == other.simpleValues;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, simpleValue.hashCode), simpleValues.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ImportedCustomValue')
+          ..add('simpleValue', simpleValue)
+          ..add('simpleValues', simpleValues))
+        .toString();
+  }
+}
+
+class _$ImportedCustomValueBuilder extends ImportedCustomValueBuilder {
+  _$ImportedCustomValue _$v;
+
+  @override
+  prefix.SimpleValue get simpleValue {
+    _$this;
+    return super.simpleValue;
+  }
+
+  @override
+  set simpleValue(prefix.SimpleValue simpleValue) {
+    _$this;
+    super.simpleValue = simpleValue;
+  }
+
+  @override
+  BuiltList<prefix.SimpleValue> get simpleValues {
+    _$this;
+    return super.simpleValues;
+  }
+
+  @override
+  set simpleValues(BuiltList<prefix.SimpleValue> simpleValues) {
+    _$this;
+    super.simpleValues = simpleValues;
+  }
+
+  _$ImportedCustomValueBuilder() : super._();
+
+  ImportedCustomValueBuilder get _$this {
+    if (_$v != null) {
+      super.simpleValue = _$v.simpleValue;
+      super.simpleValues = _$v.simpleValues;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ImportedCustomValue other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$ImportedCustomValue;
+  }
+
+  @override
+  void update(void Function(ImportedCustomValueBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ImportedCustomValue build() {
+    final _$result = _$v ??
+        new _$ImportedCustomValue._(
+            simpleValue: simpleValue, simpleValues: simpleValues);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
+  @override
+  final prefix.SimpleValue simpleValue;
+  @override
+  final BuiltList<prefix.SimpleValue> simpleValues;
+
+  factory _$ImportedCustomNestedValue(
+          [void Function(ImportedCustomNestedValueBuilder) updates]) =>
+      (new ImportedCustomNestedValueBuilder()..update(updates)).build()
+          as _$ImportedCustomNestedValue;
+
+  _$ImportedCustomNestedValue._({this.simpleValue, this.simpleValues})
+      : super._() {
+    if (simpleValue == null) {
+      throw new BuiltValueNullFieldError(
+          'ImportedCustomNestedValue', 'simpleValue');
+    }
+    if (simpleValues == null) {
+      throw new BuiltValueNullFieldError(
+          'ImportedCustomNestedValue', 'simpleValues');
+    }
+  }
+
+  @override
+  ImportedCustomNestedValue rebuild(
+          void Function(ImportedCustomNestedValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$ImportedCustomNestedValueBuilder toBuilder() =>
+      new _$ImportedCustomNestedValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ImportedCustomNestedValue &&
+        simpleValue == other.simpleValue &&
+        simpleValues == other.simpleValues;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, simpleValue.hashCode), simpleValues.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ImportedCustomNestedValue')
+          ..add('simpleValue', simpleValue)
+          ..add('simpleValues', simpleValues))
+        .toString();
+  }
+}
+
+class _$ImportedCustomNestedValueBuilder
+    extends ImportedCustomNestedValueBuilder {
+  _$ImportedCustomNestedValue _$v;
+
+  @override
+  prefix.SimpleValueBuilder get simpleValue {
+    _$this;
+    return super.simpleValue ??= new prefix.SimpleValueBuilder();
+  }
+
+  @override
+  set simpleValue(prefix.SimpleValueBuilder simpleValue) {
+    _$this;
+    super.simpleValue = simpleValue;
+  }
+
+  @override
+  ListBuilder<prefix.SimpleValue> get simpleValues {
+    _$this;
+    return super.simpleValues ??= new ListBuilder<prefix.SimpleValue>();
+  }
+
+  @override
+  set simpleValues(ListBuilder<prefix.SimpleValue> simpleValues) {
+    _$this;
+    super.simpleValues = simpleValues;
+  }
+
+  _$ImportedCustomNestedValueBuilder() : super._();
+
+  ImportedCustomNestedValueBuilder get _$this {
+    if (_$v != null) {
+      super.simpleValue = _$v.simpleValue?.toBuilder();
+      super.simpleValues = _$v.simpleValues?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ImportedCustomNestedValue other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$ImportedCustomNestedValue;
+  }
+
+  @override
+  void update(void Function(ImportedCustomNestedValueBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ImportedCustomNestedValue build() {
+    _$ImportedCustomNestedValue _$result;
+    try {
+      _$result = _$v ??
+          new _$ImportedCustomNestedValue._(
+              simpleValue: simpleValue.build(),
+              simpleValues: simpleValues.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        simpleValue.build();
+        _$failedField = 'simpleValues';
+        simpleValues.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ImportedCustomNestedValue', _$failedField, e.toString());
       }
       rethrow;
     }
