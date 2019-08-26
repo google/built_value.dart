@@ -26,6 +26,7 @@ class _$ValueSourceField extends ValueSourceField {
   bool __builderFieldIsNormalField;
   bool __builderFieldIsGetterSetterPair;
   String __buildElementType;
+  String __builderElementTypeWithPrefix;
   bool __isNestedBuilder;
 
   factory _$ValueSourceField(
@@ -82,6 +83,10 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   String get buildElementType => __buildElementType ??= super.buildElementType;
+
+  @override
+  String get builderElementTypeWithPrefix =>
+      __builderElementTypeWithPrefix ??= super.builderElementTypeWithPrefix;
 
   @override
   bool get isNestedBuilder => __isNestedBuilder ??= super.isNestedBuilder;

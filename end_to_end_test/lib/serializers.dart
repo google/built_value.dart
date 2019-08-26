@@ -38,6 +38,8 @@ part 'serializers.g.dart';
   HasDouble,
   HasString,
   ImportedValue,
+  ImportedCustomValue,
+  ImportedCustomNestedValue,
   NamedFactoryValue,
   NestedGenericContainer,
   NonBuiltGeneric,

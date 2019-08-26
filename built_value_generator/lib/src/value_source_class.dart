@@ -707,7 +707,7 @@ abstract class ValueSourceClass
     if (hasBuilder) {
       for (var field in fields) {
         final type = field.typeInCompilationUnit(compilationUnit);
-        final typeInBuilder = field.typeInBuilder(compilationUnit);
+        final typeInBuilder = field.builderElementTypeWithPrefix;
         final name = field.name;
 
         if (field.isNestedBuilder) {

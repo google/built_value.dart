@@ -22,3 +22,54 @@ abstract class ImportedValue
       _$ImportedValue;
   ImportedValue._();
 }
+
+// With a custom builder.
+abstract class ImportedCustomValue
+    implements Built<ImportedCustomValue, ImportedCustomValueBuilder> {
+  static Serializer<ImportedCustomValue> get serializer =>
+      _$importedCustomValueSerializer;
+
+  prefix.SimpleValue get simpleValue;
+  BuiltList<prefix.SimpleValue> get simpleValues;
+
+  factory ImportedCustomValue(
+          [void Function(ImportedCustomValueBuilder) updates]) =
+      _$ImportedCustomValue;
+  ImportedCustomValue._();
+}
+
+abstract class ImportedCustomValueBuilder
+    implements Builder<ImportedCustomValue, ImportedCustomValueBuilder> {
+  prefix.SimpleValue simpleValue;
+  BuiltList<prefix.SimpleValue> simpleValues;
+
+  ImportedCustomValueBuilder._();
+  factory ImportedCustomValueBuilder() = _$ImportedCustomValueBuilder;
+}
+
+// With a custom builder using nested buliders.
+abstract class ImportedCustomNestedValue
+    implements
+        Built<ImportedCustomNestedValue, ImportedCustomNestedValueBuilder> {
+  static Serializer<ImportedCustomNestedValue> get serializer =>
+      _$importedCustomNestedValueSerializer;
+
+  prefix.SimpleValue get simpleValue;
+  BuiltList<prefix.SimpleValue> get simpleValues;
+
+  factory ImportedCustomNestedValue(
+          [void Function(ImportedCustomNestedValueBuilder) updates]) =
+      _$ImportedCustomNestedValue;
+  ImportedCustomNestedValue._();
+}
+
+abstract class ImportedCustomNestedValueBuilder
+    implements
+        Builder<ImportedCustomNestedValue, ImportedCustomNestedValueBuilder> {
+  prefix.SimpleValueBuilder simpleValue;
+  ListBuilder<prefix.SimpleValue> simpleValues;
+
+  ImportedCustomNestedValueBuilder._();
+  factory ImportedCustomNestedValueBuilder() =
+      _$ImportedCustomNestedValueBuilder;
+}
