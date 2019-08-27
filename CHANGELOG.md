@@ -2,6 +2,8 @@
 
 # 6.7.1
 
+- Fix codegen for custom builders when fields use types that have an import
+  prefix.
 - Bump version of `analyzer_plugin`.
 
 # 6.7.0
