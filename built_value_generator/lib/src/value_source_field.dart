@@ -95,7 +95,7 @@ abstract class ValueSourceField
   BuiltValueField get builtValueField {
     var annotations = element.getter.metadata
         .map((annotation) => annotation.computeConstantValue())
-        .where((value) => value?.type?.displayName == 'BuiltValueField');
+        .where((value) => DartTypes.getName(value?.type) == 'BuiltValueField');
     if (annotations.isEmpty) return const BuiltValueField();
     var annotation = annotations.single;
     return BuiltValueField(
@@ -122,7 +122,7 @@ abstract class ValueSourceField
   @memoized
   String get buildElementType {
     // Try to get a resolved type first, it's faster.
-    var result = builderElement.getter?.returnType?.displayName;
+    var result = DartTypes.getName(builderElement.getter?.returnType);
     if (result != null && result != 'dynamic') return result;
     // Go via AST to allow use of unresolvable types not yet generated;
     // this includes generated Builder types.

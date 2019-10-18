@@ -55,7 +55,7 @@ abstract class SerializerSourceField
   BuiltValueField get builtValueField {
     var annotations = element.getter.metadata
         .map((annotation) => annotation.computeConstantValue())
-        .where((value) => value?.type?.displayName == 'BuiltValueField');
+        .where((value) => DartTypes.getName(value?.type) == 'BuiltValueField');
     if (annotations.isEmpty) return const BuiltValueField();
     var annotation = annotations.single;
     return BuiltValueField(
@@ -75,7 +75,7 @@ abstract class SerializerSourceField
   String get wireName => builtValueField.wireName ?? name;
 
   @memoized
-  String get type => element.getter.returnType.displayName;
+  String get type => DartTypes.getName(element.getter.returnType);
 
   /// The [type] plus any import prefix.
   @memoized
@@ -115,8 +115,8 @@ abstract class SerializerSourceField
     // builder is needed. Otherwise, use the same logic as built_value when
     // it decides whether to use a nested builder.
     return builderFieldElementIsValid
-        ? element.getter.returnType.displayName !=
-            builderElement.getter.returnType.displayName
+        ? DartTypes.getName(element.getter.returnType) !=
+            DartTypes.getName(builderElement.getter.returnType)
         : settings.nestedBuilders &&
             DartTypes.needsNestedBuilder(element.getter.returnType);
   }
@@ -132,7 +132,7 @@ abstract class SerializerSourceField
 
   @memoized
   bool get needsBuilder =>
-      element.getter.returnType.displayName.contains('<') &&
+      DartTypes.getName(element.getter.returnType).contains('<') &&
       DartTypes.isBuilt(element.getter.returnType);
 
   Iterable<String> computeErrors() {

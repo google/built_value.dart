@@ -2,6 +2,7 @@ library built_value_generator.memoized_getter;
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/metadata.dart'
     show metadataToStringValue;
 
@@ -24,7 +25,7 @@ abstract class MemoizedGetter
             field.getter.metadata.any(
                 (metadata) => metadataToStringValue(metadata) == 'memoized'))
         .map((field) => MemoizedGetter((b) => b
-          ..returnType = field.getter.returnType.toString()
+          ..returnType = DartTypes.getName(field.getter.returnType)
           ..name = field.displayName))
         .toList();
   }

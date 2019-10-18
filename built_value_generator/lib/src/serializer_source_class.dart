@@ -16,6 +16,8 @@ import 'package:built_value_generator/src/serializer_source_field.dart';
 import 'package:built_value_generator/src/strings.dart';
 import 'package:built_value_generator/src/value_source_class.dart';
 
+import 'dart_types.dart';
+
 part 'serializer_source_class.g.dart';
 
 abstract class SerializerSourceClass
@@ -49,7 +51,8 @@ abstract class SerializerSourceClass
 
     var annotations = serializerField.getter.metadata
         .map((annotation) => annotation.computeConstantValue())
-        .where((value) => value?.type?.displayName == 'BuiltValueSerializer');
+        .where((value) =>
+            DartTypes.getName(value?.type) == 'BuiltValueSerializer');
     if (annotations.isEmpty) return const BuiltValueSerializer();
 
     var annotation = annotations.single;
