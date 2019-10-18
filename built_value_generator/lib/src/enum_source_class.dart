@@ -8,6 +8,7 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/enum_source_field.dart';
 import 'package:built_value_generator/src/strings.dart';
 import 'package:quiver/iterables.dart';
@@ -37,7 +38,7 @@ abstract class EnumSourceClass
   BuiltValueEnum get settings {
     var annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
-        .where((value) => value?.type?.displayName == 'BuiltValueEnum');
+        .where((value) => DartTypes.getName(value?.type) == 'BuiltValueEnum');
     if (annotations.isEmpty) return const BuiltValueEnum();
     var annotation = annotations.single;
     return BuiltValueEnum(
@@ -102,7 +103,7 @@ abstract class EnumSourceClass
 
   static bool needsEnumClass(ClassElement classElement) {
     // `Object` and mixins return `null` for `supertype`.
-    return classElement.supertype?.displayName == 'EnumClass';
+    return DartTypes.getName(classElement.supertype) == 'EnumClass';
   }
 
   Iterable<String> computeErrors() {

@@ -34,7 +34,7 @@ class DartTypes {
 
   static bool isBuiltCollection(DartType type) {
     return _builtCollectionNames
-        .any((name) => type.displayName.startsWith('$name<'));
+        .any((name) => getName(type).startsWith('$name<'));
   }
 
   static bool isBuilt(DartType type) =>
@@ -46,13 +46,29 @@ class DartTypes {
   /// Gets the name of a `DartType`. Supports `Function` types, which will
   /// be returned using the `Function()` syntax.
   static String getName(DartType dartType) {
-    if (dartType is FunctionType) {
+    if (dartType == null) {
+      return null;
+    } else if (dartType.isDynamic) {
+      return 'dynamic';
+    } else if (dartType is FunctionType) {
       return getName(dartType.returnType) +
           ' Function(' +
           dartType.parameters.map((p) => getName(p.type)).join(', ') +
           ')';
+    } else if (dartType is InterfaceType) {
+      var typeArguments = dartType.typeArguments;
+      if (typeArguments.isEmpty || typeArguments.every((t) => t.isDynamic)) {
+        return dartType.element.name;
+      } else {
+        final typeArgumentsStr = typeArguments.map(getName).join(', ');
+        return '${dartType.element.name}<$typeArgumentsStr>';
+      }
+    } else if (dartType is TypeParameterType) {
+      return dartType.element.name;
+    } else if (dartType.isVoid) {
+      return 'void';
     } else {
-      return dartType.displayName;
+      throw UnimplementedError('(${dartType.runtimeType}) $dartType');
     }
   }
 }

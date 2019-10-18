@@ -13,6 +13,8 @@ import 'package:built_value_generator/src/serializer_source_class.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'dart_types.dart';
+
 part 'serializer_source_library.g.dart';
 
 abstract class SerializerSourceLibrary
@@ -37,13 +39,14 @@ abstract class SerializerSourceLibrary
     var result = MapBuilder<String, ElementAnnotation>();
     var accessors = element.definingCompilationUnit.accessors
         .where((element) =>
-            element.isGetter && element.returnType.displayName == 'Serializers')
+            element.isGetter &&
+            DartTypes.getName(element.returnType) == 'Serializers')
         .toList();
 
     for (var accessor in accessors) {
       final annotations = accessor.variable.metadata
           .where((annotation) =>
-              annotation.computeConstantValue()?.type?.displayName ==
+              DartTypes.getName(annotation.computeConstantValue()?.type) ==
               'SerializersFor')
           .toList();
       if (annotations.isEmpty) continue;

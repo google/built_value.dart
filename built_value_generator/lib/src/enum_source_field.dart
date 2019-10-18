@@ -9,6 +9,8 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
+import 'dart_types.dart';
+
 part 'enum_source_field.g.dart';
 
 abstract class EnumSourceField
@@ -25,13 +27,14 @@ abstract class EnumSourceField
   String get name => element.displayName;
 
   @memoized
-  String get type => element.getter.returnType.displayName;
+  String get type => DartTypes.getName(element.getter.returnType);
 
   @memoized
   BuiltValueEnumConst get settings {
     var annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
-        .where((value) => value?.type?.displayName == 'BuiltValueEnumConst');
+        .where(
+            (value) => DartTypes.getName(value?.type) == 'BuiltValueEnumConst');
     if (annotations.isEmpty) return const BuiltValueEnumConst();
     var annotation = annotations.single;
     return BuiltValueEnumConst(
@@ -61,7 +64,7 @@ abstract class EnumSourceField
 
     var enumName = classElement.displayName;
     for (var fieldElement in classElement.fields) {
-      final type = fieldElement.getter.returnType.displayName;
+      final type = DartTypes.getName(fieldElement.getter.returnType);
       if (!fieldElement.isSynthetic &&
           (type == enumName || type == 'dynamic')) {
         result.add(EnumSourceField(parsedLibrary, fieldElement));

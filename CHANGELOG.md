@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.7.2 (not yet published)
+
+- Replace analyzer's `DartType.displayName` with custom code generator.
+
 # 6.7.1
 
 - Fix codegen for custom builders when fields use types that have an import

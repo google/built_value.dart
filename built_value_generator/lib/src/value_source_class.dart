@@ -15,6 +15,8 @@ import 'package:built_value_generator/src/value_source_field.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'dart_types.dart';
+
 part 'value_source_class.g.dart';
 
 const String _importWithSingleQuotes =
@@ -74,7 +76,7 @@ abstract class ValueSourceClass
 
     for (var supertype in [element.supertype]
       ..addAll(element.supertype.element.allSupertypes)) {
-      if (supertype.displayName == 'Object') continue;
+      if (DartTypes.getName(supertype) == 'Object') continue;
 
       // Base class must be abstract.
       if (!supertype.element.isAbstract) return false;
@@ -104,7 +106,7 @@ abstract class ValueSourceClass
   BuiltValue get settings {
     var annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
-        .where((value) => value?.type?.displayName == 'BuiltValue');
+        .where((value) => DartTypes.getName(value?.type) == 'BuiltValue');
     if (annotations.isEmpty) return const BuiltValue();
     var annotation = annotations.single;
     // If a field does not exist, that means an old `built_value` version; use
@@ -131,8 +133,11 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltList<String> get genericBounds =>
-      BuiltList<String>(element.typeParameters
-          .map((element) => (element.bound ?? '').toString()));
+      BuiltList<String>(element.typeParameters.map((element) {
+        var bound = element.bound;
+        if (bound == null) return '';
+        return DartTypes.getName(bound);
+      }));
 
   @memoized
   ClassDeclaration get classDeclaration {
@@ -149,7 +154,7 @@ abstract class ValueSourceClass
         .where((interfaceType) => interfaceType.name == 'Builder')
         .single
         .typeArguments
-        .map((element) => element.displayName)
+        .map((type) => DartTypes.getName(type))
         .join(', ');
   }
 
@@ -244,7 +249,7 @@ abstract class ValueSourceClass
     ..addAll(element.interfaces
         .where((interface) => needsBuiltValue(interface.element))
         .map((interface) {
-      final displayName = interface.displayName;
+      final displayName = DartTypes.getName(interface);
       if (!displayName.contains('<')) return displayName + 'Builder';
       final index = displayName.indexOf('<');
       return displayName.substring(0, index) +
@@ -278,7 +283,8 @@ abstract class ValueSourceClass
                 .any((interfaceType) => interfaceType.name == 'Built') ||
             classElement.metadata
                 .map((annotation) => annotation.computeConstantValue())
-                .any((value) => value?.type?.displayName == 'BuiltValue'));
+                .any(
+                    (value) => DartTypes.getName(value?.type) == 'BuiltValue'));
   }
 
   Iterable<GeneratorError> computeErrors() {
