@@ -368,6 +368,13 @@ abstract class AnimalBuilder {
   set legs(int legs);
 }
 
+abstract class MammalBuilder implements AnimalBuilder {
+  void replace(covariant Mammal other);
+  void update(void Function(MammalBuilder) updates);
+  int get legs;
+  set legs(int legs);
+}
+
 class _$Cat extends Cat {
   @override
   final bool tail;
@@ -413,7 +420,7 @@ class _$Cat extends Cat {
   }
 }
 
-class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
+class CatBuilder implements Builder<Cat, CatBuilder>, MammalBuilder {
   _$Cat _$v;
 
   bool _tail;
