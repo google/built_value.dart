@@ -37,7 +37,7 @@ class NumSerializer implements PrimitiveSerializer<num> {
     } else if (serialized == DoubleSerializer.infinity) {
       return double.infinity;
     } else {
-      return (serialized as num).toDouble();
+      return serialized as num;
     }
   }
 }
