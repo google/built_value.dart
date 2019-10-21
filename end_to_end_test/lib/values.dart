@@ -537,3 +537,11 @@ abstract class OtherValue implements Built<OtherValue, OtherValueBuilder> {
   factory OtherValue([void Function(OtherValueBuilder) updates]) = _$OtherValue;
   OtherValue._();
 }
+
+// Class that implements a built value class should not trigger generation.
+class NoGeneration implements SimpleValue {
+  @override
+  Object noSuchMethod(Invocation invocation) {
+    return null;
+  }
+}

@@ -279,7 +279,7 @@ abstract class ValueSourceClass
   static bool needsBuiltValue(ClassElement classElement) {
     // TODO(davidmorgan): more exact type check.
     return !classElement.displayName.startsWith('_\$') &&
-        (classElement.allSupertypes
+        (classElement.interfaces
                 .any((interfaceType) => interfaceType.name == 'Built') ||
             classElement.metadata
                 .map((annotation) => annotation.computeConstantValue())

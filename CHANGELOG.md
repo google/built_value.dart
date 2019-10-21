@@ -4,6 +4,8 @@
 
 - Add facility to merge `Serializers` instances via `Serializers.merge`,
   `SerializersBuilder.merge` and `SerializersBuilder.mergeAll`.
+- Make codegen trigger less eager, so you can `implement` a `built_value`
+  class using a `Mock` without it generating code.
 - Bug fix: fix generated `operator==` when a field is called `other`.
 - Fix `num` deserialization so it does not always convert to `double`.
 - Bump version of `analyzer`.
