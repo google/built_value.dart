@@ -976,10 +976,16 @@ abstract class ValueSourceClass
     } else {
       // The "Built" interface has been omitted to work around dart2js issue
       // https://github.com/dart-lang/sdk/issues/14729. So, we can't implement
-      // "Builder". Add the methods explicitly.
-      result.writeln('abstract class ${name}Builder$_boundedGenerics {');
+      // "Builder". Add the methods explicitly. We can however implement any
+      // other built_value interfaces.
+      var interfaces = builderImplements.skip(1).toList();
+      result.writeln('abstract class ${name}Builder$_boundedGenerics '
+          '${interfaces.isEmpty ? '' : 'implements ' + interfaces.join(', ')}'
+          '{');
 
-      result.writeln('void replace($name$_generics other);');
+      // Add `covariant` if we're implementing one or more parent builders.
+      result.writeln('void replace(${interfaces.isEmpty ? '' : 'covariant '}'
+          '$name$_generics other);');
       result.writeln(
           'void update(void Function(${name}Builder$_generics) updates);');
     }

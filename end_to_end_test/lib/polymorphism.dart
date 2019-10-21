@@ -19,9 +19,16 @@ abstract class Animal extends Object with Walker implements OtherInterface {
 // still being allowed to implement any other interface.
 abstract class OtherInterface {}
 
+// Check a second layer of `instantiable: false` inheritance.
+@BuiltValue(instantiable: false)
+abstract class Mammal implements Animal {
+  Mammal rebuild(void Function(MammalBuilder) updates);
+  MammalBuilder toBuilder();
+}
+
 abstract class Cat extends Object
     with Walker
-    implements Animal, Built<Cat, CatBuilder> {
+    implements Mammal, Built<Cat, CatBuilder> {
   static Serializer<Cat> get serializer => _$catSerializer;
 
   bool get tail;
