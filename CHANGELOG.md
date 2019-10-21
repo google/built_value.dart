@@ -3,6 +3,7 @@
 # 6.7.2 (not yet published)
 
 - Bug fix: fix generated `operator==` when a field is called `other`.
+- Fix `num` deserialization so it does not always convert to `double`.
 - Bump version of `analyzer`.
 - Internal: replace analyzer's `DartType.displayName` with custom code
   generator.
