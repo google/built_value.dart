@@ -3,6 +3,7 @@
 # 6.7.2 (not yet published)
 
 - Replace analyzer's `DartType.displayName` with custom code generator.
+- Bump version of `analyzer`.
 
 # 6.7.1
 
