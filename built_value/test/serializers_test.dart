@@ -8,6 +8,10 @@ import 'package:test/test.dart';
 
 void main() {
   var serializers = Serializers();
+  final moreSerializers = (serializers.toBuilder()
+        ..addAll([TestSerializer()])
+        ..addBuilderFactory(FullType(TestSerializer), () => null))
+      .build();
 
   group(Serializers, () {
     test('exposes iterable of serializer', () {
@@ -15,11 +19,25 @@ void main() {
     });
 
     test('can be added to', () {
-      final moreSerializers =
-          (serializers.toBuilder()..addAll([TestSerializer()])).build();
-
       expect(
           moreSerializers.serializers, contains(TypeMatcher<TestSerializer>()));
+    });
+
+    test('can be merged', () {
+      var mergedSerializers =
+          (serializers.toBuilder()..mergeAll([moreSerializers])).build();
+      expect(mergedSerializers.serializers,
+          contains(TypeMatcher<TestSerializer>()));
+      expect(mergedSerializers.builderFactories.keys,
+          contains(FullType(TestSerializer)));
+    });
+
+    test('can be merged by static method', () {
+      var mergedSerializers = Serializers.merge([serializers, moreSerializers]);
+      expect(mergedSerializers.serializers,
+          contains(TypeMatcher<TestSerializer>()));
+      expect(mergedSerializers.builderFactories.keys,
+          contains(FullType(TestSerializer)));
     });
   });
 }
