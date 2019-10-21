@@ -43,6 +43,7 @@ part 'serializers.g.dart';
   NamedFactoryValue,
   NestedGenericContainer,
   NonBuiltGeneric,
+  OtherValue,
   PartiallySerializableValue,
   PrimitivesValue,
   RecursiveValueA,

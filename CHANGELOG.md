@@ -2,8 +2,11 @@
 
 # 6.7.2 (not yet published)
 
-- Replace analyzer's `DartType.displayName` with custom code generator.
+- Bug fix: fix generated `operator==` when a field is called `other`.
 - Bump version of `analyzer`.
+- Internal: replace analyzer's `DartType.displayName` with custom code
+  generator.
+
 
 # 6.7.1
 

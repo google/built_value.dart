@@ -316,4 +316,18 @@ void main() {
       expect(CustomToStringValue().toString(), 'custom');
     });
   });
+
+  group('ValueUsingImportAs', () {
+    test('can be instantiated', () {
+      ValueUsingImportAs((b) => b..value = TestEnum.yes);
+    });
+  });
+
+  group('OtherValue', () {
+    test('compares correctly', () {
+      var value = OtherValue((b) => b..other = 1);
+      var equalValue = OtherValue((b) => b..other = 1);
+      expect(value, equalValue);
+    });
+  });
 }
