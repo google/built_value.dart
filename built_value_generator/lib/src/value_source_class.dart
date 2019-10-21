@@ -933,11 +933,13 @@ abstract class ValueSourceClass
     result.writeln('  return other is $name${forBuilder ? 'Builder' : ''}');
     if (comparedFields.isNotEmpty) {
       result.writeln('&&');
-      result.writeln(comparedFields
-          .map((field) => field.isFunctionType
-              ? '${field.name} == _\$dynamicOther.${field.name}'
-              : '${field.name} == other.${field.name}')
-          .join('&&'));
+      result.writeln(comparedFields.map((field) {
+        var nameOrThisDotName =
+            field.name == 'other' ? 'other.${field.name}' : field.name;
+        return field.isFunctionType
+            ? '$nameOrThisDotName == _\$dynamicOther.${field.name}'
+            : '$nameOrThisDotName == other.${field.name}';
+      }).join('&&'));
     }
     result.writeln(';');
     result.writeln('}');
