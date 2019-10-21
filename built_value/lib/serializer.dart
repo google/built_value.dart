@@ -89,6 +89,12 @@ abstract class Serializers {
         .build();
   }
 
+  /// Merges iterable of [Serializers] into a single [Serializers].
+  ///
+  /// [Serializer] and builder factories are accumulated. Plugins are not.
+  static Serializers merge(Iterable<Serializers> serializersIterable) =>
+      (Serializers().toBuilder()..mergeAll(serializersIterable)).build();
+
   /// The installed [Serializer]s.
   Iterable<Serializer> get serializers;
 
@@ -174,8 +180,15 @@ abstract class SerializersBuilder {
   /// via its `types` property.
   void add(Serializer serializer);
 
+  /// Merges a [Serializers], adding all of its [Serializer] instances and
+  /// builder factories. Does _not_ add plugins.
+  void merge(Serializers serializers);
+
   /// Adds an iterable of [Serializer].
   void addAll(Iterable<Serializer> serializers);
+
+  /// Merges an iterable of [Serializers].
+  void mergeAll(Iterable<Serializers> serializersIterable);
 
   /// Adds a builder factory.
   ///

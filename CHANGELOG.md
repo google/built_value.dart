@@ -2,6 +2,8 @@
 
 # 6.7.2 (not yet published)
 
+- Add facility to merge `Serializers` instances via `Serializers.merge`,
+  `SerializersBuilder.merge` and `SerializersBuilder.mergeAll`.
 - Bug fix: fix generated `operator==` when a field is called `other`.
 - Fix `num` deserialization so it does not always convert to `double`.
 - Bump version of `analyzer`.

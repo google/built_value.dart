@@ -257,6 +257,19 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   }
 
   @override
+  void merge(Serializers serializers) {
+    addAll(serializers.serializers);
+    _builderFactories.addAll(serializers.builderFactories.asMap());
+  }
+
+  @override
+  void mergeAll(Iterable<Serializers> serializersIterable) {
+    for (var serializers in serializersIterable) {
+      merge(serializers);
+    }
+  }
+
+  @override
   void addPlugin(SerializerPlugin plugin) {
     _plugins.add(plugin);
   }
