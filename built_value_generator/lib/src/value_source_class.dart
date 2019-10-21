@@ -935,7 +935,7 @@ abstract class ValueSourceClass
       result.writeln('&&');
       result.writeln(comparedFields.map((field) {
         var nameOrThisDotName =
-            field.name == 'other' ? 'other.${field.name}' : field.name;
+            field.name == 'other' ? 'this.other' : field.name;
         return field.isFunctionType
             ? '$nameOrThisDotName == _\$dynamicOther.${field.name}'
             : '$nameOrThisDotName == other.${field.name}';
