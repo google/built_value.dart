@@ -4006,7 +4006,7 @@ class _$OtherValue extends OtherValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is OtherValue && other.other == other.other;
+    return other is OtherValue && this.other == other.other;
   }
 
   @override
