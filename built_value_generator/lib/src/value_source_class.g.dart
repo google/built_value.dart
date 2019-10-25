@@ -20,6 +20,10 @@ class _$ValueSourceClass extends ValueSourceClass {
   BuiltList<String> __genericBounds;
   ClassDeclaration __classDeclaration;
   bool __hasBuilder;
+  bool __hasBuilderInitializer;
+  MethodElement __builderInitializer;
+  bool __hasBuilderFinalizer;
+  MethodElement __builderFinalizer;
   String __builderParameters;
   BuiltList<ValueSourceField> __fields;
   String __source;
@@ -86,6 +90,22 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   bool get hasBuilder => __hasBuilder ??= super.hasBuilder;
+
+  @override
+  bool get hasBuilderInitializer =>
+      __hasBuilderInitializer ??= super.hasBuilderInitializer;
+
+  @override
+  MethodElement get builderInitializer =>
+      __builderInitializer ??= super.builderInitializer;
+
+  @override
+  bool get hasBuilderFinalizer =>
+      __hasBuilderFinalizer ??= super.hasBuilderFinalizer;
+
+  @override
+  MethodElement get builderFinalizer =>
+      __builderFinalizer ??= super.builderFinalizer;
 
   @override
   String get builderParameters =>

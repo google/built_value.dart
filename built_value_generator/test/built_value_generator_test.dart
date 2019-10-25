@@ -265,6 +265,114 @@ abstract class Value implements Built<Value, ValueBuilder> {
 }'''), isNot(contains('1.')));
     });
 
+    test('suggests making builder initializer static', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  void _initializeBuilder(ValueBuilder b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Fix _initializeBuilder signature: '
+              'static void _initializeBuilder(ValueBuilder b)'));
+    });
+
+    test('suggests making builder initializer return void', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  static String _initializeBuilder(ValueBuilder b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Fix _initializeBuilder signature: '
+              'static void _initializeBuilder(ValueBuilder b)'));
+    });
+
+    test('suggests making builder initializer accept a builder', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  static void _initializeBuilder(String b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Fix _initializeBuilder signature: '
+              'static void _initializeBuilder(ValueBuilder b)'));
+    });
+
+    test('suggests making builder finalizer static', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  void _finalizeBuilder(ValueBuilder b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Fix _finalizeBuilder signature: '
+              'static void _finalizeBuilder(ValueBuilder b)'));
+    });
+
+    test('suggests making builder finalizer return void', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  static String _finalizeBuilder(ValueBuilder b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Fix _finalizeBuilder signature: '
+              'static void _finalizeBuilder(ValueBuilder b)'));
+    });
+
+    test('suggests making builder finalizer accept a builder', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  static void _finalizeBuilder(String b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+          contains('1. Fix _finalizeBuilder signature: '
+              'static void _finalizeBuilder(ValueBuilder b)'));
+    });
+
     test('suggests to add constructor to value class', () async {
       expect(await generate('''library value;
 import 'package:built_value/built_value.dart';

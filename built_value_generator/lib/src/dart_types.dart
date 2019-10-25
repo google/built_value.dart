@@ -71,4 +71,10 @@ class DartTypes {
       throw UnimplementedError('(${dartType.runtimeType}) $dartType');
     }
   }
+
+  /// Turns a type name, optionally with generics, into just the type name.
+  static String stripGenerics(String name) {
+    var genericsStart = name.indexOf('<');
+    return genericsStart == -1 ? name : name.substring(0, genericsStart);
+  }
 }

@@ -366,4 +366,66 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('ValuesWithBuilderInitializer', () {
+    var data = ValueWithBuilderInitializer((b) => b
+      ..anInt = 1
+      ..nestedValue.anInt = 2);
+    var serialized = [
+      'ValueWithBuilderInitializer',
+      'anInt',
+      1,
+      'anIntWithDefault',
+      7,
+      'nestedValue',
+      ['anInt', 2],
+      'nestedValueWithDefault',
+      ['anInt', 9],
+      'nullableIntWithDefault',
+      8,
+      'nullableNestedValueWithDefault',
+      ['anInt', 10],
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+
+    test('adds defaults for missing fields on deserialization', () {
+      var serializedWithoutDefaults = [
+        'ValueWithBuilderInitializer',
+        'anInt',
+        1,
+        'nestedValue',
+        ['anInt', 2],
+      ];
+      expect(serializers.deserialize(serializedWithoutDefaults), data);
+    });
+  });
+
+  group('ValueWithBuilderFinalizer', () {
+    var data = ValueWithBuilderFinalizer((b) => b..anInt = 1);
+    var serialized = ['ValueWithBuilderFinalizer', 'anInt', 1];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+
+    test('runs hook on deserialize', () {
+      var serializedWhichTriggersHook = [
+        'ValueWithBuilderFinalizer', 'anInt',
+        // Hook will change 0 to 1.
+        0,
+      ];
+      expect(serializers.deserialize(serializedWhichTriggersHook), data);
+    });
+  });
 }

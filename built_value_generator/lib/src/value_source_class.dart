@@ -149,6 +149,19 @@ abstract class ValueSourceClass
   bool get hasBuilder => builderElement != null;
 
   @memoized
+  bool get hasBuilderInitializer => builderInitializer != null;
+
+  @memoized
+  MethodElement get builderInitializer =>
+      element.getMethod('_initializeBuilder');
+
+  @memoized
+  bool get hasBuilderFinalizer => builderFinalizer != null;
+
+  @memoized
+  MethodElement get builderFinalizer => element.getMethod('_finalizeBuilder');
+
+  @memoized
   String get builderParameters {
     return builderElement.allSupertypes
         .where((interfaceType) => interfaceType.name == 'Builder')
@@ -413,6 +426,43 @@ abstract class ValueSourceClass
     }
 
     if (settings.instantiable) {
+      if (hasBuilderInitializer) {
+        if (!builderInitializer.isStatic ||
+            !builderInitializer.returnType.isVoid ||
+            builderInitializer.parameters.length != 1 ||
+            parsedLibrary
+                .getElementDeclaration(builderInitializer.parameters[0])
+                .node is! SimpleFormalParameter ||
+            DartTypes.stripGenerics((parsedLibrary
+                        .getElementDeclaration(builderInitializer.parameters[0])
+                        .node as SimpleFormalParameter)
+                    .type
+                    ?.toSource()) !=
+                '${name}Builder') {
+          result.add(GeneratorError((b) => b
+            ..message = 'Fix _initializeBuilder signature: '
+                'static void _initializeBuilder(${name}Builder b)'));
+        }
+      }
+      if (hasBuilderFinalizer) {
+        if (!builderFinalizer.isStatic ||
+            !builderFinalizer.returnType.isVoid ||
+            builderFinalizer.parameters.length != 1 ||
+            parsedLibrary
+                .getElementDeclaration(builderFinalizer.parameters[0])
+                .node is! SimpleFormalParameter ||
+            DartTypes.stripGenerics((parsedLibrary
+                        .getElementDeclaration(builderFinalizer.parameters[0])
+                        .node as SimpleFormalParameter)
+                    .type
+                    ?.toSource()) !=
+                '${name}Builder') {
+          result.add(GeneratorError((b) => b
+            ..message = 'Fix _finalizeBuilder signature: '
+                'static void _finalizeBuilder(${name}Builder b)'));
+        }
+      }
+
       final expectedConstructor = '$name._()';
       if (valueClassConstructors.isEmpty) {
         result.add(GeneratorError((b) => b
@@ -785,9 +835,16 @@ abstract class ValueSourceClass
     result.writeln();
 
     if (hasBuilder) {
-      result.writeln('${implName}Builder() : super._();');
+      result.writeln('${implName}Builder() : super._()');
     } else {
-      result.writeln('${name}Builder();');
+      result.writeln('${name}Builder()');
+    }
+    if (hasBuilderInitializer) {
+      result.writeln('{');
+      result.writeln('$name._initializeBuilder(this);');
+      result.writeln('}');
+    } else {
+      result.writeln(';');
     }
     result.writeln('');
 
@@ -840,6 +897,10 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     result.writeln('$implName$_generics build() {');
+
+    if (hasBuilderFinalizer) {
+      result.writeln('ValueWithBuilderFinalizer._finalizeBuilder(this);');
+    }
 
     // Construct a map from field to how it's built. If it's a normal field,
     // this is just the field name; if it's a nested builder, this is an
