@@ -332,4 +332,36 @@ void main() {
       expect(value, isNot(equals(notEqualValue)));
     });
   });
+
+  group('ValueWithBuilderInitializer', () {
+    test('has defaults', () {
+      var value = ValueWithBuilderInitializer((b) => b
+        ..anInt = 1
+        ..nestedValue.anInt = 2);
+      expect(
+          value,
+          ValueWithBuilderInitializer((b) => b
+            ..anInt = 1
+            ..nestedValue.anInt = 2));
+    });
+  });
+
+  group('ValueWithBuilderFinalizer', () {
+    test('applies hook', () {
+      expect(ValueWithBuilderFinalizer((b) => b..anInt = 0).anInt, 1);
+    });
+  });
+
+  group('ValueWithGenericBuilderInitializer', () {
+    test('works with generics', () {
+      // Initializer only fires for ints, it sets the value to 42.
+      var valueThatTriggersInitializer =
+          ValueWithGenericBuilderInitializer<int>();
+      expect(valueThatTriggersInitializer.value, 42);
+
+      var valueThatDoesNotTriggerInitializer =
+          ValueWithGenericBuilderInitializer<String>();
+      expect(valueThatDoesNotTriggerInitializer.value, null);
+    });
+  });
 }

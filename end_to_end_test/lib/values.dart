@@ -537,3 +537,74 @@ abstract class OtherValue implements Built<OtherValue, OtherValueBuilder> {
   factory OtherValue([void Function(OtherValueBuilder) updates]) = _$OtherValue;
   OtherValue._();
 }
+
+abstract class ValueWithBuilderInitializer
+    implements
+        Built<ValueWithBuilderInitializer, ValueWithBuilderInitializerBuilder> {
+  static Serializer<ValueWithBuilderInitializer> get serializer =>
+      _$valueWithBuilderInitializerSerializer;
+
+  static void _initializeBuilder(ValueWithBuilderInitializerBuilder b) => b
+    ..anIntWithDefault = 7
+    ..nullableIntWithDefault = 8
+    ..nestedValueWithDefault.anInt = 9
+    ..nullableNestedValueWithDefault.anInt = 10;
+
+  int get anInt;
+  int get anIntWithDefault;
+  @nullable
+  int get nullableInt;
+  @nullable
+  int get nullableIntWithDefault;
+
+  SimpleValue get nestedValue;
+  SimpleValue get nestedValueWithDefault;
+  @nullable
+  SimpleValue get nullableNestedValue;
+  @nullable
+  SimpleValue get nullableNestedValueWithDefault;
+
+  factory ValueWithBuilderInitializer(
+          [void Function(ValueWithBuilderInitializerBuilder) updates]) =
+      _$ValueWithBuilderInitializer;
+  ValueWithBuilderInitializer._();
+}
+
+abstract class ValueWithBuilderFinalizer
+    implements
+        Built<ValueWithBuilderFinalizer, ValueWithBuilderFinalizerBuilder> {
+  static Serializer<ValueWithBuilderFinalizer> get serializer =>
+      _$valueWithBuilderFinalizerSerializer;
+
+  /// Build hook forcing [anInt] to be odd.
+  static void _finalizeBuilder(ValueWithBuilderFinalizerBuilder b) {
+    if (b.anInt.isEven) ++b.anInt;
+  }
+
+  int get anInt;
+
+  factory ValueWithBuilderFinalizer(
+          [void Function(ValueWithBuilderFinalizerBuilder) updates]) =
+      _$ValueWithBuilderFinalizer;
+  ValueWithBuilderFinalizer._();
+}
+
+abstract class ValueWithGenericBuilderInitializer<T>
+    implements
+        Built<ValueWithGenericBuilderInitializer<T>,
+            ValueWithGenericBuilderInitializerBuilder<T>> {
+  static void _initializeBuilder<TT>(
+      ValueWithGenericBuilderInitializerBuilder<TT> b) {
+    if (TT == int) {
+      b.value = 42 as TT;
+    }
+  }
+
+  @nullable
+  T get value;
+
+  factory ValueWithGenericBuilderInitializer(
+      [void Function(ValueWithGenericBuilderInitializerBuilder<T>)
+          updates]) = _$ValueWithGenericBuilderInitializer<T>;
+  ValueWithGenericBuilderInitializer._();
+}

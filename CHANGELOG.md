@@ -2,6 +2,10 @@
 
 # 6.7.2 (not yet published)
 
+- Support `_initializeBuilder` hook in value types. If found, it's executed
+  when a `Builder` is created and can be used to set defaults.
+- Support `_finalizeBuilder` hook in value types. If found, it's executed
+  when `build` is called and can be used to apply processing to fields.
 - Add facility to merge `Serializers` instances via `Serializers.merge`,
   `SerializersBuilder.merge` and `SerializersBuilder.mergeAll`.
 - Bug fix: fix generated code with polymorphism and more than one level of

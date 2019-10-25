@@ -48,6 +48,11 @@ Serializer<RecursiveValueB> _$recursiveValueBSerializer =
 Serializer<SerializesNullsValue> _$serializesNullsValueSerializer =
     new _$SerializesNullsValueSerializer();
 Serializer<OtherValue> _$otherValueSerializer = new _$OtherValueSerializer();
+Serializer<ValueWithBuilderInitializer>
+    _$valueWithBuilderInitializerSerializer =
+    new _$ValueWithBuilderInitializerSerializer();
+Serializer<ValueWithBuilderFinalizer> _$valueWithBuilderFinalizerSerializer =
+    new _$ValueWithBuilderFinalizerSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -1069,6 +1074,157 @@ class _$OtherValueSerializer implements StructuredSerializer<OtherValue> {
       switch (key) {
         case 'other':
           result.other = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ValueWithBuilderInitializerSerializer
+    implements StructuredSerializer<ValueWithBuilderInitializer> {
+  @override
+  final Iterable<Type> types = const [
+    ValueWithBuilderInitializer,
+    _$ValueWithBuilderInitializer
+  ];
+  @override
+  final String wireName = 'ValueWithBuilderInitializer';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, ValueWithBuilderInitializer object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'anInt',
+      serializers.serialize(object.anInt, specifiedType: const FullType(int)),
+      'anIntWithDefault',
+      serializers.serialize(object.anIntWithDefault,
+          specifiedType: const FullType(int)),
+      'nestedValue',
+      serializers.serialize(object.nestedValue,
+          specifiedType: const FullType(SimpleValue)),
+      'nestedValueWithDefault',
+      serializers.serialize(object.nestedValueWithDefault,
+          specifiedType: const FullType(SimpleValue)),
+    ];
+    if (object.nullableInt != null) {
+      result
+        ..add('nullableInt')
+        ..add(serializers.serialize(object.nullableInt,
+            specifiedType: const FullType(int)));
+    }
+    if (object.nullableIntWithDefault != null) {
+      result
+        ..add('nullableIntWithDefault')
+        ..add(serializers.serialize(object.nullableIntWithDefault,
+            specifiedType: const FullType(int)));
+    }
+    if (object.nullableNestedValue != null) {
+      result
+        ..add('nullableNestedValue')
+        ..add(serializers.serialize(object.nullableNestedValue,
+            specifiedType: const FullType(SimpleValue)));
+    }
+    if (object.nullableNestedValueWithDefault != null) {
+      result
+        ..add('nullableNestedValueWithDefault')
+        ..add(serializers.serialize(object.nullableNestedValueWithDefault,
+            specifiedType: const FullType(SimpleValue)));
+    }
+    return result;
+  }
+
+  @override
+  ValueWithBuilderInitializer deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new ValueWithBuilderInitializerBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'anInt':
+          result.anInt = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'anIntWithDefault':
+          result.anIntWithDefault = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'nullableInt':
+          result.nullableInt = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'nullableIntWithDefault':
+          result.nullableIntWithDefault = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'nestedValue':
+          result.nestedValue.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+          break;
+        case 'nestedValueWithDefault':
+          result.nestedValueWithDefault.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+          break;
+        case 'nullableNestedValue':
+          result.nullableNestedValue.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+          break;
+        case 'nullableNestedValueWithDefault':
+          result.nullableNestedValueWithDefault.replace(serializers.deserialize(
+              value,
+              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ValueWithBuilderFinalizerSerializer
+    implements StructuredSerializer<ValueWithBuilderFinalizer> {
+  @override
+  final Iterable<Type> types = const [
+    ValueWithBuilderFinalizer,
+    _$ValueWithBuilderFinalizer
+  ];
+  @override
+  final String wireName = 'ValueWithBuilderFinalizer';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, ValueWithBuilderFinalizer object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'anInt',
+      serializers.serialize(object.anInt, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  ValueWithBuilderFinalizer deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new ValueWithBuilderFinalizerBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'anInt':
+          result.anInt = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
       }
@@ -4054,6 +4210,407 @@ class OtherValueBuilder implements Builder<OtherValue, OtherValueBuilder> {
   @override
   _$OtherValue build() {
     final _$result = _$v ?? new _$OtherValue._(other: other);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ValueWithBuilderInitializer extends ValueWithBuilderInitializer {
+  @override
+  final int anInt;
+  @override
+  final int anIntWithDefault;
+  @override
+  final int nullableInt;
+  @override
+  final int nullableIntWithDefault;
+  @override
+  final SimpleValue nestedValue;
+  @override
+  final SimpleValue nestedValueWithDefault;
+  @override
+  final SimpleValue nullableNestedValue;
+  @override
+  final SimpleValue nullableNestedValueWithDefault;
+
+  factory _$ValueWithBuilderInitializer(
+          [void Function(ValueWithBuilderInitializerBuilder) updates]) =>
+      (new ValueWithBuilderInitializerBuilder()..update(updates)).build();
+
+  _$ValueWithBuilderInitializer._(
+      {this.anInt,
+      this.anIntWithDefault,
+      this.nullableInt,
+      this.nullableIntWithDefault,
+      this.nestedValue,
+      this.nestedValueWithDefault,
+      this.nullableNestedValue,
+      this.nullableNestedValueWithDefault})
+      : super._() {
+    if (anInt == null) {
+      throw new BuiltValueNullFieldError(
+          'ValueWithBuilderInitializer', 'anInt');
+    }
+    if (anIntWithDefault == null) {
+      throw new BuiltValueNullFieldError(
+          'ValueWithBuilderInitializer', 'anIntWithDefault');
+    }
+    if (nestedValue == null) {
+      throw new BuiltValueNullFieldError(
+          'ValueWithBuilderInitializer', 'nestedValue');
+    }
+    if (nestedValueWithDefault == null) {
+      throw new BuiltValueNullFieldError(
+          'ValueWithBuilderInitializer', 'nestedValueWithDefault');
+    }
+  }
+
+  @override
+  ValueWithBuilderInitializer rebuild(
+          void Function(ValueWithBuilderInitializerBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ValueWithBuilderInitializerBuilder toBuilder() =>
+      new ValueWithBuilderInitializerBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithBuilderInitializer &&
+        anInt == other.anInt &&
+        anIntWithDefault == other.anIntWithDefault &&
+        nullableInt == other.nullableInt &&
+        nullableIntWithDefault == other.nullableIntWithDefault &&
+        nestedValue == other.nestedValue &&
+        nestedValueWithDefault == other.nestedValueWithDefault &&
+        nullableNestedValue == other.nullableNestedValue &&
+        nullableNestedValueWithDefault == other.nullableNestedValueWithDefault;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc($jc(0, anInt.hashCode),
+                                anIntWithDefault.hashCode),
+                            nullableInt.hashCode),
+                        nullableIntWithDefault.hashCode),
+                    nestedValue.hashCode),
+                nestedValueWithDefault.hashCode),
+            nullableNestedValue.hashCode),
+        nullableNestedValueWithDefault.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueWithBuilderInitializer')
+          ..add('anInt', anInt)
+          ..add('anIntWithDefault', anIntWithDefault)
+          ..add('nullableInt', nullableInt)
+          ..add('nullableIntWithDefault', nullableIntWithDefault)
+          ..add('nestedValue', nestedValue)
+          ..add('nestedValueWithDefault', nestedValueWithDefault)
+          ..add('nullableNestedValue', nullableNestedValue)
+          ..add(
+              'nullableNestedValueWithDefault', nullableNestedValueWithDefault))
+        .toString();
+  }
+}
+
+class ValueWithBuilderInitializerBuilder
+    implements
+        Builder<ValueWithBuilderInitializer,
+            ValueWithBuilderInitializerBuilder> {
+  _$ValueWithBuilderInitializer _$v;
+
+  int _anInt;
+  int get anInt => _$this._anInt;
+  set anInt(int anInt) => _$this._anInt = anInt;
+
+  int _anIntWithDefault;
+  int get anIntWithDefault => _$this._anIntWithDefault;
+  set anIntWithDefault(int anIntWithDefault) =>
+      _$this._anIntWithDefault = anIntWithDefault;
+
+  int _nullableInt;
+  int get nullableInt => _$this._nullableInt;
+  set nullableInt(int nullableInt) => _$this._nullableInt = nullableInt;
+
+  int _nullableIntWithDefault;
+  int get nullableIntWithDefault => _$this._nullableIntWithDefault;
+  set nullableIntWithDefault(int nullableIntWithDefault) =>
+      _$this._nullableIntWithDefault = nullableIntWithDefault;
+
+  SimpleValueBuilder _nestedValue;
+  SimpleValueBuilder get nestedValue =>
+      _$this._nestedValue ??= new SimpleValueBuilder();
+  set nestedValue(SimpleValueBuilder nestedValue) =>
+      _$this._nestedValue = nestedValue;
+
+  SimpleValueBuilder _nestedValueWithDefault;
+  SimpleValueBuilder get nestedValueWithDefault =>
+      _$this._nestedValueWithDefault ??= new SimpleValueBuilder();
+  set nestedValueWithDefault(SimpleValueBuilder nestedValueWithDefault) =>
+      _$this._nestedValueWithDefault = nestedValueWithDefault;
+
+  SimpleValueBuilder _nullableNestedValue;
+  SimpleValueBuilder get nullableNestedValue =>
+      _$this._nullableNestedValue ??= new SimpleValueBuilder();
+  set nullableNestedValue(SimpleValueBuilder nullableNestedValue) =>
+      _$this._nullableNestedValue = nullableNestedValue;
+
+  SimpleValueBuilder _nullableNestedValueWithDefault;
+  SimpleValueBuilder get nullableNestedValueWithDefault =>
+      _$this._nullableNestedValueWithDefault ??= new SimpleValueBuilder();
+  set nullableNestedValueWithDefault(
+          SimpleValueBuilder nullableNestedValueWithDefault) =>
+      _$this._nullableNestedValueWithDefault = nullableNestedValueWithDefault;
+
+  ValueWithBuilderInitializerBuilder() {
+    ValueWithBuilderInitializer._initializeBuilder(this);
+  }
+
+  ValueWithBuilderInitializerBuilder get _$this {
+    if (_$v != null) {
+      _anInt = _$v.anInt;
+      _anIntWithDefault = _$v.anIntWithDefault;
+      _nullableInt = _$v.nullableInt;
+      _nullableIntWithDefault = _$v.nullableIntWithDefault;
+      _nestedValue = _$v.nestedValue?.toBuilder();
+      _nestedValueWithDefault = _$v.nestedValueWithDefault?.toBuilder();
+      _nullableNestedValue = _$v.nullableNestedValue?.toBuilder();
+      _nullableNestedValueWithDefault =
+          _$v.nullableNestedValueWithDefault?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithBuilderInitializer other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$ValueWithBuilderInitializer;
+  }
+
+  @override
+  void update(void Function(ValueWithBuilderInitializerBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ValueWithBuilderInitializer build() {
+    _$ValueWithBuilderInitializer _$result;
+    try {
+      _$result = _$v ??
+          new _$ValueWithBuilderInitializer._(
+              anInt: anInt,
+              anIntWithDefault: anIntWithDefault,
+              nullableInt: nullableInt,
+              nullableIntWithDefault: nullableIntWithDefault,
+              nestedValue: nestedValue.build(),
+              nestedValueWithDefault: nestedValueWithDefault.build(),
+              nullableNestedValue: _nullableNestedValue?.build(),
+              nullableNestedValueWithDefault:
+                  _nullableNestedValueWithDefault?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'nestedValue';
+        nestedValue.build();
+        _$failedField = 'nestedValueWithDefault';
+        nestedValueWithDefault.build();
+        _$failedField = 'nullableNestedValue';
+        _nullableNestedValue?.build();
+        _$failedField = 'nullableNestedValueWithDefault';
+        _nullableNestedValueWithDefault?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ValueWithBuilderInitializer', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ValueWithBuilderFinalizer extends ValueWithBuilderFinalizer {
+  @override
+  final int anInt;
+
+  factory _$ValueWithBuilderFinalizer(
+          [void Function(ValueWithBuilderFinalizerBuilder) updates]) =>
+      (new ValueWithBuilderFinalizerBuilder()..update(updates)).build();
+
+  _$ValueWithBuilderFinalizer._({this.anInt}) : super._() {
+    if (anInt == null) {
+      throw new BuiltValueNullFieldError('ValueWithBuilderFinalizer', 'anInt');
+    }
+  }
+
+  @override
+  ValueWithBuilderFinalizer rebuild(
+          void Function(ValueWithBuilderFinalizerBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ValueWithBuilderFinalizerBuilder toBuilder() =>
+      new ValueWithBuilderFinalizerBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithBuilderFinalizer && anInt == other.anInt;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, anInt.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueWithBuilderFinalizer')
+          ..add('anInt', anInt))
+        .toString();
+  }
+}
+
+class ValueWithBuilderFinalizerBuilder
+    implements
+        Builder<ValueWithBuilderFinalizer, ValueWithBuilderFinalizerBuilder> {
+  _$ValueWithBuilderFinalizer _$v;
+
+  int _anInt;
+  int get anInt => _$this._anInt;
+  set anInt(int anInt) => _$this._anInt = anInt;
+
+  ValueWithBuilderFinalizerBuilder();
+
+  ValueWithBuilderFinalizerBuilder get _$this {
+    if (_$v != null) {
+      _anInt = _$v.anInt;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithBuilderFinalizer other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$ValueWithBuilderFinalizer;
+  }
+
+  @override
+  void update(void Function(ValueWithBuilderFinalizerBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ValueWithBuilderFinalizer build() {
+    ValueWithBuilderFinalizer._finalizeBuilder(this);
+    final _$result = _$v ?? new _$ValueWithBuilderFinalizer._(anInt: anInt);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ValueWithGenericBuilderInitializer<T>
+    extends ValueWithGenericBuilderInitializer<T> {
+  @override
+  final T value;
+
+  factory _$ValueWithGenericBuilderInitializer(
+          [void Function(ValueWithGenericBuilderInitializerBuilder<T>)
+              updates]) =>
+      (new ValueWithGenericBuilderInitializerBuilder<T>()..update(updates))
+          .build();
+
+  _$ValueWithGenericBuilderInitializer._({this.value}) : super._() {
+    if (T == dynamic) {
+      throw new BuiltValueMissingGenericsError(
+          'ValueWithGenericBuilderInitializer', 'T');
+    }
+  }
+
+  @override
+  ValueWithGenericBuilderInitializer<T> rebuild(
+          void Function(ValueWithGenericBuilderInitializerBuilder<T>)
+              updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ValueWithGenericBuilderInitializerBuilder<T> toBuilder() =>
+      new ValueWithGenericBuilderInitializerBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithGenericBuilderInitializer && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueWithGenericBuilderInitializer')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class ValueWithGenericBuilderInitializerBuilder<T>
+    implements
+        Builder<ValueWithGenericBuilderInitializer<T>,
+            ValueWithGenericBuilderInitializerBuilder<T>> {
+  _$ValueWithGenericBuilderInitializer<T> _$v;
+
+  T _value;
+  T get value => _$this._value;
+  set value(T value) => _$this._value = value;
+
+  ValueWithGenericBuilderInitializerBuilder() {
+    ValueWithGenericBuilderInitializer._initializeBuilder(this);
+  }
+
+  ValueWithGenericBuilderInitializerBuilder<T> get _$this {
+    if (_$v != null) {
+      _value = _$v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithGenericBuilderInitializer<T> other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$ValueWithGenericBuilderInitializer<T>;
+  }
+
+  @override
+  void update(
+      void Function(ValueWithGenericBuilderInitializerBuilder<T>) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ValueWithGenericBuilderInitializer<T> build() {
+    final _$result =
+        _$v ?? new _$ValueWithGenericBuilderInitializer<T>._(value: value);
     replace(_$result);
     return _$result;
   }
