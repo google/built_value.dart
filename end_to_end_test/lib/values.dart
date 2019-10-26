@@ -538,6 +538,29 @@ abstract class OtherValue implements Built<OtherValue, OtherValueBuilder> {
   OtherValue._();
 }
 
+@BuiltValue(defaultCompare: false, defaultSerialize: false)
+abstract class DefaultsForFieldSettingsValue
+    implements
+        Built<DefaultsForFieldSettingsValue,
+            DefaultsForFieldSettingsValueBuilder> {
+  static Serializer<DefaultsForFieldSettingsValue> get serializer =>
+      _$defaultsForFieldSettingsValueSerializer;
+
+  int get ignored;
+
+  @BuiltValueField(compare: true)
+  int get compared;
+
+  @BuiltValueField(serialize: true)
+  int get serialized;
+
+  factory DefaultsForFieldSettingsValue(
+          [void Function(DefaultsForFieldSettingsValueBuilder) updates]) =
+      _$DefaultsForFieldSettingsValue;
+
+  DefaultsForFieldSettingsValue._();
+}
+
 abstract class ValueWithBuilderInitializer
     implements
         Built<ValueWithBuilderInitializer, ValueWithBuilderInitializerBuilder> {
