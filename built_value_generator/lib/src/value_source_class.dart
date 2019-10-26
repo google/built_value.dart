@@ -124,6 +124,10 @@ abstract class ValueSourceClass
         generateBuilderOnSetField:
             annotation.getField('generateBuilderOnSetField')?.toBoolValue() ??
                 false,
+        defaultCompare:
+            annotation.getField('defaultCompare')?.toBoolValue() ?? true,
+        defaultSerialize:
+            annotation.getField('defaultSerialize')?.toBoolValue() ?? true,
         wireName: annotation.getField('wireName')?.toStringValue());
   }
 
@@ -980,8 +984,10 @@ abstract class ValueSourceClass
   String _generateEqualsAndHashcode({bool forBuilder = false}) {
     var result = StringBuffer();
 
-    var comparedFields =
-        fields.where((field) => field.builtValueField.compare).toList();
+    var comparedFields = fields
+        .where(
+            (field) => field.builtValueField.compare ?? settings.defaultCompare)
+        .toList();
     var comparedFunctionFields =
         comparedFields.where((field) => field.isFunctionType).toList();
     result.writeln('@override');

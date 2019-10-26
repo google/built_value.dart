@@ -6,6 +6,8 @@
   when a `Builder` is created and can be used to set defaults.
 - Support `_finalizeBuilder` hook in value types. If found, it's executed
   when `build` is called and can be used to apply processing to fields.
+- Add `defaultCompare` and `defaultSerialize` to `@BuiltValue`. They
+  control the defaults for `compare` and `serialize` in `@BuiltValueField`.
 - Add facility to merge `Serializers` instances via `Serializers.merge`,
   `SerializersBuilder.merge` and `SerializersBuilder.mergeAll`.
 - Bug fix: fix generated code with polymorphism and more than one level of

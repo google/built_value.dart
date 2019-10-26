@@ -49,7 +49,7 @@ abstract class SerializerSourceField
       element.getter != null &&
       element.getter.isAbstract &&
       !element.isStatic &&
-      builtValueField.serialize;
+      (builtValueField.serialize ?? settings.defaultSerialize);
 
   @memoized
   BuiltValueField get builtValueField {

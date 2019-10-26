@@ -105,13 +105,25 @@ class BuiltValue {
   /// indicates that the name is to be taken from the literal class name.
   final String wireName;
 
+  /// The default for [BuiltValueField.compare]. Set to `false` if you want to
+  /// ignore most fields when comparing, then mark the ones you do want to
+  /// compare on with `@BuiltValueField(compare: true)`.
+  final bool defaultCompare;
+
+  /// The default for [BuiltValueField.serialize]. Set to `false` if you want
+  /// to ignore most fields when serializing, then mark the ones you do want
+  /// to serialize with `@BuiltValueField(serialize: true)`.
+  final bool defaultSerialize;
+
   const BuiltValue(
       {this.instantiable = true,
       this.nestedBuilders = true,
       this.autoCreateNestedBuilders = true,
       this.comparableBuilders = false,
       this.generateBuilderOnSetField = false,
-      this.wireName});
+      this.wireName,
+      this.defaultCompare = true,
+      this.defaultSerialize = true});
 }
 
 /// Nullable annotation for Built Value fields.
@@ -122,13 +134,15 @@ const String nullable = 'nullable';
 /// Optionally, annotate a Built Value field with this to specify settings.
 /// This is only needed for advanced use.
 class BuiltValueField {
-  /// Whether the field is compared and hashed. Defaults to `true`.
+  /// Whether the field is compared and hashed. Defaults to `null` which means
+  /// [BuiltValue.defaultCompare] is used.
   ///
   /// Set to `false` to ignore the field when calculating `hashCode` and when
   /// comparing with `operator==`.
   final bool compare;
 
-  /// Whether the field is serialized. Defaults to `true`.
+  /// Whether the field is serialized. Defaults to `null` which means
+  /// [BuiltValue.defaultSerialize] is used.
   ///
   /// If a field is not serialized, it must either be `@nullable` or specify a
   /// default for deserialization to succeed.
@@ -138,8 +152,7 @@ class BuiltValueField {
   /// indicates the name is to be taken from the literal field name.
   final String wireName;
 
-  const BuiltValueField(
-      {this.compare = true, this.serialize = true, this.wireName});
+  const BuiltValueField({this.compare, this.serialize, this.wireName});
 }
 
 /// Optionally, annotate a Built Value `Serializer` getters with this to
