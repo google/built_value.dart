@@ -25,9 +25,10 @@ abstract class Built<V extends Built<V, B>, B extends Builder<V, B>> {
   B toBuilder();
 }
 
-/// Every Built Value must have a [Builder] class.
+/// Every [Built] class has a corresponding [Builder] class.
 ///
-/// Use it to set defaults, if needed, and to do validation.
+/// Usually you don't need to create one by hand; it will be generated
+/// for you.
 ///
 /// See <https://github.com/google/built_value.dart/tree/master/example>
 abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
