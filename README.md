@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/google/built_value.dart.svg?branch=master)](https://travis-ci.org/google/built_value.dart)
 ## Introduction
 
-Built Values provides:
+Built Value provides:
 
 - Immutable value types;
 - EnumClass, classes that behave like enums;
@@ -10,6 +10,8 @@ Built Values provides:
 
 Immutable collections are from
 [built_collection](https://github.com/google/built_collection.dart#built-collections-for-dart).
+
+See the [API docs](https://pub.dev/documentation/built_value/latest/built_value/built_value-library.html).
 
 ## Articles
 
