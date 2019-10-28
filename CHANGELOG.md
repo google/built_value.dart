@@ -1,6 +1,10 @@
 # Changelog
 
-# 6.7.2 (not yet published)
+# 6.8.1
+
+- Fix missing `README.md` in `package:built_value`.
+
+# 6.8.0
 
 - Support `_initializeBuilder` hook in value types. If found, it's executed
   when a `Builder` is created and can be used to set defaults.
@@ -17,7 +21,6 @@
 - Bump version of `analyzer`.
 - Internal: replace analyzer's `DartType.displayName` with custom code
   generator.
-
 
 # 6.7.1
 
