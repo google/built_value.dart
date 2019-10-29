@@ -1,5 +1,11 @@
 # Changelog
 
+# 7.0.0
+
+- Internal: clean up `built_value_generator` -> `built_value` dependency;
+  depend on minor instead of major version so we can in future handle tight
+  coupling between the two without a major version bump to `built_value`.
+
 # 6.8.2
 
 - Fix `_finalizeBuilder` generation so it uses the correct class name.
