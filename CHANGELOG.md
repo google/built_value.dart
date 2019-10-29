@@ -1,5 +1,9 @@
 # Changelog
 
+# 6.8.2
+
+- Fix `_finalizeBuilder` generation so it uses the correct class name.
+
 # 6.8.1
 
 - Fix missing `README.md` in `package:built_value`.

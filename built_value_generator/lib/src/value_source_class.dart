@@ -903,7 +903,7 @@ abstract class ValueSourceClass
     result.writeln('$implName$_generics build() {');
 
     if (hasBuilderFinalizer) {
-      result.writeln('ValueWithBuilderFinalizer._finalizeBuilder(this);');
+      result.writeln('$name._finalizeBuilder(this);');
     }
 
     // Construct a map from field to how it's built. If it's a normal field,
