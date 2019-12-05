@@ -13,7 +13,7 @@ import 'package:chat_example/server/server_connection.dart';
 /// Server-side logic for the built_value chat example.
 class Server {
   final Random random = Random();
-  final Set<ServerConnection> _connections = Set<ServerConnection>();
+  final Set<ServerConnection> _connections = <ServerConnection>{};
   final Map<String, String> _passwords = <String, String>{};
   final Map<String, Status> _statuses = <String, Status>{};
   final List<Response> _log = <Response>[];

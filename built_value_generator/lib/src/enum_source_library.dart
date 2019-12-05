@@ -76,8 +76,8 @@ abstract class EnumSourceLibrary
 
   Iterable<String> _checkIdentifiers() {
     var result = <String>[];
-    var seenIdentifiers = Set<String>();
-    var reportedIdentifiers = Set<String>();
+    var seenIdentifiers = <String>{};
+    var reportedIdentifiers = <String>{};
 
     for (var sourceClass in classes) {
       for (var identifier in sourceClass.identifiers) {

@@ -110,7 +110,7 @@ class ListJsonObject extends JsonObject {
   final List<Object> value;
 
   ListJsonObject(List<Object> value)
-      : this.value = UnmodifiableListView<Object>(value),
+      : value = UnmodifiableListView<Object>(value),
         super._();
 
   @override
@@ -136,7 +136,7 @@ class MapJsonObject extends JsonObject {
   final Map<String, Object> value;
 
   MapJsonObject(Map<String, Object> value)
-      : this.value = UnmodifiableMapView(value),
+      : value = UnmodifiableMapView(value),
         super._();
 
   @override

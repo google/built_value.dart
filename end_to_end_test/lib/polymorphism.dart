@@ -22,7 +22,9 @@ abstract class OtherInterface {}
 // Check a second layer of `instantiable: false` inheritance.
 @BuiltValue(instantiable: false)
 abstract class Mammal implements Animal {
+  @override
   Mammal rebuild(void Function(MammalBuilder) updates);
+  @override
   MammalBuilder toBuilder();
 }
 
@@ -109,7 +111,7 @@ abstract class StandardCat extends Object
 abstract class HasField<T> {
   T get field;
 
-  HasField<T> rebuild(void updates(HasFieldBuilder<T> b));
+  HasField<T> rebuild(void Function(HasFieldBuilder<T>) updates);
   HasFieldBuilder<T> toBuilder();
 }
 

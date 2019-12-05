@@ -20,6 +20,7 @@ class BuiltJsonSerializers implements Serializers {
   final BuiltMap<String, Serializer> _wireNameToSerializer;
   final BuiltMap<String, Serializer> _typeNameToSerializer;
 
+  @override
   final BuiltMap<FullType, Function> builderFactories;
 
   final BuiltList<SerializerPlugin> _plugins;
@@ -111,7 +112,7 @@ class BuiltJsonSerializers implements Serializers {
   Object _deserialize(
       Object objectBeforePlugins, Object object, FullType specifiedType) {
     if (specifiedType.isUnspecified) {
-      final String wireName = (object as List).first as String;
+      final wireName = (object as List).first as String;
 
       final serializer = serializerForWireName(wireName);
       if (serializer == null) {

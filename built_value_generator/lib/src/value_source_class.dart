@@ -74,8 +74,10 @@ abstract class ValueSourceClass
     // This means it _is_ allowed to have concrete getters as well as
     // concrete and abstract methods.
 
-    for (var supertype in [element.supertype]
-      ..addAll(element.supertype.element.allSupertypes)) {
+    for (var supertype in [
+      element.supertype,
+      ...element.supertype.element.allSupertypes
+    ]) {
       if (DartTypes.getName(supertype) == 'Object') continue;
 
       // Base class must be abstract.
@@ -739,7 +741,7 @@ abstract class ValueSourceClass
         result.writeln(fields
             .map((field) => "..add('${field.name}',  ${field.name})")
             .join(''));
-        result.writeln(").toString();");
+        result.writeln(').toString();');
       }
       result.writeln('}');
       result.writeln();

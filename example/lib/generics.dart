@@ -26,7 +26,8 @@ abstract class GenericValue<T>
 
   T get value;
 
-  factory GenericValue([updates(GenericValueBuilder<T> b)]) = _$GenericValue<T>;
+  factory GenericValue([Function(GenericValueBuilder<T>) updates]) =
+      _$GenericValue<T>;
   GenericValue._();
 }
 
@@ -42,7 +43,7 @@ abstract class BoundGenericValue<T extends num>
 
   T get value;
 
-  factory BoundGenericValue([updates(BoundGenericValueBuilder<T> b)]) =
+  factory BoundGenericValue([Function(BoundGenericValueBuilder<T>) updates]) =
       _$BoundGenericValue<T>;
   BoundGenericValue._();
 }
@@ -61,7 +62,7 @@ abstract class CollectionGenericValue<T>
   BuiltList<T> get values;
 
   factory CollectionGenericValue(
-          [updates(CollectionGenericValueBuilder<T> b)]) =
+          [Function(CollectionGenericValueBuilder<T>) updates]) =
       _$CollectionGenericValue<T>;
   CollectionGenericValue._();
 }

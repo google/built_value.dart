@@ -37,7 +37,7 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
     var elementType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
         : specifiedType.parameters[0];
-    SetBuilder result = isUnderspecified
+    var result = isUnderspecified
         ? SetBuilder<Object>()
         : serializers.newBuilder(specifiedType) as SetBuilder;
 
