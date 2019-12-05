@@ -24,7 +24,7 @@ abstract class Chat implements Built<Chat, ChatBuilder>, Command {
   /// Set of usernames to send the chat to, or empty to send to everyone.
   BuiltSet<String> get targets;
 
-  factory Chat([updates(ChatBuilder b)]) = _$Chat;
+  factory Chat([Function(ChatBuilder) updates]) = _$Chat;
   Chat._();
 }
 
@@ -34,7 +34,7 @@ abstract class Login implements Built<Login, LoginBuilder>, Command {
   String get username;
   String get password;
 
-  factory Login([updates(LoginBuilder b)]) = _$Login;
+  factory Login([Function(LoginBuilder) updates]) = _$Login;
   Login._();
 }
 
@@ -46,7 +46,7 @@ abstract class Status implements Built<Status, StatusBuilder>, Command {
   String get message;
   StatusType get type;
 
-  factory Status([updates(StatusBuilder b)]) = _$Status;
+  factory Status([Function(StatusBuilder) updates]) = _$Status;
   Status._();
 }
 
@@ -72,7 +72,7 @@ abstract class ListUsers
   /// Set of statuses to filter by.
   BuiltSet<StatusType> get statusTypes;
 
-  factory ListUsers([updates(ListUsersBuilder b)]) = _$ListUsers;
+  factory ListUsers([Function(ListUsersBuilder) updates]) = _$ListUsers;
   ListUsers._();
 }
 
@@ -103,7 +103,7 @@ class LoginResponse extends EnumClass implements Response {
       case reset:
         return 'You have been logged out.';
       default:
-        throw StateError(this.name);
+        throw StateError(name);
     }
   }
 }
@@ -121,7 +121,7 @@ abstract class ShowChat implements Built<ShowChat, ShowChatBuilder>, Response {
   /// Message text.
   String get text;
 
-  factory ShowChat([updates(ShowChatBuilder b)]) = _$ShowChat;
+  factory ShowChat([Function(ShowChatBuilder) updates]) = _$ShowChat;
   ShowChat._();
 
   @override
@@ -135,7 +135,7 @@ abstract class Welcome implements Built<Welcome, WelcomeBuilder>, Response {
 
   String get message;
 
-  factory Welcome([updates(WelcomeBuilder b)]) = _$Welcome;
+  factory Welcome([Function(WelcomeBuilder) updates]) = _$Welcome;
   Welcome._();
 
   @override
@@ -152,7 +152,7 @@ abstract class ListUsersResponse
   /// Map from username to status.
   BuiltMap<String, Status> get statuses;
 
-  factory ListUsersResponse([updates(ListUsersResponseBuilder b)]) =
+  factory ListUsersResponse([Function(ListUsersResponseBuilder) updates]) =
       _$ListUsersResponse;
   ListUsersResponse._();
 

@@ -18,7 +18,7 @@ class LibraryElements {
 
 /// Visitor that gets all [ClassElement]s.
 class _GetClassesVisitor extends SimpleElementVisitor {
-  final List<ClassElement> classElements = List<ClassElement>();
+  final List<ClassElement> classElements = [];
 
   @override
   void visitClassElement(ClassElement element) {

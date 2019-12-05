@@ -51,7 +51,7 @@ class BuiltSetMultimapSerializer
         ? FullType.unspecified
         : specifiedType.parameters[1];
 
-    SetMultimapBuilder result = isUnderspecified
+    var result = isUnderspecified
         ? SetMultimapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as SetMultimapBuilder;
 
@@ -59,7 +59,7 @@ class BuiltSetMultimapSerializer
       throw ArgumentError('odd length');
     }
 
-    for (int i = 0; i != serialized.length; i += 2) {
+    for (var i = 0; i != serialized.length; i += 2) {
       final key = serializers.deserialize(serialized.elementAt(i),
           specifiedType: keyType);
       final values = serialized.elementAt(i + 1).map(

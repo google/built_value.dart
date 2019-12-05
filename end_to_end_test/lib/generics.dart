@@ -16,7 +16,8 @@ abstract class GenericValue<T>
 
   T get value;
 
-  factory GenericValue([updates(GenericValueBuilder<T> b)]) = _$GenericValue<T>;
+  factory GenericValue([Function(GenericValueBuilder<T>) updates]) =
+      _$GenericValue<T>;
   factory GenericValue.of(T value) => _$GenericValue._(value: value);
   GenericValue._();
 }
@@ -28,7 +29,7 @@ abstract class BoundGenericValue<T extends num>
 
   T get value;
 
-  factory BoundGenericValue([updates(BoundGenericValueBuilder<T> b)]) =
+  factory BoundGenericValue([Function(BoundGenericValueBuilder<T>) updates]) =
       _$BoundGenericValue<T>;
   BoundGenericValue._();
 }
@@ -42,7 +43,7 @@ abstract class CollectionGenericValue<T>
   BuiltList<T> get values;
 
   factory CollectionGenericValue(
-          [updates(CollectionGenericValueBuilder<T> b)]) =
+          [Function(CollectionGenericValueBuilder<T>) updates]) =
       _$CollectionGenericValue<T>;
   CollectionGenericValue._();
 }
@@ -81,7 +82,7 @@ abstract class CustomBuilderGenericValue<T>
   T get value;
 
   factory CustomBuilderGenericValue(
-          [updates(CustomBuilderGenericValueBuilder<T> b)]) =
+          [Function(CustomBuilderGenericValueBuilder<T>) updates]) =
       _$CustomBuilderGenericValue<T>;
   CustomBuilderGenericValue._();
 }
@@ -115,7 +116,7 @@ abstract class GenericFunction<T>
     implements Built<GenericFunction<T>, GenericFunctionBuilder<T>> {
   Function(T) get function;
 
-  factory GenericFunction([updates(GenericFunctionBuilder<T> b)]) =
+  factory GenericFunction([Function(GenericFunctionBuilder<T>) updates]) =
       _$GenericFunction<T>;
   GenericFunction._();
 }
@@ -129,7 +130,7 @@ abstract class NonBuiltGeneric
 
   NonBuilt<int> get value;
 
-  factory NonBuiltGeneric([updates(NonBuiltGenericBuilder b)]) =
+  factory NonBuiltGeneric([Function(NonBuiltGenericBuilder) updates]) =
       _$NonBuiltGeneric;
   NonBuiltGeneric._();
 }

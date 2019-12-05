@@ -525,6 +525,7 @@ abstract class CustomToStringValue extends Object
 }
 
 mixin CustomToString {
+  @override
   String toString() => 'custom';
 }
 

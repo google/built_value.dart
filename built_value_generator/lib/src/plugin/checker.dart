@@ -21,7 +21,7 @@ class Checker {
           continue;
         }
 
-        final ValueSourceClass sourceClass = ValueSourceClass(type);
+        final sourceClass = ValueSourceClass(type);
         final errors = sourceClass.computeErrors();
 
         if (errors.isNotEmpty) {

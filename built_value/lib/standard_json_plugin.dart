@@ -79,7 +79,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// type is known statically.
   Map _toMap(List list, bool needsEncodedKeys) {
     var result = <String, Object>{};
-    for (int i = 0; i != list.length ~/ 2; ++i) {
+    for (var i = 0; i != list.length ~/ 2; ++i) {
       final key = list[i * 2];
       final value = list[i * 2 + 1];
       result[needsEncodedKeys ? _encodeKey(key) : key as String] = value;
@@ -111,7 +111,7 @@ class StandardJsonPlugin implements SerializerPlugin {
     // type name on the wire to `encoded_map`.
     var needToEncodeKeys = false;
     if (type == 'map') {
-      for (int i = 0; i != (list.length - 1) ~/ 2; ++i) {
+      for (var i = 0; i != (list.length - 1) ~/ 2; ++i) {
         if (list[i * 2 + 1] is! String) {
           needToEncodeKeys = true;
           type = 'encoded_map';
@@ -121,7 +121,7 @@ class StandardJsonPlugin implements SerializerPlugin {
     }
 
     var result = <String, Object>{discriminator: type};
-    for (int i = 0; i != (list.length - 1) ~/ 2; ++i) {
+    for (var i = 0; i != (list.length - 1) ~/ 2; ++i) {
       final key = needToEncodeKeys
           ? _encodeKey(list[i * 2 + 1])
           : list[i * 2 + 1] as String;
@@ -165,7 +165,7 @@ class StandardJsonPlugin implements SerializerPlugin {
     }
 
     if (type == 'list') {
-      return [type]..addAll(map[valueKey] as Iterable);
+      return [type, ...(map[valueKey] as Iterable)];
     }
 
     if (map.containsKey(valueKey)) {

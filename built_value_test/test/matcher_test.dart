@@ -50,7 +50,7 @@ void main() {
       _expectMismatch(
           value,
           otherValue,
-          "shorter than expected at location"
+          'shorter than expected at location'
           " ['simpleValue']['multimap']['42'][1]");
     });
 
@@ -88,7 +88,7 @@ void main() {
       _expectMismatch(
           value,
           otherValue,
-          "shorter than expected at location"
+          'shorter than expected at location'
           " ['simpleValue']['setMultimap']['42'][1]");
     });
 

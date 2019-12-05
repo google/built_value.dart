@@ -16,7 +16,7 @@ abstract class Built<V extends Built<V, B>, B extends Builder<V, B>> {
   ///
   /// The implementation of this method will be generated for you by the
   /// built_value generator.
-  V rebuild(updates(B builder));
+  V rebuild(Function(B) updates);
 
   /// Converts the instance to a builder [B].
   ///
@@ -41,7 +41,7 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
   /// Applies updates.
   ///
   /// [updates] is a function that takes a builder [B].
-  void update(updates(B builder));
+  void update(Function(B) updates);
 
   /// Builds.
   ///

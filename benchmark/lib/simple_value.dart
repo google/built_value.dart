@@ -13,6 +13,6 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
 
   String get aString;
 
-  factory SimpleValue([updates(SimpleValueBuilder b)]) = _$SimpleValue;
+  factory SimpleValue([Function(SimpleValueBuilder) updates]) = _$SimpleValue;
   SimpleValue._();
 }

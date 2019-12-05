@@ -16,6 +16,6 @@ class FakeDisplay implements Display {
 
   @override
   void addLocal(String text) {
-    this.localText.add(text);
+    localText.add(text);
   }
 }

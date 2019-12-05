@@ -105,7 +105,7 @@ class Value implements Built<Value, ValueBuilder> {
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
-}'''), contains("1. Make class abstract."));
+}'''), contains('1. Make class abstract.'));
     });
 
     test('suggests correct Built type parameters for implements', () async {
@@ -383,7 +383,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
-}'''), contains("1. Make class have exactly one constructor: Value._();"));
+}'''), contains('1. Make class have exactly one constructor: Value._();'));
     });
 
     test('suggests to add constructor when there is synthetic constructor',
@@ -396,7 +396,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
-}'''), contains("1. Make class have exactly one constructor: Value._();"));
+}'''), contains('1. Make class have exactly one constructor: Value._();'));
     });
 
     test('allows code in constructor of value class', () async {
@@ -415,7 +415,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   factory ValueBuilder() = _\$ValueBuilder;
 }'''),
           isNot(contains(
-              "1. Make class have exactly one constructor: Value._();")));
+              '1. Make class have exactly one constructor: Value._();')));
     });
 
     test('suggests to remove constructor from non-instantiable value class',
@@ -478,7 +478,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
 class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
-}'''), contains("1. Make builder class abstract"));
+}'''), contains('1. Make builder class abstract'));
     });
 
     test('suggests correct Builder type parameters', () async {
@@ -511,8 +511,8 @@ abstract class Value implements Built<Value, ValueBuilder> {
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   factory ValueBuilder() = _\$ValueBuilder;
 }'''),
-          contains("1. Make builder class "
-              "have exactly one constructor: ValueBuilder._();"));
+          contains('1. Make builder class '
+              'have exactly one constructor: ValueBuilder._();'));
     });
 
     test('suggests constructor for builder class with synthetic constructor',
@@ -527,8 +527,8 @@ abstract class Value implements Built<Value, ValueBuilder> {
 }
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 }'''),
-          contains("1. Make builder class "
-              "have exactly one constructor: ValueBuilder._();"));
+          contains('1. Make builder class '
+              'have exactly one constructor: ValueBuilder._();'));
     });
 
     test('suggests to add factory to builder class', () async {
@@ -543,8 +543,8 @@ abstract class Value implements Built<Value, ValueBuilder> {
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
 }'''),
-          contains("1. Make builder class have exactly one factory: "
-              "factory ValueBuilder() = _\$ValueBuilder;"));
+          contains('1. Make builder class have exactly one factory: '
+              'factory ValueBuilder() = _\$ValueBuilder;'));
     });
 
     test('suggests value fields must be getters', () async {
@@ -560,7 +560,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   int foo;
-}'''), contains("1. Make field foo a getter."));
+}'''), contains('1. Make field foo a getter.'));
     });
 
     test('suggests value fields must be public', () async {
@@ -619,7 +619,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
-}'''), contains("1. Make builder have exactly these fields: foo"));
+}'''), contains('1. Make builder have exactly these fields: foo'));
     });
 
     test('suggests builder fields must be same type', () async {
@@ -635,7 +635,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   ValueBuilder._();
   factory ValueBuilder() = _\$ValueBuilder;
   String foo;
-}'''), contains("1. Make builder field foo have type: int"));
+}'''), contains('1. Make builder field foo have type: int'));
     });
 
     test('ignores setters', () async {

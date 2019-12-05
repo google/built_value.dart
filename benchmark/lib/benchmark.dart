@@ -24,7 +24,7 @@ void benchmarkNestedRebuilds() {
     _benchmark('nested rebuild $depth', () {
       final topBuilder = value.toBuilder();
       var leafBuilder = topBuilder;
-      for (int i = 0; i != depth; ++i) {
+      for (var i = 0; i != depth; ++i) {
         leafBuilder = leafBuilder.left;
       }
       leafBuilder.label = 'updatedLeaf';
@@ -42,14 +42,14 @@ void _buildNested(NodeBuilder nodeBuilder, int depth) {
   }
 }
 
-void _benchmark(String name, function()) {
+void _benchmark(String name, Function() function) {
   // Warm up.
   for (var i = 0; i != 1000; ++i) {
     function();
   }
 
   // Time.
-  for (int i = 0; i != 3; ++i) {
+  for (var i = 0; i != 3; ++i) {
     final stopwatch = Stopwatch()..start();
     final reps = 10000000;
     for (var i = 0; i != reps; ++i) {

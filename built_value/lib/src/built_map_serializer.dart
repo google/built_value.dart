@@ -49,7 +49,7 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
         ? FullType.unspecified
         : specifiedType.parameters[1];
 
-    MapBuilder result = isUnderspecified
+    var result = isUnderspecified
         ? MapBuilder<Object, Object>()
         : serializers.newBuilder(specifiedType) as MapBuilder;
 
@@ -57,7 +57,7 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
       throw ArgumentError('odd length');
     }
 
-    for (int i = 0; i != serialized.length; i += 2) {
+    for (var i = 0; i != serialized.length; i += 2) {
       final key = serializers.deserialize(serialized.elementAt(i),
           specifiedType: keyType);
       final value = serializers.deserialize(serialized.elementAt(i + 1),

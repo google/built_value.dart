@@ -17,7 +17,7 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
   BuiltSet<int> get aSet;
   BuiltSetMultimap<int, bool> get setMultimap;
 
-  factory SimpleValue([updates(SimpleValueBuilder b)]) = _$SimpleValue;
+  factory SimpleValue([Function(SimpleValueBuilder) updates]) = _$SimpleValue;
   SimpleValue._();
 }
 
@@ -27,7 +27,8 @@ abstract class CompoundValue
   @nullable
   String get string;
 
-  factory CompoundValue([updates(CompoundValueBuilder b)]) = _$CompoundValue;
+  factory CompoundValue([Function(CompoundValueBuilder) updates]) =
+      _$CompoundValue;
   CompoundValue._();
 }
 
@@ -38,6 +39,7 @@ abstract class ComparedValue
   @BuiltValueField(compare: false)
   Function get onChanged;
 
-  factory ComparedValue([updates(ComparedValueBuilder b)]) = _$ComparedValue;
+  factory ComparedValue([Function(ComparedValueBuilder) updates]) =
+      _$ComparedValue;
   ComparedValue._();
 }
