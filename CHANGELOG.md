@@ -1,5 +1,9 @@
 # Changelog
 
+# 7.0.1
+
+- Internal: cleanup for pedantic v1.9.0 lints.
+
 # 7.0.0
 
 - Internal: clean up `built_value_generator` -> `built_value` dependency;
