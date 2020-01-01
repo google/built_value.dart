@@ -1,5 +1,5 @@
 name: benchmark
-version: 7.0.2
+version: 7.0.3
 description: >
   Benchmark, not for publishing.
 authors:
@@ -15,7 +15,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^1.0.0
-  built_value_generator: ^7.0.2
+  built_value_generator: ^7.0.3
   pedantic: ^1.4.0
   quiver: '>=0.21.0 <3.0.0'
   test: ^1.0.0

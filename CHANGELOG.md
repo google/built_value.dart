@@ -1,5 +1,9 @@
 # Changelog
 
+# 7.0.3
+
+- Add `example` folders with `README.md` pointing to examples.
+
 # 7.0.2
 
 - Internal: cleanup for pedantic v1.9.0 lints.
