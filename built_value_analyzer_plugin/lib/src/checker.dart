@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer_plugin/protocol/protocol_common.dart';
 import 'package:analyzer_plugin/protocol/protocol_generated.dart';
+// ignore: implementation_imports
 import 'package:built_value_generator/src/value_source_class.dart';
 
 /// Checks a library for errors related to built_value generation. Returns
