@@ -28,4 +28,8 @@ for pubspec in \
   sed -i -e \
       "s#.*built_value_generator: .*#  built_value_generator: ^$version#" \
       "$pubspec"
+
+  sed -i -e \
+      "s#.*built_value_analyzer_plugin: .*#  built_value_analyzer_plugin: ^$version#" \
+      "$pubspec"
 done

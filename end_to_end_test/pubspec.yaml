@@ -1,5 +1,5 @@
 name: end_to_end_test
-version: 7.0.3
+version: 7.0.4
 description: >
   Tests, not for publishing.
 authors:
@@ -16,7 +16,7 @@ dependencies:
 dev_dependencies:
   build: ^1.0.0
   build_runner: ^1.0.0
-  built_value_generator: ^7.0.3
+  built_value_generator: ^7.0.4
   fixnum: ^0.10.0
   pedantic: ^1.4.0
   quiver: '>=0.21.0 <3.0.0'

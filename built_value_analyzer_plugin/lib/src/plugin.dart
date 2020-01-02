@@ -11,7 +11,7 @@ import 'package:analyzer/src/dart/analysis/driver.dart';
 import 'package:analyzer_plugin/plugin/plugin.dart';
 import 'package:analyzer_plugin/protocol/protocol_common.dart' as plugin;
 import 'package:analyzer_plugin/protocol/protocol_generated.dart' as plugin;
-import 'package:built_value_generator/src/plugin/checker.dart';
+import 'package:built_value_analyzer_plugin/src/checker.dart';
 
 /// Analyzer plugin for built_value.
 ///

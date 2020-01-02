@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:build_test/build_test.dart';
-import 'package:built_value_generator/src/plugin/checker.dart';
+import 'package:built_value_analyzer_plugin/src/checker.dart';
 import 'package:test/test.dart';
 
 /// Applies fixes from the plugin to [src], and compares the result to

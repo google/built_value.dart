@@ -1,5 +1,11 @@
 # Changelog
 
+# 7.0.4
+
+- Split analysis plugin out into new package, `built_value_analyzer_plugin`.
+  Bump `built_value_generator` dependency on `analyzer` to `0.39.0` so it
+  supports extension methods.
+
 # 7.0.3
 
 - Add `example` folders with `README.md` pointing to examples.
