@@ -29,7 +29,7 @@ class DartTypes {
     if (type.element is! ClassElement) return false;
     return (type.element as ClassElement)
         .allSupertypes
-        .any((interfaceType) => interfaceType.name == 'Built');
+        .any((interfaceType) => interfaceType.element.name == 'Built');
   }
 
   static bool isBuiltCollection(DartType type) {

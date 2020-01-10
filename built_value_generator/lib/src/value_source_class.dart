@@ -58,7 +58,7 @@ abstract class ValueSourceClass
 
   @memoized
   bool get implementsBuilt => element.allSupertypes
-      .any((interfaceType) => interfaceType.name == 'Built');
+      .any((interfaceType) => interfaceType.element.name == 'Built');
 
   @memoized
   bool get extendsIsAllowed {
@@ -170,7 +170,7 @@ abstract class ValueSourceClass
   @memoized
   String get builderParameters {
     return builderElement.allSupertypes
-        .where((interfaceType) => interfaceType.name == 'Builder')
+        .where((interfaceType) => interfaceType.element.name == 'Builder')
         .single
         .typeArguments
         .map((type) => DartTypes.getName(type))
@@ -298,8 +298,8 @@ abstract class ValueSourceClass
   static bool needsBuiltValue(ClassElement classElement) {
     // TODO(davidmorgan): more exact type check.
     return !classElement.displayName.startsWith('_\$') &&
-        (classElement.allSupertypes
-                .any((interfaceType) => interfaceType.name == 'Built') ||
+        (classElement.allSupertypes.any(
+                (interfaceType) => interfaceType.element.name == 'Built') ||
             classElement.metadata
                 .map((annotation) => annotation.computeConstantValue())
                 .any(
