@@ -1,5 +1,9 @@
 # Changelog
 
+# 7.0.5
+
+- Internal: fix analyzer deprecation warnings.
+
 # 7.0.4
 
 - Split analysis plugin out into new package, `built_value_analyzer_plugin`.
