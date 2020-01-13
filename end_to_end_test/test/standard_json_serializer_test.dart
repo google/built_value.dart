@@ -130,7 +130,7 @@ void main() {
       'zoo': [
         {r'$': 'Cat', 'tail': true, 'legs': 4}
       ],
-      'uniqueZoo': [],
+      'uniqueZoo': <Object>[],
     };
 
     test('can be serialized', () {

@@ -9,7 +9,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('HasInt', () {
-    var data = BuiltList<ValueWithHasInt>([
+    var data = BuiltList.of([
       ValueWithHasInt((b) => b.hasInt = ValueWithInt((b) => b
         ..anInt = 2
         ..note = 'two')),

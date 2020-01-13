@@ -186,7 +186,7 @@ class _$CollectionGenericValueSerializer
         case 'values':
           result.values.replace(serializers.deserialize(value,
                   specifiedType: new FullType(BuiltList, [parameterT]))
-              as BuiltList<dynamic>);
+              as BuiltList<Object>);
           break;
       }
     }
@@ -1097,7 +1097,7 @@ class _$GenericFunction<T> extends GenericFunction<T> {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final _$dynamicOther = other as dynamic;
+    final dynamic _$dynamicOther = other;
     return other is GenericFunction && function == _$dynamicOther.function;
   }
 

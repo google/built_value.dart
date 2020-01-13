@@ -89,7 +89,7 @@ void main() {
       final value = SimpleValue((b) => b
         ..anInt = 73
         ..aString = 'seventythree');
-      expect(value.hashCode, hashObjects([value.anInt, value.aString]));
+      expect(value.hashCode, hashObjects(<Object>[value.anInt, value.aString]));
     });
 
     test('hashes equal when equal', () {
@@ -169,7 +169,7 @@ void main() {
         ..simpleValue.aString = 'two');
 
       expect(value.hashCode,
-          hashObjects([value.simpleValue, value.validatedValue]));
+          hashObjects(<Object>[value.simpleValue, value.validatedValue]));
     });
   });
 

@@ -76,7 +76,7 @@ void main() {
   });
 
   group('HasField', () {
-    var data = BuiltList<HasField<dynamic>>([
+    var data = BuiltList<HasField<dynamic>>(<Object>[
       HasString((b) => b..field = 'hello'),
       HasDouble((b) => b..field = 3.14)
     ]);

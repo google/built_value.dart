@@ -997,7 +997,7 @@ abstract class ValueSourceClass
     result.writeln('  if (identical(other, this)) return true;');
 
     if (comparedFunctionFields.isNotEmpty) {
-      result.writeln('  final _\$dynamicOther = other as dynamic;');
+      result.writeln('  final dynamic _\$dynamicOther = other;');
     }
     result.writeln('  return other is $name${forBuilder ? 'Builder' : ''}');
     if (comparedFields.isNotEmpty) {

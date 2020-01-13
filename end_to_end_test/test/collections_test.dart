@@ -76,7 +76,7 @@ void main() {
 
       expect(
           collections.hashCode,
-          hashObjects([
+          hashObjects(<Object>[
             collections.list,
             collections.set,
             collections.map,
