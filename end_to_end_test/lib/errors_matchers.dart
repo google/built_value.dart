@@ -19,6 +19,6 @@ class _ErrorContaining extends TypeMatcher<Error> {
   }
 
   @override
-  bool matches(dynamic item, Map matchState) =>
+  bool matches(dynamic item, Map<Object, Object> matchState) =>
       item is Error && item.toString().contains(string);
 }

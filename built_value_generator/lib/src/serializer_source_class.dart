@@ -113,6 +113,17 @@ abstract class SerializerSourceClass
       BuiltList<String>(element.typeParameters
           .map((element) => (element.bound ?? '').toString()));
 
+  @memoized
+  String get genericBoundsOrObjectString => genericBounds.isEmpty
+      ? ''
+      : '<' +
+          genericBounds
+              .map((bound) => bound.isEmpty ? 'Object' : bound)
+              .join(', ') +
+          '>';
+
+  String get genericName => '$name$genericBoundsOrObjectString';
+
   // TODO(davidmorgan): better check.
   @memoized
   bool get isBuiltValue =>
@@ -214,9 +225,15 @@ abstract class SerializerSourceClass
           name.substring(0, 1).toLowerCase() + name.substring(1);
 
       final expectedSerializerDeclaration =
+          'static Serializer<$genericName> get serializer => '
+          '_\$${camelCaseName}Serializer;';
+      // We used to recommend raw types; recommend the full type now, but still
+      // allow raw types.
+      final expectedSerializerDeclarationRaw =
           'static Serializer<$name> get serializer => '
           '_\$${camelCaseName}Serializer;';
-      if (serializerDeclaration != expectedSerializerDeclaration) {
+      if (serializerDeclaration != expectedSerializerDeclaration &&
+          serializerDeclaration != expectedSerializerDeclarationRaw) {
         result.add('Declare $name.serializer as: '
             '$expectedSerializerDeclaration got $serializerDeclaration');
       }
@@ -258,7 +275,7 @@ abstract class SerializerSourceClass
 
   String generateSerializerDeclaration() {
     var camelCaseName = _toCamelCase(name);
-    return 'Serializer<$name> '
+    return 'Serializer<$genericName> '
         '_\$${camelCaseName}Serializer = '
         'new _\$${name}Serializer();';
   }
@@ -266,14 +283,14 @@ abstract class SerializerSourceClass
   String generateSerializer() {
     if (isBuiltValue) {
       return '''
-class _\$${name}Serializer implements StructuredSerializer<$name> {
+class _\$${name}Serializer implements StructuredSerializer<$genericName> {
   @override
   final Iterable<Type> types = const [$name, _\$$name];
   @override
   final String wireName = '${escapeString(wireName)}';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, $name object,
+  Iterable<Object> serialize(Serializers serializers, $genericName object,
       {FullType specifiedType = FullType.unspecified}) {
     ${fields.isEmpty ? 'return <Object>[];' : '''
     ${_generateGenericsSerializerPreamble()}
@@ -284,7 +301,7 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
   }
 
   @override
-  $name deserialize(Serializers serializers, Iterable<Object> serialized,
+  $genericName deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     ${_generateGenericsSerializerPreamble()}
     ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
@@ -320,14 +337,14 @@ class _\$${name}Serializer implements StructuredSerializer<$name> {
       if (wireNameMapping.isEmpty) {
         // No wire names. Just use the enum names directly.
         return '''
-class _\$${name}Serializer implements PrimitiveSerializer<$name> {
+class _\$${name}Serializer implements PrimitiveSerializer<$genericName> {
   @override
   final Iterable<Type> types = const <Type>[$name];
   @override
   final String wireName = '${escapeString(wireName)}';
 
   @override
-  Object serialize(Serializers serializers, $name object,
+  Object serialize(Serializers serializers, $genericName object,
       {FullType specifiedType = FullType.unspecified}) =>
     object.name;
 
@@ -348,7 +365,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
          };''';
 
         return '''
-class _\$${name}Serializer implements PrimitiveSerializer<$name> {
+class _\$${name}Serializer implements PrimitiveSerializer<$genericName> {
   $toWire
   $fromWire
 
@@ -358,12 +375,12 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   final String wireName = '${escapeString(wireName)}';
 
   @override
-  Object serialize(Serializers serializers, $name object,
+  Object serialize(Serializers serializers, $genericName object,
       {FullType specifiedType = FullType.unspecified}) =>
     _toWire[object.name] ?? object.name;
 
   @override
-  $name deserialize(Serializers serializers, Object serialized,
+  $genericName deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) =>
     $name.valueOf(_fromWire[serialized] ?? serialized as String);
 }''';
@@ -376,11 +393,8 @@ class _\$${name}Serializer implements PrimitiveSerializer<$name> {
   String _generateNewBuilder() {
     var parameters = _genericParametersUsedInFields;
     if (parameters.isEmpty) return 'new ${name}Builder()';
-    var boundsOrObject = genericBounds
-        .map((bound) => bound.isEmpty ? 'Object' : bound)
-        .join(', ');
     return 'isUnderspecified ? '
-        'new ${name}Builder<$boundsOrObject>() : '
+        'new ${name}Builder$genericBoundsOrObjectString() : '
         'serializers.newBuilder(specifiedType) as ${name}Builder';
   }
 

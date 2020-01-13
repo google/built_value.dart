@@ -6,23 +6,25 @@ part of generics;
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GenericValue> _$genericValueSerializer =
+Serializer<GenericValue<Object>> _$genericValueSerializer =
     new _$GenericValueSerializer();
-Serializer<BoundGenericValue> _$boundGenericValueSerializer =
+Serializer<BoundGenericValue<num>> _$boundGenericValueSerializer =
     new _$BoundGenericValueSerializer();
-Serializer<CollectionGenericValue> _$collectionGenericValueSerializer =
+Serializer<CollectionGenericValue<Object>> _$collectionGenericValueSerializer =
     new _$CollectionGenericValueSerializer();
 Serializer<GenericContainer> _$genericContainerSerializer =
     new _$GenericContainerSerializer();
 
-class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
+class _$GenericValueSerializer
+    implements StructuredSerializer<GenericValue<Object>> {
   @override
   final Iterable<Type> types = const [GenericValue, _$GenericValue];
   @override
   final String wireName = 'GenericValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, GenericValue object,
+  Iterable<Object> serialize(
+      Serializers serializers, GenericValue<Object> object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -39,7 +41,8 @@ class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
   }
 
   @override
-  GenericValue deserialize(Serializers serializers, Iterable<Object> serialized,
+  GenericValue<Object> deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -69,14 +72,15 @@ class _$GenericValueSerializer implements StructuredSerializer<GenericValue> {
 }
 
 class _$BoundGenericValueSerializer
-    implements StructuredSerializer<BoundGenericValue> {
+    implements StructuredSerializer<BoundGenericValue<num>> {
   @override
   final Iterable<Type> types = const [BoundGenericValue, _$BoundGenericValue];
   @override
   final String wireName = 'BoundGenericValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, BoundGenericValue object,
+  Iterable<Object> serialize(
+      Serializers serializers, BoundGenericValue<num> object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -93,7 +97,7 @@ class _$BoundGenericValueSerializer
   }
 
   @override
-  BoundGenericValue deserialize(
+  BoundGenericValue<num> deserialize(
       Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
@@ -124,7 +128,7 @@ class _$BoundGenericValueSerializer
 }
 
 class _$CollectionGenericValueSerializer
-    implements StructuredSerializer<CollectionGenericValue> {
+    implements StructuredSerializer<CollectionGenericValue<Object>> {
   @override
   final Iterable<Type> types = const [
     CollectionGenericValue,
@@ -135,7 +139,7 @@ class _$CollectionGenericValueSerializer
 
   @override
   Iterable<Object> serialize(
-      Serializers serializers, CollectionGenericValue object,
+      Serializers serializers, CollectionGenericValue<Object> object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -153,7 +157,7 @@ class _$CollectionGenericValueSerializer
   }
 
   @override
-  CollectionGenericValue deserialize(
+  CollectionGenericValue<Object> deserialize(
       Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
