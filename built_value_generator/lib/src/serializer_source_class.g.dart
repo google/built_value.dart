@@ -20,6 +20,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   String __serializerDeclaration;
   BuiltList<String> __genericParameters;
   BuiltList<String> __genericBounds;
+  String __genericBoundsOrObjectString;
   bool __isBuiltValue;
   bool __isEnumClass;
   BuiltList<SerializerSourceField> __fields;
@@ -71,6 +72,10 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   BuiltList<String> get genericBounds =>
       __genericBounds ??= super.genericBounds;
+
+  @override
+  String get genericBoundsOrObjectString =>
+      __genericBoundsOrObjectString ??= super.genericBoundsOrObjectString;
 
   @override
   bool get isBuiltValue => __isBuiltValue ??= super.isBuiltValue;

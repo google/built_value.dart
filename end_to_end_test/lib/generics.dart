@@ -12,7 +12,8 @@ part 'generics.g.dart';
 
 abstract class GenericValue<T>
     implements Built<GenericValue<T>, GenericValueBuilder<T>> {
-  static Serializer<GenericValue> get serializer => _$genericValueSerializer;
+  static Serializer<GenericValue<Object>> get serializer =>
+      _$genericValueSerializer;
 
   T get value;
 
@@ -37,7 +38,7 @@ abstract class BoundGenericValue<T extends num>
 abstract class CollectionGenericValue<T>
     implements
         Built<CollectionGenericValue<T>, CollectionGenericValueBuilder<T>> {
-  static Serializer<CollectionGenericValue> get serializer =>
+  static Serializer<CollectionGenericValue<Object>> get serializer =>
       _$collectionGenericValueSerializer;
 
   BuiltList<T> get values;

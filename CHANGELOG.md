@@ -1,5 +1,11 @@
 # Changelog
 
+# 7.0.6
+
+- Make generated code comply with analyzer option `strict-raw-types`.
+- Allow `Serialiers` declaration to comply with `strict-raw-types`, or to
+  continue to use raw types as before.
+
 # 7.0.5
 
 - Internal: fix analyzer deprecation warnings.
