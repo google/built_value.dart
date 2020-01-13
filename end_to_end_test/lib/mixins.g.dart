@@ -50,7 +50,7 @@ class _$UsesMixin extends UsesMixin {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final _$dynamicOther = other as dynamic;
+    final dynamic _$dynamicOther = other;
     return other is UsesMixin && typeDef == _$dynamicOther.typeDef;
   }
 

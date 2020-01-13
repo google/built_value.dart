@@ -23,7 +23,7 @@ void main() {
         'two',
       ],
       'simpleValues',
-      [],
+      <Object>[],
     ];
 
     test('can be serialized', () {
@@ -51,7 +51,7 @@ void main() {
         'two',
       ],
       'simpleValues',
-      [],
+      <Object>[],
     ];
 
     test('can be serialized', () {
@@ -77,7 +77,7 @@ void main() {
         'two',
       ],
       'simpleValues',
-      [],
+      <Object>[],
     ];
 
     test('can be serialized', () {

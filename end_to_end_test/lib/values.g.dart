@@ -765,7 +765,7 @@ class _$FieldDiscoveryValueSerializer
           result.values.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(ThirdDiscoverableValue)
-              ])) as BuiltList<dynamic>);
+              ])) as BuiltList<ThirdDiscoverableValue>);
           break;
         case 'recursiveValue':
           result.recursiveValue.replace(serializers.deserialize(value,
@@ -2911,7 +2911,7 @@ class _$FunctionValue extends FunctionValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final _$dynamicOther = other as dynamic;
+    final dynamic _$dynamicOther = other;
     return other is FunctionValue && function == _$dynamicOther.function;
   }
 
@@ -2993,7 +2993,7 @@ class _$ListOfFunctionValue extends ListOfFunctionValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final _$dynamicOther = other as dynamic;
+    final dynamic _$dynamicOther = other;
     return other is ListOfFunctionValue &&
         functions == _$dynamicOther.functions;
   }

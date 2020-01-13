@@ -192,25 +192,7 @@ abstract class SerializerSourceField
       String type, BuiltMap<String, String> classGenericBounds,
       {bool topLevel = true}) {
     var bareType = _getBareType(type);
-
-    // For built collections we can cast to the dynamic type when deserializing,
-    // instead of the actual generic type. This is because the `replace` method
-    // checks the generic type and copies if needed.
-    String generics;
-    if (topLevel && DartTypes.isBuiltCollectionTypeName(bareType)) {
-      if (bareType == 'BuiltList' || bareType == 'BuiltSet') {
-        generics = 'dynamic';
-      } else if (bareType == 'BuiltMap' ||
-          bareType == 'BuiltListMultimap' ||
-          bareType == 'BuiltSetMultimap') {
-        generics = 'dynamic, dynamic';
-      } else {
-        throw UnsupportedError('Bare type is a built_collection type, but not '
-            'one of the known built_collection types: $bareType.');
-      }
-    } else {
-      generics = _getGenerics(type);
-    }
+    var generics = _getGenerics(type);
     var genericItems = _splitOnTopLevelCommas(generics);
 
     if (generics.isEmpty) {
