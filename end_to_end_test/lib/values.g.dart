@@ -765,7 +765,7 @@ class _$FieldDiscoveryValueSerializer
           result.values.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(ThirdDiscoverableValue)
-              ])) as BuiltList<dynamic>);
+              ])) as BuiltList<ThirdDiscoverableValue>);
           break;
         case 'recursiveValue':
           result.recursiveValue.replace(serializers.deserialize(value,

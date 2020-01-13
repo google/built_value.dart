@@ -186,7 +186,7 @@ class _$CollectionGenericValueSerializer
         case 'values':
           result.values.replace(serializers.deserialize(value,
                   specifiedType: new FullType(BuiltList, [parameterT]))
-              as BuiltList<dynamic>);
+              as BuiltList<Object>);
           break;
       }
     }

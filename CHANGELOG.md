@@ -5,6 +5,8 @@
 - Make generated code comply with analyzer option `strict-raw-types`.
 - Allow `Serialiers` declaration to comply with `strict-raw-types`, or to
   continue to use raw types as before.
+- Make generated code comply with analyzer options `implicit-casts: false`
+  and `implicit-dynamic: false`.
 
 # 7.0.5
 
