@@ -1,5 +1,10 @@
 # Changelog
 
+# 7.0.7
+
+- Fix regression in a corner case when determining which fields to generate
+  based on mixins.
+
 # 7.0.6
 
 - Make generated code comply with analyzer option `strict-raw-types`.

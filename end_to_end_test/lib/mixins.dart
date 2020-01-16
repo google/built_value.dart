@@ -18,3 +18,31 @@ abstract class UsesMixin extends Object
   factory UsesMixin([void Function(UsesMixinBuilder) updates]) = _$UsesMixin;
   UsesMixin._();
 }
+
+// This catches a regression in determining whether a getter should cause a
+// field to be created. We only want that if there is no concrete
+// implementation. This precise combination of mixins and interfaces caused
+// the concrete implementation to be missed and an unwanted field to be
+// created.
+abstract class GetsCorrectFieldsViaMixins extends Object
+    with ConcreteMixin, AbstractMixin
+    implements
+        Built<GetsCorrectFieldsViaMixins, GetsCorrectFieldsViaMixinsBuilder>,
+        MixinBase {
+  factory GetsCorrectFieldsViaMixins(
+          [void Function(GetsCorrectFieldsViaMixinsBuilder) updates]) =
+      _$GetsCorrectFieldsViaMixins;
+  GetsCorrectFieldsViaMixins._();
+}
+
+abstract class MixinBase {
+  int get shouldBeAField;
+  int get shouldNotBeAField;
+}
+
+mixin ConcreteMixin implements MixinBase {
+  @override
+  int get shouldNotBeAField => 1;
+}
+
+mixin AbstractMixin implements MixinBase {}
