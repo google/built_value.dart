@@ -1,5 +1,9 @@
 # Changelog
 
+# 7.0.8
+
+- Fix `analyzer` lower bound: was `0.39.0`, needs to be `0.39.3`.
+
 # 7.0.7
 
 - Fix regression in a corner case when determining which fields to generate
