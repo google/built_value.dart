@@ -43,7 +43,12 @@ BuiltList<FieldElement> collectFieldsForType(InterfaceType type) {
     ..addAll(fieldSet)
     ..where((field) =>
         type
-            .lookUpGetter2(field.name, field.library, inherited: true)
+            .lookUpGetter2(
+              field.name,
+              field.library,
+              inherited: true,
+              concrete: true,
+            )
             ?.isAbstract ??
         true));
 }

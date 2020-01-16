@@ -104,4 +104,90 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
   }
 }
 
+class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
+  @override
+  final int shouldBeAField;
+
+  factory _$GetsCorrectFieldsViaMixins(
+          [void Function(GetsCorrectFieldsViaMixinsBuilder) updates]) =>
+      (new GetsCorrectFieldsViaMixinsBuilder()..update(updates)).build();
+
+  _$GetsCorrectFieldsViaMixins._({this.shouldBeAField}) : super._() {
+    if (shouldBeAField == null) {
+      throw new BuiltValueNullFieldError(
+          'GetsCorrectFieldsViaMixins', 'shouldBeAField');
+    }
+  }
+
+  @override
+  GetsCorrectFieldsViaMixins rebuild(
+          void Function(GetsCorrectFieldsViaMixinsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GetsCorrectFieldsViaMixinsBuilder toBuilder() =>
+      new GetsCorrectFieldsViaMixinsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GetsCorrectFieldsViaMixins &&
+        shouldBeAField == other.shouldBeAField;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, shouldBeAField.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('GetsCorrectFieldsViaMixins')
+          ..add('shouldBeAField', shouldBeAField))
+        .toString();
+  }
+}
+
+class GetsCorrectFieldsViaMixinsBuilder
+    implements
+        Builder<GetsCorrectFieldsViaMixins, GetsCorrectFieldsViaMixinsBuilder> {
+  _$GetsCorrectFieldsViaMixins _$v;
+
+  int _shouldBeAField;
+  int get shouldBeAField => _$this._shouldBeAField;
+  set shouldBeAField(int shouldBeAField) =>
+      _$this._shouldBeAField = shouldBeAField;
+
+  GetsCorrectFieldsViaMixinsBuilder();
+
+  GetsCorrectFieldsViaMixinsBuilder get _$this {
+    if (_$v != null) {
+      _shouldBeAField = _$v.shouldBeAField;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GetsCorrectFieldsViaMixins other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$GetsCorrectFieldsViaMixins;
+  }
+
+  @override
+  void update(void Function(GetsCorrectFieldsViaMixinsBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$GetsCorrectFieldsViaMixins build() {
+    final _$result = _$v ??
+        new _$GetsCorrectFieldsViaMixins._(shouldBeAField: shouldBeAField);
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
