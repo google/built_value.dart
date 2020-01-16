@@ -4,6 +4,8 @@
 
 - Fix regression in a corner case when determining which fields to generate
   based on mixins.
+- Tweak generation changes for `implicit-casts: false` and
+  `implicit-dynamic: false`. Relax casts again where possible.
 
 # 7.0.6
 
