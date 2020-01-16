@@ -250,10 +250,8 @@ class _$AccountSerializer implements StructuredSerializer<Account> {
           break;
         case 'keyValues':
           result.keyValues.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltMap, const [
-                const FullType(String),
-                const FullType(JsonObject)
-              ])) as BuiltMap<String, JsonObject>);
+              specifiedType: const FullType(BuiltMap,
+                  const [const FullType(String), const FullType(JsonObject)])));
           break;
       }
     }
