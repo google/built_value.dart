@@ -12,6 +12,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/memoized_getter.dart';
 import 'package:built_value_generator/src/value_source_field.dart';
+import 'package:built_value_generator/src/strings.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -739,7 +740,7 @@ abstract class ValueSourceClass
       } else {
         result.writeln("return (newBuiltValueToStringHelper('$name')");
         result.writeln(fields
-            .map((field) => "..add('${field.name}',  ${field.name})")
+            .map((field) => "..add('${escapeString(field.name)}',  ${field.name})")
             .join(''));
         result.writeln(').toString();');
       }
