@@ -39,19 +39,24 @@ void main() {
     test('fields can be set via build constructor', () {
       final value = SimpleValue((b) => b
         ..anInt = 1
-        ..aString = 'two');
+        ..aString = 'two'
+        ..$mustBeEscaped = true);
       expect(value.anInt, 1);
       expect(value.aString, 'two');
+      expect(value.$mustBeEscaped, true);
     });
 
     test('fields can be updated via rebuild method', () {
       final value = SimpleValue((b) => b
         ..anInt = 0
-        ..aString = '').rebuild((b) => b
+        ..aString = ''
+        ..$mustBeEscaped = true).rebuild((b) => b
         ..anInt = 1
-        ..aString = 'two');
+        ..aString = 'two'
+        ..$mustBeEscaped = false);
       expect(value.anInt, 1);
       expect(value.aString, 'two');
+      expect(value.$mustBeEscaped, false);
     });
 
     test('builder can be instantiated', () {
@@ -88,8 +93,15 @@ void main() {
     test('hash matches quiver hash', () {
       final value = SimpleValue((b) => b
         ..anInt = 73
-        ..aString = 'seventythree');
-      expect(value.hashCode, hashObjects(<Object>[value.anInt, value.aString]));
+        ..aString = 'seventythree'
+        ..$mustBeEscaped = true);
+      expect(
+          value.hashCode,
+          hashObjects(<Object>[
+            value.anInt,
+            value.aString,
+            value.$mustBeEscaped,
+          ]));
     });
 
     test('hashes equal when equal', () {
@@ -115,10 +127,12 @@ void main() {
     test('has toString', () {
       final value1 = SimpleValue((b) => b
         ..anInt = 0
-        ..aString = '');
+        ..aString = ''
+        ..$mustBeEscaped = true);
       expect(value1.toString(), '''SimpleValue {
   anInt=0,
   aString=,
+  \$mustBeEscaped=true,
 }''');
     });
   });

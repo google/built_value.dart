@@ -21,6 +21,9 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
   @nullable
   String get aString;
 
+  @nullable
+  bool get $mustBeEscaped;
+
   factory SimpleValue([void Function(SimpleValueBuilder) updates]) =
       _$SimpleValue;
   SimpleValue._();
