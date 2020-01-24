@@ -740,7 +740,8 @@ abstract class ValueSourceClass
       } else {
         result.writeln("return (newBuiltValueToStringHelper('$name')");
         result.writeln(fields
-            .map((field) => "..add('${escapeString(field.name)}',  ${field.name})")
+            .map((field) =>
+                "..add('${escapeString(field.name)}',  ${field.name})")
             .join(''));
         result.writeln(').toString();');
       }
