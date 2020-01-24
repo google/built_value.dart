@@ -686,7 +686,7 @@ abstract class ValueSourceClass
       for (var field in requiredFields) {
         result.writeln('if (${field.name} == null) {');
         result.writeln(
-            "throw new BuiltValueNullFieldError('$name', '${field.name}');");
+            "throw new BuiltValueNullFieldError('$name', '${escapeString(field.name)}');");
         result.writeln('}');
       }
       // If there are generic parameters, check they are not "dynamic".
