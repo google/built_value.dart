@@ -15,13 +15,16 @@ void main() {
   group('SimpleValue', () {
     var data = SimpleValue((b) => b
       ..anInt = 1
-      ..aString = 'two');
+      ..aString = 'two'
+      ..$mustBeEscaped = true);
     var serialized = [
       'SimpleValue',
       'anInt',
       1,
       'aString',
       'two',
+      '\$mustBeEscaped',
+      true,
     ];
 
     test('can be serialized', () {

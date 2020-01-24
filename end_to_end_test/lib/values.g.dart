@@ -76,6 +76,12 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
         ..add(serializers.serialize(object.aString,
             specifiedType: const FullType(String)));
     }
+    if (object.$mustBeEscaped != null) {
+      result
+        ..add('\$mustBeEscaped')
+        ..add(serializers.serialize(object.$mustBeEscaped,
+            specifiedType: const FullType(bool)));
+    }
     return result;
   }
 
@@ -97,6 +103,10 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
         case 'aString':
           result.aString = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+        case '\$mustBeEscaped':
+          result.$mustBeEscaped = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
           break;
       }
     }
@@ -1288,11 +1298,13 @@ class _$SimpleValue extends SimpleValue {
   final int anInt;
   @override
   final String aString;
+  @override
+  final bool $mustBeEscaped;
 
   factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
-  _$SimpleValue._({this.anInt, this.aString}) : super._() {
+  _$SimpleValue._({this.anInt, this.aString, this.$mustBeEscaped}) : super._() {
     if (anInt == null) {
       throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
     }
@@ -1310,19 +1322,22 @@ class _$SimpleValue extends SimpleValue {
     if (identical(other, this)) return true;
     return other is SimpleValue &&
         anInt == other.anInt &&
-        aString == other.aString;
+        aString == other.aString &&
+        $mustBeEscaped == other.$mustBeEscaped;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+    return $jf($jc($jc($jc(0, anInt.hashCode), aString.hashCode),
+        $mustBeEscaped.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SimpleValue')
           ..add('anInt', anInt)
-          ..add('aString', aString))
+          ..add('aString', aString)
+          ..add('\$mustBeEscaped', $mustBeEscaped))
         .toString();
   }
 }
@@ -1338,12 +1353,18 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   String get aString => _$this._aString;
   set aString(String aString) => _$this._aString = aString;
 
+  bool _$mustBeEscaped;
+  bool get $mustBeEscaped => _$this._$mustBeEscaped;
+  set $mustBeEscaped(bool $mustBeEscaped) =>
+      _$this._$mustBeEscaped = $mustBeEscaped;
+
   SimpleValueBuilder();
 
   SimpleValueBuilder get _$this {
     if (_$v != null) {
       _anInt = _$v.anInt;
       _aString = _$v.aString;
+      _$mustBeEscaped = _$v.$mustBeEscaped;
       _$v = null;
     }
     return this;
@@ -1364,7 +1385,9 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   _$SimpleValue build() {
-    final _$result = _$v ?? new _$SimpleValue._(anInt: anInt, aString: aString);
+    final _$result = _$v ??
+        new _$SimpleValue._(
+            anInt: anInt, aString: aString, $mustBeEscaped: $mustBeEscaped);
     replace(_$result);
     return _$result;
   }
