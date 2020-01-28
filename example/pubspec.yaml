@@ -1,5 +1,5 @@
 name: example
-version: 7.0.8
+publish_to: none
 description: >
   Just an example, not for publishing.
 authors:
