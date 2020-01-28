@@ -22,7 +22,7 @@ See the [API docs](https://pub.dev/documentation/built_value/latest/built_value/
 - [Moving Fast with Dart Immutable Values](https://medium.com/@davidmorgan_14314/moving-fast-with-dart-immutable-values-1e717925fafb)
 - [Flutter JSON Serialization](https://aloisdeniel.github.io/flutter-json-serialization/)
 - [Flutter TODO App Example](https://gitlab.com/brianegan/flutter_architecture_samples/tree/master/example/built_redux)
-  using `built_value`, [built_redux](https://pub.dartlang.org/packages/built_redux), and [flutter_built_redux](https://pub.dartlang.org/packages/flutter_built_redux)
+  using `built_value`, [built_redux](https://pub.dev/packages/built_redux), and [flutter_built_redux](https://pub.dev/packages/flutter_built_redux)
 - [Building a (large) Flutter app with Redux](https://hillelcoren.com/2018/06/01/building-a-large-flutter-app-with-redux/)
 - [Some Options for Deserializing JSON with Flutter](https://medium.com/flutter-io/some-options-for-deserializing-json-with-flutter-7481325a4450)
 
@@ -204,10 +204,10 @@ a client for a JSON API representing a person that looks like the following:
 
 The corresponding dart class employing `built_value` might look like this. Note
 that it is using the
-[`@nullable`](https://pub.dartlang.org/documentation/built_value/latest/built_value/nullable-constant.html)
+[`@nullable`](https://pub.dev/documentation/built_value/latest/built_value/nullable-constant.html)
 annotation to indicate that the field does not have to be present on the
 response, as well as the
-[`@BuiltValueField`](https://pub.dartlang.org/documentation/built_value/latest/built_value/BuiltValueField-class.html)
+[`@BuiltValueField`](https://pub.dev/documentation/built_value/latest/built_value/BuiltValueField-class.html)
 annotation to map between the property name on the response and the name of the
 member variable in the `Person` class.
 
@@ -243,7 +243,7 @@ abstract class Person implements Built<Person, PersonBuilder> {
 
 ### Should I check in and/or publish in the generated `.g.dart` files?
 
-See the [build_runner](https://pub.dartlang.org/packages/build_runner#source-control)
+See the [build_runner](https://pub.dev/packages/build_runner#source-control)
 docs. You usually should not check in generated files, but you _do_ need to publish
 them.
 
