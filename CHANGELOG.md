@@ -1,5 +1,9 @@
 # Changelog
 
+# 7.0.9
+
+- Fix unescaped string usages while generating `ValueSourceClass`.
+
 # 7.0.8
 
 - Fix `analyzer` lower bound: was `0.39.0`, needs to be `0.39.3`.
