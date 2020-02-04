@@ -135,8 +135,6 @@ abstract class ValueWithDefaults
 /// particular constructor and factory, as shown here.
 abstract class ValueWithDefaultsBuilder
     implements Builder<ValueWithDefaults, ValueWithDefaultsBuilder> {
-  /// Builder fields must be marked "@virtual". This is a language feature that
-  /// allows them to be overriden.
   int anInt = 7;
 
   @nullable
