@@ -111,7 +111,7 @@ abstract class SerializerSourceClass
   @memoized
   BuiltList<String> get genericBounds =>
       BuiltList<String>(element.typeParameters
-          .map((element) => (element.bound ?? '').toString()));
+          .map((element) => DartTypes.getName(element.bound) ?? ''));
 
   @memoized
   String get genericBoundsOrObjectString => genericBounds.isEmpty
