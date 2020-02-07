@@ -3,6 +3,7 @@
 # 7.0.9
 
 - Fix unescaped string usages while generating `ValueSourceClass`.
+- Fix analyzer use: don't rely on `toString` on types.
 
 # 7.0.8
 
