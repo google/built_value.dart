@@ -217,21 +217,38 @@ abstract class SerializerSourceClass
   CompilationUnitElement get compilationUnit =>
       element.library.definingCompilationUnit;
 
+  /// Returns the serializer class name for the generated implementation. If the manually
+  /// maintained class is private then we ignore the underscore here, to avoid
+  /// returning a class name starting `_$_`.
+  @memoized
+  String get serializerImplName {
+    final unhidden = name.startsWith('_') ? name.substring(1) : name;
+    return '_\$${unhidden}Serializer';
+  }
+
+  /// Returns the serializer instance name for the generated implementation,
+  /// referenced by the user as a `static serializer` attribute.
+  ///
+  /// If the manually maintained class is private then we ignore the underscore here, to avoid
+  /// returning a class name starting `_$_`.
+  @memoized
+  String get serializerInstanceName {
+    final unhidden = name.startsWith('_') ? name.substring(1) : name;
+    final camelCaseName =
+        unhidden.substring(0, 1).toLowerCase() + unhidden.substring(1);
+    return '_\$${camelCaseName}Serializer';
+  }
+
   Iterable<String> computeErrors() {
     var result = <String>[];
 
     if (!serializerSettings.custom) {
-      final camelCaseName =
-          name.substring(0, 1).toLowerCase() + name.substring(1);
-
       final expectedSerializerDeclaration =
-          'static Serializer<$genericName> get serializer => '
-          '_\$${camelCaseName}Serializer;';
+          'static Serializer<$genericName> get serializer => ${serializerInstanceName};';
       // We used to recommend raw types; recommend the full type now, but still
       // allow raw types.
       final expectedSerializerDeclarationRaw =
-          'static Serializer<$name> get serializer => '
-          '_\$${camelCaseName}Serializer;';
+          'static Serializer<$name> get serializer => ${serializerInstanceName};';
       if (serializerDeclaration != expectedSerializerDeclaration &&
           serializerDeclaration != expectedSerializerDeclarationRaw) {
         result.add('Declare $name.serializer as: '
@@ -273,19 +290,22 @@ abstract class SerializerSourceClass
         .join('\n');
   }
 
-  String generateSerializerDeclaration() {
-    var camelCaseName = _toCamelCase(name);
-    return 'Serializer<$genericName> '
-        '_\$${camelCaseName}Serializer = '
-        'new _\$${name}Serializer();';
-  }
+  String generateSerializerDeclaration() =>
+      'Serializer<$genericName> ${serializerInstanceName} = new ${serializerImplName}();';
+
+  /// Returns the class name for the generated implementation. If the manually
+  /// maintained class is private then we ignore the underscore here, to avoid
+  /// returning a class name starting `_$_`.
+  @memoized
+  String get implName =>
+      name.startsWith('_') ? '_\$${name.substring(1)}' : '_\$$name';
 
   String generateSerializer() {
     if (isBuiltValue) {
       return '''
-class _\$${name}Serializer implements StructuredSerializer<$genericName> {
+class ${serializerImplName} implements StructuredSerializer<$genericName> {
   @override
-  final Iterable<Type> types = const [$name, _\$$name];
+  final Iterable<Type> types = const [$name, $implName];
   @override
   final String wireName = '${escapeString(wireName)}';
 
@@ -339,7 +359,7 @@ class _\$${name}Serializer implements StructuredSerializer<$genericName> {
       if (wireNameMapping.isEmpty) {
         // No wire names. Just use the enum names directly.
         return '''
-class _\$${name}Serializer implements PrimitiveSerializer<$genericName> {
+class $serializerImplName implements PrimitiveSerializer<$genericName> {
   @override
   final Iterable<Type> types = const <Type>[$name];
   @override
@@ -367,7 +387,7 @@ class _\$${name}Serializer implements PrimitiveSerializer<$genericName> {
          };''';
 
         return '''
-class _\$${name}Serializer implements PrimitiveSerializer<$genericName> {
+class $serializerImplName implements PrimitiveSerializer<$genericName> {
   $toWire
   $fromWire
 
