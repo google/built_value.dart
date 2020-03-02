@@ -678,7 +678,7 @@ abstract class ValueSourceClass
     // If there is a manually maintained builder we have to cast the "build()"
     // result to the generated value class. If the builder is generated, that
     // can return the right type directly and needs no cast.
-    var cast = hasBuilder ? 'as _\$$name$_generics' : '';
+    var cast = hasBuilder ? 'as $implName$_generics' : '';
     result.writeln('factory $implName(['
         'void Function(${name}Builder$_generics) updates]) '
         '=> (new ${name}Builder$_generics()..update(updates)).build() $cast;');
