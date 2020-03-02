@@ -604,7 +604,7 @@ abstract class ValueSourceClass
 
     if (settings.instantiable) {
       final expectedFactory =
-          'factory ${name}Builder() = _\$${name}Builder$_generics;';
+          'factory ${name}Builder() = ${implName}Builder$_generics;';
       if (builderClassFactories.length != 1 ||
           builderClassFactories.single != expectedFactory) {
         result.add(GeneratorError((b) => b
