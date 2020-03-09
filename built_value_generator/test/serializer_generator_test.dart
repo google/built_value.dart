@@ -176,6 +176,24 @@ abstract class Value implements Built<Value, ValueBuilder> {
           contains(r'1. Function fields are not serializable. Remove '
               '"function" or mark it "@BuiltValueField(serialize: false)".'));
     });
+
+    test('Cannot generate serializer for private classes', () async {
+      expect(await generate(r'''
+library value;
+
+import 'package:test_support/test_support.dart';
+
+part 'value.g.dart';
+
+abstract class _Value implements Built<_Value, _ValueBuilder> {
+  static Serializer<_Value> get serializer => _$valueSerializer;
+  bool get aBool;
+  
+  _Value._();
+  factory _Value([void Function(ValueBuilder) updates]) = _$Value;
+}
+'''), contains(r'1. Cannot generate serializers for private class _Value'));
+    });
   });
 }
 

@@ -745,6 +745,21 @@ abstract class Value implements Built<Value, ValueBuilder> {
         contains(
             '1. Set `nestedBuilders: false` in order to use `comparableBuilders: true`.'));
   });
+
+  test('Cleans generated class names for private classes', () async {
+    expect(
+        await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class _Value implements Built<_Value, _ValueBuilder> {
+  _Value._();
+  factory _Value([void Function(ValueBuilder) updates]) = _\$Value;
+}'''),
+        allOf(
+          isNot(contains(r'_$_')),
+          isNot(contains(r'1.')),
+        ));
+  });
 }
 
 // Test setup.
