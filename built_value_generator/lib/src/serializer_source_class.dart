@@ -254,6 +254,9 @@ abstract class SerializerSourceClass
         result.add('Declare $name.serializer as: '
             '$expectedSerializerDeclaration got $serializerDeclaration');
       }
+      if (name.startsWith('_')) {
+        result.add('Cannot generate serializers for private class ${name}');
+      }
     }
 
     for (var field in fields) {
