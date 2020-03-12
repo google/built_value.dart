@@ -1,9 +1,8 @@
 name: end_to_end_test
 version: 7.0.9
+publish_to: none
 description: >
   Tests, not for publishing.
-authors:
-- David Morgan <davidmorgan@google.com>
 homepage: https://github.com/google/built_value.dart
 
 environment:

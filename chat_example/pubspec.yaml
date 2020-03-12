@@ -1,9 +1,8 @@
 name: chat_example
 version: 7.0.9
+publish_to: none
 description: >
   Just an example, not for publishing.
-authors:
-- David Morgan <davidmorgan@google.com>
 homepage: https://github.com/google/built_value.dart
 
 environment:
