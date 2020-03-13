@@ -1,9 +1,8 @@
 name: benchmark
 version: 7.0.9
+publish_to: none
 description: >
   Benchmark, not for publishing.
-authors:
-- David Morgan <davidmorgan@google.com>
 homepage: https://github.com/google/built_value.dart
 
 environment:
