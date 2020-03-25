@@ -234,8 +234,7 @@ abstract class SerializerSourceClass
   @memoized
   String get serializerInstanceName {
     final unhidden = name.startsWith('_') ? name.substring(1) : name;
-    final camelCaseName =
-        unhidden.substring(0, 1).toLowerCase() + unhidden.substring(1);
+    final camelCaseName = _toCamelCase(unhidden);
     return '_\$${camelCaseName}Serializer';
   }
 
