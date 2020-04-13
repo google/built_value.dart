@@ -11,6 +11,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/memoized_getter.dart';
+import 'package:built_value_generator/src/metadata.dart';
 import 'package:built_value_generator/src/value_source_field.dart';
 import 'package:built_value_generator/src/strings.dart';
 import 'package:quiver/iterables.dart';
@@ -278,7 +279,19 @@ abstract class ValueSourceClass
     })));
 
   @memoized
-  bool get implementsHashCode => element.getGetter('hashCode') != null;
+  bool get implementsHashCode {
+    var getter = element.getGetter('hashCode');
+    return getter != null && !getter.isAbstract;
+  }
+
+  @memoized
+  bool get declaresMemoizedHashCode {
+    var getter = element.getGetter('hashCode');
+    return getter != null &&
+        getter.isAbstract &&
+        getter.metadata
+            .any((metadata) => metadataToStringValue(metadata) == 'memoized');
+  }
 
   @memoized
   bool get implementsOperatorEquals => element.getMethod('==') != null;
@@ -1016,13 +1029,20 @@ abstract class ValueSourceClass
     result.writeln('}');
     result.writeln();
 
+    var generateMemoizedHashCode =
+        declaresMemoizedHashCode && comparedFields.isNotEmpty;
+    if (generateMemoizedHashCode) {
+      result.writeln('int __hashCode;');
+    }
+
     result.writeln('@override');
     result.writeln('int get hashCode {');
 
     if (comparedFields.isEmpty) {
       result.writeln('return ${name.hashCode};');
     } else {
-      result.writeln(r'return $jf(');
+      result.writeln(
+          'return ${generateMemoizedHashCode ? '__hashCode ??= ' : ''}\$jf(');
       result.writeln(r'$jc(' * comparedFields.length);
       // Use a different seed for builders than for values, so they do not have
       // identical hashCodes if the values are identical.

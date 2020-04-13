@@ -4,6 +4,9 @@
 
 - Support serializing enums to ints: add `wireNumber` to
   `@BuiltValueEnumConst`.
+- Support memoizing `hashCode`, so it's computed lazily once. Write an abstract
+  getter `int get hashCode;` then annotate it with `@memoized` to turn this on
+  for a `built_value` class.
 - Trim `built_value_test` dependencies: depend on `matcher` instead of `test`.
 - Fix enum generator error messages when `value` and `valueOf` are missing.
 

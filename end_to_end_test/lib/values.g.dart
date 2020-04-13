@@ -4800,4 +4800,186 @@ class ValueWithGenericBuilderInitializerBuilder<T>
   }
 }
 
+class _$HashcodeValue extends HashcodeValue {
+  @override
+  final int x;
+  @override
+  final int y;
+
+  factory _$HashcodeValue([void Function(HashcodeValueBuilder) updates]) =>
+      (new HashcodeValueBuilder()..update(updates)).build();
+
+  _$HashcodeValue._({this.x, this.y}) : super._() {
+    if (x == null) {
+      throw new BuiltValueNullFieldError('HashcodeValue', 'x');
+    }
+    if (y == null) {
+      throw new BuiltValueNullFieldError('HashcodeValue', 'y');
+    }
+  }
+
+  @override
+  HashcodeValue rebuild(void Function(HashcodeValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  HashcodeValueBuilder toBuilder() => new HashcodeValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is HashcodeValue && x == other.x && y == other.y;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, x.hashCode), y.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('HashcodeValue')
+          ..add('x', x)
+          ..add('y', y))
+        .toString();
+  }
+}
+
+class HashcodeValueBuilder
+    implements Builder<HashcodeValue, HashcodeValueBuilder> {
+  _$HashcodeValue _$v;
+
+  int _x;
+  int get x => _$this._x;
+  set x(int x) => _$this._x = x;
+
+  int _y;
+  int get y => _$this._y;
+  set y(int y) => _$this._y = y;
+
+  HashcodeValueBuilder();
+
+  HashcodeValueBuilder get _$this {
+    if (_$v != null) {
+      _x = _$v.x;
+      _y = _$v.y;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(HashcodeValue other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$HashcodeValue;
+  }
+
+  @override
+  void update(void Function(HashcodeValueBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$HashcodeValue build() {
+    final _$result = _$v ?? new _$HashcodeValue._(x: x, y: y);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$MemoizedHashcodeValue extends MemoizedHashcodeValue {
+  @override
+  final int x;
+  @override
+  final int y;
+
+  factory _$MemoizedHashcodeValue(
+          [void Function(MemoizedHashcodeValueBuilder) updates]) =>
+      (new MemoizedHashcodeValueBuilder()..update(updates)).build();
+
+  _$MemoizedHashcodeValue._({this.x, this.y}) : super._() {
+    if (x == null) {
+      throw new BuiltValueNullFieldError('MemoizedHashcodeValue', 'x');
+    }
+    if (y == null) {
+      throw new BuiltValueNullFieldError('MemoizedHashcodeValue', 'y');
+    }
+  }
+
+  @override
+  MemoizedHashcodeValue rebuild(
+          void Function(MemoizedHashcodeValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  MemoizedHashcodeValueBuilder toBuilder() =>
+      new MemoizedHashcodeValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is MemoizedHashcodeValue && x == other.x && y == other.y;
+  }
+
+  int __hashCode;
+  @override
+  int get hashCode {
+    return __hashCode ??= $jf($jc($jc(0, x.hashCode), y.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('MemoizedHashcodeValue')
+          ..add('x', x)
+          ..add('y', y))
+        .toString();
+  }
+}
+
+class MemoizedHashcodeValueBuilder
+    implements Builder<MemoizedHashcodeValue, MemoizedHashcodeValueBuilder> {
+  _$MemoizedHashcodeValue _$v;
+
+  int _x;
+  int get x => _$this._x;
+  set x(int x) => _$this._x = x;
+
+  int _y;
+  int get y => _$this._y;
+  set y(int y) => _$this._y = y;
+
+  MemoizedHashcodeValueBuilder();
+
+  MemoizedHashcodeValueBuilder get _$this {
+    if (_$v != null) {
+      _x = _$v.x;
+      _y = _$v.y;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(MemoizedHashcodeValue other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$MemoizedHashcodeValue;
+  }
+
+  @override
+  void update(void Function(MemoizedHashcodeValueBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$MemoizedHashcodeValue build() {
+    final _$result = _$v ?? new _$MemoizedHashcodeValue._(x: x, y: y);
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
