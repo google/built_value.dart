@@ -65,7 +65,8 @@ class WireNumberEnum extends EnumClass {
   @BuiltValueEnumConst(wireNumber: 2)
   static const WireNumberEnum no = _$wireNumberNo;
 
-  @BuiltValueEnumConst(wireNumber: 3)
+  // `wireName` on fields can be mixed in the same class.
+  @BuiltValueEnumConst(wireName: '3')
   static const WireNumberEnum definitely = _$wireNumberDefinitely;
 
   const WireNumberEnum._(String name) : super(name);
