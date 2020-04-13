@@ -1,8 +1,9 @@
 # Changelog
 
-# 7.10.0
+# 7.0.10 (unreleased)
 
 - Trim `built_value_test` dependencies: depend on `matcher` instead of `test`.
+- Fix enum generator error messages when `value` and `valueOf` are missing.
 
 # 7.0.9
 

@@ -349,6 +349,24 @@ class TestEnum extends EnumClass {
           contains(correctOutput.replaceAll('test_enum', 'test_enum_two')));
     });
 
+    test('does not report name clash on null', () async {
+      expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$no;
+  static const TestEnum no = _$maybe;
+  static const TestEnum maybe = _$yes;
+
+  const TestEnum._(String name) : super(name);
+}
+'''), isNot(contains('null')));
+    });
+
     test('fails with error on missing constructor', () async {
       expect(await generate(r'''
 library test_enum;

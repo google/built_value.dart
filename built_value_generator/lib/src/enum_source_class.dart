@@ -98,7 +98,7 @@ abstract class EnumSourceClass
     return concat([
       [valuesIdentifier, valueOfIdentifier],
       fields.map((field) => field.generatedIdentifier)
-    ]);
+    ]).where((identifier) => identifier != null).toList();
   }
 
   static bool needsEnumClass(ClassElement classElement) {
