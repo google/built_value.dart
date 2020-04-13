@@ -753,7 +753,7 @@ import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class _Value implements Built<_Value, _ValueBuilder> {
   _Value._();
-  factory _Value([void Function(ValueBuilder) updates]) = _\$Value;
+  factory _Value([void Function(_ValueBuilder) updates]) = _\$Value;
 }'''),
         allOf(
           isNot(contains(r'_$_')),
