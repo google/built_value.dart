@@ -12,13 +12,14 @@ dependencies:
   built_value: ^7.0.2
   built_collection: '>=2.0.0 <5.0.0'
   collection: ^1.0.0
+  matcher: ^0.12.0
   quiver: '>=0.21.0 <3.0.0'
-  test: ^1.0.0
 
 dev_dependencies:
   built_value_generator: ^7.0.9
   build_runner: ^1.0.0
   pedantic: ^1.4.0
+  test: ^1.0.0
 
 dependency_overrides:
   built_value:
