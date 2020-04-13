@@ -397,4 +397,17 @@ void main() {
       expect(valueThatDoesNotTriggerInitializer.value, null);
     });
   });
+
+  group('MemoizedHashcodeValue', () {
+    test('computes same hashCode as HashcodeValue', () {
+      var value = HashcodeValue((b) => b
+        ..x = 42
+        ..y = 43);
+      var valueWithMemoization = MemoizedHashcodeValue((b) => b
+        ..x = 42
+        ..y = 43);
+
+      expect(valueWithMemoization.hashCode, value.hashCode);
+    });
+  });
 }
