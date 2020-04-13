@@ -1,5 +1,9 @@
 # Changelog
 
+# 7.10.0
+
+- Trim `built_value_test` dependencies: depend on `matcher` instead of `test`.
+
 # 7.0.9
 
 - Fix unescaped string usages while generating `ValueSourceClass`.
