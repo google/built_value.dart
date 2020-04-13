@@ -4982,4 +4982,61 @@ class MemoizedHashcodeValueBuilder
   }
 }
 
+class _$PrivateValue extends _PrivateValue {
+  factory _$PrivateValue([void Function(_PrivateValueBuilder) updates]) =>
+      (new _PrivateValueBuilder()..update(updates)).build();
+
+  _$PrivateValue._() : super._();
+
+  @override
+  _PrivateValue rebuild(void Function(_PrivateValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _PrivateValueBuilder toBuilder() => new _PrivateValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is _PrivateValue;
+  }
+
+  @override
+  int get hashCode {
+    return 75608033;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('_PrivateValue').toString();
+  }
+}
+
+class _PrivateValueBuilder
+    implements Builder<_PrivateValue, _PrivateValueBuilder> {
+  _$PrivateValue _$v;
+
+  _PrivateValueBuilder();
+
+  @override
+  void replace(_PrivateValue other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$PrivateValue;
+  }
+
+  @override
+  void update(void Function(_PrivateValueBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$PrivateValue build() {
+    final _$result = _$v ?? new _$PrivateValue._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
