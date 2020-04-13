@@ -55,6 +55,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ValueWithInt.serializer)
       ..add(WireNameEnum.serializer)
       ..add(WireNameValue.serializer)
+      ..add(WireNumberEnum.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Animal)]),
           () => new ListBuilder<Animal>())

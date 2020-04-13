@@ -39,7 +39,9 @@ abstract class EnumSourceField
     var annotation = annotations.single;
     return BuiltValueEnumConst(
         fallback: annotation.getField('fallback')?.toBoolValue() ?? false,
-        wireName: annotation.getField('wireName').toStringValue());
+        wireName: annotation.getField('wireName').toStringValue(),
+        // Field added in version `7.1.0`, might be missing.
+        wireNumber: annotation.getField('wireNumber')?.toIntValue());
   }
 
   @memoized
@@ -85,6 +87,11 @@ abstract class EnumSourceField
       result.add('Make field "$name" const.');
     } else if (!generatedIdentifier.startsWith('_\$')) {
       result.add('Initialize field "$name" with a value starting "_\$".');
+    }
+
+    if (settings.wireName != null && settings.wireNumber != null) {
+      result.add('Specify either `wireName` or `wireNumber`, not both, on '
+          'field "$name".');
     }
 
     return result;

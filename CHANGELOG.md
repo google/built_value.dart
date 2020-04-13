@@ -1,7 +1,9 @@
 # Changelog
 
-# 7.0.10 (unreleased)
+# 7.1.0 (unreleased)
 
+- Support serializing enums to ints: add `wireNumber` to
+  `@BuiltValueEnumConst`.
 - Trim `built_value_test` dependencies: depend on `matcher` instead of `test`.
 - Fix enum generator error messages when `value` and `valueOf` are missing.
 

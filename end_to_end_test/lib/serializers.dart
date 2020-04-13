@@ -64,6 +64,7 @@ part 'serializers.g.dart';
   ValueWithInt,
   WireNameEnum,
   WireNameValue,
+  WireNumberEnum,
 ])
 final Serializers serializers = _$serializers;
 

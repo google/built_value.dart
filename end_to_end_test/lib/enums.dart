@@ -55,6 +55,25 @@ class WireNameEnum extends EnumClass {
   static WireNameEnum valueOf(String name) => _$wireValueOf(name);
 }
 
+class WireNumberEnum extends EnumClass {
+  static Serializer<WireNumberEnum> get serializer =>
+      _$wireNumberEnumSerializer;
+
+  @BuiltValueEnumConst(wireNumber: 1)
+  static const WireNumberEnum yes = _$wireNumberYes;
+
+  @BuiltValueEnumConst(wireNumber: 2)
+  static const WireNumberEnum no = _$wireNumberNo;
+
+  @BuiltValueEnumConst(wireNumber: 3)
+  static const WireNumberEnum definitely = _$wireNumberDefinitely;
+
+  const WireNumberEnum._(String name) : super(name);
+
+  static BuiltSet<WireNumberEnum> get values => _$wireNumberValues;
+  static WireNumberEnum valueOf(String name) => _$wireNumberValueOf(name);
+}
+
 // Check escaping for dollar sign in enum values.
 class DollarValueEnum extends EnumClass {
   static Serializer<DollarValueEnum> get serializer =>

@@ -91,6 +91,31 @@ final BuiltSet<WireNameEnum> _$wireValues =
   _$wireDefinitely,
 ]);
 
+const WireNumberEnum _$wireNumberYes = const WireNumberEnum._('yes');
+const WireNumberEnum _$wireNumberNo = const WireNumberEnum._('no');
+const WireNumberEnum _$wireNumberDefinitely =
+    const WireNumberEnum._('definitely');
+
+WireNumberEnum _$wireNumberValueOf(String name) {
+  switch (name) {
+    case 'yes':
+      return _$wireNumberYes;
+    case 'no':
+      return _$wireNumberNo;
+    case 'definitely':
+      return _$wireNumberDefinitely;
+    default:
+      throw new ArgumentError(name);
+  }
+}
+
+final BuiltSet<WireNumberEnum> _$wireNumberValues =
+    new BuiltSet<WireNumberEnum>(const <WireNumberEnum>[
+  _$wireNumberYes,
+  _$wireNumberNo,
+  _$wireNumberDefinitely,
+]);
+
 const DollarValueEnum _$value$ = const DollarValueEnum._('value\$');
 
 DollarValueEnum _$dollarValueOf(String name) {
@@ -130,6 +155,8 @@ final BuiltSet<FallbackEnum> _$fbValues =
 Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
 Serializer<WireNameEnum> _$wireNameEnumSerializer =
     new _$WireNameEnumSerializer();
+Serializer<WireNumberEnum> _$wireNumberEnumSerializer =
+    new _$WireNumberEnumSerializer();
 Serializer<DollarValueEnum> _$dollarValueEnumSerializer =
     new _$DollarValueEnumSerializer();
 Serializer<FallbackEnum> _$fallbackEnumSerializer =
@@ -153,12 +180,12 @@ class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
 }
 
 class _$WireNameEnumSerializer implements PrimitiveSerializer<WireNameEnum> {
-  static const Map<String, String> _toWire = const <String, String>{
+  static const Map<String, Object> _toWire = const <String, Object>{
     'yes': 'y',
     'no': 'n',
     'definitely': 'd',
   };
-  static const Map<String, String> _fromWire = const <String, String>{
+  static const Map<Object, String> _fromWire = const <Object, String>{
     'y': 'yes',
     'n': 'no',
     'd': 'definitely',
@@ -178,6 +205,35 @@ class _$WireNameEnumSerializer implements PrimitiveSerializer<WireNameEnum> {
   WireNameEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
       WireNameEnum.valueOf(_fromWire[serialized] ?? serialized as String);
+}
+
+class _$WireNumberEnumSerializer
+    implements PrimitiveSerializer<WireNumberEnum> {
+  static const Map<String, Object> _toWire = const <String, Object>{
+    'yes': 1,
+    'no': 2,
+    'definitely': 3,
+  };
+  static const Map<Object, String> _fromWire = const <Object, String>{
+    1: 'yes',
+    2: 'no',
+    3: 'definitely',
+  };
+
+  @override
+  final Iterable<Type> types = const <Type>[WireNumberEnum];
+  @override
+  final String wireName = 'WireNumberEnum';
+
+  @override
+  Object serialize(Serializers serializers, WireNumberEnum object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      _toWire[object.name] ?? object.name;
+
+  @override
+  WireNumberEnum deserialize(Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      WireNumberEnum.valueOf(_fromWire[serialized] ?? serialized as String);
 }
 
 class _$DollarValueEnumSerializer
