@@ -212,12 +212,12 @@ class _$WireNumberEnumSerializer
   static const Map<String, Object> _toWire = const <String, Object>{
     'yes': 1,
     'no': 2,
-    'definitely': 3,
+    'definitely': '3',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     1: 'yes',
     2: 'no',
-    3: 'definitely',
+    '3': 'definitely',
   };
 
   @override
