@@ -578,6 +578,29 @@ class TestEnum extends EnumClass {
 1. Remove `fallback = true` so that at most one constant is the fallback.'''
               ' Currently on "TestEnum" fields "yes", "no".'));
     });
+
+    test('fails if both `wireName` and `wireNumber` are used', () async {
+      expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  @BuiltValueEnumConst(wireName: 'yes', wireNumber: 1)
+  static const TestEnum yes = _$yes;
+  static const TestEnum no = _$no;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Specify either `wireName` or `wireNumber`, not both, on field "yes".'''));
+    });
   });
 }
 
@@ -642,8 +665,12 @@ class EnumClass {
 
 class BuiltValueEnumConst {
   final String wireName;
+  final String wireNumber;
   final bool fallback;
 
-  const BuiltValueEnumConst({this.wireName, this.fallback = false});
+  const BuiltValueEnumConst({
+      this.wireName,
+      this.wireNumber,
+      this.fallback = false});
 }
 ''';

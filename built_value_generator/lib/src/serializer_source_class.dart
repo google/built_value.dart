@@ -324,13 +324,15 @@ class _\$${name}Serializer implements StructuredSerializer<$genericName> {
 }
 ''';
     } else if (isEnumClass) {
-      final wireNameMapping = BuiltMap<String, String>.build((b) => element
+      final wireNameMapping = BuiltMap<String, Object>.build((b) => element
               .fields
               .where((field) => field.isConst && field.isStatic)
               .forEach((field) {
             final enumSourceField = EnumSourceField(parsedLibrary, field);
             if (enumSourceField.settings.wireName != null) {
               b[field.name] = enumSourceField.settings.wireName;
+            } else if (enumSourceField.settings.wireNumber != null) {
+              b[field.name] = enumSourceField.settings.wireNumber;
             }
           }));
 
@@ -356,12 +358,12 @@ class _\$${name}Serializer implements PrimitiveSerializer<$genericName> {
       } else {
         // Generate maps between enum names and wire names.
         final toWire = '''
-         static const Map<String, String> _toWire = const <String, String>{
-           ${wireNameMapping.keys.map((key) => "'$key': '${wireNameMapping[key]}',").join('\n')}
+         static const Map<String, Object> _toWire = const <String, Object>{
+           ${wireNameMapping.keys.map((key) => "'$key': ${_toCode(wireNameMapping[key])},").join('\n')}
          };''';
         final fromWire = '''
-         static const Map<String, String> _fromWire = const <String, String>{
-           ${wireNameMapping.keys.map((key) => "'${wireNameMapping[key]}': '$key',").join('\n')}
+         static const Map<Object, String> _fromWire = const <Object, String>{
+           ${wireNameMapping.keys.map((key) => "${_toCode(wireNameMapping[key])}: '$key',").join('\n')}
          };''';
 
         return '''
@@ -387,6 +389,16 @@ class _\$${name}Serializer implements PrimitiveSerializer<$genericName> {
       }
     } else {
       throw UnsupportedError('not serializable');
+    }
+  }
+
+  static String _toCode(Object object) {
+    if (object is String) {
+      return "'$object'";
+    } else if (object is int) {
+      return object.toString();
+    } else {
+      throw UnsupportedError(object);
     }
   }
 

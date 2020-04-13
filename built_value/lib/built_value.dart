@@ -193,7 +193,17 @@ class BuiltValueEnum {
 class BuiltValueEnumConst {
   /// The wire name when the constant is serialized. Defaults to `null` which
   /// indicates the name is to be taken from the literal field name.
+  ///
+  /// Or, set [wireNumber] to serialize to an `int`. Only one of the two may be
+  /// used.
   final String wireName;
+
+  /// The wire name when the constant is serialized. Defaults to `null` which
+  /// indicates the name is to be taken from the literal field name.
+  ///
+  /// Or, set [wireNumber] to serialize to a `String`. Only one of the two may
+  /// be used.
+  final int wireNumber;
 
   /// Marks a value that is used as a fallback when an unrecognized value
   /// is encountered.
@@ -204,7 +214,8 @@ class BuiltValueEnumConst {
   /// the fallback, if available, rather than throwing an exception.
   final bool fallback;
 
-  const BuiltValueEnumConst({this.wireName, this.fallback = false});
+  const BuiltValueEnumConst(
+      {this.wireName, this.wireNumber, this.fallback = false});
 }
 
 /// Enum Class base class.
