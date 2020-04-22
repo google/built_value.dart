@@ -217,26 +217,14 @@ abstract class SerializerSourceClass
   CompilationUnitElement get compilationUnit =>
       element.library.definingCompilationUnit;
 
-  /// Returns the serializer class name for the generated implementation. If the manually
-  /// maintained class is private then we ignore the underscore here, to avoid
-  /// returning a class name starting `_$_`.
+  /// Returns the serializer class name for the generated implementation.
   @memoized
-  String get serializerImplName {
-    final unhidden = name.startsWith('_') ? name.substring(1) : name;
-    return '_\$${unhidden}Serializer';
-  }
+  String get serializerImplName => '_\$${name}Serializer';
 
   /// Returns the serializer instance name for the generated implementation,
   /// referenced by the user as a `static serializer` attribute.
-  ///
-  /// If the manually maintained class is private then we ignore the underscore here, to avoid
-  /// returning a class name starting `_$_`.
   @memoized
-  String get serializerInstanceName {
-    final unhidden = name.startsWith('_') ? name.substring(1) : name;
-    final camelCaseName = _toCamelCase(unhidden);
-    return '_\$${camelCaseName}Serializer';
-  }
+  String get serializerInstanceName => '_\$${_toCamelCase(name)}Serializer';
 
   Iterable<String> computeErrors() {
     var result = <String>[];
