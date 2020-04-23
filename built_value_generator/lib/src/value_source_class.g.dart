@@ -40,6 +40,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   BuiltList<MemoizedGetter> __memoizedGetters;
   BuiltList<String> __builderImplements;
   bool __implementsHashCode;
+  bool __declaresMemoizedHashCode;
   bool __implementsOperatorEquals;
   bool __implementsToString;
   CompilationUnitElement __compilationUnit;
@@ -166,6 +167,10 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   bool get implementsHashCode =>
       __implementsHashCode ??= super.implementsHashCode;
+
+  @override
+  bool get declaresMemoizedHashCode =>
+      __declaresMemoizedHashCode ??= super.declaresMemoizedHashCode;
 
   @override
   bool get implementsOperatorEquals =>

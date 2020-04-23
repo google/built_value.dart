@@ -26,8 +26,11 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   BuiltList<SerializerSourceField> __fields;
   BuiltSet<SerializerSourceClass> __fieldClasses;
   CompilationUnitElement __compilationUnit;
+  String __serializerImplName;
+  String __serializerInstanceName;
   bool __isSerializable;
   bool __needsGeneratedSerializer;
+  String __implName;
 
   factory _$SerializerSourceClass(
           [void Function(SerializerSourceClassBuilder) updates]) =>
@@ -95,11 +98,22 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       __compilationUnit ??= super.compilationUnit;
 
   @override
+  String get serializerImplName =>
+      __serializerImplName ??= super.serializerImplName;
+
+  @override
+  String get serializerInstanceName =>
+      __serializerInstanceName ??= super.serializerInstanceName;
+
+  @override
   bool get isSerializable => __isSerializable ??= super.isSerializable;
 
   @override
   bool get needsGeneratedSerializer =>
       __needsGeneratedSerializer ??= super.needsGeneratedSerializer;
+
+  @override
+  String get implName => __implName ??= super.implName;
 
   @override
   SerializerSourceClass rebuild(
