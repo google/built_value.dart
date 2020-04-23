@@ -4,7 +4,7 @@
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:test/test.dart';
+import 'package:matcher/matcher.dart';
 
 /// Returns a matcher that matches if the value is structurally equal to
 /// [expected].
