@@ -1,7 +1,9 @@
 # Changelog
 
-# 7.1.0 (unreleased)
+# 7.1.0
 
+- Support private `Built` classes. Note that private classes cannot be made
+  serializable.
 - Support serializing enums to ints: add `wireNumber` to
   `@BuiltValueEnumConst`.
 - Support memoizing `hashCode`, so it's computed lazily once. Write an abstract
