@@ -6,10 +6,11 @@ description: >
 homepage: https://github.com/google/built_value.dart
 
 environment:
-  sdk: '>=2.3.0 <3.0.0'
+  sdk: '>=2.9.0-18.0 <3.0.0'
+
 
 dependencies:
-  built_collection: '>=2.0.0 <5.0.0'
+  built_collection: ^5.0.0
   collection: ^1.0.0
   fixnum: ^0.10.0
   quiver: '>=0.21.0 <3.0.0'
@@ -17,3 +18,80 @@ dependencies:
 dev_dependencies:
   pedantic: ^1.4.0
   test: ^1.0.0
+
+dependency_overrides:
+  built_collection:
+    path:
+      ../../built-collection-dart
+  async:
+    git:
+      url: git://github.com/dart-lang/async.git
+      ref: null_safety
+  boolean_selector:
+    git:
+      url: git://github.com/dart-lang/boolean_selector.git
+      ref: null_safety
+  charcode:
+    git:
+      url: git://github.com/dart-lang/charcode.git
+      ref: null_safety
+  collection:
+    git:
+      url: git://github.com/dart-lang/collection.git
+      ref: null_safety
+  matcher:
+    git:
+      url: git://github.com/dart-lang/matcher.git
+      ref: null_safety
+  meta:
+    git:
+      url: git://github.com/dart-lang/sdk.git
+      ref: null_safety-pkgs
+      path: pkg/meta
+  path:
+    git:
+      url: git://github.com/dart-lang/path.git
+      ref: null_safety
+  pedantic:
+    git:
+      url: git://github.com/dart-lang/pedantic.git
+      ref: null_safety
+  pool:
+    git:
+      url: git://github.com/dart-lang/pool.git
+      ref: null_safety
+  source_span:
+    git:
+      url: git://github.com/dart-lang/source_span.git
+      ref: null_safety
+  stack_trace:
+    git:
+      url: git://github.com/dart-lang/stack_trace.git
+      ref: null_safety
+  stream_channel:
+    git:
+      url: git://github.com/dart-lang/stream_channel.git
+      ref: null_safety
+  string_scanner:
+    git:
+      url: git://github.com/dart-lang/string_scanner.git
+      ref: null_safety
+  term_glyph:
+    git:
+      url: git://github.com/dart-lang/term_glyph.git
+      ref: null_safety
+  test_api:
+    git:
+      url: git://github.com/dart-lang/test.git
+      ref: null_safety
+      path: pkgs/test_api
+  test_core:
+    git:
+      url: git://github.com/dart-lang/test.git
+      ref: null_safety
+      path: pkgs/test_core
+  test:
+    git:
+      url: git://github.com/dart-lang/test.git
+      ref: null_safety
+      path: pkgs/test
