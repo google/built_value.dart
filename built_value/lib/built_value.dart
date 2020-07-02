@@ -1,7 +1,6 @@
 // Copyright (c) 2015, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.8
 
 /// Implement this for a Built Value.
 ///
@@ -104,7 +103,7 @@ class BuiltValue {
 
   /// The wire name when the class is serialized. Defaults to `null` which
   /// indicates that the name is to be taken from the literal class name.
-  final String wireName;
+  final String? wireName;
 
   /// The default for [BuiltValueField.compare]. Set to `false` if you want to
   /// ignore most fields when comparing, then mark the ones you do want to
@@ -140,18 +139,18 @@ class BuiltValueField {
   ///
   /// Set to `false` to ignore the field when calculating `hashCode` and when
   /// comparing with `operator==`.
-  final bool compare;
+  final bool? compare;
 
   /// Whether the field is serialized. Defaults to `null` which means
   /// [BuiltValue.defaultSerialize] is used.
   ///
   /// If a field is not serialized, it must either be `@nullable` or specify a
   /// default for deserialization to succeed.
-  final bool serialize;
+  final bool? serialize;
 
   /// The wire name when the field is serialized. Defaults to `null` which
   /// indicates the name is to be taken from the literal field name.
-  final String wireName;
+  final String? wireName;
 
   const BuiltValueField({this.compare, this.serialize, this.wireName});
 }
@@ -184,7 +183,7 @@ const String memoized = 'memoized';
 class BuiltValueEnum {
   /// The wire name when the enum is serialized. Defaults to `null` which
   /// indicates that the name is to be taken from the literal class name.
-  final String wireName;
+  final String? wireName;
 
   const BuiltValueEnum({this.wireName});
 }
@@ -197,14 +196,14 @@ class BuiltValueEnumConst {
   ///
   /// Or, set [wireNumber] to serialize to an `int`. Only one of the two may be
   /// used.
-  final String wireName;
+  final String? wireName;
 
   /// The wire name when the constant is serialized. Defaults to `null` which
   /// indicates the name is to be taken from the literal field name.
   ///
   /// Or, set [wireNumber] to serialize to a `String`. Only one of the two may
   /// be used.
-  final int wireNumber;
+  final int? wireNumber;
 
   /// Marks a value that is used as a fallback when an unrecognized value
   /// is encountered.
@@ -267,7 +266,7 @@ BuiltValueToStringHelperProvider newBuiltValueToStringHelper =
 /// version increase.
 abstract class BuiltValueToStringHelper {
   /// Add a field and its value.
-  void add(String field, Object value);
+  void add(String field, Object? value);
 
   /// Returns to completed toString(). The helper may not be used after this
   /// method is called.
@@ -277,17 +276,17 @@ abstract class BuiltValueToStringHelper {
 
 /// A [BuiltValueToStringHelper] that produces multi-line indented output.
 class IndentingBuiltValueToStringHelper implements BuiltValueToStringHelper {
-  StringBuffer _result = StringBuffer();
+  StringBuffer? _result = StringBuffer();
 
   IndentingBuiltValueToStringHelper(String className) {
-    _result..write(className)..write(' {\n');
+    _result!..write(className)..write(' {\n');
     _indentingBuiltValueToStringHelperIndent += 2;
   }
 
   @override
-  void add(String field, Object value) {
+  void add(String field, Object? value) {
     if (value != null) {
-      _result
+      _result!
         ..write(' ' * _indentingBuiltValueToStringHelperIndent)
         ..write(field)
         ..write('=')
@@ -299,7 +298,7 @@ class IndentingBuiltValueToStringHelper implements BuiltValueToStringHelper {
   @override
   String toString() {
     _indentingBuiltValueToStringHelperIndent -= 2;
-    _result..write(' ' * _indentingBuiltValueToStringHelperIndent)..write('}');
+    _result!..write(' ' * _indentingBuiltValueToStringHelperIndent)..write('}');
     var stringResult = _result.toString();
     _result = null;
     return stringResult;
@@ -310,25 +309,25 @@ int _indentingBuiltValueToStringHelperIndent = 0;
 
 /// A [BuiltValueToStringHelper] that produces single line output.
 class FlatBuiltValueToStringHelper implements BuiltValueToStringHelper {
-  StringBuffer _result = StringBuffer();
+  StringBuffer? _result = StringBuffer();
   bool _previousField = false;
 
   FlatBuiltValueToStringHelper(String className) {
-    _result..write(className)..write(' {');
+    _result!..write(className)..write(' {');
   }
 
   @override
-  void add(String field, Object value) {
+  void add(String field, Object? value) {
     if (value != null) {
-      if (_previousField) _result.write(',');
-      _result..write(field)..write('=')..write(value);
+      if (_previousField) _result!.write(',');
+      _result!..write(field)..write('=')..write(value);
       _previousField = true;
     }
   }
 
   @override
   String toString() {
-    _result..write('}');
+    _result!..write('}');
     var stringResult = _result.toString();
     _result = null;
     return stringResult;
