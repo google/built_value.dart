@@ -7,6 +7,7 @@ part of value_test;
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 class _$PrivateValue extends _PrivateValue {
   @override
   final int value;
@@ -65,9 +66,7 @@ class _PrivateValueBuilder
 
   @override
   void replace(_PrivateValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PrivateValue;
   }
 

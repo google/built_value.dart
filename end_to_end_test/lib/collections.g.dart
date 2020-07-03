@@ -7,6 +7,7 @@ part of collections;
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 Serializer<Collections> _$collectionsSerializer = new _$CollectionsSerializer();
 Serializer<CollectionsWithNulls> _$collectionsWithNullsSerializer =
     new _$CollectionsWithNullsSerializer();
@@ -500,9 +501,7 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
 
   @override
   void replace(Collections other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Collections;
   }
 
@@ -761,9 +760,7 @@ class CollectionsWithNullsBuilder
 
   @override
   void replace(CollectionsWithNulls other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CollectionsWithNulls;
   }
 

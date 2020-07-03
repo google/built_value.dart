@@ -41,7 +41,7 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
   /// Applies updates.
   ///
   /// [updates] is a function that takes a builder [B].
-  void update(Function(B) updates);
+  void update(Function(B)? updates);
 
   /// Builds.
   ///

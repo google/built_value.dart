@@ -7,6 +7,7 @@ part of interfaces;
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 const EnumWithInt _$one = const EnumWithInt._('one');
 const EnumWithInt _$two = const EnumWithInt._('two');
 const EnumWithInt _$three = const EnumWithInt._('three');
@@ -211,9 +212,7 @@ class ValueWithIntBuilder
 
   @override
   void replace(ValueWithInt other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithInt;
   }
 
@@ -290,9 +289,7 @@ class ValueWithHasIntBuilder
 
   @override
   void replace(ValueWithHasInt other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithHasInt;
   }
 

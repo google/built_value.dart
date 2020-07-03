@@ -7,6 +7,7 @@ part of generics;
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 Serializer<GenericValue<Object>> _$genericValueSerializer =
     new _$GenericValueSerializer();
 Serializer<BoundGenericValue<num>> _$boundGenericValueSerializer =
@@ -460,9 +461,7 @@ class GenericValueBuilder<T>
 
   @override
   void replace(GenericValue<T> other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GenericValue<T>;
   }
 
@@ -544,9 +543,7 @@ class BoundGenericValueBuilder<T extends num>
 
   @override
   void replace(BoundGenericValue<T> other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$BoundGenericValue<T>;
   }
 
@@ -629,9 +626,7 @@ class CollectionGenericValueBuilder<T>
 
   @override
   void replace(CollectionGenericValue<T> other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CollectionGenericValue<T>;
   }
 
@@ -762,9 +757,7 @@ class GenericContainerBuilder
 
   @override
   void replace(GenericContainer other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GenericContainer;
   }
 
@@ -865,9 +858,7 @@ class NestedGenericContainerBuilder
 
   @override
   void replace(NestedGenericContainer other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$NestedGenericContainer;
   }
 
@@ -972,9 +963,7 @@ class _$CustomBuilderGenericValueBuilder<T>
 
   @override
   void replace(CustomBuilderGenericValue<T> other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CustomBuilderGenericValue<T>;
   }
 
@@ -1050,9 +1039,7 @@ class ConcreteGenericBuilder
 
   @override
   void replace(ConcreteGeneric other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ConcreteGeneric;
   }
 
@@ -1135,9 +1122,7 @@ class GenericFunctionBuilder<T>
 
   @override
   void replace(GenericFunction<T> other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GenericFunction<T>;
   }
 
@@ -1213,9 +1198,7 @@ class NonBuiltGenericBuilder
 
   @override
   void replace(NonBuiltGeneric other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$NonBuiltGeneric;
   }
 

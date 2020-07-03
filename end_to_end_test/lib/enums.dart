@@ -24,6 +24,10 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 
+int? foo;
+
+void x(int? y, int z) => 3;
+
 abstract class TestEnumMixin = Object with _$TestEnumMixin;
 
 class SecondTestEnum extends EnumClass {

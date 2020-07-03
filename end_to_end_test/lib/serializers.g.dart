@@ -7,6 +7,7 @@ part of serializers;
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BoundGenericValue.serializer)
       ..add(Cage.serializer)

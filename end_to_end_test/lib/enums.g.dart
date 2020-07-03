@@ -7,6 +7,7 @@ part of enums;
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 const TestEnum _$yes = const TestEnum._('yes');
 const TestEnum _$no = const TestEnum._('no');
 const TestEnum _$maybe = const TestEnum._('maybe');

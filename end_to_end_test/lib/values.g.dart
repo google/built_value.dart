@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// @dart=2.8
+// @dart=2.9
 part of values;
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
 Serializer<CompoundValue> _$compoundValueSerializer =
     new _$CompoundValueSerializer();
@@ -1298,14 +1299,15 @@ class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;
   @override
-  final String aString;
+  final String? aString;
   @override
-  final bool $mustBeEscaped;
+  final bool? $mustBeEscaped;
 
   factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
-  _$SimpleValue._({this.anInt, this.aString, this.$mustBeEscaped}) : super._() {
+  _$SimpleValue._({required this.anInt, this.aString, this.$mustBeEscaped})
+      : super._() {
     if (anInt == null) {
       throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
     }
@@ -1344,28 +1346,28 @@ class _$SimpleValue extends SimpleValue {
 }
 
 class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
-  _$SimpleValue _$v;
+  _$SimpleValue? _$v;
 
-  int _anInt;
-  int get anInt => _$this._anInt;
-  set anInt(int anInt) => _$this._anInt = anInt;
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
 
-  String _aString;
-  String get aString => _$this._aString;
-  set aString(String aString) => _$this._aString = aString;
+  String? _aString;
+  String? get aString => _$this._aString;
+  set aString(String? aString) => _$this._aString = aString;
 
-  bool _$mustBeEscaped;
-  bool get $mustBeEscaped => _$this._$mustBeEscaped;
-  set $mustBeEscaped(bool $mustBeEscaped) =>
+  bool? _$mustBeEscaped;
+  bool? get $mustBeEscaped => _$this._$mustBeEscaped;
+  set $mustBeEscaped(bool? $mustBeEscaped) =>
       _$this._$mustBeEscaped = $mustBeEscaped;
 
   SimpleValueBuilder();
 
   SimpleValueBuilder get _$this {
     if (_$v != null) {
-      _anInt = _$v.anInt;
-      _aString = _$v.aString;
-      _$mustBeEscaped = _$v.$mustBeEscaped;
+      _anInt = _$v!.anInt;
+      _aString = _$v!.aString;
+      _$mustBeEscaped = _$v!.$mustBeEscaped;
       _$v = null;
     }
     return this;
@@ -1373,14 +1375,12 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SimpleValue;
   }
 
   @override
-  void update(void Function(SimpleValueBuilder) updates) {
+  void update(void Function(SimpleValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -1398,12 +1398,13 @@ class _$CompoundValue extends CompoundValue {
   @override
   final SimpleValue simpleValue;
   @override
-  final ValidatedValue validatedValue;
+  final ValidatedValue? validatedValue;
 
   factory _$CompoundValue([void Function(CompoundValueBuilder) updates]) =>
       (new CompoundValueBuilder()..update(updates)).build();
 
-  _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
+  _$CompoundValue._({required this.simpleValue, this.validatedValue})
+      : super._() {
     if (simpleValue == null) {
       throw new BuiltValueNullFieldError('CompoundValue', 'simpleValue');
     }
@@ -1440,26 +1441,26 @@ class _$CompoundValue extends CompoundValue {
 
 class CompoundValueBuilder
     implements Builder<CompoundValue, CompoundValueBuilder> {
-  _$CompoundValue _$v;
+  _$CompoundValue? _$v;
 
-  SimpleValueBuilder _simpleValue;
-  SimpleValueBuilder get simpleValue =>
+  SimpleValueBuilder? _simpleValue;
+  SimpleValueBuilder? get simpleValue =>
       _$this._simpleValue ??= new SimpleValueBuilder();
-  set simpleValue(SimpleValueBuilder simpleValue) =>
+  set simpleValue(SimpleValueBuilder? simpleValue) =>
       _$this._simpleValue = simpleValue;
 
-  ValidatedValueBuilder _validatedValue;
-  ValidatedValueBuilder get validatedValue =>
+  ValidatedValueBuilder? _validatedValue;
+  ValidatedValueBuilder? get validatedValue =>
       _$this._validatedValue ??= new ValidatedValueBuilder();
-  set validatedValue(ValidatedValueBuilder validatedValue) =>
+  set validatedValue(ValidatedValueBuilder? validatedValue) =>
       _$this._validatedValue = validatedValue;
 
   CompoundValueBuilder();
 
   CompoundValueBuilder get _$this {
     if (_$v != null) {
-      _simpleValue = _$v.simpleValue?.toBuilder();
-      _validatedValue = _$v.validatedValue?.toBuilder();
+      _simpleValue = _$v!.simpleValue?.toBuilder();
+      _validatedValue = _$v!.validatedValue?.toBuilder();
       _$v = null;
     }
     return this;
@@ -1467,14 +1468,12 @@ class CompoundValueBuilder
 
   @override
   void replace(CompoundValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CompoundValue;
   }
 
   @override
-  void update(void Function(CompoundValueBuilder) updates) {
+  void update(void Function(CompoundValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -1508,13 +1507,13 @@ class _$CompoundValueNoNesting extends CompoundValueNoNesting {
   @override
   final SimpleValue simpleValue;
   @override
-  final ValidatedValue validatedValue;
+  final ValidatedValue? validatedValue;
 
   factory _$CompoundValueNoNesting(
           [void Function(CompoundValueNoNestingBuilder) updates]) =>
       (new CompoundValueNoNestingBuilder()..update(updates)).build();
 
-  _$CompoundValueNoNesting._({this.simpleValue, this.validatedValue})
+  _$CompoundValueNoNesting._({required this.simpleValue, this.validatedValue})
       : super._() {
     if (simpleValue == null) {
       throw new BuiltValueNullFieldError(
@@ -1555,23 +1554,24 @@ class _$CompoundValueNoNesting extends CompoundValueNoNesting {
 
 class CompoundValueNoNestingBuilder
     implements Builder<CompoundValueNoNesting, CompoundValueNoNestingBuilder> {
-  _$CompoundValueNoNesting _$v;
+  _$CompoundValueNoNesting? _$v;
 
-  SimpleValue _simpleValue;
-  SimpleValue get simpleValue => _$this._simpleValue;
-  set simpleValue(SimpleValue simpleValue) => _$this._simpleValue = simpleValue;
+  SimpleValue? _simpleValue;
+  SimpleValue? get simpleValue => _$this._simpleValue;
+  set simpleValue(SimpleValue? simpleValue) =>
+      _$this._simpleValue = simpleValue;
 
-  ValidatedValue _validatedValue;
-  ValidatedValue get validatedValue => _$this._validatedValue;
-  set validatedValue(ValidatedValue validatedValue) =>
+  ValidatedValue? _validatedValue;
+  ValidatedValue? get validatedValue => _$this._validatedValue;
+  set validatedValue(ValidatedValue? validatedValue) =>
       _$this._validatedValue = validatedValue;
 
   CompoundValueNoNestingBuilder();
 
   CompoundValueNoNestingBuilder get _$this {
     if (_$v != null) {
-      _simpleValue = _$v.simpleValue;
-      _validatedValue = _$v.validatedValue;
+      _simpleValue = _$v!.simpleValue;
+      _validatedValue = _$v!.validatedValue;
       _$v = null;
     }
     return this;
@@ -1579,14 +1579,12 @@ class CompoundValueNoNestingBuilder
 
   @override
   void replace(CompoundValueNoNesting other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CompoundValueNoNesting;
   }
 
   @override
-  void update(void Function(CompoundValueNoNestingBuilder) updates) {
+  void update(void Function(CompoundValueNoNestingBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -1608,7 +1606,7 @@ class _$CompoundValueNoAutoNesting extends CompoundValueNoAutoNesting {
           [void Function(CompoundValueNoAutoNestingBuilder) updates]) =>
       (new CompoundValueNoAutoNestingBuilder()..update(updates)).build();
 
-  _$CompoundValueNoAutoNesting._({this.value}) : super._() {
+  _$CompoundValueNoAutoNesting._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('CompoundValueNoAutoNesting', 'value');
     }
@@ -1645,17 +1643,17 @@ class _$CompoundValueNoAutoNesting extends CompoundValueNoAutoNesting {
 class CompoundValueNoAutoNestingBuilder
     implements
         Builder<CompoundValueNoAutoNesting, CompoundValueNoAutoNestingBuilder> {
-  _$CompoundValueNoAutoNesting _$v;
+  _$CompoundValueNoAutoNesting? _$v;
 
-  NoFieldsValueBuilder _value;
-  NoFieldsValueBuilder get value => _$this._value;
-  set value(NoFieldsValueBuilder value) => _$this._value = value;
+  NoFieldsValueBuilder? _value;
+  NoFieldsValueBuilder? get value => _$this._value;
+  set value(NoFieldsValueBuilder? value) => _$this._value = value;
 
   CompoundValueNoAutoNestingBuilder();
 
   CompoundValueNoAutoNestingBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value?.toBuilder();
+      _value = _$v!.value?.toBuilder();
       _$v = null;
     }
     return this;
@@ -1663,14 +1661,12 @@ class CompoundValueNoAutoNestingBuilder
 
   @override
   void replace(CompoundValueNoAutoNesting other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CompoundValueNoAutoNesting;
   }
 
   @override
-  void update(void Function(CompoundValueNoAutoNestingBuilder) updates) {
+  void update(void Function(CompoundValueNoAutoNestingBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -1701,13 +1697,14 @@ class _$CompoundValueComparableBuilders
   @override
   final SimpleValue simpleValue;
   @override
-  final ValidatedValue validatedValue;
+  final ValidatedValue? validatedValue;
 
   factory _$CompoundValueComparableBuilders(
           [void Function(CompoundValueComparableBuildersBuilder) updates]) =>
       (new CompoundValueComparableBuildersBuilder()..update(updates)).build();
 
-  _$CompoundValueComparableBuilders._({this.simpleValue, this.validatedValue})
+  _$CompoundValueComparableBuilders._(
+      {required this.simpleValue, this.validatedValue})
       : super._() {
     if (simpleValue == null) {
       throw new BuiltValueNullFieldError(
@@ -1750,23 +1747,24 @@ class CompoundValueComparableBuildersBuilder
     implements
         Builder<CompoundValueComparableBuilders,
             CompoundValueComparableBuildersBuilder> {
-  _$CompoundValueComparableBuilders _$v;
+  _$CompoundValueComparableBuilders? _$v;
 
-  SimpleValue _simpleValue;
-  SimpleValue get simpleValue => _$this._simpleValue;
-  set simpleValue(SimpleValue simpleValue) => _$this._simpleValue = simpleValue;
+  SimpleValue? _simpleValue;
+  SimpleValue? get simpleValue => _$this._simpleValue;
+  set simpleValue(SimpleValue? simpleValue) =>
+      _$this._simpleValue = simpleValue;
 
-  ValidatedValue _validatedValue;
-  ValidatedValue get validatedValue => _$this._validatedValue;
-  set validatedValue(ValidatedValue validatedValue) =>
+  ValidatedValue? _validatedValue;
+  ValidatedValue? get validatedValue => _$this._validatedValue;
+  set validatedValue(ValidatedValue? validatedValue) =>
       _$this._validatedValue = validatedValue;
 
   CompoundValueComparableBuildersBuilder();
 
   CompoundValueComparableBuildersBuilder get _$this {
     if (_$v != null) {
-      _simpleValue = _$v.simpleValue;
-      _validatedValue = _$v.validatedValue;
+      _simpleValue = _$v!.simpleValue;
+      _validatedValue = _$v!.validatedValue;
       _$v = null;
     }
     return this;
@@ -1774,14 +1772,12 @@ class CompoundValueComparableBuildersBuilder
 
   @override
   void replace(CompoundValueComparableBuilders other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CompoundValueComparableBuilders;
   }
 
   @override
-  void update(void Function(CompoundValueComparableBuildersBuilder) updates) {
+  void update(void Function(CompoundValueComparableBuildersBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -1812,14 +1808,15 @@ class _$CompoundValueExplicitNoNesting extends CompoundValueExplicitNoNesting {
   @override
   final SimpleValue simpleValue;
   @override
-  final ValidatedValue validatedValue;
+  final ValidatedValue? validatedValue;
 
   factory _$CompoundValueExplicitNoNesting(
           [void Function(CompoundValueExplicitNoNestingBuilder) updates]) =>
       (new CompoundValueExplicitNoNestingBuilder()..update(updates)).build()
           as _$CompoundValueExplicitNoNesting;
 
-  _$CompoundValueExplicitNoNesting._({this.simpleValue, this.validatedValue})
+  _$CompoundValueExplicitNoNesting._(
+      {required this.simpleValue, this.validatedValue})
       : super._() {
     if (simpleValue == null) {
       throw new BuiltValueNullFieldError(
@@ -1860,7 +1857,7 @@ class _$CompoundValueExplicitNoNesting extends CompoundValueExplicitNoNesting {
 
 class _$CompoundValueExplicitNoNestingBuilder
     extends CompoundValueExplicitNoNestingBuilder {
-  _$CompoundValueExplicitNoNesting _$v;
+  _$CompoundValueExplicitNoNesting? _$v;
 
   @override
   SimpleValueBuilder get simpleValue {
@@ -1890,8 +1887,8 @@ class _$CompoundValueExplicitNoNestingBuilder
 
   CompoundValueExplicitNoNestingBuilder get _$this {
     if (_$v != null) {
-      super.simpleValue = _$v.simpleValue?.toBuilder();
-      super.validatedValue = _$v.validatedValue;
+      super.simpleValue = _$v!.simpleValue?.toBuilder();
+      super.validatedValue = _$v!.validatedValue;
       _$v = null;
     }
     return this;
@@ -1899,14 +1896,12 @@ class _$CompoundValueExplicitNoNestingBuilder
 
   @override
   void replace(CompoundValueExplicitNoNesting other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CompoundValueExplicitNoNesting;
   }
 
   @override
-  void update(void Function(CompoundValueExplicitNoNestingBuilder) updates) {
+  void update(void Function(CompoundValueExplicitNoNestingBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -1942,7 +1937,7 @@ class _$ExplicitNestedList extends ExplicitNestedList {
       (new ExplicitNestedListBuilder()..update(updates)).build()
           as _$ExplicitNestedList;
 
-  _$ExplicitNestedList._({this.nestedList}) : super._() {
+  _$ExplicitNestedList._({required this.nestedList}) : super._() {
     if (nestedList == null) {
       throw new BuiltValueNullFieldError('ExplicitNestedList', 'nestedList');
     }
@@ -1977,7 +1972,7 @@ class _$ExplicitNestedList extends ExplicitNestedList {
 }
 
 class _$ExplicitNestedListBuilder extends ExplicitNestedListBuilder {
-  _$ExplicitNestedList _$v;
+  _$ExplicitNestedList? _$v;
 
   @override
   ListBuilder<BuiltList<int>> get nestedList {
@@ -1995,7 +1990,7 @@ class _$ExplicitNestedListBuilder extends ExplicitNestedListBuilder {
 
   ExplicitNestedListBuilder get _$this {
     if (_$v != null) {
-      super.nestedList = _$v.nestedList?.toBuilder();
+      super.nestedList = _$v!.nestedList?.toBuilder();
       _$v = null;
     }
     return this;
@@ -2003,14 +1998,12 @@ class _$ExplicitNestedListBuilder extends ExplicitNestedListBuilder {
 
   @override
   void replace(ExplicitNestedList other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ExplicitNestedList;
   }
 
   @override
-  void update(void Function(ExplicitNestedListBuilder) updates) {
+  void update(void Function(ExplicitNestedListBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2045,7 +2038,7 @@ class _$DerivedValue extends DerivedValue {
   factory _$DerivedValue([void Function(DerivedValueBuilder) updates]) =>
       (new DerivedValueBuilder()..update(updates)).build();
 
-  _$DerivedValue._({this.anInt}) : super._() {
+  _$DerivedValue._({required this.anInt}) : super._() {
     if (anInt == null) {
       throw new BuiltValueNullFieldError('DerivedValue', 'anInt');
     }
@@ -2084,17 +2077,17 @@ class _$DerivedValue extends DerivedValue {
 
 class DerivedValueBuilder
     implements Builder<DerivedValue, DerivedValueBuilder> {
-  _$DerivedValue _$v;
+  _$DerivedValue? _$v;
 
-  int _anInt;
-  int get anInt => _$this._anInt;
-  set anInt(int anInt) => _$this._anInt = anInt;
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
 
   DerivedValueBuilder();
 
   DerivedValueBuilder get _$this {
     if (_$v != null) {
-      _anInt = _$v.anInt;
+      _anInt = _$v!.anInt;
       _$v = null;
     }
     return this;
@@ -2102,14 +2095,12 @@ class DerivedValueBuilder
 
   @override
   void replace(DerivedValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$DerivedValue;
   }
 
   @override
-  void update(void Function(DerivedValueBuilder) updates) {
+  void update(void Function(DerivedValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2125,12 +2116,12 @@ class _$ValueWithCode extends ValueWithCode {
   @override
   final int anInt;
   @override
-  final String aString;
+  final String? aString;
 
   factory _$ValueWithCode([void Function(ValueWithCodeBuilder) updates]) =>
       (new ValueWithCodeBuilder()..update(updates)).build();
 
-  _$ValueWithCode._({this.anInt, this.aString}) : super._() {
+  _$ValueWithCode._({required this.anInt, this.aString}) : super._() {
     if (anInt == null) {
       throw new BuiltValueNullFieldError('ValueWithCode', 'anInt');
     }
@@ -2167,22 +2158,22 @@ class _$ValueWithCode extends ValueWithCode {
 
 class ValueWithCodeBuilder
     implements Builder<ValueWithCode, ValueWithCodeBuilder> {
-  _$ValueWithCode _$v;
+  _$ValueWithCode? _$v;
 
-  int _anInt;
-  int get anInt => _$this._anInt;
-  set anInt(int anInt) => _$this._anInt = anInt;
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
 
-  String _aString;
-  String get aString => _$this._aString;
-  set aString(String aString) => _$this._aString = aString;
+  String? _aString;
+  String? get aString => _$this._aString;
+  set aString(String? aString) => _$this._aString = aString;
 
   ValueWithCodeBuilder();
 
   ValueWithCodeBuilder get _$this {
     if (_$v != null) {
-      _anInt = _$v.anInt;
-      _aString = _$v.aString;
+      _anInt = _$v!.anInt;
+      _aString = _$v!.aString;
       _$v = null;
     }
     return this;
@@ -2190,14 +2181,12 @@ class ValueWithCodeBuilder
 
   @override
   void replace(ValueWithCode other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithCode;
   }
 
   @override
-  void update(void Function(ValueWithCodeBuilder) updates) {
+  void update(void Function(ValueWithCodeBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2214,7 +2203,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
   @override
   final int anInt;
   @override
-  final String aString;
+  final String? aString;
   @override
   final SimpleValue value;
 
@@ -2223,7 +2212,9 @@ class _$ValueWithDefaults extends ValueWithDefaults {
       (new ValueWithDefaultsBuilder()..update(updates)).build()
           as _$ValueWithDefaults;
 
-  _$ValueWithDefaults._({this.anInt, this.aString, this.value}) : super._() {
+  _$ValueWithDefaults._(
+      {required this.anInt, this.aString, required this.value})
+      : super._() {
     if (anInt == null) {
       throw new BuiltValueNullFieldError('ValueWithDefaults', 'anInt');
     }
@@ -2266,7 +2257,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 }
 
 class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
-  _$ValueWithDefaults _$v;
+  _$ValueWithDefaults? _$v;
 
   @override
   int get anInt {
@@ -2308,9 +2299,9 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   ValueWithDefaultsBuilder get _$this {
     if (_$v != null) {
-      super.anInt = _$v.anInt;
-      super.aString = _$v.aString;
-      super.value = _$v.value?.toBuilder();
+      super.anInt = _$v!.anInt;
+      super.aString = _$v!.aString;
+      super.value = _$v!.value?.toBuilder();
       _$v = null;
     }
     return this;
@@ -2318,14 +2309,12 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   @override
   void replace(ValueWithDefaults other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithDefaults;
   }
 
   @override
-  void update(void Function(ValueWithDefaultsBuilder) updates) {
+  void update(void Function(ValueWithDefaultsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2361,7 +2350,7 @@ class _$ValueWithBuilderSmarts extends ValueWithBuilderSmarts {
       (new ValueWithBuilderSmartsBuilder()..update(updates)).build()
           as _$ValueWithBuilderSmarts;
 
-  _$ValueWithBuilderSmarts._({this.value}) : super._() {
+  _$ValueWithBuilderSmarts._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('ValueWithBuilderSmarts', 'value');
     }
@@ -2396,7 +2385,7 @@ class _$ValueWithBuilderSmarts extends ValueWithBuilderSmarts {
 }
 
 class _$ValueWithBuilderSmartsBuilder extends ValueWithBuilderSmartsBuilder {
-  _$ValueWithBuilderSmarts _$v;
+  _$ValueWithBuilderSmarts? _$v;
 
   @override
   String get value {
@@ -2414,7 +2403,7 @@ class _$ValueWithBuilderSmartsBuilder extends ValueWithBuilderSmartsBuilder {
 
   ValueWithBuilderSmartsBuilder get _$this {
     if (_$v != null) {
-      super.value = _$v.value;
+      super.value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -2422,14 +2411,12 @@ class _$ValueWithBuilderSmartsBuilder extends ValueWithBuilderSmartsBuilder {
 
   @override
   void replace(ValueWithBuilderSmarts other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithBuilderSmarts;
   }
 
   @override
-  void update(void Function(ValueWithBuilderSmartsBuilder) updates) {
+  void update(void Function(ValueWithBuilderSmartsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2445,12 +2432,12 @@ class _$ValidatedValue extends ValidatedValue {
   @override
   final int anInt;
   @override
-  final String aString;
+  final String? aString;
 
   factory _$ValidatedValue([void Function(ValidatedValueBuilder) updates]) =>
       (new ValidatedValueBuilder()..update(updates)).build();
 
-  _$ValidatedValue._({this.anInt, this.aString}) : super._() {
+  _$ValidatedValue._({required this.anInt, this.aString}) : super._() {
     if (anInt == null) {
       throw new BuiltValueNullFieldError('ValidatedValue', 'anInt');
     }
@@ -2488,22 +2475,22 @@ class _$ValidatedValue extends ValidatedValue {
 
 class ValidatedValueBuilder
     implements Builder<ValidatedValue, ValidatedValueBuilder> {
-  _$ValidatedValue _$v;
+  _$ValidatedValue? _$v;
 
-  int _anInt;
-  int get anInt => _$this._anInt;
-  set anInt(int anInt) => _$this._anInt = anInt;
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
 
-  String _aString;
-  String get aString => _$this._aString;
-  set aString(String aString) => _$this._aString = aString;
+  String? _aString;
+  String? get aString => _$this._aString;
+  set aString(String? aString) => _$this._aString = aString;
 
   ValidatedValueBuilder();
 
   ValidatedValueBuilder get _$this {
     if (_$v != null) {
-      _anInt = _$v.anInt;
-      _aString = _$v.aString;
+      _anInt = _$v!.anInt;
+      _aString = _$v!.aString;
       _$v = null;
     }
     return this;
@@ -2511,14 +2498,12 @@ class ValidatedValueBuilder
 
   @override
   void replace(ValidatedValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValidatedValue;
   }
 
   @override
-  void update(void Function(ValidatedValueBuilder) updates) {
+  void update(void Function(ValidatedValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2539,7 +2524,7 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
           [void Function(ValueUsingImportAsBuilder) updates]) =>
       (new ValueUsingImportAsBuilder()..update(updates)).build();
 
-  _$ValueUsingImportAs._({this.value}) : super._() {
+  _$ValueUsingImportAs._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('ValueUsingImportAs', 'value');
     }
@@ -2575,17 +2560,17 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
 
 class ValueUsingImportAsBuilder
     implements Builder<ValueUsingImportAs, ValueUsingImportAsBuilder> {
-  _$ValueUsingImportAs _$v;
+  _$ValueUsingImportAs? _$v;
 
-  using_import_as.TestEnum _value;
-  using_import_as.TestEnum get value => _$this._value;
-  set value(using_import_as.TestEnum value) => _$this._value = value;
+  using_import_as.TestEnum? _value;
+  using_import_as.TestEnum? get value => _$this._value;
+  set value(using_import_as.TestEnum? value) => _$this._value = value;
 
   ValueUsingImportAsBuilder();
 
   ValueUsingImportAsBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value;
+      _value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -2593,14 +2578,12 @@ class ValueUsingImportAsBuilder
 
   @override
   void replace(ValueUsingImportAs other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueUsingImportAs;
   }
 
   @override
-  void update(void Function(ValueUsingImportAsBuilder) updates) {
+  void update(void Function(ValueUsingImportAsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2644,20 +2627,18 @@ class _$NoFieldsValue extends NoFieldsValue {
 
 class NoFieldsValueBuilder
     implements Builder<NoFieldsValue, NoFieldsValueBuilder> {
-  _$NoFieldsValue _$v;
+  _$NoFieldsValue? _$v;
 
   NoFieldsValueBuilder();
 
   @override
   void replace(NoFieldsValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$NoFieldsValue;
   }
 
   @override
-  void update(void Function(NoFieldsValueBuilder) updates) {
+  void update(void Function(NoFieldsValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2697,17 +2678,17 @@ class _$PrimitivesValue extends PrimitivesValue {
       (new PrimitivesValueBuilder()..update(updates)).build();
 
   _$PrimitivesValue._(
-      {this.boolean,
-      this.integer,
-      this.int64,
-      this.dbl,
-      this.number,
-      this.string,
-      this.dateTime,
-      this.duration,
-      this.regExp,
-      this.uri,
-      this.bigInt})
+      {required this.boolean,
+      required this.integer,
+      required this.int64,
+      required this.dbl,
+      required this.number,
+      required this.string,
+      required this.dateTime,
+      required this.duration,
+      required this.regExp,
+      required this.uri,
+      required this.bigInt})
       : super._() {
     if (boolean == null) {
       throw new BuiltValueNullFieldError('PrimitivesValue', 'boolean');
@@ -2813,67 +2794,67 @@ class _$PrimitivesValue extends PrimitivesValue {
 
 class PrimitivesValueBuilder
     implements Builder<PrimitivesValue, PrimitivesValueBuilder> {
-  _$PrimitivesValue _$v;
+  _$PrimitivesValue? _$v;
 
-  bool _boolean;
-  bool get boolean => _$this._boolean;
-  set boolean(bool boolean) => _$this._boolean = boolean;
+  bool? _boolean;
+  bool? get boolean => _$this._boolean;
+  set boolean(bool? boolean) => _$this._boolean = boolean;
 
-  int _integer;
-  int get integer => _$this._integer;
-  set integer(int integer) => _$this._integer = integer;
+  int? _integer;
+  int? get integer => _$this._integer;
+  set integer(int? integer) => _$this._integer = integer;
 
-  Int64 _int64;
-  Int64 get int64 => _$this._int64;
-  set int64(Int64 int64) => _$this._int64 = int64;
+  Int64? _int64;
+  Int64? get int64 => _$this._int64;
+  set int64(Int64? int64) => _$this._int64 = int64;
 
-  double _dbl;
-  double get dbl => _$this._dbl;
-  set dbl(double dbl) => _$this._dbl = dbl;
+  double? _dbl;
+  double? get dbl => _$this._dbl;
+  set dbl(double? dbl) => _$this._dbl = dbl;
 
-  num _number;
-  num get number => _$this._number;
-  set number(num number) => _$this._number = number;
+  num? _number;
+  num? get number => _$this._number;
+  set number(num? number) => _$this._number = number;
 
-  String _string;
-  String get string => _$this._string;
-  set string(String string) => _$this._string = string;
+  String? _string;
+  String? get string => _$this._string;
+  set string(String? string) => _$this._string = string;
 
-  DateTime _dateTime;
-  DateTime get dateTime => _$this._dateTime;
-  set dateTime(DateTime dateTime) => _$this._dateTime = dateTime;
+  DateTime? _dateTime;
+  DateTime? get dateTime => _$this._dateTime;
+  set dateTime(DateTime? dateTime) => _$this._dateTime = dateTime;
 
-  Duration _duration;
-  Duration get duration => _$this._duration;
-  set duration(Duration duration) => _$this._duration = duration;
+  Duration? _duration;
+  Duration? get duration => _$this._duration;
+  set duration(Duration? duration) => _$this._duration = duration;
 
-  RegExp _regExp;
-  RegExp get regExp => _$this._regExp;
-  set regExp(RegExp regExp) => _$this._regExp = regExp;
+  RegExp? _regExp;
+  RegExp? get regExp => _$this._regExp;
+  set regExp(RegExp? regExp) => _$this._regExp = regExp;
 
-  Uri _uri;
-  Uri get uri => _$this._uri;
-  set uri(Uri uri) => _$this._uri = uri;
+  Uri? _uri;
+  Uri? get uri => _$this._uri;
+  set uri(Uri? uri) => _$this._uri = uri;
 
-  BigInt _bigInt;
-  BigInt get bigInt => _$this._bigInt;
-  set bigInt(BigInt bigInt) => _$this._bigInt = bigInt;
+  BigInt? _bigInt;
+  BigInt? get bigInt => _$this._bigInt;
+  set bigInt(BigInt? bigInt) => _$this._bigInt = bigInt;
 
   PrimitivesValueBuilder();
 
   PrimitivesValueBuilder get _$this {
     if (_$v != null) {
-      _boolean = _$v.boolean;
-      _integer = _$v.integer;
-      _int64 = _$v.int64;
-      _dbl = _$v.dbl;
-      _number = _$v.number;
-      _string = _$v.string;
-      _dateTime = _$v.dateTime;
-      _duration = _$v.duration;
-      _regExp = _$v.regExp;
-      _uri = _$v.uri;
-      _bigInt = _$v.bigInt;
+      _boolean = _$v!.boolean;
+      _integer = _$v!.integer;
+      _int64 = _$v!.int64;
+      _dbl = _$v!.dbl;
+      _number = _$v!.number;
+      _string = _$v!.string;
+      _dateTime = _$v!.dateTime;
+      _duration = _$v!.duration;
+      _regExp = _$v!.regExp;
+      _uri = _$v!.uri;
+      _bigInt = _$v!.bigInt;
       _$v = null;
     }
     return this;
@@ -2881,14 +2862,12 @@ class PrimitivesValueBuilder
 
   @override
   void replace(PrimitivesValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PrimitivesValue;
   }
 
   @override
-  void update(void Function(PrimitivesValueBuilder) updates) {
+  void update(void Function(PrimitivesValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2919,7 +2898,7 @@ class _$FunctionValue extends FunctionValue {
   factory _$FunctionValue([void Function(FunctionValueBuilder) updates]) =>
       (new FunctionValueBuilder()..update(updates)).build();
 
-  _$FunctionValue._({this.function}) : super._() {
+  _$FunctionValue._({required this.function}) : super._() {
     if (function == null) {
       throw new BuiltValueNullFieldError('FunctionValue', 'function');
     }
@@ -2954,17 +2933,17 @@ class _$FunctionValue extends FunctionValue {
 
 class FunctionValueBuilder
     implements Builder<FunctionValue, FunctionValueBuilder> {
-  _$FunctionValue _$v;
+  _$FunctionValue? _$v;
 
-  MyFunctionType _function;
-  MyFunctionType get function => _$this._function;
-  set function(MyFunctionType function) => _$this._function = function;
+  MyFunctionType? _function;
+  MyFunctionType? get function => _$this._function;
+  set function(MyFunctionType? function) => _$this._function = function;
 
   FunctionValueBuilder();
 
   FunctionValueBuilder get _$this {
     if (_$v != null) {
-      _function = _$v.function;
+      _function = _$v!.function;
       _$v = null;
     }
     return this;
@@ -2972,14 +2951,12 @@ class FunctionValueBuilder
 
   @override
   void replace(FunctionValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$FunctionValue;
   }
 
   @override
-  void update(void Function(FunctionValueBuilder) updates) {
+  void update(void Function(FunctionValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -2999,7 +2976,7 @@ class _$ListOfFunctionValue extends ListOfFunctionValue {
           [void Function(ListOfFunctionValueBuilder) updates]) =>
       (new ListOfFunctionValueBuilder()..update(updates)).build();
 
-  _$ListOfFunctionValue._({this.functions}) : super._() {
+  _$ListOfFunctionValue._({required this.functions}) : super._() {
     if (functions == null) {
       throw new BuiltValueNullFieldError('ListOfFunctionValue', 'functions');
     }
@@ -3037,19 +3014,19 @@ class _$ListOfFunctionValue extends ListOfFunctionValue {
 
 class ListOfFunctionValueBuilder
     implements Builder<ListOfFunctionValue, ListOfFunctionValueBuilder> {
-  _$ListOfFunctionValue _$v;
+  _$ListOfFunctionValue? _$v;
 
-  ListBuilder<MyFunctionType> _functions;
-  ListBuilder<MyFunctionType> get functions =>
+  ListBuilder<MyFunctionType>? _functions;
+  ListBuilder<MyFunctionType>? get functions =>
       _$this._functions ??= new ListBuilder<MyFunctionType>();
-  set functions(ListBuilder<MyFunctionType> functions) =>
+  set functions(ListBuilder<MyFunctionType>? functions) =>
       _$this._functions = functions;
 
   ListOfFunctionValueBuilder();
 
   ListOfFunctionValueBuilder get _$this {
     if (_$v != null) {
-      _functions = _$v.functions?.toBuilder();
+      _functions = _$v!.functions?.toBuilder();
       _$v = null;
     }
     return this;
@@ -3057,14 +3034,12 @@ class ListOfFunctionValueBuilder
 
   @override
   void replace(ListOfFunctionValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ListOfFunctionValue;
   }
 
   @override
-  void update(void Function(ListOfFunctionValueBuilder) updates) {
+  void update(void Function(ListOfFunctionValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3094,13 +3069,13 @@ class _$PartiallySerializableValue extends PartiallySerializableValue {
   @override
   final int value;
   @override
-  final int transientValue;
+  final int? transientValue;
 
   factory _$PartiallySerializableValue(
           [void Function(PartiallySerializableValueBuilder) updates]) =>
       (new PartiallySerializableValueBuilder()..update(updates)).build();
 
-  _$PartiallySerializableValue._({this.value, this.transientValue})
+  _$PartiallySerializableValue._({required this.value, this.transientValue})
       : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('PartiallySerializableValue', 'value');
@@ -3141,23 +3116,23 @@ class _$PartiallySerializableValue extends PartiallySerializableValue {
 class PartiallySerializableValueBuilder
     implements
         Builder<PartiallySerializableValue, PartiallySerializableValueBuilder> {
-  _$PartiallySerializableValue _$v;
+  _$PartiallySerializableValue? _$v;
 
-  int _value;
-  int get value => _$this._value;
-  set value(int value) => _$this._value = value;
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
 
-  int _transientValue;
-  int get transientValue => _$this._transientValue;
-  set transientValue(int transientValue) =>
+  int? _transientValue;
+  int? get transientValue => _$this._transientValue;
+  set transientValue(int? transientValue) =>
       _$this._transientValue = transientValue;
 
   PartiallySerializableValueBuilder();
 
   PartiallySerializableValueBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value;
-      _transientValue = _$v.transientValue;
+      _value = _$v!.value;
+      _transientValue = _$v!.transientValue;
       _$v = null;
     }
     return this;
@@ -3165,14 +3140,12 @@ class PartiallySerializableValueBuilder
 
   @override
   void replace(PartiallySerializableValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PartiallySerializableValue;
   }
 
   @override
-  void update(void Function(PartiallySerializableValueBuilder) updates) {
+  void update(void Function(PartiallySerializableValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3194,7 +3167,7 @@ class _$NamedFactoryValue extends NamedFactoryValue {
           [void Function(NamedFactoryValueBuilder) updates]) =>
       (new NamedFactoryValueBuilder()..update(updates)).build();
 
-  _$NamedFactoryValue._({this.value}) : super._() {
+  _$NamedFactoryValue._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('NamedFactoryValue', 'value');
     }
@@ -3229,17 +3202,17 @@ class _$NamedFactoryValue extends NamedFactoryValue {
 
 class NamedFactoryValueBuilder
     implements Builder<NamedFactoryValue, NamedFactoryValueBuilder> {
-  _$NamedFactoryValue _$v;
+  _$NamedFactoryValue? _$v;
 
-  int _value;
-  int get value => _$this._value;
-  set value(int value) => _$this._value = value;
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
 
   NamedFactoryValueBuilder();
 
   NamedFactoryValueBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value;
+      _value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -3247,14 +3220,12 @@ class NamedFactoryValueBuilder
 
   @override
   void replace(NamedFactoryValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$NamedFactoryValue;
   }
 
   @override
-  void update(void Function(NamedFactoryValueBuilder) updates) {
+  void update(void Function(NamedFactoryValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3273,7 +3244,7 @@ class _$WireNameValue extends WireNameValue {
   factory _$WireNameValue([void Function(WireNameValueBuilder) updates]) =>
       (new WireNameValueBuilder()..update(updates)).build();
 
-  _$WireNameValue._({this.value}) : super._() {
+  _$WireNameValue._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('WireNameValue', 'value');
     }
@@ -3306,17 +3277,17 @@ class _$WireNameValue extends WireNameValue {
 
 class WireNameValueBuilder
     implements Builder<WireNameValue, WireNameValueBuilder> {
-  _$WireNameValue _$v;
+  _$WireNameValue? _$v;
 
-  int _value;
-  int get value => _$this._value;
-  set value(int value) => _$this._value = value;
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
 
   WireNameValueBuilder();
 
   WireNameValueBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value;
+      _value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -3324,14 +3295,12 @@ class WireNameValueBuilder
 
   @override
   void replace(WireNameValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$WireNameValue;
   }
 
   @override
-  void update(void Function(WireNameValueBuilder) updates) {
+  void update(void Function(WireNameValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3349,13 +3318,14 @@ class _$FieldDiscoveryValue extends FieldDiscoveryValue {
   @override
   final BuiltList<ThirdDiscoverableValue> values;
   @override
-  final FieldDiscoveryValue recursiveValue;
+  final FieldDiscoveryValue? recursiveValue;
 
   factory _$FieldDiscoveryValue(
           [void Function(FieldDiscoveryValueBuilder) updates]) =>
       (new FieldDiscoveryValueBuilder()..update(updates)).build();
 
-  _$FieldDiscoveryValue._({this.value, this.values, this.recursiveValue})
+  _$FieldDiscoveryValue._(
+      {required this.value, required this.values, this.recursiveValue})
       : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('FieldDiscoveryValue', 'value');
@@ -3401,32 +3371,32 @@ class _$FieldDiscoveryValue extends FieldDiscoveryValue {
 
 class FieldDiscoveryValueBuilder
     implements Builder<FieldDiscoveryValue, FieldDiscoveryValueBuilder> {
-  _$FieldDiscoveryValue _$v;
+  _$FieldDiscoveryValue? _$v;
 
-  DiscoverableValueBuilder _value;
-  DiscoverableValueBuilder get value =>
+  DiscoverableValueBuilder? _value;
+  DiscoverableValueBuilder? get value =>
       _$this._value ??= new DiscoverableValueBuilder();
-  set value(DiscoverableValueBuilder value) => _$this._value = value;
+  set value(DiscoverableValueBuilder? value) => _$this._value = value;
 
-  ListBuilder<ThirdDiscoverableValue> _values;
-  ListBuilder<ThirdDiscoverableValue> get values =>
+  ListBuilder<ThirdDiscoverableValue>? _values;
+  ListBuilder<ThirdDiscoverableValue>? get values =>
       _$this._values ??= new ListBuilder<ThirdDiscoverableValue>();
-  set values(ListBuilder<ThirdDiscoverableValue> values) =>
+  set values(ListBuilder<ThirdDiscoverableValue>? values) =>
       _$this._values = values;
 
-  FieldDiscoveryValueBuilder _recursiveValue;
-  FieldDiscoveryValueBuilder get recursiveValue =>
+  FieldDiscoveryValueBuilder? _recursiveValue;
+  FieldDiscoveryValueBuilder? get recursiveValue =>
       _$this._recursiveValue ??= new FieldDiscoveryValueBuilder();
-  set recursiveValue(FieldDiscoveryValueBuilder recursiveValue) =>
+  set recursiveValue(FieldDiscoveryValueBuilder? recursiveValue) =>
       _$this._recursiveValue = recursiveValue;
 
   FieldDiscoveryValueBuilder();
 
   FieldDiscoveryValueBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value?.toBuilder();
-      _values = _$v.values?.toBuilder();
-      _recursiveValue = _$v.recursiveValue?.toBuilder();
+      _value = _$v!.value?.toBuilder();
+      _values = _$v!.values?.toBuilder();
+      _recursiveValue = _$v!.recursiveValue?.toBuilder();
       _$v = null;
     }
     return this;
@@ -3434,14 +3404,12 @@ class FieldDiscoveryValueBuilder
 
   @override
   void replace(FieldDiscoveryValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$FieldDiscoveryValue;
   }
 
   @override
-  void update(void Function(FieldDiscoveryValueBuilder) updates) {
+  void update(void Function(FieldDiscoveryValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3482,7 +3450,7 @@ class _$DiscoverableValue extends DiscoverableValue {
           [void Function(DiscoverableValueBuilder) updates]) =>
       (new DiscoverableValueBuilder()..update(updates)).build();
 
-  _$DiscoverableValue._({this.value}) : super._() {
+  _$DiscoverableValue._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('DiscoverableValue', 'value');
     }
@@ -3517,18 +3485,18 @@ class _$DiscoverableValue extends DiscoverableValue {
 
 class DiscoverableValueBuilder
     implements Builder<DiscoverableValue, DiscoverableValueBuilder> {
-  _$DiscoverableValue _$v;
+  _$DiscoverableValue? _$v;
 
-  SecondDiscoverableValueBuilder _value;
-  SecondDiscoverableValueBuilder get value =>
+  SecondDiscoverableValueBuilder? _value;
+  SecondDiscoverableValueBuilder? get value =>
       _$this._value ??= new SecondDiscoverableValueBuilder();
-  set value(SecondDiscoverableValueBuilder value) => _$this._value = value;
+  set value(SecondDiscoverableValueBuilder? value) => _$this._value = value;
 
   DiscoverableValueBuilder();
 
   DiscoverableValueBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value?.toBuilder();
+      _value = _$v!.value?.toBuilder();
       _$v = null;
     }
     return this;
@@ -3536,14 +3504,12 @@ class DiscoverableValueBuilder
 
   @override
   void replace(DiscoverableValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$DiscoverableValue;
   }
 
   @override
-  void update(void Function(DiscoverableValueBuilder) updates) {
+  void update(void Function(DiscoverableValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3576,7 +3542,7 @@ class _$SecondDiscoverableValue extends SecondDiscoverableValue {
           [void Function(SecondDiscoverableValueBuilder) updates]) =>
       (new SecondDiscoverableValueBuilder()..update(updates)).build();
 
-  _$SecondDiscoverableValue._({this.value}) : super._() {
+  _$SecondDiscoverableValue._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('SecondDiscoverableValue', 'value');
     }
@@ -3613,17 +3579,17 @@ class _$SecondDiscoverableValue extends SecondDiscoverableValue {
 class SecondDiscoverableValueBuilder
     implements
         Builder<SecondDiscoverableValue, SecondDiscoverableValueBuilder> {
-  _$SecondDiscoverableValue _$v;
+  _$SecondDiscoverableValue? _$v;
 
-  int _value;
-  int get value => _$this._value;
-  set value(int value) => _$this._value = value;
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
 
   SecondDiscoverableValueBuilder();
 
   SecondDiscoverableValueBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value;
+      _value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -3631,14 +3597,12 @@ class SecondDiscoverableValueBuilder
 
   @override
   void replace(SecondDiscoverableValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SecondDiscoverableValue;
   }
 
   @override
-  void update(void Function(SecondDiscoverableValueBuilder) updates) {
+  void update(void Function(SecondDiscoverableValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3658,7 +3622,7 @@ class _$ThirdDiscoverableValue extends ThirdDiscoverableValue {
           [void Function(ThirdDiscoverableValueBuilder) updates]) =>
       (new ThirdDiscoverableValueBuilder()..update(updates)).build();
 
-  _$ThirdDiscoverableValue._({this.value}) : super._() {
+  _$ThirdDiscoverableValue._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('ThirdDiscoverableValue', 'value');
     }
@@ -3694,17 +3658,17 @@ class _$ThirdDiscoverableValue extends ThirdDiscoverableValue {
 
 class ThirdDiscoverableValueBuilder
     implements Builder<ThirdDiscoverableValue, ThirdDiscoverableValueBuilder> {
-  _$ThirdDiscoverableValue _$v;
+  _$ThirdDiscoverableValue? _$v;
 
-  int _value;
-  int get value => _$this._value;
-  set value(int value) => _$this._value = value;
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
 
   ThirdDiscoverableValueBuilder();
 
   ThirdDiscoverableValueBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value;
+      _value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -3712,14 +3676,12 @@ class ThirdDiscoverableValueBuilder
 
   @override
   void replace(ThirdDiscoverableValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ThirdDiscoverableValue;
   }
 
   @override
-  void update(void Function(ThirdDiscoverableValueBuilder) updates) {
+  void update(void Function(ThirdDiscoverableValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3738,7 +3700,7 @@ class _$RecursiveValueA extends RecursiveValueA {
   factory _$RecursiveValueA([void Function(RecursiveValueABuilder) updates]) =>
       (new RecursiveValueABuilder()..update(updates)).build();
 
-  _$RecursiveValueA._({this.value}) : super._() {
+  _$RecursiveValueA._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('RecursiveValueA', 'value');
     }
@@ -3772,18 +3734,18 @@ class _$RecursiveValueA extends RecursiveValueA {
 
 class RecursiveValueABuilder
     implements Builder<RecursiveValueA, RecursiveValueABuilder> {
-  _$RecursiveValueA _$v;
+  _$RecursiveValueA? _$v;
 
-  RecursiveValueBBuilder _value;
-  RecursiveValueBBuilder get value =>
+  RecursiveValueBBuilder? _value;
+  RecursiveValueBBuilder? get value =>
       _$this._value ??= new RecursiveValueBBuilder();
-  set value(RecursiveValueBBuilder value) => _$this._value = value;
+  set value(RecursiveValueBBuilder? value) => _$this._value = value;
 
   RecursiveValueABuilder();
 
   RecursiveValueABuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value?.toBuilder();
+      _value = _$v!.value?.toBuilder();
       _$v = null;
     }
     return this;
@@ -3791,14 +3753,12 @@ class RecursiveValueABuilder
 
   @override
   void replace(RecursiveValueA other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$RecursiveValueA;
   }
 
   @override
-  void update(void Function(RecursiveValueABuilder) updates) {
+  void update(void Function(RecursiveValueABuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3830,7 +3790,7 @@ class _$RecursiveValueB extends RecursiveValueB {
   factory _$RecursiveValueB([void Function(RecursiveValueBBuilder) updates]) =>
       (new RecursiveValueBBuilder()..update(updates)).build();
 
-  _$RecursiveValueB._({this.value}) : super._() {
+  _$RecursiveValueB._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('RecursiveValueB', 'value');
     }
@@ -3864,18 +3824,18 @@ class _$RecursiveValueB extends RecursiveValueB {
 
 class RecursiveValueBBuilder
     implements Builder<RecursiveValueB, RecursiveValueBBuilder> {
-  _$RecursiveValueB _$v;
+  _$RecursiveValueB? _$v;
 
-  RecursiveValueABuilder _value;
-  RecursiveValueABuilder get value =>
+  RecursiveValueABuilder? _value;
+  RecursiveValueABuilder? get value =>
       _$this._value ??= new RecursiveValueABuilder();
-  set value(RecursiveValueABuilder value) => _$this._value = value;
+  set value(RecursiveValueABuilder? value) => _$this._value = value;
 
   RecursiveValueBBuilder();
 
   RecursiveValueBBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value?.toBuilder();
+      _value = _$v!.value?.toBuilder();
       _$v = null;
     }
     return this;
@@ -3883,14 +3843,12 @@ class RecursiveValueBBuilder
 
   @override
   void replace(RecursiveValueB other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$RecursiveValueB;
   }
 
   @override
-  void update(void Function(RecursiveValueBBuilder) updates) {
+  void update(void Function(RecursiveValueBBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -3923,7 +3881,7 @@ class _$ValueWithCustomSerializer extends ValueWithCustomSerializer {
           [void Function(ValueWithCustomSerializerBuilder) updates]) =>
       (new ValueWithCustomSerializerBuilder()..update(updates)).build();
 
-  _$ValueWithCustomSerializer._({this.value}) : super._() {
+  _$ValueWithCustomSerializer._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('ValueWithCustomSerializer', 'value');
     }
@@ -3960,17 +3918,17 @@ class _$ValueWithCustomSerializer extends ValueWithCustomSerializer {
 class ValueWithCustomSerializerBuilder
     implements
         Builder<ValueWithCustomSerializer, ValueWithCustomSerializerBuilder> {
-  _$ValueWithCustomSerializer _$v;
+  _$ValueWithCustomSerializer? _$v;
 
-  int _value;
-  int get value => _$this._value;
-  set value(int value) => _$this._value = value;
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
 
   ValueWithCustomSerializerBuilder();
 
   ValueWithCustomSerializerBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value;
+      _value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -3978,14 +3936,12 @@ class ValueWithCustomSerializerBuilder
 
   @override
   void replace(ValueWithCustomSerializer other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithCustomSerializer;
   }
 
   @override
-  void update(void Function(ValueWithCustomSerializerBuilder) updates) {
+  void update(void Function(ValueWithCustomSerializerBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4004,7 +3960,7 @@ class _$ValueWithOnSet extends ValueWithOnSet {
   factory _$ValueWithOnSet([void Function(ValueWithOnSetBuilder) updates]) =>
       (new ValueWithOnSetBuilder()..update(updates)).build();
 
-  _$ValueWithOnSet._({this.value}) : super._() {
+  _$ValueWithOnSet._({required this.value}) : super._() {
     if (value == null) {
       throw new BuiltValueNullFieldError('ValueWithOnSet', 'value');
     }
@@ -4038,13 +3994,13 @@ class _$ValueWithOnSet extends ValueWithOnSet {
 
 class ValueWithOnSetBuilder
     implements Builder<ValueWithOnSet, ValueWithOnSetBuilder> {
-  _$ValueWithOnSet _$v;
+  _$ValueWithOnSet? _$v;
 
   void Function() onSet = () {};
 
-  int _value;
-  int get value => _$this._value;
-  set value(int value) {
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) {
     _$this._value = value;
     onSet();
   }
@@ -4053,7 +4009,7 @@ class ValueWithOnSetBuilder
 
   ValueWithOnSetBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value;
+      _value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -4061,14 +4017,12 @@ class ValueWithOnSetBuilder
 
   @override
   void replace(ValueWithOnSet other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithOnSet;
   }
 
   @override
-  void update(void Function(ValueWithOnSetBuilder) updates) {
+  void update(void Function(ValueWithOnSetBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4082,7 +4036,7 @@ class ValueWithOnSetBuilder
 
 class _$SerializesNullsValue extends SerializesNullsValue {
   @override
-  final String value;
+  final String? value;
 
   factory _$SerializesNullsValue(
           [void Function(SerializesNullsValueBuilder) updates]) =>
@@ -4120,17 +4074,17 @@ class _$SerializesNullsValue extends SerializesNullsValue {
 
 class SerializesNullsValueBuilder
     implements Builder<SerializesNullsValue, SerializesNullsValueBuilder> {
-  _$SerializesNullsValue _$v;
+  _$SerializesNullsValue? _$v;
 
-  String _value;
-  String get value => _$this._value;
-  set value(String value) => _$this._value = value;
+  String? _value;
+  String? get value => _$this._value;
+  set value(String? value) => _$this._value = value;
 
   SerializesNullsValueBuilder();
 
   SerializesNullsValueBuilder get _$this {
     if (_$v != null) {
-      _value = _$v.value;
+      _value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -4138,14 +4092,12 @@ class SerializesNullsValueBuilder
 
   @override
   void replace(SerializesNullsValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SerializesNullsValue;
   }
 
   @override
-  void update(void Function(SerializesNullsValueBuilder) updates) {
+  void update(void Function(SerializesNullsValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4187,20 +4139,18 @@ class _$CustomToStringValue extends CustomToStringValue {
 
 class CustomToStringValueBuilder
     implements Builder<CustomToStringValue, CustomToStringValueBuilder> {
-  _$CustomToStringValue _$v;
+  _$CustomToStringValue? _$v;
 
   CustomToStringValueBuilder();
 
   @override
   void replace(CustomToStringValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CustomToStringValue;
   }
 
   @override
-  void update(void Function(CustomToStringValueBuilder) updates) {
+  void update(void Function(CustomToStringValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4219,7 +4169,7 @@ class _$OtherValue extends OtherValue {
   factory _$OtherValue([void Function(OtherValueBuilder) updates]) =>
       (new OtherValueBuilder()..update(updates)).build();
 
-  _$OtherValue._({this.other}) : super._() {
+  _$OtherValue._({required this.other}) : super._() {
     if (other == null) {
       throw new BuiltValueNullFieldError('OtherValue', 'other');
     }
@@ -4251,17 +4201,17 @@ class _$OtherValue extends OtherValue {
 }
 
 class OtherValueBuilder implements Builder<OtherValue, OtherValueBuilder> {
-  _$OtherValue _$v;
+  _$OtherValue? _$v;
 
-  int _other;
-  int get other => _$this._other;
-  set other(int other) => _$this._other = other;
+  int? _other;
+  int? get other => _$this._other;
+  set other(int? other) => _$this._other = other;
 
   OtherValueBuilder();
 
   OtherValueBuilder get _$this {
     if (_$v != null) {
-      _other = _$v.other;
+      _other = _$v!.other;
       _$v = null;
     }
     return this;
@@ -4269,14 +4219,12 @@ class OtherValueBuilder implements Builder<OtherValue, OtherValueBuilder> {
 
   @override
   void replace(OtherValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$OtherValue;
   }
 
   @override
-  void update(void Function(OtherValueBuilder) updates) {
+  void update(void Function(OtherValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4301,7 +4249,7 @@ class _$DefaultsForFieldSettingsValue extends DefaultsForFieldSettingsValue {
       (new DefaultsForFieldSettingsValueBuilder()..update(updates)).build();
 
   _$DefaultsForFieldSettingsValue._(
-      {this.ignored, this.compared, this.serialized})
+      {required this.ignored, required this.compared, required this.serialized})
       : super._() {
     if (ignored == null) {
       throw new BuiltValueNullFieldError(
@@ -4351,27 +4299,27 @@ class DefaultsForFieldSettingsValueBuilder
     implements
         Builder<DefaultsForFieldSettingsValue,
             DefaultsForFieldSettingsValueBuilder> {
-  _$DefaultsForFieldSettingsValue _$v;
+  _$DefaultsForFieldSettingsValue? _$v;
 
-  int _ignored;
-  int get ignored => _$this._ignored;
-  set ignored(int ignored) => _$this._ignored = ignored;
+  int? _ignored;
+  int? get ignored => _$this._ignored;
+  set ignored(int? ignored) => _$this._ignored = ignored;
 
-  int _compared;
-  int get compared => _$this._compared;
-  set compared(int compared) => _$this._compared = compared;
+  int? _compared;
+  int? get compared => _$this._compared;
+  set compared(int? compared) => _$this._compared = compared;
 
-  int _serialized;
-  int get serialized => _$this._serialized;
-  set serialized(int serialized) => _$this._serialized = serialized;
+  int? _serialized;
+  int? get serialized => _$this._serialized;
+  set serialized(int? serialized) => _$this._serialized = serialized;
 
   DefaultsForFieldSettingsValueBuilder();
 
   DefaultsForFieldSettingsValueBuilder get _$this {
     if (_$v != null) {
-      _ignored = _$v.ignored;
-      _compared = _$v.compared;
-      _serialized = _$v.serialized;
+      _ignored = _$v!.ignored;
+      _compared = _$v!.compared;
+      _serialized = _$v!.serialized;
       _$v = null;
     }
     return this;
@@ -4379,14 +4327,12 @@ class DefaultsForFieldSettingsValueBuilder
 
   @override
   void replace(DefaultsForFieldSettingsValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$DefaultsForFieldSettingsValue;
   }
 
   @override
-  void update(void Function(DefaultsForFieldSettingsValueBuilder) updates) {
+  void update(void Function(DefaultsForFieldSettingsValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4406,29 +4352,29 @@ class _$ValueWithBuilderInitializer extends ValueWithBuilderInitializer {
   @override
   final int anIntWithDefault;
   @override
-  final int nullableInt;
+  final int? nullableInt;
   @override
-  final int nullableIntWithDefault;
+  final int? nullableIntWithDefault;
   @override
   final SimpleValue nestedValue;
   @override
   final SimpleValue nestedValueWithDefault;
   @override
-  final SimpleValue nullableNestedValue;
+  final SimpleValue? nullableNestedValue;
   @override
-  final SimpleValue nullableNestedValueWithDefault;
+  final SimpleValue? nullableNestedValueWithDefault;
 
   factory _$ValueWithBuilderInitializer(
           [void Function(ValueWithBuilderInitializerBuilder) updates]) =>
       (new ValueWithBuilderInitializerBuilder()..update(updates)).build();
 
   _$ValueWithBuilderInitializer._(
-      {this.anInt,
-      this.anIntWithDefault,
+      {required this.anInt,
+      required this.anIntWithDefault,
       this.nullableInt,
       this.nullableIntWithDefault,
-      this.nestedValue,
-      this.nestedValueWithDefault,
+      required this.nestedValue,
+      required this.nestedValueWithDefault,
       this.nullableNestedValue,
       this.nullableNestedValueWithDefault})
       : super._() {
@@ -4511,49 +4457,49 @@ class ValueWithBuilderInitializerBuilder
     implements
         Builder<ValueWithBuilderInitializer,
             ValueWithBuilderInitializerBuilder> {
-  _$ValueWithBuilderInitializer _$v;
+  _$ValueWithBuilderInitializer? _$v;
 
-  int _anInt;
-  int get anInt => _$this._anInt;
-  set anInt(int anInt) => _$this._anInt = anInt;
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
 
-  int _anIntWithDefault;
-  int get anIntWithDefault => _$this._anIntWithDefault;
-  set anIntWithDefault(int anIntWithDefault) =>
+  int? _anIntWithDefault;
+  int? get anIntWithDefault => _$this._anIntWithDefault;
+  set anIntWithDefault(int? anIntWithDefault) =>
       _$this._anIntWithDefault = anIntWithDefault;
 
-  int _nullableInt;
-  int get nullableInt => _$this._nullableInt;
-  set nullableInt(int nullableInt) => _$this._nullableInt = nullableInt;
+  int? _nullableInt;
+  int? get nullableInt => _$this._nullableInt;
+  set nullableInt(int? nullableInt) => _$this._nullableInt = nullableInt;
 
-  int _nullableIntWithDefault;
-  int get nullableIntWithDefault => _$this._nullableIntWithDefault;
-  set nullableIntWithDefault(int nullableIntWithDefault) =>
+  int? _nullableIntWithDefault;
+  int? get nullableIntWithDefault => _$this._nullableIntWithDefault;
+  set nullableIntWithDefault(int? nullableIntWithDefault) =>
       _$this._nullableIntWithDefault = nullableIntWithDefault;
 
-  SimpleValueBuilder _nestedValue;
-  SimpleValueBuilder get nestedValue =>
+  SimpleValueBuilder? _nestedValue;
+  SimpleValueBuilder? get nestedValue =>
       _$this._nestedValue ??= new SimpleValueBuilder();
-  set nestedValue(SimpleValueBuilder nestedValue) =>
+  set nestedValue(SimpleValueBuilder? nestedValue) =>
       _$this._nestedValue = nestedValue;
 
-  SimpleValueBuilder _nestedValueWithDefault;
-  SimpleValueBuilder get nestedValueWithDefault =>
+  SimpleValueBuilder? _nestedValueWithDefault;
+  SimpleValueBuilder? get nestedValueWithDefault =>
       _$this._nestedValueWithDefault ??= new SimpleValueBuilder();
-  set nestedValueWithDefault(SimpleValueBuilder nestedValueWithDefault) =>
+  set nestedValueWithDefault(SimpleValueBuilder? nestedValueWithDefault) =>
       _$this._nestedValueWithDefault = nestedValueWithDefault;
 
-  SimpleValueBuilder _nullableNestedValue;
-  SimpleValueBuilder get nullableNestedValue =>
+  SimpleValueBuilder? _nullableNestedValue;
+  SimpleValueBuilder? get nullableNestedValue =>
       _$this._nullableNestedValue ??= new SimpleValueBuilder();
-  set nullableNestedValue(SimpleValueBuilder nullableNestedValue) =>
+  set nullableNestedValue(SimpleValueBuilder? nullableNestedValue) =>
       _$this._nullableNestedValue = nullableNestedValue;
 
-  SimpleValueBuilder _nullableNestedValueWithDefault;
-  SimpleValueBuilder get nullableNestedValueWithDefault =>
+  SimpleValueBuilder? _nullableNestedValueWithDefault;
+  SimpleValueBuilder? get nullableNestedValueWithDefault =>
       _$this._nullableNestedValueWithDefault ??= new SimpleValueBuilder();
   set nullableNestedValueWithDefault(
-          SimpleValueBuilder nullableNestedValueWithDefault) =>
+          SimpleValueBuilder? nullableNestedValueWithDefault) =>
       _$this._nullableNestedValueWithDefault = nullableNestedValueWithDefault;
 
   ValueWithBuilderInitializerBuilder() {
@@ -4562,15 +4508,15 @@ class ValueWithBuilderInitializerBuilder
 
   ValueWithBuilderInitializerBuilder get _$this {
     if (_$v != null) {
-      _anInt = _$v.anInt;
-      _anIntWithDefault = _$v.anIntWithDefault;
-      _nullableInt = _$v.nullableInt;
-      _nullableIntWithDefault = _$v.nullableIntWithDefault;
-      _nestedValue = _$v.nestedValue?.toBuilder();
-      _nestedValueWithDefault = _$v.nestedValueWithDefault?.toBuilder();
-      _nullableNestedValue = _$v.nullableNestedValue?.toBuilder();
+      _anInt = _$v!.anInt;
+      _anIntWithDefault = _$v!.anIntWithDefault;
+      _nullableInt = _$v!.nullableInt;
+      _nullableIntWithDefault = _$v!.nullableIntWithDefault;
+      _nestedValue = _$v!.nestedValue?.toBuilder();
+      _nestedValueWithDefault = _$v!.nestedValueWithDefault?.toBuilder();
+      _nullableNestedValue = _$v!.nullableNestedValue?.toBuilder();
       _nullableNestedValueWithDefault =
-          _$v.nullableNestedValueWithDefault?.toBuilder();
+          _$v!.nullableNestedValueWithDefault?.toBuilder();
       _$v = null;
     }
     return this;
@@ -4578,14 +4524,12 @@ class ValueWithBuilderInitializerBuilder
 
   @override
   void replace(ValueWithBuilderInitializer other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithBuilderInitializer;
   }
 
   @override
-  void update(void Function(ValueWithBuilderInitializerBuilder) updates) {
+  void update(void Function(ValueWithBuilderInitializerBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4634,7 +4578,7 @@ class _$ValueWithBuilderFinalizer extends ValueWithBuilderFinalizer {
           [void Function(ValueWithBuilderFinalizerBuilder) updates]) =>
       (new ValueWithBuilderFinalizerBuilder()..update(updates)).build();
 
-  _$ValueWithBuilderFinalizer._({this.anInt}) : super._() {
+  _$ValueWithBuilderFinalizer._({required this.anInt}) : super._() {
     if (anInt == null) {
       throw new BuiltValueNullFieldError('ValueWithBuilderFinalizer', 'anInt');
     }
@@ -4671,17 +4615,17 @@ class _$ValueWithBuilderFinalizer extends ValueWithBuilderFinalizer {
 class ValueWithBuilderFinalizerBuilder
     implements
         Builder<ValueWithBuilderFinalizer, ValueWithBuilderFinalizerBuilder> {
-  _$ValueWithBuilderFinalizer _$v;
+  _$ValueWithBuilderFinalizer? _$v;
 
-  int _anInt;
-  int get anInt => _$this._anInt;
-  set anInt(int anInt) => _$this._anInt = anInt;
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
 
   ValueWithBuilderFinalizerBuilder();
 
   ValueWithBuilderFinalizerBuilder get _$this {
     if (_$v != null) {
-      _anInt = _$v.anInt;
+      _anInt = _$v!.anInt;
       _$v = null;
     }
     return this;
@@ -4689,14 +4633,12 @@ class ValueWithBuilderFinalizerBuilder
 
   @override
   void replace(ValueWithBuilderFinalizer other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithBuilderFinalizer;
   }
 
   @override
-  void update(void Function(ValueWithBuilderFinalizerBuilder) updates) {
+  void update(void Function(ValueWithBuilderFinalizerBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4712,7 +4654,7 @@ class ValueWithBuilderFinalizerBuilder
 class _$ValueWithGenericBuilderInitializer<T>
     extends ValueWithGenericBuilderInitializer<T> {
   @override
-  final T value;
+  final T? value;
 
   factory _$ValueWithGenericBuilderInitializer(
           [void Function(ValueWithGenericBuilderInitializerBuilder<T>)
@@ -4760,11 +4702,11 @@ class ValueWithGenericBuilderInitializerBuilder<T>
     implements
         Builder<ValueWithGenericBuilderInitializer<T>,
             ValueWithGenericBuilderInitializerBuilder<T>> {
-  _$ValueWithGenericBuilderInitializer<T> _$v;
+  _$ValueWithGenericBuilderInitializer<T>? _$v;
 
-  T _value;
-  T get value => _$this._value;
-  set value(T value) => _$this._value = value;
+  T? _value;
+  T? get value => _$this._value;
+  set value(T? value) => _$this._value = value;
 
   ValueWithGenericBuilderInitializerBuilder() {
     ValueWithGenericBuilderInitializer._initializeBuilder(this);
@@ -4772,7 +4714,7 @@ class ValueWithGenericBuilderInitializerBuilder<T>
 
   ValueWithGenericBuilderInitializerBuilder<T> get _$this {
     if (_$v != null) {
-      _value = _$v.value;
+      _value = _$v!.value;
       _$v = null;
     }
     return this;
@@ -4780,15 +4722,13 @@ class ValueWithGenericBuilderInitializerBuilder<T>
 
   @override
   void replace(ValueWithGenericBuilderInitializer<T> other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithGenericBuilderInitializer<T>;
   }
 
   @override
   void update(
-      void Function(ValueWithGenericBuilderInitializerBuilder<T>) updates) {
+      void Function(ValueWithGenericBuilderInitializerBuilder<T>)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4810,7 +4750,7 @@ class _$HashcodeValue extends HashcodeValue {
   factory _$HashcodeValue([void Function(HashcodeValueBuilder) updates]) =>
       (new HashcodeValueBuilder()..update(updates)).build();
 
-  _$HashcodeValue._({this.x, this.y}) : super._() {
+  _$HashcodeValue._({required this.x, required this.y}) : super._() {
     if (x == null) {
       throw new BuiltValueNullFieldError('HashcodeValue', 'x');
     }
@@ -4848,22 +4788,22 @@ class _$HashcodeValue extends HashcodeValue {
 
 class HashcodeValueBuilder
     implements Builder<HashcodeValue, HashcodeValueBuilder> {
-  _$HashcodeValue _$v;
+  _$HashcodeValue? _$v;
 
-  int _x;
-  int get x => _$this._x;
-  set x(int x) => _$this._x = x;
+  int? _x;
+  int? get x => _$this._x;
+  set x(int? x) => _$this._x = x;
 
-  int _y;
-  int get y => _$this._y;
-  set y(int y) => _$this._y = y;
+  int? _y;
+  int? get y => _$this._y;
+  set y(int? y) => _$this._y = y;
 
   HashcodeValueBuilder();
 
   HashcodeValueBuilder get _$this {
     if (_$v != null) {
-      _x = _$v.x;
-      _y = _$v.y;
+      _x = _$v!.x;
+      _y = _$v!.y;
       _$v = null;
     }
     return this;
@@ -4871,14 +4811,12 @@ class HashcodeValueBuilder
 
   @override
   void replace(HashcodeValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$HashcodeValue;
   }
 
   @override
-  void update(void Function(HashcodeValueBuilder) updates) {
+  void update(void Function(HashcodeValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -4900,7 +4838,7 @@ class _$MemoizedHashcodeValue extends MemoizedHashcodeValue {
           [void Function(MemoizedHashcodeValueBuilder) updates]) =>
       (new MemoizedHashcodeValueBuilder()..update(updates)).build();
 
-  _$MemoizedHashcodeValue._({this.x, this.y}) : super._() {
+  _$MemoizedHashcodeValue._({required this.x, required this.y}) : super._() {
     if (x == null) {
       throw new BuiltValueNullFieldError('MemoizedHashcodeValue', 'x');
     }
@@ -4941,22 +4879,22 @@ class _$MemoizedHashcodeValue extends MemoizedHashcodeValue {
 
 class MemoizedHashcodeValueBuilder
     implements Builder<MemoizedHashcodeValue, MemoizedHashcodeValueBuilder> {
-  _$MemoizedHashcodeValue _$v;
+  _$MemoizedHashcodeValue? _$v;
 
-  int _x;
-  int get x => _$this._x;
-  set x(int x) => _$this._x = x;
+  int? _x;
+  int? get x => _$this._x;
+  set x(int? x) => _$this._x = x;
 
-  int _y;
-  int get y => _$this._y;
-  set y(int y) => _$this._y = y;
+  int? _y;
+  int? get y => _$this._y;
+  set y(int? y) => _$this._y = y;
 
   MemoizedHashcodeValueBuilder();
 
   MemoizedHashcodeValueBuilder get _$this {
     if (_$v != null) {
-      _x = _$v.x;
-      _y = _$v.y;
+      _x = _$v!.x;
+      _y = _$v!.y;
       _$v = null;
     }
     return this;
@@ -4964,14 +4902,12 @@ class MemoizedHashcodeValueBuilder
 
   @override
   void replace(MemoizedHashcodeValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$MemoizedHashcodeValue;
   }
 
   @override
-  void update(void Function(MemoizedHashcodeValueBuilder) updates) {
+  void update(void Function(MemoizedHashcodeValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -5015,20 +4951,18 @@ class _$PrivateValue extends _PrivateValue {
 
 class _PrivateValueBuilder
     implements Builder<_PrivateValue, _PrivateValueBuilder> {
-  _$PrivateValue _$v;
+  _$PrivateValue? _$v;
 
   _PrivateValueBuilder();
 
   @override
   void replace(_PrivateValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PrivateValue;
   }
 
   @override
-  void update(void Function(_PrivateValueBuilder) updates) {
+  void update(void Function(_PrivateValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

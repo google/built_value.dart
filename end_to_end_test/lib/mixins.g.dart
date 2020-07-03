@@ -7,6 +7,7 @@ part of mixins;
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 Serializer<UsesMixin> _$usesMixinSerializer = new _$UsesMixinSerializer();
 
 class _$UsesMixinSerializer implements StructuredSerializer<UsesMixin> {
@@ -86,9 +87,7 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
 
   @override
   void replace(UsesMixin other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$UsesMixin;
   }
 
@@ -171,9 +170,7 @@ class GetsCorrectFieldsViaMixinsBuilder
 
   @override
   void replace(GetsCorrectFieldsViaMixins other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GetsCorrectFieldsViaMixins;
   }
 

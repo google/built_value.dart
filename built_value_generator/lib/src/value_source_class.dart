@@ -41,6 +41,12 @@ abstract class ValueSourceClass
   @memoized
   String get name => element.displayName;
 
+  bool get isNonNullByDefault =>
+      element.source.contents.data.contains('// @dart=2.9');
+
+  String get orNull => isNonNullByDefault ? '?' : '';
+  String get notNull => isNonNullByDefault ? '!' : '';
+
   /// Returns the class name for the generated implementation. If the manually
   /// maintained class is private then we ignore the underscore here, to avoid
   /// returning a class name starting `_$_`.
@@ -668,7 +674,8 @@ abstract class ValueSourceClass
     for (var field in fields) {
       final type = field.typeInCompilationUnit(compilationUnit);
       result.writeln('@override');
-      result.writeln('final $type ${field.name};');
+      result.writeln(
+          'final $type${field.isNullable ? orNull : ''} ${field.name};');
     }
     for (var memoizedGetter in memoizedGetters) {
       result.writeln('${memoizedGetter.returnType} __${memoizedGetter.name};');
@@ -688,7 +695,10 @@ abstract class ValueSourceClass
       result.write('$implName._() : super._()');
     } else {
       result.write('$implName._({');
-      result.write(fields.map((field) => 'this.${field.name}').join(', '));
+      result.write(fields.map((field) {
+        var required = isNonNullByDefault && !field.isNullable;
+        return '${required ? 'required ' : ''}this.${field.name}';
+      }).join(', '));
       result.write('}) : super._()');
     }
     var requiredFields = fields.where((field) => !field.isNullable);
@@ -778,7 +788,7 @@ abstract class ValueSourceClass
     }
 
     // Builder holds a reference to a value, copies from it lazily.
-    result.writeln('$implName$_generics _\$v;');
+    result.writeln('$implName$_generics$orNull _\$v;');
     result.writeln('');
 
     if (hasBuilder) {
@@ -829,10 +839,10 @@ abstract class ValueSourceClass
         var name = field.name;
 
         // Field.
-        result.writeln('$fieldType _$name;');
+        result.writeln('$fieldType$orNull _$name;');
 
         // Getter.
-        result.writeln('$fieldType get $name =>');
+        result.writeln('$fieldType$orNull get $name =>');
         if (field.isNestedBuilder && settings.autoCreateNestedBuilders) {
           result.writeln('_\$this._$name ??= new $typeInBuilder();');
         } else {
@@ -841,12 +851,12 @@ abstract class ValueSourceClass
 
         // Setter.
         if (settings.generateBuilderOnSetField) {
-          result.writeln('set $name($fieldType $name) {'
+          result.writeln('set $name($fieldType$orNull $name) {'
               '_\$this._$name = $name;'
               'onSet();'
               '}');
         } else {
-          result.writeln('set $name($fieldType $name) =>'
+          result.writeln('set $name($fieldType$orNull $name) =>'
               '_\$this._$name = $name;');
         }
 
@@ -877,9 +887,9 @@ abstract class ValueSourceClass
         final name = field.name;
         final nameInBuilder = hasBuilder ? 'super.$name' : '_$name';
         if (field.isNestedBuilder) {
-          result.writeln('$nameInBuilder = _\$v.$name?.toBuilder();');
+          result.writeln('$nameInBuilder = _\$v$notNull.$name?.toBuilder();');
         } else {
-          result.writeln('$nameInBuilder = _\$v.$name;');
+          result.writeln('$nameInBuilder = _\$v$notNull.$name;');
         }
       }
       result.writeln('_\$v = null;');
@@ -904,15 +914,13 @@ abstract class ValueSourceClass
       result.writeln('void replace($name$_generics other) {');
     }
 
-    result.writeln('if (other == null) {');
-    result.writeln("throw new ArgumentError.notNull('other');");
-    result.writeln('}');
+    result.writeln("ArgumentError.checkNotNull(other, 'other');");
     result.writeln('_\$v = other as $implName$_generics;');
     result.writeln('}');
 
     result.writeln('@override');
     result.writeln(
-        'void update(void Function(${name}Builder$_generics) updates) {'
+        'void update(void Function(${name}Builder$_generics)$orNull updates) {'
         ' if (updates != null) updates(this); }');
     result.writeln();
 
@@ -1078,7 +1086,7 @@ abstract class ValueSourceClass
       result.writeln('void replace(${interfaces.isEmpty ? '' : 'covariant '}'
           '$name$_generics other);');
       result.writeln(
-          'void update(void Function(${name}Builder$_generics) updates);');
+          'void update(void Function(${name}Builder$_generics)$orNull updates);');
     }
 
     for (var field in fields) {

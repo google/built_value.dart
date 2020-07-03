@@ -7,6 +7,7 @@ part of imported_values;
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 Serializer<ImportedValue> _$importedValueSerializer =
     new _$ImportedValueSerializer();
 Serializer<ImportedCustomValue> _$importedCustomValueSerializer =
@@ -256,9 +257,7 @@ class ImportedValueBuilder
 
   @override
   void replace(ImportedValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImportedValue;
   }
 
@@ -384,9 +383,7 @@ class _$ImportedCustomValueBuilder extends ImportedCustomValueBuilder {
 
   @override
   void replace(ImportedCustomValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImportedCustomValue;
   }
 
@@ -500,9 +497,7 @@ class _$ImportedCustomNestedValueBuilder
 
   @override
   void replace(ImportedCustomNestedValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImportedCustomNestedValue;
   }
 

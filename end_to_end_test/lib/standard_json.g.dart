@@ -7,6 +7,7 @@ part of standard_json;
 // BuiltValueGenerator
 // **************************************************************************
 
+// NNBD? false
 Serializer<StandardJsonValue> _$standardJsonValueSerializer =
     new _$StandardJsonValueSerializer();
 
@@ -235,9 +236,7 @@ class StandardJsonValueBuilder
 
   @override
   void replace(StandardJsonValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$StandardJsonValue;
   }
 
