@@ -28,6 +28,8 @@ dependency_overrides:
     path: ../built_value
   built_value_generator:
     path: ../built_value_generator
+  source_gen:
+    path: ../../source_gen/source_gen
   fixnum:
     git:
       url: git://github.com/dart-lang/fixnum.git
