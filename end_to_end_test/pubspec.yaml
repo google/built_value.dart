@@ -9,14 +9,26 @@ environment:
   sdk: '>=2.0.0-dev <3.0.0'
 
 dependencies:
-  built_collection: '>=2.0.0 <5.0.0'
+  built_collection: ^5.0.0
   built_value: ^7.0.2
 
 dev_dependencies:
   build: ^1.0.0
   build_runner: ^1.0.0
   built_value_generator: ^7.1.0
-  fixnum: ^0.10.0
+  fixnum: ^1.0.0
   pedantic: ^1.4.0
   quiver: '>=0.21.0 <3.0.0'
   test: ^1.0.0
+
+dependency_overrides:
+  built_collection:
+    path: ../../built-collection-dart
+  built_value:
+    path: ../built_value
+  built_value_generator:
+    path: ../built_value_generator
+  fixnum:
+    git:
+      url: git://github.com/dart-lang/fixnum.git
+      ref: 9b38f49f6679654d66a363e69e48173cca07e882
