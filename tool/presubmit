@@ -45,6 +45,7 @@ for directory in $directories; do
   cd "$parent_directory/$directory"
 
   dartanalyzer \
+      --enable-experiment=non-nullable \
       --fatal-warnings \
       --fatal-infos \
       --packages="$PWD/.packages" \
@@ -57,5 +58,16 @@ for directory in $directories; do
   echo
   cd "$parent_directory/$directory"
 
-  pub run test
+  if [[ "$directory" == "built_value" ]]; then
+    # pub run test doesn't support NNBD yet.
+    for src in $(find test -name \*.dart); do
+      grep -q 'main()' "$src" || continue
+      echo "$src in sound mode."
+      dart --enable-experiment=non-nullable --null-safety "$src" || exit 1
+      echo "$src in unsound mode."
+      dart --enable-experiment=non-nullable "$src" || exit 1
+    done
+  else
+    pub run test
+  fi
 done

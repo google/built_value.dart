@@ -2,7 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-
 import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
