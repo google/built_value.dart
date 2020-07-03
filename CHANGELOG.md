@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.0.0 (unmigrated)
+
+- Migrate to NNBD.
+- Remove dependency on `package:quiver`.
+
 # 7.1.0
 
 - Support private `Built` classes. Note that private classes cannot be made
