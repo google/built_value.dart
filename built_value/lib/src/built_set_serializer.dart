@@ -14,7 +14,7 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
   final String wireName = 'set';
 
   @override
-  Iterable serialize(Serializers serializers, BuiltSet builtSet,
+  Iterable<Object> serialize(Serializers serializers, BuiltSet builtSet,
       {FullType specifiedType = FullType.unspecified}) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;

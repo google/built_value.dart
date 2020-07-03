@@ -328,7 +328,7 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
   /// JSON: booleans, integers, doubles, Strings and [Iterable]s.
   ///
   /// TODO(davidmorgan): document the wire format.
-  Iterable serialize(Serializers serializers, T object,
+  Iterable<Object> serialize(Serializers serializers, T object,
       {FullType specifiedType = FullType.unspecified});
 
   /// Deserializes [serialized].
@@ -338,7 +338,7 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
   ///
   /// Use [serializers] as needed for nested deserialization. Information about
   /// the type being deserialized is provided in [specifiedType].
-  T deserialize(Serializers serializers, Iterable serialized,
+  T deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified});
 }
 
@@ -359,5 +359,6 @@ class DeserializationError extends Error {
   DeserializationError._(this.json, this.type, this.error);
 
   @override
-  String toString() => "Deserializing '$json' to '$type' failed due to: $error";
+  String toString() =>
+      "Deserializing '$json' to '$type' failed due to: $error at ${error.stackTrace}";
 }

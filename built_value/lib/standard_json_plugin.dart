@@ -143,8 +143,9 @@ class StandardJsonPlugin implements SerializerPlugin {
 
   /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
   /// when the serialized type is known statically.
-  List _toList(Map map, bool hasEncodedKeys) {
-    var result = List<Object?>.filled(map.length * 2, null);
+  List<Object> _toList(Map map, bool hasEncodedKeys) {
+    var result =
+        List<Object>.filled(map.length * 2, 0 /* Will be overwritten. */);
     var i = 0;
     map.forEach((key, value) {
       // Drop null values, they are represented by missing keys.
@@ -160,7 +161,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
   /// when the serialized type is not known statically. The type is retrieved
   /// from the [discriminator] field.
-  List _toListUsingDiscriminator(Map map) {
+  List<Object> _toListUsingDiscriminator(Map map) {
     var type = map[discriminator];
 
     if (type == null) {
@@ -174,7 +175,7 @@ class StandardJsonPlugin implements SerializerPlugin {
 
     if (map.containsKey(valueKey)) {
       // Just a type and a primitive value. Retrieve the value in the map.
-      final result = List<Object?>.filled(2, null);
+      final result = List<Object>.filled(2, 0 /* Will be overwritten. */);
       result[0] = type;
       result[1] = map[valueKey];
       return result;
@@ -188,7 +189,8 @@ class StandardJsonPlugin implements SerializerPlugin {
       type = 'map';
     }
 
-    var result = List<Object?>.filled(map.length * 2 - 1, null);
+    var result =
+        List<Object>.filled(map.length * 2 - 1, 0 /* Will be overwritten. */);
     result[0] = type;
 
     var i = 1;

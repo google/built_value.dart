@@ -15,7 +15,7 @@ class BuiltListMultimapSerializer
   final String wireName = 'listMultimap';
 
   @override
-  Iterable serialize(
+  Iterable<Object> serialize(
       Serializers serializers, BuiltListMultimap builtListMultimap,
       {FullType specifiedType = FullType.unspecified}) {
     var isUnderspecified =

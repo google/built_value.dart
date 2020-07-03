@@ -14,7 +14,7 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
   final String wireName = 'map';
 
   @override
-  Iterable serialize(Serializers serializers, BuiltMap builtMap,
+  Iterable<Object> serialize(Serializers serializers, BuiltMap builtMap,
       {FullType specifiedType = FullType.unspecified}) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
