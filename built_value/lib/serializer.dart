@@ -1,9 +1,9 @@
 // Copyright (c) 2015, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.8
 
 import 'package:built_collection/built_collection.dart';
+import 'package:built_collection/src/internal/hash.dart';
 import 'package:built_value/src/big_int_serializer.dart';
 import 'package:built_value/src/date_time_serializer.dart';
 import 'package:built_value/src/duration_serializer.dart';
@@ -11,7 +11,6 @@ import 'package:built_value/src/int64_serializer.dart';
 import 'package:built_value/src/json_object_serializer.dart';
 import 'package:built_value/src/num_serializer.dart';
 import 'package:built_value/src/uri_serializer.dart';
-import 'package:quiver/core.dart';
 
 import 'src/bool_serializer.dart';
 import 'src/built_json_serializers.dart';
@@ -134,11 +133,11 @@ abstract class Serializers {
 
   /// Gets a serializer; returns `null` if none is found. For use in plugins
   /// and other extension code.
-  Serializer serializerForType(Type type);
+  Serializer? serializerForType(Type type);
 
   /// Gets a serializer; returns `null` if none is found. For use in plugins
   /// and other extension code.
-  Serializer serializerForWireName(String wireName);
+  Serializer? serializerForWireName(String wireName);
 
   /// Creates a new builder for the type represented by [fullType].
   ///
@@ -230,7 +229,7 @@ class FullType {
   static const FullType object = FullType(Object);
 
   /// The root of the type.
-  final Type root;
+  final Type? root;
 
   /// Type parameters of the type.
   final List<FullType> parameters;
@@ -263,7 +262,7 @@ class FullType {
           ? _getRawName(root)
           : '${_getRawName(root)}<${parameters.join(", ")}>';
 
-  static String _getRawName(Type type) {
+  static String _getRawName(Type? type) {
     var name = type.toString();
     var genericsStart = name.indexOf('<');
     return genericsStart == -1 ? name : name.substring(0, genericsStart);

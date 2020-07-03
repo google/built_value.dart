@@ -1,7 +1,7 @@
 // Copyright (c) 2019, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.8
+
 
 import 'package:built_value/iso_8601_duration_serializer.dart';
 import 'package:built_value/serializer.dart';
@@ -44,13 +44,13 @@ void main() {
     testTable.forEach((testValue) {
       test('can be serialized', () {
         expect(
-            serializers.serialize(testValue[#d], specifiedType: specifiedType),
+            serializers.serialize(testValue[#d]!, specifiedType: specifiedType),
             testValue[#s]);
       });
 
       test('can be deserialized', () {
         expect(
-            serializers.deserialize(testValue[#s],
+            serializers.deserialize(testValue[#s]!,
                 specifiedType: specifiedType),
             testValue[#d]);
       });
@@ -69,7 +69,7 @@ void main() {
     testTable.forEach((testValue) {
       test('can be serialized', () {
         expect(
-            serializers.serialize(testValue[#d], specifiedType: specifiedType),
+            serializers.serialize(testValue[#d]!, specifiedType: specifiedType),
             ['Duration', testValue[#s]]);
       });
 

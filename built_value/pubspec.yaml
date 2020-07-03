@@ -6,14 +6,13 @@ description: >
 homepage: https://github.com/google/built_value.dart
 
 environment:
-  sdk: '>=2.9.0-18.0 <3.0.0'
+  sdk: '>=2.9.0 <2.10.0'
 
 
 dependencies:
   built_collection: ^5.0.0
   collection: ^1.0.0
-  fixnum: ^0.10.0
-  quiver: '>=0.21.0 <3.0.0'
+  fixnum: ^1.0.0
 
 dev_dependencies:
   pedantic: ^1.4.0
@@ -39,6 +38,10 @@ dependency_overrides:
     git:
       url: git://github.com/dart-lang/collection.git
       ref: null_safety
+  fixnum:
+    git:
+      url: git://github.com/dart-lang/fixnum.git
+      ref: 9b38f49f6679654d66a363e69e48173cca07e882
   matcher:
     git:
       url: git://github.com/dart-lang/matcher.git

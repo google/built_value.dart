@@ -1,7 +1,7 @@
 // Copyright (c) 2019, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.8
+
 
 import 'package:built_value/serializer.dart';
 import 'package:built_value/src/int_serializer.dart';
@@ -43,7 +43,7 @@ void main() {
   });
 }
 
-class TestSerializer implements PrimitiveSerializer<Object> {
+class TestSerializer implements PrimitiveSerializer<Object?> {
   @override
   Iterable<Type> get types => [];
 
@@ -51,14 +51,14 @@ class TestSerializer implements PrimitiveSerializer<Object> {
   String get wireName => '';
 
   @override
-  Object deserialize(Serializers serializers, Object serialized,
+  Object? deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return null;
   }
 
   @override
-  Object serialize(Serializers serializers, Object object,
+  Object serialize(Serializers serializers, Object? object,
       {FullType specifiedType = FullType.unspecified}) {
-    return null;
+    return null!;
   }
 }
