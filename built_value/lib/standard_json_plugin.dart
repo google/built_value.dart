@@ -1,7 +1,6 @@
 // Copyright (c) 2015, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.8
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/json_object.dart';
@@ -145,7 +144,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
   /// when the serialized type is known statically.
   List _toList(Map map, bool hasEncodedKeys) {
-    var result = List(map.length * 2);
+    var result = List<Object?>.filled(map.length * 2, null);
     var i = 0;
     map.forEach((key, value) {
       // Drop null values, they are represented by missing keys.
@@ -175,7 +174,7 @@ class StandardJsonPlugin implements SerializerPlugin {
 
     if (map.containsKey(valueKey)) {
       // Just a type and a primitive value. Retrieve the value in the map.
-      final result = List(2);
+      final result = List<Object?>.filled(2, null);
       result[0] = type;
       result[1] = map[valueKey];
       return result;
@@ -189,7 +188,7 @@ class StandardJsonPlugin implements SerializerPlugin {
       type = 'map';
     }
 
-    var result = List(map.length * 2 - 1);
+    var result = List<Object?>.filled(map.length * 2 - 1, null);
     result[0] = type;
 
     var i = 1;
@@ -207,7 +206,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   }
 
   /// JSON-decodes a `String` encoded using [_encodeKey].
-  Object _decodeKey(String key) {
+  Object? _decodeKey(String key) {
     return json.decode(key);
   }
 }
