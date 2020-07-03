@@ -14,7 +14,8 @@ class BuiltSetMultimapSerializer
   final String wireName = 'setMultimap';
 
   @override
-  Iterable serialize(Serializers serializers, BuiltSetMultimap builtSetMultimap,
+  Iterable<Object> serialize(
+      Serializers serializers, BuiltSetMultimap builtSetMultimap,
       {FullType specifiedType = FullType.unspecified}) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;

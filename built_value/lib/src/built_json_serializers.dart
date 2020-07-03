@@ -64,8 +64,7 @@ class BuiltJsonSerializers implements Serializers {
       }
       if (serializer is StructuredSerializer) {
         final result = <Object>[serializer.wireName];
-        return result
-          ..addAll(serializer.serialize(this, object) as Iterable<Object>);
+        return result..addAll(serializer.serialize(this, object));
       } else if (serializer is PrimitiveSerializer) {
         return <Object>[
           serializer.wireName,
@@ -121,7 +120,8 @@ class BuiltJsonSerializers implements Serializers {
 
       if (serializer is StructuredSerializer) {
         try {
-          return serializer.deserialize(this, object.sublist(1));
+          return serializer.deserialize(
+              this, object.sublist(1) as List<Object>);
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
@@ -148,7 +148,7 @@ class BuiltJsonSerializers implements Serializers {
 
       if (serializer is StructuredSerializer) {
         try {
-          return serializer.deserialize(this, object as Iterable,
+          return serializer.deserialize(this, object as Iterable<Object>,
               specifiedType: specifiedType);
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);

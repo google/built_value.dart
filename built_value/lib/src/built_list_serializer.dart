@@ -14,7 +14,7 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
   final String wireName = 'list';
 
   @override
-  Iterable serialize(Serializers serializers, BuiltList builtList,
+  Iterable<Object> serialize(Serializers serializers, BuiltList builtList,
       {FullType specifiedType = FullType.unspecified}) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
