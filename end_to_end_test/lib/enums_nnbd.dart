@@ -1,15 +1,15 @@
 // Copyright (c) 2017, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.8
+// @dart=2.9
 
-library enums;
+library enums_nnbd;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'enums.g.dart';
+part 'enums_nnbd.g.dart';
 
 class TestEnum extends EnumClass {
   static Serializer<TestEnum> get serializer => _$testEnumSerializer;
