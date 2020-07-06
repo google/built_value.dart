@@ -20,8 +20,9 @@ dev_dependencies:
 
 dependency_overrides:
   built_collection:
-    path:
-      ../../built-collection-dart
+    git:
+      url: git://github.com/google/built_collection.dart.git
+      ref: 88de195928b75fc5dd25507baed14cf45c267a62
   async:
     git:
       url: git://github.com/dart-lang/async.git
