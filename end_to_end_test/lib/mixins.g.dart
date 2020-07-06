@@ -7,7 +7,6 @@ part of mixins;
 // BuiltValueGenerator
 // **************************************************************************
 
-// NNBD? false
 Serializer<UsesMixin> _$usesMixinSerializer = new _$UsesMixinSerializer();
 
 class _$UsesMixinSerializer implements StructuredSerializer<UsesMixin> {
@@ -37,9 +36,7 @@ class _$UsesMixin extends UsesMixin {
       (new UsesMixinBuilder()..update(updates)).build();
 
   _$UsesMixin._({this.typeDef}) : super._() {
-    if (typeDef == null) {
-      throw new BuiltValueNullFieldError('UsesMixin', 'typeDef');
-    }
+    BuiltValueNullFieldError.checkNotNull(typeDef, 'UsesMixin', 'typeDef');
   }
 
   @override
@@ -113,10 +110,8 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
       (new GetsCorrectFieldsViaMixinsBuilder()..update(updates)).build();
 
   _$GetsCorrectFieldsViaMixins._({this.shouldBeAField}) : super._() {
-    if (shouldBeAField == null) {
-      throw new BuiltValueNullFieldError(
-          'GetsCorrectFieldsViaMixins', 'shouldBeAField');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        shouldBeAField, 'GetsCorrectFieldsViaMixins', 'shouldBeAField');
   }
 
   @override

@@ -51,7 +51,6 @@ part 'serializers.g.dart';
   RecursiveValueB,
   Robot,
   SecondTestEnum,
-  SerializesNullsValue,
   SimpleValue,
   StandardCat,
   StandardJsonValue,

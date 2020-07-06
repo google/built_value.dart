@@ -7,7 +7,6 @@ part of interfaces;
 // BuiltValueGenerator
 // **************************************************************************
 
-// NNBD? false
 const EnumWithInt _$one = const EnumWithInt._('one');
 const EnumWithInt _$two = const EnumWithInt._('two');
 const EnumWithInt _$three = const EnumWithInt._('three');
@@ -66,7 +65,7 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
@@ -129,7 +128,7 @@ class _$ValueWithHasIntSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'hasInt':
           result.hasInt = serializers.deserialize(value,
@@ -152,12 +151,8 @@ class _$ValueWithInt extends ValueWithInt {
       (new ValueWithIntBuilder()..update(updates)).build();
 
   _$ValueWithInt._({this.anInt, this.note}) : super._() {
-    if (anInt == null) {
-      throw new BuiltValueNullFieldError('ValueWithInt', 'anInt');
-    }
-    if (note == null) {
-      throw new BuiltValueNullFieldError('ValueWithInt', 'note');
-    }
+    BuiltValueNullFieldError.checkNotNull(anInt, 'ValueWithInt', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(note, 'ValueWithInt', 'note');
   }
 
   @override
@@ -237,9 +232,7 @@ class _$ValueWithHasInt extends ValueWithHasInt {
       (new ValueWithHasIntBuilder()..update(updates)).build();
 
   _$ValueWithHasInt._({this.hasInt}) : super._() {
-    if (hasInt == null) {
-      throw new BuiltValueNullFieldError('ValueWithHasInt', 'hasInt');
-    }
+    BuiltValueNullFieldError.checkNotNull(hasInt, 'ValueWithHasInt', 'hasInt');
   }
 
   @override

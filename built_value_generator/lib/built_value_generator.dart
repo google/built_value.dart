@@ -22,8 +22,6 @@ class BuiltValueGenerator extends Generator {
   Future<String> generate(LibraryReader library, BuildStep buildStep) async {
     var result = StringBuffer();
 
-    result.writeln('// NNBD? ${library.element.isNonNullableByDefault}');
-
     try {
       final enumCode = EnumSourceLibrary(library.element).generateCode();
       if (enumCode != null) result.writeln(enumCode);

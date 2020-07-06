@@ -1,13 +1,12 @@
 // Copyright (c) 2017, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.8
 
+import 'package:built_collection/src/internal/hash.dart';
 import 'package:built_value/built_value.dart';
 import 'package:end_to_end_test/enums.dart';
 import 'package:end_to_end_test/errors_matchers.dart';
 import 'package:end_to_end_test/values.dart';
-import 'package:quiver/core.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -33,7 +32,7 @@ void main() {
       expect(
           () => SimpleValue((b) => b
             ..anInt = 1
-            ..replace(null)),
+            ..replace(null as SimpleValue)),
           throwsA(const TypeMatcher<ArgumentError>()));
     });
 
@@ -98,7 +97,7 @@ void main() {
         ..$mustBeEscaped = true);
       expect(
           value.hashCode,
-          hashObjects(<Object>[
+          hashObjects(<Object?>[
             value.anInt,
             value.aString,
             value.$mustBeEscaped,
@@ -174,7 +173,7 @@ void main() {
       expect(
           CompoundValue((b) => b
             ..simpleValue.anInt = 1
-            ..validatedValue.anInt = 2).validatedValue.anInt,
+            ..validatedValue.anInt = 2).validatedValue?.anInt,
           2);
     });
 
@@ -184,7 +183,7 @@ void main() {
         ..simpleValue.aString = 'two');
 
       expect(value.hashCode,
-          hashObjects(<Object>[value.simpleValue, value.validatedValue]));
+          hashObjects(<Object?>[value.simpleValue, value.validatedValue]));
     });
   });
 

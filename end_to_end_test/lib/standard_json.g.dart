@@ -7,7 +7,6 @@ part of standard_json;
 // BuiltValueGenerator
 // **************************************************************************
 
-// NNBD? false
 Serializer<StandardJsonValue> _$standardJsonValueSerializer =
     new _$StandardJsonValueSerializer();
 
@@ -39,10 +38,12 @@ class _$StandardJsonValueSerializer
           specifiedType:
               const FullType(BuiltSet, const [const FullType(Animal)])),
     ];
-    if (object.strings != null) {
+    Object? value;
+    value = object.strings;
+    if (value != null) {
       result
         ..add('strings')
-        ..add(serializers.serialize(object.strings,
+        ..add(serializers.serialize(value,
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
@@ -59,7 +60,7 @@ class _$StandardJsonValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'number':
           result.number = serializers.deserialize(value,
@@ -125,21 +126,14 @@ class _$StandardJsonValue extends StandardJsonValue {
       this.uniqueZoo,
       this.strings})
       : super._() {
-    if (number == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'number');
-    }
-    if (text == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'text');
-    }
-    if (keyValues == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'keyValues');
-    }
-    if (zoo == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'zoo');
-    }
-    if (uniqueZoo == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'uniqueZoo');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        number, 'StandardJsonValue', 'number');
+    BuiltValueNullFieldError.checkNotNull(text, 'StandardJsonValue', 'text');
+    BuiltValueNullFieldError.checkNotNull(
+        keyValues, 'StandardJsonValue', 'keyValues');
+    BuiltValueNullFieldError.checkNotNull(zoo, 'StandardJsonValue', 'zoo');
+    BuiltValueNullFieldError.checkNotNull(
+        uniqueZoo, 'StandardJsonValue', 'uniqueZoo');
   }
 
   @override
@@ -225,9 +219,9 @@ class StandardJsonValueBuilder
     if (_$v != null) {
       _number = _$v.number;
       _text = _$v.text;
-      _keyValues = _$v.keyValues?.toBuilder();
-      _zoo = _$v.zoo?.toBuilder();
-      _uniqueZoo = _$v.uniqueZoo?.toBuilder();
+      _keyValues = _$v.keyValues.toBuilder();
+      _zoo = _$v.zoo.toBuilder();
+      _uniqueZoo = _$v.uniqueZoo.toBuilder();
       _strings = _$v.strings?.toBuilder();
       _$v = null;
     }
@@ -258,7 +252,7 @@ class StandardJsonValueBuilder
               uniqueZoo: uniqueZoo.build(),
               strings: _strings?.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'keyValues';
         keyValues.build();

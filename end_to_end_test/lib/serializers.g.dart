@@ -7,7 +7,6 @@ part of serializers;
 // BuiltValueGenerator
 // **************************************************************************
 
-// NNBD? false
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BoundGenericValue.serializer)
       ..add(Cage.serializer)
@@ -41,7 +40,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(RecursiveValueB.serializer)
       ..add(Robot.serializer)
       ..add(SecondDiscoverableValue.serializer)
-      ..add(SerializesNullsValue.serializer)
       ..add(SimpleValue.serializer)
       ..add(StandardCat.serializer)
       ..add(StandardJsonValue.serializer)

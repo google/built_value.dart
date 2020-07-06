@@ -59,9 +59,7 @@ abstract class SerializerSourceClass
     // If a field does not exist, that means an old `built_value` version; use
     // the default.
     return BuiltValueSerializer(
-        custom: annotation.getField('custom')?.toBoolValue() ?? false,
-        serializeNulls:
-            annotation.getField('serializeNulls')?.toBoolValue() ?? false);
+        custom: annotation.getField('custom')?.toBoolValue() ?? false);
   }
 
   // TODO(davidmorgan): share common code in a nicer way.
@@ -71,6 +69,12 @@ abstract class SerializerSourceClass
 
   @memoized
   String get name => element.name;
+
+  bool get isNonNullByDefault =>
+      element.source.contents.data.contains('// @dart=2.9');
+
+  String get orNull => isNonNullByDefault ? '?' : '';
+  String get notNull => isNonNullByDefault ? '!' : '';
 
   @memoized
   String get wireName {
@@ -321,9 +325,8 @@ class ${serializerImplName} implements StructuredSerializer<$genericName> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
-      ${serializerSettings.serializeNulls ? 'if (value == null) continue;' : ''}'''
-              '''switch (key) {
+      final Object value = iterator.current;
+      switch (key) {
         ${_generateFieldDeserializers()}
       }
     }
@@ -455,31 +458,24 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
   }
 
   String _generateNullableFieldSerializers() {
-    return fields.where((field) => field.isNullable).map((field) {
-      var serializeField = '''serializers.serialize(
-          object.${field.name},
+    var nullableFields = fields.where((field) => field.isNullable).toList();
+    if (nullableFields.isEmpty) return '';
+
+    return 'Object? value;\n' +
+        nullableFields.map((field) {
+          var serializeField = '''serializers.serialize(
+          value,
           specifiedType:
           ${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())})''';
 
-      // By default, omit nulls; but if we were asked to include nulls, just
-      // write them.
-      if (serializerSettings.serializeNulls) {
-        return '''
-          result.add('${escapeString(field.wireName)}');
-          if (object.${field.name} == null) {
-            result.add(null);
-          } else {
-            result.add($serializeField);
-          }''';
-      } else {
-        return '''
-          if (object.${field.name} != null) {
+          return '''
+          value = object.${field.name};
+          if (value != null) {
             result
               ..add('${escapeString(field.wireName)}')
               ..add($serializeField);
           }''';
-      }
-    }).join('');
+        }).join('');
   }
 
   /// Gets a map from generic parameter to its bound.
@@ -501,9 +497,11 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
           compilationUnit, genericParameters.toBuiltSet());
       final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
       if (field.builderFieldUsesNestedBuilder) {
+        var maybeNotNull =
+            builtValueSettings.autoCreateNestedBuilders ? '' : notNull;
         return '''
 case '${escapeString(field.wireName)}':
-  result.${field.name}.replace(serializers.deserialize(
+  result.${field.name}$maybeNotNull.replace(serializers.deserialize(
       value, specifiedType: $fullType) $cast);
   break;
 ''';

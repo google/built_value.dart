@@ -540,7 +540,7 @@ abstract class ValueSourceClass
       if (!valueClassFactories.any(
           (factory) => factory.toSource().contains('$implName$_generics'))) {
         final exampleFactory =
-            'factory $name([void Function(${name}Builder$_generics) updates]) = '
+            'factory $name([void Function(${name}Builder$_generics)$orNull updates]) = '
             '$implName$_generics;';
         result.add(GeneratorError((b) => b
           ..message =
@@ -687,7 +687,7 @@ abstract class ValueSourceClass
     // can return the right type directly and needs no cast.
     var cast = hasBuilder ? 'as $implName$_generics' : '';
     result.writeln('factory $implName(['
-        'void Function(${name}Builder$_generics) updates]) '
+        'void Function(${name}Builder$_generics)$orNull updates]) '
         '=> (new ${name}Builder$_generics()..update(updates)).build() $cast;');
     result.writeln();
 
@@ -707,10 +707,8 @@ abstract class ValueSourceClass
     } else {
       result.writeln('{');
       for (var field in requiredFields) {
-        result.writeln('if (${field.name} == null) {');
-        result.writeln(
-            "throw new BuiltValueNullFieldError('$name', '${escapeString(field.name)}');");
-        result.writeln('}');
+        result.writeln('BuiltValueNullFieldError.checkNotNull('
+            "${field.name}, '$name', '${escapeString(field.name)}');");
       }
       // If there are generic parameters, check they are not "dynamic".
       if (genericParameters.isNotEmpty) {
@@ -808,7 +806,7 @@ abstract class ValueSourceClass
           }
           result.writeln('}');
           result.writeln('@override');
-          result.writeln('set $name($typeInBuilder $name) {'
+          result.writeln('set $name($typeInBuilder$ $name) {'
               '_\$this;'
               'super.$name = $name;'
               '}');
@@ -842,10 +840,11 @@ abstract class ValueSourceClass
         result.writeln('$fieldType$orNull _$name;');
 
         // Getter.
-        result.writeln('$fieldType$orNull get $name =>');
         if (field.isNestedBuilder && settings.autoCreateNestedBuilders) {
+          result.writeln('$fieldType get $name =>');
           result.writeln('_\$this._$name ??= new $typeInBuilder();');
         } else {
+          result.writeln('$fieldType$orNull get $name =>');
           result.writeln('_\$this._$name;');
         }
 
@@ -887,7 +886,9 @@ abstract class ValueSourceClass
         final name = field.name;
         final nameInBuilder = hasBuilder ? 'super.$name' : '_$name';
         if (field.isNestedBuilder) {
-          result.writeln('$nameInBuilder = _\$v$notNull.$name?.toBuilder();');
+          var nullSafe = field.isNullable ? '?' : '';
+          result.writeln(
+              '$nameInBuilder = _\$v$notNull.$name$nullSafe.toBuilder();');
         } else {
           result.writeln('$nameInBuilder = _\$v$notNull.$name;');
         }
@@ -935,11 +936,14 @@ abstract class ValueSourceClass
     // this is just the field name; if it's a nested builder, this is an
     // invocation of the nested builder taking into account nullability.
     var fieldBuilders = <String, String>{};
+    var needsNotNull = <String>{};
     fields.forEach((field) {
       final name = field.name;
+
       if (!field.isNestedBuilder) {
         fieldBuilders[name] = name;
-      } else if (!field.isNullable) {
+        if (!field.isNullable) needsNotNull.add(field.name);
+      } else if (!field.isNullable && settings.autoCreateNestedBuilders) {
         // If not nullable, go via the public accessor, which instantiates
         // if needed.
         fieldBuilders[name] = '$name.build()';
@@ -947,9 +951,11 @@ abstract class ValueSourceClass
         // Otherwise access the private field: in super if there's a manually
         // maintained builder.
         fieldBuilders[name] = 'super.$name?.build()';
+        if (!field.isNullable) needsNotNull.add(field.name);
       } else {
         // Or, directly if there is no manually maintained builder.
         fieldBuilders[name] = '_$name?.build()';
+        if (!field.isNullable) needsNotNull.add(field.name);
       }
     });
 
@@ -966,9 +972,10 @@ abstract class ValueSourceClass
     }
     result.writeln('_\$result = _\$v ?? ');
     result.writeln('new $implName$_generics._(');
-    result.write(fieldBuilders.keys
-        .map((field) => '$field: ${fieldBuilders[field]}')
-        .join(','));
+    result.write(fieldBuilders.keys.map((field) {
+      var maybeNotNull = needsNotNull.contains(field) ? notNull : '';
+      return '$field: ${fieldBuilders[field]}$maybeNotNull';
+    }).join(','));
     result.writeln(');');
 
     if (needsTryCatchOnBuild) {
@@ -976,7 +983,7 @@ abstract class ValueSourceClass
       // in a nested builder then throw with more information. Otherwise,
       // just rethrow.
       result.writeln('} catch (_) {');
-      result.writeln('String _\$failedField;');
+      result.writeln('late String _\$failedField;');
       result.writeln('try {');
       result.write(fieldBuilders.keys.map((field) {
         final fieldBuilder = fieldBuilders[field];

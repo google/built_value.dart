@@ -4,6 +4,7 @@
 
 - Migrate to NNBD.
 - Remove dependency on `package:quiver`.
+- Remove option to explicitly serialize nulls.
 
 # 7.1.0
 

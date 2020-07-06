@@ -163,13 +163,7 @@ class BuiltValueSerializer {
   /// to `false`.
   final bool custom;
 
-  /// Whether the generated serializer should output `null`s.
-  ///
-  /// By default this is `false` and nulls are omitted from the output.
-  final bool serializeNulls;
-
-  const BuiltValueSerializer(
-      {this.custom = false, this.serializeNulls = false});
+  const BuiltValueSerializer({this.custom = false});
 }
 
 /// Memoized annotation for Built Value getters.
@@ -341,6 +335,13 @@ class BuiltValueNullFieldError extends Error {
   final String field;
 
   BuiltValueNullFieldError(this.type, this.field);
+
+  /// Throws a [BuiltValueNullFieldError] if [value] is `null`.
+  static void checkNotNull(Object? value, String type, String field) {
+    if (value == null) {
+      throw BuiltValueNullFieldError(type, field);
+    }
+  }
 
   @override
   String toString() =>

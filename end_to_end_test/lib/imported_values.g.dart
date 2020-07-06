@@ -7,7 +7,6 @@ part of imported_values;
 // BuiltValueGenerator
 // **************************************************************************
 
-// NNBD? false
 Serializer<ImportedValue> _$importedValueSerializer =
     new _$ImportedValueSerializer();
 Serializer<ImportedCustomValue> _$importedCustomValueSerializer =
@@ -47,7 +46,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue.replace(serializers.deserialize(value,
@@ -104,7 +103,7 @@ class _$ImportedCustomValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
@@ -161,7 +160,7 @@ class _$ImportedCustomNestedValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue.replace(serializers.deserialize(value,
@@ -191,12 +190,10 @@ class _$ImportedValue extends ImportedValue {
       (new ImportedValueBuilder()..update(updates)).build();
 
   _$ImportedValue._({this.simpleValue, this.simpleValues}) : super._() {
-    if (simpleValue == null) {
-      throw new BuiltValueNullFieldError('ImportedValue', 'simpleValue');
-    }
-    if (simpleValues == null) {
-      throw new BuiltValueNullFieldError('ImportedValue', 'simpleValues');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValue, 'ImportedValue', 'simpleValue');
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValues, 'ImportedValue', 'simpleValues');
   }
 
   @override
@@ -248,8 +245,8 @@ class ImportedValueBuilder
 
   ImportedValueBuilder get _$this {
     if (_$v != null) {
-      _simpleValue = _$v.simpleValue?.toBuilder();
-      _simpleValues = _$v.simpleValues?.toBuilder();
+      _simpleValue = _$v.simpleValue.toBuilder();
+      _simpleValues = _$v.simpleValues.toBuilder();
       _$v = null;
     }
     return this;
@@ -275,7 +272,7 @@ class ImportedValueBuilder
               simpleValue: simpleValue.build(),
               simpleValues: simpleValues.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'simpleValue';
         simpleValue.build();
@@ -304,12 +301,10 @@ class _$ImportedCustomValue extends ImportedCustomValue {
           as _$ImportedCustomValue;
 
   _$ImportedCustomValue._({this.simpleValue, this.simpleValues}) : super._() {
-    if (simpleValue == null) {
-      throw new BuiltValueNullFieldError('ImportedCustomValue', 'simpleValue');
-    }
-    if (simpleValues == null) {
-      throw new BuiltValueNullFieldError('ImportedCustomValue', 'simpleValues');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValue, 'ImportedCustomValue', 'simpleValue');
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValues, 'ImportedCustomValue', 'simpleValues');
   }
 
   @override
@@ -415,14 +410,10 @@ class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
 
   _$ImportedCustomNestedValue._({this.simpleValue, this.simpleValues})
       : super._() {
-    if (simpleValue == null) {
-      throw new BuiltValueNullFieldError(
-          'ImportedCustomNestedValue', 'simpleValue');
-    }
-    if (simpleValues == null) {
-      throw new BuiltValueNullFieldError(
-          'ImportedCustomNestedValue', 'simpleValues');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValue, 'ImportedCustomNestedValue', 'simpleValue');
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValues, 'ImportedCustomNestedValue', 'simpleValues');
   }
 
   @override
@@ -488,8 +479,8 @@ class _$ImportedCustomNestedValueBuilder
 
   ImportedCustomNestedValueBuilder get _$this {
     if (_$v != null) {
-      super.simpleValue = _$v.simpleValue?.toBuilder();
-      super.simpleValues = _$v.simpleValues?.toBuilder();
+      super.simpleValue = _$v.simpleValue.toBuilder();
+      super.simpleValues = _$v.simpleValues.toBuilder();
       _$v = null;
     }
     return this;
@@ -515,7 +506,7 @@ class _$ImportedCustomNestedValueBuilder
               simpleValue: simpleValue.build(),
               simpleValues: simpleValues.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'simpleValue';
         simpleValue.build();

@@ -7,7 +7,6 @@ part of polymorphism;
 // BuiltValueGenerator
 // **************************************************************************
 
-// NNBD? false
 Serializer<Cat> _$catSerializer = new _$CatSerializer();
 Serializer<Fish> _$fishSerializer = new _$FishSerializer();
 Serializer<Robot> _$robotSerializer = new _$RobotSerializer();
@@ -46,7 +45,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'tail':
           result.tail = serializers.deserialize(value,
@@ -91,7 +90,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'fins':
           result.fins = serializers.deserialize(value,
@@ -136,7 +135,7 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'fins':
           result.fins = serializers.deserialize(value,
@@ -184,7 +183,7 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'inhabitant':
           result.inhabitant = serializers.deserialize(value,
@@ -229,7 +228,7 @@ class _$StandardCatSerializer implements StructuredSerializer<StandardCat> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'tail':
           result.tail = serializers.deserialize(value,
@@ -269,7 +268,7 @@ class _$HasStringSerializer implements StructuredSerializer<HasString> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'field':
           result.field = serializers.deserialize(value,
@@ -309,7 +308,7 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'field':
           result.field = serializers.deserialize(value,
@@ -350,7 +349,7 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'fieldInBaseBuilder':
           result.fieldInBaseBuilder = serializers.deserialize(value,
@@ -387,12 +386,8 @@ class _$Cat extends Cat {
       (new CatBuilder()..update(updates)).build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
-    if (tail == null) {
-      throw new BuiltValueNullFieldError('Cat', 'tail');
-    }
-    if (legs == null) {
-      throw new BuiltValueNullFieldError('Cat', 'legs');
-    }
+    BuiltValueNullFieldError.checkNotNull(tail, 'Cat', 'tail');
+    BuiltValueNullFieldError.checkNotNull(legs, 'Cat', 'legs');
   }
 
   @override
@@ -473,12 +468,8 @@ class _$Fish extends Fish {
       (new FishBuilder()..update(updates)).build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
-    if (fins == null) {
-      throw new BuiltValueNullFieldError('Fish', 'fins');
-    }
-    if (legs == null) {
-      throw new BuiltValueNullFieldError('Fish', 'legs');
-    }
+    BuiltValueNullFieldError.checkNotNull(fins, 'Fish', 'fins');
+    BuiltValueNullFieldError.checkNotNull(legs, 'Fish', 'legs');
   }
 
   @override
@@ -559,12 +550,8 @@ class _$Robot extends Robot {
       (new RobotBuilder()..update(updates)).build();
 
   _$Robot._({this.fins, this.legs}) : super._() {
-    if (fins == null) {
-      throw new BuiltValueNullFieldError('Robot', 'fins');
-    }
-    if (legs == null) {
-      throw new BuiltValueNullFieldError('Robot', 'legs');
-    }
+    BuiltValueNullFieldError.checkNotNull(fins, 'Robot', 'fins');
+    BuiltValueNullFieldError.checkNotNull(legs, 'Robot', 'legs');
   }
 
   @override
@@ -645,12 +632,9 @@ class _$Cage extends Cage {
       (new CageBuilder()..update(updates)).build();
 
   _$Cage._({this.inhabitant, this.otherInhabitants}) : super._() {
-    if (inhabitant == null) {
-      throw new BuiltValueNullFieldError('Cage', 'inhabitant');
-    }
-    if (otherInhabitants == null) {
-      throw new BuiltValueNullFieldError('Cage', 'otherInhabitants');
-    }
+    BuiltValueNullFieldError.checkNotNull(inhabitant, 'Cage', 'inhabitant');
+    BuiltValueNullFieldError.checkNotNull(
+        otherInhabitants, 'Cage', 'otherInhabitants');
   }
 
   @override
@@ -700,7 +684,7 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
   CageBuilder get _$this {
     if (_$v != null) {
       _inhabitant = _$v.inhabitant;
-      _otherInhabitants = _$v.otherInhabitants?.toBuilder();
+      _otherInhabitants = _$v.otherInhabitants.toBuilder();
       _$v = null;
     }
     return this;
@@ -726,7 +710,7 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
               inhabitant: inhabitant,
               otherInhabitants: otherInhabitants.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'otherInhabitants';
         otherInhabitants.build();
@@ -749,9 +733,7 @@ class _$StandardCat extends StandardCat {
       (new StandardCatBuilder()..update(updates)).build();
 
   _$StandardCat._({this.tail}) : super._() {
-    if (tail == null) {
-      throw new BuiltValueNullFieldError('StandardCat', 'tail');
-    }
+    BuiltValueNullFieldError.checkNotNull(tail, 'StandardCat', 'tail');
   }
 
   @override
@@ -830,9 +812,7 @@ class _$HasString extends HasString {
       (new HasStringBuilder()..update(updates)).build();
 
   _$HasString._({this.field}) : super._() {
-    if (field == null) {
-      throw new BuiltValueNullFieldError('HasString', 'field');
-    }
+    BuiltValueNullFieldError.checkNotNull(field, 'HasString', 'field');
   }
 
   @override
@@ -905,9 +885,7 @@ class _$HasDouble extends HasDouble {
       (new HasDoubleBuilder()..update(updates)).build();
 
   _$HasDouble._({this.field}) : super._() {
-    if (field == null) {
-      throw new BuiltValueNullFieldError('HasDouble', 'field');
-    }
+    BuiltValueNullFieldError.checkNotNull(field, 'HasDouble', 'field');
   }
 
   @override
@@ -983,12 +961,8 @@ class _$UsesChainedInterface extends UsesChainedInterface {
       (new UsesChainedInterfaceBuilder()..update(updates)).build();
 
   _$UsesChainedInterface._({this.bar, this.foo}) : super._() {
-    if (bar == null) {
-      throw new BuiltValueNullFieldError('UsesChainedInterface', 'bar');
-    }
-    if (foo == null) {
-      throw new BuiltValueNullFieldError('UsesChainedInterface', 'foo');
-    }
+    BuiltValueNullFieldError.checkNotNull(bar, 'UsesChainedInterface', 'bar');
+    BuiltValueNullFieldError.checkNotNull(foo, 'UsesChainedInterface', 'foo');
   }
 
   @override
@@ -1072,9 +1046,8 @@ class _$UsesHandCoded extends UsesHandCoded {
       (new UsesHandCodedBuilder()..update(updates)).build();
 
   _$UsesHandCoded._({this.fieldInBaseBuilder}) : super._() {
-    if (fieldInBaseBuilder == null) {
-      throw new BuiltValueNullFieldError('UsesHandCoded', 'fieldInBaseBuilder');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        fieldInBaseBuilder, 'UsesHandCoded', 'fieldInBaseBuilder');
   }
 
   @override

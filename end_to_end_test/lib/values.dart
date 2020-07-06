@@ -36,7 +36,7 @@ abstract class CompoundValue
 
   SimpleValue get simpleValue;
   @nullable
-  ValidatedValue get validatedValue;
+  ValidatedValue? get validatedValue;
 
   factory CompoundValue([void Function(CompoundValueBuilder) updates]) =
       _$CompoundValue;
@@ -51,7 +51,7 @@ abstract class CompoundValueNoNesting
 
   SimpleValue get simpleValue;
   @nullable
-  ValidatedValue get validatedValue;
+  ValidatedValue? get validatedValue;
 
   factory CompoundValueNoNesting(
           [void Function(CompoundValueNoNestingBuilder) updates]) =
@@ -84,7 +84,7 @@ abstract class CompoundValueComparableBuilders
 
   SimpleValue get simpleValue;
   @nullable
-  ValidatedValue get validatedValue;
+  ValidatedValue? get validatedValue;
 
   factory CompoundValueComparableBuilders(
           [void Function(CompoundValueComparableBuildersBuilder) updates]) =
@@ -101,7 +101,7 @@ abstract class CompoundValueExplicitNoNesting
 
   SimpleValue get simpleValue;
   @nullable
-  ValidatedValue get validatedValue;
+  ValidatedValue? get validatedValue;
 
   factory CompoundValueExplicitNoNesting(
           [void Function(CompoundValueExplicitNoNestingBuilder) updates]) =
@@ -114,9 +114,9 @@ abstract class CompoundValueExplicitNoNestingBuilder
         Builder<CompoundValueExplicitNoNesting,
             CompoundValueExplicitNoNestingBuilder> {
   // One field using nesting.
-  SimpleValueBuilder simpleValue;
+  SimpleValueBuilder? simpleValue;
   // One field not using nesting.
-  ValidatedValue validatedValue;
+  ValidatedValue? validatedValue;
 
   factory CompoundValueExplicitNoNestingBuilder() =
       _$CompoundValueExplicitNoNestingBuilder;
@@ -136,7 +136,7 @@ abstract class ExplicitNestedList
 
 abstract class ExplicitNestedListBuilder
     implements Builder<ExplicitNestedList, ExplicitNestedListBuilder> {
-  ListBuilder<BuiltList<int>> nestedList;
+  ListBuilder<BuiltList<int>>? nestedList;
 
   factory ExplicitNestedListBuilder() = _$ExplicitNestedListBuilder;
   ExplicitNestedListBuilder._();
@@ -175,9 +175,10 @@ abstract class ValueWithCode
 
   int get anInt;
   @nullable
-  String get aString;
+  String? get aString;
 
-  String get youCanWriteDerivedGetters => anInt.toString() + aString;
+  String get youCanWriteDerivedGetters =>
+      anInt.toString() + aString?.toString();
 
   factory ValueWithCode([void Function(ValueWithCodeBuilder) updates]) =
       _$ValueWithCode;
@@ -192,7 +193,7 @@ abstract class ValueWithDefaults
     implements Built<ValueWithDefaults, ValueWithDefaultsBuilder> {
   int get anInt;
   @nullable
-  String get aString;
+  String? get aString;
   SimpleValue get value;
 
   factory ValueWithDefaults([void Function(ValueWithDefaultsBuilder) updates]) =
@@ -205,7 +206,7 @@ abstract class ValueWithDefaultsBuilder
   int anInt = 7;
 
   @nullable
-  String aString;
+  String? aString;
   SimpleValueBuilder value = SimpleValue((b) => b..anInt = 3).toBuilder();
 
   factory ValueWithDefaultsBuilder() = _$ValueWithDefaultsBuilder;
@@ -224,9 +225,9 @@ abstract class ValueWithBuilderSmarts
 
 abstract class ValueWithBuilderSmartsBuilder
     implements Builder<ValueWithBuilderSmarts, ValueWithBuilderSmartsBuilder> {
-  String _value;
-  String get value => _value;
-  set value(String v) {
+  String? _value;
+  String? get value => _value;
+  set value(String? v) {
     if (v == 'not allowed') throw ArgumentError('not allowed');
     _value = v;
   }
@@ -242,7 +243,7 @@ abstract class ValidatedValue
 
   int get anInt;
   @nullable
-  String get aString;
+  String? get aString;
 
   factory ValidatedValue([void Function(ValidatedValueBuilder) updates]) =
       _$ValidatedValue;
@@ -332,7 +333,7 @@ abstract class PartiallySerializableValue
 
   @nullable
   @BuiltValueField(serialize: false)
-  int get transientValue;
+  int? get transientValue;
 
   factory PartiallySerializableValue(
           [void Function(PartiallySerializableValueBuilder) updates]) =
@@ -378,7 +379,7 @@ abstract class FieldDiscoveryValue
 
   // Check that discovery doesn't recurse forever on reference to self.
   @nullable
-  FieldDiscoveryValue get recursiveValue;
+  FieldDiscoveryValue? get recursiveValue;
 
   factory FieldDiscoveryValue(
           [void Function(FieldDiscoveryValueBuilder) updates]) =
@@ -503,21 +504,6 @@ abstract class ValueWithOnSet
   ValueWithOnSet._();
 }
 
-abstract class SerializesNullsValue
-    implements Built<SerializesNullsValue, SerializesNullsValueBuilder> {
-  @BuiltValueSerializer(serializeNulls: true)
-  static Serializer<SerializesNullsValue> get serializer =>
-      _$serializesNullsValueSerializer;
-
-  @nullable
-  String get value;
-
-  factory SerializesNullsValue(
-          [void Function(SerializesNullsValueBuilder) updates]) =
-      _$SerializesNullsValue;
-  SerializesNullsValue._();
-}
-
 // Check that `toString` from a mixin is not redefined.
 abstract class CustomToStringValue extends Object
     with CustomToString
@@ -581,16 +567,16 @@ abstract class ValueWithBuilderInitializer
   int get anInt;
   int get anIntWithDefault;
   @nullable
-  int get nullableInt;
+  int? get nullableInt;
   @nullable
-  int get nullableIntWithDefault;
+  int? get nullableIntWithDefault;
 
   SimpleValue get nestedValue;
   SimpleValue get nestedValueWithDefault;
   @nullable
-  SimpleValue get nullableNestedValue;
+  SimpleValue? get nullableNestedValue;
   @nullable
-  SimpleValue get nullableNestedValueWithDefault;
+  SimpleValue? get nullableNestedValueWithDefault;
 
   factory ValueWithBuilderInitializer(
           [void Function(ValueWithBuilderInitializerBuilder) updates]) =
@@ -606,7 +592,7 @@ abstract class ValueWithBuilderFinalizer
 
   /// Build hook forcing [anInt] to be odd.
   static void _finalizeBuilder(ValueWithBuilderFinalizerBuilder b) {
-    if (b.anInt.isEven) ++b.anInt;
+    if (b.anInt!.isEven) b.anInt = b.anInt! + 1;
   }
 
   int get anInt;
@@ -629,7 +615,7 @@ abstract class ValueWithGenericBuilderInitializer<T>
   }
 
   @nullable
-  T get value;
+  T? get value;
 
   factory ValueWithGenericBuilderInitializer(
       [void Function(ValueWithGenericBuilderInitializerBuilder<T>)
