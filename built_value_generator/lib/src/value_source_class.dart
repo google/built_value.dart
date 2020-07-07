@@ -41,11 +41,19 @@ abstract class ValueSourceClass
   @memoized
   String get name => element.displayName;
 
+  // TODO(davidmorgan): this is not the right way to check, but is good enough
+  // while developing. Fix before publishing.
+  @memoized
   bool get isNonNullByDefault =>
       element.source.contents.data.contains('// @dart=2.9');
 
+  @memoized
   String get orNull => isNonNullByDefault ? '?' : '';
+
+  @memoized
   String get notNull => isNonNullByDefault ? '!' : '';
+
+  @memoized
   String get late => isNonNullByDefault ? 'late ' : '';
 
   /// Returns the class name for the generated implementation. If the manually
@@ -799,29 +807,31 @@ abstract class ValueSourceClass
         final typeInBuilder = field.builderElementTypeWithPrefix;
         final name = field.name;
 
+        var maybeOrNull = field.builderElementTypeIsNullable ? orNull : '';
         if (field.isNestedBuilder) {
           result.writeln('@override');
           result.writeln('$typeInBuilder get $name {'
               '_\$this;');
-          if (settings.autoCreateNestedBuilders) {
+          if (settings.autoCreateNestedBuilders &&
+              (field.builderElementTypeIsNullable || !isNonNullByDefault)) {
             result.writeln('return super.$name ??= new $typeInBuilder();');
           } else {
             result.writeln('return super.$name;');
           }
           result.writeln('}');
           result.writeln('@override');
-          result.writeln('set $name($typeInBuilder $name) {'
+          result.writeln('set $name($typeInBuilder$maybeOrNull $name) {'
               '_\$this;'
               'super.$name = $name;'
               '}');
         } else {
           result.writeln('@override');
-          result.writeln('$typeInBuilder get $name {'
+          result.writeln('$typeInBuilder$maybeOrNull get $name {'
               '_\$this;'
               'return super.$name;'
               '}');
           result.writeln('@override');
-          result.writeln('set $name($type $name) {'
+          result.writeln('set $name($type$maybeOrNull $name) {'
               '_\$this;'
               'super.$name = $name;'
               '}');

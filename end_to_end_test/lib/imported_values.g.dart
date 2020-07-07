@@ -163,15 +163,17 @@ class _$ImportedCustomNestedValueSerializer
       final Object value = iterator.current;
       switch (key) {
         case 'simpleValue':
-          result.simpleValue.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(prefix.SimpleValue))
-              as prefix.SimpleValue);
+          result.simpleValue = (serializers.deserialize(value,
+                      specifiedType: const FullType(prefix.SimpleValue))
+                  as prefix.SimpleValue)
+              .toBuilder();
           break;
         case 'simpleValues':
-          result.simpleValues.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(prefix.SimpleValue)]))
-              as BuiltList<Object>);
+          result.simpleValues = (serializers.deserialize(value,
+                  specifiedType: const FullType(BuiltList, const [
+                    const FullType(prefix.SimpleValue)
+                  ])) as BuiltList<Object>)
+              .toBuilder();
           break;
       }
     }

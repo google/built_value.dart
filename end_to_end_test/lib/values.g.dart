@@ -376,8 +376,9 @@ class _$CompoundValueExplicitNoNestingSerializer
       final Object value = iterator.current;
       switch (key) {
         case 'simpleValue':
-          result.simpleValue.replace(serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+          result.simpleValue = (serializers.deserialize(value,
+                  specifiedType: const FullType(SimpleValue)) as SimpleValue)
+              .toBuilder();
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,

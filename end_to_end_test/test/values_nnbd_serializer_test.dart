@@ -141,6 +141,37 @@ void main() {
     });
   });
 
+  group('CompoundValueExplicitNoNesting', () {
+    var data = CompoundValueExplicitNoNesting((b) => b
+      ..simpleValue.replace(SimpleValue((b) => b
+        ..anInt = 1
+        ..aString = 'two'))
+      ..validatedValue = ValidatedValue((b) => b.anInt = 3));
+    var serialized = [
+      'CompoundValueExplicitNoNesting',
+      'simpleValue',
+      [
+        'anInt',
+        1,
+        'aString',
+        'two',
+      ],
+      'validatedValue',
+      [
+        'anInt',
+        3,
+      ],
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
   group('CompoundValue using StandardJsonPlugin', () {
     var data = CompoundValue((b) => b
       ..simpleValue.anInt = 1
