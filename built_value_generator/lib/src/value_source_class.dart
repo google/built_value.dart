@@ -46,6 +46,7 @@ abstract class ValueSourceClass
 
   String get orNull => isNonNullByDefault ? '?' : '';
   String get notNull => isNonNullByDefault ? '!' : '';
+  String get late => isNonNullByDefault ? 'late ' : '';
 
   /// Returns the class name for the generated implementation. If the manually
   /// maintained class is private then we ignore the underscore here, to avoid
@@ -843,10 +844,11 @@ abstract class ValueSourceClass
         result.writeln('$fieldType$orNull _$name;');
 
         // Getter.
-        result.writeln('$fieldType$orNull get $name =>');
         if (field.isNestedBuilder && settings.autoCreateNestedBuilders) {
+          result.writeln('$fieldType get $name =>');
           result.writeln('_\$this._$name ??= new $typeInBuilder();');
         } else {
+          result.writeln('$fieldType$orNull get $name =>');
           result.writeln('_\$this._$name;');
         }
 
@@ -889,7 +891,9 @@ abstract class ValueSourceClass
         final name = field.name;
         final nameInBuilder = hasBuilder ? 'super.$name' : '_$name';
         if (field.isNestedBuilder) {
-          result.writeln('$nameInBuilder = \$v.$name?.toBuilder();');
+          var maybeOrNull = field.isNullable ? '?' : '';
+          result.writeln(
+              '$nameInBuilder = ' '\$v.$name$maybeOrNull.toBuilder();');
         } else {
           result.writeln('$nameInBuilder = \$v.$name;');
         }
@@ -987,7 +991,7 @@ abstract class ValueSourceClass
       // in a nested builder then throw with more information. Otherwise,
       // just rethrow.
       result.writeln('} catch (_) {');
-      result.writeln('String _\$failedField;');
+      result.writeln('${late}String _\$failedField;');
       result.writeln('try {');
       result.write(fieldBuilders.keys.map((field) {
         final fieldBuilder = fieldBuilders[field];

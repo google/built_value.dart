@@ -489,11 +489,11 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
   CollectionsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _list = $v.list?.toBuilder();
-      _set = $v.set?.toBuilder();
-      _map = $v.map?.toBuilder();
-      _listMultimap = $v.listMultimap?.toBuilder();
-      _setMultimap = $v.setMultimap?.toBuilder();
+      _list = $v.list.toBuilder();
+      _set = $v.set.toBuilder();
+      _map = $v.map.toBuilder();
+      _listMultimap = $v.listMultimap.toBuilder();
+      _setMultimap = $v.setMultimap.toBuilder();
       _nullableList = $v.nullableList?.toBuilder();
       _nullableSet = $v.nullableSet?.toBuilder();
       _nullableMap = $v.nullableMap?.toBuilder();
@@ -740,11 +740,11 @@ class CollectionsWithNullsBuilder
   CollectionsWithNullsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _list = $v.list?.toBuilder();
-      _set = $v.set?.toBuilder();
-      _map = $v.map?.toBuilder();
-      _listMultimap = $v.listMultimap?.toBuilder();
-      _setMultimap = $v.setMultimap?.toBuilder();
+      _list = $v.list.toBuilder();
+      _set = $v.set.toBuilder();
+      _map = $v.map.toBuilder();
+      _listMultimap = $v.listMultimap.toBuilder();
+      _setMultimap = $v.setMultimap.toBuilder();
       _nullableList = $v.nullableList?.toBuilder();
       _nullableSet = $v.nullableSet?.toBuilder();
       _nullableMap = $v.nullableMap?.toBuilder();

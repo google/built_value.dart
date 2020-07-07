@@ -45,7 +45,7 @@ abstract class ValidatedValue
 
   int get anInt;
   @nullable
-  String get aString;
+  String? get aString;
 
   factory ValidatedValue([void Function(ValidatedValueBuilder) updates]) =
       _$ValidatedValue;

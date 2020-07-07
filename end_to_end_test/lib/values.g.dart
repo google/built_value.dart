@@ -1480,7 +1480,7 @@ class CompoundValueBuilder
   CompoundValueBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _simpleValue = $v.simpleValue?.toBuilder();
+      _simpleValue = $v.simpleValue.toBuilder();
       _validatedValue = $v.validatedValue?.toBuilder();
       _$v = null;
     }
@@ -1676,7 +1676,7 @@ class CompoundValueNoAutoNestingBuilder
   CompoundValueNoAutoNestingBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _value = $v.value?.toBuilder();
+      _value = $v.value.toBuilder();
       _$v = null;
     }
     return this;
@@ -1909,7 +1909,7 @@ class _$CompoundValueExplicitNoNestingBuilder
   CompoundValueExplicitNoNestingBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      super.simpleValue = $v.simpleValue?.toBuilder();
+      super.simpleValue = $v.simpleValue.toBuilder();
       super.validatedValue = $v.validatedValue;
       _$v = null;
     }
@@ -2012,7 +2012,7 @@ class _$ExplicitNestedListBuilder extends ExplicitNestedListBuilder {
   ExplicitNestedListBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      super.nestedList = $v.nestedList?.toBuilder();
+      super.nestedList = $v.nestedList.toBuilder();
       _$v = null;
     }
     return this;
@@ -2324,7 +2324,7 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
     if ($v != null) {
       super.anInt = $v.anInt;
       super.aString = $v.aString;
-      super.value = $v.value?.toBuilder();
+      super.value = $v.value.toBuilder();
       _$v = null;
     }
     return this;
@@ -3060,7 +3060,7 @@ class ListOfFunctionValueBuilder
   ListOfFunctionValueBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _functions = $v.functions?.toBuilder();
+      _functions = $v.functions.toBuilder();
       _$v = null;
     }
     return this;
@@ -3434,8 +3434,8 @@ class FieldDiscoveryValueBuilder
   FieldDiscoveryValueBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _value = $v.value?.toBuilder();
-      _values = $v.values?.toBuilder();
+      _value = $v.value.toBuilder();
+      _values = $v.values.toBuilder();
       _recursiveValue = $v.recursiveValue?.toBuilder();
       _$v = null;
     }
@@ -3535,7 +3535,7 @@ class DiscoverableValueBuilder
   DiscoverableValueBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _value = $v.value?.toBuilder();
+      _value = $v.value.toBuilder();
       _$v = null;
     }
     return this;
@@ -3792,7 +3792,7 @@ class RecursiveValueABuilder
   RecursiveValueABuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _value = $v.value?.toBuilder();
+      _value = $v.value.toBuilder();
       _$v = null;
     }
     return this;
@@ -3882,7 +3882,7 @@ class RecursiveValueBBuilder
   RecursiveValueBBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _value = $v.value?.toBuilder();
+      _value = $v.value.toBuilder();
       _$v = null;
     }
     return this;
@@ -4565,8 +4565,8 @@ class ValueWithBuilderInitializerBuilder
       _anIntWithDefault = $v.anIntWithDefault;
       _nullableInt = $v.nullableInt;
       _nullableIntWithDefault = $v.nullableIntWithDefault;
-      _nestedValue = $v.nestedValue?.toBuilder();
-      _nestedValueWithDefault = $v.nestedValueWithDefault?.toBuilder();
+      _nestedValue = $v.nestedValue.toBuilder();
+      _nestedValueWithDefault = $v.nestedValueWithDefault.toBuilder();
       _nullableNestedValue = $v.nullableNestedValue?.toBuilder();
       _nullableNestedValueWithDefault =
           $v.nullableNestedValueWithDefault?.toBuilder();
