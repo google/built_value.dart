@@ -6,7 +6,7 @@ description: >
 homepage: https://github.com/google/built_value.dart
 
 environment:
-  sdk: '>=2.9.0 <3.0.0'
+  sdk: '>=2.9.0-18.0 <3.0.0'
 
 dependencies:
   built_collection: ^5.0.0
@@ -23,18 +23,22 @@ dev_dependencies:
 
 dependency_overrides:
   built_collection:
-    path: ../../built-collection-dart
+    git:
+      url: git://github.com/google/built_collection.dart.git
+      ref: 22a1b3fe844b75eb3b9b9b075059da603545abbc
   built_value:
     path: ../built_value
   built_value_generator:
     path: ../built_value_generator
   source_gen:
-    path: ../../source_gen/source_gen
+    git:
+      url: git://github.com/dart-lang/source_gen.git
+      ref: 5e3a2475d8fb2011948d8f32e9f161b31d5efb93
+      path: source_gen
   fixnum:
     git:
       url: git://github.com/dart-lang/fixnum.git
       ref: 9b38f49f6679654d66a363e69e48173cca07e882
-
   async:
     git:
       url: git://github.com/dart-lang/async.git
