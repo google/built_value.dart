@@ -233,6 +233,9 @@ class EnumClass {
   String toString() => name;
 }
 
+/// Default value for `updates` parameters; does nothing.
+void emptyUpdate(Builder<dynamic, dynamic> _) {}
+
 /// For use by generated code in calculating hash codes. Do not use directly.
 int $jc(int hash, int value) {
   // Jenkins hash "combine".
@@ -341,6 +344,14 @@ class BuiltValueNullFieldError extends Error {
   final String field;
 
   BuiltValueNullFieldError(this.type, this.field);
+
+  /// Throws a [BuiltValueNullFieldError] if [value] is `null`.
+  static T checkNotNull<T>(T? value, String type, String field) {
+    if (value == null) {
+      throw BuiltValueNullFieldError(type, field);
+    }
+    return value;
+  }
 
   @override
   String toString() =>

@@ -72,6 +72,12 @@ abstract class SerializerSourceClass
   @memoized
   String get name => element.name;
 
+  bool get isNonNullByDefault =>
+      element.source.contents.data.contains('// @dart=2.9');
+
+  String get orNull => isNonNullByDefault ? '?' : '';
+  String get notNull => isNonNullByDefault ? '!' : '';
+
   @memoized
   String get wireName {
     if (isBuiltValue) {
@@ -321,7 +327,7 @@ class ${serializerImplName} implements StructuredSerializer<$genericName> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       ${serializerSettings.serializeNulls ? 'if (value == null) continue;' : ''}'''
               '''switch (key) {
         ${_generateFieldDeserializers()}
@@ -455,31 +461,37 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
   }
 
   String _generateNullableFieldSerializers() {
-    return fields.where((field) => field.isNullable).map((field) {
-      var serializeField = '''serializers.serialize(
-          object.${field.name},
+    var nullableFields = fields.where((field) => field.isNullable).toList();
+    if (nullableFields.isEmpty) return '';
+
+    return 'Object$orNull value;' +
+        nullableFields.map((field) {
+          var serializeField = '''serializers.serialize(
+          value,
           specifiedType:
           ${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())})''';
 
-      // By default, omit nulls; but if we were asked to include nulls, just
-      // write them.
-      if (serializerSettings.serializeNulls) {
-        return '''
+          // By default, omit nulls; but if we were asked to include nulls, just
+          // write them.
+          if (serializerSettings.serializeNulls) {
+            return '''
           result.add('${escapeString(field.wireName)}');
-          if (object.${field.name} == null) {
+          value = object.${field.name};
+          if (value == null) {
             result.add(null);
           } else {
             result.add($serializeField);
           }''';
-      } else {
-        return '''
-          if (object.${field.name} != null) {
+          } else {
+            return '''
+          value = object.${field.name};
+          if (value != null) {
             result
               ..add('${escapeString(field.wireName)}')
               ..add($serializeField);
           }''';
-      }
-    }).join('');
+          }
+        }).join('');
   }
 
   /// Gets a map from generic parameter to its bound.

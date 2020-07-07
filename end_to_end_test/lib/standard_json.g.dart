@@ -38,10 +38,12 @@ class _$StandardJsonValueSerializer
           specifiedType:
               const FullType(BuiltSet, const [const FullType(Animal)])),
     ];
-    if (object.strings != null) {
+    Object value;
+    value = object.strings;
+    if (value != null) {
       result
         ..add('strings')
-        ..add(serializers.serialize(object.strings,
+        ..add(serializers.serialize(value,
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
@@ -58,7 +60,7 @@ class _$StandardJsonValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'number':
           result.number = serializers.deserialize(value,
@@ -113,7 +115,7 @@ class _$StandardJsonValue extends StandardJsonValue {
   final BuiltList<String> strings;
 
   factory _$StandardJsonValue(
-          [void Function(StandardJsonValueBuilder) updates]) =>
+          [void Function(StandardJsonValueBuilder) updates = emptyUpdate]) =>
       (new StandardJsonValueBuilder()..update(updates)).build();
 
   _$StandardJsonValue._(
@@ -124,21 +126,14 @@ class _$StandardJsonValue extends StandardJsonValue {
       this.uniqueZoo,
       this.strings})
       : super._() {
-    if (number == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'number');
-    }
-    if (text == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'text');
-    }
-    if (keyValues == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'keyValues');
-    }
-    if (zoo == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'zoo');
-    }
-    if (uniqueZoo == null) {
-      throw new BuiltValueNullFieldError('StandardJsonValue', 'uniqueZoo');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        number, 'StandardJsonValue', 'number');
+    BuiltValueNullFieldError.checkNotNull(text, 'StandardJsonValue', 'text');
+    BuiltValueNullFieldError.checkNotNull(
+        keyValues, 'StandardJsonValue', 'keyValues');
+    BuiltValueNullFieldError.checkNotNull(zoo, 'StandardJsonValue', 'zoo');
+    BuiltValueNullFieldError.checkNotNull(
+        uniqueZoo, 'StandardJsonValue', 'uniqueZoo');
   }
 
   @override
@@ -221,13 +216,14 @@ class StandardJsonValueBuilder
   StandardJsonValueBuilder();
 
   StandardJsonValueBuilder get _$this {
-    if (_$v != null) {
-      _number = _$v.number;
-      _text = _$v.text;
-      _keyValues = _$v.keyValues?.toBuilder();
-      _zoo = _$v.zoo?.toBuilder();
-      _uniqueZoo = _$v.uniqueZoo?.toBuilder();
-      _strings = _$v.strings?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _number = $v.number;
+      _text = $v.text;
+      _keyValues = $v.keyValues?.toBuilder();
+      _zoo = $v.zoo?.toBuilder();
+      _uniqueZoo = $v.uniqueZoo?.toBuilder();
+      _strings = $v.strings?.toBuilder();
       _$v = null;
     }
     return this;
@@ -235,15 +231,13 @@ class StandardJsonValueBuilder
 
   @override
   void replace(StandardJsonValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$StandardJsonValue;
   }
 
   @override
   void update(void Function(StandardJsonValueBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override
@@ -252,8 +246,10 @@ class StandardJsonValueBuilder
     try {
       _$result = _$v ??
           new _$StandardJsonValue._(
-              number: number,
-              text: text,
+              number: BuiltValueNullFieldError.checkNotNull(
+                  number, 'StandardJsonValue', 'number'),
+              text: BuiltValueNullFieldError.checkNotNull(
+                  text, 'StandardJsonValue', 'text'),
               keyValues: keyValues.build(),
               zoo: zoo.build(),
               uniqueZoo: uniqueZoo.build(),

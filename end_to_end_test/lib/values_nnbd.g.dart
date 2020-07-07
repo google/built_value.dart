@@ -22,17 +22,20 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
     ];
-    if (object.aString != null) {
+    Object? value;
+    value = object.aString;
+    if (value != null) {
       result
         ..add('aString')
-        ..add(serializers.serialize(object.aString,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.$mustBeEscaped != null) {
+    value = object.$mustBeEscaped;
+    if (value != null) {
       result
         ..add('\$mustBeEscaped')
-        ..add(serializers.serialize(object.$mustBeEscaped,
-            specifiedType: const FullType(bool)));
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
     }
     return result;
   }
@@ -46,7 +49,7 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
@@ -71,17 +74,17 @@ class _$SimpleValue extends SimpleValue {
   @override
   final int anInt;
   @override
-  final String aString;
+  final String? aString;
   @override
-  final bool $mustBeEscaped;
+  final bool? $mustBeEscaped;
 
-  factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
+  factory _$SimpleValue(
+          [void Function(SimpleValueBuilder) updates = emptyUpdate]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
-  _$SimpleValue._({this.anInt, this.aString, this.$mustBeEscaped}) : super._() {
-    if (anInt == null) {
-      throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
-    }
+  _$SimpleValue._({required this.anInt, this.aString, this.$mustBeEscaped})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(anInt, 'SimpleValue', 'anInt');
   }
 
   @override
@@ -117,28 +120,29 @@ class _$SimpleValue extends SimpleValue {
 }
 
 class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
-  _$SimpleValue _$v;
+  _$SimpleValue? _$v;
 
-  int _anInt;
-  int get anInt => _$this._anInt;
-  set anInt(int anInt) => _$this._anInt = anInt;
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
 
-  String _aString;
-  String get aString => _$this._aString;
-  set aString(String aString) => _$this._aString = aString;
+  String? _aString;
+  String? get aString => _$this._aString;
+  set aString(String? aString) => _$this._aString = aString;
 
-  bool _$mustBeEscaped;
-  bool get $mustBeEscaped => _$this._$mustBeEscaped;
-  set $mustBeEscaped(bool $mustBeEscaped) =>
+  bool? _$mustBeEscaped;
+  bool? get $mustBeEscaped => _$this._$mustBeEscaped;
+  set $mustBeEscaped(bool? $mustBeEscaped) =>
       _$this._$mustBeEscaped = $mustBeEscaped;
 
   SimpleValueBuilder();
 
   SimpleValueBuilder get _$this {
-    if (_$v != null) {
-      _anInt = _$v.anInt;
-      _aString = _$v.aString;
-      _$mustBeEscaped = _$v.$mustBeEscaped;
+    final $v = _$v;
+    if ($v != null) {
+      _anInt = $v.anInt;
+      _aString = $v.aString;
+      _$mustBeEscaped = $v.$mustBeEscaped;
       _$v = null;
     }
     return this;
@@ -146,22 +150,23 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SimpleValue;
   }
 
   @override
   void update(void Function(SimpleValueBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override
   _$SimpleValue build() {
     final _$result = _$v ??
         new _$SimpleValue._(
-            anInt: anInt, aString: aString, $mustBeEscaped: $mustBeEscaped);
+            anInt: BuiltValueNullFieldError.checkNotNull(
+                anInt, 'SimpleValue', 'anInt'),
+            aString: aString,
+            $mustBeEscaped: $mustBeEscaped);
     replace(_$result);
     return _$result;
   }
