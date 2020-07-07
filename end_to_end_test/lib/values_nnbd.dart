@@ -38,12 +38,62 @@ abstract class CompoundValue
   CompoundValue._();
 }
 
+@BuiltValue(nestedBuilders: false)
+abstract class CompoundValueNoNesting
+    implements Built<CompoundValueNoNesting, CompoundValueNoNestingBuilder> {
+  static Serializer<CompoundValueNoNesting> get serializer =>
+      _$compoundValueNoNestingSerializer;
+
+  SimpleValue get simpleValue;
+  @nullable
+  ValidatedValue? get validatedValue;
+
+  factory CompoundValueNoNesting(
+          [void Function(CompoundValueNoNestingBuilder) updates]) =
+      _$CompoundValueNoNesting;
+  CompoundValueNoNesting._();
+}
+
+@BuiltValue(autoCreateNestedBuilders: false)
+abstract class CompoundValueNoAutoNesting
+    implements
+        Built<CompoundValueNoAutoNesting, CompoundValueNoAutoNestingBuilder> {
+  static Serializer<CompoundValueNoAutoNesting> get serializer =>
+      _$compoundValueNoAutoNestingSerializer;
+
+  NoFieldsValue get value;
+
+  factory CompoundValueNoAutoNesting(
+          [void Function(CompoundValueNoAutoNestingBuilder) updates]) =
+      _$CompoundValueNoAutoNesting;
+  CompoundValueNoAutoNesting._();
+}
+
+@BuiltValue(nestedBuilders: false, comparableBuilders: true)
+abstract class CompoundValueComparableBuilders
+    implements
+        Built<CompoundValueComparableBuilders,
+            CompoundValueComparableBuildersBuilder> {
+  static Serializer<CompoundValueComparableBuilders> get serializer =>
+      _$compoundValueComparableBuildersSerializer;
+
+  SimpleValue get simpleValue;
+  @nullable
+  ValidatedValue get validatedValue;
+
+  factory CompoundValueComparableBuilders(
+          [void Function(CompoundValueComparableBuildersBuilder) updates]) =
+      _$CompoundValueComparableBuilders;
+  CompoundValueComparableBuilders._();
+}
+
 abstract class ValidatedValue
     implements Built<ValidatedValue, ValidatedValueBuilder> {
   static Serializer<ValidatedValue> get serializer =>
       _$validatedValueSerializer;
 
   int get anInt;
+
   @nullable
   String? get aString;
 
@@ -53,4 +103,14 @@ abstract class ValidatedValue
   ValidatedValue._() {
     if (anInt == 7) throw StateError('anInt may not be 7');
   }
+}
+
+abstract class NoFieldsValue
+    implements Built<NoFieldsValue, NoFieldsValueBuilder> {
+  static Serializer<NoFieldsValue> get serializer => _$noFieldsValueSerializer;
+
+  factory NoFieldsValue([void Function(NoFieldsValueBuilder) updates]) =
+      _$NoFieldsValue;
+
+  NoFieldsValue._();
 }

@@ -187,6 +187,13 @@ void main() {
     });
   });
 
+  group('CompoundValueNoNesting', () {
+    test('does not use nested builders', () {
+      CompoundValueNoNesting(
+          (b) => b..simpleValue = SimpleValue((b) => b..anInt = 1));
+    });
+  });
+
   group('ValidatedValue', () {
     test('can be instantiated', () {
       ValidatedValue((b) => b..anInt = 1);

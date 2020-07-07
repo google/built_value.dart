@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 // @dart=2.9
 
+import 'package:built_value/serializer.dart';
+import 'package:built_value/standard_json_plugin.dart';
 import 'package:end_to_end_test/errors_matchers.dart';
 import 'package:end_to_end_test/serializers_nnbd.dart';
 import 'package:end_to_end_test/values_nnbd.dart';
@@ -87,6 +89,69 @@ void main() {
               "'ValidatedValue' failed due to: Deserializing 'foo' to 'int' "
               "failed due to: type 'String' is not a subtype of type "
               "'int' in type cast")));
+    });
+  });
+
+  group('CompoundValueNoNesting', () {
+    var data = CompoundValueNoNesting((b) => b
+      ..simpleValue = SimpleValue((b) => b
+        ..anInt = 1
+        ..aString = 'two')
+      ..validatedValue = ValidatedValue((b) => b.anInt = 3));
+    var serialized = [
+      'CompoundValueNoNesting',
+      'simpleValue',
+      [
+        'anInt',
+        1,
+        'aString',
+        'two',
+      ],
+      'validatedValue',
+      [
+        'anInt',
+        3,
+      ],
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
+  group('CompoundValue using StandardJsonPlugin', () {
+    var data = CompoundValue((b) => b
+      ..simpleValue.anInt = 1
+      ..simpleValue.aString = 'two'
+      ..validatedValue = ValidatedValue((b) => b.anInt = 3).toBuilder());
+    var specifiedType = const FullType(CompoundValue);
+    var serializersWithPlugin =
+        (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
+    var serialized = {
+      'simpleValue': {
+        'anInt': 1,
+        'aString': 'two',
+      },
+      'validatedValue': {
+        'anInt': 3,
+      },
+    };
+
+    test('can be serialized', () {
+      expect(
+          serializersWithPlugin.serialize(data, specifiedType: specifiedType),
+          serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(
+          serializersWithPlugin.deserialize(serialized,
+              specifiedType: specifiedType),
+          data);
     });
   });
 }
