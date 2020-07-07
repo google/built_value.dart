@@ -79,7 +79,7 @@ abstract class CompoundValueComparableBuilders
 
   SimpleValue get simpleValue;
   @nullable
-  ValidatedValue get validatedValue;
+  ValidatedValue? get validatedValue;
 
   factory CompoundValueComparableBuilders(
           [void Function(CompoundValueComparableBuildersBuilder) updates]) =

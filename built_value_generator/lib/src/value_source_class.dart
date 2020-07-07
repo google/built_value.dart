@@ -947,9 +947,9 @@ abstract class ValueSourceClass
       if (!field.isNestedBuilder) {
         fieldBuilders[name] = name;
         if (!field.isNullable) needsNullCheck.add(name);
-      } else if (!field.isNullable) {
+      } else if (!field.isNullable && settings.autoCreateNestedBuilders) {
         // If not nullable, go via the public accessor, which instantiates
-        // if needed.
+        // if needed provided `autoCreateNestedBuilders` is true.
         fieldBuilders[name] = '$name.build()';
       } else if (hasBuilder) {
         // Otherwise access the private field: in super if there's a manually

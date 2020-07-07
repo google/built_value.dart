@@ -264,8 +264,10 @@ class _$CompoundValueNoAutoNestingSerializer
       final Object value = iterator.current;
       switch (key) {
         case 'value':
-          result.value.replace(serializers.deserialize(value,
-              specifiedType: const FullType(NoFieldsValue)) as NoFieldsValue);
+          result.value = (serializers.deserialize(value,
+                      specifiedType: const FullType(NoFieldsValue))
+                  as NoFieldsValue)
+              .toBuilder();
           break;
       }
     }
@@ -1697,13 +1699,15 @@ class CompoundValueNoAutoNestingBuilder
   _$CompoundValueNoAutoNesting build() {
     _$CompoundValueNoAutoNesting _$result;
     try {
-      _$result =
-          _$v ?? new _$CompoundValueNoAutoNesting._(value: value.build());
+      _$result = _$v ??
+          new _$CompoundValueNoAutoNesting._(
+              value: BuiltValueNullFieldError.checkNotNull(
+                  _value?.build(), 'CompoundValueNoAutoNesting', 'value'));
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'value';
-        value.build();
+        _value?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'CompoundValueNoAutoNesting', _$failedField, e.toString());

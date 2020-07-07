@@ -513,12 +513,21 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
           compilationUnit, genericParameters.toBuiltSet());
       final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
       if (field.builderFieldUsesNestedBuilder) {
-        return '''
+        if (builtValueSettings.autoCreateNestedBuilders) {
+          return '''
 case '${escapeString(field.wireName)}':
   result.${field.name}.replace(serializers.deserialize(
       value, specifiedType: $fullType) $cast);
   break;
 ''';
+        } else {
+          return '''
+case '${escapeString(field.wireName)}':
+  result.${field.name} = (serializers.deserialize(
+      value, specifiedType: $fullType) $cast).toBuilder();
+  break;
+''';
+        }
       } else {
         return '''
 case '${escapeString(field.wireName)}':
