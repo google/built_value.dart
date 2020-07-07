@@ -14,6 +14,7 @@ part 'serializers_nnbd.g.dart';
 
 @SerializersFor([
   CompoundValue,
+  CompoundValueNoNesting,
   FallbackEnum,
   SecondTestEnum,
   SimpleValue,
