@@ -9,6 +9,7 @@ part of serializers_nnbd;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(FallbackEnum.serializer)
+      ..add(SimpleValue.serializer)
       ..add(TestEnum.serializer)
       ..add(WireNameEnum.serializer)
       ..add(WireNumberEnum.serializer))
