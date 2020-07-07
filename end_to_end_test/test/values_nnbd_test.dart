@@ -136,4 +136,65 @@ void main() {
 }''');
     });
   });
+
+  group('CompoundValue', () {
+    test('can be instantiated', () {
+      CompoundValue((b) => b..simpleValue.anInt = 1);
+    });
+
+    test('throws on null for non-nullable nested fields on build', () {
+      expect(() => CompoundValue(),
+          throwsA(const TypeMatcher<BuiltValueNestedFieldError>()));
+    });
+
+    test('includes helpful information in null error message', () {
+      expect(
+          () => CompoundValue(),
+          throwsA(allOf(
+              // Mentions outer type.
+              isErrorContaining('"CompoundValue"'),
+              // Mentions field in outer type.
+              isErrorContaining('"simpleValue"'),
+              // Mentions inner type.
+              isErrorContaining('"SimpleValue"'),
+              // Mentions field in inner type.
+              isErrorContaining('"anInt"'))));
+    });
+
+    test('allows nested updates', () {
+      expect(
+          CompoundValue((b) => b
+            ..simpleValue.anInt = 1
+            ..simpleValue.aString = 'two').simpleValue.anInt,
+          1);
+    });
+
+    test('nullable nested builders can be assigned', () {
+      expect(
+          CompoundValue((b) => b
+            ..simpleValue.anInt = 1
+            ..validatedValue.anInt = 2).validatedValue.anInt,
+          2);
+    });
+
+    test('hash matches quiver hash', () {
+      final value = CompoundValue((b) => b
+        ..simpleValue.anInt = 1
+        ..simpleValue.aString = 'two');
+
+      expect(value.hashCode,
+          hashObjects(<Object?>[value.simpleValue, value.validatedValue]));
+    });
+  });
+
+  group('ValidatedValue', () {
+    test('can be instantiated', () {
+      ValidatedValue((b) => b..anInt = 1);
+    });
+
+    test('does custom validation', () {
+      expect(() => ValidatedValue((b) => b..anInt = 7),
+          throwsA(const TypeMatcher<StateError>()));
+    });
+  });
 }
