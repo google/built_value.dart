@@ -42,38 +42,44 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
           specifiedType: const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType(bool)])),
     ];
-    if (object.nullableList != null) {
+    Object value;
+    value = object.nullableList;
+    if (value != null) {
       result
         ..add('nullableList')
-        ..add(serializers.serialize(object.nullableList,
+        ..add(serializers.serialize(value,
             specifiedType:
                 const FullType(BuiltList, const [const FullType(int)])));
     }
-    if (object.nullableSet != null) {
+    value = object.nullableSet;
+    if (value != null) {
       result
         ..add('nullableSet')
-        ..add(serializers.serialize(object.nullableSet,
+        ..add(serializers.serialize(value,
             specifiedType:
                 const FullType(BuiltSet, const [const FullType(String)])));
     }
-    if (object.nullableMap != null) {
+    value = object.nullableMap;
+    if (value != null) {
       result
         ..add('nullableMap')
-        ..add(serializers.serialize(object.nullableMap,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(BuiltMap,
                 const [const FullType(String), const FullType(int)])));
     }
-    if (object.nullableListMultimap != null) {
+    value = object.nullableListMultimap;
+    if (value != null) {
       result
         ..add('nullableListMultimap')
-        ..add(serializers.serialize(object.nullableListMultimap,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(BuiltListMultimap,
                 const [const FullType(int), const FullType(bool)])));
     }
-    if (object.nullableSetMultimap != null) {
+    value = object.nullableSetMultimap;
+    if (value != null) {
       result
         ..add('nullableSetMultimap')
-        ..add(serializers.serialize(object.nullableSetMultimap,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(BuiltSetMultimap,
                 const [const FullType(String), const FullType(bool)])));
     }
@@ -89,7 +95,7 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'list':
           result.list.replace(serializers.deserialize(value,
@@ -188,43 +194,49 @@ class _$CollectionsWithNullsSerializer
           specifiedType: const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType(bool)])),
     ];
+    Object value;
     result.add('nullableList');
-    if (object.nullableList == null) {
+    value = object.nullableList;
+    if (value == null) {
       result.add(null);
     } else {
-      result.add(serializers.serialize(object.nullableList,
+      result.add(serializers.serialize(value,
           specifiedType:
               const FullType(BuiltList, const [const FullType(int)])));
     }
     result.add('nullableSet');
-    if (object.nullableSet == null) {
+    value = object.nullableSet;
+    if (value == null) {
       result.add(null);
     } else {
-      result.add(serializers.serialize(object.nullableSet,
+      result.add(serializers.serialize(value,
           specifiedType:
               const FullType(BuiltSet, const [const FullType(String)])));
     }
     result.add('nullableMap');
-    if (object.nullableMap == null) {
+    value = object.nullableMap;
+    if (value == null) {
       result.add(null);
     } else {
-      result.add(serializers.serialize(object.nullableMap,
+      result.add(serializers.serialize(value,
           specifiedType: const FullType(
               BuiltMap, const [const FullType(String), const FullType(int)])));
     }
     result.add('nullableListMultimap');
-    if (object.nullableListMultimap == null) {
+    value = object.nullableListMultimap;
+    if (value == null) {
       result.add(null);
     } else {
-      result.add(serializers.serialize(object.nullableListMultimap,
+      result.add(serializers.serialize(value,
           specifiedType: const FullType(BuiltListMultimap,
               const [const FullType(int), const FullType(bool)])));
     }
     result.add('nullableSetMultimap');
-    if (object.nullableSetMultimap == null) {
+    value = object.nullableSetMultimap;
+    if (value == null) {
       result.add(null);
     } else {
-      result.add(serializers.serialize(object.nullableSetMultimap,
+      result.add(serializers.serialize(value,
           specifiedType: const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType(bool)])));
     }
@@ -241,7 +253,7 @@ class _$CollectionsWithNullsSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       if (value == null) continue;
       switch (key) {
         case 'list':
@@ -327,7 +339,8 @@ class _$Collections extends Collections {
   @override
   final BuiltSetMultimap<String, bool> nullableSetMultimap;
 
-  factory _$Collections([void Function(CollectionsBuilder) updates]) =>
+  factory _$Collections(
+          [void Function(CollectionsBuilder) updates = emptyUpdate]) =>
       (new CollectionsBuilder()..update(updates)).build();
 
   _$Collections._(
@@ -342,21 +355,13 @@ class _$Collections extends Collections {
       this.nullableListMultimap,
       this.nullableSetMultimap})
       : super._() {
-    if (list == null) {
-      throw new BuiltValueNullFieldError('Collections', 'list');
-    }
-    if (set == null) {
-      throw new BuiltValueNullFieldError('Collections', 'set');
-    }
-    if (map == null) {
-      throw new BuiltValueNullFieldError('Collections', 'map');
-    }
-    if (listMultimap == null) {
-      throw new BuiltValueNullFieldError('Collections', 'listMultimap');
-    }
-    if (setMultimap == null) {
-      throw new BuiltValueNullFieldError('Collections', 'setMultimap');
-    }
+    BuiltValueNullFieldError.checkNotNull(list, 'Collections', 'list');
+    BuiltValueNullFieldError.checkNotNull(set, 'Collections', 'set');
+    BuiltValueNullFieldError.checkNotNull(map, 'Collections', 'map');
+    BuiltValueNullFieldError.checkNotNull(
+        listMultimap, 'Collections', 'listMultimap');
+    BuiltValueNullFieldError.checkNotNull(
+        setMultimap, 'Collections', 'setMultimap');
   }
 
   @override
@@ -482,17 +487,18 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
   CollectionsBuilder();
 
   CollectionsBuilder get _$this {
-    if (_$v != null) {
-      _list = _$v.list?.toBuilder();
-      _set = _$v.set?.toBuilder();
-      _map = _$v.map?.toBuilder();
-      _listMultimap = _$v.listMultimap?.toBuilder();
-      _setMultimap = _$v.setMultimap?.toBuilder();
-      _nullableList = _$v.nullableList?.toBuilder();
-      _nullableSet = _$v.nullableSet?.toBuilder();
-      _nullableMap = _$v.nullableMap?.toBuilder();
-      _nullableListMultimap = _$v.nullableListMultimap?.toBuilder();
-      _nullableSetMultimap = _$v.nullableSetMultimap?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _list = $v.list?.toBuilder();
+      _set = $v.set?.toBuilder();
+      _map = $v.map?.toBuilder();
+      _listMultimap = $v.listMultimap?.toBuilder();
+      _setMultimap = $v.setMultimap?.toBuilder();
+      _nullableList = $v.nullableList?.toBuilder();
+      _nullableSet = $v.nullableSet?.toBuilder();
+      _nullableMap = $v.nullableMap?.toBuilder();
+      _nullableListMultimap = $v.nullableListMultimap?.toBuilder();
+      _nullableSetMultimap = $v.nullableSetMultimap?.toBuilder();
       _$v = null;
     }
     return this;
@@ -500,15 +506,13 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
 
   @override
   void replace(Collections other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Collections;
   }
 
   @override
   void update(void Function(CollectionsBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override
@@ -584,7 +588,7 @@ class _$CollectionsWithNulls extends CollectionsWithNulls {
   final BuiltSetMultimap<String, bool> nullableSetMultimap;
 
   factory _$CollectionsWithNulls(
-          [void Function(CollectionsWithNullsBuilder) updates]) =>
+          [void Function(CollectionsWithNullsBuilder) updates = emptyUpdate]) =>
       (new CollectionsWithNullsBuilder()..update(updates)).build();
 
   _$CollectionsWithNulls._(
@@ -599,22 +603,13 @@ class _$CollectionsWithNulls extends CollectionsWithNulls {
       this.nullableListMultimap,
       this.nullableSetMultimap})
       : super._() {
-    if (list == null) {
-      throw new BuiltValueNullFieldError('CollectionsWithNulls', 'list');
-    }
-    if (set == null) {
-      throw new BuiltValueNullFieldError('CollectionsWithNulls', 'set');
-    }
-    if (map == null) {
-      throw new BuiltValueNullFieldError('CollectionsWithNulls', 'map');
-    }
-    if (listMultimap == null) {
-      throw new BuiltValueNullFieldError(
-          'CollectionsWithNulls', 'listMultimap');
-    }
-    if (setMultimap == null) {
-      throw new BuiltValueNullFieldError('CollectionsWithNulls', 'setMultimap');
-    }
+    BuiltValueNullFieldError.checkNotNull(list, 'CollectionsWithNulls', 'list');
+    BuiltValueNullFieldError.checkNotNull(set, 'CollectionsWithNulls', 'set');
+    BuiltValueNullFieldError.checkNotNull(map, 'CollectionsWithNulls', 'map');
+    BuiltValueNullFieldError.checkNotNull(
+        listMultimap, 'CollectionsWithNulls', 'listMultimap');
+    BuiltValueNullFieldError.checkNotNull(
+        setMultimap, 'CollectionsWithNulls', 'setMultimap');
   }
 
   @override
@@ -743,17 +738,18 @@ class CollectionsWithNullsBuilder
   CollectionsWithNullsBuilder();
 
   CollectionsWithNullsBuilder get _$this {
-    if (_$v != null) {
-      _list = _$v.list?.toBuilder();
-      _set = _$v.set?.toBuilder();
-      _map = _$v.map?.toBuilder();
-      _listMultimap = _$v.listMultimap?.toBuilder();
-      _setMultimap = _$v.setMultimap?.toBuilder();
-      _nullableList = _$v.nullableList?.toBuilder();
-      _nullableSet = _$v.nullableSet?.toBuilder();
-      _nullableMap = _$v.nullableMap?.toBuilder();
-      _nullableListMultimap = _$v.nullableListMultimap?.toBuilder();
-      _nullableSetMultimap = _$v.nullableSetMultimap?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _list = $v.list?.toBuilder();
+      _set = $v.set?.toBuilder();
+      _map = $v.map?.toBuilder();
+      _listMultimap = $v.listMultimap?.toBuilder();
+      _setMultimap = $v.setMultimap?.toBuilder();
+      _nullableList = $v.nullableList?.toBuilder();
+      _nullableSet = $v.nullableSet?.toBuilder();
+      _nullableMap = $v.nullableMap?.toBuilder();
+      _nullableListMultimap = $v.nullableListMultimap?.toBuilder();
+      _nullableSetMultimap = $v.nullableSetMultimap?.toBuilder();
       _$v = null;
     }
     return this;
@@ -761,15 +757,13 @@ class CollectionsWithNullsBuilder
 
   @override
   void replace(CollectionsWithNulls other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CollectionsWithNulls;
   }
 
   @override
   void update(void Function(CollectionsWithNullsBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override

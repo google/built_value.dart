@@ -33,7 +33,7 @@ void main() {
           () => SimpleValue((b) => b
             ..anInt = 1
             ..replace(null as SimpleValue)),
-          throwsA(const TypeMatcher<ArgumentError>()));
+          throwsA(const TypeMatcher<Error>()));
     });
 
     test('fields can be set via build constructor', () {
@@ -97,7 +97,7 @@ void main() {
         ..$mustBeEscaped = true);
       expect(
           value.hashCode,
-          hashObjects(<Object>[
+          hashObjects(<Object?>[
             value.anInt,
             value.aString,
             value.$mustBeEscaped,

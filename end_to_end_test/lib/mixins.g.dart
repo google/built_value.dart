@@ -32,13 +32,12 @@ class _$UsesMixin extends UsesMixin {
   @override
   final String Function(String) typeDef;
 
-  factory _$UsesMixin([void Function(UsesMixinBuilder) updates]) =>
+  factory _$UsesMixin(
+          [void Function(UsesMixinBuilder) updates = emptyUpdate]) =>
       (new UsesMixinBuilder()..update(updates)).build();
 
   _$UsesMixin._({this.typeDef}) : super._() {
-    if (typeDef == null) {
-      throw new BuiltValueNullFieldError('UsesMixin', 'typeDef');
-    }
+    BuiltValueNullFieldError.checkNotNull(typeDef, 'UsesMixin', 'typeDef');
   }
 
   @override
@@ -77,8 +76,9 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
   UsesMixinBuilder();
 
   UsesMixinBuilder get _$this {
-    if (_$v != null) {
-      _typeDef = _$v.typeDef;
+    final $v = _$v;
+    if ($v != null) {
+      _typeDef = $v.typeDef;
       _$v = null;
     }
     return this;
@@ -86,20 +86,21 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
 
   @override
   void replace(UsesMixin other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$UsesMixin;
   }
 
   @override
   void update(void Function(UsesMixinBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override
   _$UsesMixin build() {
-    final _$result = _$v ?? new _$UsesMixin._(typeDef: typeDef);
+    final _$result = _$v ??
+        new _$UsesMixin._(
+            typeDef: BuiltValueNullFieldError.checkNotNull(
+                typeDef, 'UsesMixin', 'typeDef'));
     replace(_$result);
     return _$result;
   }
@@ -110,14 +111,13 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
   final int shouldBeAField;
 
   factory _$GetsCorrectFieldsViaMixins(
-          [void Function(GetsCorrectFieldsViaMixinsBuilder) updates]) =>
+          [void Function(GetsCorrectFieldsViaMixinsBuilder) updates =
+              emptyUpdate]) =>
       (new GetsCorrectFieldsViaMixinsBuilder()..update(updates)).build();
 
   _$GetsCorrectFieldsViaMixins._({this.shouldBeAField}) : super._() {
-    if (shouldBeAField == null) {
-      throw new BuiltValueNullFieldError(
-          'GetsCorrectFieldsViaMixins', 'shouldBeAField');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        shouldBeAField, 'GetsCorrectFieldsViaMixins', 'shouldBeAField');
   }
 
   @override
@@ -162,8 +162,9 @@ class GetsCorrectFieldsViaMixinsBuilder
   GetsCorrectFieldsViaMixinsBuilder();
 
   GetsCorrectFieldsViaMixinsBuilder get _$this {
-    if (_$v != null) {
-      _shouldBeAField = _$v.shouldBeAField;
+    final $v = _$v;
+    if ($v != null) {
+      _shouldBeAField = $v.shouldBeAField;
       _$v = null;
     }
     return this;
@@ -171,21 +172,23 @@ class GetsCorrectFieldsViaMixinsBuilder
 
   @override
   void replace(GetsCorrectFieldsViaMixins other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GetsCorrectFieldsViaMixins;
   }
 
   @override
   void update(void Function(GetsCorrectFieldsViaMixinsBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override
   _$GetsCorrectFieldsViaMixins build() {
     final _$result = _$v ??
-        new _$GetsCorrectFieldsViaMixins._(shouldBeAField: shouldBeAField);
+        new _$GetsCorrectFieldsViaMixins._(
+            shouldBeAField: BuiltValueNullFieldError.checkNotNull(
+                shouldBeAField,
+                'GetsCorrectFieldsViaMixins',
+                'shouldBeAField'));
     replace(_$result);
     return _$result;
   }

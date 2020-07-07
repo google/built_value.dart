@@ -46,7 +46,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue.replace(serializers.deserialize(value,
@@ -103,7 +103,7 @@ class _$ImportedCustomValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
@@ -160,7 +160,7 @@ class _$ImportedCustomNestedValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue.replace(serializers.deserialize(value,
@@ -186,16 +186,15 @@ class _$ImportedValue extends ImportedValue {
   @override
   final BuiltList<prefix.SimpleValue> simpleValues;
 
-  factory _$ImportedValue([void Function(ImportedValueBuilder) updates]) =>
+  factory _$ImportedValue(
+          [void Function(ImportedValueBuilder) updates = emptyUpdate]) =>
       (new ImportedValueBuilder()..update(updates)).build();
 
   _$ImportedValue._({this.simpleValue, this.simpleValues}) : super._() {
-    if (simpleValue == null) {
-      throw new BuiltValueNullFieldError('ImportedValue', 'simpleValue');
-    }
-    if (simpleValues == null) {
-      throw new BuiltValueNullFieldError('ImportedValue', 'simpleValues');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValue, 'ImportedValue', 'simpleValue');
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValues, 'ImportedValue', 'simpleValues');
   }
 
   @override
@@ -246,9 +245,10 @@ class ImportedValueBuilder
   ImportedValueBuilder();
 
   ImportedValueBuilder get _$this {
-    if (_$v != null) {
-      _simpleValue = _$v.simpleValue?.toBuilder();
-      _simpleValues = _$v.simpleValues?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _simpleValue = $v.simpleValue?.toBuilder();
+      _simpleValues = $v.simpleValues?.toBuilder();
       _$v = null;
     }
     return this;
@@ -256,15 +256,13 @@ class ImportedValueBuilder
 
   @override
   void replace(ImportedValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImportedValue;
   }
 
   @override
   void update(void Function(ImportedValueBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override
@@ -300,17 +298,15 @@ class _$ImportedCustomValue extends ImportedCustomValue {
   final BuiltList<prefix.SimpleValue> simpleValues;
 
   factory _$ImportedCustomValue(
-          [void Function(ImportedCustomValueBuilder) updates]) =>
+          [void Function(ImportedCustomValueBuilder) updates = emptyUpdate]) =>
       (new ImportedCustomValueBuilder()..update(updates)).build()
           as _$ImportedCustomValue;
 
   _$ImportedCustomValue._({this.simpleValue, this.simpleValues}) : super._() {
-    if (simpleValue == null) {
-      throw new BuiltValueNullFieldError('ImportedCustomValue', 'simpleValue');
-    }
-    if (simpleValues == null) {
-      throw new BuiltValueNullFieldError('ImportedCustomValue', 'simpleValues');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValue, 'ImportedCustomValue', 'simpleValue');
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValues, 'ImportedCustomValue', 'simpleValues');
   }
 
   @override
@@ -374,9 +370,10 @@ class _$ImportedCustomValueBuilder extends ImportedCustomValueBuilder {
   _$ImportedCustomValueBuilder() : super._();
 
   ImportedCustomValueBuilder get _$this {
-    if (_$v != null) {
-      super.simpleValue = _$v.simpleValue;
-      super.simpleValues = _$v.simpleValues;
+    final $v = _$v;
+    if ($v != null) {
+      super.simpleValue = $v.simpleValue;
+      super.simpleValues = $v.simpleValues;
       _$v = null;
     }
     return this;
@@ -384,22 +381,23 @@ class _$ImportedCustomValueBuilder extends ImportedCustomValueBuilder {
 
   @override
   void replace(ImportedCustomValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImportedCustomValue;
   }
 
   @override
   void update(void Function(ImportedCustomValueBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override
   _$ImportedCustomValue build() {
     final _$result = _$v ??
         new _$ImportedCustomValue._(
-            simpleValue: simpleValue, simpleValues: simpleValues);
+            simpleValue: BuiltValueNullFieldError.checkNotNull(
+                simpleValue, 'ImportedCustomValue', 'simpleValue'),
+            simpleValues: BuiltValueNullFieldError.checkNotNull(
+                simpleValues, 'ImportedCustomValue', 'simpleValues'));
     replace(_$result);
     return _$result;
   }
@@ -412,20 +410,17 @@ class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
   final BuiltList<prefix.SimpleValue> simpleValues;
 
   factory _$ImportedCustomNestedValue(
-          [void Function(ImportedCustomNestedValueBuilder) updates]) =>
+          [void Function(ImportedCustomNestedValueBuilder) updates =
+              emptyUpdate]) =>
       (new ImportedCustomNestedValueBuilder()..update(updates)).build()
           as _$ImportedCustomNestedValue;
 
   _$ImportedCustomNestedValue._({this.simpleValue, this.simpleValues})
       : super._() {
-    if (simpleValue == null) {
-      throw new BuiltValueNullFieldError(
-          'ImportedCustomNestedValue', 'simpleValue');
-    }
-    if (simpleValues == null) {
-      throw new BuiltValueNullFieldError(
-          'ImportedCustomNestedValue', 'simpleValues');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValue, 'ImportedCustomNestedValue', 'simpleValue');
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValues, 'ImportedCustomNestedValue', 'simpleValues');
   }
 
   @override
@@ -490,9 +485,10 @@ class _$ImportedCustomNestedValueBuilder
   _$ImportedCustomNestedValueBuilder() : super._();
 
   ImportedCustomNestedValueBuilder get _$this {
-    if (_$v != null) {
-      super.simpleValue = _$v.simpleValue?.toBuilder();
-      super.simpleValues = _$v.simpleValues?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      super.simpleValue = $v.simpleValue?.toBuilder();
+      super.simpleValues = $v.simpleValues?.toBuilder();
       _$v = null;
     }
     return this;
@@ -500,15 +496,13 @@ class _$ImportedCustomNestedValueBuilder
 
   @override
   void replace(ImportedCustomNestedValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImportedCustomNestedValue;
   }
 
   @override
   void update(void Function(ImportedCustomNestedValueBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override

@@ -11,13 +11,12 @@ class _$PrivateValue extends _PrivateValue {
   @override
   final int value;
 
-  factory _$PrivateValue([void Function(_PrivateValueBuilder) updates]) =>
+  factory _$PrivateValue(
+          [void Function(_PrivateValueBuilder) updates = emptyUpdate]) =>
       (new _PrivateValueBuilder()..update(updates)).build();
 
   _$PrivateValue._({this.value}) : super._() {
-    if (value == null) {
-      throw new BuiltValueNullFieldError('_PrivateValue', 'value');
-    }
+    BuiltValueNullFieldError.checkNotNull(value, '_PrivateValue', 'value');
   }
 
   @override
@@ -56,8 +55,9 @@ class _PrivateValueBuilder
   _PrivateValueBuilder();
 
   _PrivateValueBuilder get _$this {
-    if (_$v != null) {
-      _value = _$v.value;
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
       _$v = null;
     }
     return this;
@@ -65,20 +65,21 @@ class _PrivateValueBuilder
 
   @override
   void replace(_PrivateValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PrivateValue;
   }
 
   @override
   void update(void Function(_PrivateValueBuilder) updates) {
-    if (updates != null) updates(this);
+    updates(this);
   }
 
   @override
   _$PrivateValue build() {
-    final _$result = _$v ?? new _$PrivateValue._(value: value);
+    final _$result = _$v ??
+        new _$PrivateValue._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, '_PrivateValue', 'value'));
     replace(_$result);
     return _$result;
   }
