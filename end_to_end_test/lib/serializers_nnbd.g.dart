@@ -9,8 +9,10 @@ part of serializers_nnbd;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(CompoundValue.serializer)
+      ..add(CompoundValueNoAutoNesting.serializer)
       ..add(CompoundValueNoNesting.serializer)
       ..add(FallbackEnum.serializer)
+      ..add(NoFieldsValue.serializer)
       ..add(SimpleValue.serializer)
       ..add(TestEnum.serializer)
       ..add(ValidatedValue.serializer)

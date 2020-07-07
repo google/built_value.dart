@@ -198,7 +198,7 @@ void main() {
   group(CompoundValueNoAutoNesting, () {
     test('does not auto create nested builders', () {
       expect(() => CompoundValueNoAutoNesting((b) => b..value),
-          throwsA(const TypeMatcher<BuiltValueNestedFieldError>()));
+          throwsA(const TypeMatcher<BuiltValueNullFieldError>()));
     });
   });
 

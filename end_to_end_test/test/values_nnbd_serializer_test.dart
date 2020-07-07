@@ -123,6 +123,24 @@ void main() {
     });
   });
 
+  group('CompoundValueNoAutoNesting', () {
+    var data =
+        CompoundValueNoAutoNesting((b) => b..value = NoFieldsValueBuilder());
+    var serialized = [
+      'CompoundValueNoAutoNesting',
+      'value',
+      <String>[],
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
   group('CompoundValue using StandardJsonPlugin', () {
     var data = CompoundValue((b) => b
       ..simpleValue.anInt = 1

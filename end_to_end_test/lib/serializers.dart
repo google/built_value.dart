@@ -28,6 +28,7 @@ part 'serializers.g.dart';
   CollectionsWithNulls,
   CompoundValue,
   CompoundValueExplicitNoNesting,
+  CompoundValueNoAutoNesting,
   CompoundValueNoNesting,
   ConcreteGeneric,
   EnumWithInt,
