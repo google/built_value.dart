@@ -13,6 +13,7 @@ import 'values_nnbd.dart';
 part 'serializers_nnbd.g.dart';
 
 @SerializersFor([
+  CompoundValue,
   FallbackEnum,
   SecondTestEnum,
   SimpleValue,

@@ -24,3 +24,33 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
       _$SimpleValue;
   SimpleValue._();
 }
+
+abstract class CompoundValue
+    implements Built<CompoundValue, CompoundValueBuilder> {
+  static Serializer<CompoundValue> get serializer => _$compoundValueSerializer;
+
+  SimpleValue get simpleValue;
+  @nullable
+  ValidatedValue? get validatedValue;
+
+  factory CompoundValue([void Function(CompoundValueBuilder) updates]) =
+      _$CompoundValue;
+  CompoundValue._();
+}
+
+abstract class ValidatedValue
+    implements Built<ValidatedValue, ValidatedValueBuilder> {
+  static Serializer<ValidatedValue> get serializer =>
+      _$validatedValueSerializer;
+
+  int get anInt;
+  @nullable
+  String get aString;
+
+  factory ValidatedValue([void Function(ValidatedValueBuilder) updates]) =
+      _$ValidatedValue;
+
+  ValidatedValue._() {
+    if (anInt == 7) throw StateError('anInt may not be 7');
+  }
+}
