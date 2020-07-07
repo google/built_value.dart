@@ -173,7 +173,7 @@ void main() {
       expect(
           CompoundValue((b) => b
             ..simpleValue.anInt = 1
-            ..validatedValue.anInt = 2).validatedValue.anInt,
+            ..validatedValue.anInt = 2).validatedValue!.anInt,
           2);
     });
 

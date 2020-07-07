@@ -330,13 +330,13 @@ class CompoundValueBuilder
   _$CompoundValue? _$v;
 
   SimpleValueBuilder? _simpleValue;
-  SimpleValueBuilder? get simpleValue =>
+  SimpleValueBuilder get simpleValue =>
       _$this._simpleValue ??= new SimpleValueBuilder();
   set simpleValue(SimpleValueBuilder? simpleValue) =>
       _$this._simpleValue = simpleValue;
 
   ValidatedValueBuilder? _validatedValue;
-  ValidatedValueBuilder? get validatedValue =>
+  ValidatedValueBuilder get validatedValue =>
       _$this._validatedValue ??= new ValidatedValueBuilder();
   set validatedValue(ValidatedValueBuilder? validatedValue) =>
       _$this._validatedValue = validatedValue;
@@ -346,7 +346,7 @@ class CompoundValueBuilder
   CompoundValueBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _simpleValue = $v.simpleValue?.toBuilder();
+      _simpleValue = $v.simpleValue.toBuilder();
       _validatedValue = $v.validatedValue?.toBuilder();
       _$v = null;
     }
@@ -373,7 +373,7 @@ class CompoundValueBuilder
               simpleValue: simpleValue.build(),
               validatedValue: _validatedValue?.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'simpleValue';
         simpleValue.build();

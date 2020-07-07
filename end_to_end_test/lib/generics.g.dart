@@ -623,7 +623,7 @@ class CollectionGenericValueBuilder<T>
   CollectionGenericValueBuilder<T> get _$this {
     final $v = _$v;
     if ($v != null) {
-      _values = $v.values?.toBuilder();
+      _values = $v.values.toBuilder();
       _$v = null;
     }
     return this;
@@ -748,9 +748,9 @@ class GenericContainerBuilder
   GenericContainerBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _genericValue = $v.genericValue?.toBuilder();
-      _boundGenericValue = $v.boundGenericValue?.toBuilder();
-      _collectionGenericValue = $v.collectionGenericValue?.toBuilder();
+      _genericValue = $v.genericValue.toBuilder();
+      _boundGenericValue = $v.boundGenericValue.toBuilder();
+      _collectionGenericValue = $v.collectionGenericValue.toBuilder();
       _$v = null;
     }
     return this;
@@ -851,7 +851,7 @@ class NestedGenericContainerBuilder
   NestedGenericContainerBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _map = $v.map?.toBuilder();
+      _map = $v.map.toBuilder();
       _$v = null;
     }
     return this;

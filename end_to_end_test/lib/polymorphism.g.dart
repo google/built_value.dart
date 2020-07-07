@@ -697,7 +697,7 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
     final $v = _$v;
     if ($v != null) {
       _inhabitant = $v.inhabitant;
-      _otherInhabitants = $v.otherInhabitants?.toBuilder();
+      _otherInhabitants = $v.otherInhabitants.toBuilder();
       _$v = null;
     }
     return this;

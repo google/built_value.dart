@@ -220,9 +220,9 @@ class StandardJsonValueBuilder
     if ($v != null) {
       _number = $v.number;
       _text = $v.text;
-      _keyValues = $v.keyValues?.toBuilder();
-      _zoo = $v.zoo?.toBuilder();
-      _uniqueZoo = $v.uniqueZoo?.toBuilder();
+      _keyValues = $v.keyValues.toBuilder();
+      _zoo = $v.zoo.toBuilder();
+      _uniqueZoo = $v.uniqueZoo.toBuilder();
       _strings = $v.strings?.toBuilder();
       _$v = null;
     }

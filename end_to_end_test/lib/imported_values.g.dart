@@ -247,8 +247,8 @@ class ImportedValueBuilder
   ImportedValueBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _simpleValue = $v.simpleValue?.toBuilder();
-      _simpleValues = $v.simpleValues?.toBuilder();
+      _simpleValue = $v.simpleValue.toBuilder();
+      _simpleValues = $v.simpleValues.toBuilder();
       _$v = null;
     }
     return this;
@@ -487,8 +487,8 @@ class _$ImportedCustomNestedValueBuilder
   ImportedCustomNestedValueBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      super.simpleValue = $v.simpleValue?.toBuilder();
-      super.simpleValues = $v.simpleValues?.toBuilder();
+      super.simpleValue = $v.simpleValue.toBuilder();
+      super.simpleValues = $v.simpleValues.toBuilder();
       _$v = null;
     }
     return this;
