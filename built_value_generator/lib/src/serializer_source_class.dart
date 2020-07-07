@@ -42,6 +42,9 @@ abstract class SerializerSourceClass
   BuiltValue get builtValueSettings => ValueSourceClass(element).settings;
 
   @memoized
+  bool get hasBuilder => builderElement != null;
+
+  @memoized
   BuiltValueSerializer get serializerSettings {
     var serializerFields =
         element.fields.where((field) => field.name == 'serializer').toList();
@@ -72,10 +75,16 @@ abstract class SerializerSourceClass
   @memoized
   String get name => element.name;
 
+  // TODO(davidmorgan): this is not the right way to check, but is good enough
+  // while developing. Fix before publishing.
+  @memoized
   bool get isNonNullByDefault =>
       element.source.contents.data.contains('// @dart=2.9');
 
+  @memoized
   String get orNull => isNonNullByDefault ? '?' : '';
+
+  @memoized
   String get notNull => isNonNullByDefault ? '!' : '';
 
   @memoized
@@ -513,7 +522,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
           compilationUnit, genericParameters.toBuiltSet());
       final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
       if (field.builderFieldUsesNestedBuilder) {
-        if (builtValueSettings.autoCreateNestedBuilders) {
+        if (builtValueSettings.autoCreateNestedBuilders && !hasBuilder) {
           return '''
 case '${escapeString(field.wireName)}':
   result.${field.name}.replace(serializers.deserialize(

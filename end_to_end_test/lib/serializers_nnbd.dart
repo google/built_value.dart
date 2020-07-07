@@ -16,6 +16,7 @@ part 'serializers_nnbd.g.dart';
   CompoundValue,
   CompoundValueNoAutoNesting,
   CompoundValueNoNesting,
+  CompoundValueExplicitNoNesting,
   FallbackEnum,
   SecondTestEnum,
   SimpleValue,

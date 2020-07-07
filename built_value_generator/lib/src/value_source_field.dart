@@ -49,6 +49,11 @@ abstract class ValueSourceField
   @memoized
   String get name => element.displayName;
 
+  bool get isNonNullByDefault =>
+      element.library.source.contents.data.contains('// @dart=2.9');
+
+  String get orNull => isNonNullByDefault ? '?' : '';
+
   @memoized
   String get type => DartTypes.getName(element.getter.returnType);
 
@@ -139,8 +144,19 @@ abstract class ValueSourceField
     if (result.contains('.')) {
       result = result.substring(result.indexOf('.') + 1);
     }
-    return result;
+    return _removeNullabilitySuffix(result);
   }
+
+  bool get builderElementTypeIsNullable =>
+      parsedLibrary
+          .getElementDeclaration(builderElement)
+          ?.node
+          ?.parent
+          ?.childEntities
+          ?.first
+          .toString()
+          ?.endsWith('?') ??
+      false;
 
   /// The [builderElementType] plus any import prefix.
   @memoized
@@ -149,19 +165,25 @@ abstract class ValueSourceField
     // to have parent node [VariableDeclarationList] giving the type.
     var fieldDeclaration = parsedLibrary.getElementDeclaration(builderElement);
     if (fieldDeclaration != null) {
-      return (((fieldDeclaration.node as VariableDeclaration).parent)
-                  as VariableDeclarationList)
-              ?.type
-              ?.toSource() ??
-          'dynamic';
+      return _removeNullabilitySuffix(
+          (((fieldDeclaration.node as VariableDeclaration).parent)
+                      as VariableDeclarationList)
+                  ?.type
+                  ?.toSource() ??
+              'dynamic');
     } else {
       // Otherwise it's an explicit getter/setter pair; get the type from the getter.
-      return (parsedLibrary.getElementDeclaration(builderElement.getter).node
-                  as MethodDeclaration)
+      return _removeNullabilitySuffix((parsedLibrary
+                  .getElementDeclaration(builderElement.getter)
+                  .node as MethodDeclaration)
               ?.returnType
               ?.toSource() ??
-          'dynamic';
+          'dynamic');
     }
+  }
+
+  String _removeNullabilitySuffix(String type) {
+    return type.endsWith('?') ? type.substring(0, type.length - 1) : type;
   }
 
   /// Gets the type name for the builder. Specify the compilation unit to
@@ -241,11 +263,13 @@ abstract class ValueSourceField
     }
 
     if (builderFieldExists) {
-      if (buildElementType != type &&
-          buildElementType != _toBuilderType(element.type, type)) {
+      var builderElementTypeOrNull = buildElementType;
+      if (builderElementTypeIsNullable) builderElementTypeOrNull += orNull;
+      if (builderElementTypeOrNull != type + orNull &&
+          builderElementTypeOrNull != _toBuilderType(element.type, type)) {
         result.add(GeneratorError((b) => b
           ..message = 'Make builder field $name have type: '
-              '$type (or, if applicable, builder)'));
+              '$type$orNull (or, if applicable, builder)'));
       }
     }
 
