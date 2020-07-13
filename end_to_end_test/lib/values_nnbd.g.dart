@@ -1261,6 +1261,96 @@ class DerivedValueBuilder
   }
 }
 
+class _$ValueWithCode extends ValueWithCode {
+  @override
+  final int anInt;
+  @override
+  final String? aString;
+
+  factory _$ValueWithCode(
+          [void Function(ValueWithCodeBuilder) updates = emptyUpdate]) =>
+      (new ValueWithCodeBuilder()..update(updates)).build();
+
+  _$ValueWithCode._({required this.anInt, this.aString}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(anInt, 'ValueWithCode', 'anInt');
+  }
+
+  @override
+  ValueWithCode rebuild(void Function(ValueWithCodeBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ValueWithCodeBuilder toBuilder() => new ValueWithCodeBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithCode &&
+        anInt == other.anInt &&
+        aString == other.aString;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueWithCode')
+          ..add('anInt', anInt)
+          ..add('aString', aString))
+        .toString();
+  }
+}
+
+class ValueWithCodeBuilder
+    implements Builder<ValueWithCode, ValueWithCodeBuilder> {
+  _$ValueWithCode? _$v;
+
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
+
+  String? _aString;
+  String? get aString => _$this._aString;
+  set aString(String? aString) => _$this._aString = aString;
+
+  ValueWithCodeBuilder();
+
+  ValueWithCodeBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _anInt = $v.anInt;
+      _aString = $v.aString;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithCode other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ValueWithCode;
+  }
+
+  @override
+  void update(void Function(ValueWithCodeBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$ValueWithCode build() {
+    final _$result = _$v ??
+        new _$ValueWithCode._(
+            anInt: BuiltValueNullFieldError.checkNotNull(
+                anInt, 'ValueWithCode', 'anInt'),
+            aString: aString);
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ValidatedValue extends ValidatedValue {
   @override
   final int anInt;
