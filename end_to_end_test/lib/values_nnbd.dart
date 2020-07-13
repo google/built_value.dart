@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 // @dart=2.9
 
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -116,6 +117,25 @@ abstract class CompoundValueExplicitNoNestingBuilder
   factory CompoundValueExplicitNoNestingBuilder() =
       _$CompoundValueExplicitNoNestingBuilder;
   CompoundValueExplicitNoNestingBuilder._();
+}
+
+// Check that nested collections work with a manually declared builder.
+abstract class ExplicitNestedList
+    implements Built<ExplicitNestedList, ExplicitNestedListBuilder> {
+  BuiltList<BuiltList<int>> get nestedList;
+
+  factory ExplicitNestedList(
+          [void Function(ExplicitNestedListBuilder) updates]) =
+      _$ExplicitNestedList;
+  ExplicitNestedList._();
+}
+
+abstract class ExplicitNestedListBuilder
+    implements Builder<ExplicitNestedList, ExplicitNestedListBuilder> {
+  ListBuilder<BuiltList<int>> nestedList = ListBuilder();
+
+  factory ExplicitNestedListBuilder() = _$ExplicitNestedListBuilder;
+  ExplicitNestedListBuilder._();
 }
 
 abstract class ValidatedValue
