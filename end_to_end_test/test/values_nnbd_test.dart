@@ -224,4 +224,22 @@ void main() {
           throwsA(const TypeMatcher<StateError>()));
     });
   });
+
+  group('ValueWithCode', () {
+    test('can be instantiated via custom factory', () {
+      expect(
+          ValueWithCode.fromCustomFactory(12),
+          ValueWithCode((b) => b
+            ..anInt = 12
+            ..aString = 'two'));
+    });
+
+    test('has derived getter', () {
+      expect(
+          ValueWithCode((b) => b
+            ..anInt = 12
+            ..aString = 'two').youCanWriteDerivedGetters,
+          '12two');
+    });
+  });
 }

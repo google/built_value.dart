@@ -165,6 +165,25 @@ int derivedValueGetterCount = 0;
 
 int derivedStringGetterCount = 0;
 
+abstract class ValueWithCode
+    implements Built<ValueWithCode, ValueWithCodeBuilder> {
+  static final int youCanHaveStaticFields = 3;
+
+  int get anInt;
+  @nullable
+  String? get aString;
+
+  String get youCanWriteDerivedGetters => anInt.toString() + aString!;
+
+  factory ValueWithCode([void Function(ValueWithCodeBuilder) updates]) =
+      _$ValueWithCode;
+  ValueWithCode._();
+
+  factory ValueWithCode.fromCustomFactory(int anInt) => ValueWithCode((b) => b
+    ..anInt = anInt
+    ..aString = 'two');
+}
+
 abstract class ValidatedValue
     implements Built<ValidatedValue, ValidatedValueBuilder> {
   static Serializer<ValidatedValue> get serializer =>
