@@ -194,6 +194,26 @@ void main() {
     });
   });
 
+  group('DerivedValue', () {
+    test('caches derivedValue', () {
+      final value = DerivedValue((b) => b..anInt = 7);
+      expect(derivedValueGetterCount, 0);
+      expect(value.derivedValue, 17);
+      expect(derivedValueGetterCount, 1);
+      expect(value.derivedValue, 17);
+      expect(derivedValueGetterCount, 1);
+    });
+
+    test('caches derivedString', () {
+      final value = DerivedValue((b) => b..anInt = 0);
+      expect(derivedStringGetterCount, 0);
+      expect(value.derivedString, [value.toString()]);
+      expect(derivedStringGetterCount, 1);
+      expect(value.derivedString, [value.toString()]);
+      expect(derivedStringGetterCount, 1);
+    });
+  });
+
   group('ValidatedValue', () {
     test('can be instantiated', () {
       ValidatedValue((b) => b..anInt = 1);

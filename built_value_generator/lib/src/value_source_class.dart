@@ -688,7 +688,8 @@ abstract class ValueSourceClass
           'final $type${field.isNullable ? orNull : ''} ${field.name};');
     }
     for (var memoizedGetter in memoizedGetters) {
-      result.writeln('${memoizedGetter.returnType} __${memoizedGetter.name};');
+      result.writeln(
+          '${memoizedGetter.returnType}$orNull __${memoizedGetter.name};');
     }
     result.writeln();
 
