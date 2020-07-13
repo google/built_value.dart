@@ -138,6 +138,33 @@ abstract class ExplicitNestedListBuilder
   ExplicitNestedListBuilder._();
 }
 
+abstract class DerivedValue
+    implements Built<DerivedValue, DerivedValueBuilder> {
+  int get anInt;
+
+  @memoized
+  int get derivedValue {
+    ++derivedValueGetterCount;
+
+    return anInt + 10;
+  }
+
+  @memoized
+  Iterable<String> get derivedString {
+    ++derivedStringGetterCount;
+
+    return [toString()];
+  }
+
+  factory DerivedValue([void Function(DerivedValueBuilder) updates]) =
+      _$DerivedValue;
+  DerivedValue._();
+}
+
+int derivedValueGetterCount = 0;
+
+int derivedStringGetterCount = 0;
+
 abstract class ValidatedValue
     implements Built<ValidatedValue, ValidatedValueBuilder> {
   static Serializer<ValidatedValue> get serializer =>

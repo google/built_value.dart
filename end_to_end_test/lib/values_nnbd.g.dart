@@ -1175,6 +1175,92 @@ class _$ExplicitNestedListBuilder extends ExplicitNestedListBuilder {
   }
 }
 
+class _$DerivedValue extends DerivedValue {
+  @override
+  final int anInt;
+  int? __derivedValue;
+  Iterable<String>? __derivedString;
+
+  factory _$DerivedValue(
+          [void Function(DerivedValueBuilder) updates = emptyUpdate]) =>
+      (new DerivedValueBuilder()..update(updates)).build();
+
+  _$DerivedValue._({required this.anInt}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(anInt, 'DerivedValue', 'anInt');
+  }
+
+  @override
+  int get derivedValue => __derivedValue ??= super.derivedValue;
+
+  @override
+  Iterable<String> get derivedString => __derivedString ??= super.derivedString;
+
+  @override
+  DerivedValue rebuild(void Function(DerivedValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  DerivedValueBuilder toBuilder() => new DerivedValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is DerivedValue && anInt == other.anInt;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, anInt.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('DerivedValue')..add('anInt', anInt))
+        .toString();
+  }
+}
+
+class DerivedValueBuilder
+    implements Builder<DerivedValue, DerivedValueBuilder> {
+  _$DerivedValue? _$v;
+
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
+
+  DerivedValueBuilder();
+
+  DerivedValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _anInt = $v.anInt;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(DerivedValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$DerivedValue;
+  }
+
+  @override
+  void update(void Function(DerivedValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$DerivedValue build() {
+    final _$result = _$v ??
+        new _$DerivedValue._(
+            anInt: BuiltValueNullFieldError.checkNotNull(
+                anInt, 'DerivedValue', 'anInt'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ValidatedValue extends ValidatedValue {
   @override
   final int anInt;
