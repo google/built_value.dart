@@ -22,6 +22,8 @@ Serializer<CompoundValueExplicitNoNesting>
     new _$CompoundValueExplicitNoNestingSerializer();
 Serializer<ValidatedValue> _$validatedValueSerializer =
     new _$ValidatedValueSerializer();
+Serializer<ValueUsingImportAs> _$valueUsingImportAsSerializer =
+    new _$ValueUsingImportAsSerializer();
 Serializer<NoFieldsValue> _$noFieldsValueSerializer =
     new _$NoFieldsValueSerializer();
 
@@ -402,6 +404,49 @@ class _$ValidatedValueSerializer
         case 'aString':
           result.aString = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ValueUsingImportAsSerializer
+    implements StructuredSerializer<ValueUsingImportAs> {
+  @override
+  final Iterable<Type> types = const [ValueUsingImportAs, _$ValueUsingImportAs];
+  @override
+  final String wireName = 'ValueUsingImportAs';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, ValueUsingImportAs object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value,
+          specifiedType: const FullType(using_import_as.TestEnum)),
+    ];
+
+    return result;
+  }
+
+  @override
+  ValueUsingImportAs deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new ValueUsingImportAsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+                  specifiedType: const FullType(using_import_as.TestEnum))
+              as using_import_as.TestEnum;
           break;
       }
     }
@@ -1670,6 +1715,87 @@ class ValidatedValueBuilder
             anInt: BuiltValueNullFieldError.checkNotNull(
                 anInt, 'ValidatedValue', 'anInt'),
             aString: aString);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ValueUsingImportAs extends ValueUsingImportAs {
+  @override
+  final using_import_as.TestEnum value;
+
+  factory _$ValueUsingImportAs(
+          [void Function(ValueUsingImportAsBuilder) updates = emptyUpdate]) =>
+      (new ValueUsingImportAsBuilder()..update(updates)).build();
+
+  _$ValueUsingImportAs._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(value, 'ValueUsingImportAs', 'value');
+  }
+
+  @override
+  ValueUsingImportAs rebuild(
+          void Function(ValueUsingImportAsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ValueUsingImportAsBuilder toBuilder() =>
+      new ValueUsingImportAsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueUsingImportAs && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueUsingImportAs')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class ValueUsingImportAsBuilder
+    implements Builder<ValueUsingImportAs, ValueUsingImportAsBuilder> {
+  _$ValueUsingImportAs? _$v;
+
+  using_import_as.TestEnum? _value;
+  using_import_as.TestEnum? get value => _$this._value;
+  set value(using_import_as.TestEnum? value) => _$this._value = value;
+
+  ValueUsingImportAsBuilder();
+
+  ValueUsingImportAsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueUsingImportAs other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ValueUsingImportAs;
+  }
+
+  @override
+  void update(void Function(ValueUsingImportAsBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$ValueUsingImportAs build() {
+    final _$result = _$v ??
+        new _$ValueUsingImportAs._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, 'ValueUsingImportAs', 'value'));
     replace(_$result);
     return _$result;
   }

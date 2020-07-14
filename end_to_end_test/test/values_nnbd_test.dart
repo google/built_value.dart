@@ -5,6 +5,7 @@
 
 import 'package:built_collection/src/internal/hash.dart';
 import 'package:built_value/built_value.dart';
+import 'package:end_to_end_test/enums_nnbd.dart';
 import 'package:end_to_end_test/errors_matchers.dart';
 import 'package:end_to_end_test/values_nnbd.dart';
 import 'package:test/test.dart';
@@ -262,6 +263,12 @@ void main() {
     test('validates on set', () {
       expect(() => ValueWithBuilderSmarts((b) => b..value = 'not allowed'),
           throwsA(const TypeMatcher<ArgumentError>()));
+    });
+  });
+
+  group('ValueUsingImportAs', () {
+    test('can be instantiated', () {
+      ValueUsingImportAs((b) => b..value = TestEnum.yes);
     });
   });
 }

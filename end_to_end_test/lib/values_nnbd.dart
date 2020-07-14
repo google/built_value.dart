@@ -6,6 +6,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:end_to_end_test/enums_nnbd.dart' as using_import_as;
 
 part 'values_nnbd.g.dart';
 
@@ -247,6 +248,20 @@ abstract class ValidatedValue
   ValidatedValue._() {
     if (anInt == 7) throw StateError('anInt may not be 7');
   }
+}
+
+abstract class ValueUsingImportAs
+    implements Built<ValueUsingImportAs, ValueUsingImportAsBuilder> {
+  static Serializer<ValueUsingImportAs> get serializer =>
+      _$valueUsingImportAsSerializer;
+
+  using_import_as.TestEnum get value;
+
+  factory ValueUsingImportAs(
+          [void Function(ValueUsingImportAsBuilder) updates]) =
+      _$ValueUsingImportAs;
+
+  ValueUsingImportAs._();
 }
 
 abstract class NoFieldsValue
