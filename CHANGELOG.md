@@ -4,6 +4,8 @@
 
 - Migrate to NNBD.
 - Remove dependency on `package:quiver`.
+- Remove support for serializing nulls using
+  `BuiltValueSerializer(serializeNulls: true)`.
 
 # 7.1.0
 

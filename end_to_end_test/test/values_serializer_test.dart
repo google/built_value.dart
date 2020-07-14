@@ -363,19 +363,6 @@ void main() {
     });
   });
 
-  group('SerializesNullsValue', () {
-    var data = SerializesNullsValue();
-    var serialized = ['SerializesNullsValue', 'value', null];
-
-    test('can be serialized', () {
-      expect(serializers.serialize(data), serialized);
-    });
-
-    test('can be deserialized', () {
-      expect(serializers.deserialize(serialized), data);
-    });
-  });
-
   group('OtherValue', () {
     var data = OtherValue((b) => b..other = 1);
     var serialized = ['OtherValue', 'other', 1];
