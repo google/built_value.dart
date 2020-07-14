@@ -3801,4 +3801,57 @@ class ValueWithOnSetBuilder
   }
 }
 
+class _$CustomToStringValue extends CustomToStringValue {
+  factory _$CustomToStringValue(
+          [void Function(CustomToStringValueBuilder) updates = emptyUpdate]) =>
+      (new CustomToStringValueBuilder()..update(updates)).build();
+
+  _$CustomToStringValue._() : super._();
+
+  @override
+  CustomToStringValue rebuild(
+          void Function(CustomToStringValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  CustomToStringValueBuilder toBuilder() =>
+      new CustomToStringValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is CustomToStringValue;
+  }
+
+  @override
+  int get hashCode {
+    return 617836932;
+  }
+}
+
+class CustomToStringValueBuilder
+    implements Builder<CustomToStringValue, CustomToStringValueBuilder> {
+  _$CustomToStringValue? _$v;
+
+  CustomToStringValueBuilder();
+
+  @override
+  void replace(CustomToStringValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$CustomToStringValue;
+  }
+
+  @override
+  void update(void Function(CustomToStringValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$CustomToStringValue build() {
+    final _$result = _$v ?? new _$CustomToStringValue._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

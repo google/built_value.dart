@@ -501,3 +501,18 @@ abstract class ValueWithOnSet
       _$ValueWithOnSet;
   ValueWithOnSet._();
 }
+
+// Check that `toString` from a mixin is not redefined.
+abstract class CustomToStringValue extends Object
+    with CustomToString
+    implements Built<CustomToStringValue, CustomToStringValueBuilder> {
+  factory CustomToStringValue(
+          [void Function(CustomToStringValueBuilder) updates]) =
+      _$CustomToStringValue;
+  CustomToStringValue._();
+}
+
+mixin CustomToString {
+  @override
+  String toString() => 'custom';
+}
