@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.8
+// @dart=2.9
 
-part of imported_values;
+part of 'imported_values_nnbd.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -190,7 +190,8 @@ class _$ImportedValue extends ImportedValue {
           [void Function(ImportedValueBuilder) updates = emptyUpdate]) =>
       (new ImportedValueBuilder()..update(updates)).build();
 
-  _$ImportedValue._({this.simpleValue, this.simpleValues}) : super._() {
+  _$ImportedValue._({required this.simpleValue, required this.simpleValues})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
         simpleValue, 'ImportedValue', 'simpleValue');
     BuiltValueNullFieldError.checkNotNull(
@@ -228,18 +229,18 @@ class _$ImportedValue extends ImportedValue {
 
 class ImportedValueBuilder
     implements Builder<ImportedValue, ImportedValueBuilder> {
-  _$ImportedValue _$v;
+  _$ImportedValue? _$v;
 
-  prefix.SimpleValueBuilder _simpleValue;
+  prefix.SimpleValueBuilder? _simpleValue;
   prefix.SimpleValueBuilder get simpleValue =>
       _$this._simpleValue ??= new prefix.SimpleValueBuilder();
-  set simpleValue(prefix.SimpleValueBuilder simpleValue) =>
+  set simpleValue(prefix.SimpleValueBuilder? simpleValue) =>
       _$this._simpleValue = simpleValue;
 
-  ListBuilder<prefix.SimpleValue> _simpleValues;
+  ListBuilder<prefix.SimpleValue>? _simpleValues;
   ListBuilder<prefix.SimpleValue> get simpleValues =>
       _$this._simpleValues ??= new ListBuilder<prefix.SimpleValue>();
-  set simpleValues(ListBuilder<prefix.SimpleValue> simpleValues) =>
+  set simpleValues(ListBuilder<prefix.SimpleValue>? simpleValues) =>
       _$this._simpleValues = simpleValues;
 
   ImportedValueBuilder();
@@ -274,7 +275,7 @@ class ImportedValueBuilder
               simpleValue: simpleValue.build(),
               simpleValues: simpleValues.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'simpleValue';
         simpleValue.build();
@@ -302,7 +303,9 @@ class _$ImportedCustomValue extends ImportedCustomValue {
       (new ImportedCustomValueBuilder()..update(updates)).build()
           as _$ImportedCustomValue;
 
-  _$ImportedCustomValue._({this.simpleValue, this.simpleValues}) : super._() {
+  _$ImportedCustomValue._(
+      {required this.simpleValue, required this.simpleValues})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
         simpleValue, 'ImportedCustomValue', 'simpleValue');
     BuiltValueNullFieldError.checkNotNull(
@@ -341,28 +344,28 @@ class _$ImportedCustomValue extends ImportedCustomValue {
 }
 
 class _$ImportedCustomValueBuilder extends ImportedCustomValueBuilder {
-  _$ImportedCustomValue _$v;
+  _$ImportedCustomValue? _$v;
 
   @override
-  prefix.SimpleValue get simpleValue {
+  prefix.SimpleValue? get simpleValue {
     _$this;
     return super.simpleValue;
   }
 
   @override
-  set simpleValue(prefix.SimpleValue simpleValue) {
+  set simpleValue(prefix.SimpleValue? simpleValue) {
     _$this;
     super.simpleValue = simpleValue;
   }
 
   @override
-  BuiltList<prefix.SimpleValue> get simpleValues {
+  BuiltList<prefix.SimpleValue>? get simpleValues {
     _$this;
     return super.simpleValues;
   }
 
   @override
-  set simpleValues(BuiltList<prefix.SimpleValue> simpleValues) {
+  set simpleValues(BuiltList<prefix.SimpleValue>? simpleValues) {
     _$this;
     super.simpleValues = simpleValues;
   }
@@ -415,7 +418,8 @@ class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
       (new ImportedCustomNestedValueBuilder()..update(updates)).build()
           as _$ImportedCustomNestedValue;
 
-  _$ImportedCustomNestedValue._({this.simpleValue, this.simpleValues})
+  _$ImportedCustomNestedValue._(
+      {required this.simpleValue, required this.simpleValues})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         simpleValue, 'ImportedCustomNestedValue', 'simpleValue');
@@ -456,12 +460,12 @@ class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
 
 class _$ImportedCustomNestedValueBuilder
     extends ImportedCustomNestedValueBuilder {
-  _$ImportedCustomNestedValue _$v;
+  _$ImportedCustomNestedValue? _$v;
 
   @override
   prefix.SimpleValueBuilder get simpleValue {
     _$this;
-    return super.simpleValue ??= new prefix.SimpleValueBuilder();
+    return super.simpleValue;
   }
 
   @override
@@ -473,7 +477,7 @@ class _$ImportedCustomNestedValueBuilder
   @override
   ListBuilder<prefix.SimpleValue> get simpleValues {
     _$this;
-    return super.simpleValues ??= new ListBuilder<prefix.SimpleValue>();
+    return super.simpleValues;
   }
 
   @override
@@ -514,7 +518,7 @@ class _$ImportedCustomNestedValueBuilder
               simpleValue: simpleValue.build(),
               simpleValues: simpleValues.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'simpleValue';
         simpleValue.build();

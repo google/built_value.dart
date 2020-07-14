@@ -21,6 +21,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(FieldDiscoveryValue.serializer)
       ..add(GenericContainer.serializer)
       ..add(GenericValue.serializer)
+      ..add(ImportedCustomNestedValue.serializer)
+      ..add(ImportedCustomValue.serializer)
+      ..add(ImportedValue.serializer)
       ..add(NamedFactoryValue.serializer)
       ..add(NestedGenericContainer.serializer)
       ..add(NoFieldsValue.serializer)
@@ -40,6 +43,15 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(WireNameEnum.serializer)
       ..add(WireNameValue.serializer)
       ..add(WireNumberEnum.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SimpleValue)]),
+          () => new ListBuilder<SimpleValue>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SimpleValue)]),
+          () => new ListBuilder<SimpleValue>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SimpleValue)]),
+          () => new ListBuilder<SimpleValue>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(ThirdDiscoverableValue)]),

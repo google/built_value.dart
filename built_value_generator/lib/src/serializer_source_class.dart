@@ -507,7 +507,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
           compilationUnit, genericParameters.toBuiltSet());
       final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
       if (field.builderFieldUsesNestedBuilder) {
-        if (builtValueSettings.autoCreateNestedBuilders && !hasBuilder) {
+        if (builtValueSettings.autoCreateNestedBuilders || hasBuilder) {
           return '''
 case '${escapeString(field.wireName)}':
   result.${field.name}.replace(serializers.deserialize(
