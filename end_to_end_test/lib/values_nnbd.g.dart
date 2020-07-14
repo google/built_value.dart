@@ -26,6 +26,8 @@ Serializer<ValueUsingImportAs> _$valueUsingImportAsSerializer =
     new _$ValueUsingImportAsSerializer();
 Serializer<NoFieldsValue> _$noFieldsValueSerializer =
     new _$NoFieldsValueSerializer();
+Serializer<PrimitivesValue> _$primitivesValueSerializer =
+    new _$PrimitivesValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -472,6 +474,113 @@ class _$NoFieldsValueSerializer implements StructuredSerializer<NoFieldsValue> {
       Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return new NoFieldsValueBuilder().build();
+  }
+}
+
+class _$PrimitivesValueSerializer
+    implements StructuredSerializer<PrimitivesValue> {
+  @override
+  final Iterable<Type> types = const [PrimitivesValue, _$PrimitivesValue];
+  @override
+  final String wireName = 'PrimitivesValue';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, PrimitivesValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'boolean',
+      serializers.serialize(object.boolean,
+          specifiedType: const FullType(bool)),
+      'integer',
+      serializers.serialize(object.integer, specifiedType: const FullType(int)),
+      'int64',
+      serializers.serialize(object.int64, specifiedType: const FullType(Int64)),
+      'dbl',
+      serializers.serialize(object.dbl, specifiedType: const FullType(double)),
+      'number',
+      serializers.serialize(object.number, specifiedType: const FullType(num)),
+      'string',
+      serializers.serialize(object.string,
+          specifiedType: const FullType(String)),
+      'dateTime',
+      serializers.serialize(object.dateTime,
+          specifiedType: const FullType(DateTime)),
+      'duration',
+      serializers.serialize(object.duration,
+          specifiedType: const FullType(Duration)),
+      'regExp',
+      serializers.serialize(object.regExp,
+          specifiedType: const FullType(RegExp)),
+      'uri',
+      serializers.serialize(object.uri, specifiedType: const FullType(Uri)),
+      'bigInt',
+      serializers.serialize(object.bigInt,
+          specifiedType: const FullType(BigInt)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PrimitivesValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PrimitivesValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'boolean':
+          result.boolean = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'integer':
+          result.integer = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'int64':
+          result.int64 = serializers.deserialize(value,
+              specifiedType: const FullType(Int64)) as Int64;
+          break;
+        case 'dbl':
+          result.dbl = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'number':
+          result.number = serializers.deserialize(value,
+              specifiedType: const FullType(num)) as num;
+          break;
+        case 'string':
+          result.string = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'dateTime':
+          result.dateTime = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'duration':
+          result.duration = serializers.deserialize(value,
+              specifiedType: const FullType(Duration)) as Duration;
+          break;
+        case 'regExp':
+          result.regExp = serializers.deserialize(value,
+              specifiedType: const FullType(RegExp)) as RegExp;
+          break;
+        case 'uri':
+          result.uri = serializers.deserialize(value,
+              specifiedType: const FullType(Uri)) as Uri;
+          break;
+        case 'bigInt':
+          result.bigInt = serializers.deserialize(value,
+              specifiedType: const FullType(BigInt)) as BigInt;
+          break;
+      }
+    }
+
+    return result.build();
   }
 }
 
@@ -1852,6 +1961,241 @@ class NoFieldsValueBuilder
   @override
   _$NoFieldsValue build() {
     final _$result = _$v ?? new _$NoFieldsValue._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PrimitivesValue extends PrimitivesValue {
+  @override
+  final bool boolean;
+  @override
+  final int integer;
+  @override
+  final Int64 int64;
+  @override
+  final double dbl;
+  @override
+  final num number;
+  @override
+  final String string;
+  @override
+  final DateTime dateTime;
+  @override
+  final Duration duration;
+  @override
+  final RegExp regExp;
+  @override
+  final Uri uri;
+  @override
+  final BigInt bigInt;
+
+  factory _$PrimitivesValue(
+          [void Function(PrimitivesValueBuilder) updates = emptyUpdate]) =>
+      (new PrimitivesValueBuilder()..update(updates)).build();
+
+  _$PrimitivesValue._(
+      {required this.boolean,
+      required this.integer,
+      required this.int64,
+      required this.dbl,
+      required this.number,
+      required this.string,
+      required this.dateTime,
+      required this.duration,
+      required this.regExp,
+      required this.uri,
+      required this.bigInt})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        boolean, 'PrimitivesValue', 'boolean');
+    BuiltValueNullFieldError.checkNotNull(
+        integer, 'PrimitivesValue', 'integer');
+    BuiltValueNullFieldError.checkNotNull(int64, 'PrimitivesValue', 'int64');
+    BuiltValueNullFieldError.checkNotNull(dbl, 'PrimitivesValue', 'dbl');
+    BuiltValueNullFieldError.checkNotNull(number, 'PrimitivesValue', 'number');
+    BuiltValueNullFieldError.checkNotNull(string, 'PrimitivesValue', 'string');
+    BuiltValueNullFieldError.checkNotNull(
+        dateTime, 'PrimitivesValue', 'dateTime');
+    BuiltValueNullFieldError.checkNotNull(
+        duration, 'PrimitivesValue', 'duration');
+    BuiltValueNullFieldError.checkNotNull(regExp, 'PrimitivesValue', 'regExp');
+    BuiltValueNullFieldError.checkNotNull(uri, 'PrimitivesValue', 'uri');
+    BuiltValueNullFieldError.checkNotNull(bigInt, 'PrimitivesValue', 'bigInt');
+  }
+
+  @override
+  PrimitivesValue rebuild(void Function(PrimitivesValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PrimitivesValueBuilder toBuilder() =>
+      new PrimitivesValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PrimitivesValue &&
+        boolean == other.boolean &&
+        integer == other.integer &&
+        int64 == other.int64 &&
+        dbl == other.dbl &&
+        number == other.number &&
+        string == other.string &&
+        dateTime == other.dateTime &&
+        duration == other.duration &&
+        regExp == other.regExp &&
+        uri == other.uri &&
+        bigInt == other.bigInt;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc(
+                                        $jc($jc(0, boolean.hashCode),
+                                            integer.hashCode),
+                                        int64.hashCode),
+                                    dbl.hashCode),
+                                number.hashCode),
+                            string.hashCode),
+                        dateTime.hashCode),
+                    duration.hashCode),
+                regExp.hashCode),
+            uri.hashCode),
+        bigInt.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('PrimitivesValue')
+          ..add('boolean', boolean)
+          ..add('integer', integer)
+          ..add('int64', int64)
+          ..add('dbl', dbl)
+          ..add('number', number)
+          ..add('string', string)
+          ..add('dateTime', dateTime)
+          ..add('duration', duration)
+          ..add('regExp', regExp)
+          ..add('uri', uri)
+          ..add('bigInt', bigInt))
+        .toString();
+  }
+}
+
+class PrimitivesValueBuilder
+    implements Builder<PrimitivesValue, PrimitivesValueBuilder> {
+  _$PrimitivesValue? _$v;
+
+  bool? _boolean;
+  bool? get boolean => _$this._boolean;
+  set boolean(bool? boolean) => _$this._boolean = boolean;
+
+  int? _integer;
+  int? get integer => _$this._integer;
+  set integer(int? integer) => _$this._integer = integer;
+
+  Int64? _int64;
+  Int64? get int64 => _$this._int64;
+  set int64(Int64? int64) => _$this._int64 = int64;
+
+  double? _dbl;
+  double? get dbl => _$this._dbl;
+  set dbl(double? dbl) => _$this._dbl = dbl;
+
+  num? _number;
+  num? get number => _$this._number;
+  set number(num? number) => _$this._number = number;
+
+  String? _string;
+  String? get string => _$this._string;
+  set string(String? string) => _$this._string = string;
+
+  DateTime? _dateTime;
+  DateTime? get dateTime => _$this._dateTime;
+  set dateTime(DateTime? dateTime) => _$this._dateTime = dateTime;
+
+  Duration? _duration;
+  Duration? get duration => _$this._duration;
+  set duration(Duration? duration) => _$this._duration = duration;
+
+  RegExp? _regExp;
+  RegExp? get regExp => _$this._regExp;
+  set regExp(RegExp? regExp) => _$this._regExp = regExp;
+
+  Uri? _uri;
+  Uri? get uri => _$this._uri;
+  set uri(Uri? uri) => _$this._uri = uri;
+
+  BigInt? _bigInt;
+  BigInt? get bigInt => _$this._bigInt;
+  set bigInt(BigInt? bigInt) => _$this._bigInt = bigInt;
+
+  PrimitivesValueBuilder();
+
+  PrimitivesValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _boolean = $v.boolean;
+      _integer = $v.integer;
+      _int64 = $v.int64;
+      _dbl = $v.dbl;
+      _number = $v.number;
+      _string = $v.string;
+      _dateTime = $v.dateTime;
+      _duration = $v.duration;
+      _regExp = $v.regExp;
+      _uri = $v.uri;
+      _bigInt = $v.bigInt;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(PrimitivesValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PrimitivesValue;
+  }
+
+  @override
+  void update(void Function(PrimitivesValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$PrimitivesValue build() {
+    final _$result = _$v ??
+        new _$PrimitivesValue._(
+            boolean: BuiltValueNullFieldError.checkNotNull(
+                boolean, 'PrimitivesValue', 'boolean'),
+            integer: BuiltValueNullFieldError.checkNotNull(
+                integer, 'PrimitivesValue', 'integer'),
+            int64: BuiltValueNullFieldError.checkNotNull(
+                int64, 'PrimitivesValue', 'int64'),
+            dbl: BuiltValueNullFieldError.checkNotNull(
+                dbl, 'PrimitivesValue', 'dbl'),
+            number: BuiltValueNullFieldError.checkNotNull(
+                number, 'PrimitivesValue', 'number'),
+            string: BuiltValueNullFieldError.checkNotNull(
+                string, 'PrimitivesValue', 'string'),
+            dateTime: BuiltValueNullFieldError.checkNotNull(
+                dateTime, 'PrimitivesValue', 'dateTime'),
+            duration: BuiltValueNullFieldError.checkNotNull(
+                duration, 'PrimitivesValue', 'duration'),
+            regExp: BuiltValueNullFieldError.checkNotNull(
+                regExp, 'PrimitivesValue', 'regExp'),
+            uri: BuiltValueNullFieldError.checkNotNull(
+                uri, 'PrimitivesValue', 'uri'),
+            bigInt: BuiltValueNullFieldError.checkNotNull(bigInt, 'PrimitivesValue', 'bigInt'));
     replace(_$result);
     return _$result;
   }
