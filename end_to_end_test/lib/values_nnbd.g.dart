@@ -46,6 +46,7 @@ Serializer<RecursiveValueA> _$recursiveValueASerializer =
     new _$RecursiveValueASerializer();
 Serializer<RecursiveValueB> _$recursiveValueBSerializer =
     new _$RecursiveValueBSerializer();
+Serializer<OtherValue> _$otherValueSerializer = new _$OtherValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -1008,6 +1009,45 @@ class _$RecursiveValueBSerializer
           result.value.replace(serializers.deserialize(value,
                   specifiedType: const FullType(RecursiveValueA))
               as RecursiveValueA);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$OtherValueSerializer implements StructuredSerializer<OtherValue> {
+  @override
+  final Iterable<Type> types = const [OtherValue, _$OtherValue];
+  @override
+  final String wireName = 'OtherValue';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, OtherValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'other',
+      serializers.serialize(object.other, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  OtherValue deserialize(Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new OtherValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'other':
+          result.other = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -3849,6 +3889,83 @@ class CustomToStringValueBuilder
   @override
   _$CustomToStringValue build() {
     final _$result = _$v ?? new _$CustomToStringValue._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$OtherValue extends OtherValue {
+  @override
+  final int other;
+
+  factory _$OtherValue(
+          [void Function(OtherValueBuilder) updates = emptyUpdate]) =>
+      (new OtherValueBuilder()..update(updates)).build();
+
+  _$OtherValue._({required this.other}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(other, 'OtherValue', 'other');
+  }
+
+  @override
+  OtherValue rebuild(void Function(OtherValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  OtherValueBuilder toBuilder() => new OtherValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is OtherValue && this.other == other.other;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, other.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('OtherValue')..add('other', other))
+        .toString();
+  }
+}
+
+class OtherValueBuilder implements Builder<OtherValue, OtherValueBuilder> {
+  _$OtherValue? _$v;
+
+  int? _other;
+  int? get other => _$this._other;
+  set other(int? other) => _$this._other = other;
+
+  OtherValueBuilder();
+
+  OtherValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _other = $v.other;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(OtherValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$OtherValue;
+  }
+
+  @override
+  void update(void Function(OtherValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$OtherValue build() {
+    final _$result = _$v ??
+        new _$OtherValue._(
+            other: BuiltValueNullFieldError.checkNotNull(
+                other, 'OtherValue', 'other'));
     replace(_$result);
     return _$result;
   }

@@ -287,4 +287,14 @@ void main() {
       expect(CustomToStringValue().toString(), 'custom');
     });
   });
+
+  group('OtherValue', () {
+    test('compares correctly', () {
+      var value = OtherValue((b) => b..other = 1);
+      var equalValue = OtherValue((b) => b..other = 1);
+      var notEqualValue = OtherValue((b) => b..other = 2);
+      expect(value, equalValue);
+      expect(value, isNot(equals(notEqualValue)));
+    });
+  });
 }
