@@ -1351,6 +1351,148 @@ class ValueWithCodeBuilder
   }
 }
 
+class _$ValueWithDefaults extends ValueWithDefaults {
+  @override
+  final int anInt;
+  @override
+  final String? aString;
+  @override
+  final SimpleValue value;
+
+  factory _$ValueWithDefaults(
+          [void Function(ValueWithDefaultsBuilder) updates = emptyUpdate]) =>
+      (new ValueWithDefaultsBuilder()..update(updates)).build()
+          as _$ValueWithDefaults;
+
+  _$ValueWithDefaults._(
+      {required this.anInt, this.aString, required this.value})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(anInt, 'ValueWithDefaults', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(value, 'ValueWithDefaults', 'value');
+  }
+
+  @override
+  ValueWithDefaults rebuild(void Function(ValueWithDefaultsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$ValueWithDefaultsBuilder toBuilder() =>
+      new _$ValueWithDefaultsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithDefaults &&
+        anInt == other.anInt &&
+        aString == other.aString &&
+        value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf(
+        $jc($jc($jc(0, anInt.hashCode), aString.hashCode), value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueWithDefaults')
+          ..add('anInt', anInt)
+          ..add('aString', aString)
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
+  _$ValueWithDefaults? _$v;
+
+  @override
+  int get anInt {
+    _$this;
+    return super.anInt;
+  }
+
+  @override
+  set anInt(int anInt) {
+    _$this;
+    super.anInt = anInt;
+  }
+
+  @override
+  String? get aString {
+    _$this;
+    return super.aString;
+  }
+
+  @override
+  set aString(String? aString) {
+    _$this;
+    super.aString = aString;
+  }
+
+  @override
+  SimpleValueBuilder get value {
+    _$this;
+    return super.value;
+  }
+
+  @override
+  set value(SimpleValueBuilder value) {
+    _$this;
+    super.value = value;
+  }
+
+  _$ValueWithDefaultsBuilder() : super._();
+
+  ValueWithDefaultsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      super.anInt = $v.anInt;
+      super.aString = $v.aString;
+      super.value = $v.value.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithDefaults other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ValueWithDefaults;
+  }
+
+  @override
+  void update(void Function(ValueWithDefaultsBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$ValueWithDefaults build() {
+    _$ValueWithDefaults _$result;
+    try {
+      _$result = _$v ??
+          new _$ValueWithDefaults._(
+              anInt: BuiltValueNullFieldError.checkNotNull(
+                  anInt, 'ValueWithDefaults', 'anInt'),
+              aString: aString,
+              value: value.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'value';
+        value.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ValueWithDefaults', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ValidatedValue extends ValidatedValue {
   @override
   final int anInt;
