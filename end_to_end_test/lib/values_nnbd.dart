@@ -297,3 +297,26 @@ abstract class PrimitivesValue
 
   PrimitivesValue._();
 }
+
+typedef MyFunctionType = int Function(String);
+
+abstract class FunctionValue
+    implements Built<FunctionValue, FunctionValueBuilder> {
+  MyFunctionType get function;
+
+  factory FunctionValue([void Function(FunctionValueBuilder) updates]) =
+      _$FunctionValue;
+
+  FunctionValue._();
+}
+
+abstract class ListOfFunctionValue
+    implements Built<ListOfFunctionValue, ListOfFunctionValueBuilder> {
+  BuiltList<MyFunctionType> get functions;
+
+  factory ListOfFunctionValue(
+          [void Function(ListOfFunctionValueBuilder) updates]) =
+      _$ListOfFunctionValue;
+
+  ListOfFunctionValue._();
+}
