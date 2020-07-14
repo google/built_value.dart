@@ -2201,4 +2201,182 @@ class PrimitivesValueBuilder
   }
 }
 
+class _$FunctionValue extends FunctionValue {
+  @override
+  final MyFunctionType function;
+
+  factory _$FunctionValue(
+          [void Function(FunctionValueBuilder) updates = emptyUpdate]) =>
+      (new FunctionValueBuilder()..update(updates)).build();
+
+  _$FunctionValue._({required this.function}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        function, 'FunctionValue', 'function');
+  }
+
+  @override
+  FunctionValue rebuild(void Function(FunctionValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  FunctionValueBuilder toBuilder() => new FunctionValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    final dynamic _$dynamicOther = other;
+    return other is FunctionValue && function == _$dynamicOther.function;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, function.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('FunctionValue')
+          ..add('function', function))
+        .toString();
+  }
+}
+
+class FunctionValueBuilder
+    implements Builder<FunctionValue, FunctionValueBuilder> {
+  _$FunctionValue? _$v;
+
+  MyFunctionType? _function;
+  MyFunctionType? get function => _$this._function;
+  set function(MyFunctionType? function) => _$this._function = function;
+
+  FunctionValueBuilder();
+
+  FunctionValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _function = $v.function;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(FunctionValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$FunctionValue;
+  }
+
+  @override
+  void update(void Function(FunctionValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$FunctionValue build() {
+    final _$result = _$v ??
+        new _$FunctionValue._(
+            function: BuiltValueNullFieldError.checkNotNull(
+                function, 'FunctionValue', 'function'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ListOfFunctionValue extends ListOfFunctionValue {
+  @override
+  final BuiltList<MyFunctionType> functions;
+
+  factory _$ListOfFunctionValue(
+          [void Function(ListOfFunctionValueBuilder) updates = emptyUpdate]) =>
+      (new ListOfFunctionValueBuilder()..update(updates)).build();
+
+  _$ListOfFunctionValue._({required this.functions}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        functions, 'ListOfFunctionValue', 'functions');
+  }
+
+  @override
+  ListOfFunctionValue rebuild(
+          void Function(ListOfFunctionValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ListOfFunctionValueBuilder toBuilder() =>
+      new ListOfFunctionValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    final dynamic _$dynamicOther = other;
+    return other is ListOfFunctionValue &&
+        functions == _$dynamicOther.functions;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, functions.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ListOfFunctionValue')
+          ..add('functions', functions))
+        .toString();
+  }
+}
+
+class ListOfFunctionValueBuilder
+    implements Builder<ListOfFunctionValue, ListOfFunctionValueBuilder> {
+  _$ListOfFunctionValue? _$v;
+
+  ListBuilder<MyFunctionType>? _functions;
+  ListBuilder<MyFunctionType> get functions =>
+      _$this._functions ??= new ListBuilder<MyFunctionType>();
+  set functions(ListBuilder<MyFunctionType>? functions) =>
+      _$this._functions = functions;
+
+  ListOfFunctionValueBuilder();
+
+  ListOfFunctionValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _functions = $v.functions.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ListOfFunctionValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ListOfFunctionValue;
+  }
+
+  @override
+  void update(void Function(ListOfFunctionValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$ListOfFunctionValue build() {
+    _$ListOfFunctionValue _$result;
+    try {
+      _$result =
+          _$v ?? new _$ListOfFunctionValue._(functions: functions.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'functions';
+        functions.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ListOfFunctionValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
