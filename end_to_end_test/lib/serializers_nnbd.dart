@@ -27,6 +27,7 @@ part 'serializers_nnbd.g.dart';
   SimpleValue,
   TestEnum,
   ValueUsingImportAs,
+  ValueWithCustomSerializer,
   WireNameEnum,
   WireNameValue,
   WireNumberEnum,

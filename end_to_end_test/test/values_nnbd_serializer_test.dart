@@ -349,4 +349,17 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('ValueWithCustomSerializer', () {
+    var data = ValueWithCustomSerializer((b) => b..value = 1);
+    var serialized = ['ValueWithCustomSerializer', 1];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }
