@@ -1493,6 +1493,97 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   }
 }
 
+class _$ValueWithBuilderSmarts extends ValueWithBuilderSmarts {
+  @override
+  final String value;
+
+  factory _$ValueWithBuilderSmarts(
+          [void Function(ValueWithBuilderSmartsBuilder) updates =
+              emptyUpdate]) =>
+      (new ValueWithBuilderSmartsBuilder()..update(updates)).build()
+          as _$ValueWithBuilderSmarts;
+
+  _$ValueWithBuilderSmarts._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        value, 'ValueWithBuilderSmarts', 'value');
+  }
+
+  @override
+  ValueWithBuilderSmarts rebuild(
+          void Function(ValueWithBuilderSmartsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$ValueWithBuilderSmartsBuilder toBuilder() =>
+      new _$ValueWithBuilderSmartsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithBuilderSmarts && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueWithBuilderSmarts')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class _$ValueWithBuilderSmartsBuilder extends ValueWithBuilderSmartsBuilder {
+  _$ValueWithBuilderSmarts? _$v;
+
+  @override
+  String get value {
+    _$this;
+    return super.value;
+  }
+
+  @override
+  set value(String value) {
+    _$this;
+    super.value = value;
+  }
+
+  _$ValueWithBuilderSmartsBuilder() : super._();
+
+  ValueWithBuilderSmartsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      super.value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithBuilderSmarts other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ValueWithBuilderSmarts;
+  }
+
+  @override
+  void update(void Function(ValueWithBuilderSmartsBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$ValueWithBuilderSmarts build() {
+    final _$result = _$v ??
+        new _$ValueWithBuilderSmarts._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, 'ValueWithBuilderSmarts', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$ValidatedValue extends ValidatedValue {
   @override
   final int anInt;
