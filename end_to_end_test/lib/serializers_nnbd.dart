@@ -18,9 +18,11 @@ part 'serializers_nnbd.g.dart';
   CompoundValueNoNesting,
   CompoundValueExplicitNoNesting,
   FallbackEnum,
+  PrimitivesValue,
   SecondTestEnum,
   SimpleValue,
   TestEnum,
+  ValueUsingImportAs,
   WireNameEnum,
   WireNumberEnum,
 ])

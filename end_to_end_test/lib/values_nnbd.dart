@@ -7,6 +7,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/enums_nnbd.dart' as using_import_as;
+import 'package:fixnum/fixnum.dart';
 
 part 'values_nnbd.g.dart';
 
@@ -272,4 +273,27 @@ abstract class NoFieldsValue
       _$NoFieldsValue;
 
   NoFieldsValue._();
+}
+
+abstract class PrimitivesValue
+    implements Built<PrimitivesValue, PrimitivesValueBuilder> {
+  static Serializer<PrimitivesValue> get serializer =>
+      _$primitivesValueSerializer;
+
+  bool get boolean;
+  int get integer;
+  Int64 get int64;
+  double get dbl;
+  num get number;
+  String get string;
+  DateTime get dateTime;
+  Duration get duration;
+  RegExp get regExp;
+  Uri get uri;
+  BigInt get bigInt;
+
+  factory PrimitivesValue([void Function(PrimitivesValueBuilder) updates]) =
+      _$PrimitivesValue;
+
+  PrimitivesValue._();
 }

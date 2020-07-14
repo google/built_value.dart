@@ -5,9 +5,11 @@
 
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
+import 'package:end_to_end_test/enums_nnbd.dart';
 import 'package:end_to_end_test/errors_matchers.dart';
 import 'package:end_to_end_test/serializers_nnbd.dart';
 import 'package:end_to_end_test/values_nnbd.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -201,6 +203,71 @@ void main() {
           serializersWithPlugin.deserialize(serialized,
               specifiedType: specifiedType),
           data);
+    });
+  });
+
+  group('ValueUsingImportAs', () {
+    var data = ValueUsingImportAs((b) => b.value = TestEnum.yes);
+    var serialized = [
+      'ValueUsingImportAs',
+      'value',
+      'yes',
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
+  group('PrimitivesValue', () {
+    var data = PrimitivesValue((b) => b
+      ..boolean = true
+      ..integer = 42
+      ..int64 = Int64.MAX_VALUE
+      ..dbl = 2.5
+      ..number = 17.5
+      ..string = 'test'
+      ..dateTime = DateTime.fromMillisecondsSinceEpoch(1000, isUtc: true)
+      ..duration = Duration(microseconds: 12345)
+      ..regExp = RegExp(r'\w+@\d+')
+      ..uri = Uri.parse('https://github.com/google/built_value.dart')
+      ..bigInt = BigInt.parse('123456789012345678901234567890'));
+    var serialized = [
+      'PrimitivesValue',
+      'boolean',
+      true,
+      'integer',
+      42,
+      'int64',
+      '9223372036854775807',
+      'dbl',
+      2.5,
+      'number',
+      17.5,
+      'string',
+      'test',
+      'dateTime',
+      1000000,
+      'duration',
+      12345,
+      'regExp',
+      r'\w+@\d+',
+      'uri',
+      'https://github.com/google/built_value.dart',
+      'bigInt',
+      '123456789012345678901234567890',
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
     });
   });
 }
