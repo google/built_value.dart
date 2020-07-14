@@ -284,6 +284,35 @@ void main() {
     });
   });
 
+  group('FieldDiscoveryValue', () {
+    var data = FieldDiscoveryValue((b) => b
+      ..value.value.value = 1
+      ..values.add(ThirdDiscoverableValue((b) => b..value = 4)));
+    var serialized = [
+      'FieldDiscoveryValue',
+      'value',
+      [
+        'value',
+        ['value', 1],
+      ],
+      'values',
+      [
+        [
+          'value',
+          4,
+        ]
+      ],
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
   group('PartiallySerializableValue', () {
     var data = PartiallySerializableValue((b) => b
       ..value = 1

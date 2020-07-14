@@ -5,6 +5,7 @@
 
 library serializers_nnbd;
 
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/enums_nnbd.dart';
 
@@ -18,6 +19,7 @@ part 'serializers_nnbd.g.dart';
   CompoundValueNoNesting,
   CompoundValueExplicitNoNesting,
   FallbackEnum,
+  FieldDiscoveryValue,
   NamedFactoryValue,
   PartiallySerializableValue,
   PrimitivesValue,
