@@ -340,12 +340,25 @@ void main() {
     test('works with generics', () {
       // Initializer only fires for ints, it sets the value to 42.
       var valueThatTriggersInitializer =
-      ValueWithGenericBuilderInitializer<int>();
+          ValueWithGenericBuilderInitializer<int>();
       expect(valueThatTriggersInitializer.value, 42);
 
       var valueThatDoesNotTriggerInitializer =
-      ValueWithGenericBuilderInitializer<String>();
+          ValueWithGenericBuilderInitializer<String>();
       expect(valueThatDoesNotTriggerInitializer.value, null);
+    });
+  });
+
+  group('MemoizedHashcodeValue', () {
+    test('computes same hashCode as HashcodeValue', () {
+      var value = HashcodeValue((b) => b
+        ..x = 42
+        ..y = 43);
+      var valueWithMemoization = MemoizedHashcodeValue((b) => b
+        ..x = 42
+        ..y = 43);
+
+      expect(valueWithMemoization.hashCode, value.hashCode);
     });
   });
 }

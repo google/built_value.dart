@@ -620,3 +620,28 @@ abstract class ValueWithGenericBuilderInitializer<T>
           updates]) = _$ValueWithGenericBuilderInitializer<T>;
   ValueWithGenericBuilderInitializer._();
 }
+
+abstract class HashcodeValue
+    implements Built<HashcodeValue, HashcodeValueBuilder> {
+  int get x;
+  int get y;
+
+  HashcodeValue._();
+  factory HashcodeValue([void Function(HashcodeValueBuilder) updates]) =
+      _$HashcodeValue;
+}
+
+abstract class MemoizedHashcodeValue
+    implements Built<MemoizedHashcodeValue, MemoizedHashcodeValueBuilder> {
+  int get x;
+  int get y;
+
+  @override
+  @memoized
+  int get hashCode;
+
+  MemoizedHashcodeValue._();
+  factory MemoizedHashcodeValue(
+          [void Function(MemoizedHashcodeValueBuilder) updates]) =
+      _$MemoizedHashcodeValue;
+}

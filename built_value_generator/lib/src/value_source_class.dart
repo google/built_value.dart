@@ -1066,7 +1066,7 @@ abstract class ValueSourceClass
     var generateMemoizedHashCode =
         declaresMemoizedHashCode && comparedFields.isNotEmpty;
     if (generateMemoizedHashCode) {
-      result.writeln('int __hashCode;');
+      result.writeln('int$orNull __hashCode;');
     }
 
     result.writeln('@override');
