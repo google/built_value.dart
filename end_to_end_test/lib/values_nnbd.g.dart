@@ -32,6 +32,8 @@ Serializer<PartiallySerializableValue> _$partiallySerializableValueSerializer =
     new _$PartiallySerializableValueSerializer();
 Serializer<NamedFactoryValue> _$namedFactoryValueSerializer =
     new _$NamedFactoryValueSerializer();
+Serializer<WireNameValue> _$wireNameValueSerializer =
+    new _$WireNameValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -664,6 +666,46 @@ class _$NamedFactoryValueSerializer
       final Object value = iterator.current;
       switch (key) {
         case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
+  @override
+  final Iterable<Type> types = const [WireNameValue, _$WireNameValue];
+  @override
+  final String wireName = '\$V';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, WireNameValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      '\$v',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  WireNameValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new WireNameValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case '\$v':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
@@ -2641,6 +2683,84 @@ class NamedFactoryValueBuilder
         new _$NamedFactoryValue._(
             value: BuiltValueNullFieldError.checkNotNull(
                 value, 'NamedFactoryValue', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$WireNameValue extends WireNameValue {
+  @override
+  final int value;
+
+  factory _$WireNameValue(
+          [void Function(WireNameValueBuilder) updates = emptyUpdate]) =>
+      (new WireNameValueBuilder()..update(updates)).build();
+
+  _$WireNameValue._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(value, 'WireNameValue', 'value');
+  }
+
+  @override
+  WireNameValue rebuild(void Function(WireNameValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  WireNameValueBuilder toBuilder() => new WireNameValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is WireNameValue && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('WireNameValue')..add('value', value))
+        .toString();
+  }
+}
+
+class WireNameValueBuilder
+    implements Builder<WireNameValue, WireNameValueBuilder> {
+  _$WireNameValue? _$v;
+
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
+
+  WireNameValueBuilder();
+
+  WireNameValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(WireNameValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$WireNameValue;
+  }
+
+  @override
+  void update(void Function(WireNameValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$WireNameValue build() {
+    final _$result = _$v ??
+        new _$WireNameValue._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, 'WireNameValue', 'value'));
     replace(_$result);
     return _$result;
   }

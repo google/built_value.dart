@@ -22,6 +22,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ValidatedValue.serializer)
       ..add(ValueUsingImportAs.serializer)
       ..add(WireNameEnum.serializer)
+      ..add(WireNameValue.serializer)
       ..add(WireNumberEnum.serializer))
     .build();
 

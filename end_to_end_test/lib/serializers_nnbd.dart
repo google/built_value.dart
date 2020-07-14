@@ -26,6 +26,7 @@ part 'serializers_nnbd.g.dart';
   TestEnum,
   ValueUsingImportAs,
   WireNameEnum,
+  WireNameValue,
   WireNumberEnum,
 ])
 final Serializers serializers = _$serializers;
