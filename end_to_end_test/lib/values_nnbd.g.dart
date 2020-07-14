@@ -47,6 +47,9 @@ Serializer<RecursiveValueA> _$recursiveValueASerializer =
 Serializer<RecursiveValueB> _$recursiveValueBSerializer =
     new _$RecursiveValueBSerializer();
 Serializer<OtherValue> _$otherValueSerializer = new _$OtherValueSerializer();
+Serializer<DefaultsForFieldSettingsValue>
+    _$defaultsForFieldSettingsValueSerializer =
+    new _$DefaultsForFieldSettingsValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -1047,6 +1050,52 @@ class _$OtherValueSerializer implements StructuredSerializer<OtherValue> {
       switch (key) {
         case 'other':
           result.other = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$DefaultsForFieldSettingsValueSerializer
+    implements StructuredSerializer<DefaultsForFieldSettingsValue> {
+  @override
+  final Iterable<Type> types = const [
+    DefaultsForFieldSettingsValue,
+    _$DefaultsForFieldSettingsValue
+  ];
+  @override
+  final String wireName = 'DefaultsForFieldSettingsValue';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, DefaultsForFieldSettingsValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'serialized',
+      serializers.serialize(object.serialized,
+          specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  DefaultsForFieldSettingsValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new DefaultsForFieldSettingsValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'serialized':
+          result.serialized = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
       }
@@ -3966,6 +4015,117 @@ class OtherValueBuilder implements Builder<OtherValue, OtherValueBuilder> {
         new _$OtherValue._(
             other: BuiltValueNullFieldError.checkNotNull(
                 other, 'OtherValue', 'other'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$DefaultsForFieldSettingsValue extends DefaultsForFieldSettingsValue {
+  @override
+  final int ignored;
+  @override
+  final int compared;
+  @override
+  final int serialized;
+
+  factory _$DefaultsForFieldSettingsValue(
+          [void Function(DefaultsForFieldSettingsValueBuilder) updates =
+              emptyUpdate]) =>
+      (new DefaultsForFieldSettingsValueBuilder()..update(updates)).build();
+
+  _$DefaultsForFieldSettingsValue._(
+      {required this.ignored, required this.compared, required this.serialized})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        ignored, 'DefaultsForFieldSettingsValue', 'ignored');
+    BuiltValueNullFieldError.checkNotNull(
+        compared, 'DefaultsForFieldSettingsValue', 'compared');
+    BuiltValueNullFieldError.checkNotNull(
+        serialized, 'DefaultsForFieldSettingsValue', 'serialized');
+  }
+
+  @override
+  DefaultsForFieldSettingsValue rebuild(
+          void Function(DefaultsForFieldSettingsValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  DefaultsForFieldSettingsValueBuilder toBuilder() =>
+      new DefaultsForFieldSettingsValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is DefaultsForFieldSettingsValue && compared == other.compared;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, compared.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('DefaultsForFieldSettingsValue')
+          ..add('ignored', ignored)
+          ..add('compared', compared)
+          ..add('serialized', serialized))
+        .toString();
+  }
+}
+
+class DefaultsForFieldSettingsValueBuilder
+    implements
+        Builder<DefaultsForFieldSettingsValue,
+            DefaultsForFieldSettingsValueBuilder> {
+  _$DefaultsForFieldSettingsValue? _$v;
+
+  int? _ignored;
+  int? get ignored => _$this._ignored;
+  set ignored(int? ignored) => _$this._ignored = ignored;
+
+  int? _compared;
+  int? get compared => _$this._compared;
+  set compared(int? compared) => _$this._compared = compared;
+
+  int? _serialized;
+  int? get serialized => _$this._serialized;
+  set serialized(int? serialized) => _$this._serialized = serialized;
+
+  DefaultsForFieldSettingsValueBuilder();
+
+  DefaultsForFieldSettingsValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _ignored = $v.ignored;
+      _compared = $v.compared;
+      _serialized = $v.serialized;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(DefaultsForFieldSettingsValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$DefaultsForFieldSettingsValue;
+  }
+
+  @override
+  void update(void Function(DefaultsForFieldSettingsValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$DefaultsForFieldSettingsValue build() {
+    final _$result = _$v ??
+        new _$DefaultsForFieldSettingsValue._(
+            ignored: BuiltValueNullFieldError.checkNotNull(
+                ignored, 'DefaultsForFieldSettingsValue', 'ignored'),
+            compared: BuiltValueNullFieldError.checkNotNull(
+                compared, 'DefaultsForFieldSettingsValue', 'compared'),
+            serialized: BuiltValueNullFieldError.checkNotNull(
+                serialized, 'DefaultsForFieldSettingsValue', 'serialized'));
     replace(_$result);
     return _$result;
   }
