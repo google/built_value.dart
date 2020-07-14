@@ -195,6 +195,50 @@ void main() {
     });
   });
 
+  group(CompoundValueNoAutoNesting, () {
+    test('does not auto create nested builders', () {
+      expect(() => CompoundValueNoAutoNesting((b) => b..value),
+          throwsA(const TypeMatcher<BuiltValueNullFieldError>()));
+    });
+  });
+
+  group('CompoundValueComparableBuilders', () {
+    test('builder implements operator==', () {
+      final left = CompoundValueComparableBuilders(
+          (b) => b..simpleValue = SimpleValue((b) => b..anInt = 1));
+      final right = CompoundValueComparableBuilders(
+          (b) => b..simpleValue = SimpleValue((b) => b..anInt = 1));
+      expect(left.toBuilder() == right.toBuilder(), true);
+    });
+
+    test('built does not equal builder', () {
+      final value = CompoundValueComparableBuilders(
+          (b) => b..simpleValue = SimpleValue((b) => b..anInt = 1));
+
+      /// ignore: unrelated_type_equality_checks
+      expect(value == value.toBuilder(), false);
+    });
+
+    test('builder implements hashCode', () {
+      final left = CompoundValueComparableBuilders(
+          (b) => b..simpleValue = SimpleValue((b) => b..anInt = 1));
+      final right = CompoundValueComparableBuilders(
+          (b) => b..simpleValue = SimpleValue((b) => b..anInt = 1));
+      expect(left.toBuilder().hashCode == right.toBuilder().hashCode, true);
+    });
+
+    test('built hashCode does not equal builder hashCode', () {
+      final value = CompoundValueComparableBuilders(
+          (b) => b..simpleValue = SimpleValue((b) => b..anInt = 1));
+
+      // It's not actually required that the hash codes differ; but since
+      // they are not equal, it's better if the hash codes _do_ differ. This
+      // helps performance if you put both built and builder in a hash set or
+      // map.
+      expect(value.hashCode, isNot(value.toBuilder().hashCode));
+    });
+  });
+
   group('DerivedValue', () {
     test('caches derivedValue', () {
       final value = DerivedValue((b) => b..anInt = 7);
@@ -266,12 +310,6 @@ void main() {
     });
   });
 
-  group('ValueUsingImportAs', () {
-    test('can be instantiated', () {
-      ValueUsingImportAs((b) => b..value = TestEnum.yes);
-    });
-  });
-
   group('ValueWithOnSet', () {
     test('notifies on sets', () {
       var notified = false;
@@ -285,6 +323,12 @@ void main() {
   group(CustomToStringValue, () {
     test('has custom toString()', () {
       expect(CustomToStringValue().toString(), 'custom');
+    });
+  });
+
+  group('ValueUsingImportAs', () {
+    test('can be instantiated', () {
+      ValueUsingImportAs((b) => b..value = TestEnum.yes);
     });
   });
 
