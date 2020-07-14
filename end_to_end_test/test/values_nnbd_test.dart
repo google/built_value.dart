@@ -281,4 +281,10 @@ void main() {
       expect(notified, true);
     });
   });
+
+  group(CustomToStringValue, () {
+    test('has custom toString()', () {
+      expect(CustomToStringValue().toString(), 'custom');
+    });
+  });
 }
