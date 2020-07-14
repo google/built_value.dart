@@ -310,12 +310,6 @@ void main() {
     });
   });
 
-  group('ValueUsingImportAs', () {
-    test('can be instantiated', () {
-      ValueUsingImportAs((b) => b..value = TestEnum.yes);
-    });
-  });
-
   group('ValueWithOnSet', () {
     test('notifies on sets', () {
       var notified = false;

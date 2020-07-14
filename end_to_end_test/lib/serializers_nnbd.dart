@@ -21,6 +21,7 @@ part 'serializers_nnbd.g.dart';
   FallbackEnum,
   FieldDiscoveryValue,
   NamedFactoryValue,
+  OtherValue,
   PartiallySerializableValue,
   PrimitivesValue,
   SecondTestEnum,
