@@ -516,3 +516,13 @@ mixin CustomToString {
   @override
   String toString() => 'custom';
 }
+
+// Check that a field can be called `other`.
+abstract class OtherValue implements Built<OtherValue, OtherValueBuilder> {
+  static Serializer<OtherValue> get serializer => _$otherValueSerializer;
+
+  int get other;
+
+  factory OtherValue([void Function(OtherValueBuilder) updates]) = _$OtherValue;
+  OtherValue._();
+}
