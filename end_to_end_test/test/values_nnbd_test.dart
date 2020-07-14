@@ -297,4 +297,23 @@ void main() {
       expect(value, isNot(equals(notEqualValue)));
     });
   });
+
+  group('DefaultsForFieldSettingsValue', () {
+    test('compares correctly', () {
+      var value = DefaultsForFieldSettingsValue((b) => b
+        ..ignored = 0
+        ..compared = 0
+        ..serialized = 0);
+      var equalValue = DefaultsForFieldSettingsValue((b) => b
+        ..ignored = 1
+        ..compared = 0
+        ..serialized = 0);
+      var differentValue = DefaultsForFieldSettingsValue((b) => b
+        ..ignored = 0
+        ..compared = 1
+        ..serialized = 0);
+      expect(value, equalValue);
+      expect(value, isNot(differentValue));
+    });
+  });
 }
