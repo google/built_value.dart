@@ -62,9 +62,7 @@ abstract class SerializerSourceClass
     // If a field does not exist, that means an old `built_value` version; use
     // the default.
     return BuiltValueSerializer(
-        custom: annotation.getField('custom')?.toBoolValue() ?? false,
-        serializeNulls:
-            annotation.getField('serializeNulls')?.toBoolValue() ?? false);
+        custom: annotation.getField('custom')?.toBoolValue() ?? false);
   }
 
   // TODO(davidmorgan): share common code in a nicer way.
@@ -337,8 +335,7 @@ class ${serializerImplName} implements StructuredSerializer<$genericName> {
       final key = iterator.current as String;
       iterator.moveNext();
       final Object value = iterator.current;
-      ${serializerSettings.serializeNulls ? 'if (value == null) continue;' : ''}'''
-              '''switch (key) {
+      switch (key) {
         ${_generateFieldDeserializers()}
       }
     }
@@ -480,26 +477,13 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
           specifiedType:
           ${field.generateFullType(compilationUnit, genericParameters.toBuiltSet())})''';
 
-          // By default, omit nulls; but if we were asked to include nulls, just
-          // write them.
-          if (serializerSettings.serializeNulls) {
-            return '''
-          result.add('${escapeString(field.wireName)}');
-          value = object.${field.name};
-          if (value == null) {
-            result.add(null);
-          } else {
-            result.add($serializeField);
-          }''';
-          } else {
-            return '''
+          return '''
           value = object.${field.name};
           if (value != null) {
             result
               ..add('${escapeString(field.wireName)}')
               ..add($serializeField);
           }''';
-          }
         }).join('');
   }
 

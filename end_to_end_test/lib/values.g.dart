@@ -46,8 +46,6 @@ Serializer<RecursiveValueA> _$recursiveValueASerializer =
     new _$RecursiveValueASerializer();
 Serializer<RecursiveValueB> _$recursiveValueBSerializer =
     new _$RecursiveValueBSerializer();
-Serializer<SerializesNullsValue> _$serializesNullsValueSerializer =
-    new _$SerializesNullsValueSerializer();
 Serializer<OtherValue> _$otherValueSerializer = new _$OtherValueSerializer();
 Serializer<DefaultsForFieldSettingsValue>
     _$defaultsForFieldSettingsValueSerializer =
@@ -1019,57 +1017,6 @@ class _$RecursiveValueBSerializer
           result.value.replace(serializers.deserialize(value,
                   specifiedType: const FullType(RecursiveValueA))
               as RecursiveValueA);
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$SerializesNullsValueSerializer
-    implements StructuredSerializer<SerializesNullsValue> {
-  @override
-  final Iterable<Type> types = const [
-    SerializesNullsValue,
-    _$SerializesNullsValue
-  ];
-  @override
-  final String wireName = 'SerializesNullsValue';
-
-  @override
-  Iterable<Object> serialize(
-      Serializers serializers, SerializesNullsValue object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
-    result.add('value');
-    value = object.value;
-    if (value == null) {
-      result.add(null);
-    } else {
-      result.add(
-          serializers.serialize(value, specifiedType: const FullType(String)));
-    }
-    return result;
-  }
-
-  @override
-  SerializesNullsValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new SerializesNullsValueBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current as String;
-      iterator.moveNext();
-      final Object value = iterator.current;
-      if (value == null) continue;
-      switch (key) {
-        case 'value':
-          result.value = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
           break;
       }
     }
@@ -4088,82 +4035,6 @@ class ValueWithOnSetBuilder
         new _$ValueWithOnSet._(
             value: BuiltValueNullFieldError.checkNotNull(
                 value, 'ValueWithOnSet', 'value'));
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$SerializesNullsValue extends SerializesNullsValue {
-  @override
-  final String value;
-
-  factory _$SerializesNullsValue(
-          [void Function(SerializesNullsValueBuilder) updates = emptyUpdate]) =>
-      (new SerializesNullsValueBuilder()..update(updates)).build();
-
-  _$SerializesNullsValue._({this.value}) : super._();
-
-  @override
-  SerializesNullsValue rebuild(
-          void Function(SerializesNullsValueBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  SerializesNullsValueBuilder toBuilder() =>
-      new SerializesNullsValueBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is SerializesNullsValue && value == other.value;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, value.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('SerializesNullsValue')
-          ..add('value', value))
-        .toString();
-  }
-}
-
-class SerializesNullsValueBuilder
-    implements Builder<SerializesNullsValue, SerializesNullsValueBuilder> {
-  _$SerializesNullsValue _$v;
-
-  String _value;
-  String get value => _$this._value;
-  set value(String value) => _$this._value = value;
-
-  SerializesNullsValueBuilder();
-
-  SerializesNullsValueBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _value = $v.value;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(SerializesNullsValue other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$SerializesNullsValue;
-  }
-
-  @override
-  void update(void Function(SerializesNullsValueBuilder) updates) {
-    updates(this);
-  }
-
-  @override
-  _$SerializesNullsValue build() {
-    final _$result = _$v ?? new _$SerializesNullsValue._(value: value);
     replace(_$result);
     return _$result;
   }
