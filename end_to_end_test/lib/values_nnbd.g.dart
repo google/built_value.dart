@@ -34,6 +34,18 @@ Serializer<NamedFactoryValue> _$namedFactoryValueSerializer =
     new _$NamedFactoryValueSerializer();
 Serializer<WireNameValue> _$wireNameValueSerializer =
     new _$WireNameValueSerializer();
+Serializer<FieldDiscoveryValue> _$fieldDiscoveryValueSerializer =
+    new _$FieldDiscoveryValueSerializer();
+Serializer<DiscoverableValue> _$discoverableValueSerializer =
+    new _$DiscoverableValueSerializer();
+Serializer<SecondDiscoverableValue> _$secondDiscoverableValueSerializer =
+    new _$SecondDiscoverableValueSerializer();
+Serializer<ThirdDiscoverableValue> _$thirdDiscoverableValueSerializer =
+    new _$ThirdDiscoverableValueSerializer();
+Serializer<RecursiveValueA> _$recursiveValueASerializer =
+    new _$RecursiveValueASerializer();
+Serializer<RecursiveValueB> _$recursiveValueBSerializer =
+    new _$RecursiveValueBSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -708,6 +720,294 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
         case '\$v':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$FieldDiscoveryValueSerializer
+    implements StructuredSerializer<FieldDiscoveryValue> {
+  @override
+  final Iterable<Type> types = const [
+    FieldDiscoveryValue,
+    _$FieldDiscoveryValue
+  ];
+  @override
+  final String wireName = 'FieldDiscoveryValue';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, FieldDiscoveryValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value,
+          specifiedType: const FullType(DiscoverableValue)),
+      'values',
+      serializers.serialize(object.values,
+          specifiedType: const FullType(
+              BuiltList, const [const FullType(ThirdDiscoverableValue)])),
+    ];
+    Object? value;
+    value = object.recursiveValue;
+    if (value != null) {
+      result
+        ..add('recursiveValue')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(FieldDiscoveryValue)));
+    }
+    return result;
+  }
+
+  @override
+  FieldDiscoveryValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new FieldDiscoveryValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(DiscoverableValue))
+              as DiscoverableValue);
+          break;
+        case 'values':
+          result.values.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(ThirdDiscoverableValue)
+              ])) as BuiltList<Object>);
+          break;
+        case 'recursiveValue':
+          result.recursiveValue.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(FieldDiscoveryValue))
+              as FieldDiscoveryValue);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$DiscoverableValueSerializer
+    implements StructuredSerializer<DiscoverableValue> {
+  @override
+  final Iterable<Type> types = const [DiscoverableValue, _$DiscoverableValue];
+  @override
+  final String wireName = 'DiscoverableValue';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, DiscoverableValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value,
+          specifiedType: const FullType(SecondDiscoverableValue)),
+    ];
+
+    return result;
+  }
+
+  @override
+  DiscoverableValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new DiscoverableValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(SecondDiscoverableValue))
+              as SecondDiscoverableValue);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$SecondDiscoverableValueSerializer
+    implements StructuredSerializer<SecondDiscoverableValue> {
+  @override
+  final Iterable<Type> types = const [
+    SecondDiscoverableValue,
+    _$SecondDiscoverableValue
+  ];
+  @override
+  final String wireName = 'SecondDiscoverableValue';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, SecondDiscoverableValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  SecondDiscoverableValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new SecondDiscoverableValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ThirdDiscoverableValueSerializer
+    implements StructuredSerializer<ThirdDiscoverableValue> {
+  @override
+  final Iterable<Type> types = const [
+    ThirdDiscoverableValue,
+    _$ThirdDiscoverableValue
+  ];
+  @override
+  final String wireName = 'ThirdDiscoverableValue';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, ThirdDiscoverableValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  ThirdDiscoverableValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new ThirdDiscoverableValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$RecursiveValueASerializer
+    implements StructuredSerializer<RecursiveValueA> {
+  @override
+  final Iterable<Type> types = const [RecursiveValueA, _$RecursiveValueA];
+  @override
+  final String wireName = 'RecursiveValueA';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, RecursiveValueA object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value,
+          specifiedType: const FullType(RecursiveValueB)),
+    ];
+
+    return result;
+  }
+
+  @override
+  RecursiveValueA deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new RecursiveValueABuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(RecursiveValueB))
+              as RecursiveValueB);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$RecursiveValueBSerializer
+    implements StructuredSerializer<RecursiveValueB> {
+  @override
+  final Iterable<Type> types = const [RecursiveValueB, _$RecursiveValueB];
+  @override
+  final String wireName = 'RecursiveValueB';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, RecursiveValueB object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value,
+          specifiedType: const FullType(RecursiveValueA)),
+    ];
+
+    return result;
+  }
+
+  @override
+  RecursiveValueB deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new RecursiveValueBBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(RecursiveValueA))
+              as RecursiveValueA);
           break;
       }
     }
@@ -2761,6 +3061,573 @@ class WireNameValueBuilder
         new _$WireNameValue._(
             value: BuiltValueNullFieldError.checkNotNull(
                 value, 'WireNameValue', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$FieldDiscoveryValue extends FieldDiscoveryValue {
+  @override
+  final DiscoverableValue value;
+  @override
+  final BuiltList<ThirdDiscoverableValue> values;
+  @override
+  final FieldDiscoveryValue? recursiveValue;
+
+  factory _$FieldDiscoveryValue(
+          [void Function(FieldDiscoveryValueBuilder) updates = emptyUpdate]) =>
+      (new FieldDiscoveryValueBuilder()..update(updates)).build();
+
+  _$FieldDiscoveryValue._(
+      {required this.value, required this.values, this.recursiveValue})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        value, 'FieldDiscoveryValue', 'value');
+    BuiltValueNullFieldError.checkNotNull(
+        values, 'FieldDiscoveryValue', 'values');
+  }
+
+  @override
+  FieldDiscoveryValue rebuild(
+          void Function(FieldDiscoveryValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  FieldDiscoveryValueBuilder toBuilder() =>
+      new FieldDiscoveryValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is FieldDiscoveryValue &&
+        value == other.value &&
+        values == other.values &&
+        recursiveValue == other.recursiveValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc($jc(0, value.hashCode), values.hashCode), recursiveValue.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('FieldDiscoveryValue')
+          ..add('value', value)
+          ..add('values', values)
+          ..add('recursiveValue', recursiveValue))
+        .toString();
+  }
+}
+
+class FieldDiscoveryValueBuilder
+    implements Builder<FieldDiscoveryValue, FieldDiscoveryValueBuilder> {
+  _$FieldDiscoveryValue? _$v;
+
+  DiscoverableValueBuilder? _value;
+  DiscoverableValueBuilder get value =>
+      _$this._value ??= new DiscoverableValueBuilder();
+  set value(DiscoverableValueBuilder? value) => _$this._value = value;
+
+  ListBuilder<ThirdDiscoverableValue>? _values;
+  ListBuilder<ThirdDiscoverableValue> get values =>
+      _$this._values ??= new ListBuilder<ThirdDiscoverableValue>();
+  set values(ListBuilder<ThirdDiscoverableValue>? values) =>
+      _$this._values = values;
+
+  FieldDiscoveryValueBuilder? _recursiveValue;
+  FieldDiscoveryValueBuilder get recursiveValue =>
+      _$this._recursiveValue ??= new FieldDiscoveryValueBuilder();
+  set recursiveValue(FieldDiscoveryValueBuilder? recursiveValue) =>
+      _$this._recursiveValue = recursiveValue;
+
+  FieldDiscoveryValueBuilder();
+
+  FieldDiscoveryValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value.toBuilder();
+      _values = $v.values.toBuilder();
+      _recursiveValue = $v.recursiveValue?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(FieldDiscoveryValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$FieldDiscoveryValue;
+  }
+
+  @override
+  void update(void Function(FieldDiscoveryValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$FieldDiscoveryValue build() {
+    _$FieldDiscoveryValue _$result;
+    try {
+      _$result = _$v ??
+          new _$FieldDiscoveryValue._(
+              value: value.build(),
+              values: values.build(),
+              recursiveValue: _recursiveValue?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'value';
+        value.build();
+        _$failedField = 'values';
+        values.build();
+        _$failedField = 'recursiveValue';
+        _recursiveValue?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'FieldDiscoveryValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$DiscoverableValue extends DiscoverableValue {
+  @override
+  final SecondDiscoverableValue value;
+
+  factory _$DiscoverableValue(
+          [void Function(DiscoverableValueBuilder) updates = emptyUpdate]) =>
+      (new DiscoverableValueBuilder()..update(updates)).build();
+
+  _$DiscoverableValue._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(value, 'DiscoverableValue', 'value');
+  }
+
+  @override
+  DiscoverableValue rebuild(void Function(DiscoverableValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  DiscoverableValueBuilder toBuilder() =>
+      new DiscoverableValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is DiscoverableValue && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('DiscoverableValue')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class DiscoverableValueBuilder
+    implements Builder<DiscoverableValue, DiscoverableValueBuilder> {
+  _$DiscoverableValue? _$v;
+
+  SecondDiscoverableValueBuilder? _value;
+  SecondDiscoverableValueBuilder get value =>
+      _$this._value ??= new SecondDiscoverableValueBuilder();
+  set value(SecondDiscoverableValueBuilder? value) => _$this._value = value;
+
+  DiscoverableValueBuilder();
+
+  DiscoverableValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(DiscoverableValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$DiscoverableValue;
+  }
+
+  @override
+  void update(void Function(DiscoverableValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$DiscoverableValue build() {
+    _$DiscoverableValue _$result;
+    try {
+      _$result = _$v ?? new _$DiscoverableValue._(value: value.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'value';
+        value.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'DiscoverableValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SecondDiscoverableValue extends SecondDiscoverableValue {
+  @override
+  final int value;
+
+  factory _$SecondDiscoverableValue(
+          [void Function(SecondDiscoverableValueBuilder) updates =
+              emptyUpdate]) =>
+      (new SecondDiscoverableValueBuilder()..update(updates)).build();
+
+  _$SecondDiscoverableValue._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        value, 'SecondDiscoverableValue', 'value');
+  }
+
+  @override
+  SecondDiscoverableValue rebuild(
+          void Function(SecondDiscoverableValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SecondDiscoverableValueBuilder toBuilder() =>
+      new SecondDiscoverableValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SecondDiscoverableValue && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SecondDiscoverableValue')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class SecondDiscoverableValueBuilder
+    implements
+        Builder<SecondDiscoverableValue, SecondDiscoverableValueBuilder> {
+  _$SecondDiscoverableValue? _$v;
+
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
+
+  SecondDiscoverableValueBuilder();
+
+  SecondDiscoverableValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SecondDiscoverableValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$SecondDiscoverableValue;
+  }
+
+  @override
+  void update(void Function(SecondDiscoverableValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$SecondDiscoverableValue build() {
+    final _$result = _$v ??
+        new _$SecondDiscoverableValue._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, 'SecondDiscoverableValue', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ThirdDiscoverableValue extends ThirdDiscoverableValue {
+  @override
+  final int value;
+
+  factory _$ThirdDiscoverableValue(
+          [void Function(ThirdDiscoverableValueBuilder) updates =
+              emptyUpdate]) =>
+      (new ThirdDiscoverableValueBuilder()..update(updates)).build();
+
+  _$ThirdDiscoverableValue._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        value, 'ThirdDiscoverableValue', 'value');
+  }
+
+  @override
+  ThirdDiscoverableValue rebuild(
+          void Function(ThirdDiscoverableValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ThirdDiscoverableValueBuilder toBuilder() =>
+      new ThirdDiscoverableValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ThirdDiscoverableValue && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ThirdDiscoverableValue')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class ThirdDiscoverableValueBuilder
+    implements Builder<ThirdDiscoverableValue, ThirdDiscoverableValueBuilder> {
+  _$ThirdDiscoverableValue? _$v;
+
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
+
+  ThirdDiscoverableValueBuilder();
+
+  ThirdDiscoverableValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ThirdDiscoverableValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ThirdDiscoverableValue;
+  }
+
+  @override
+  void update(void Function(ThirdDiscoverableValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$ThirdDiscoverableValue build() {
+    final _$result = _$v ??
+        new _$ThirdDiscoverableValue._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, 'ThirdDiscoverableValue', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$RecursiveValueA extends RecursiveValueA {
+  @override
+  final RecursiveValueB value;
+
+  factory _$RecursiveValueA(
+          [void Function(RecursiveValueABuilder) updates = emptyUpdate]) =>
+      (new RecursiveValueABuilder()..update(updates)).build();
+
+  _$RecursiveValueA._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(value, 'RecursiveValueA', 'value');
+  }
+
+  @override
+  RecursiveValueA rebuild(void Function(RecursiveValueABuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  RecursiveValueABuilder toBuilder() =>
+      new RecursiveValueABuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is RecursiveValueA && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('RecursiveValueA')..add('value', value))
+        .toString();
+  }
+}
+
+class RecursiveValueABuilder
+    implements Builder<RecursiveValueA, RecursiveValueABuilder> {
+  _$RecursiveValueA? _$v;
+
+  RecursiveValueBBuilder? _value;
+  RecursiveValueBBuilder get value =>
+      _$this._value ??= new RecursiveValueBBuilder();
+  set value(RecursiveValueBBuilder? value) => _$this._value = value;
+
+  RecursiveValueABuilder();
+
+  RecursiveValueABuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(RecursiveValueA other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$RecursiveValueA;
+  }
+
+  @override
+  void update(void Function(RecursiveValueABuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$RecursiveValueA build() {
+    _$RecursiveValueA _$result;
+    try {
+      _$result = _$v ?? new _$RecursiveValueA._(value: value.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'value';
+        value.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'RecursiveValueA', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$RecursiveValueB extends RecursiveValueB {
+  @override
+  final RecursiveValueA value;
+
+  factory _$RecursiveValueB(
+          [void Function(RecursiveValueBBuilder) updates = emptyUpdate]) =>
+      (new RecursiveValueBBuilder()..update(updates)).build();
+
+  _$RecursiveValueB._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(value, 'RecursiveValueB', 'value');
+  }
+
+  @override
+  RecursiveValueB rebuild(void Function(RecursiveValueBBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  RecursiveValueBBuilder toBuilder() =>
+      new RecursiveValueBBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is RecursiveValueB && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('RecursiveValueB')..add('value', value))
+        .toString();
+  }
+}
+
+class RecursiveValueBBuilder
+    implements Builder<RecursiveValueB, RecursiveValueBBuilder> {
+  _$RecursiveValueB? _$v;
+
+  RecursiveValueABuilder? _value;
+  RecursiveValueABuilder get value =>
+      _$this._value ??= new RecursiveValueABuilder();
+  set value(RecursiveValueABuilder? value) => _$this._value = value;
+
+  RecursiveValueBBuilder();
+
+  RecursiveValueBBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(RecursiveValueB other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$RecursiveValueB;
+  }
+
+  @override
+  void update(void Function(RecursiveValueBBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$RecursiveValueB build() {
+    _$RecursiveValueB _$result;
+    try {
+      _$result = _$v ?? new _$RecursiveValueB._(value: value.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'value';
+        value.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'RecursiveValueB', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

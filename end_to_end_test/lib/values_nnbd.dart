@@ -365,3 +365,89 @@ abstract class WireNameValue
 
   WireNameValue._();
 }
+
+// Check discovery of serializable types via fields.
+abstract class FieldDiscoveryValue
+    implements Built<FieldDiscoveryValue, FieldDiscoveryValueBuilder> {
+  static Serializer<FieldDiscoveryValue> get serializer =>
+      _$fieldDiscoveryValueSerializer;
+
+  DiscoverableValue get value;
+  BuiltList<ThirdDiscoverableValue> get values;
+
+  // Check that discovery doesn't recurse forever on reference to self.
+  @nullable
+  FieldDiscoveryValue? get recursiveValue;
+
+  factory FieldDiscoveryValue(
+          [void Function(FieldDiscoveryValueBuilder) updates]) =
+      _$FieldDiscoveryValue;
+  FieldDiscoveryValue._();
+}
+
+// Discovered indirectly via FieldDiscoveryValue.
+abstract class DiscoverableValue
+    implements Built<DiscoverableValue, DiscoverableValueBuilder> {
+  static Serializer<DiscoverableValue> get serializer =>
+      _$discoverableValueSerializer;
+
+  SecondDiscoverableValue get value;
+
+  factory DiscoverableValue([void Function(DiscoverableValueBuilder) updates]) =
+      _$DiscoverableValue;
+  DiscoverableValue._();
+}
+
+// Discovered indirectly via DiscoverableValue.
+abstract class SecondDiscoverableValue
+    implements Built<SecondDiscoverableValue, SecondDiscoverableValueBuilder> {
+  static Serializer<SecondDiscoverableValue> get serializer =>
+      _$secondDiscoverableValueSerializer;
+
+  int get value;
+
+  factory SecondDiscoverableValue(
+          [void Function(SecondDiscoverableValueBuilder) updates]) =
+      _$SecondDiscoverableValue;
+  SecondDiscoverableValue._();
+}
+
+// Discovered indirectly via FieldDiscoveryValue.
+abstract class ThirdDiscoverableValue
+    implements Built<ThirdDiscoverableValue, ThirdDiscoverableValueBuilder> {
+  static Serializer<ThirdDiscoverableValue> get serializer =>
+      _$thirdDiscoverableValueSerializer;
+
+  int get value;
+
+  factory ThirdDiscoverableValue(
+          [void Function(ThirdDiscoverableValueBuilder) updates]) =
+      _$ThirdDiscoverableValue;
+  ThirdDiscoverableValue._();
+}
+
+// Check that discovery doesn't recurse forever when there is a loop in field
+// types.
+abstract class RecursiveValueA
+    implements Built<RecursiveValueA, RecursiveValueABuilder> {
+  static Serializer<RecursiveValueA> get serializer =>
+      _$recursiveValueASerializer;
+
+  RecursiveValueB get value;
+
+  factory RecursiveValueA([void Function(RecursiveValueABuilder) updates]) =
+      _$RecursiveValueA;
+  RecursiveValueA._();
+}
+
+abstract class RecursiveValueB
+    implements Built<RecursiveValueB, RecursiveValueBBuilder> {
+  static Serializer<RecursiveValueB> get serializer =>
+      _$recursiveValueBSerializer;
+
+  RecursiveValueA get value;
+
+  factory RecursiveValueB([void Function(RecursiveValueBBuilder) updates]) =
+      _$RecursiveValueB;
+  RecursiveValueB._();
+}
