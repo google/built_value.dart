@@ -491,3 +491,13 @@ class ValueWithCustomSerializerSerializer
     return object.value;
   }
 }
+
+@BuiltValue(generateBuilderOnSetField: true)
+abstract class ValueWithOnSet
+    implements Built<ValueWithOnSet, ValueWithOnSetBuilder> {
+  int get value;
+
+  factory ValueWithOnSet([void Function(ValueWithOnSetBuilder) updates]) =
+      _$ValueWithOnSet;
+  ValueWithOnSet._();
+}

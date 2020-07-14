@@ -3717,4 +3717,88 @@ class ValueWithCustomSerializerBuilder
   }
 }
 
+class _$ValueWithOnSet extends ValueWithOnSet {
+  @override
+  final int value;
+
+  factory _$ValueWithOnSet(
+          [void Function(ValueWithOnSetBuilder) updates = emptyUpdate]) =>
+      (new ValueWithOnSetBuilder()..update(updates)).build();
+
+  _$ValueWithOnSet._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(value, 'ValueWithOnSet', 'value');
+  }
+
+  @override
+  ValueWithOnSet rebuild(void Function(ValueWithOnSetBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ValueWithOnSetBuilder toBuilder() =>
+      new ValueWithOnSetBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithOnSet && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueWithOnSet')..add('value', value))
+        .toString();
+  }
+}
+
+class ValueWithOnSetBuilder
+    implements Builder<ValueWithOnSet, ValueWithOnSetBuilder> {
+  _$ValueWithOnSet? _$v;
+
+  void Function() onSet = () {};
+
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) {
+    _$this._value = value;
+    onSet();
+  }
+
+  ValueWithOnSetBuilder();
+
+  ValueWithOnSetBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithOnSet other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ValueWithOnSet;
+  }
+
+  @override
+  void update(void Function(ValueWithOnSetBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$ValueWithOnSet build() {
+    final _$result = _$v ??
+        new _$ValueWithOnSet._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, 'ValueWithOnSet', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
