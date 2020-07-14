@@ -253,4 +253,15 @@ void main() {
       expect(builder.anInt, 12);
     });
   });
+
+  group(ValueWithBuilderSmarts, () {
+    test('can be instantiated', () {
+      ValueWithBuilderSmarts((b) => b..value = 'hi');
+    });
+
+    test('validates on set', () {
+      expect(() => ValueWithBuilderSmarts((b) => b..value = 'not allowed'),
+          throwsA(const TypeMatcher<ArgumentError>()));
+    });
+  });
 }

@@ -192,7 +192,7 @@ abstract class ValueWithDefaults
   SimpleValue get value;
 
   factory ValueWithDefaults([void Function(ValueWithDefaultsBuilder) updates]) =
-  _$ValueWithDefaults;
+      _$ValueWithDefaults;
   ValueWithDefaults._();
 }
 
@@ -206,6 +206,29 @@ abstract class ValueWithDefaultsBuilder
 
   factory ValueWithDefaultsBuilder() = _$ValueWithDefaultsBuilder;
   ValueWithDefaultsBuilder._();
+}
+
+abstract class ValueWithBuilderSmarts
+    implements Built<ValueWithBuilderSmarts, ValueWithBuilderSmartsBuilder> {
+  String get value;
+
+  factory ValueWithBuilderSmarts(
+          [void Function(ValueWithBuilderSmartsBuilder) updates]) =
+      _$ValueWithBuilderSmarts;
+  ValueWithBuilderSmarts._();
+}
+
+abstract class ValueWithBuilderSmartsBuilder
+    implements Builder<ValueWithBuilderSmarts, ValueWithBuilderSmartsBuilder> {
+  String? _value;
+  String get value => _value!;
+  set value(String v) {
+    if (v == 'not allowed') throw ArgumentError('not allowed');
+    _value = v;
+  }
+
+  factory ValueWithBuilderSmartsBuilder() = _$ValueWithBuilderSmartsBuilder;
+  ValueWithBuilderSmartsBuilder._();
 }
 
 abstract class ValidatedValue
