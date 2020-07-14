@@ -9,19 +9,27 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/collections_nnbd.dart';
 import 'package:end_to_end_test/enums_nnbd.dart';
+import 'package:end_to_end_test/generics_nnbd.dart';
 import 'package:end_to_end_test/values_nnbd.dart';
 
 part 'serializers_nnbd.g.dart';
 
 @SerializersFor([
+  BoundGenericValue,
+  CollectionGenericValue,
   Collections,
   CompoundValue,
+  CompoundValueExplicitNoNesting,
   CompoundValueNoAutoNesting,
   CompoundValueNoNesting,
-  CompoundValueExplicitNoNesting,
+  ConcreteGeneric,
   FallbackEnum,
   FieldDiscoveryValue,
+  GenericContainer,
+  GenericValue,
   NamedFactoryValue,
+  NestedGenericContainer,
+  NonBuiltGeneric,
   OtherValue,
   PartiallySerializableValue,
   PrimitivesValue,
@@ -29,8 +37,8 @@ part 'serializers_nnbd.g.dart';
   SimpleValue,
   TestEnum,
   ValueUsingImportAs,
-  ValueWithBuilderInitializer,
   ValueWithBuilderFinalizer,
+  ValueWithBuilderInitializer,
   ValueWithCustomSerializer,
   WireNameEnum,
   WireNameValue,

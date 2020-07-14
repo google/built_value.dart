@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.8
+// @dart=2.9
 
-part of generics;
+part of 'generics_nnbd.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -407,7 +407,7 @@ class _$GenericValue<T> extends GenericValue<T> {
           [void Function(GenericValueBuilder<T>) updates = emptyUpdate]) =>
       (new GenericValueBuilder<T>()..update(updates)).build();
 
-  _$GenericValue._({this.value}) : super._() {
+  _$GenericValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'GenericValue', 'value');
     if (T == dynamic) {
       throw new BuiltValueMissingGenericsError('GenericValue', 'T');
@@ -442,11 +442,11 @@ class _$GenericValue<T> extends GenericValue<T> {
 
 class GenericValueBuilder<T>
     implements Builder<GenericValue<T>, GenericValueBuilder<T>> {
-  _$GenericValue<T> _$v;
+  _$GenericValue<T>? _$v;
 
-  T _value;
-  T get value => _$this._value;
-  set value(T value) => _$this._value = value;
+  T? _value;
+  T? get value => _$this._value;
+  set value(T? value) => _$this._value = value;
 
   GenericValueBuilder();
 
@@ -489,7 +489,7 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
           [void Function(BoundGenericValueBuilder<T>) updates = emptyUpdate]) =>
       (new BoundGenericValueBuilder<T>()..update(updates)).build();
 
-  _$BoundGenericValue._({this.value}) : super._() {
+  _$BoundGenericValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'BoundGenericValue', 'value');
     if (T == dynamic) {
       throw new BuiltValueMissingGenericsError('BoundGenericValue', 'T');
@@ -526,11 +526,11 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
 
 class BoundGenericValueBuilder<T extends num>
     implements Builder<BoundGenericValue<T>, BoundGenericValueBuilder<T>> {
-  _$BoundGenericValue<T> _$v;
+  _$BoundGenericValue<T>? _$v;
 
-  T _value;
-  T get value => _$this._value;
-  set value(T value) => _$this._value = value;
+  T? _value;
+  T? get value => _$this._value;
+  set value(T? value) => _$this._value = value;
 
   BoundGenericValueBuilder();
 
@@ -574,7 +574,7 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
               emptyUpdate]) =>
       (new CollectionGenericValueBuilder<T>()..update(updates)).build();
 
-  _$CollectionGenericValue._({this.values}) : super._() {
+  _$CollectionGenericValue._({required this.values}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
         values, 'CollectionGenericValue', 'values');
     if (T == dynamic) {
@@ -613,11 +613,11 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
 class CollectionGenericValueBuilder<T>
     implements
         Builder<CollectionGenericValue<T>, CollectionGenericValueBuilder<T>> {
-  _$CollectionGenericValue<T> _$v;
+  _$CollectionGenericValue<T>? _$v;
 
-  ListBuilder<T> _values;
+  ListBuilder<T>? _values;
   ListBuilder<T> get values => _$this._values ??= new ListBuilder<T>();
-  set values(ListBuilder<T> values) => _$this._values = values;
+  set values(ListBuilder<T>? values) => _$this._values = values;
 
   CollectionGenericValueBuilder();
 
@@ -648,7 +648,7 @@ class CollectionGenericValueBuilder<T>
       _$result =
           _$v ?? new _$CollectionGenericValue<T>._(values: values.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'values';
         values.build();
@@ -676,7 +676,9 @@ class _$GenericContainer extends GenericContainer {
       (new GenericContainerBuilder()..update(updates)).build();
 
   _$GenericContainer._(
-      {this.genericValue, this.boundGenericValue, this.collectionGenericValue})
+      {required this.genericValue,
+      required this.boundGenericValue,
+      required this.collectionGenericValue})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         genericValue, 'GenericContainer', 'genericValue');
@@ -722,26 +724,26 @@ class _$GenericContainer extends GenericContainer {
 
 class GenericContainerBuilder
     implements Builder<GenericContainer, GenericContainerBuilder> {
-  _$GenericContainer _$v;
+  _$GenericContainer? _$v;
 
-  GenericValueBuilder<String> _genericValue;
+  GenericValueBuilder<String>? _genericValue;
   GenericValueBuilder<String> get genericValue =>
       _$this._genericValue ??= new GenericValueBuilder<String>();
-  set genericValue(GenericValueBuilder<String> genericValue) =>
+  set genericValue(GenericValueBuilder<String>? genericValue) =>
       _$this._genericValue = genericValue;
 
-  BoundGenericValueBuilder<double> _boundGenericValue;
+  BoundGenericValueBuilder<double>? _boundGenericValue;
   BoundGenericValueBuilder<double> get boundGenericValue =>
       _$this._boundGenericValue ??= new BoundGenericValueBuilder<double>();
-  set boundGenericValue(BoundGenericValueBuilder<double> boundGenericValue) =>
+  set boundGenericValue(BoundGenericValueBuilder<double>? boundGenericValue) =>
       _$this._boundGenericValue = boundGenericValue;
 
-  CollectionGenericValueBuilder<String> _collectionGenericValue;
+  CollectionGenericValueBuilder<String>? _collectionGenericValue;
   CollectionGenericValueBuilder<String> get collectionGenericValue =>
       _$this._collectionGenericValue ??=
           new CollectionGenericValueBuilder<String>();
   set collectionGenericValue(
-          CollectionGenericValueBuilder<String> collectionGenericValue) =>
+          CollectionGenericValueBuilder<String>? collectionGenericValue) =>
       _$this._collectionGenericValue = collectionGenericValue;
 
   GenericContainerBuilder();
@@ -778,7 +780,7 @@ class GenericContainerBuilder
               boundGenericValue: boundGenericValue.build(),
               collectionGenericValue: collectionGenericValue.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'genericValue';
         genericValue.build();
@@ -806,7 +808,7 @@ class _$NestedGenericContainer extends NestedGenericContainer {
               emptyUpdate]) =>
       (new NestedGenericContainerBuilder()..update(updates)).build();
 
-  _$NestedGenericContainer._({this.map}) : super._() {
+  _$NestedGenericContainer._({required this.map}) : super._() {
     BuiltValueNullFieldError.checkNotNull(map, 'NestedGenericContainer', 'map');
   }
 
@@ -840,12 +842,12 @@ class _$NestedGenericContainer extends NestedGenericContainer {
 
 class NestedGenericContainerBuilder
     implements Builder<NestedGenericContainer, NestedGenericContainerBuilder> {
-  _$NestedGenericContainer _$v;
+  _$NestedGenericContainer? _$v;
 
-  GenericValueBuilder<BuiltMap<int, String>> _map;
+  GenericValueBuilder<BuiltMap<int, String>>? _map;
   GenericValueBuilder<BuiltMap<int, String>> get map =>
       _$this._map ??= new GenericValueBuilder<BuiltMap<int, String>>();
-  set map(GenericValueBuilder<BuiltMap<int, String>> map) => _$this._map = map;
+  set map(GenericValueBuilder<BuiltMap<int, String>>? map) => _$this._map = map;
 
   NestedGenericContainerBuilder();
 
@@ -875,7 +877,7 @@ class NestedGenericContainerBuilder
     try {
       _$result = _$v ?? new _$NestedGenericContainer._(map: map.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'map';
         map.build();
@@ -900,7 +902,7 @@ class _$CustomBuilderGenericValue<T> extends CustomBuilderGenericValue<T> {
       (new CustomBuilderGenericValueBuilder<T>()..update(updates)).build()
           as _$CustomBuilderGenericValue<T>;
 
-  _$CustomBuilderGenericValue._({this.value}) : super._() {
+  _$CustomBuilderGenericValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
         value, 'CustomBuilderGenericValue', 'value');
     if (T == dynamic) {
@@ -939,16 +941,16 @@ class _$CustomBuilderGenericValue<T> extends CustomBuilderGenericValue<T> {
 
 class _$CustomBuilderGenericValueBuilder<T>
     extends CustomBuilderGenericValueBuilder<T> {
-  _$CustomBuilderGenericValue<T> _$v;
+  _$CustomBuilderGenericValue<T>? _$v;
 
   @override
-  T get value {
+  T? get value {
     _$this;
     return super.value;
   }
 
   @override
-  set value(T value) {
+  set value(T? value) {
     _$this;
     super.value = value;
   }
@@ -994,7 +996,7 @@ class _$ConcreteGeneric extends ConcreteGeneric {
           [void Function(ConcreteGenericBuilder) updates = emptyUpdate]) =>
       (new ConcreteGenericBuilder()..update(updates)).build();
 
-  _$ConcreteGeneric._({this.value}) : super._() {
+  _$ConcreteGeneric._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'ConcreteGeneric', 'value');
   }
 
@@ -1026,11 +1028,11 @@ class _$ConcreteGeneric extends ConcreteGeneric {
 
 class ConcreteGenericBuilder
     implements Builder<ConcreteGeneric, ConcreteGenericBuilder> {
-  _$ConcreteGeneric _$v;
+  _$ConcreteGeneric? _$v;
 
-  int _value;
-  int get value => _$this._value;
-  set value(int value) => _$this._value = value;
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
 
   ConcreteGenericBuilder();
 
@@ -1073,7 +1075,7 @@ class _$GenericFunction<T> extends GenericFunction<T> {
           [void Function(GenericFunctionBuilder<T>) updates = emptyUpdate]) =>
       (new GenericFunctionBuilder<T>()..update(updates)).build();
 
-  _$GenericFunction._({this.function}) : super._() {
+  _$GenericFunction._({required this.function}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
         function, 'GenericFunction', 'function');
     if (T == dynamic) {
@@ -1112,11 +1114,11 @@ class _$GenericFunction<T> extends GenericFunction<T> {
 
 class GenericFunctionBuilder<T>
     implements Builder<GenericFunction<T>, GenericFunctionBuilder<T>> {
-  _$GenericFunction<T> _$v;
+  _$GenericFunction<T>? _$v;
 
-  Function(T) _function;
-  Function(T) get function => _$this._function;
-  set function(Function(T) function) => _$this._function = function;
+  Function(T)? _function;
+  Function(T)? get function => _$this._function;
+  set function(Function(T)? function) => _$this._function = function;
 
   GenericFunctionBuilder();
 
@@ -1159,7 +1161,7 @@ class _$NonBuiltGeneric extends NonBuiltGeneric {
           [void Function(NonBuiltGenericBuilder) updates = emptyUpdate]) =>
       (new NonBuiltGenericBuilder()..update(updates)).build();
 
-  _$NonBuiltGeneric._({this.value}) : super._() {
+  _$NonBuiltGeneric._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'NonBuiltGeneric', 'value');
   }
 
@@ -1191,11 +1193,11 @@ class _$NonBuiltGeneric extends NonBuiltGeneric {
 
 class NonBuiltGenericBuilder
     implements Builder<NonBuiltGeneric, NonBuiltGenericBuilder> {
-  _$NonBuiltGeneric _$v;
+  _$NonBuiltGeneric? _$v;
 
-  NonBuilt<int> _value;
-  NonBuilt<int> get value => _$this._value;
-  set value(NonBuilt<int> value) => _$this._value = value;
+  NonBuilt<int>? _value;
+  NonBuilt<int>? get value => _$this._value;
+  set value(NonBuilt<int>? value) => _$this._value = value;
 
   NonBuiltGenericBuilder();
 
