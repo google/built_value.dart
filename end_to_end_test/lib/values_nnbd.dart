@@ -645,3 +645,10 @@ abstract class MemoizedHashcodeValue
           [void Function(MemoizedHashcodeValueBuilder) updates]) =
       _$MemoizedHashcodeValue;
 }
+
+abstract class _PrivateValue
+    implements Built<_PrivateValue, _PrivateValueBuilder> {
+  _PrivateValue._();
+  factory _PrivateValue([void Function(_PrivateValueBuilder) updates]) =
+      _$PrivateValue;
+}
