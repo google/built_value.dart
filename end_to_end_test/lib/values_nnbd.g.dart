@@ -28,6 +28,10 @@ Serializer<NoFieldsValue> _$noFieldsValueSerializer =
     new _$NoFieldsValueSerializer();
 Serializer<PrimitivesValue> _$primitivesValueSerializer =
     new _$PrimitivesValueSerializer();
+Serializer<PartiallySerializableValue> _$partiallySerializableValueSerializer =
+    new _$PartiallySerializableValueSerializer();
+Serializer<NamedFactoryValue> _$namedFactoryValueSerializer =
+    new _$NamedFactoryValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -576,6 +580,92 @@ class _$PrimitivesValueSerializer
         case 'bigInt':
           result.bigInt = serializers.deserialize(value,
               specifiedType: const FullType(BigInt)) as BigInt;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PartiallySerializableValueSerializer
+    implements StructuredSerializer<PartiallySerializableValue> {
+  @override
+  final Iterable<Type> types = const [
+    PartiallySerializableValue,
+    _$PartiallySerializableValue
+  ];
+  @override
+  final String wireName = 'PartiallySerializableValue';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, PartiallySerializableValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PartiallySerializableValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PartiallySerializableValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$NamedFactoryValueSerializer
+    implements StructuredSerializer<NamedFactoryValue> {
+  @override
+  final Iterable<Type> types = const [NamedFactoryValue, _$NamedFactoryValue];
+  @override
+  final String wireName = 'NamedFactoryValue';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, NamedFactoryValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  NamedFactoryValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new NamedFactoryValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -2374,6 +2464,183 @@ class ListOfFunctionValueBuilder
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PartiallySerializableValue extends PartiallySerializableValue {
+  @override
+  final int value;
+  @override
+  final int? transientValue;
+
+  factory _$PartiallySerializableValue(
+          [void Function(PartiallySerializableValueBuilder) updates =
+              emptyUpdate]) =>
+      (new PartiallySerializableValueBuilder()..update(updates)).build();
+
+  _$PartiallySerializableValue._({required this.value, this.transientValue})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        value, 'PartiallySerializableValue', 'value');
+  }
+
+  @override
+  PartiallySerializableValue rebuild(
+          void Function(PartiallySerializableValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PartiallySerializableValueBuilder toBuilder() =>
+      new PartiallySerializableValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PartiallySerializableValue &&
+        value == other.value &&
+        transientValue == other.transientValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, value.hashCode), transientValue.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('PartiallySerializableValue')
+          ..add('value', value)
+          ..add('transientValue', transientValue))
+        .toString();
+  }
+}
+
+class PartiallySerializableValueBuilder
+    implements
+        Builder<PartiallySerializableValue, PartiallySerializableValueBuilder> {
+  _$PartiallySerializableValue? _$v;
+
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
+
+  int? _transientValue;
+  int? get transientValue => _$this._transientValue;
+  set transientValue(int? transientValue) =>
+      _$this._transientValue = transientValue;
+
+  PartiallySerializableValueBuilder();
+
+  PartiallySerializableValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _transientValue = $v.transientValue;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(PartiallySerializableValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PartiallySerializableValue;
+  }
+
+  @override
+  void update(void Function(PartiallySerializableValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$PartiallySerializableValue build() {
+    final _$result = _$v ??
+        new _$PartiallySerializableValue._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, 'PartiallySerializableValue', 'value'),
+            transientValue: transientValue);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$NamedFactoryValue extends NamedFactoryValue {
+  @override
+  final int value;
+
+  factory _$NamedFactoryValue(
+          [void Function(NamedFactoryValueBuilder) updates = emptyUpdate]) =>
+      (new NamedFactoryValueBuilder()..update(updates)).build();
+
+  _$NamedFactoryValue._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(value, 'NamedFactoryValue', 'value');
+  }
+
+  @override
+  NamedFactoryValue rebuild(void Function(NamedFactoryValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  NamedFactoryValueBuilder toBuilder() =>
+      new NamedFactoryValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is NamedFactoryValue && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('NamedFactoryValue')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class NamedFactoryValueBuilder
+    implements Builder<NamedFactoryValue, NamedFactoryValueBuilder> {
+  _$NamedFactoryValue? _$v;
+
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
+
+  NamedFactoryValueBuilder();
+
+  NamedFactoryValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(NamedFactoryValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$NamedFactoryValue;
+  }
+
+  @override
+  void update(void Function(NamedFactoryValueBuilder) updates) {
+    updates(this);
+  }
+
+  @override
+  _$NamedFactoryValue build() {
+    final _$result = _$v ??
+        new _$NamedFactoryValue._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, 'NamedFactoryValue', 'value'));
     replace(_$result);
     return _$result;
   }

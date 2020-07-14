@@ -270,4 +270,37 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('NamedFactoryValue', () {
+    var data = NamedFactoryValue(3);
+    var serialized = ['NamedFactoryValue', 'value', 3];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
+  group('PartiallySerializableValue', () {
+    var data = PartiallySerializableValue((b) => b
+      ..value = 1
+      ..transientValue = 2);
+    var serialized = [
+      'PartiallySerializableValue',
+      'value',
+      1,
+    ];
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized),
+          data.rebuild((b) => b..transientValue = null));
+    });
+  });
 }
