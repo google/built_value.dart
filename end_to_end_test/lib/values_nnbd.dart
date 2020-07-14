@@ -184,6 +184,30 @@ abstract class ValueWithCode
     ..aString = 'two');
 }
 
+abstract class ValueWithDefaults
+    implements Built<ValueWithDefaults, ValueWithDefaultsBuilder> {
+  int get anInt;
+  @nullable
+  String? get aString;
+  SimpleValue get value;
+
+  factory ValueWithDefaults([void Function(ValueWithDefaultsBuilder) updates]) =
+  _$ValueWithDefaults;
+  ValueWithDefaults._();
+}
+
+abstract class ValueWithDefaultsBuilder
+    implements Builder<ValueWithDefaults, ValueWithDefaultsBuilder> {
+  int anInt = 7;
+
+  @nullable
+  String? aString;
+  SimpleValueBuilder value = SimpleValue((b) => b..anInt = 3).toBuilder();
+
+  factory ValueWithDefaultsBuilder() = _$ValueWithDefaultsBuilder;
+  ValueWithDefaultsBuilder._();
+}
+
 abstract class ValidatedValue
     implements Built<ValidatedValue, ValidatedValueBuilder> {
   static Serializer<ValidatedValue> get serializer =>

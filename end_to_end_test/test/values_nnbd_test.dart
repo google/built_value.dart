@@ -242,4 +242,15 @@ void main() {
           '12two');
     });
   });
+
+  group('ValueWithDefaults', () {
+    test('has defaults', () {
+      expect(ValueWithDefaults().anInt, 7);
+    });
+
+    test('builder exposes values via getters', () {
+      final builder = ValueWithDefaults((b) => b..anInt = 12).toBuilder();
+      expect(builder.anInt, 12);
+    });
+  });
 }
