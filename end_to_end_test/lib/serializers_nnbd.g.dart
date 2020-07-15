@@ -41,6 +41,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(SecondDiscoverableValue.serializer)
       ..add(SimpleValue.serializer)
       ..add(StandardCat.serializer)
+      ..add(StandardJsonValue.serializer)
       ..add(TestEnum.serializer)
       ..add(ThirdDiscoverableValue.serializer)
       ..add(UsesHandCoded.serializer)
@@ -106,6 +107,19 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType(bool)]),
           () => new SetMultimapBuilder<String, bool>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap,
+              const [const FullType(String), const FullType(JsonObject)]),
+          () => new MapBuilder<String, JsonObject>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Animal)]),
+          () => new ListBuilder<Animal>())
+      ..addBuilderFactory(
+          const FullType(BuiltSet, const [const FullType(Animal)]),
+          () => new SetBuilder<Animal>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(GenericValue, const [
             const FullType(
