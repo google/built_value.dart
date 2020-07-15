@@ -12,12 +12,15 @@ import 'package:end_to_end_test/enums_nnbd.dart';
 import 'package:end_to_end_test/generics_nnbd.dart';
 import 'package:end_to_end_test/imported_values_nnbd.dart';
 import 'package:end_to_end_test/interfaces_nnbd.dart';
+import 'package:end_to_end_test/polymorphism_nnbd.dart';
 import 'package:end_to_end_test/values_nnbd.dart';
 
 part 'serializers_nnbd.g.dart';
 
 @SerializersFor([
   BoundGenericValue,
+  Cage,
+  Cat,
   CollectionGenericValue,
   Collections,
   CompoundValue,
@@ -28,8 +31,11 @@ part 'serializers_nnbd.g.dart';
   EnumWithInt,
   FallbackEnum,
   FieldDiscoveryValue,
+  Fish,
   GenericContainer,
   GenericValue,
+  HasDouble,
+  HasString,
   ImportedValue,
   ImportedCustomValue,
   ImportedCustomNestedValue,
@@ -39,9 +45,12 @@ part 'serializers_nnbd.g.dart';
   OtherValue,
   PartiallySerializableValue,
   PrimitivesValue,
+  Robot,
   SecondTestEnum,
   SimpleValue,
+  StandardCat,
   TestEnum,
+  UsesHandCoded,
   ValueUsingImportAs,
   ValueWithBuilderFinalizer,
   ValueWithBuilderInitializer,
@@ -53,3 +62,9 @@ part 'serializers_nnbd.g.dart';
   WireNumberEnum,
 ])
 final Serializers serializers = _$serializers;
+
+// Check that multiple `Serializers` can be declared in one file.
+@SerializersFor([
+  Cat,
+])
+final Serializers moreSerializers = _$moreSerializers;

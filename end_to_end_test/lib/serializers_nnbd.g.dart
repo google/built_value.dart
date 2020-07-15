@@ -9,6 +9,8 @@ part of serializers_nnbd;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BoundGenericValue.serializer)
+      ..add(Cage.serializer)
+      ..add(Cat.serializer)
       ..add(CollectionGenericValue.serializer)
       ..add(Collections.serializer)
       ..add(CompoundValue.serializer)
@@ -20,8 +22,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(EnumWithInt.serializer)
       ..add(FallbackEnum.serializer)
       ..add(FieldDiscoveryValue.serializer)
+      ..add(Fish.serializer)
       ..add(GenericContainer.serializer)
       ..add(GenericValue.serializer)
+      ..add(HasDouble.serializer)
+      ..add(HasString.serializer)
       ..add(ImportedCustomNestedValue.serializer)
       ..add(ImportedCustomValue.serializer)
       ..add(ImportedValue.serializer)
@@ -32,10 +37,13 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(OtherValue.serializer)
       ..add(PartiallySerializableValue.serializer)
       ..add(PrimitivesValue.serializer)
+      ..add(Robot.serializer)
       ..add(SecondDiscoverableValue.serializer)
       ..add(SimpleValue.serializer)
+      ..add(StandardCat.serializer)
       ..add(TestEnum.serializer)
       ..add(ThirdDiscoverableValue.serializer)
+      ..add(UsesHandCoded.serializer)
       ..add(ValidatedValue.serializer)
       ..add(ValueUsingImportAs.serializer)
       ..add(ValueWithBuilderFinalizer.serializer)
@@ -46,6 +54,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(WireNameEnum.serializer)
       ..add(WireNameValue.serializer)
       ..add(WireNumberEnum.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Animal)]),
+          () => new ListBuilder<Animal>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SimpleValue)]),
           () => new ListBuilder<SimpleValue>())
@@ -112,5 +123,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
               CollectionGenericValue, const [const FullType(String)]),
           () => new CollectionGenericValueBuilder<String>()))
     .build();
+Serializers _$moreSerializers =
+    (new Serializers().toBuilder()..add(Cat.serializer)).build();
 
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

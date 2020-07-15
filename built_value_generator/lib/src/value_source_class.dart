@@ -1119,8 +1119,9 @@ abstract class ValueSourceClass
       final typeInBuilder = field.typeInBuilder(compilationUnit);
       final name = field.name;
 
-      result.writeln('$typeInBuilder get $name;');
-      result.writeln('set $name($typeInBuilder $name);');
+      result.writeln('$typeInBuilder$orNull get $name;');
+      result.writeln('set $name($typeInBuilder$orNull $name);');
+
       result.writeln();
     }
 
