@@ -6,6 +6,7 @@
 library serializers_nnbd;
 
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/collections_nnbd.dart';
 import 'package:end_to_end_test/enums_nnbd.dart';
@@ -13,6 +14,7 @@ import 'package:end_to_end_test/generics_nnbd.dart';
 import 'package:end_to_end_test/imported_values_nnbd.dart';
 import 'package:end_to_end_test/interfaces_nnbd.dart';
 import 'package:end_to_end_test/polymorphism_nnbd.dart';
+import 'package:end_to_end_test/standard_json_nnbd.dart';
 import 'package:end_to_end_test/values_nnbd.dart';
 
 part 'serializers_nnbd.g.dart';
@@ -49,6 +51,7 @@ part 'serializers_nnbd.g.dart';
   SecondTestEnum,
   SimpleValue,
   StandardCat,
+  StandardJsonValue,
   TestEnum,
   UsesHandCoded,
   ValueUsingImportAs,

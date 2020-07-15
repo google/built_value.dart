@@ -144,8 +144,9 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
   /// when the serialized type is known statically.
   List<Object> _toList(Map map, bool hasEncodedKeys) {
-    var result =
-        List<Object>.filled(map.length * 2, 0 /* Will be overwritten. */);
+    var nullValueCount = map.values.where((value) => value == null).length;
+    var result = List<Object>.filled(
+        (map.length - nullValueCount) * 2, 0 /* Will be overwritten. */);
     var i = 0;
     map.forEach((key, value) {
       // Drop null values, they are represented by missing keys.
@@ -189,8 +190,9 @@ class StandardJsonPlugin implements SerializerPlugin {
       type = 'map';
     }
 
-    var result =
-        List<Object>.filled(map.length * 2 - 1, 0 /* Will be overwritten. */);
+    var nullValueCount = map.values.where((value) => value == null).length;
+    var result = List<Object>.filled(
+        (map.length - nullValueCount) * 2 - 1, 0 /* Will be overwritten. */);
     result[0] = type;
 
     var i = 1;
