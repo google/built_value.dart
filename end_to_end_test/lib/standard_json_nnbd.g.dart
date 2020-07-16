@@ -115,7 +115,7 @@ class _$StandardJsonValue extends StandardJsonValue {
   final BuiltList<String>? strings;
 
   factory _$StandardJsonValue(
-          [void Function(StandardJsonValueBuilder) updates = emptyUpdate]) =>
+          [void Function(StandardJsonValueBuilder)? updates]) =>
       (new StandardJsonValueBuilder()..update(updates)).build();
 
   _$StandardJsonValue._(
@@ -236,8 +236,8 @@ class StandardJsonValueBuilder
   }
 
   @override
-  void update(void Function(StandardJsonValueBuilder) updates) {
-    updates(this);
+  void update(void Function(StandardJsonValueBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override

@@ -382,7 +382,7 @@ class _$Cat extends Cat {
   @override
   final int legs;
 
-  factory _$Cat([void Function(CatBuilder) updates = emptyUpdate]) =>
+  factory _$Cat([void Function(CatBuilder)? updates]) =>
       (new CatBuilder()..update(updates)).build();
 
   _$Cat._({required this.tail, required this.legs}) : super._() {
@@ -447,8 +447,8 @@ class CatBuilder implements Builder<Cat, CatBuilder>, MammalBuilder {
   }
 
   @override
-  void update(void Function(CatBuilder) updates) {
-    updates(this);
+  void update(void Function(CatBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -468,7 +468,7 @@ class _$Fish extends Fish {
   @override
   final int legs;
 
-  factory _$Fish([void Function(FishBuilder) updates = emptyUpdate]) =>
+  factory _$Fish([void Function(FishBuilder)? updates]) =>
       (new FishBuilder()..update(updates)).build();
 
   _$Fish._({required this.fins, required this.legs}) : super._() {
@@ -533,8 +533,8 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 
   @override
-  void update(void Function(FishBuilder) updates) {
-    updates(this);
+  void update(void Function(FishBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -554,7 +554,7 @@ class _$Robot extends Robot {
   @override
   final int legs;
 
-  factory _$Robot([void Function(RobotBuilder) updates = emptyUpdate]) =>
+  factory _$Robot([void Function(RobotBuilder)? updates]) =>
       (new RobotBuilder()..update(updates)).build();
 
   _$Robot._({required this.fins, required this.legs}) : super._() {
@@ -619,8 +619,8 @@ class RobotBuilder implements Builder<Robot, RobotBuilder> {
   }
 
   @override
-  void update(void Function(RobotBuilder) updates) {
-    updates(this);
+  void update(void Function(RobotBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -640,7 +640,7 @@ class _$Cage extends Cage {
   @override
   final BuiltList<Animal> otherInhabitants;
 
-  factory _$Cage([void Function(CageBuilder) updates = emptyUpdate]) =>
+  factory _$Cage([void Function(CageBuilder)? updates]) =>
       (new CageBuilder()..update(updates)).build();
 
   _$Cage._({required this.inhabitant, required this.otherInhabitants})
@@ -711,8 +711,8 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
   }
 
   @override
-  void update(void Function(CageBuilder) updates) {
-    updates(this);
+  void update(void Function(CageBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -744,8 +744,7 @@ class _$StandardCat extends StandardCat {
   @override
   final bool tail;
 
-  factory _$StandardCat(
-          [void Function(StandardCatBuilder) updates = emptyUpdate]) =>
+  factory _$StandardCat([void Function(StandardCatBuilder)? updates]) =>
       (new StandardCatBuilder()..update(updates)).build();
 
   _$StandardCat._({required this.tail}) : super._() {
@@ -802,8 +801,8 @@ class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
   }
 
   @override
-  void update(void Function(StandardCatBuilder) updates) {
-    updates(this);
+  void update(void Function(StandardCatBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -828,8 +827,7 @@ class _$HasString extends HasString {
   @override
   final String field;
 
-  factory _$HasString(
-          [void Function(HasStringBuilder) updates = emptyUpdate]) =>
+  factory _$HasString([void Function(HasStringBuilder)? updates]) =>
       (new HasStringBuilder()..update(updates)).build();
 
   _$HasString._({required this.field}) : super._() {
@@ -887,8 +885,8 @@ class HasStringBuilder
   }
 
   @override
-  void update(void Function(HasStringBuilder) updates) {
-    updates(this);
+  void update(void Function(HasStringBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -906,8 +904,7 @@ class _$HasDouble extends HasDouble {
   @override
   final double field;
 
-  factory _$HasDouble(
-          [void Function(HasDoubleBuilder) updates = emptyUpdate]) =>
+  factory _$HasDouble([void Function(HasDoubleBuilder)? updates]) =>
       (new HasDoubleBuilder()..update(updates)).build();
 
   _$HasDouble._({required this.field}) : super._() {
@@ -965,8 +962,8 @@ class HasDoubleBuilder
   }
 
   @override
-  void update(void Function(HasDoubleBuilder) updates) {
-    updates(this);
+  void update(void Function(HasDoubleBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -987,7 +984,7 @@ class _$UsesChainedInterface extends UsesChainedInterface {
   final int foo;
 
   factory _$UsesChainedInterface(
-          [void Function(UsesChainedInterfaceBuilder) updates = emptyUpdate]) =>
+          [void Function(UsesChainedInterfaceBuilder)? updates]) =>
       (new UsesChainedInterfaceBuilder()..update(updates)).build();
 
   _$UsesChainedInterface._({required this.bar, required this.foo}) : super._() {
@@ -1057,8 +1054,8 @@ class UsesChainedInterfaceBuilder
   }
 
   @override
-  void update(void Function(UsesChainedInterfaceBuilder) updates) {
-    updates(this);
+  void update(void Function(UsesChainedInterfaceBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1078,8 +1075,7 @@ class _$UsesHandCoded extends UsesHandCoded {
   @override
   final int fieldInBaseBuilder;
 
-  factory _$UsesHandCoded(
-          [void Function(UsesHandCodedBuilder) updates = emptyUpdate]) =>
+  factory _$UsesHandCoded([void Function(UsesHandCodedBuilder)? updates]) =>
       (new UsesHandCodedBuilder()..update(updates)).build();
 
   _$UsesHandCoded._({required this.fieldInBaseBuilder}) : super._() {
@@ -1141,8 +1137,8 @@ class UsesHandCodedBuilder
   }
 
   @override
-  void update(void Function(UsesHandCodedBuilder) updates) {
-    updates(this);
+  void update(void Function(UsesHandCodedBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1167,8 +1163,7 @@ abstract class TwoBuilder {
 }
 
 class _$ImplementsTwo extends ImplementsTwo {
-  factory _$ImplementsTwo(
-          [void Function(ImplementsTwoBuilder) updates = emptyUpdate]) =>
+  factory _$ImplementsTwo([void Function(ImplementsTwoBuilder)? updates]) =>
       (new ImplementsTwoBuilder()..update(updates)).build();
 
   _$ImplementsTwo._() : super._();
@@ -1214,8 +1209,8 @@ class ImplementsTwoBuilder
   }
 
   @override
-  void update(void Function(ImplementsTwoBuilder) updates) {
-    updates(this);
+  void update(void Function(ImplementsTwoBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override

@@ -41,7 +41,7 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
   /// Applies updates.
   ///
   /// [updates] is a function that takes a builder [B].
-  void update(Function(B) updates);
+  void update(Function(B)? updates);
 
   /// Builds.
   ///
@@ -226,9 +226,6 @@ class EnumClass {
   @override
   String toString() => name;
 }
-
-/// Default value for `updates` parameters; does nothing.
-void emptyUpdate(Builder<dynamic, dynamic> _) {}
 
 /// For use by generated code in calculating hash codes. Do not use directly.
 int $jc(int hash, int value) {

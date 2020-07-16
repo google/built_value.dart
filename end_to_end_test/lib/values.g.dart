@@ -1271,8 +1271,7 @@ class _$SimpleValue extends SimpleValue {
   @override
   final bool $mustBeEscaped;
 
-  factory _$SimpleValue(
-          [void Function(SimpleValueBuilder) updates = emptyUpdate]) =>
+  factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
       (new SimpleValueBuilder()..update(updates)).build();
 
   _$SimpleValue._({this.anInt, this.aString, this.$mustBeEscaped}) : super._() {
@@ -1348,7 +1347,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void update(void Function(SimpleValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1370,8 +1369,7 @@ class _$CompoundValue extends CompoundValue {
   @override
   final ValidatedValue validatedValue;
 
-  factory _$CompoundValue(
-          [void Function(CompoundValueBuilder) updates = emptyUpdate]) =>
+  factory _$CompoundValue([void Function(CompoundValueBuilder) updates]) =>
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
@@ -1444,7 +1442,7 @@ class CompoundValueBuilder
 
   @override
   void update(void Function(CompoundValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1480,8 +1478,7 @@ class _$CompoundValueNoNesting extends CompoundValueNoNesting {
   final ValidatedValue validatedValue;
 
   factory _$CompoundValueNoNesting(
-          [void Function(CompoundValueNoNestingBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(CompoundValueNoNestingBuilder) updates]) =>
       (new CompoundValueNoNestingBuilder()..update(updates)).build();
 
   _$CompoundValueNoNesting._({this.simpleValue, this.validatedValue})
@@ -1554,7 +1551,7 @@ class CompoundValueNoNestingBuilder
 
   @override
   void update(void Function(CompoundValueNoNestingBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1574,8 +1571,7 @@ class _$CompoundValueNoAutoNesting extends CompoundValueNoAutoNesting {
   final NoFieldsValue value;
 
   factory _$CompoundValueNoAutoNesting(
-          [void Function(CompoundValueNoAutoNestingBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(CompoundValueNoAutoNestingBuilder) updates]) =>
       (new CompoundValueNoAutoNestingBuilder()..update(updates)).build();
 
   _$CompoundValueNoAutoNesting._({this.value}) : super._() {
@@ -1639,7 +1635,7 @@ class CompoundValueNoAutoNestingBuilder
 
   @override
   void update(void Function(CompoundValueNoAutoNestingBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1674,8 +1670,7 @@ class _$CompoundValueComparableBuilders
   final ValidatedValue validatedValue;
 
   factory _$CompoundValueComparableBuilders(
-          [void Function(CompoundValueComparableBuildersBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(CompoundValueComparableBuildersBuilder) updates]) =>
       (new CompoundValueComparableBuildersBuilder()..update(updates)).build();
 
   _$CompoundValueComparableBuilders._({this.simpleValue, this.validatedValue})
@@ -1750,7 +1745,7 @@ class CompoundValueComparableBuildersBuilder
 
   @override
   void update(void Function(CompoundValueComparableBuildersBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1785,8 +1780,7 @@ class _$CompoundValueExplicitNoNesting extends CompoundValueExplicitNoNesting {
   final ValidatedValue validatedValue;
 
   factory _$CompoundValueExplicitNoNesting(
-          [void Function(CompoundValueExplicitNoNestingBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(CompoundValueExplicitNoNestingBuilder) updates]) =>
       (new CompoundValueExplicitNoNestingBuilder()..update(updates)).build()
           as _$CompoundValueExplicitNoNesting;
 
@@ -1875,7 +1869,7 @@ class _$CompoundValueExplicitNoNestingBuilder
 
   @override
   void update(void Function(CompoundValueExplicitNoNestingBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1906,7 +1900,7 @@ class _$ExplicitNestedList extends ExplicitNestedList {
   final BuiltList<BuiltList<int>> nestedList;
 
   factory _$ExplicitNestedList(
-          [void Function(ExplicitNestedListBuilder) updates = emptyUpdate]) =>
+          [void Function(ExplicitNestedListBuilder) updates]) =>
       (new ExplicitNestedListBuilder()..update(updates)).build()
           as _$ExplicitNestedList;
 
@@ -1977,7 +1971,7 @@ class _$ExplicitNestedListBuilder extends ExplicitNestedListBuilder {
 
   @override
   void update(void Function(ExplicitNestedListBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2008,8 +2002,7 @@ class _$DerivedValue extends DerivedValue {
   int __derivedValue;
   Iterable<String> __derivedString;
 
-  factory _$DerivedValue(
-          [void Function(DerivedValueBuilder) updates = emptyUpdate]) =>
+  factory _$DerivedValue([void Function(DerivedValueBuilder) updates]) =>
       (new DerivedValueBuilder()..update(updates)).build();
 
   _$DerivedValue._({this.anInt}) : super._() {
@@ -2074,7 +2067,7 @@ class DerivedValueBuilder
 
   @override
   void update(void Function(DerivedValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2094,8 +2087,7 @@ class _$ValueWithCode extends ValueWithCode {
   @override
   final String aString;
 
-  factory _$ValueWithCode(
-          [void Function(ValueWithCodeBuilder) updates = emptyUpdate]) =>
+  factory _$ValueWithCode([void Function(ValueWithCodeBuilder) updates]) =>
       (new ValueWithCodeBuilder()..update(updates)).build();
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
@@ -2163,7 +2155,7 @@ class ValueWithCodeBuilder
 
   @override
   void update(void Function(ValueWithCodeBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2187,7 +2179,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
   final SimpleValue value;
 
   factory _$ValueWithDefaults(
-          [void Function(ValueWithDefaultsBuilder) updates = emptyUpdate]) =>
+          [void Function(ValueWithDefaultsBuilder) updates]) =>
       (new ValueWithDefaultsBuilder()..update(updates)).build()
           as _$ValueWithDefaults;
 
@@ -2289,7 +2281,7 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   @override
   void update(void Function(ValueWithDefaultsBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2323,8 +2315,7 @@ class _$ValueWithBuilderSmarts extends ValueWithBuilderSmarts {
   final String value;
 
   factory _$ValueWithBuilderSmarts(
-          [void Function(ValueWithBuilderSmartsBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(ValueWithBuilderSmartsBuilder) updates]) =>
       (new ValueWithBuilderSmartsBuilder()..update(updates)).build()
           as _$ValueWithBuilderSmarts;
 
@@ -2395,7 +2386,7 @@ class _$ValueWithBuilderSmartsBuilder extends ValueWithBuilderSmartsBuilder {
 
   @override
   void update(void Function(ValueWithBuilderSmartsBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2415,8 +2406,7 @@ class _$ValidatedValue extends ValidatedValue {
   @override
   final String aString;
 
-  factory _$ValidatedValue(
-          [void Function(ValidatedValueBuilder) updates = emptyUpdate]) =>
+  factory _$ValidatedValue([void Function(ValidatedValueBuilder) updates]) =>
       (new ValidatedValueBuilder()..update(updates)).build();
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
@@ -2485,7 +2475,7 @@ class ValidatedValueBuilder
 
   @override
   void update(void Function(ValidatedValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2505,7 +2495,7 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
   final using_import_as.TestEnum value;
 
   factory _$ValueUsingImportAs(
-          [void Function(ValueUsingImportAsBuilder) updates = emptyUpdate]) =>
+          [void Function(ValueUsingImportAsBuilder) updates]) =>
       (new ValueUsingImportAsBuilder()..update(updates)).build();
 
   _$ValueUsingImportAs._({this.value}) : super._() {
@@ -2567,7 +2557,7 @@ class ValueUsingImportAsBuilder
 
   @override
   void update(void Function(ValueUsingImportAsBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2582,8 +2572,7 @@ class ValueUsingImportAsBuilder
 }
 
 class _$NoFieldsValue extends NoFieldsValue {
-  factory _$NoFieldsValue(
-          [void Function(NoFieldsValueBuilder) updates = emptyUpdate]) =>
+  factory _$NoFieldsValue([void Function(NoFieldsValueBuilder) updates]) =>
       (new NoFieldsValueBuilder()..update(updates)).build();
 
   _$NoFieldsValue._() : super._();
@@ -2626,7 +2615,7 @@ class NoFieldsValueBuilder
 
   @override
   void update(void Function(NoFieldsValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2661,8 +2650,7 @@ class _$PrimitivesValue extends PrimitivesValue {
   @override
   final BigInt bigInt;
 
-  factory _$PrimitivesValue(
-          [void Function(PrimitivesValueBuilder) updates = emptyUpdate]) =>
+  factory _$PrimitivesValue([void Function(PrimitivesValueBuilder) updates]) =>
       (new PrimitivesValueBuilder()..update(updates)).build();
 
   _$PrimitivesValue._(
@@ -2839,7 +2827,7 @@ class PrimitivesValueBuilder
 
   @override
   void update(void Function(PrimitivesValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2876,8 +2864,7 @@ class _$FunctionValue extends FunctionValue {
   @override
   final MyFunctionType function;
 
-  factory _$FunctionValue(
-          [void Function(FunctionValueBuilder) updates = emptyUpdate]) =>
+  factory _$FunctionValue([void Function(FunctionValueBuilder) updates]) =>
       (new FunctionValueBuilder()..update(updates)).build();
 
   _$FunctionValue._({this.function}) : super._() {
@@ -2939,7 +2926,7 @@ class FunctionValueBuilder
 
   @override
   void update(void Function(FunctionValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -2958,7 +2945,7 @@ class _$ListOfFunctionValue extends ListOfFunctionValue {
   final BuiltList<MyFunctionType> functions;
 
   factory _$ListOfFunctionValue(
-          [void Function(ListOfFunctionValueBuilder) updates = emptyUpdate]) =>
+          [void Function(ListOfFunctionValueBuilder) updates]) =>
       (new ListOfFunctionValueBuilder()..update(updates)).build();
 
   _$ListOfFunctionValue._({this.functions}) : super._() {
@@ -3025,7 +3012,7 @@ class ListOfFunctionValueBuilder
 
   @override
   void update(void Function(ListOfFunctionValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3057,8 +3044,7 @@ class _$PartiallySerializableValue extends PartiallySerializableValue {
   final int transientValue;
 
   factory _$PartiallySerializableValue(
-          [void Function(PartiallySerializableValueBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(PartiallySerializableValueBuilder) updates]) =>
       (new PartiallySerializableValueBuilder()..update(updates)).build();
 
   _$PartiallySerializableValue._({this.value, this.transientValue})
@@ -3132,7 +3118,7 @@ class PartiallySerializableValueBuilder
 
   @override
   void update(void Function(PartiallySerializableValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3152,7 +3138,7 @@ class _$NamedFactoryValue extends NamedFactoryValue {
   final int value;
 
   factory _$NamedFactoryValue(
-          [void Function(NamedFactoryValueBuilder) updates = emptyUpdate]) =>
+          [void Function(NamedFactoryValueBuilder) updates]) =>
       (new NamedFactoryValueBuilder()..update(updates)).build();
 
   _$NamedFactoryValue._({this.value}) : super._() {
@@ -3213,7 +3199,7 @@ class NamedFactoryValueBuilder
 
   @override
   void update(void Function(NamedFactoryValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3231,8 +3217,7 @@ class _$WireNameValue extends WireNameValue {
   @override
   final int value;
 
-  factory _$WireNameValue(
-          [void Function(WireNameValueBuilder) updates = emptyUpdate]) =>
+  factory _$WireNameValue([void Function(WireNameValueBuilder) updates]) =>
       (new WireNameValueBuilder()..update(updates)).build();
 
   _$WireNameValue._({this.value}) : super._() {
@@ -3291,7 +3276,7 @@ class WireNameValueBuilder
 
   @override
   void update(void Function(WireNameValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3314,7 +3299,7 @@ class _$FieldDiscoveryValue extends FieldDiscoveryValue {
   final FieldDiscoveryValue recursiveValue;
 
   factory _$FieldDiscoveryValue(
-          [void Function(FieldDiscoveryValueBuilder) updates = emptyUpdate]) =>
+          [void Function(FieldDiscoveryValueBuilder) updates]) =>
       (new FieldDiscoveryValueBuilder()..update(updates)).build();
 
   _$FieldDiscoveryValue._({this.value, this.values, this.recursiveValue})
@@ -3401,7 +3386,7 @@ class FieldDiscoveryValueBuilder
 
   @override
   void update(void Function(FieldDiscoveryValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3438,7 +3423,7 @@ class _$DiscoverableValue extends DiscoverableValue {
   final SecondDiscoverableValue value;
 
   factory _$DiscoverableValue(
-          [void Function(DiscoverableValueBuilder) updates = emptyUpdate]) =>
+          [void Function(DiscoverableValueBuilder) updates]) =>
       (new DiscoverableValueBuilder()..update(updates)).build();
 
   _$DiscoverableValue._({this.value}) : super._() {
@@ -3500,7 +3485,7 @@ class DiscoverableValueBuilder
 
   @override
   void update(void Function(DiscoverableValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3529,8 +3514,7 @@ class _$SecondDiscoverableValue extends SecondDiscoverableValue {
   final int value;
 
   factory _$SecondDiscoverableValue(
-          [void Function(SecondDiscoverableValueBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(SecondDiscoverableValueBuilder) updates]) =>
       (new SecondDiscoverableValueBuilder()..update(updates)).build();
 
   _$SecondDiscoverableValue._({this.value}) : super._() {
@@ -3594,7 +3578,7 @@ class SecondDiscoverableValueBuilder
 
   @override
   void update(void Function(SecondDiscoverableValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3613,8 +3597,7 @@ class _$ThirdDiscoverableValue extends ThirdDiscoverableValue {
   final int value;
 
   factory _$ThirdDiscoverableValue(
-          [void Function(ThirdDiscoverableValueBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(ThirdDiscoverableValueBuilder) updates]) =>
       (new ThirdDiscoverableValueBuilder()..update(updates)).build();
 
   _$ThirdDiscoverableValue._({this.value}) : super._() {
@@ -3677,7 +3660,7 @@ class ThirdDiscoverableValueBuilder
 
   @override
   void update(void Function(ThirdDiscoverableValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3695,8 +3678,7 @@ class _$RecursiveValueA extends RecursiveValueA {
   @override
   final RecursiveValueB value;
 
-  factory _$RecursiveValueA(
-          [void Function(RecursiveValueABuilder) updates = emptyUpdate]) =>
+  factory _$RecursiveValueA([void Function(RecursiveValueABuilder) updates]) =>
       (new RecursiveValueABuilder()..update(updates)).build();
 
   _$RecursiveValueA._({this.value}) : super._() {
@@ -3757,7 +3739,7 @@ class RecursiveValueABuilder
 
   @override
   void update(void Function(RecursiveValueABuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3785,8 +3767,7 @@ class _$RecursiveValueB extends RecursiveValueB {
   @override
   final RecursiveValueA value;
 
-  factory _$RecursiveValueB(
-          [void Function(RecursiveValueBBuilder) updates = emptyUpdate]) =>
+  factory _$RecursiveValueB([void Function(RecursiveValueBBuilder) updates]) =>
       (new RecursiveValueBBuilder()..update(updates)).build();
 
   _$RecursiveValueB._({this.value}) : super._() {
@@ -3847,7 +3828,7 @@ class RecursiveValueBBuilder
 
   @override
   void update(void Function(RecursiveValueBBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3876,8 +3857,7 @@ class _$ValueWithCustomSerializer extends ValueWithCustomSerializer {
   final int value;
 
   factory _$ValueWithCustomSerializer(
-          [void Function(ValueWithCustomSerializerBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(ValueWithCustomSerializerBuilder) updates]) =>
       (new ValueWithCustomSerializerBuilder()..update(updates)).build();
 
   _$ValueWithCustomSerializer._({this.value}) : super._() {
@@ -3941,7 +3921,7 @@ class ValueWithCustomSerializerBuilder
 
   @override
   void update(void Function(ValueWithCustomSerializerBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -3959,8 +3939,7 @@ class _$ValueWithOnSet extends ValueWithOnSet {
   @override
   final int value;
 
-  factory _$ValueWithOnSet(
-          [void Function(ValueWithOnSetBuilder) updates = emptyUpdate]) =>
+  factory _$ValueWithOnSet([void Function(ValueWithOnSetBuilder) updates]) =>
       (new ValueWithOnSetBuilder()..update(updates)).build();
 
   _$ValueWithOnSet._({this.value}) : super._() {
@@ -4025,7 +4004,7 @@ class ValueWithOnSetBuilder
 
   @override
   void update(void Function(ValueWithOnSetBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -4041,7 +4020,7 @@ class ValueWithOnSetBuilder
 
 class _$CustomToStringValue extends CustomToStringValue {
   factory _$CustomToStringValue(
-          [void Function(CustomToStringValueBuilder) updates = emptyUpdate]) =>
+          [void Function(CustomToStringValueBuilder) updates]) =>
       (new CustomToStringValueBuilder()..update(updates)).build();
 
   _$CustomToStringValue._() : super._();
@@ -4081,7 +4060,7 @@ class CustomToStringValueBuilder
 
   @override
   void update(void Function(CustomToStringValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -4096,8 +4075,7 @@ class _$OtherValue extends OtherValue {
   @override
   final int other;
 
-  factory _$OtherValue(
-          [void Function(OtherValueBuilder) updates = emptyUpdate]) =>
+  factory _$OtherValue([void Function(OtherValueBuilder) updates]) =>
       (new OtherValueBuilder()..update(updates)).build();
 
   _$OtherValue._({this.other}) : super._() {
@@ -4155,7 +4133,7 @@ class OtherValueBuilder implements Builder<OtherValue, OtherValueBuilder> {
 
   @override
   void update(void Function(OtherValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -4178,8 +4156,7 @@ class _$DefaultsForFieldSettingsValue extends DefaultsForFieldSettingsValue {
   final int serialized;
 
   factory _$DefaultsForFieldSettingsValue(
-          [void Function(DefaultsForFieldSettingsValueBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(DefaultsForFieldSettingsValueBuilder) updates]) =>
       (new DefaultsForFieldSettingsValueBuilder()..update(updates)).build();
 
   _$DefaultsForFieldSettingsValue._(
@@ -4262,7 +4239,7 @@ class DefaultsForFieldSettingsValueBuilder
 
   @override
   void update(void Function(DefaultsForFieldSettingsValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -4299,8 +4276,7 @@ class _$ValueWithBuilderInitializer extends ValueWithBuilderInitializer {
   final SimpleValue nullableNestedValueWithDefault;
 
   factory _$ValueWithBuilderInitializer(
-          [void Function(ValueWithBuilderInitializerBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(ValueWithBuilderInitializerBuilder) updates]) =>
       (new ValueWithBuilderInitializerBuilder()..update(updates)).build();
 
   _$ValueWithBuilderInitializer._(
@@ -4458,7 +4434,7 @@ class ValueWithBuilderInitializerBuilder
 
   @override
   void update(void Function(ValueWithBuilderInitializerBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -4507,8 +4483,7 @@ class _$ValueWithBuilderFinalizer extends ValueWithBuilderFinalizer {
   final int anInt;
 
   factory _$ValueWithBuilderFinalizer(
-          [void Function(ValueWithBuilderFinalizerBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(ValueWithBuilderFinalizerBuilder) updates]) =>
       (new ValueWithBuilderFinalizerBuilder()..update(updates)).build();
 
   _$ValueWithBuilderFinalizer._({this.anInt}) : super._() {
@@ -4572,7 +4547,7 @@ class ValueWithBuilderFinalizerBuilder
 
   @override
   void update(void Function(ValueWithBuilderFinalizerBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -4593,8 +4568,8 @@ class _$ValueWithGenericBuilderInitializer<T>
   final T value;
 
   factory _$ValueWithGenericBuilderInitializer(
-          [void Function(ValueWithGenericBuilderInitializerBuilder<T>) updates =
-              emptyUpdate]) =>
+          [void Function(ValueWithGenericBuilderInitializerBuilder<T>)
+              updates]) =>
       (new ValueWithGenericBuilderInitializerBuilder<T>()..update(updates))
           .build();
 
@@ -4666,7 +4641,7 @@ class ValueWithGenericBuilderInitializerBuilder<T>
   @override
   void update(
       void Function(ValueWithGenericBuilderInitializerBuilder<T>) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -4684,8 +4659,7 @@ class _$HashcodeValue extends HashcodeValue {
   @override
   final int y;
 
-  factory _$HashcodeValue(
-          [void Function(HashcodeValueBuilder) updates = emptyUpdate]) =>
+  factory _$HashcodeValue([void Function(HashcodeValueBuilder) updates]) =>
       (new HashcodeValueBuilder()..update(updates)).build();
 
   _$HashcodeValue._({this.x, this.y}) : super._() {
@@ -4752,7 +4726,7 @@ class HashcodeValueBuilder
 
   @override
   void update(void Function(HashcodeValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -4773,8 +4747,7 @@ class _$MemoizedHashcodeValue extends MemoizedHashcodeValue {
   final int y;
 
   factory _$MemoizedHashcodeValue(
-          [void Function(MemoizedHashcodeValueBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(MemoizedHashcodeValueBuilder) updates]) =>
       (new MemoizedHashcodeValueBuilder()..update(updates)).build();
 
   _$MemoizedHashcodeValue._({this.x, this.y}) : super._() {
@@ -4844,7 +4817,7 @@ class MemoizedHashcodeValueBuilder
 
   @override
   void update(void Function(MemoizedHashcodeValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -4861,8 +4834,7 @@ class MemoizedHashcodeValueBuilder
 }
 
 class _$PrivateValue extends _PrivateValue {
-  factory _$PrivateValue(
-          [void Function(_PrivateValueBuilder) updates = emptyUpdate]) =>
+  factory _$PrivateValue([void Function(_PrivateValueBuilder) updates]) =>
       (new _PrivateValueBuilder()..update(updates)).build();
 
   _$PrivateValue._() : super._();
@@ -4905,7 +4877,7 @@ class _PrivateValueBuilder
 
   @override
   void update(void Function(_PrivateValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override

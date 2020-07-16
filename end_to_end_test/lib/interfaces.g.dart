@@ -147,8 +147,7 @@ class _$ValueWithInt extends ValueWithInt {
   @override
   final String note;
 
-  factory _$ValueWithInt(
-          [void Function(ValueWithIntBuilder) updates = emptyUpdate]) =>
+  factory _$ValueWithInt([void Function(ValueWithIntBuilder) updates]) =>
       (new ValueWithIntBuilder()..update(updates)).build();
 
   _$ValueWithInt._({this.anInt, this.note}) : super._() {
@@ -215,7 +214,7 @@ class ValueWithIntBuilder
 
   @override
   void update(void Function(ValueWithIntBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -235,8 +234,7 @@ class _$ValueWithHasInt extends ValueWithHasInt {
   @override
   final HasInt hasInt;
 
-  factory _$ValueWithHasInt(
-          [void Function(ValueWithHasIntBuilder) updates = emptyUpdate]) =>
+  factory _$ValueWithHasInt([void Function(ValueWithHasIntBuilder) updates]) =>
       (new ValueWithHasIntBuilder()..update(updates)).build();
 
   _$ValueWithHasInt._({this.hasInt}) : super._() {
@@ -297,7 +295,7 @@ class ValueWithHasIntBuilder
 
   @override
   void update(void Function(ValueWithHasIntBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override

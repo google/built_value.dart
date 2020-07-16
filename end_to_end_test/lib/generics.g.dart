@@ -403,8 +403,7 @@ class _$GenericValue<T> extends GenericValue<T> {
   @override
   final T value;
 
-  factory _$GenericValue(
-          [void Function(GenericValueBuilder<T>) updates = emptyUpdate]) =>
+  factory _$GenericValue([void Function(GenericValueBuilder<T>) updates]) =>
       (new GenericValueBuilder<T>()..update(updates)).build();
 
   _$GenericValue._({this.value}) : super._() {
@@ -467,7 +466,7 @@ class GenericValueBuilder<T>
 
   @override
   void update(void Function(GenericValueBuilder<T>) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -486,7 +485,7 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
   final T value;
 
   factory _$BoundGenericValue(
-          [void Function(BoundGenericValueBuilder<T>) updates = emptyUpdate]) =>
+          [void Function(BoundGenericValueBuilder<T>) updates]) =>
       (new BoundGenericValueBuilder<T>()..update(updates)).build();
 
   _$BoundGenericValue._({this.value}) : super._() {
@@ -551,7 +550,7 @@ class BoundGenericValueBuilder<T extends num>
 
   @override
   void update(void Function(BoundGenericValueBuilder<T>) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -570,8 +569,7 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
   final BuiltList<T> values;
 
   factory _$CollectionGenericValue(
-          [void Function(CollectionGenericValueBuilder<T>) updates =
-              emptyUpdate]) =>
+          [void Function(CollectionGenericValueBuilder<T>) updates]) =>
       (new CollectionGenericValueBuilder<T>()..update(updates)).build();
 
   _$CollectionGenericValue._({this.values}) : super._() {
@@ -638,7 +636,7 @@ class CollectionGenericValueBuilder<T>
 
   @override
   void update(void Function(CollectionGenericValueBuilder<T>) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -672,7 +670,7 @@ class _$GenericContainer extends GenericContainer {
   final CollectionGenericValue<String> collectionGenericValue;
 
   factory _$GenericContainer(
-          [void Function(GenericContainerBuilder) updates = emptyUpdate]) =>
+          [void Function(GenericContainerBuilder) updates]) =>
       (new GenericContainerBuilder()..update(updates)).build();
 
   _$GenericContainer._(
@@ -765,7 +763,7 @@ class GenericContainerBuilder
 
   @override
   void update(void Function(GenericContainerBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -802,8 +800,7 @@ class _$NestedGenericContainer extends NestedGenericContainer {
   final GenericValue<BuiltMap<int, String>> map;
 
   factory _$NestedGenericContainer(
-          [void Function(NestedGenericContainerBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(NestedGenericContainerBuilder) updates]) =>
       (new NestedGenericContainerBuilder()..update(updates)).build();
 
   _$NestedGenericContainer._({this.map}) : super._() {
@@ -866,7 +863,7 @@ class NestedGenericContainerBuilder
 
   @override
   void update(void Function(NestedGenericContainerBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -895,8 +892,7 @@ class _$CustomBuilderGenericValue<T> extends CustomBuilderGenericValue<T> {
   final T value;
 
   factory _$CustomBuilderGenericValue(
-          [void Function(CustomBuilderGenericValueBuilder<T>) updates =
-              emptyUpdate]) =>
+          [void Function(CustomBuilderGenericValueBuilder<T>) updates]) =>
       (new CustomBuilderGenericValueBuilder<T>()..update(updates)).build()
           as _$CustomBuilderGenericValue<T>;
 
@@ -972,7 +968,7 @@ class _$CustomBuilderGenericValueBuilder<T>
 
   @override
   void update(void Function(CustomBuilderGenericValueBuilder<T>) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -990,8 +986,7 @@ class _$ConcreteGeneric extends ConcreteGeneric {
   @override
   final int value;
 
-  factory _$ConcreteGeneric(
-          [void Function(ConcreteGenericBuilder) updates = emptyUpdate]) =>
+  factory _$ConcreteGeneric([void Function(ConcreteGenericBuilder) updates]) =>
       (new ConcreteGenericBuilder()..update(updates)).build();
 
   _$ConcreteGeneric._({this.value}) : super._() {
@@ -1051,7 +1046,7 @@ class ConcreteGenericBuilder
 
   @override
   void update(void Function(ConcreteGenericBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1070,7 +1065,7 @@ class _$GenericFunction<T> extends GenericFunction<T> {
   final Function(T) function;
 
   factory _$GenericFunction(
-          [void Function(GenericFunctionBuilder<T>) updates = emptyUpdate]) =>
+          [void Function(GenericFunctionBuilder<T>) updates]) =>
       (new GenericFunctionBuilder<T>()..update(updates)).build();
 
   _$GenericFunction._({this.function}) : super._() {
@@ -1137,7 +1132,7 @@ class GenericFunctionBuilder<T>
 
   @override
   void update(void Function(GenericFunctionBuilder<T>) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -1155,8 +1150,7 @@ class _$NonBuiltGeneric extends NonBuiltGeneric {
   @override
   final NonBuilt<int> value;
 
-  factory _$NonBuiltGeneric(
-          [void Function(NonBuiltGenericBuilder) updates = emptyUpdate]) =>
+  factory _$NonBuiltGeneric([void Function(NonBuiltGenericBuilder) updates]) =>
       (new NonBuiltGenericBuilder()..update(updates)).build();
 
   _$NonBuiltGeneric._({this.value}) : super._() {
@@ -1216,7 +1210,7 @@ class NonBuiltGenericBuilder
 
   @override
   void update(void Function(NonBuiltGenericBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
