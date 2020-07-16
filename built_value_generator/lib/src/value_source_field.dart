@@ -93,8 +93,11 @@ abstract class ValueSourceField
   bool get isGetter => element.getter != null && !element.getter.isSynthetic;
 
   @memoized
-  bool get isNullable => element.getter.metadata
+  bool get hasNullableAnnotation => element.getter.metadata
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
+
+  @memoized
+  bool get isNullable => hasNullableAnnotation;
 
   @memoized
   BuiltValueField get builtValueField {
@@ -260,6 +263,12 @@ abstract class ValueSourceField
       result.add(GeneratorError((b) => b
         ..message = 'Make field "$name" have type "${_suggestedTypes[type]}". '
             'The current type, "$type", is not allowed because it is mutable.'));
+    }
+
+    if (isNonNullByDefault && hasNullableAnnotation) {
+      result.add(GeneratorError((b) => b
+        ..message = 'Remove "@nullable" from field "$name". '
+            'In null safe code, add "?" to the field type instead.'));
     }
 
     if (builderFieldExists) {

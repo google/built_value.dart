@@ -760,6 +760,23 @@ abstract class _Value implements Built<_Value, _ValueBuilder> {
           isNot(contains(r'1.')),
         ));
   });
+
+  test('2.9 rejects @nullable annotation', () async {
+    expect(
+        await generate('''// @dart=2.9
+library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+  
+  @nullable
+  int get x;
+}'''),
+        contains('1. Remove "@nullable" from field "x". '
+            'In null safe code, add "?" to the field type instead.'));
+  });
 }
 
 // Test setup.
@@ -794,6 +811,8 @@ Future<String> generate(String source) async {
 
 const String builtValueSource = r'''
 library built_value;
+
+const nullable = 'nullable';
 
 abstract class Built<V extends Built<V, B>, B extends Builder<V, B>> {
   V rebuild(updates(B builder));
