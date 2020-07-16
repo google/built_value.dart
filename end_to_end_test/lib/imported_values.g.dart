@@ -186,8 +186,7 @@ class _$ImportedValue extends ImportedValue {
   @override
   final BuiltList<prefix.SimpleValue> simpleValues;
 
-  factory _$ImportedValue(
-          [void Function(ImportedValueBuilder) updates = emptyUpdate]) =>
+  factory _$ImportedValue([void Function(ImportedValueBuilder) updates]) =>
       (new ImportedValueBuilder()..update(updates)).build();
 
   _$ImportedValue._({this.simpleValue, this.simpleValues}) : super._() {
@@ -262,7 +261,7 @@ class ImportedValueBuilder
 
   @override
   void update(void Function(ImportedValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -298,7 +297,7 @@ class _$ImportedCustomValue extends ImportedCustomValue {
   final BuiltList<prefix.SimpleValue> simpleValues;
 
   factory _$ImportedCustomValue(
-          [void Function(ImportedCustomValueBuilder) updates = emptyUpdate]) =>
+          [void Function(ImportedCustomValueBuilder) updates]) =>
       (new ImportedCustomValueBuilder()..update(updates)).build()
           as _$ImportedCustomValue;
 
@@ -387,7 +386,7 @@ class _$ImportedCustomValueBuilder extends ImportedCustomValueBuilder {
 
   @override
   void update(void Function(ImportedCustomValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override
@@ -410,8 +409,7 @@ class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
   final BuiltList<prefix.SimpleValue> simpleValues;
 
   factory _$ImportedCustomNestedValue(
-          [void Function(ImportedCustomNestedValueBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(ImportedCustomNestedValueBuilder) updates]) =>
       (new ImportedCustomNestedValueBuilder()..update(updates)).build()
           as _$ImportedCustomNestedValue;
 
@@ -502,7 +500,7 @@ class _$ImportedCustomNestedValueBuilder
 
   @override
   void update(void Function(ImportedCustomNestedValueBuilder) updates) {
-    updates(this);
+    if (updates != null) updates(this);
   }
 
   @override

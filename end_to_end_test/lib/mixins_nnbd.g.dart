@@ -32,8 +32,7 @@ class _$UsesMixin extends UsesMixin {
   @override
   final String Function(String) typeDef;
 
-  factory _$UsesMixin(
-          [void Function(UsesMixinBuilder) updates = emptyUpdate]) =>
+  factory _$UsesMixin([void Function(UsesMixinBuilder)? updates]) =>
       (new UsesMixinBuilder()..update(updates)).build();
 
   _$UsesMixin._({required this.typeDef}) : super._() {
@@ -91,8 +90,8 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
   }
 
   @override
-  void update(void Function(UsesMixinBuilder) updates) {
-    updates(this);
+  void update(void Function(UsesMixinBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
@@ -111,8 +110,7 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
   final int shouldBeAField;
 
   factory _$GetsCorrectFieldsViaMixins(
-          [void Function(GetsCorrectFieldsViaMixinsBuilder) updates =
-              emptyUpdate]) =>
+          [void Function(GetsCorrectFieldsViaMixinsBuilder)? updates]) =>
       (new GetsCorrectFieldsViaMixinsBuilder()..update(updates)).build();
 
   _$GetsCorrectFieldsViaMixins._({required this.shouldBeAField}) : super._() {
@@ -177,8 +175,8 @@ class GetsCorrectFieldsViaMixinsBuilder
   }
 
   @override
-  void update(void Function(GetsCorrectFieldsViaMixinsBuilder) updates) {
-    updates(this);
+  void update(void Function(GetsCorrectFieldsViaMixinsBuilder)? updates) {
+    if (updates != null) updates(this);
   }
 
   @override
