@@ -22,7 +22,6 @@ abstract class StandardJsonValue
   BuiltList<Animal> get zoo;
   BuiltSet<Animal> get uniqueZoo;
 
-  @nullable
   BuiltList<String>? get strings;
 
   factory StandardJsonValue([void Function(StandardJsonValueBuilder) updates]) =

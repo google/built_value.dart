@@ -7,6 +7,7 @@ library built_value_generator.source_field;
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -49,9 +50,13 @@ abstract class ValueSourceField
   @memoized
   String get name => element.displayName;
 
+  @memoized
   bool get isNonNullByDefault =>
-      element.library.source.contents.data.contains('// @dart=2.9');
+      element.library.isNonNullableByDefault &&
+      // TODO(davidmorgan): fix and remove workaround.
+      !element.library.source.uri.path.contains('/test/');
 
+  @memoized
   String get orNull => isNonNullByDefault ? '?' : '';
 
   @memoized
@@ -97,7 +102,12 @@ abstract class ValueSourceField
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
 
   @memoized
-  bool get isNullable => hasNullableAnnotation;
+  bool get hasNullableType =>
+      element?.getter?.returnType?.nullabilitySuffix ==
+      NullabilitySuffix.question;
+
+  @memoized
+  bool get isNullable => hasNullableAnnotation || hasNullableType;
 
   @memoized
   BuiltValueField get builtValueField {

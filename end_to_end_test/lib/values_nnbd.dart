@@ -16,11 +16,7 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
 
   int get anInt;
 
-  // Only fields marked @nullable can hold null.
-  @nullable
   String? get aString;
-
-  @nullable
   bool? get $mustBeEscaped;
 
   factory SimpleValue([void Function(SimpleValueBuilder) updates]) =
@@ -33,7 +29,6 @@ abstract class CompoundValue
   static Serializer<CompoundValue> get serializer => _$compoundValueSerializer;
 
   SimpleValue get simpleValue;
-  @nullable
   ValidatedValue? get validatedValue;
 
   factory CompoundValue([void Function(CompoundValueBuilder) updates]) =
@@ -48,7 +43,6 @@ abstract class CompoundValueNoNesting
       _$compoundValueNoNestingSerializer;
 
   SimpleValue get simpleValue;
-  @nullable
   ValidatedValue? get validatedValue;
 
   factory CompoundValueNoNesting(
@@ -81,7 +75,6 @@ abstract class CompoundValueComparableBuilders
       _$compoundValueComparableBuildersSerializer;
 
   SimpleValue get simpleValue;
-  @nullable
   ValidatedValue? get validatedValue;
 
   factory CompoundValueComparableBuilders(
@@ -98,7 +91,6 @@ abstract class CompoundValueExplicitNoNesting
       _$compoundValueExplicitNoNestingSerializer;
 
   SimpleValue get simpleValue;
-  @nullable
   ValidatedValue? get validatedValue;
 
   factory CompoundValueExplicitNoNesting(
@@ -172,7 +164,6 @@ abstract class ValueWithCode
   static final int youCanHaveStaticFields = 3;
 
   int get anInt;
-  @nullable
   String? get aString;
 
   String get youCanWriteDerivedGetters => anInt.toString() + aString!;
@@ -189,7 +180,6 @@ abstract class ValueWithCode
 abstract class ValueWithDefaults
     implements Built<ValueWithDefaults, ValueWithDefaultsBuilder> {
   int get anInt;
-  @nullable
   String? get aString;
   SimpleValue get value;
 
@@ -202,7 +192,6 @@ abstract class ValueWithDefaultsBuilder
     implements Builder<ValueWithDefaults, ValueWithDefaultsBuilder> {
   int anInt = 7;
 
-  @nullable
   String? aString;
   SimpleValueBuilder value = SimpleValue((b) => b..anInt = 3).toBuilder();
 
@@ -240,7 +229,6 @@ abstract class ValidatedValue
 
   int get anInt;
 
-  @nullable
   String? get aString;
 
   factory ValidatedValue([void Function(ValidatedValueBuilder) updates]) =
@@ -329,7 +317,6 @@ abstract class PartiallySerializableValue
 
   int get value;
 
-  @nullable
   @BuiltValueField(serialize: false)
   int? get transientValue;
 
@@ -376,7 +363,6 @@ abstract class FieldDiscoveryValue
   BuiltList<ThirdDiscoverableValue> get values;
 
   // Check that discovery doesn't recurse forever on reference to self.
-  @nullable
   FieldDiscoveryValue? get recursiveValue;
 
   factory FieldDiscoveryValue(
@@ -564,16 +550,12 @@ abstract class ValueWithBuilderInitializer
 
   int get anInt;
   int get anIntWithDefault;
-  @nullable
   int? get nullableInt;
-  @nullable
   int? get nullableIntWithDefault;
 
   SimpleValue get nestedValue;
   SimpleValue get nestedValueWithDefault;
-  @nullable
   SimpleValue? get nullableNestedValue;
-  @nullable
   SimpleValue? get nullableNestedValueWithDefault;
 
   factory ValueWithBuilderInitializer(
@@ -612,7 +594,6 @@ abstract class ValueWithGenericBuilderInitializer<T>
     }
   }
 
-  @nullable
   T? get value;
 
   factory ValueWithGenericBuilderInitializer(

@@ -41,11 +41,11 @@ abstract class ValueSourceClass
   @memoized
   String get name => element.displayName;
 
-  // TODO(davidmorgan): this is not the right way to check, but is good enough
-  // while developing. Fix before publishing.
   @memoized
   bool get isNonNullByDefault =>
-      element.source.contents.data.contains('// @dart=2.9');
+      element.library.isNonNullableByDefault &&
+      // TODO(davidmorgan): fix and remove workaround.
+      !element.library.source.uri.path.contains('/test/');
 
   @memoized
   String get orNull => isNonNullByDefault ? '?' : '';

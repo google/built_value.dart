@@ -18,15 +18,10 @@ abstract class Collections implements Built<Collections, CollectionsBuilder> {
   BuiltListMultimap<int, bool> get listMultimap;
   BuiltSetMultimap<String, bool> get setMultimap;
 
-  @nullable
   BuiltList<int>? get nullableList;
-  @nullable
   BuiltSet<String>? get nullableSet;
-  @nullable
   BuiltMap<String, int>? get nullableMap;
-  @nullable
   BuiltListMultimap<int, bool>? get nullableListMultimap;
-  @nullable
   BuiltSetMultimap<String, bool>? get nullableSetMultimap;
 
   factory Collections([void Function(CollectionsBuilder) updates]) =

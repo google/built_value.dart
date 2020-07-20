@@ -7,6 +7,7 @@ library built_value_generator.source_field;
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -65,8 +66,16 @@ abstract class SerializerSourceField
   }
 
   @memoized
-  bool get isNullable => element.getter.metadata
+  bool get hasNullableAnnotation => element.getter.metadata
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
+
+  @memoized
+  bool get hasNullableType =>
+      element?.getter?.returnType?.nullabilitySuffix ==
+      NullabilitySuffix.question;
+
+  @memoized
+  bool get isNullable => hasNullableAnnotation || hasNullableType;
 
   @memoized
   String get name => element.displayName;
