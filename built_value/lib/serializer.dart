@@ -359,6 +359,5 @@ class DeserializationError extends Error {
   DeserializationError._(this.json, this.type, this.error);
 
   @override
-  String toString() =>
-      "Deserializing '$json' to '$type' failed due to: $error at ${error.stackTrace}";
+  String toString() => "Deserializing '$json' to '$type' failed due to: $error";
 }
