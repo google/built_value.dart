@@ -54,6 +54,7 @@ abstract class ValueSourceField
   bool get isNonNullByDefault =>
       element.library.isNonNullableByDefault &&
       // TODO(davidmorgan): fix and remove workaround.
+      !element.library.source.uri.path.contains('/test/') &&
       !element.library.source.uri.path.contains('.test/') &&
       !element.library.source.uri.path.contains('.test.');
 
