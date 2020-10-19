@@ -38,6 +38,7 @@ See the [API docs](https://pub.dev/documentation/built_value/latest/built_value/
  - The [Json to Dart built_value class converter](https://charafau.github.io/json2builtvalue/) creates classes for you that correspond to a snippet of JSON
  - [VSCode extension](https://marketplace.visualstudio.com/items?itemName=GiancarloCode.built-value-snippets)
  - [IntelliJ plugin](https://plugins.jetbrains.com/plugin/13786-built-value-snippets)
+ - [Json or js Object to Dart built_value class converter](https://januwa.github.io/p5_object_2_builtvalue/index.html)
 
 ## Examples
 
