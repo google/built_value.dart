@@ -63,6 +63,11 @@ class StandardJsonPlugin implements SerializerPlugin {
       } else {
         return _toList(object, _needsEncodedKeys(specifiedType));
       }
+    } else if (object.runtimeType == _dynamicListRuntimeType) {
+      // built_json_serializers does not support List<dynamic>. As nulls in
+      // built lists are not supported anyway, it is safe to cast List<dynamic>
+      // to List<Object> here.
+      return (object as List).cast<Object>();
     } else {
       return object;
     }
@@ -214,3 +219,5 @@ class StandardJsonPlugin implements SerializerPlugin {
     return json.decode(key);
   }
 }
+
+final _dynamicListRuntimeType = <dynamic>[].runtimeType;
