@@ -150,6 +150,13 @@ abstract class DerivedValue
     return [toString()];
   }
 
+  @memoized
+  int? get nullableDerivedValue {
+    ++nullableDerivedGetterCount;
+
+    return null;
+  }
+
   factory DerivedValue([void Function(DerivedValueBuilder) updates]) =
       _$DerivedValue;
   DerivedValue._();
@@ -158,6 +165,8 @@ abstract class DerivedValue
 int derivedValueGetterCount = 0;
 
 int derivedStringGetterCount = 0;
+
+int nullableDerivedGetterCount = 0;
 
 abstract class ValueWithCode
     implements Built<ValueWithCode, ValueWithCodeBuilder> {

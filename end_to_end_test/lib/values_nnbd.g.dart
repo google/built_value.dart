@@ -2007,6 +2007,8 @@ class _$DerivedValue extends DerivedValue {
   final int anInt;
   int? __derivedValue;
   Iterable<String>? __derivedString;
+  int? __nullableDerivedValue;
+  bool ___nullableDerivedValue = false;
 
   factory _$DerivedValue([void Function(DerivedValueBuilder)? updates]) =>
       (new DerivedValueBuilder()..update(updates)).build();
@@ -2020,6 +2022,15 @@ class _$DerivedValue extends DerivedValue {
 
   @override
   Iterable<String> get derivedString => __derivedString ??= super.derivedString;
+
+  @override
+  int? get nullableDerivedValue {
+    if (!___nullableDerivedValue) {
+      __nullableDerivedValue = super.nullableDerivedValue;
+      ___nullableDerivedValue = true;
+    }
+    return __nullableDerivedValue;
+  }
 
   @override
   DerivedValue rebuild(void Function(DerivedValueBuilder) updates) =>
