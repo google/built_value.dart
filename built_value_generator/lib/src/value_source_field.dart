@@ -67,7 +67,7 @@ abstract class ValueSourceField
   @memoized
   bool get isFunctionType => type.contains('(');
 
-  /// The [type] plus any import prefix.
+  /// The [type] plus any import prefix, without any nullability suffix.
   @memoized
   String get typeWithPrefix {
     var typeFromAst = (parsedLibrary.getElementDeclaration(element.getter).node
@@ -75,6 +75,9 @@ abstract class ValueSourceField
             ?.returnType
             ?.toSource() ??
         'dynamic';
+    if (typeFromAst.endsWith('?')) {
+      typeFromAst = typeFromAst.substring(0, typeFromAst.length - 1);
+    }
     var typeFromElement = type;
 
     // If the type is a function, we can't use the element result; it is

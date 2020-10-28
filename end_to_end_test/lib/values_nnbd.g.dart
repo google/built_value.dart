@@ -455,7 +455,14 @@ class _$ValueUsingImportAsSerializer
       serializers.serialize(object.value,
           specifiedType: const FullType(using_import_as.TestEnum)),
     ];
-
+    Object? value;
+    value = object.nullableValue;
+    if (value != null) {
+      result
+        ..add('nullableValue')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(using_import_as.TestEnum)));
+    }
     return result;
   }
 
@@ -473,6 +480,11 @@ class _$ValueUsingImportAsSerializer
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
+                  specifiedType: const FullType(using_import_as.TestEnum))
+              as using_import_as.TestEnum;
+          break;
+        case 'nullableValue':
+          result.nullableValue = serializers.deserialize(value,
                   specifiedType: const FullType(using_import_as.TestEnum))
               as using_import_as.TestEnum;
           break;
@@ -2512,12 +2524,15 @@ class ValidatedValueBuilder
 class _$ValueUsingImportAs extends ValueUsingImportAs {
   @override
   final using_import_as.TestEnum value;
+  @override
+  final using_import_as.TestEnum? nullableValue;
 
   factory _$ValueUsingImportAs(
           [void Function(ValueUsingImportAsBuilder)? updates]) =>
       (new ValueUsingImportAsBuilder()..update(updates)).build();
 
-  _$ValueUsingImportAs._({required this.value}) : super._() {
+  _$ValueUsingImportAs._({required this.value, this.nullableValue})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'ValueUsingImportAs', 'value');
   }
 
@@ -2533,18 +2548,21 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ValueUsingImportAs && value == other.value;
+    return other is ValueUsingImportAs &&
+        value == other.value &&
+        nullableValue == other.nullableValue;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    return $jf($jc($jc(0, value.hashCode), nullableValue.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ValueUsingImportAs')
-          ..add('value', value))
+          ..add('value', value)
+          ..add('nullableValue', nullableValue))
         .toString();
   }
 }
@@ -2557,12 +2575,18 @@ class ValueUsingImportAsBuilder
   using_import_as.TestEnum? get value => _$this._value;
   set value(using_import_as.TestEnum? value) => _$this._value = value;
 
+  using_import_as.TestEnum? _nullableValue;
+  using_import_as.TestEnum? get nullableValue => _$this._nullableValue;
+  set nullableValue(using_import_as.TestEnum? nullableValue) =>
+      _$this._nullableValue = nullableValue;
+
   ValueUsingImportAsBuilder();
 
   ValueUsingImportAsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _value = $v.value;
+      _nullableValue = $v.nullableValue;
       _$v = null;
     }
     return this;
@@ -2584,7 +2608,8 @@ class ValueUsingImportAsBuilder
     final _$result = _$v ??
         new _$ValueUsingImportAs._(
             value: BuiltValueNullFieldError.checkNotNull(
-                value, 'ValueUsingImportAs', 'value'));
+                value, 'ValueUsingImportAs', 'value'),
+            nullableValue: nullableValue);
     replace(_$result);
     return _$result;
   }
