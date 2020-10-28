@@ -254,6 +254,7 @@ abstract class ValueUsingImportAs
       _$valueUsingImportAsSerializer;
 
   using_import_as.TestEnum get value;
+  using_import_as.TestEnum? get nullableValue;
 
   factory ValueUsingImportAs(
           [void Function(ValueUsingImportAsBuilder) updates]) =
