@@ -257,6 +257,15 @@ void main() {
       expect(value.derivedString, [value.toString()]);
       expect(derivedStringGetterCount, 1);
     });
+
+    test('caches nullableDerivedValue', () {
+      final value = DerivedValue((b) => b..anInt = 7);
+      expect(nullableDerivedGetterCount, 0);
+      expect(value.nullableDerivedValue, null);
+      expect(nullableDerivedGetterCount, 1);
+      expect(value.nullableDerivedValue, null);
+      expect(nullableDerivedGetterCount, 1);
+    });
   });
 
   group('ValidatedValue', () {

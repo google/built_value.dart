@@ -10,14 +10,20 @@ class _$MemoizedGetter extends MemoizedGetter {
   @override
   final String returnType;
   @override
+  final NullabilitySuffix nullabilitySuffix;
+  @override
   final String name;
 
   factory _$MemoizedGetter([void Function(MemoizedGetterBuilder) updates]) =>
       (new MemoizedGetterBuilder()..update(updates)).build();
 
-  _$MemoizedGetter._({this.returnType, this.name}) : super._() {
+  _$MemoizedGetter._({this.returnType, this.nullabilitySuffix, this.name})
+      : super._() {
     if (returnType == null) {
       throw new BuiltValueNullFieldError('MemoizedGetter', 'returnType');
+    }
+    if (nullabilitySuffix == null) {
+      throw new BuiltValueNullFieldError('MemoizedGetter', 'nullabilitySuffix');
     }
     if (name == null) {
       throw new BuiltValueNullFieldError('MemoizedGetter', 'name');
@@ -37,18 +43,21 @@ class _$MemoizedGetter extends MemoizedGetter {
     if (identical(other, this)) return true;
     return other is MemoizedGetter &&
         returnType == other.returnType &&
+        nullabilitySuffix == other.nullabilitySuffix &&
         name == other.name;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, returnType.hashCode), name.hashCode));
+    return $jf($jc($jc($jc(0, returnType.hashCode), nullabilitySuffix.hashCode),
+        name.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('MemoizedGetter')
           ..add('returnType', returnType)
+          ..add('nullabilitySuffix', nullabilitySuffix)
           ..add('name', name))
         .toString();
   }
@@ -62,6 +71,11 @@ class MemoizedGetterBuilder
   String get returnType => _$this._returnType;
   set returnType(String returnType) => _$this._returnType = returnType;
 
+  NullabilitySuffix _nullabilitySuffix;
+  NullabilitySuffix get nullabilitySuffix => _$this._nullabilitySuffix;
+  set nullabilitySuffix(NullabilitySuffix nullabilitySuffix) =>
+      _$this._nullabilitySuffix = nullabilitySuffix;
+
   String _name;
   String get name => _$this._name;
   set name(String name) => _$this._name = name;
@@ -71,6 +85,7 @@ class MemoizedGetterBuilder
   MemoizedGetterBuilder get _$this {
     if (_$v != null) {
       _returnType = _$v.returnType;
+      _nullabilitySuffix = _$v.nullabilitySuffix;
       _name = _$v.name;
       _$v = null;
     }
@@ -92,8 +107,11 @@ class MemoizedGetterBuilder
 
   @override
   _$MemoizedGetter build() {
-    final _$result =
-        _$v ?? new _$MemoizedGetter._(returnType: returnType, name: name);
+    final _$result = _$v ??
+        new _$MemoizedGetter._(
+            returnType: returnType,
+            nullabilitySuffix: nullabilitySuffix,
+            name: name);
     replace(_$result);
     return _$result;
   }

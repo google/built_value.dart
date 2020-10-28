@@ -691,6 +691,11 @@ abstract class ValueSourceClass
     for (var memoizedGetter in memoizedGetters) {
       result.writeln(
           '${memoizedGetter.returnType}$orNull __${memoizedGetter.name};');
+      if (memoizedGetter.isNullable) {
+        // Nullable memoiozed getters needs a field to store whether they are
+        // initialized.
+        result.writeln('bool ___${memoizedGetter.name} = false;');
+      }
     }
     result.writeln();
 
@@ -739,10 +744,22 @@ abstract class ValueSourceClass
 
     for (var memoizedGetter in memoizedGetters) {
       result.writeln('@override');
-      result.writeln(
-          '${memoizedGetter.returnType} get ${memoizedGetter.name} =>');
-      result.writeln(
-          '__${memoizedGetter.name} ??= super.${memoizedGetter.name};');
+      if (memoizedGetter.isNullable) {
+        result.writeln(
+            '${memoizedGetter.returnType}? get ${memoizedGetter.name} {');
+        result.writeln('if (!___${memoizedGetter.name}) {');
+        result.writeln(
+            '__${memoizedGetter.name} = super.${memoizedGetter.name};');
+        result.writeln('___${memoizedGetter.name} = true;');
+        result.writeln('}');
+        result.writeln('return __${memoizedGetter.name};');
+        result.writeln('}');
+      } else {
+        result.writeln(
+            '${memoizedGetter.returnType} get ${memoizedGetter.name} =>');
+        result.writeln(
+            '__${memoizedGetter.name} ??= super.${memoizedGetter.name};');
+      }
       result.writeln();
     }
 
