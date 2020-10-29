@@ -98,6 +98,12 @@ abstract class Serializers {
   /// The installed [Serializer]s.
   Iterable<Serializer> get serializers;
 
+  /// The installed builder factories.
+  BuiltMap<FullType, Function> get builderFactories;
+
+  /// The installed serializer plugins.
+  Iterable<SerializerPlugin> get serializerPlugins;
+
   /// Serializes [object].
   ///
   /// A [Serializer] must have been provided for every type the object uses.
@@ -153,9 +159,6 @@ abstract class Serializers {
 
   /// Throws if a builder for [fullType] is not available via [newBuilder].
   void expectBuilder(FullType fullType);
-
-  /// The installed builder factories.
-  BuiltMap<FullType, Function> get builderFactories;
 
   SerializersBuilder toBuilder();
 }

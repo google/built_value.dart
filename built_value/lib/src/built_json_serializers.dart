@@ -22,10 +22,15 @@ class BuiltJsonSerializers implements Serializers {
   @override
   final BuiltMap<FullType, Function> builderFactories;
 
-  final BuiltList<SerializerPlugin> _plugins;
+  @override
+  final BuiltList<SerializerPlugin> serializerPlugins;
 
-  BuiltJsonSerializers._(this._typeToSerializer, this._wireNameToSerializer,
-      this._typeNameToSerializer, this.builderFactories, this._plugins);
+  BuiltJsonSerializers._(
+      this._typeToSerializer,
+      this._wireNameToSerializer,
+      this._typeNameToSerializer,
+      this.builderFactories,
+      this.serializerPlugins);
 
   @override
   Iterable<Serializer> get serializers => _wireNameToSerializer.values;
@@ -45,12 +50,12 @@ class BuiltJsonSerializers implements Serializers {
   Object serialize(Object? object,
       {FullType specifiedType = FullType.unspecified}) {
     var transformedObject = object;
-    for (var plugin in _plugins) {
+    for (var plugin in serializerPlugins) {
       transformedObject =
           plugin.beforeSerialize(transformedObject!, specifiedType);
     }
     var result = _serialize(transformedObject, specifiedType);
-    for (var plugin in _plugins) {
+    for (var plugin in serializerPlugins) {
       result = plugin.afterSerialize(result, specifiedType);
     }
     return result;
@@ -97,12 +102,12 @@ class BuiltJsonSerializers implements Serializers {
   Object deserialize(Object object,
       {FullType specifiedType = FullType.unspecified}) {
     var transformedObject = object;
-    for (var plugin in _plugins) {
+    for (var plugin in serializerPlugins) {
       transformedObject =
           plugin.beforeDeserialize(transformedObject, specifiedType);
     }
     var result = _deserialize(object, transformedObject, specifiedType);
-    for (var plugin in _plugins) {
+    for (var plugin in serializerPlugins) {
       result = plugin.afterDeserialize(result, specifiedType);
     }
     return result;
@@ -204,7 +209,7 @@ class BuiltJsonSerializers implements Serializers {
         _wireNameToSerializer.toBuilder(),
         _typeNameToSerializer.toBuilder(),
         builderFactories.toBuilder(),
-        _plugins.toBuilder());
+        serializerPlugins.toBuilder());
   }
 }
 
