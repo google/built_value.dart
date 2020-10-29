@@ -6,6 +6,9 @@
 - Remove dependency on `package:quiver`.
 - Remove support for serializing nulls using
   `BuiltValueSerializer(serializeNulls: true)`.
+- Make installed plugins public in `Serializers` as `serializerPlugins`.
+- `@memoized` fields can now memoize `null`; previously, nulls would not be
+  cached, causing the computation to rerun.
 
 # 7.1.0
 
