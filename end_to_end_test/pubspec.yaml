@@ -1,5 +1,5 @@
 name: end_to_end_test
-version: 7.1.0
+version: 8.0.0-nullsafety.0
 publish_to: none
 description: >
   Tests, not for publishing.
@@ -15,99 +15,8 @@ dependencies:
 dev_dependencies:
   build: ^1.0.0
   build_runner: ^1.0.0
-  built_value_generator: ^7.1.0
+  built_value_generator: ^8.0.0-nullsafety.0
   fixnum: ^1.0.0
   pedantic: ^1.4.0
   quiver: '>=0.21.0 <3.0.0'
   test: ^1.0.0
-
-dependency_overrides:
-  built_collection:
-    git:
-      url: git://github.com/google/built_collection.dart.git
-      ref: 22a1b3fe844b75eb3b9b9b075059da603545abbc
-  built_value:
-    path: ../built_value
-  built_value_generator:
-    path: ../built_value_generator
-  source_gen:
-    git:
-      url: git://github.com/dart-lang/source_gen.git
-      ref: 5e3a2475d8fb2011948d8f32e9f161b31d5efb93
-      path: source_gen
-  fixnum:
-    git:
-      url: git://github.com/dart-lang/fixnum.git
-      ref: 9b38f49f6679654d66a363e69e48173cca07e882
-  async:
-    git:
-      url: git://github.com/dart-lang/async.git
-      ref: null_safety
-  boolean_selector:
-    git:
-      url: git://github.com/dart-lang/boolean_selector.git
-      ref: null_safety
-  charcode:
-    git:
-      url: git://github.com/dart-lang/charcode.git
-      ref: null_safety
-  collection:
-    git:
-      url: git://github.com/dart-lang/collection.git
-      ref: null_safety
-  matcher:
-    git:
-      url: git://github.com/dart-lang/matcher.git
-      ref: null_safety
-  meta:
-    git:
-      url: git://github.com/dart-lang/sdk.git
-      ref: null_safety-pkgs
-      path: pkg/meta
-  path:
-    git:
-      url: git://github.com/dart-lang/path.git
-      ref: null_safety
-  pedantic:
-    git:
-      url: git://github.com/dart-lang/pedantic.git
-      ref: null_safety
-  pool:
-    git:
-      url: git://github.com/dart-lang/pool.git
-      ref: null_safety
-  source_span:
-    git:
-      url: git://github.com/dart-lang/source_span.git
-      ref: null_safety
-  stack_trace:
-    git:
-      url: git://github.com/dart-lang/stack_trace.git
-      ref: null_safety
-  stream_channel:
-    git:
-      url: git://github.com/dart-lang/stream_channel.git
-      ref: null_safety
-  string_scanner:
-    git:
-      url: git://github.com/dart-lang/string_scanner.git
-      ref: null_safety
-  term_glyph:
-    git:
-      url: git://github.com/dart-lang/term_glyph.git
-      ref: null_safety
-  test_api:
-    git:
-      url: git://github.com/dart-lang/test.git
-      ref: null_safety
-      path: pkgs/test_api
-  test_core:
-    git:
-      url: git://github.com/dart-lang/test.git
-      ref: null_safety
-      path: pkgs/test_core
-  test:
-    git:
-      url: git://github.com/dart-lang/test.git
-      ref: null_safety
-      path: pkgs/test

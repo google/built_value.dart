@@ -1,5 +1,5 @@
 name: built_value_generator
-version: 7.1.0
+version: 8.0.0-nullsafety.0
 description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library is the dev dependency.
