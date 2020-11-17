@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.9
+// @dart=2.12
 
 part of 'polymorphism_nnbd.dart';
 

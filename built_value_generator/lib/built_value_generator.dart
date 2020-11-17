@@ -40,7 +40,7 @@ class BuiltValueGenerator extends Generator {
       result.writeln(_error(e.toString()));
       log.severe(
           'Unknown error in BuiltValueGenerator for '
-          '${library.element.source.fullName}.',
+          '${library.element.source.fullName}. $st',
           e,
           st);
     }
