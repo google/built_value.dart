@@ -88,7 +88,18 @@ void main() {
             collections.nullableMap,
             collections.nullableListMultimap,
             collections.nullableSetMultimap,
+            collections.nullableInGenericsList,
           ]));
+    });
+
+    test('nullable in generics works', () {
+      Collections((b) => b
+        ..list.add(1)
+        ..set.add('two')
+        ..map['three'] = 4
+        ..listMultimap.add(5, true)
+        ..setMultimap.add('six', false)
+        ..nullableInGenericsList.add(Foo<int?>()));
     });
   });
 }

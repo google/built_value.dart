@@ -24,7 +24,11 @@ abstract class Collections implements Built<Collections, CollectionsBuilder> {
   BuiltListMultimap<int, bool>? get nullableListMultimap;
   BuiltSetMultimap<String, bool>? get nullableSetMultimap;
 
+  BuiltList<Foo<int?>> get nullableInGenericsList;
+
   factory Collections([void Function(CollectionsBuilder) updates]) =
       _$Collections;
   Collections._();
 }
+
+class Foo<T> {}

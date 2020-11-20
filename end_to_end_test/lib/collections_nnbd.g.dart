@@ -39,6 +39,11 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
       serializers.serialize(object.setMultimap,
           specifiedType: const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType(bool)])),
+      'nullableInGenericsList',
+      serializers.serialize(object.nullableInGenericsList,
+          specifiedType: const FullType(BuiltList, const [
+            const FullType(Foo, const [const FullType(int)])
+          ])),
     ];
     Object? value;
     value = object.nullableList;
@@ -149,6 +154,12 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
               specifiedType: const FullType(BuiltSetMultimap,
                   const [const FullType(String), const FullType(bool)])));
           break;
+        case 'nullableInGenericsList':
+          result.nullableInGenericsList.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(Foo, const [const FullType(int)])
+              ])) as BuiltList<Object>);
+          break;
       }
     }
 
@@ -177,6 +188,8 @@ class _$Collections extends Collections {
   final BuiltListMultimap<int, bool>? nullableListMultimap;
   @override
   final BuiltSetMultimap<String, bool>? nullableSetMultimap;
+  @override
+  final BuiltList<Foo<int?>> nullableInGenericsList;
 
   factory _$Collections([void Function(CollectionsBuilder)? updates]) =>
       (new CollectionsBuilder()..update(updates)).build();
@@ -191,7 +204,8 @@ class _$Collections extends Collections {
       this.nullableSet,
       this.nullableMap,
       this.nullableListMultimap,
-      this.nullableSetMultimap})
+      this.nullableSetMultimap,
+      required this.nullableInGenericsList})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(list, 'Collections', 'list');
     BuiltValueNullFieldError.checkNotNull(set, 'Collections', 'set');
@@ -200,6 +214,8 @@ class _$Collections extends Collections {
         listMultimap, 'Collections', 'listMultimap');
     BuiltValueNullFieldError.checkNotNull(
         setMultimap, 'Collections', 'setMultimap');
+    BuiltValueNullFieldError.checkNotNull(
+        nullableInGenericsList, 'Collections', 'nullableInGenericsList');
   }
 
   @override
@@ -222,7 +238,8 @@ class _$Collections extends Collections {
         nullableSet == other.nullableSet &&
         nullableMap == other.nullableMap &&
         nullableListMultimap == other.nullableListMultimap &&
-        nullableSetMultimap == other.nullableSetMultimap;
+        nullableSetMultimap == other.nullableSetMultimap &&
+        nullableInGenericsList == other.nullableInGenericsList;
   }
 
   @override
@@ -234,15 +251,19 @@ class _$Collections extends Collections {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc($jc(0, list.hashCode), set.hashCode),
-                                    map.hashCode),
-                                listMultimap.hashCode),
-                            setMultimap.hashCode),
-                        nullableList.hashCode),
-                    nullableSet.hashCode),
-                nullableMap.hashCode),
-            nullableListMultimap.hashCode),
-        nullableSetMultimap.hashCode));
+                                $jc(
+                                    $jc(
+                                        $jc($jc(0, list.hashCode),
+                                            set.hashCode),
+                                        map.hashCode),
+                                    listMultimap.hashCode),
+                                setMultimap.hashCode),
+                            nullableList.hashCode),
+                        nullableSet.hashCode),
+                    nullableMap.hashCode),
+                nullableListMultimap.hashCode),
+            nullableSetMultimap.hashCode),
+        nullableInGenericsList.hashCode));
   }
 
   @override
@@ -257,7 +278,8 @@ class _$Collections extends Collections {
           ..add('nullableSet', nullableSet)
           ..add('nullableMap', nullableMap)
           ..add('nullableListMultimap', nullableListMultimap)
-          ..add('nullableSetMultimap', nullableSetMultimap))
+          ..add('nullableSetMultimap', nullableSetMultimap)
+          ..add('nullableInGenericsList', nullableInGenericsList))
         .toString();
   }
 }
@@ -322,6 +344,12 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
           SetMultimapBuilder<String, bool>? nullableSetMultimap) =>
       _$this._nullableSetMultimap = nullableSetMultimap;
 
+  ListBuilder<Foo<int?>>? _nullableInGenericsList;
+  ListBuilder<Foo<int?>> get nullableInGenericsList =>
+      _$this._nullableInGenericsList ??= new ListBuilder<Foo<int?>>();
+  set nullableInGenericsList(ListBuilder<Foo<int?>>? nullableInGenericsList) =>
+      _$this._nullableInGenericsList = nullableInGenericsList;
+
   CollectionsBuilder();
 
   CollectionsBuilder get _$this {
@@ -337,6 +365,7 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
       _nullableMap = $v.nullableMap?.toBuilder();
       _nullableListMultimap = $v.nullableListMultimap?.toBuilder();
       _nullableSetMultimap = $v.nullableSetMultimap?.toBuilder();
+      _nullableInGenericsList = $v.nullableInGenericsList.toBuilder();
       _$v = null;
     }
     return this;
@@ -368,7 +397,8 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
               nullableSet: _nullableSet?.build(),
               nullableMap: _nullableMap?.build(),
               nullableListMultimap: _nullableListMultimap?.build(),
-              nullableSetMultimap: _nullableSetMultimap?.build());
+              nullableSetMultimap: _nullableSetMultimap?.build(),
+              nullableInGenericsList: nullableInGenericsList.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -392,6 +422,8 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
         _nullableListMultimap?.build();
         _$failedField = 'nullableSetMultimap';
         _nullableSetMultimap?.build();
+        _$failedField = 'nullableInGenericsList';
+        nullableInGenericsList.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Collections', _$failedField, e.toString());

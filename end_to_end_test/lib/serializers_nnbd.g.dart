@@ -108,6 +108,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
               const [const FullType(String), const FullType(bool)]),
           () => new SetMultimapBuilder<String, bool>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(Foo, const [const FullType(int)])
+          ]),
+          () => new ListBuilder<Foo<int?>>())
+      ..addBuilderFactory(
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(JsonObject)]),
           () => new MapBuilder<String, JsonObject>())

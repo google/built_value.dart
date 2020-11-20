@@ -247,7 +247,9 @@ abstract class SerializerSourceField
 
   static String _getBareType(String name) {
     var genericsStart = name.indexOf('<');
-    return genericsStart == -1 ? name : name.substring(0, genericsStart);
+    var result = genericsStart == -1 ? name : name.substring(0, genericsStart);
+    if (result.endsWith('?')) result = result.substring(0, result.length - 1);
+    return result;
   }
 
   static String _getGenerics(String name) {
