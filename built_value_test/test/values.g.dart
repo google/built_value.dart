@@ -31,24 +31,13 @@ class _$SimpleValue extends SimpleValue {
       this.aSet,
       this.setMultimap})
       : super._() {
-    if (anInt == null) {
-      throw new BuiltValueNullFieldError('SimpleValue', 'anInt');
-    }
-    if (list == null) {
-      throw new BuiltValueNullFieldError('SimpleValue', 'list');
-    }
-    if (multimap == null) {
-      throw new BuiltValueNullFieldError('SimpleValue', 'multimap');
-    }
-    if (map == null) {
-      throw new BuiltValueNullFieldError('SimpleValue', 'map');
-    }
-    if (aSet == null) {
-      throw new BuiltValueNullFieldError('SimpleValue', 'aSet');
-    }
-    if (setMultimap == null) {
-      throw new BuiltValueNullFieldError('SimpleValue', 'setMultimap');
-    }
+    BuiltValueNullFieldError.checkNotNull(anInt, 'SimpleValue', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(list, 'SimpleValue', 'list');
+    BuiltValueNullFieldError.checkNotNull(multimap, 'SimpleValue', 'multimap');
+    BuiltValueNullFieldError.checkNotNull(map, 'SimpleValue', 'map');
+    BuiltValueNullFieldError.checkNotNull(aSet, 'SimpleValue', 'aSet');
+    BuiltValueNullFieldError.checkNotNull(
+        setMultimap, 'SimpleValue', 'setMultimap');
   }
 
   @override
@@ -130,13 +119,14 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   SimpleValueBuilder();
 
   SimpleValueBuilder get _$this {
-    if (_$v != null) {
-      _anInt = _$v.anInt;
-      _list = _$v.list?.toBuilder();
-      _multimap = _$v.multimap?.toBuilder();
-      _map = _$v.map?.toBuilder();
-      _aSet = _$v.aSet?.toBuilder();
-      _setMultimap = _$v.setMultimap?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _anInt = $v.anInt;
+      _list = $v.list.toBuilder();
+      _multimap = $v.multimap.toBuilder();
+      _map = $v.map.toBuilder();
+      _aSet = $v.aSet.toBuilder();
+      _setMultimap = $v.setMultimap.toBuilder();
       _$v = null;
     }
     return this;
@@ -144,9 +134,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SimpleValue;
   }
 
@@ -161,7 +149,8 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
     try {
       _$result = _$v ??
           new _$SimpleValue._(
-              anInt: anInt,
+              anInt: BuiltValueNullFieldError.checkNotNull(
+                  anInt, 'SimpleValue', 'anInt'),
               list: list.build(),
               multimap: multimap.build(),
               map: map.build(),
@@ -201,9 +190,8 @@ class _$CompoundValue extends CompoundValue {
       (new CompoundValueBuilder()..update(updates)).build();
 
   _$CompoundValue._({this.simpleValue, this.string}) : super._() {
-    if (simpleValue == null) {
-      throw new BuiltValueNullFieldError('CompoundValue', 'simpleValue');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        simpleValue, 'CompoundValue', 'simpleValue');
   }
 
   @override
@@ -252,9 +240,10 @@ class CompoundValueBuilder
   CompoundValueBuilder();
 
   CompoundValueBuilder get _$this {
-    if (_$v != null) {
-      _simpleValue = _$v.simpleValue?.toBuilder();
-      _string = _$v.string;
+    final $v = _$v;
+    if ($v != null) {
+      _simpleValue = $v.simpleValue.toBuilder();
+      _string = $v.string;
       _$v = null;
     }
     return this;
@@ -262,9 +251,7 @@ class CompoundValueBuilder
 
   @override
   void replace(CompoundValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CompoundValue;
   }
 
@@ -306,12 +293,9 @@ class _$ComparedValue extends ComparedValue {
       (new ComparedValueBuilder()..update(updates)).build();
 
   _$ComparedValue._({this.name, this.onChanged}) : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('ComparedValue', 'name');
-    }
-    if (onChanged == null) {
-      throw new BuiltValueNullFieldError('ComparedValue', 'onChanged');
-    }
+    BuiltValueNullFieldError.checkNotNull(name, 'ComparedValue', 'name');
+    BuiltValueNullFieldError.checkNotNull(
+        onChanged, 'ComparedValue', 'onChanged');
   }
 
   @override
@@ -356,9 +340,10 @@ class ComparedValueBuilder
   ComparedValueBuilder();
 
   ComparedValueBuilder get _$this {
-    if (_$v != null) {
-      _name = _$v.name;
-      _onChanged = _$v.onChanged;
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _onChanged = $v.onChanged;
       _$v = null;
     }
     return this;
@@ -366,9 +351,7 @@ class ComparedValueBuilder
 
   @override
   void replace(ComparedValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ComparedValue;
   }
 
@@ -379,8 +362,12 @@ class ComparedValueBuilder
 
   @override
   _$ComparedValue build() {
-    final _$result =
-        _$v ?? new _$ComparedValue._(name: name, onChanged: onChanged);
+    final _$result = _$v ??
+        new _$ComparedValue._(
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, 'ComparedValue', 'name'),
+            onChanged: BuiltValueNullFieldError.checkNotNull(
+                onChanged, 'ComparedValue', 'onChanged'));
     replace(_$result);
     return _$result;
   }

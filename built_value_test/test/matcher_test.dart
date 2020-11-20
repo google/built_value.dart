@@ -25,7 +25,7 @@ void main() {
       final otherValue = value.rebuild((b) => b..simpleValue.anInt = 5);
 
       _expectMismatch(value, otherValue,
-          "was <3> instead of <5> at location ['simpleValue']['anInt']");
+          "at location ['simpleValue']['anInt'] is <3> instead of <5>");
     });
 
     test('reports deep match on lists if not same', () {
@@ -35,8 +35,8 @@ void main() {
         ..string = 'str');
       final otherValue = value.rebuild((b) => b..simpleValue.list.add('bar'));
 
-      _expectMismatch(value, otherValue,
-          "shorter than expected at location ['simpleValue']['list'][1]");
+      _expectMismatch(value, otherValue, 'shorter than expected');
+      _expectMismatch(value, otherValue, "['simpleValue']['list'][1]");
     });
 
     test('reports deep match on list multimaps if not same', () {
@@ -48,10 +48,8 @@ void main() {
           value.rebuild((b) => b..simpleValue.multimap.add(42, false));
 
       _expectMismatch(
-          value,
-          otherValue,
-          'shorter than expected at location'
-          " ['simpleValue']['multimap']['42'][1]");
+          value, otherValue, " ['simpleValue']['multimap']['42'][1]");
+      _expectMismatch(value, otherValue, 'shorter than expected');
     });
 
     test('reports deep match on maps if not same', () {
@@ -63,7 +61,7 @@ void main() {
       final otherValue = value.rebuild((b) => b..simpleValue.map['bar'] = 5);
 
       _expectMismatch(value, otherValue,
-          "was <4> instead of <5> at location ['simpleValue']['map']['bar']");
+          "at location ['simpleValue']['map']['bar'] is <4> instead of <5>");
     });
 
     test('reports deep match on sets if not same', () {
@@ -73,8 +71,8 @@ void main() {
         ..string = 'str');
       final otherValue = value.rebuild((b) => b..simpleValue.aSet.remove(42));
 
-      _expectMismatch(value, otherValue,
-          "larger than expected at location ['simpleValue']['aSet']");
+      _expectMismatch(value, otherValue, "['simpleValue']['aSet']");
+      _expectMismatch(value, otherValue, "larger than expected");
     });
 
     test('reports deep match on set multimaps if not same', () {
@@ -86,10 +84,8 @@ void main() {
           value.rebuild((b) => b..simpleValue.setMultimap.add(42, false));
 
       _expectMismatch(
-          value,
-          otherValue,
-          'shorter than expected at location'
-          " ['simpleValue']['setMultimap']['42'][1]");
+          value, otherValue, "['simpleValue']['setMultimap']['42'][1]");
+      _expectMismatch(value, otherValue, 'shorter than expected');
     });
 
     test('reports if the wrong type', () {
@@ -129,7 +125,7 @@ void main() {
         ..name = 'bar'
         ..onChanged = () => 'Change did not happen!');
 
-      _expectMismatch(value, otherValue, 'was \'foo\' instead of \'bar\'');
+      _expectMismatch(value, otherValue, 'is \'foo\' instead of \'bar\'');
     });
   });
 }
