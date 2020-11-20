@@ -33,6 +33,8 @@ void main() {
         'five',
         [true, false]
       ],
+      'nullableInGenericsList',
+      <Object>[],
     ];
 
     test('can be serialized', () {
