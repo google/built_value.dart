@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.11
 
 part of built_value_generator.source_class;
 
@@ -11,6 +12,10 @@ class _$ValueSourceClass extends ValueSourceClass {
   final ClassElement element;
   ParsedLibraryResult __parsedLibrary;
   String __name;
+  bool __isNonNullByDefault;
+  String __orNull;
+  String __notNull;
+  String __late;
   String __implName;
   ClassElement __builderElement;
   bool __implementsBuilt;
@@ -50,9 +55,8 @@ class _$ValueSourceClass extends ValueSourceClass {
       (new ValueSourceClassBuilder()..update(updates)).build();
 
   _$ValueSourceClass._({this.element}) : super._() {
-    if (element == null) {
-      throw new BuiltValueNullFieldError('ValueSourceClass', 'element');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        element, 'ValueSourceClass', 'element');
   }
 
   @override
@@ -61,6 +65,19 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   String get name => __name ??= super.name;
+
+  @override
+  bool get isNonNullByDefault =>
+      __isNonNullByDefault ??= super.isNonNullByDefault;
+
+  @override
+  String get orNull => __orNull ??= super.orNull;
+
+  @override
+  String get notNull => __notNull ??= super.notNull;
+
+  @override
+  String get late => __late ??= super.late;
 
   @override
   String get implName => __implName ??= super.implName;
@@ -222,8 +239,9 @@ class ValueSourceClassBuilder
   ValueSourceClassBuilder();
 
   ValueSourceClassBuilder get _$this {
-    if (_$v != null) {
-      _element = _$v.element;
+    final $v = _$v;
+    if ($v != null) {
+      _element = $v.element;
       _$v = null;
     }
     return this;
@@ -231,9 +249,7 @@ class ValueSourceClassBuilder
 
   @override
   void replace(ValueSourceClass other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueSourceClass;
   }
 
@@ -244,7 +260,10 @@ class ValueSourceClassBuilder
 
   @override
   _$ValueSourceClass build() {
-    final _$result = _$v ?? new _$ValueSourceClass._(element: element);
+    final _$result = _$v ??
+        new _$ValueSourceClass._(
+            element: BuiltValueNullFieldError.checkNotNull(
+                element, 'ValueSourceClass', 'element'));
     replace(_$result);
     return _$result;
   }

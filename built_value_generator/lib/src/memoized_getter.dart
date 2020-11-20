@@ -1,3 +1,4 @@
+// @dart=2.11
 library built_value_generator.memoized_getter;
 
 import 'package:analyzer/dart/element/element.dart';

@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.11
 
 part of built_value_generator.enum_source_field;
 
@@ -22,12 +23,10 @@ class _$EnumSourceField extends EnumSourceField {
       (new EnumSourceFieldBuilder()..update(updates)).build();
 
   _$EnumSourceField._({this.parsedLibrary, this.element}) : super._() {
-    if (parsedLibrary == null) {
-      throw new BuiltValueNullFieldError('EnumSourceField', 'parsedLibrary');
-    }
-    if (element == null) {
-      throw new BuiltValueNullFieldError('EnumSourceField', 'element');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        parsedLibrary, 'EnumSourceField', 'parsedLibrary');
+    BuiltValueNullFieldError.checkNotNull(
+        element, 'EnumSourceField', 'element');
   }
 
   @override
@@ -95,9 +94,10 @@ class EnumSourceFieldBuilder
   EnumSourceFieldBuilder();
 
   EnumSourceFieldBuilder get _$this {
-    if (_$v != null) {
-      _parsedLibrary = _$v.parsedLibrary;
-      _element = _$v.element;
+    final $v = _$v;
+    if ($v != null) {
+      _parsedLibrary = $v.parsedLibrary;
+      _element = $v.element;
       _$v = null;
     }
     return this;
@@ -105,9 +105,7 @@ class EnumSourceFieldBuilder
 
   @override
   void replace(EnumSourceField other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$EnumSourceField;
   }
 
@@ -119,7 +117,11 @@ class EnumSourceFieldBuilder
   @override
   _$EnumSourceField build() {
     final _$result = _$v ??
-        new _$EnumSourceField._(parsedLibrary: parsedLibrary, element: element);
+        new _$EnumSourceField._(
+            parsedLibrary: BuiltValueNullFieldError.checkNotNull(
+                parsedLibrary, 'EnumSourceField', 'parsedLibrary'),
+            element: BuiltValueNullFieldError.checkNotNull(
+                element, 'EnumSourceField', 'element'));
     replace(_$result);
     return _$result;
   }

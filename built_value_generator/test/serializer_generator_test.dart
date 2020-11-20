@@ -1,6 +1,7 @@
 // Copyright (c) 2015, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
+// @dart=2.11
 
 import 'dart:async';
 
@@ -39,9 +40,9 @@ abstract class Value implements Built<Value, ValueBuilder> {}
       expect(await generate(r'''
 library value;
 
-part 'value.g.dart';
-
 import 'package:test_support/test_support.dart';
+
+part 'value.g.dart';
 
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;

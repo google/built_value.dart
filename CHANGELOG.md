@@ -1,6 +1,6 @@
 # Changelog
 
-# 8.0.0 (unmigrated)
+# 8.0.0-nullsafety.0
 
 - Migrate to NNBD.
 - Remove dependency on `package:quiver`.

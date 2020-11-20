@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// @dart=2.11
 
 part of built_value_generator.enum_source_class;
 
@@ -26,9 +27,8 @@ class _$EnumSourceClass extends EnumSourceClass {
       (new EnumSourceClassBuilder()..update(updates)).build();
 
   _$EnumSourceClass._({this.element}) : super._() {
-    if (element == null) {
-      throw new BuiltValueNullFieldError('EnumSourceClass', 'element');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        element, 'EnumSourceClass', 'element');
   }
 
   @override
@@ -107,8 +107,9 @@ class EnumSourceClassBuilder
   EnumSourceClassBuilder();
 
   EnumSourceClassBuilder get _$this {
-    if (_$v != null) {
-      _element = _$v.element;
+    final $v = _$v;
+    if ($v != null) {
+      _element = $v.element;
       _$v = null;
     }
     return this;
@@ -116,9 +117,7 @@ class EnumSourceClassBuilder
 
   @override
   void replace(EnumSourceClass other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$EnumSourceClass;
   }
 
@@ -129,7 +128,10 @@ class EnumSourceClassBuilder
 
   @override
   _$EnumSourceClass build() {
-    final _$result = _$v ?? new _$EnumSourceClass._(element: element);
+    final _$result = _$v ??
+        new _$EnumSourceClass._(
+            element: BuiltValueNullFieldError.checkNotNull(
+                element, 'EnumSourceClass', 'element'));
     replace(_$result);
     return _$result;
   }

@@ -1,7 +1,7 @@
 // Copyright (c) 2020, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.9
+// @dart=2.12
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -640,6 +640,6 @@ abstract class MemoizedHashcodeValue
 abstract class _PrivateValue
     implements Built<_PrivateValue, _PrivateValueBuilder> {
   _PrivateValue._();
-  factory _PrivateValue([void Function(_PrivateValueBuilder) updates]) =
+  factory _PrivateValue(void Function(_PrivateValueBuilder) updates) =
       _$PrivateValue;
 }

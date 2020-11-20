@@ -1,6 +1,7 @@
 // Copyright (c) 2015, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
+// @dart=2.11
 
 import 'dart:async';
 
@@ -128,7 +129,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 class Foo {}
-abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+abstract class Value extends Foo implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
@@ -148,7 +149,7 @@ part 'value.g.dart';
 abstract class Foo {
   final int x;
 }
-abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+abstract class Value extends Foo implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
@@ -168,7 +169,7 @@ part 'value.g.dart';
 abstract class Foo {
   int get x;
 }
-abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+abstract class Value extends Foo implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
@@ -186,9 +187,9 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
 abstract class Foo {
-  bool get operator==(other) => true;
+  bool operator ==(other) => true;
 }
-abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+abstract class Value extends Foo implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
@@ -211,7 +212,7 @@ abstract class Foo {
   int bar() => 3;
   int get baz => foo();
 }
-abstract class Value implements Built<Value, ValueBuilder> extends Foo {
+abstract class Value extends Foo implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _\$Value;
 }
@@ -449,7 +450,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
           contains(
               '1. Add a factory so your class can be instantiated. Example:\n'
               '\n'
-              'factory Value([void Function(ValueBuilder) updates]) = _\$Value;'));
+              'factory Value([void Function(ValueBuilder)? updates]) = _\$Value;'));
     });
 
     test('suggests to remove factory from non-instantiable value class',
@@ -761,9 +762,9 @@ abstract class _Value implements Built<_Value, _ValueBuilder> {
         ));
   });
 
-  test('2.9 rejects @nullable annotation', () async {
+  test('2.12 rejects @nullable annotation', () async {
     expect(
-        await generate('''// @dart=2.9
+        await generate('''// @dart=2.12
 library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
