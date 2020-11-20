@@ -68,10 +68,11 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
   NodeBuilder();
 
   NodeBuilder get _$this {
-    if (_$v != null) {
-      _label = _$v.label;
-      _left = _$v.left?.toBuilder();
-      _right = _$v.right?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _label = $v.label;
+      _left = $v.left?.toBuilder();
+      _right = $v.right?.toBuilder();
       _$v = null;
     }
     return this;
@@ -79,9 +80,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
 
   @override
   void replace(Node other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Node;
   }
 

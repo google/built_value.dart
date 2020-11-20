@@ -96,7 +96,7 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'text':
           result.text = serializers.deserialize(value,
@@ -145,7 +145,7 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'username':
           result.username = serializers.deserialize(value,
@@ -192,7 +192,7 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'message':
           result.message = serializers.deserialize(value,
@@ -254,7 +254,7 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'statusTypes':
           result.statusTypes.replace(serializers.deserialize(value,
@@ -318,7 +318,7 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'username':
           result.username = serializers.deserialize(value,
@@ -370,7 +370,7 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'log':
           result.log.replace(serializers.deserialize(value,
@@ -419,7 +419,7 @@ class _$ListUsersResponseSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'statuses':
           result.statuses.replace(serializers.deserialize(value,
@@ -443,12 +443,8 @@ class _$Chat extends Chat {
       (new ChatBuilder()..update(updates)).build();
 
   _$Chat._({this.text, this.targets}) : super._() {
-    if (text == null) {
-      throw new BuiltValueNullFieldError('Chat', 'text');
-    }
-    if (targets == null) {
-      throw new BuiltValueNullFieldError('Chat', 'targets');
-    }
+    BuiltValueNullFieldError.checkNotNull(text, 'Chat', 'text');
+    BuiltValueNullFieldError.checkNotNull(targets, 'Chat', 'targets');
   }
 
   @override
@@ -493,9 +489,10 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   ChatBuilder();
 
   ChatBuilder get _$this {
-    if (_$v != null) {
-      _text = _$v.text;
-      _targets = _$v.targets?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _text = $v.text;
+      _targets = $v.targets.toBuilder();
       _$v = null;
     }
     return this;
@@ -503,9 +500,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
 
   @override
   void replace(Chat other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Chat;
   }
 
@@ -518,7 +513,10 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   _$Chat build() {
     _$Chat _$result;
     try {
-      _$result = _$v ?? new _$Chat._(text: text, targets: targets.build());
+      _$result = _$v ??
+          new _$Chat._(
+              text: BuiltValueNullFieldError.checkNotNull(text, 'Chat', 'text'),
+              targets: targets.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -545,12 +543,8 @@ class _$Login extends Login {
       (new LoginBuilder()..update(updates)).build();
 
   _$Login._({this.username, this.password}) : super._() {
-    if (username == null) {
-      throw new BuiltValueNullFieldError('Login', 'username');
-    }
-    if (password == null) {
-      throw new BuiltValueNullFieldError('Login', 'password');
-    }
+    BuiltValueNullFieldError.checkNotNull(username, 'Login', 'username');
+    BuiltValueNullFieldError.checkNotNull(password, 'Login', 'password');
   }
 
   @override
@@ -596,9 +590,10 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   LoginBuilder();
 
   LoginBuilder get _$this {
-    if (_$v != null) {
-      _username = _$v.username;
-      _password = _$v.password;
+    final $v = _$v;
+    if ($v != null) {
+      _username = $v.username;
+      _password = $v.password;
       _$v = null;
     }
     return this;
@@ -606,9 +601,7 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
 
   @override
   void replace(Login other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Login;
   }
 
@@ -619,8 +612,12 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
 
   @override
   _$Login build() {
-    final _$result =
-        _$v ?? new _$Login._(username: username, password: password);
+    final _$result = _$v ??
+        new _$Login._(
+            username: BuiltValueNullFieldError.checkNotNull(
+                username, 'Login', 'username'),
+            password: BuiltValueNullFieldError.checkNotNull(
+                password, 'Login', 'password'));
     replace(_$result);
     return _$result;
   }
@@ -636,12 +633,8 @@ class _$Status extends Status {
       (new StatusBuilder()..update(updates)).build();
 
   _$Status._({this.message, this.type}) : super._() {
-    if (message == null) {
-      throw new BuiltValueNullFieldError('Status', 'message');
-    }
-    if (type == null) {
-      throw new BuiltValueNullFieldError('Status', 'type');
-    }
+    BuiltValueNullFieldError.checkNotNull(message, 'Status', 'message');
+    BuiltValueNullFieldError.checkNotNull(type, 'Status', 'type');
   }
 
   @override
@@ -685,9 +678,10 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   StatusBuilder();
 
   StatusBuilder get _$this {
-    if (_$v != null) {
-      _message = _$v.message;
-      _type = _$v.type;
+    final $v = _$v;
+    if ($v != null) {
+      _message = $v.message;
+      _type = $v.type;
       _$v = null;
     }
     return this;
@@ -695,9 +689,7 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
 
   @override
   void replace(Status other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Status;
   }
 
@@ -708,7 +700,12 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
 
   @override
   _$Status build() {
-    final _$result = _$v ?? new _$Status._(message: message, type: type);
+    final _$result = _$v ??
+        new _$Status._(
+            message: BuiltValueNullFieldError.checkNotNull(
+                message, 'Status', 'message'),
+            type:
+                BuiltValueNullFieldError.checkNotNull(type, 'Status', 'type'));
     replace(_$result);
     return _$result;
   }
@@ -722,9 +719,8 @@ class _$ListUsers extends ListUsers {
       (new ListUsersBuilder()..update(updates)).build();
 
   _$ListUsers._({this.statusTypes}) : super._() {
-    if (statusTypes == null) {
-      throw new BuiltValueNullFieldError('ListUsers', 'statusTypes');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        statusTypes, 'ListUsers', 'statusTypes');
   }
 
   @override
@@ -765,8 +761,9 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
   ListUsersBuilder();
 
   ListUsersBuilder get _$this {
-    if (_$v != null) {
-      _statusTypes = _$v.statusTypes?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _statusTypes = $v.statusTypes.toBuilder();
       _$v = null;
     }
     return this;
@@ -774,9 +771,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 
   @override
   void replace(ListUsers other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ListUsers;
   }
 
@@ -818,15 +813,9 @@ class _$ShowChat extends ShowChat {
       (new ShowChatBuilder()..update(updates)).build();
 
   _$ShowChat._({this.username, this.private, this.text}) : super._() {
-    if (username == null) {
-      throw new BuiltValueNullFieldError('ShowChat', 'username');
-    }
-    if (private == null) {
-      throw new BuiltValueNullFieldError('ShowChat', 'private');
-    }
-    if (text == null) {
-      throw new BuiltValueNullFieldError('ShowChat', 'text');
-    }
+    BuiltValueNullFieldError.checkNotNull(username, 'ShowChat', 'username');
+    BuiltValueNullFieldError.checkNotNull(private, 'ShowChat', 'private');
+    BuiltValueNullFieldError.checkNotNull(text, 'ShowChat', 'text');
   }
 
   @override
@@ -879,10 +868,11 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   ShowChatBuilder();
 
   ShowChatBuilder get _$this {
-    if (_$v != null) {
-      _username = _$v.username;
-      _private = _$v.private;
-      _text = _$v.text;
+    final $v = _$v;
+    if ($v != null) {
+      _username = $v.username;
+      _private = $v.private;
+      _text = $v.text;
       _$v = null;
     }
     return this;
@@ -890,9 +880,7 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
 
   @override
   void replace(ShowChat other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ShowChat;
   }
 
@@ -904,7 +892,13 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   @override
   _$ShowChat build() {
     final _$result = _$v ??
-        new _$ShowChat._(username: username, private: private, text: text);
+        new _$ShowChat._(
+            username: BuiltValueNullFieldError.checkNotNull(
+                username, 'ShowChat', 'username'),
+            private: BuiltValueNullFieldError.checkNotNull(
+                private, 'ShowChat', 'private'),
+            text: BuiltValueNullFieldError.checkNotNull(
+                text, 'ShowChat', 'text'));
     replace(_$result);
     return _$result;
   }
@@ -920,12 +914,8 @@ class _$Welcome extends Welcome {
       (new WelcomeBuilder()..update(updates)).build();
 
   _$Welcome._({this.log, this.message}) : super._() {
-    if (log == null) {
-      throw new BuiltValueNullFieldError('Welcome', 'log');
-    }
-    if (message == null) {
-      throw new BuiltValueNullFieldError('Welcome', 'message');
-    }
+    BuiltValueNullFieldError.checkNotNull(log, 'Welcome', 'log');
+    BuiltValueNullFieldError.checkNotNull(message, 'Welcome', 'message');
   }
 
   @override
@@ -969,9 +959,10 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   WelcomeBuilder();
 
   WelcomeBuilder get _$this {
-    if (_$v != null) {
-      _log = _$v.log?.toBuilder();
-      _message = _$v.message;
+    final $v = _$v;
+    if ($v != null) {
+      _log = $v.log.toBuilder();
+      _message = $v.message;
       _$v = null;
     }
     return this;
@@ -979,9 +970,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
 
   @override
   void replace(Welcome other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Welcome;
   }
 
@@ -994,7 +983,11 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   _$Welcome build() {
     _$Welcome _$result;
     try {
-      _$result = _$v ?? new _$Welcome._(log: log.build(), message: message);
+      _$result = _$v ??
+          new _$Welcome._(
+              log: log.build(),
+              message: BuiltValueNullFieldError.checkNotNull(
+                  message, 'Welcome', 'message'));
     } catch (_) {
       String _$failedField;
       try {
@@ -1020,9 +1013,8 @@ class _$ListUsersResponse extends ListUsersResponse {
       (new ListUsersResponseBuilder()..update(updates)).build();
 
   _$ListUsersResponse._({this.statuses}) : super._() {
-    if (statuses == null) {
-      throw new BuiltValueNullFieldError('ListUsersResponse', 'statuses');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        statuses, 'ListUsersResponse', 'statuses');
   }
 
   @override
@@ -1065,8 +1057,9 @@ class ListUsersResponseBuilder
   ListUsersResponseBuilder();
 
   ListUsersResponseBuilder get _$this {
-    if (_$v != null) {
-      _statuses = _$v.statuses?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _statuses = $v.statuses.toBuilder();
       _$v = null;
     }
     return this;
@@ -1074,9 +1067,7 @@ class ListUsersResponseBuilder
 
   @override
   void replace(ListUsersResponse other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ListUsersResponse;
   }
 
