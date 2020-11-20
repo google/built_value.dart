@@ -18,6 +18,8 @@ class _$SerializerSourceField extends SerializerSourceField {
   final FieldElement builderElement;
   bool __isSerializable;
   BuiltValueField __builtValueField;
+  bool __hasNullableAnnotation;
+  bool __hasNullableType;
   bool __isNullable;
   String __name;
   String __wireName;
@@ -34,16 +36,12 @@ class _$SerializerSourceField extends SerializerSourceField {
   _$SerializerSourceField._(
       {this.settings, this.parsedLibrary, this.element, this.builderElement})
       : super._() {
-    if (settings == null) {
-      throw new BuiltValueNullFieldError('SerializerSourceField', 'settings');
-    }
-    if (parsedLibrary == null) {
-      throw new BuiltValueNullFieldError(
-          'SerializerSourceField', 'parsedLibrary');
-    }
-    if (element == null) {
-      throw new BuiltValueNullFieldError('SerializerSourceField', 'element');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        settings, 'SerializerSourceField', 'settings');
+    BuiltValueNullFieldError.checkNotNull(
+        parsedLibrary, 'SerializerSourceField', 'parsedLibrary');
+    BuiltValueNullFieldError.checkNotNull(
+        element, 'SerializerSourceField', 'element');
   }
 
   @override
@@ -52,6 +50,13 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   BuiltValueField get builtValueField =>
       __builtValueField ??= super.builtValueField;
+
+  @override
+  bool get hasNullableAnnotation =>
+      __hasNullableAnnotation ??= super.hasNullableAnnotation;
+
+  @override
+  bool get hasNullableType => __hasNullableType ??= super.hasNullableType;
 
   @override
   bool get isNullable => __isNullable ??= super.isNullable;
@@ -141,11 +146,12 @@ class SerializerSourceFieldBuilder
   SerializerSourceFieldBuilder();
 
   SerializerSourceFieldBuilder get _$this {
-    if (_$v != null) {
-      _settings = _$v.settings;
-      _parsedLibrary = _$v.parsedLibrary;
-      _element = _$v.element;
-      _builderElement = _$v.builderElement;
+    final $v = _$v;
+    if ($v != null) {
+      _settings = $v.settings;
+      _parsedLibrary = $v.parsedLibrary;
+      _element = $v.element;
+      _builderElement = $v.builderElement;
       _$v = null;
     }
     return this;
@@ -153,9 +159,7 @@ class SerializerSourceFieldBuilder
 
   @override
   void replace(SerializerSourceField other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SerializerSourceField;
   }
 
@@ -168,9 +172,12 @@ class SerializerSourceFieldBuilder
   _$SerializerSourceField build() {
     final _$result = _$v ??
         new _$SerializerSourceField._(
-            settings: settings,
-            parsedLibrary: parsedLibrary,
-            element: element,
+            settings: BuiltValueNullFieldError.checkNotNull(
+                settings, 'SerializerSourceField', 'settings'),
+            parsedLibrary: BuiltValueNullFieldError.checkNotNull(
+                parsedLibrary, 'SerializerSourceField', 'parsedLibrary'),
+            element: BuiltValueNullFieldError.checkNotNull(
+                element, 'SerializerSourceField', 'element'),
             builderElement: builderElement);
     replace(_$result);
     return _$result;

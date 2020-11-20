@@ -22,9 +22,7 @@ class _$GeneratorError extends GeneratorError {
 
   _$GeneratorError._({this.message, this.offset, this.length, this.fix})
       : super._() {
-    if (message == null) {
-      throw new BuiltValueNullFieldError('GeneratorError', 'message');
-    }
+    BuiltValueNullFieldError.checkNotNull(message, 'GeneratorError', 'message');
   }
 
   @override
@@ -86,11 +84,12 @@ class GeneratorErrorBuilder
   GeneratorErrorBuilder();
 
   GeneratorErrorBuilder get _$this {
-    if (_$v != null) {
-      _message = _$v.message;
-      _offset = _$v.offset;
-      _length = _$v.length;
-      _fix = _$v.fix;
+    final $v = _$v;
+    if ($v != null) {
+      _message = $v.message;
+      _offset = $v.offset;
+      _length = $v.length;
+      _fix = $v.fix;
       _$v = null;
     }
     return this;
@@ -98,9 +97,7 @@ class GeneratorErrorBuilder
 
   @override
   void replace(GeneratorError other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GeneratorError;
   }
 
@@ -113,7 +110,11 @@ class GeneratorErrorBuilder
   _$GeneratorError build() {
     final _$result = _$v ??
         new _$GeneratorError._(
-            message: message, offset: offset, length: length, fix: fix);
+            message: BuiltValueNullFieldError.checkNotNull(
+                message, 'GeneratorError', 'message'),
+            offset: offset,
+            length: length,
+            fix: fix);
     replace(_$result);
     return _$result;
   }

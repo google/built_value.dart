@@ -14,9 +14,13 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   final ClassElement builderElement;
   ParsedLibraryResult __parsedLibrary;
   BuiltValue __builtValueSettings;
+  bool __hasBuilder;
   BuiltValueSerializer __serializerSettings;
   BuiltValueEnum __enumClassSettings;
   String __name;
+  bool __isNonNullByDefault;
+  String __orNull;
+  String __notNull;
   String __wireName;
   String __serializerDeclaration;
   BuiltList<String> __genericParameters;
@@ -38,9 +42,8 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       (new SerializerSourceClassBuilder()..update(updates)).build();
 
   _$SerializerSourceClass._({this.element, this.builderElement}) : super._() {
-    if (element == null) {
-      throw new BuiltValueNullFieldError('SerializerSourceClass', 'element');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        element, 'SerializerSourceClass', 'element');
   }
 
   @override
@@ -52,6 +55,9 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       __builtValueSettings ??= super.builtValueSettings;
 
   @override
+  bool get hasBuilder => __hasBuilder ??= super.hasBuilder;
+
+  @override
   BuiltValueSerializer get serializerSettings =>
       __serializerSettings ??= super.serializerSettings;
 
@@ -61,6 +67,16 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   @override
   String get name => __name ??= super.name;
+
+  @override
+  bool get isNonNullByDefault =>
+      __isNonNullByDefault ??= super.isNonNullByDefault;
+
+  @override
+  String get orNull => __orNull ??= super.orNull;
+
+  @override
+  String get notNull => __notNull ??= super.notNull;
 
   @override
   String get wireName => __wireName ??= super.wireName;
@@ -163,9 +179,10 @@ class SerializerSourceClassBuilder
   SerializerSourceClassBuilder();
 
   SerializerSourceClassBuilder get _$this {
-    if (_$v != null) {
-      _element = _$v.element;
-      _builderElement = _$v.builderElement;
+    final $v = _$v;
+    if ($v != null) {
+      _element = $v.element;
+      _builderElement = $v.builderElement;
       _$v = null;
     }
     return this;
@@ -173,9 +190,7 @@ class SerializerSourceClassBuilder
 
   @override
   void replace(SerializerSourceClass other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SerializerSourceClass;
   }
 
@@ -188,7 +203,9 @@ class SerializerSourceClassBuilder
   _$SerializerSourceClass build() {
     final _$result = _$v ??
         new _$SerializerSourceClass._(
-            element: element, builderElement: builderElement);
+            element: BuiltValueNullFieldError.checkNotNull(
+                element, 'SerializerSourceClass', 'element'),
+            builderElement: builderElement);
     replace(_$result);
     return _$result;
   }

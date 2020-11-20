@@ -58,6 +58,6 @@ class TestSerializer implements PrimitiveSerializer<Object?> {
   @override
   Object serialize(Serializers serializers, Object? object,
       {FullType specifiedType = FullType.unspecified}) {
-    return null!;
+    return '';
   }
 }

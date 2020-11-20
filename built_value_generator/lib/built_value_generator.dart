@@ -50,14 +50,14 @@ class BuiltValueGenerator extends Generator {
       result.writeln(_error(e.message));
       log.severe(
           'Error in BuiltValueGenerator for '
-          '${libraryElement.source.fullName}. $st',
+          '${libraryElement.source.fullName}.',
           e,
           st);
     } catch (e, st) {
       result.writeln(_error(e.toString()));
       log.severe(
           'Unknown error in BuiltValueGenerator for '
-          '${libraryElement.source.fullName}. $st',
+          '${libraryElement.source.fullName}.',
           e,
           st);
     }

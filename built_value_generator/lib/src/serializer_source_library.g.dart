@@ -23,9 +23,8 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
       (new SerializerSourceLibraryBuilder()..update(updates)).build();
 
   _$SerializerSourceLibrary._({this.element}) : super._() {
-    if (element == null) {
-      throw new BuiltValueNullFieldError('SerializerSourceLibrary', 'element');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        element, 'SerializerSourceLibrary', 'element');
   }
 
   @override
@@ -92,8 +91,9 @@ class SerializerSourceLibraryBuilder
   SerializerSourceLibraryBuilder();
 
   SerializerSourceLibraryBuilder get _$this {
-    if (_$v != null) {
-      _element = _$v.element;
+    final $v = _$v;
+    if ($v != null) {
+      _element = $v.element;
       _$v = null;
     }
     return this;
@@ -101,9 +101,7 @@ class SerializerSourceLibraryBuilder
 
   @override
   void replace(SerializerSourceLibrary other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SerializerSourceLibrary;
   }
 
@@ -114,7 +112,10 @@ class SerializerSourceLibraryBuilder
 
   @override
   _$SerializerSourceLibrary build() {
-    final _$result = _$v ?? new _$SerializerSourceLibrary._(element: element);
+    final _$result = _$v ??
+        new _$SerializerSourceLibrary._(
+            element: BuiltValueNullFieldError.checkNotNull(
+                element, 'SerializerSourceLibrary', 'element'));
     replace(_$result);
     return _$result;
   }

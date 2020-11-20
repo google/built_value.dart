@@ -15,7 +15,7 @@ abstract class _PrivateValue
     implements Built<_PrivateValue, _PrivateValueBuilder> {
   int get value;
 
-  factory _PrivateValue([Function(_PrivateValueBuilder) updates]) =
+  factory _PrivateValue(Function(_PrivateValueBuilder) updates) =
       _$PrivateValue;
 
   _PrivateValue._();

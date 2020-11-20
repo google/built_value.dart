@@ -72,7 +72,7 @@ void main() {
       final otherValue = value.rebuild((b) => b..simpleValue.aSet.remove(42));
 
       _expectMismatch(value, otherValue, "['simpleValue']['aSet']");
-      _expectMismatch(value, otherValue, "larger than expected");
+      _expectMismatch(value, otherValue, 'larger than expected');
     });
 
     test('reports deep match on set multimaps if not same', () {

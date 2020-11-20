@@ -20,15 +20,11 @@ class _$MemoizedGetter extends MemoizedGetter {
 
   _$MemoizedGetter._({this.returnType, this.nullabilitySuffix, this.name})
       : super._() {
-    if (returnType == null) {
-      throw new BuiltValueNullFieldError('MemoizedGetter', 'returnType');
-    }
-    if (nullabilitySuffix == null) {
-      throw new BuiltValueNullFieldError('MemoizedGetter', 'nullabilitySuffix');
-    }
-    if (name == null) {
-      throw new BuiltValueNullFieldError('MemoizedGetter', 'name');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        returnType, 'MemoizedGetter', 'returnType');
+    BuiltValueNullFieldError.checkNotNull(
+        nullabilitySuffix, 'MemoizedGetter', 'nullabilitySuffix');
+    BuiltValueNullFieldError.checkNotNull(name, 'MemoizedGetter', 'name');
   }
 
   @override
@@ -84,10 +80,11 @@ class MemoizedGetterBuilder
   MemoizedGetterBuilder();
 
   MemoizedGetterBuilder get _$this {
-    if (_$v != null) {
-      _returnType = _$v.returnType;
-      _nullabilitySuffix = _$v.nullabilitySuffix;
-      _name = _$v.name;
+    final $v = _$v;
+    if ($v != null) {
+      _returnType = $v.returnType;
+      _nullabilitySuffix = $v.nullabilitySuffix;
+      _name = $v.name;
       _$v = null;
     }
     return this;
@@ -95,9 +92,7 @@ class MemoizedGetterBuilder
 
   @override
   void replace(MemoizedGetter other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$MemoizedGetter;
   }
 
@@ -110,9 +105,12 @@ class MemoizedGetterBuilder
   _$MemoizedGetter build() {
     final _$result = _$v ??
         new _$MemoizedGetter._(
-            returnType: returnType,
-            nullabilitySuffix: nullabilitySuffix,
-            name: name);
+            returnType: BuiltValueNullFieldError.checkNotNull(
+                returnType, 'MemoizedGetter', 'returnType'),
+            nullabilitySuffix: BuiltValueNullFieldError.checkNotNull(
+                nullabilitySuffix, 'MemoizedGetter', 'nullabilitySuffix'),
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, 'MemoizedGetter', 'name'));
     replace(_$result);
     return _$result;
   }

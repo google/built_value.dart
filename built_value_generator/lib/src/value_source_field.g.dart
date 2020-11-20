@@ -17,10 +17,14 @@ class _$ValueSourceField extends ValueSourceField {
   @override
   final FieldElement builderElement;
   String __name;
+  bool __isNonNullByDefault;
+  String __orNull;
   String __type;
   bool __isFunctionType;
   String __typeWithPrefix;
   bool __isGetter;
+  bool __hasNullableAnnotation;
+  bool __hasNullableType;
   bool __isNullable;
   BuiltValueField __builtValueField;
   bool __builderFieldExists;
@@ -37,19 +41,23 @@ class _$ValueSourceField extends ValueSourceField {
   _$ValueSourceField._(
       {this.settings, this.parsedLibrary, this.element, this.builderElement})
       : super._() {
-    if (settings == null) {
-      throw new BuiltValueNullFieldError('ValueSourceField', 'settings');
-    }
-    if (parsedLibrary == null) {
-      throw new BuiltValueNullFieldError('ValueSourceField', 'parsedLibrary');
-    }
-    if (element == null) {
-      throw new BuiltValueNullFieldError('ValueSourceField', 'element');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        settings, 'ValueSourceField', 'settings');
+    BuiltValueNullFieldError.checkNotNull(
+        parsedLibrary, 'ValueSourceField', 'parsedLibrary');
+    BuiltValueNullFieldError.checkNotNull(
+        element, 'ValueSourceField', 'element');
   }
 
   @override
   String get name => __name ??= super.name;
+
+  @override
+  bool get isNonNullByDefault =>
+      __isNonNullByDefault ??= super.isNonNullByDefault;
+
+  @override
+  String get orNull => __orNull ??= super.orNull;
 
   @override
   String get type => __type ??= super.type;
@@ -62,6 +70,13 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   bool get isGetter => __isGetter ??= super.isGetter;
+
+  @override
+  bool get hasNullableAnnotation =>
+      __hasNullableAnnotation ??= super.hasNullableAnnotation;
+
+  @override
+  bool get hasNullableType => __hasNullableType ??= super.hasNullableType;
 
   @override
   bool get isNullable => __isNullable ??= super.isNullable;
@@ -154,11 +169,12 @@ class ValueSourceFieldBuilder
   ValueSourceFieldBuilder();
 
   ValueSourceFieldBuilder get _$this {
-    if (_$v != null) {
-      _settings = _$v.settings;
-      _parsedLibrary = _$v.parsedLibrary;
-      _element = _$v.element;
-      _builderElement = _$v.builderElement;
+    final $v = _$v;
+    if ($v != null) {
+      _settings = $v.settings;
+      _parsedLibrary = $v.parsedLibrary;
+      _element = $v.element;
+      _builderElement = $v.builderElement;
       _$v = null;
     }
     return this;
@@ -166,9 +182,7 @@ class ValueSourceFieldBuilder
 
   @override
   void replace(ValueSourceField other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueSourceField;
   }
 
@@ -181,9 +195,12 @@ class ValueSourceFieldBuilder
   _$ValueSourceField build() {
     final _$result = _$v ??
         new _$ValueSourceField._(
-            settings: settings,
-            parsedLibrary: parsedLibrary,
-            element: element,
+            settings: BuiltValueNullFieldError.checkNotNull(
+                settings, 'ValueSourceField', 'settings'),
+            parsedLibrary: BuiltValueNullFieldError.checkNotNull(
+                parsedLibrary, 'ValueSourceField', 'parsedLibrary'),
+            element: BuiltValueNullFieldError.checkNotNull(
+                element, 'ValueSourceField', 'element'),
             builderElement: builderElement);
     replace(_$result);
     return _$result;
