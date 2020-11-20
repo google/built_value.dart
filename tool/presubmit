@@ -58,16 +58,5 @@ for directory in $directories; do
   echo
   cd "$parent_directory/$directory"
 
-  if [[ "$directory" == "built_value" ]]; then
-    # pub run test doesn't support NNBD yet.
-    for src in $(find test -name \*.dart); do
-      grep -q 'main()' "$src" || continue
-      echo "$src in sound mode."
-      dart --enable-experiment=non-nullable --null-safety "$src" || exit 1
-      echo "$src in unsound mode."
-      dart --enable-experiment=non-nullable "$src" || exit 1
-    done
-  else
-    pub run test
-  fi
+  pub run test
 done
