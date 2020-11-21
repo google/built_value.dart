@@ -178,7 +178,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
               '"function" or mark it "@BuiltValueField(serialize: false)".'));
     });
 
-    test('Cannot generate serializer for private classes', () async {
+    test('cannot generate serializer for private classes', () async {
       expect(await generate(r'''
 library value;
 

@@ -74,6 +74,347 @@ abstract class _$TestEnumMixin {
 
 void main() {
   group('generator', () {
+    group('fails', () {
+      test('on dynamic fields', () async {
+        expect(
+            await generate(correctInput.replaceAll(
+                'class TestEnum extends EnumClass {',
+                'class TestEnum extends EnumClass {\n'
+                    '  static const aNull = null;')),
+            contains(r'''Please make the following changes to use EnumClass:
+
+1. Specify a type for field "aNull".'''));
+      });
+
+      test('with error on missing part statement', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'src_par.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$yes;
+  static const TestEnum no = _$no;
+  static const TestEnum maybe = _$maybe;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), contains(r'''Please make the following changes to use EnumClass:
+
+1. Import generated part: part 'test_enum.g.dart';'''));
+      });
+
+      test('with error on non-const static fields', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static TestEnum yes = _$yes;
+  static TestEnum no = _$no;
+  static TestEnum maybe = _$maybe;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Make field "yes" const.
+2. Make field "no" const.
+3. Make field "maybe" const.'''));
+      });
+
+      test('with error on non-const non-static fields', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  TestEnum yes = _$yes;
+  TestEnum no = _$no;
+  TestEnum maybe = _$maybe;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Make field "yes" static const.
+2. Make field "no" static const.
+3. Make field "maybe" static const.'''));
+      });
+
+      test('with error on name clash for field rhs', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$no;
+  static const TestEnum no = _$no;
+  static const TestEnum maybe = _$yes;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.'''));
+      });
+
+      test('with error on name clash for values', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$no;
+  static const TestEnum no = _$maybe;
+  static const TestEnum maybe = _$yes;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$no;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.'''));
+      });
+
+      test('with error on missing constructor', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$yes;
+  static const TestEnum no = _$no;
+  static const TestEnum maybe = _$maybe;
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
+      });
+
+      test('with error on incorrect constructor', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$yes;
+  static const TestEnum no = _$no;
+  static const TestEnum maybe = _$maybe;
+
+  TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
+      });
+
+      test('with error on too many constructors', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$yes;
+  static const TestEnum no = _$no;
+  static const TestEnum maybe = _$maybe;
+
+  const TestEnum._(String name) : super(name);
+  TestEnum._create(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+
+abstract class BuiltSet<T> {
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
+      });
+
+      test('with error on missing values getter', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$yes;
+  static const TestEnum no = _$no;
+  static const TestEnum maybe = _$maybe;
+
+  const TestEnum._(String name) : super(name);
+
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Add getter: static BuiltSet<TestEnum> get values => _$values'''));
+      });
+
+      test('with error on missing valueOf', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$yes;
+  static const TestEnum no = _$no;
+  static const TestEnum maybe = _$maybe;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Add method: static TestEnum valueOf(String name) => _$valueOf(name)'''));
+      });
+
+      test('with error on wrong mixin declaration', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  static const TestEnum yes = _$yes;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+
+class TestEnumMixin = Object with _$TestEnumMixin;
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Remove mixin or declare using exactly: abstract class TestEnumMixin = Object with _$TestEnumMixin;'''));
+      });
+
+      test('with error on abstract class', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+abstract class TestEnum extends EnumClass {
+  static const TestEnum yes = _$yes;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Make TestEnum concrete; remove "abstract".'''));
+      });
+
+      test('if there is more than one fallback field', () async {
+        expect(
+            await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  @BuiltValueEnumConst(fallback: true)
+  static const TestEnum yes = _$yes;
+  @BuiltValueEnumConst(fallback: true)
+  static const TestEnum no = _$no;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''),
+            endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Remove `fallback = true` so that at most one constant is the fallback.'''
+            ' Currently on "TestEnum" fields "yes", "no".'));
+      });
+
+      test('if both `wireName` and `wireNumber` are used', () async {
+        expect(await generate(r'''
+library test_enum;
+
+import 'package:built_value/built_value.dart';
+
+part 'test_enum.g.dart';
+
+class TestEnum extends EnumClass {
+  @BuiltValueEnumConst(wireName: 'yes', wireNumber: 1)
+  static const TestEnum yes = _$yes;
+  static const TestEnum no = _$no;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+'''), endsWith(r'''Please make the following changes to use EnumClass:
+
+1. Specify either `wireName` or `wireNumber`, not both, on field "yes".'''));
+      });
+    });
+
     test('produces correct output for correct input', () async {
       expect(await generate(correctInput), contains(correctOutput));
     });
@@ -101,89 +442,7 @@ void main() {
           contains(correctOutput));
     });
 
-    test('fails on dynamic fields', () async {
-      expect(
-          await generate(correctInput.replaceAll(
-              'class TestEnum extends EnumClass {',
-              'class TestEnum extends EnumClass {\n'
-                  '  static const aNull = null;')),
-          contains(r'''Please make the following changes to use EnumClass:
 
-1. Specify a type for field "aNull".'''));
-    });
-
-    test('fails with error on missing part statement', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'src_par.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-  static const TestEnum no = _$no;
-  static const TestEnum maybe = _$maybe;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), contains(r'''Please make the following changes to use EnumClass:
-
-1. Import generated part: part 'test_enum.g.dart';'''));
-    });
-
-    test('fails with error on non-const static fields', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static TestEnum yes = _$yes;
-  static TestEnum no = _$no;
-  static TestEnum maybe = _$maybe;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Make field "yes" const.
-2. Make field "no" const.
-3. Make field "maybe" const.'''));
-    });
-
-    test('fails with error on non-const non-static fields', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  TestEnum yes = _$yes;
-  TestEnum no = _$no;
-  TestEnum maybe = _$maybe;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Make field "yes" static const.
-2. Make field "no" static const.
-3. Make field "maybe" static const.'''));
-    });
 
     test('ignores static const fields of wrong type', () async {
       expect(await generate(r'''
@@ -297,51 +556,7 @@ final BuiltSet<TestEnum> _$vls = new BuiltSet<TestEnum>(const <TestEnum>[
 '''));
     });
 
-    test('fails with error on name clash for field rhs', () async {
-      expect(await generate(r'''
-library test_enum;
 
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$no;
-  static const TestEnum no = _$no;
-  static const TestEnum maybe = _$yes;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.'''));
-    });
-
-    test('fails with error on name clash for values', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$no;
-  static const TestEnum no = _$maybe;
-  static const TestEnum maybe = _$yes;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$no;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.'''));
-    });
 
     test('does not fail with clash across multiple files', () async {
       expect(
@@ -368,165 +583,6 @@ class TestEnum extends EnumClass {
 '''), isNot(contains('null')));
     });
 
-    test('fails with error on missing constructor', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-  static const TestEnum no = _$no;
-  static const TestEnum maybe = _$maybe;
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
-    });
-
-    test('fails with error on incorrect constructor', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-  static const TestEnum no = _$no;
-  static const TestEnum maybe = _$maybe;
-
-  TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
-    });
-
-    test('fails with error on too many constructors', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-  static const TestEnum no = _$no;
-  static const TestEnum maybe = _$maybe;
-
-  const TestEnum._(String name) : super(name);
-  TestEnum._create(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-
-abstract class BuiltSet<T> {
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
-    });
-
-    test('fails with error on missing values getter', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-  static const TestEnum no = _$no;
-  static const TestEnum maybe = _$maybe;
-
-  const TestEnum._(String name) : super(name);
-
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Add getter: static BuiltSet<TestEnum> get values => _$values'''));
-    });
-
-    test('fails with error on missing valueOf', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-  static const TestEnum no = _$no;
-  static const TestEnum maybe = _$maybe;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Add method: static TestEnum valueOf(String name) => _$valueOf(name)'''));
-    });
-
-    test('fails with error on wrong mixin declaration', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-
-class TestEnumMixin = Object with _$TestEnumMixin;
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Remove mixin or declare using exactly: abstract class TestEnumMixin = Object with _$TestEnumMixin;'''));
-    });
-
-    test('fails with error on abstract class', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-abstract class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Make TestEnum concrete; remove "abstract".'''));
-    });
-
     test('is robust to newlines in input', () async {
       expect(await generate(r'''
 library test_enum;
@@ -551,56 +607,6 @@ class TestEnum extends EnumClass {
 
 abstract class TestEnumMixin = Object with _$TestEnumMixin;
 '''), contains(correctOutput));
-    });
-
-    test('fails if there is more than one fallback field', () async {
-      expect(
-          await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  @BuiltValueEnumConst(fallback: true)
-  static const TestEnum yes = _$yes;
-  @BuiltValueEnumConst(fallback: true)
-  static const TestEnum no = _$no;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''),
-          endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Remove `fallback = true` so that at most one constant is the fallback.'''
-              ' Currently on "TestEnum" fields "yes", "no".'));
-    });
-
-    test('fails if both `wireName` and `wireNumber` are used', () async {
-      expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  @BuiltValueEnumConst(wireName: 'yes', wireNumber: 1)
-  static const TestEnum yes = _$yes;
-  static const TestEnum no = _$no;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Specify either `wireName` or `wireNumber`, not both, on field "yes".'''));
     });
   });
 }
