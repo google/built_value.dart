@@ -388,7 +388,7 @@ class TestEnum extends EnumClass {
             endsWith(r'''Please make the following changes to use EnumClass:
 
 1. Remove `fallback = true` so that at most one constant is the fallback.'''
-            ' Currently on "TestEnum" fields "yes", "no".'));
+                ' Currently on "TestEnum" fields "yes", "no".'));
       });
 
       test('if both `wireName` and `wireNumber` are used', () async {
@@ -441,8 +441,6 @@ class TestEnum extends EnumClass {
                   '  static const int anInt = 3;')),
           contains(correctOutput));
     });
-
-
 
     test('ignores static const fields of wrong type', () async {
       expect(await generate(r'''
@@ -555,8 +553,6 @@ final BuiltSet<TestEnum> _$vls = new BuiltSet<TestEnum>(const <TestEnum>[
 ]);
 '''));
     });
-
-
 
     test('does not fail with clash across multiple files', () async {
       expect(
