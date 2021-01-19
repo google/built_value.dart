@@ -392,8 +392,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 }'''), contains('1. Make class have exactly one constructor: Value._();'));
       });
 
-      test('to add constructor when there is synthetic constructor',
-          () async {
+      test('to add constructor when there is synthetic constructor', () async {
         expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
@@ -405,8 +404,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 }'''), contains('1. Make class have exactly one constructor: Value._();'));
       });
 
-      test('to remove constructor from non-instantiable value class',
-          () async {
+      test('to remove constructor from non-instantiable value class', () async {
         expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
@@ -439,8 +437,7 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
                 'factory Value([void Function(ValueBuilder)? updates]) = _\$Value;'));
       });
 
-      test('to remove factory from non-instantiable value class',
-          () async {
+      test('to remove factory from non-instantiable value class', () async {
         expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
 part 'value.g.dart';
