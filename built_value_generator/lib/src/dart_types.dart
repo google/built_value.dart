@@ -27,12 +27,10 @@ class DartTypes {
         ValueSourceClass(type.element as ClassElement).settings.instantiable;
   }
 
-  static bool isBuiltValue(DartType type) {
-    if (type.element is! ClassElement) return false;
-    return (type.element as ClassElement)
-        .allSupertypes
-        .any((interfaceType) => interfaceType.element.name == 'Built');
-  }
+  static bool isBuiltValue(DartType type) =>
+      type is InterfaceType &&
+      type.element.allSupertypes
+          .any((interfaceType) => interfaceType.element.name == 'Built');
 
   static bool isBuiltCollection(DartType type) {
     return _builtCollectionNames
