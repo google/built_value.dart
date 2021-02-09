@@ -373,7 +373,7 @@ abstract class MammalBuilder implements AnimalBuilder {
   void replace(covariant Mammal other);
   void update(void Function(MammalBuilder) updates);
   int get legs;
-  set legs(int legs);
+  set legs(covariant int legs);
 }
 
 class _$Cat extends Cat {
@@ -1218,6 +1218,21 @@ class ImplementsTwoBuilder
     replace(_$result);
     return _$result;
   }
+}
+
+abstract class ArgumentBuilder<T> {
+  void replace(Argument<T> other);
+  void update(void Function(ArgumentBuilder<T>) updates);
+  IntentSlot<T, Object> get slot;
+  set slot(IntentSlot<T, Object> slot);
+}
+
+abstract class GroundedArgumentBuilder<T, G extends Object>
+    implements ArgumentBuilder<T> {
+  void replace(covariant GroundedArgument<T, G> other);
+  void update(void Function(GroundedArgumentBuilder<T, G>) updates);
+  IntentSlot<T, G> get slot;
+  set slot(covariant IntentSlot<T, G> slot);
 }
 
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

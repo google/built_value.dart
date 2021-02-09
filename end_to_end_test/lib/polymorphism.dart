@@ -214,3 +214,17 @@ abstract class ImplementsTwo
       _$ImplementsTwo;
   ImplementsTwo._();
 }
+
+// Check that `covariant` is added to setters.
+class IntentSlot<T, G extends Object> {}
+
+@BuiltValue(instantiable: false)
+abstract class Argument<T> {
+  IntentSlot<T, Object> get slot;
+}
+
+@BuiltValue(instantiable: false)
+abstract class GroundedArgument<T, G extends Object> implements Argument<T> {
+  @override
+  IntentSlot<T, G> get slot;
+}
