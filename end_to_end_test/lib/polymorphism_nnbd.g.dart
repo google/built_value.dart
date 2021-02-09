@@ -373,7 +373,7 @@ abstract class MammalBuilder implements AnimalBuilder {
   void replace(covariant Mammal other);
   void update(void Function(MammalBuilder) updates);
   int? get legs;
-  set legs(int? legs);
+  set legs(covariant int? legs);
 }
 
 class _$Cat extends Cat {

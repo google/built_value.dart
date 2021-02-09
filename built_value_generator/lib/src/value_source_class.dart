@@ -1108,15 +1108,16 @@ abstract class ValueSourceClass
   String _generateAbstractBuilder() {
     var result = StringBuffer();
 
+    // The "Built" interface has been omitted to work around dart2js issue
+    // https://github.com/dart-lang/sdk/issues/14729. So, we can't implement
+    // "Builder". Add the methods explicitly. We can however implement any
+    // other built_value interfaces.
+    var interfaces = builderImplements.skip(1).toList();
+
     if (implementsBuilt) {
       result.writeln('abstract class ${name}Builder$_boundedGenerics '
           'implements ${builderImplements.join(", ")} {');
     } else {
-      // The "Built" interface has been omitted to work around dart2js issue
-      // https://github.com/dart-lang/sdk/issues/14729. So, we can't implement
-      // "Builder". Add the methods explicitly. We can however implement any
-      // other built_value interfaces.
-      var interfaces = builderImplements.skip(1).toList();
       result.writeln('abstract class ${name}Builder$_boundedGenerics '
           '${interfaces.isEmpty ? '' : 'implements ' + interfaces.join(', ')}'
           '{');
@@ -1133,7 +1134,9 @@ abstract class ValueSourceClass
       final name = field.name;
 
       result.writeln('$typeInBuilder$orNull get $name;');
-      result.writeln('set $name($typeInBuilder$orNull $name);');
+      // Add `covariant` if we're implementing one or more parent builders.
+      result.writeln('set $name(${interfaces.isEmpty ? '' : 'covariant '} '
+          '$typeInBuilder$orNull $name);');
 
       result.writeln();
     }
