@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.0.0
+
+- Stable null safe release.
+- Add `toJson` and `fromJson` convenience methods to `Serializers`.
+
 # 8.0.0-nullsafety.0
 
 - Migrate to NNBD.
