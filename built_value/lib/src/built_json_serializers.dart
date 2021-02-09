@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 
@@ -42,8 +44,18 @@ class BuiltJsonSerializers implements Serializers {
   }
 
   @override
+  T fromJson<T>(Serializer<T> serializer, String serialized) {
+    return deserializeWith<T>(serializer, json.decode(serialized));
+  }
+
+  @override
   Object serializeWith<T>(Serializer<T> serializer, T object) {
     return serialize(object, specifiedType: FullType(serializer.types.first));
+  }
+
+  @override
+  String toJson<T>(Serializer<T> serializer, T object) {
+    return json.encode(serializeWith<T>(serializer, object));
   }
 
   @override

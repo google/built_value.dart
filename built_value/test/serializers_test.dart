@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_value/serializer.dart';
+import 'package:built_value/src/date_time_serializer.dart';
 import 'package:built_value/src/int_serializer.dart';
 import 'package:test/test.dart';
 
@@ -38,6 +39,16 @@ void main() {
           contains(TypeMatcher<TestSerializer>()));
       expect(mergedSerializers.builderFactories.keys,
           contains(FullType(TestSerializer)));
+    });
+
+    test('provides convenience toJson method', () {
+      expect(serializers.toJson(DateTimeSerializer(), DateTime.utc(2020, 1, 1)),
+          '1577836800000000');
+    });
+
+    test('provides convenience fromJson method', () {
+      expect(serializers.fromJson(DateTimeSerializer(), '1577836800000000'),
+          DateTime.utc(2020, 1, 1));
     });
   });
 }

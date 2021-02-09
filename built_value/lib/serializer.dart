@@ -123,6 +123,12 @@ abstract class Serializers {
   /// calling [serialize] with a `specifiedType`.
   Object serializeWith<T>(Serializer<T> serializer, T object);
 
+  /// Convenience method for when you want a JSON string and know the type
+  /// you're serializing. Specify the type by specifying its [Serializer]
+  /// class. Equivalent to calling [serialize] with a `specifiedType` then
+  /// calling `json.encode`.
+  String toJson<T>(Serializer<T> serializer, T object);
+
   /// Deserializes [serialized].
   ///
   /// A [Serializer] must have been provided for every type the object uses.
@@ -136,6 +142,12 @@ abstract class Serializers {
   /// Specify the type by specifying its [Serializer] class. Equivalent to
   /// calling [deserialize] with a `specifiedType`.
   T deserializeWith<T>(Serializer<T> serializer, Object serialized);
+
+  /// Convenience method for when you have a JSON string and know the type
+  /// you're deserializing. Specify the type by specifying its [Serializer]
+  /// class. Equivalent to calling [deserialize] with a `specifiedType` then
+  /// calling `json.decode`.
+  T fromJson<T>(Serializer<T> serializer, String serialized);
 
   /// Gets a serializer; returns `null` if none is found. For use in plugins
   /// and other extension code.
