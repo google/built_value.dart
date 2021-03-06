@@ -31,7 +31,7 @@ void main() {
 
     test('nested label can be updated', () {
       final node = Node((b) => b.left.label = 'updated');
-      expect(node.left.label, 'updated');
+      expect(node.left!.label, 'updated');
     });
 
     test('nested label update does not affect original', () {
@@ -46,12 +46,12 @@ void main() {
       nestedBuilder.label = 'leaf';
       final node = builder.build();
       nestedBuilder.label = 'updated';
-      expect(node.left.label, 'leaf');
+      expect(node.left!.label, 'leaf');
     });
 
     test('doubly nested label can be updated', () {
       final node = Node((b) => b.left.left.label = 'updated');
-      expect(node.left.left.label, 'updated');
+      expect(node.left!.left!.label, 'updated');
     });
 
     test('doubly nested label update does not affect original', () {
@@ -66,7 +66,7 @@ void main() {
       nestedBuilder.label = 'leaf';
       final node = builder.build();
       nestedBuilder.label = 'updated';
-      expect(node.left.left.label, 'leaf');
+      expect(node.left!.left!.label, 'leaf');
     });
 
     test('structure can be created', () {
@@ -74,9 +74,9 @@ void main() {
         ..left.left.label = 'one'
         ..left.right.left.label = 'two'
         ..right.right.right.label = 'three');
-      expect(node.left.left.label, 'one');
-      expect(node.left.right.left.label, 'two');
-      expect(node.right.right.right.label, 'three');
+      expect(node.left!.left!.label, 'one');
+      expect(node.left!.right!.left!.label, 'two');
+      expect(node.right!.right!.right!.label, 'three');
     });
 
     test('derived structure can be created without affecting original', () {
@@ -91,15 +91,15 @@ void main() {
         ..right.right.right.right.label = 'below 3');
 
       // Original is unchanged.
-      expect(node.left.left.label, 'one');
-      expect(node.left.right.left.label, 'two');
-      expect(node.right.right.right.label, 'three');
+      expect(node.left!.left!.label, 'one');
+      expect(node.left!.right!.left!.label, 'two');
+      expect(node.right!.right!.right!.label, 'three');
 
       // Derived structure is correct.
-      expect(updatedNode.left.left.label, '1');
-      expect(updatedNode.left.right.left.label, '2');
-      expect(updatedNode.right.right.right.label, 'three');
-      expect(updatedNode.right.right.right.right.label, 'below 3');
+      expect(updatedNode.left!.left!.label, '1');
+      expect(updatedNode.left!.right!.left!.label, '2');
+      expect(updatedNode.right!.right!.right!.label, 'three');
+      expect(updatedNode.right!.right!.right!.right!.label, 'below 3');
     });
 
     test('supports setting builders to null to clear', () {
@@ -121,14 +121,14 @@ void main() {
         ..left.right.left = null);
 
       // Original is unchanged.
-      expect(node.left.left.label, 'one');
-      expect(node.left.right.left.label, 'two');
-      expect(node.right.right.right.label, 'three');
+      expect(node.left!.left!.label, 'one');
+      expect(node.left!.right!.left!.label, 'two');
+      expect(node.right!.right!.right!.label, 'three');
 
       // Derived structure is correct.
-      expect(updatedNode.left.left.label, '1');
-      expect(updatedNode.left.right.left, null);
-      expect(updatedNode.right.right.right.label, 'three');
+      expect(updatedNode.left!.left!.label, '1');
+      expect(updatedNode.left!.right!.left, null);
+      expect(updatedNode.right!.right!.right!.label, 'three');
     });
   });
 }

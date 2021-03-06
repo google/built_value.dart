@@ -6,15 +6,84 @@ part of node;
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializers _$serializers =
+    (new Serializers().toBuilder()..add(Node.serializer)).build();
+Serializer<Node> _$nodeSerializer = new _$NodeSerializer();
+
+class _$NodeSerializer implements StructuredSerializer<Node> {
+  @override
+  final Iterable<Type> types = const [Node, _$Node];
+  @override
+  final String wireName = 'Node';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, Node object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    Object? value;
+    value = object.label;
+    if (value != null) {
+      result
+        ..add('label')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.left;
+    if (value != null) {
+      result
+        ..add('left')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(Node)));
+    }
+    value = object.right;
+    if (value != null) {
+      result
+        ..add('right')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(Node)));
+    }
+    return result;
+  }
+
+  @override
+  Node deserialize(Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new NodeBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'label':
+          result.label = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'left':
+          result.left.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Node)) as Node);
+          break;
+        case 'right':
+          result.right.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Node)) as Node);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$Node extends Node {
   @override
-  final String label;
+  final String? label;
   @override
-  final Node left;
+  final Node? left;
   @override
-  final Node right;
+  final Node? right;
 
-  factory _$Node([void Function(NodeBuilder) updates]) =>
+  factory _$Node([void Function(NodeBuilder)? updates]) =>
       (new NodeBuilder()..update(updates)).build();
 
   _$Node._({this.label, this.left, this.right}) : super._();
@@ -51,19 +120,19 @@ class _$Node extends Node {
 }
 
 class NodeBuilder implements Builder<Node, NodeBuilder> {
-  _$Node _$v;
+  _$Node? _$v;
 
-  String _label;
-  String get label => _$this._label;
-  set label(String label) => _$this._label = label;
+  String? _label;
+  String? get label => _$this._label;
+  set label(String? label) => _$this._label = label;
 
-  NodeBuilder _left;
+  NodeBuilder? _left;
   NodeBuilder get left => _$this._left ??= new NodeBuilder();
-  set left(NodeBuilder left) => _$this._left = left;
+  set left(NodeBuilder? left) => _$this._left = left;
 
-  NodeBuilder _right;
+  NodeBuilder? _right;
   NodeBuilder get right => _$this._right ??= new NodeBuilder();
-  set right(NodeBuilder right) => _$this._right = right;
+  set right(NodeBuilder? right) => _$this._right = right;
 
   NodeBuilder();
 
@@ -85,7 +154,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
   }
 
   @override
-  void update(void Function(NodeBuilder) updates) {
+  void update(void Function(NodeBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -97,7 +166,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
           new _$Node._(
               label: label, left: _left?.build(), right: _right?.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'left';
         _left?.build();

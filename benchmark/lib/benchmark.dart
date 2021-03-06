@@ -2,12 +2,15 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:benchmark/node.dart';
 import 'package:benchmark/simple_value.dart';
 
 void benchmark() {
   benchmarkHashCode();
   benchmarkNestedRebuilds();
+  benchmarkDeserialization();
 }
 
 void benchmarkHashCode() {
@@ -29,6 +32,16 @@ void benchmarkNestedRebuilds() {
       }
       leafBuilder.label = 'updatedLeaf';
       topBuilder.build();
+    });
+  }
+}
+
+void benchmarkDeserialization() {
+  for (var depth = 0; depth <= 3; ++depth) {
+    final value = Node((b) => _buildNested(b, depth));
+    final serialized = json.decode(json.encode(serializers.serialize(value)));
+    _benchmark('nested deserialization $depth', () {
+      return serializers.deserialize(serialized);
     });
   }
 }
