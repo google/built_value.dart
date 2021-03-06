@@ -138,7 +138,9 @@ class BuiltJsonSerializers implements Serializers {
       if (serializer is StructuredSerializer) {
         try {
           return serializer.deserialize(
-              this, object.sublist(1) as List<Object>);
+            this,
+            Iterable.castFrom(object.sublist(1)),
+          );
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
@@ -165,8 +167,11 @@ class BuiltJsonSerializers implements Serializers {
 
       if (serializer is StructuredSerializer) {
         try {
-          return serializer.deserialize(this, object as Iterable<Object>,
-              specifiedType: specifiedType);
+          return serializer.deserialize(
+            this,
+            Iterable.castFrom(object as Iterable),
+            specifiedType: specifiedType,
+          );
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }

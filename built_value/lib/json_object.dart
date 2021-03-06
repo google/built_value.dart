@@ -64,8 +64,12 @@ abstract class JsonObject {
       return BoolJsonObject(value);
     } else if (value is List<Object>) {
       return ListJsonObject(value);
+    } else if (value is List) {
+      return ListJsonObject(List.castFrom(value));
     } else if (value is Map<String, Object>) {
       return MapJsonObject(value);
+    } else if (value is Map<String, dynamic>) {
+      return MapJsonObject(Map.castFrom(value));
     } else {
       throw ArgumentError.value(value, 'value',
           'Must be bool, List<Object>, Map<String, Object>, num or String');
