@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 // @dart=2.12
 
+import 'dart:convert';
+
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
@@ -65,6 +67,13 @@ void main() {
     test('can be deserialized', () {
       expect(
           serializersWithPlugin.deserialize(serialized,
+              specifiedType: specifiedType),
+          data);
+    });
+    test('can be deserialized from the output of json.decode', () {
+      expect(
+          serializersWithPlugin.deserialize(
+              json.decode(json.encode(serialized)) as Object,
               specifiedType: specifiedType),
           data);
     });

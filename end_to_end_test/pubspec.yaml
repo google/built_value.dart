@@ -12,6 +12,10 @@ dependencies:
   built_collection: ^5.0.0
   built_value: ^8.0.0
 
+dependency_overides:
+  built_value:
+    path: ../built_value
+
 dev_dependencies:
   build: ^1.0.0
   build_runner: ^1.0.0
