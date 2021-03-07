@@ -62,6 +62,17 @@ abstract class GenericContainer
   GenericContainer._();
 }
 
+// Check generation for `strict_raw_types`.
+abstract class DynamicGenericContainer
+    implements Built<DynamicGenericContainer, DynamicGenericContainerBuilder> {
+  Generic<dynamic> get foo;
+
+  factory DynamicGenericContainer(
+          [void Function(DynamicGenericContainerBuilder) updates]) =
+      _$DynamicGenericContainer;
+  DynamicGenericContainer._();
+}
+
 abstract class NestedGenericContainer
     implements Built<NestedGenericContainer, NestedGenericContainerBuilder> {
   static Serializer<NestedGenericContainer> get serializer =>

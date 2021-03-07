@@ -622,10 +622,10 @@ abstract class Value implements Built<Value, ValueBuilder> {
 }'''),
             allOf(
                 contains('1. Make field "list" have type "BuiltList". '
-                    'The current type, "List", is not allowed '
+                    'The current type, "List<dynamic>", is not allowed '
                     'because it is mutable.'),
                 contains('2. Make field "set" have type "BuiltSet". '
-                    'The current type, "Set", is not allowed '
+                    'The current type, "Set<dynamic>", is not allowed '
                     'because it is mutable.')));
       });
     });

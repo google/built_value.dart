@@ -21,11 +21,11 @@ import 'package:built_value_generator/src/metadata.dart'
 part 'value_source_field.g.dart';
 
 const _suggestedTypes = <String, String>{
-  'List': 'BuiltList',
-  'Map': 'BuiltMap',
-  'Set': 'BuiltSet',
-  'ListMultimap': 'BuiltListMultimap',
-  'SetMultimap': 'BuiltSetMultimap',
+  'List<dynamic>': 'BuiltList',
+  'Map<dynamic, dynamic>': 'BuiltMap',
+  'Set<dynamic>': 'BuiltSet',
+  'ListMultimap<dynamic, dynamic>': 'BuiltListMultimap',
+  'SetMultimap<dynamic, dynamic>': 'BuiltSetMultimap',
 };
 
 abstract class ValueSourceField
@@ -270,6 +270,7 @@ abstract class ValueSourceField
           b..message = 'Make field $name public; remove the underscore.'));
     }
 
+    // TODO(davidmorgan): tighten this up to apply to any generics.
     if (_suggestedTypes.keys.contains(type)) {
       result.add(GeneratorError((b) => b
         ..message = 'Make field "$name" have type "${_suggestedTypes[type]}". '
