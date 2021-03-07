@@ -7,6 +7,7 @@
 - Fix generation bugs around enum wire name and polymorphism.
 - Fix generation with generics for analysis with `strict-raw-types`.
 - Add test coverage around generation for generic serialization.
+- Add test coverage around initialization with generics.
 
 # 8.0.0
 

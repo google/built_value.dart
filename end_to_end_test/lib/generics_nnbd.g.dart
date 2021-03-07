@@ -554,6 +554,94 @@ class GenericValueBuilder<T>
   }
 }
 
+class _$InitializeGenericValue<T> extends InitializeGenericValue<T> {
+  @override
+  final T value;
+
+  factory _$InitializeGenericValue(
+          [void Function(InitializeGenericValueBuilder<T>)? updates]) =>
+      (new InitializeGenericValueBuilder<T>()..update(updates)).build();
+
+  _$InitializeGenericValue._({required this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        value, 'InitializeGenericValue', 'value');
+    if (T == dynamic) {
+      throw new BuiltValueMissingGenericsError('InitializeGenericValue', 'T');
+    }
+  }
+
+  @override
+  InitializeGenericValue<T> rebuild(
+          void Function(InitializeGenericValueBuilder<T>) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  InitializeGenericValueBuilder<T> toBuilder() =>
+      new InitializeGenericValueBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is InitializeGenericValue && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('InitializeGenericValue')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class InitializeGenericValueBuilder<T>
+    implements
+        Builder<InitializeGenericValue<T>, InitializeGenericValueBuilder<T>> {
+  _$InitializeGenericValue<T>? _$v;
+
+  T? _value;
+  T? get value => _$this._value;
+  set value(T? value) => _$this._value = value;
+
+  InitializeGenericValueBuilder() {
+    InitializeGenericValue._initializeBuilder(this);
+  }
+
+  InitializeGenericValueBuilder<T> get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(InitializeGenericValue<T> other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$InitializeGenericValue<T>;
+  }
+
+  @override
+  void update(void Function(InitializeGenericValueBuilder<T>)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$InitializeGenericValue<T> build() {
+    final _$result = _$v ??
+        new _$InitializeGenericValue<T>._(
+            value: BuiltValueNullFieldError.checkNotNull(
+                value, 'InitializeGenericValue', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
   @override
   final T value;

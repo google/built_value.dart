@@ -22,6 +22,25 @@ abstract class GenericValue<T>
   GenericValue._();
 }
 
+abstract class InitializeGenericValue<T>
+    implements
+        Built<InitializeGenericValue<T>, InitializeGenericValueBuilder<T>> {
+  static void _initializeBuilder<T>(InitializeGenericValueBuilder<T> b) {
+    if (T == int) {
+      b.value = 3 as T;
+    }
+  }
+
+  T get value;
+
+  factory InitializeGenericValue(
+          [Function(InitializeGenericValueBuilder<T>) updates]) =
+      _$InitializeGenericValue<T>;
+  factory InitializeGenericValue.of(T value) =>
+      _$InitializeGenericValue._(value: value);
+  InitializeGenericValue._();
+}
+
 abstract class BoundGenericValue<T extends num>
     implements Built<BoundGenericValue<T>, BoundGenericValueBuilder<T>> {
   static Serializer<BoundGenericValue> get serializer =>

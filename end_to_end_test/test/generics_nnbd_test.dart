@@ -55,6 +55,12 @@ void main() {
     });
   });
 
+  group('InitializeGenericValue', () {
+    test('can initialize itself for int', () {
+      InitializeGenericValue<int>();
+    });
+  });
+
   group('BoundGenericValue', () {
     test('can be instantiated', () {
       BoundGenericValue<int>((b) => b.value = 0);
