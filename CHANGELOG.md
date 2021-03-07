@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.0.1 (unreleased)
+
+- Update `chat` example to webdev.
+
 # 8.0.0
 
 - Stable null safe release.
