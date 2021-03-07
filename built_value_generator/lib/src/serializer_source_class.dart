@@ -414,7 +414,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
 
   static String _toCode(Object object) {
     if (object is String) {
-      return "'$object'";
+      return "'${escapeString(object)}'";
     } else if (object is int) {
       return object.toString();
     } else {

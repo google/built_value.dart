@@ -4,7 +4,7 @@
 
 - Update `chat` example to webdev.
 - Allow nulls when serializing/deserializing for better JSON interop.
-- Fix a polymorphism generation bug.
+- Fix generation bugs around enum wire name and polymorphism.
 
 # 8.0.0
 
