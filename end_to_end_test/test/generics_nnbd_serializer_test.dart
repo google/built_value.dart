@@ -85,7 +85,7 @@ void main() {
 
     test('loses generic type on deserialization', () {
       expect(serializers.deserialize(serialized).runtimeType.toString(),
-          r'_$GenericValue<Object>');
+          r'_$GenericValue<Object?>');
     });
   });
 
@@ -253,7 +253,7 @@ void main() {
 
     test('loses generic type on deserialization', () {
       expect(serializers.deserialize(serialized).runtimeType.toString(),
-          r'_$CollectionGenericValue<Object>');
+          r'_$CollectionGenericValue<Object?>');
     });
   });
 
@@ -319,6 +319,89 @@ void main() {
         'values',
         ['3']
       ],
+    ])) as Object;
+
+    test('can be serialized', () {
+      expect(serializersWithBuilder.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializersWithBuilder.deserialize(serialized), data);
+    });
+  });
+
+  group('PassthroughGenericContainer with known specifiedType', () {
+    var data = PassthroughGenericContainer<int>((b) => b
+      ..genericValue.value = 1
+      ..collectionGenericValue.values.add(3));
+    var specifiedType =
+        const FullType(PassthroughGenericContainer, [FullType(int)]);
+    // TODO(davidmorgan): adding this builder manually shouldn't be necessary.
+    // Auto-add builders for nested generic types.
+    var serializersWithBuilder = (serializers.toBuilder()
+          ..addBuilderFactory(
+              specifiedType, () => PassthroughGenericContainerBuilder<int>())
+          ..addBuilderFactory(const FullType(GenericValue, [FullType(int)]),
+              () => GenericValueBuilder<int>())
+          ..addBuilderFactory(
+              const FullType(CollectionGenericValue, [FullType(int)]),
+              () => CollectionGenericValueBuilder<int>()))
+        .build();
+    var serialized = json.decode(json.encode([
+      'genericValue',
+      ['value', 1],
+      'collectionGenericValue',
+      [
+        'values',
+        [3]
+      ],
+    ])) as Object;
+
+    test('can be serialized', () {
+      expect(
+          serializersWithBuilder.serialize(data, specifiedType: specifiedType),
+          serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(
+          serializersWithBuilder.deserialize(serialized,
+              specifiedType: specifiedType),
+          data);
+    });
+  });
+
+  group('PassthroughGenericContainer with unknown specifiedType', () {
+    var data = PassthroughGenericContainer<int>((b) => b
+      ..genericValue.value = 1
+      ..collectionGenericValue.values.add(3));
+    var specifiedType =
+        const FullType(PassthroughGenericContainer, [FullType(int)]);
+    // TODO(davidmorgan): adding this builder manually shouldn't be necessary.
+    // Auto-add builders for nested generic types.
+    var serializersWithBuilder = (serializers.toBuilder()
+          ..addBuilderFactory(
+              specifiedType, () => PassthroughGenericContainerBuilder<int>())
+          ..addBuilderFactory(const FullType(GenericValue, [FullType(Object)]),
+              () => GenericValueBuilder<Object>())
+          ..addBuilderFactory(
+              const FullType(CollectionGenericValue, [FullType(Object)]),
+              () => CollectionGenericValueBuilder<Object>()))
+        .build();
+    var serialized = json.decode(json.encode([
+      'PassthroughGenericContainer',
+      'genericValue',
+      [
+        'value',
+        ['int', 1]
+      ],
+      'collectionGenericValue',
+      [
+        'values',
+        [
+          ['int', 3]
+        ]
+      ]
     ])) as Object;
 
     test('can be serialized', () {

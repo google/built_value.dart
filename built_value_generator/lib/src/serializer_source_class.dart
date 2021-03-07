@@ -129,7 +129,7 @@ abstract class SerializerSourceClass
       ? ''
       : '<' +
           genericBounds
-              .map((bound) => bound.isEmpty ? 'Object' : bound)
+              .map((bound) => bound.isEmpty ? 'Object$orNull' : bound)
               .join(', ') +
           '>';
 
