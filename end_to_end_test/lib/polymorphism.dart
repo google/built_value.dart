@@ -228,3 +228,17 @@ abstract class GroundedArgument<T, G extends Object> implements Argument<T> {
   @override
   IntentSlot<T, G> get slot;
 }
+
+abstract class InstantiableGroundedArgument<T, G extends Object>
+    implements
+        Argument<T>,
+        Built<InstantiableGroundedArgument<T, G>,
+            InstantiableGroundedArgumentBuilder<T, G>> {
+  @override
+  IntentSlot<T, G> get slot;
+
+  InstantiableGroundedArgument._();
+  factory InstantiableGroundedArgument(
+          [void Function(InstantiableGroundedArgumentBuilder<T, G>) updates]) =
+      _$InstantiableGroundedArgument<T, G>;
+}

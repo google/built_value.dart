@@ -422,11 +422,11 @@ class CatBuilder implements Builder<Cat, CatBuilder>, MammalBuilder {
 
   bool _tail;
   bool get tail => _$this._tail;
-  set tail(bool tail) => _$this._tail = tail;
+  set tail(covariant bool tail) => _$this._tail = tail;
 
   int _legs;
   int get legs => _$this._legs;
-  set legs(int legs) => _$this._legs = legs;
+  set legs(covariant int legs) => _$this._legs = legs;
 
   CatBuilder();
 
@@ -508,11 +508,11 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   int _fins;
   int get fins => _$this._fins;
-  set fins(int fins) => _$this._fins = fins;
+  set fins(covariant int fins) => _$this._fins = fins;
 
   int _legs;
   int get legs => _$this._legs;
-  set legs(int legs) => _$this._legs = legs;
+  set legs(covariant int legs) => _$this._legs = legs;
 
   FishBuilder();
 
@@ -864,7 +864,7 @@ class HasStringBuilder
 
   String _field;
   String get field => _$this._field;
-  set field(String field) => _$this._field = field;
+  set field(covariant String field) => _$this._field = field;
 
   HasStringBuilder();
 
@@ -941,7 +941,7 @@ class HasDoubleBuilder
 
   double _field;
   double get field => _$this._field;
-  set field(double field) => _$this._field = field;
+  set field(covariant double field) => _$this._field = field;
 
   HasDoubleBuilder();
 
@@ -1115,7 +1115,7 @@ class UsesHandCodedBuilder
 
   int _fieldInBaseBuilder;
   int get fieldInBaseBuilder => _$this._fieldInBaseBuilder;
-  set fieldInBaseBuilder(int fieldInBaseBuilder) =>
+  set fieldInBaseBuilder(covariant int fieldInBaseBuilder) =>
       _$this._fieldInBaseBuilder = fieldInBaseBuilder;
 
   UsesHandCodedBuilder();
@@ -1233,6 +1233,102 @@ abstract class GroundedArgumentBuilder<T, G extends Object>
   void update(void Function(GroundedArgumentBuilder<T, G>) updates);
   IntentSlot<T, G> get slot;
   set slot(covariant IntentSlot<T, G> slot);
+}
+
+class _$InstantiableGroundedArgument<T, G extends Object>
+    extends InstantiableGroundedArgument<T, G> {
+  @override
+  final IntentSlot<T, G> slot;
+
+  factory _$InstantiableGroundedArgument(
+          [void Function(InstantiableGroundedArgumentBuilder<T, G>) updates]) =>
+      (new InstantiableGroundedArgumentBuilder<T, G>()..update(updates))
+          .build();
+
+  _$InstantiableGroundedArgument._({this.slot}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        slot, 'InstantiableGroundedArgument', 'slot');
+    if (T == dynamic) {
+      throw new BuiltValueMissingGenericsError(
+          'InstantiableGroundedArgument', 'T');
+    }
+    if (G == dynamic) {
+      throw new BuiltValueMissingGenericsError(
+          'InstantiableGroundedArgument', 'G');
+    }
+  }
+
+  @override
+  InstantiableGroundedArgument<T, G> rebuild(
+          void Function(InstantiableGroundedArgumentBuilder<T, G>) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  InstantiableGroundedArgumentBuilder<T, G> toBuilder() =>
+      new InstantiableGroundedArgumentBuilder<T, G>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is InstantiableGroundedArgument && slot == other.slot;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, slot.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('InstantiableGroundedArgument')
+          ..add('slot', slot))
+        .toString();
+  }
+}
+
+class InstantiableGroundedArgumentBuilder<T, G extends Object>
+    implements
+        Builder<InstantiableGroundedArgument<T, G>,
+            InstantiableGroundedArgumentBuilder<T, G>>,
+        ArgumentBuilder<T> {
+  _$InstantiableGroundedArgument<T, G> _$v;
+
+  IntentSlot<T, G> _slot;
+  IntentSlot<T, G> get slot => _$this._slot;
+  set slot(covariant IntentSlot<T, G> slot) => _$this._slot = slot;
+
+  InstantiableGroundedArgumentBuilder();
+
+  InstantiableGroundedArgumentBuilder<T, G> get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _slot = $v.slot;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant InstantiableGroundedArgument<T, G> other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$InstantiableGroundedArgument<T, G>;
+  }
+
+  @override
+  void update(
+      void Function(InstantiableGroundedArgumentBuilder<T, G>) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$InstantiableGroundedArgument<T, G> build() {
+    final _$result = _$v ??
+        new _$InstantiableGroundedArgument<T, G>._(
+            slot: BuiltValueNullFieldError.checkNotNull(
+                slot, 'InstantiableGroundedArgument', 'slot'));
+    replace(_$result);
+    return _$result;
+  }
 }
 
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

@@ -858,6 +858,8 @@ abstract class ValueSourceClass
         result.writeln();
       }
 
+      // Add `covariant` if we're implementing one or more parent builders.
+      var maybeCovariant = (builderImplements.length > 1) ? 'covariant ' : '';
       for (var field in fields) {
         var type = field.typeInCompilationUnit(compilationUnit);
         var typeInBuilder = field.typeInBuilder(compilationUnit);
@@ -878,12 +880,12 @@ abstract class ValueSourceClass
 
         // Setter.
         if (settings.generateBuilderOnSetField) {
-          result.writeln('set $name($fieldType$orNull $name) {'
+          result.writeln('set $name($maybeCovariant$fieldType$orNull $name) {'
               '_\$this._$name = $name;'
               'onSet();'
               '}');
         } else {
-          result.writeln('set $name($fieldType$orNull $name) =>'
+          result.writeln('set $name($maybeCovariant$fieldType$orNull $name) =>'
               '_\$this._$name = $name;');
         }
 
