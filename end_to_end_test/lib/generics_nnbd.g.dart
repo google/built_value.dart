@@ -30,7 +30,7 @@ class _$GenericValueSerializer
   final String wireName = 'GenericValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, GenericValue<Object> object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
@@ -39,7 +39,7 @@ class _$GenericValueSerializer
     final parameterT =
         isUnderspecified ? FullType.object : specifiedType.parameters[0];
 
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value, specifiedType: parameterT),
     ];
@@ -49,7 +49,7 @@ class _$GenericValueSerializer
 
   @override
   GenericValue<Object> deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -65,7 +65,7 @@ class _$GenericValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value =
@@ -86,7 +86,7 @@ class _$BoundGenericValueSerializer
   final String wireName = 'BoundGenericValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, BoundGenericValue<num> object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
@@ -95,7 +95,7 @@ class _$BoundGenericValueSerializer
     final parameterT =
         isUnderspecified ? FullType.object : specifiedType.parameters[0];
 
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value, specifiedType: parameterT),
     ];
@@ -105,7 +105,7 @@ class _$BoundGenericValueSerializer
 
   @override
   BoundGenericValue<num> deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -122,7 +122,7 @@ class _$BoundGenericValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value =
@@ -146,7 +146,7 @@ class _$CollectionGenericValueSerializer
   final String wireName = 'CollectionGenericValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, CollectionGenericValue<Object> object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
@@ -155,7 +155,7 @@ class _$CollectionGenericValueSerializer
     final parameterT =
         isUnderspecified ? FullType.object : specifiedType.parameters[0];
 
-    final result = <Object>[
+    final result = <Object?>[
       'values',
       serializers.serialize(object.values,
           specifiedType: new FullType(BuiltList, [parameterT])),
@@ -166,7 +166,7 @@ class _$CollectionGenericValueSerializer
 
   @override
   CollectionGenericValue<Object> deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -183,11 +183,11 @@ class _$CollectionGenericValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'values':
           result.values.replace(serializers.deserialize(value,
-                  specifiedType: new FullType(BuiltList, [parameterT]))
+                  specifiedType: new FullType(BuiltList, [parameterT]))!
               as BuiltList<Object>);
           break;
       }
@@ -205,9 +205,9 @@ class _$GenericContainerSerializer
   final String wireName = 'GenericContainer';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, GenericContainer object,
+  Iterable<Object?> serialize(Serializers serializers, GenericContainer object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'genericValue',
       serializers.serialize(object.genericValue,
           specifiedType:
@@ -227,7 +227,7 @@ class _$GenericContainerSerializer
 
   @override
   GenericContainer deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new GenericContainerBuilder();
 
@@ -235,24 +235,24 @@ class _$GenericContainerSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'genericValue':
           result.genericValue.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      GenericValue, const [const FullType(String)]))
+                      GenericValue, const [const FullType(String)]))!
               as GenericValue<String>);
           break;
         case 'boundGenericValue':
           result.boundGenericValue.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BoundGenericValue, const [const FullType(double)]))
+                      BoundGenericValue, const [const FullType(double)]))!
               as BoundGenericValue<double>);
           break;
         case 'collectionGenericValue':
           result.collectionGenericValue.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      CollectionGenericValue, const [const FullType(String)]))
+                      CollectionGenericValue, const [const FullType(String)]))!
               as CollectionGenericValue<String>);
           break;
       }
@@ -273,10 +273,10 @@ class _$NestedGenericContainerSerializer
   final String wireName = 'NestedGenericContainer';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, NestedGenericContainer object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'map',
       serializers.serialize(object.map,
           specifiedType: const FullType(GenericValue, const [
@@ -290,7 +290,7 @@ class _$NestedGenericContainerSerializer
 
   @override
   NestedGenericContainer deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new NestedGenericContainerBuilder();
 
@@ -298,14 +298,14 @@ class _$NestedGenericContainerSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'map':
           result.map.replace(serializers.deserialize(value,
               specifiedType: const FullType(GenericValue, const [
                 const FullType(BuiltMap,
                     const [const FullType(int), const FullType(String)])
-              ])) as GenericValue<BuiltMap<int, String>>);
+              ]))! as GenericValue<BuiltMap<int, String>>);
           break;
       }
     }
@@ -322,9 +322,9 @@ class _$ConcreteGenericSerializer
   final String wireName = 'ConcreteGeneric';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ConcreteGeneric object,
+  Iterable<Object?> serialize(Serializers serializers, ConcreteGeneric object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
     ];
@@ -334,7 +334,7 @@ class _$ConcreteGenericSerializer
 
   @override
   ConcreteGeneric deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ConcreteGenericBuilder();
 
@@ -342,7 +342,7 @@ class _$ConcreteGenericSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
@@ -363,9 +363,9 @@ class _$NonBuiltGenericSerializer
   final String wireName = 'NonBuiltGeneric';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, NonBuiltGeneric object,
+  Iterable<Object?> serialize(Serializers serializers, NonBuiltGeneric object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value,
           specifiedType: const FullType(NonBuilt, const [const FullType(int)])),
@@ -376,7 +376,7 @@ class _$NonBuiltGenericSerializer
 
   @override
   NonBuiltGeneric deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new NonBuiltGenericBuilder();
 
@@ -384,7 +384,7 @@ class _$NonBuiltGenericSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,

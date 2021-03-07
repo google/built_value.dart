@@ -18,9 +18,9 @@ class _$StandardJsonValueSerializer
   final String wireName = 'StandardJsonValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, StandardJsonValue object,
+  Iterable<Object?> serialize(Serializers serializers, StandardJsonValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'number',
       serializers.serialize(object.number, specifiedType: const FullType(num)),
       'text',
@@ -52,7 +52,7 @@ class _$StandardJsonValueSerializer
 
   @override
   StandardJsonValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new StandardJsonValueBuilder();
 
@@ -60,7 +60,7 @@ class _$StandardJsonValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'number':
           result.number = serializers.deserialize(value,
@@ -72,25 +72,27 @@ class _$StandardJsonValueSerializer
           break;
         case 'keyValues':
           result.keyValues.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltMap,
-                  const [const FullType(String), const FullType(JsonObject)])));
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(String),
+                const FullType(JsonObject)
+              ]))!);
           break;
         case 'zoo':
           result.zoo.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(Animal)]))
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Animal)]))!
               as BuiltList<Object>);
           break;
         case 'uniqueZoo':
           result.uniqueZoo.replace(serializers.deserialize(value,
                   specifiedType:
-                      const FullType(BuiltSet, const [const FullType(Animal)]))
+                      const FullType(BuiltSet, const [const FullType(Animal)]))!
               as BuiltSet<Object>);
           break;
         case 'strings':
           result.strings.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
               as BuiltList<Object>);
           break;
       }

@@ -55,16 +55,16 @@ abstract class JsonObject {
 
   /// Instantiates with [value], which must be a bool, a List, a Map, a num
   /// or a String. Otherwise, an [ArgumentError] is thrown.
-  factory JsonObject(Object value) {
+  factory JsonObject(Object? value) {
     if (value is num) {
       return NumJsonObject(value);
     } else if (value is String) {
       return StringJsonObject(value);
     } else if (value is bool) {
       return BoolJsonObject(value);
-    } else if (value is List<Object>) {
+    } else if (value is List<Object?>) {
       return ListJsonObject(value);
-    } else if (value is Map<String, Object>) {
+    } else if (value is Map<String, Object?>) {
       return MapJsonObject(value);
     } else {
       throw ArgumentError.value(value, 'value',
@@ -107,17 +107,17 @@ class BoolJsonObject extends JsonObject {
 /// A [JsonObject] holding a List.
 class ListJsonObject extends JsonObject {
   @override
-  final List<Object> value;
+  final List<Object?> value;
 
-  ListJsonObject(List<Object> value)
-      : value = UnmodifiableListView<Object>(value),
+  ListJsonObject(List<Object?> value)
+      : value = UnmodifiableListView<Object?>(value),
         super._();
 
   @override
   bool get isList => true;
 
   @override
-  List<Object> get asList => value;
+  List<Object?> get asList => value;
 
   @override
   bool operator ==(dynamic other) {
@@ -133,9 +133,9 @@ class ListJsonObject extends JsonObject {
 /// A [JsonObject] holding a Map.
 class MapJsonObject extends JsonObject {
   @override
-  final Map<String, Object> value;
+  final Map<String, Object?> value;
 
-  MapJsonObject(Map<String, Object> value)
+  MapJsonObject(Map<String, Object?> value)
       : value = UnmodifiableMapView(value),
         super._();
 
@@ -143,7 +143,7 @@ class MapJsonObject extends JsonObject {
   bool get isMap => true;
 
   @override
-  Map<String, Object> get asMap => value;
+  Map<String, Object?> get asMap => value;
 
   @override
   bool operator ==(dynamic other) {

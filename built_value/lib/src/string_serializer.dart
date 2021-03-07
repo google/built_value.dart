@@ -19,7 +19,7 @@ class StringSerializer implements PrimitiveSerializer<String> {
   }
 
   @override
-  String deserialize(Serializers serializers, Object serialized,
+  String deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return serialized as String;
   }

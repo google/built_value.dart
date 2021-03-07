@@ -16,13 +16,13 @@ class _$UsesMixinSerializer implements StructuredSerializer<UsesMixin> {
   final String wireName = 'UsesMixin';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, UsesMixin object,
+  Iterable<Object?> serialize(Serializers serializers, UsesMixin object,
       {FullType specifiedType = FullType.unspecified}) {
-    return <Object>[];
+    return <Object?>[];
   }
 
   @override
-  UsesMixin deserialize(Serializers serializers, Iterable<Object> serialized,
+  UsesMixin deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return new UsesMixinBuilder().build();
   }

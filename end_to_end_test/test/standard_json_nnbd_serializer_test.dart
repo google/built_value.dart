@@ -32,7 +32,7 @@ void main() {
     var specifiedType = FullType(StandardJsonValue);
     var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
-    var serialized = {
+    var serialized = json.decode(json.encode({
       'number': 3,
       'text': 'some text',
       'keyValues': {
@@ -48,7 +48,7 @@ void main() {
       'uniqueZoo': [
         {r'$': 'Cat', 'tail': false, 'legs': 3}
       ],
-    };
+    })) as Object;
 
     test('can be serialized', () {
       expect(
@@ -84,7 +84,7 @@ void main() {
     var specifiedType = FullType(StandardJsonValue);
     var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
-    var serialized = {
+    var serialized = json.decode(json.encode({
       'number': 3,
       'text': 'some text',
       'keyValues': {
@@ -95,7 +95,7 @@ void main() {
         'five': {'one': 1, 'two': 2},
       },
       'strings': null,
-    };
+    })) as Object;
 
     test('can be deserialized', () {
       expect(

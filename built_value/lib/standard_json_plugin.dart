@@ -31,7 +31,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   StandardJsonPlugin({this.discriminator = r'$', this.valueKey = ''});
 
   @override
-  Object beforeSerialize(Object object, FullType specifiedType) {
+  Object? beforeSerialize(Object? object, FullType specifiedType) {
     if (_unsupportedTypes.contains(specifiedType.root)) {
       throw ArgumentError(
           'Standard JSON cannot serialize type ${specifiedType.root}.');
@@ -40,7 +40,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   }
 
   @override
-  Object afterSerialize(Object object, FullType specifiedType) {
+  Object? afterSerialize(Object? object, FullType specifiedType) {
     if (object is List &&
         specifiedType.root != BuiltList &&
         specifiedType.root != BuiltSet &&
@@ -56,7 +56,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   }
 
   @override
-  Object beforeDeserialize(Object object, FullType specifiedType) {
+  Object? beforeDeserialize(Object? object, FullType specifiedType) {
     if (object is Map && specifiedType.root != JsonObject) {
       if (specifiedType.isUnspecified) {
         return _toListUsingDiscriminator(object);
@@ -74,7 +74,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   }
 
   @override
-  Object afterDeserialize(Object object, FullType specifiedType) {
+  Object? afterDeserialize(Object? object, FullType specifiedType) {
     return object;
   }
 

@@ -242,18 +242,18 @@ abstract class SerializerSourceClass
 
     if (!serializerSettings.custom) {
       final expectedSerializerDeclaration =
-          'static Serializer<$genericName> get serializer => ${serializerInstanceName};';
+          'static Serializer<$genericName> get serializer => $serializerInstanceName;';
       // We used to recommend raw types; recommend the full type now, but still
       // allow raw types.
       final expectedSerializerDeclarationRaw =
-          'static Serializer<$name> get serializer => ${serializerInstanceName};';
+          'static Serializer<$name> get serializer => $serializerInstanceName;';
       if (serializerDeclaration != expectedSerializerDeclaration &&
           serializerDeclaration != expectedSerializerDeclarationRaw) {
         result.add('Declare $name.serializer as: '
             '$expectedSerializerDeclaration got $serializerDeclaration');
       }
       if (name.startsWith('_')) {
-        result.add('Cannot generate serializers for private class ${name}');
+        result.add('Cannot generate serializers for private class $name');
       }
     }
 
@@ -292,7 +292,7 @@ abstract class SerializerSourceClass
   }
 
   String generateSerializerDeclaration() =>
-      'Serializer<$genericName> ${serializerInstanceName} = new ${serializerImplName}();';
+      'Serializer<$genericName> $serializerInstanceName = new $serializerImplName();';
 
   /// Returns the class name for the generated implementation. If the manually
   /// maintained class is private then we ignore the underscore here, to avoid
@@ -304,25 +304,25 @@ abstract class SerializerSourceClass
   String generateSerializer() {
     if (isBuiltValue) {
       return '''
-class ${serializerImplName} implements StructuredSerializer<$genericName> {
+class $serializerImplName implements StructuredSerializer<$genericName> {
   @override
   final Iterable<Type> types = const [$name, $implName];
   @override
   final String wireName = '${escapeString(wireName)}';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, $genericName object,
+  Iterable<Object$orNull> serialize(Serializers serializers, $genericName object,
       {FullType specifiedType = FullType.unspecified}) {
-    ${fields.isEmpty ? 'return <Object>[];' : '''
+    ${fields.isEmpty ? 'return <Object$orNull>[];' : '''
     ${_generateGenericsSerializerPreamble()}
-    final result = <Object>[${_generateRequiredFieldSerializers()}];
+    final result = <Object$orNull>[${_generateRequiredFieldSerializers()}];
     ${_generateNullableFieldSerializers()}
     return result;
     '''}
   }
 
   @override
-  $genericName deserialize(Serializers serializers, Iterable<Object> serialized,
+  $genericName deserialize(Serializers serializers, Iterable<Object$orNull> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     ${_generateGenericsSerializerPreamble()}
     ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
@@ -332,7 +332,7 @@ class ${serializerImplName} implements StructuredSerializer<$genericName> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object$orNull value = iterator.current;
       switch (key) {
         ${_generateFieldDeserializers()}
       }
@@ -509,7 +509,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
           return '''
 case '${escapeString(field.wireName)}':
   result.${field.name}.replace(serializers.deserialize(
-      value, specifiedType: $fullType) $cast);
+      value, specifiedType: $fullType)$notNull $cast);
   break;
 ''';
         } else {

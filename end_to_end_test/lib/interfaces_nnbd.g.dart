@@ -44,9 +44,9 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   final String wireName = 'ValueWithInt';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ValueWithInt object,
+  Iterable<Object?> serialize(Serializers serializers, ValueWithInt object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
       'note',
@@ -57,7 +57,8 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   }
 
   @override
-  ValueWithInt deserialize(Serializers serializers, Iterable<Object> serialized,
+  ValueWithInt deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ValueWithIntBuilder();
 
@@ -65,7 +66,7 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
@@ -107,9 +108,9 @@ class _$ValueWithHasIntSerializer
   final String wireName = 'ValueWithHasInt';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ValueWithHasInt object,
+  Iterable<Object?> serialize(Serializers serializers, ValueWithHasInt object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'hasInt',
       serializers.serialize(object.hasInt,
           specifiedType: const FullType(HasInt)),
@@ -120,7 +121,7 @@ class _$ValueWithHasIntSerializer
 
   @override
   ValueWithHasInt deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ValueWithHasIntBuilder();
 
@@ -128,7 +129,7 @@ class _$ValueWithHasIntSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'hasInt':
           result.hasInt = serializers.deserialize(value,

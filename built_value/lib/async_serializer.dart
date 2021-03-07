@@ -10,7 +10,7 @@ import 'package:built_value/serializer.dart';
 /// the top level serialized object is a `BuiltList`. Then use this class to
 /// deserialize to a [Stream] of objects.
 class BuiltListAsyncDeserializer {
-  Stream<Object> deserialize(Serializers serializers, Iterable serialized,
+  Stream<Object?> deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) async* {
     var elementType = specifiedType.parameters.isEmpty
         ? FullType.unspecified
