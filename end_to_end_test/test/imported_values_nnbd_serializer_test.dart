@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 // @dart=2.12
 
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:end_to_end_test/imported_values_nnbd.dart';
 import 'package:end_to_end_test/serializers_nnbd.dart';
@@ -14,7 +16,7 @@ void main() {
     var data = ImportedValue((b) => b.simpleValue
       ..anInt = 1
       ..aString = 'two');
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'ImportedValue',
       'simpleValue',
       [
@@ -25,7 +27,7 @@ void main() {
       ],
       'simpleValues',
       <Object>[],
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -42,7 +44,7 @@ void main() {
         ..anInt = 1
         ..aString = 'two')
       ..simpleValues = BuiltList.of([]));
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'ImportedCustomValue',
       'simpleValue',
       [
@@ -53,7 +55,7 @@ void main() {
       ],
       'simpleValues',
       <Object>[],
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -68,7 +70,7 @@ void main() {
     var data = ImportedCustomNestedValue((b) => b.simpleValue
       ..anInt = 1
       ..aString = 'two');
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'ImportedCustomNestedValue',
       'simpleValue',
       [
@@ -79,7 +81,7 @@ void main() {
       ],
       'simpleValues',
       <Object>[],
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);

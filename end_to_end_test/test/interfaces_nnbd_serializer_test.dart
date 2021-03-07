@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 // @dart=2.12
 
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:end_to_end_test/interfaces_nnbd.dart';
 import 'package:end_to_end_test/serializers_nnbd.dart';
@@ -16,7 +18,7 @@ void main() {
         ..note = 'two')),
       ValueWithHasInt((b) => b.hasInt = EnumWithInt.one),
     ]);
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'list',
       [
         'ValueWithHasInt',
@@ -28,7 +30,7 @@ void main() {
         'hasInt',
         ['EnumWithInt', 'one']
       ],
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);

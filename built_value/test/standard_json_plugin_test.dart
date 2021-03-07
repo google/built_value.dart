@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:built_value/serializer.dart';
@@ -79,7 +81,7 @@ void main() {
       group('can take a list and', () {
         final data = BuiltList<int>([1, 2, 3]);
         final specifiedType = const FullType(BuiltList, [FullType(int)]);
-        final serialized = [1, 2, 3];
+        final serialized = json.decode(json.encode([1, 2, 3])) as Object;
 
         test('serialize it', () {
           expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -96,7 +98,7 @@ void main() {
       group('can take a set and', () {
         final data = BuiltSet<int>([1, 2, 3]);
         final specifiedType = const FullType(BuiltSet, [FullType(int)]);
-        final serialized = [1, 2, 3];
+        final serialized = json.decode(json.encode([1, 2, 3])) as Object;
 
         test('serialize it', () {
           expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -119,11 +121,11 @@ void main() {
         final specifiedType = const FullType(BuiltList, [
           FullType(BuiltList, [FullType(int)])
         ]);
-        final serialized = [
+        final serialized = json.decode(json.encode([
           [1, 2, 3],
           [4, 5, 6],
           [7, 8, 9]
-        ];
+        ])) as Object;
 
         test('serialize it', () {
           expect(serializers.serialize(data, specifiedType: specifiedType),

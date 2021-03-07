@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 // @dart=2.11
 
+import 'dart:convert';
+
 import 'package:end_to_end_test/enums.dart';
 import 'package:end_to_end_test/serializers.dart';
 import 'package:test/test.dart';
@@ -10,7 +12,7 @@ import 'package:test/test.dart';
 void main() {
   group('TestEnum', () {
     var data = TestEnum.yes;
-    var serialized = ['TestEnum', 'yes'];
+    var serialized = json.decode(json.encode(['TestEnum', 'yes'])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -23,7 +25,7 @@ void main() {
 
   group('WireNameEnum', () {
     var data = WireNameEnum.yes;
-    var serialized = ['E', 'y'];
+    var serialized = json.decode(json.encode(['E', 'y'])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -36,7 +38,7 @@ void main() {
 
   group('WireNumberEnum', () {
     var data = WireNumberEnum.yes;
-    var serialized = ['WireNumberEnum', 1];
+    var serialized = json.decode(json.encode(['WireNumberEnum', 1])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -49,7 +51,9 @@ void main() {
 
   group('FallbackEnum', () {
     var data = FallbackEnum.no;
-    var serialized = ['FallbackEnum', 'some_unrecognized_value'];
+    var serialized =
+        json.decode(json.encode(['FallbackEnum', 'some_unrecognized_value']))
+            as Object;
 
     test('deserializes using fallback', () {
       expect(serializers.deserialize(serialized), data);

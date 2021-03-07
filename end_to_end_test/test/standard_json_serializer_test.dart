@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 // @dart=2.11
 
+import 'dart:convert';
+
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';

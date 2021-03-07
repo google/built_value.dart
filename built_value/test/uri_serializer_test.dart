@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
@@ -50,7 +52,9 @@ void main() {
 
   group('Uri with unknown specifiedType', () {
     var data = Uri.parse('https://github.com/google/built_value.dart');
-    var serialized = ['Uri', 'https://github.com/google/built_value.dart'];
+    var serialized = json.decode(
+            json.encode(['Uri', 'https://github.com/google/built_value.dart']))
+        as Object;
     var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {

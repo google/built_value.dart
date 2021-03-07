@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
@@ -26,7 +28,9 @@ void main() {
 
   group('BigInt with unknown specifiedType', () {
     var data = BigInt.parse('123456789012345678901234567890');
-    var serialized = ['BigInt', '123456789012345678901234567890'];
+    var serialized =
+        json.decode(json.encode(['BigInt', '123456789012345678901234567890']))
+            as Object;
     var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {
