@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.0.2
+
+- Bump versions of `analyzer`, `quiver`.
+
 # 8.0.1
 
 - Update `chat` example to webdev.
