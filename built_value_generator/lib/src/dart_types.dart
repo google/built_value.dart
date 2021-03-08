@@ -65,7 +65,7 @@ class DartTypes {
           ')$suffix';
     } else if (dartType is InterfaceType) {
       var typeArguments = dartType.typeArguments;
-      if (typeArguments.isEmpty || typeArguments.every((t) => t.isDynamic)) {
+      if (typeArguments.isEmpty) {
         return dartType.element.name + suffix;
       } else {
         final typeArgumentsStr = typeArguments

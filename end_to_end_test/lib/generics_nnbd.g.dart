@@ -797,6 +797,89 @@ class GenericContainerBuilder
   }
 }
 
+class _$DynamicGenericContainer extends DynamicGenericContainer {
+  @override
+  final Generic<dynamic> foo;
+
+  factory _$DynamicGenericContainer(
+          [void Function(DynamicGenericContainerBuilder)? updates]) =>
+      (new DynamicGenericContainerBuilder()..update(updates)).build();
+
+  _$DynamicGenericContainer._({required this.foo}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        foo, 'DynamicGenericContainer', 'foo');
+  }
+
+  @override
+  DynamicGenericContainer rebuild(
+          void Function(DynamicGenericContainerBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  DynamicGenericContainerBuilder toBuilder() =>
+      new DynamicGenericContainerBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is DynamicGenericContainer && foo == other.foo;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, foo.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('DynamicGenericContainer')
+          ..add('foo', foo))
+        .toString();
+  }
+}
+
+class DynamicGenericContainerBuilder
+    implements
+        Builder<DynamicGenericContainer, DynamicGenericContainerBuilder> {
+  _$DynamicGenericContainer? _$v;
+
+  Generic<dynamic>? _foo;
+  Generic<dynamic>? get foo => _$this._foo;
+  set foo(Generic<dynamic>? foo) => _$this._foo = foo;
+
+  DynamicGenericContainerBuilder();
+
+  DynamicGenericContainerBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _foo = $v.foo;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(DynamicGenericContainer other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$DynamicGenericContainer;
+  }
+
+  @override
+  void update(void Function(DynamicGenericContainerBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$DynamicGenericContainer build() {
+    final _$result = _$v ??
+        new _$DynamicGenericContainer._(
+            foo: BuiltValueNullFieldError.checkNotNull(
+                foo, 'DynamicGenericContainer', 'foo'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$NestedGenericContainer extends NestedGenericContainer {
   @override
   final GenericValue<BuiltMap<int, String>> map;
