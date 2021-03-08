@@ -83,6 +83,9 @@ class DollarValueEnum extends EnumClass {
 
   static const DollarValueEnum value$ = _$value$;
 
+  @BuiltValueEnumConst(wireName: r'value2$')
+  static const DollarValueEnum value2 = _$value2;
+
   const DollarValueEnum._(String name) : super(name);
 
   static BuiltSet<DollarValueEnum> get values => _$dollarValues;
