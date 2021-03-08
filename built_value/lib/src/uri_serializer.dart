@@ -26,7 +26,7 @@ class UriSerializer implements PrimitiveSerializer<Uri> {
   }
 
   @override
-  Uri deserialize(Serializers serializers, Object serialized,
+  Uri deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return Uri.parse(serialized as String);
   }

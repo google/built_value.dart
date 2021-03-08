@@ -28,7 +28,7 @@ class NumSerializer implements PrimitiveSerializer<num> {
   }
 
   @override
-  num deserialize(Serializers serializers, Object serialized,
+  num deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     if (serialized == DoubleSerializer.nan) {
       return double.nan;

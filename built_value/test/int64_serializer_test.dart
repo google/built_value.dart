@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_value/serializer.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
@@ -27,7 +29,8 @@ void main() {
 
   group('int64 with unknown specifiedType', () {
     var data = Int64.MIN_VALUE;
-    var serialized = ['Int64', Int64.MIN_VALUE.toString()];
+    var serialized = json
+        .decode(json.encode(['Int64', Int64.MIN_VALUE.toString()])) as Object;
     var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {

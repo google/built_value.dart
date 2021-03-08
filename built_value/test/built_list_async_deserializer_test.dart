@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/async_serializer.dart';
 import 'package:built_value/serializer.dart';
@@ -14,7 +16,7 @@ void main() {
     var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(specifiedType, () => ListBuilder<int>()))
         .build();
-    var serialized = [1, 2, 3];
+    var serialized = json.decode(json.encode([1, 2, 3])) as Iterable;
 
     test('can be deserialized asynchronously', () async {
       final deserialized = await BuiltListAsyncDeserializer()

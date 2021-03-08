@@ -22,7 +22,7 @@ class BigIntSerializer implements PrimitiveSerializer<BigInt> {
   }
 
   @override
-  BigInt deserialize(Serializers serializers, Object serialized,
+  BigInt deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return BigInt.parse(serialized as String);
   }

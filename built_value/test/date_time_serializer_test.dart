@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
@@ -31,7 +33,9 @@ void main() {
 
   group('DateTime with unknown specifiedType', () {
     var data = DateTime.utc(1980, 1, 2, 3, 4, 5, 6, 7);
-    var serialized = ['DateTime', data.microsecondsSinceEpoch];
+    var serialized =
+        json.decode(json.encode(['DateTime', data.microsecondsSinceEpoch]))
+            as Object;
     var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {

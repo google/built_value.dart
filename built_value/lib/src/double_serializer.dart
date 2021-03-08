@@ -31,7 +31,7 @@ class DoubleSerializer implements PrimitiveSerializer<double> {
   }
 
   @override
-  double deserialize(Serializers serializers, Object serialized,
+  double deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     if (serialized == nan) {
       return double.nan;

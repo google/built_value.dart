@@ -38,28 +38,28 @@ class BuiltJsonSerializers implements Serializers {
   Iterable<Serializer> get serializers => _wireNameToSerializer.values;
 
   @override
-  T deserializeWith<T>(Serializer<T> serializer, Object serialized) {
+  T? deserializeWith<T>(Serializer<T> serializer, Object? serialized) {
     return deserialize(serialized,
-        specifiedType: FullType(serializer.types.first)) as T;
+        specifiedType: FullType(serializer.types.first)) as T?;
   }
 
   @override
-  T fromJson<T>(Serializer<T> serializer, String serialized) {
+  T? fromJson<T>(Serializer<T> serializer, String serialized) {
     return deserializeWith<T>(serializer, json.decode(serialized));
   }
 
   @override
-  Object serializeWith<T>(Serializer<T> serializer, T object) {
+  Object? serializeWith<T>(Serializer<T> serializer, T? object) {
     return serialize(object, specifiedType: FullType(serializer.types.first));
   }
 
   @override
-  String toJson<T>(Serializer<T> serializer, T object) {
+  String toJson<T>(Serializer<T> serializer, T? object) {
     return json.encode(serializeWith<T>(serializer, object));
   }
 
   @override
-  Object serialize(Object? object,
+  Object? serialize(Object? object,
       {FullType specifiedType = FullType.unspecified}) {
     var transformedObject = object;
     for (var plugin in serializerPlugins) {
@@ -73,14 +73,14 @@ class BuiltJsonSerializers implements Serializers {
     return result;
   }
 
-  Object _serialize(Object? object, FullType specifiedType) {
+  Object? _serialize(Object? object, FullType specifiedType) {
     if (specifiedType.isUnspecified) {
       final serializer = serializerForType(object.runtimeType);
       if (serializer == null) {
         throw StateError("No serializer for '${object.runtimeType}'.");
       }
       if (serializer is StructuredSerializer) {
-        final result = <Object>[serializer.wireName];
+        final result = <Object?>[serializer.wireName];
         return result..addAll(serializer.serialize(this, object));
       } else if (serializer is PrimitiveSerializer) {
         return <Object>[
@@ -111,7 +111,7 @@ class BuiltJsonSerializers implements Serializers {
   }
 
   @override
-  Object deserialize(Object object,
+  Object? deserialize(Object? object,
       {FullType specifiedType = FullType.unspecified}) {
     var transformedObject = object;
     for (var plugin in serializerPlugins) {
@@ -125,10 +125,10 @@ class BuiltJsonSerializers implements Serializers {
     return result;
   }
 
-  Object _deserialize(
-      Object objectBeforePlugins, Object object, FullType specifiedType) {
+  Object? _deserialize(
+      Object? objectBeforePlugins, Object? object, FullType specifiedType) {
     if (specifiedType.isUnspecified) {
-      final wireName = (object as List).first as String;
+      final wireName = (object as List<Object?>).first as String;
 
       final serializer = serializerForWireName(wireName);
       if (serializer == null) {
@@ -137,14 +137,16 @@ class BuiltJsonSerializers implements Serializers {
 
       if (serializer is StructuredSerializer) {
         try {
-          return serializer.deserialize(
-              this, object.sublist(1) as List<Object>);
+          return serializer.deserialize(this, object.sublist(1));
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
       } else if (serializer is PrimitiveSerializer) {
         try {
-          return serializer.deserialize(this, object[1]);
+          var primitive = object[1];
+          return primitive == null
+              ? null
+              : serializer.deserialize(this, primitive);
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
@@ -165,15 +167,17 @@ class BuiltJsonSerializers implements Serializers {
 
       if (serializer is StructuredSerializer) {
         try {
-          return serializer.deserialize(this, object as Iterable<Object>,
+          return serializer.deserialize(this, object as Iterable<Object?>,
               specifiedType: specifiedType);
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
       } else if (serializer is PrimitiveSerializer) {
         try {
-          return serializer.deserialize(this, object,
-              specifiedType: specifiedType);
+          return object == null
+              ? null
+              : serializer.deserialize(this, object,
+                  specifiedType: specifiedType);
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }

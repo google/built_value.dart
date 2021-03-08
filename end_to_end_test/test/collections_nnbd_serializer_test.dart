@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 // @dart=2.12
 
+import 'dart:convert';
+
 import 'package:end_to_end_test/collections_nnbd.dart';
 import 'package:end_to_end_test/serializers_nnbd.dart';
 import 'package:test/test.dart';
@@ -15,7 +17,7 @@ void main() {
       ..map['three'] = 4
       ..listMultimap.addValues(4, [true, false])
       ..setMultimap.addValues('five', [true, false]));
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'Collections',
       'list',
       [1],
@@ -35,7 +37,7 @@ void main() {
       ],
       'nullableInGenericsList',
       <Object>[],
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);

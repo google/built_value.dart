@@ -27,7 +27,7 @@ class JsonObjectSerializer implements PrimitiveSerializer<JsonObject> {
   }
 
   @override
-  JsonObject deserialize(Serializers serializers, Object serialized,
+  JsonObject deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return JsonObject(serialized);
   }

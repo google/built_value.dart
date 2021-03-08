@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 // @dart=2.12
 
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:end_to_end_test/polymorphism_nnbd.dart';
 import 'package:end_to_end_test/serializers_nnbd.dart';
@@ -13,13 +15,13 @@ void main() {
     var data = Cat((b) => b
       ..legs = 4
       ..tail = true);
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'Cat',
       'tail',
       true,
       'legs',
       4,
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -42,13 +44,13 @@ void main() {
     var data = Robot((b) => b
       ..legs = 4
       ..fins = 3);
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'Robot',
       'fins',
       3,
       'legs',
       4,
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -61,11 +63,11 @@ void main() {
 
   group('StandardCat', () {
     var data = StandardCat((b) => b..tail = true);
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'StandardCat',
       'tail',
       true,
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -81,11 +83,11 @@ void main() {
       HasString((b) => b..field = 'hello'),
       HasDouble((b) => b..field = 3.14)
     ]);
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'list',
       ['HasString', 'field', 'hello'],
       ['HasDouble', 'field', 3.14]
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -104,7 +106,7 @@ void main() {
       ..otherInhabitants.add(Fish((b) => b
         ..legs = 0
         ..fins = 4)));
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'Cage',
       'inhabitant',
       ['Cat', 'tail', true, 'legs', 4],
@@ -112,7 +114,7 @@ void main() {
       [
         ['Fish', 'fins', 4, 'legs', 0]
       ],
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);
@@ -125,11 +127,11 @@ void main() {
 
   group('UsesHandCoded', () {
     var data = UsesHandCoded((b) => b..fieldInBaseBuilder = 4);
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'UsesHandCoded',
       'fieldInBaseBuilder',
       4,
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data), serialized);

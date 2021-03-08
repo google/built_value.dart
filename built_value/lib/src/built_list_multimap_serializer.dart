@@ -15,7 +15,7 @@ class BuiltListMultimapSerializer
   final String wireName = 'listMultimap';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, BuiltListMultimap builtListMultimap,
       {FullType specifiedType = FullType.unspecified}) {
     var isUnderspecified =
@@ -29,7 +29,7 @@ class BuiltListMultimapSerializer
         ? FullType.unspecified
         : specifiedType.parameters[1];
 
-    var result = <Object>[];
+    var result = <Object?>[];
     for (var key in builtListMultimap.keys) {
       result.add(serializers.serialize(key, specifiedType: keyType));
       result.add(builtListMultimap[key]
@@ -41,7 +41,8 @@ class BuiltListMultimapSerializer
   }
 
   @override
-  BuiltListMultimap deserialize(Serializers serializers, Iterable serialized,
+  BuiltListMultimap deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -64,7 +65,7 @@ class BuiltListMultimapSerializer
     for (var i = 0; i != serialized.length; i += 2) {
       final key = serializers.deserialize(serialized.elementAt(i),
           specifiedType: keyType);
-      final values = serialized.elementAt(i + 1).map(
+      final values = (serialized.elementAt(i + 1) as Iterable<Object?>).map(
           (value) => serializers.deserialize(value, specifiedType: valueType));
       for (var value in values) {
         result.add(key, value);

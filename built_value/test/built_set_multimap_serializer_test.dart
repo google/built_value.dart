@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
@@ -19,14 +21,14 @@ void main() {
           ..addBuilderFactory(
               specifiedType, () => SetMultimapBuilder<int, String>()))
         .build();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       1,
       ['one'],
       2,
       ['two'],
       3,
       ['three', '3hree']
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),

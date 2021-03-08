@@ -24,9 +24,9 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   final String wireName = 'Cat';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Cat object,
+  Iterable<Object?> serialize(Serializers serializers, Cat object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'tail',
       serializers.serialize(object.tail, specifiedType: const FullType(bool)),
       'legs',
@@ -37,7 +37,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   }
 
   @override
-  Cat deserialize(Serializers serializers, Iterable<Object> serialized,
+  Cat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CatBuilder();
 
@@ -45,7 +45,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'tail':
           result.tail = serializers.deserialize(value,
@@ -69,9 +69,9 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   final String wireName = 'Fish';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Fish object,
+  Iterable<Object?> serialize(Serializers serializers, Fish object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'fins',
       serializers.serialize(object.fins, specifiedType: const FullType(int)),
       'legs',
@@ -82,7 +82,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   }
 
   @override
-  Fish deserialize(Serializers serializers, Iterable<Object> serialized,
+  Fish deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new FishBuilder();
 
@@ -90,7 +90,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'fins':
           result.fins = serializers.deserialize(value,
@@ -114,9 +114,9 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
   final String wireName = 'Robot';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Robot object,
+  Iterable<Object?> serialize(Serializers serializers, Robot object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'fins',
       serializers.serialize(object.fins, specifiedType: const FullType(int)),
       'legs',
@@ -127,7 +127,7 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
   }
 
   @override
-  Robot deserialize(Serializers serializers, Iterable<Object> serialized,
+  Robot deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new RobotBuilder();
 
@@ -135,7 +135,7 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'fins':
           result.fins = serializers.deserialize(value,
@@ -159,9 +159,9 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
   final String wireName = 'Cage';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Cage object,
+  Iterable<Object?> serialize(Serializers serializers, Cage object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'inhabitant',
       serializers.serialize(object.inhabitant,
           specifiedType: const FullType(Animal)),
@@ -175,7 +175,7 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
   }
 
   @override
-  Cage deserialize(Serializers serializers, Iterable<Object> serialized,
+  Cage deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CageBuilder();
 
@@ -183,7 +183,7 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'inhabitant':
           result.inhabitant = serializers.deserialize(value,
@@ -191,8 +191,8 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
           break;
         case 'otherInhabitants':
           result.otherInhabitants.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(Animal)]))
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Animal)]))!
               as BuiltList<Object>);
           break;
       }
@@ -209,9 +209,9 @@ class _$StandardCatSerializer implements StructuredSerializer<StandardCat> {
   final String wireName = 'StandardCat';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, StandardCat object,
+  Iterable<Object?> serialize(Serializers serializers, StandardCat object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'tail',
       serializers.serialize(object.tail, specifiedType: const FullType(bool)),
     ];
@@ -220,7 +220,7 @@ class _$StandardCatSerializer implements StructuredSerializer<StandardCat> {
   }
 
   @override
-  StandardCat deserialize(Serializers serializers, Iterable<Object> serialized,
+  StandardCat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new StandardCatBuilder();
 
@@ -228,7 +228,7 @@ class _$StandardCatSerializer implements StructuredSerializer<StandardCat> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'tail':
           result.tail = serializers.deserialize(value,
@@ -248,9 +248,9 @@ class _$HasStringSerializer implements StructuredSerializer<HasString> {
   final String wireName = 'HasString';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, HasString object,
+  Iterable<Object?> serialize(Serializers serializers, HasString object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'field',
       serializers.serialize(object.field,
           specifiedType: const FullType(String)),
@@ -260,7 +260,7 @@ class _$HasStringSerializer implements StructuredSerializer<HasString> {
   }
 
   @override
-  HasString deserialize(Serializers serializers, Iterable<Object> serialized,
+  HasString deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new HasStringBuilder();
 
@@ -268,7 +268,7 @@ class _$HasStringSerializer implements StructuredSerializer<HasString> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'field':
           result.field = serializers.deserialize(value,
@@ -288,9 +288,9 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
   final String wireName = 'HasDouble';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, HasDouble object,
+  Iterable<Object?> serialize(Serializers serializers, HasDouble object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'field',
       serializers.serialize(object.field,
           specifiedType: const FullType(double)),
@@ -300,7 +300,7 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
   }
 
   @override
-  HasDouble deserialize(Serializers serializers, Iterable<Object> serialized,
+  HasDouble deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new HasDoubleBuilder();
 
@@ -308,7 +308,7 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'field':
           result.field = serializers.deserialize(value,
@@ -328,9 +328,9 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
   final String wireName = 'UsesHandCoded';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, UsesHandCoded object,
+  Iterable<Object?> serialize(Serializers serializers, UsesHandCoded object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'fieldInBaseBuilder',
       serializers.serialize(object.fieldInBaseBuilder,
           specifiedType: const FullType(int)),
@@ -341,7 +341,7 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
 
   @override
   UsesHandCoded deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UsesHandCodedBuilder();
 
@@ -349,7 +349,7 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'fieldInBaseBuilder':
           result.fieldInBaseBuilder = serializers.deserialize(value,

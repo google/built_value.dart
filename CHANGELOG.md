@@ -3,6 +3,7 @@
 # 8.0.1 (unreleased)
 
 - Update `chat` example to webdev.
+- Allow nulls when serializing/deserializing for better JSON interop.
 
 # 8.0.0
 

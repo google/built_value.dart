@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
@@ -43,7 +45,7 @@ void main() {
         seconds: 4,
         milliseconds: 5,
         microseconds: 6);
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'Duration',
       1 * 1000 * 1000 * 60 * 60 * 24 +
           2 * 1000 * 1000 * 60 * 60 +
@@ -51,7 +53,7 @@ void main() {
           4 * 1000 * 1000 +
           5 * 1000 +
           6,
-    ];
+    ])) as Object;
     var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {

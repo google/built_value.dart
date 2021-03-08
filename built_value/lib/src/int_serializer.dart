@@ -19,7 +19,7 @@ class IntSerializer implements PrimitiveSerializer<int> {
   }
 
   @override
-  int deserialize(Serializers serializers, Object serialized,
+  int deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return serialized as int;
   }

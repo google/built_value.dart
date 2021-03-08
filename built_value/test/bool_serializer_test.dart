@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 
@@ -26,7 +28,7 @@ void main() {
 
   group('bool with unknown specifiedType', () {
     var data = true;
-    var serialized = ['bool', true];
+    var serialized = json.decode(json.encode(['bool', true])) as Object;
     var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {

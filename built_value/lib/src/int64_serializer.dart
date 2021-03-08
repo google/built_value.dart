@@ -20,7 +20,7 @@ class Int64Serializer implements PrimitiveSerializer<Int64> {
   }
 
   @override
-  Int64 deserialize(Serializers serializers, Object serialized,
+  Int64 deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return Int64.parseInt(serialized as String);
   }

@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
@@ -12,7 +14,8 @@ void main() {
     var specifiedType =
         const FullType(BuiltMap, [FullType(int), FullType(String)]);
     var serializers = Serializers();
-    var serialized = [1, 'one', 2, 'two', 3, 'three'];
+    var serialized =
+        json.decode(json.encode([1, 'one', 2, 'two', 3, 'three'])) as Object;
 
     test('cannot be serialized', () {
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
@@ -34,7 +37,8 @@ void main() {
     var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(specifiedType, () => MapBuilder<int, String>()))
         .build();
-    var serialized = [1, 'one', 2, 'two', 3, 'three'];
+    var serialized =
+        json.decode(json.encode([1, 'one', 2, 'two', 3, 'three'])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -68,12 +72,12 @@ void main() {
           ..addBuilderFactory(
               specifiedType, () => MapBuilder<BuiltMap<int, String>, String>()))
         .build();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       [1, 'one'],
       'one!',
       [2, 'two'],
       'two!'
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -101,12 +105,12 @@ void main() {
           ..addBuilderFactory(
               specifiedType, () => MapBuilder<int, BuiltMap<String, String>>()))
         .build();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       1,
       ['one', 'one!'],
       2,
       ['two', 'two!']
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -138,12 +142,12 @@ void main() {
           ..addBuilderFactory(specifiedType,
               () => MapBuilder<BuiltMap<int, int>, BuiltMap<String, String>>()))
         .build();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       [1, 1],
       ['one', 'one!'],
       [2, 2],
       ['two', 'two!']
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -182,14 +186,14 @@ void main() {
     var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(specifiedType, () => MapBuilder<int, Object>()))
         .build();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       1,
       ['String', 'one'],
       2,
       ['int', 2],
       3,
       ['String', 'three']
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -210,14 +214,14 @@ void main() {
           ..addBuilderFactory(
               specifiedType, () => MapBuilder<Object, String>()))
         .build();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       ['int', 1],
       'one',
       ['String', 'two'],
       'two',
       ['int', 3],
       'three'
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -234,14 +238,14 @@ void main() {
     var data = BuiltMap<Object, Object>({1: 'one', 'two': 2, 3: 'three'});
     var specifiedType = const FullType(BuiltMap);
     var serializers = Serializers();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       ['int', 1],
       ['String', 'one'],
       ['String', 'two'],
       ['int', 2],
       ['int', 3],
       ['String', 'three']
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -258,7 +262,7 @@ void main() {
     var data = BuiltMap<Object, Object>({1: 'one', 'two': 2, 3: 'three'});
     var specifiedType = FullType.unspecified;
     var serializers = Serializers();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'map',
       ['int', 1],
       ['String', 'one'],
@@ -266,7 +270,7 @@ void main() {
       ['int', 2],
       ['int', 3],
       ['String', 'three']
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),

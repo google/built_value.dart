@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
@@ -11,7 +13,7 @@ void main() {
     var data = BuiltList<int>([1, 2, 3]);
     var specifiedType = const FullType(BuiltList, [FullType(int)]);
     var serializers = Serializers();
-    var serialized = [1, 2, 3];
+    var serialized = json.decode(json.encode([1, 2, 3])) as Object;
 
     test('serialize throws', () {
       expect(() => serializers.serialize(data, specifiedType: specifiedType),
@@ -32,7 +34,7 @@ void main() {
     var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(specifiedType, () => ListBuilder<int>()))
         .build();
-    var serialized = [1, 2, 3];
+    var serialized = json.decode(json.encode([1, 2, 3])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -68,11 +70,11 @@ void main() {
           ..addBuilderFactory(const FullType(BuiltList, [FullType(int)]),
               () => ListBuilder<int>()))
         .build();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9]
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),
@@ -89,12 +91,12 @@ void main() {
     var data = BuiltList<int>([1, 2, 3]);
     var specifiedType = FullType.unspecified;
     var serializers = Serializers();
-    var serialized = [
+    var serialized = json.decode(json.encode([
       'list',
       ['int', 1],
       ['int', 2],
       ['int', 3]
-    ];
+    ])) as Object;
 
     test('can be serialized', () {
       expect(serializers.serialize(data, specifiedType: specifiedType),

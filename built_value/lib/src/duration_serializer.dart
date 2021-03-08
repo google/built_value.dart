@@ -23,7 +23,7 @@ class DurationSerializer implements PrimitiveSerializer<Duration> {
   }
 
   @override
-  Duration deserialize(Serializers serializers, Object serialized,
+  Duration deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return Duration(microseconds: serialized as int);
   }

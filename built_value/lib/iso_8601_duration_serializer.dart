@@ -15,7 +15,7 @@ import 'package:built_value/serializer.dart';
 /// consume reasonable strings that match the standard.
 class Iso8601DurationSerializer extends PrimitiveSerializer<Duration> {
   @override
-  Duration deserialize(Serializers serializers, Object serialized,
+  Duration deserialize(Serializers serializers, Object? serialized,
           {FullType specifiedType = FullType.unspecified}) =>
       _parseDuration(serialized as String);
 

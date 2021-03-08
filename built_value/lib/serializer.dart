@@ -115,19 +115,19 @@ abstract class Serializers {
   /// Create one using [SerializersBuilder].
   ///
   /// TODO(davidmorgan): document the wire format.
-  Object serialize(Object object,
+  Object? serialize(Object? object,
       {FullType specifiedType = FullType.unspecified});
 
   /// Convenience method for when you know the type you're serializing.
   /// Specify the type by specifying its [Serializer] class. Equivalent to
   /// calling [serialize] with a `specifiedType`.
-  Object serializeWith<T>(Serializer<T> serializer, T object);
+  Object? serializeWith<T>(Serializer<T> serializer, T? object);
 
   /// Convenience method for when you want a JSON string and know the type
   /// you're serializing. Specify the type by specifying its [Serializer]
   /// class. Equivalent to calling [serialize] with a `specifiedType` then
   /// calling `json.encode`.
-  String toJson<T>(Serializer<T> serializer, T object);
+  String toJson<T>(Serializer<T> serializer, T? object);
 
   /// Deserializes [serialized].
   ///
@@ -135,19 +135,19 @@ abstract class Serializers {
   ///
   /// If [serialized] was produced by calling [serialize] with [specifiedType],
   /// the exact same [specifiedType] must be provided to deserialize.
-  Object deserialize(Object serialized,
+  Object? deserialize(Object? serialized,
       {FullType specifiedType = FullType.unspecified});
 
   /// Convenience method for when you know the type you're deserializing.
   /// Specify the type by specifying its [Serializer] class. Equivalent to
   /// calling [deserialize] with a `specifiedType`.
-  T deserializeWith<T>(Serializer<T> serializer, Object serialized);
+  T? deserializeWith<T>(Serializer<T> serializer, Object? serialized);
 
   /// Convenience method for when you have a JSON string and know the type
   /// you're deserializing. Specify the type by specifying its [Serializer]
   /// class. Equivalent to calling [deserialize] with a `specifiedType` then
   /// calling `json.decode`.
-  T fromJson<T>(Serializer<T> serializer, String serialized);
+  T? fromJson<T>(Serializer<T> serializer, String serialized);
 
   /// Gets a serializer; returns `null` if none is found. For use in plugins
   /// and other extension code.
@@ -178,13 +178,13 @@ abstract class Serializers {
 /// Note: this is an experimental feature. API may change without a major
 /// version increase.
 abstract class SerializerPlugin {
-  Object beforeSerialize(Object object, FullType specifiedType);
+  Object? beforeSerialize(Object? object, FullType specifiedType);
 
-  Object afterSerialize(Object object, FullType specifiedType);
+  Object? afterSerialize(Object? object, FullType specifiedType);
 
-  Object beforeDeserialize(Object object, FullType specifiedType);
+  Object? beforeDeserialize(Object? object, FullType specifiedType);
 
-  Object afterDeserialize(Object object, FullType specifiedType);
+  Object? afterDeserialize(Object? object, FullType specifiedType);
 }
 
 /// Builder for [Serializers].
@@ -343,7 +343,7 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
   /// JSON: booleans, integers, doubles, Strings and [Iterable]s.
   ///
   /// TODO(davidmorgan): document the wire format.
-  Iterable<Object> serialize(Serializers serializers, T object,
+  Iterable<Object?> serialize(Serializers serializers, T object,
       {FullType specifiedType = FullType.unspecified});
 
   /// Deserializes [serialized].
@@ -353,17 +353,17 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
   ///
   /// Use [serializers] as needed for nested deserialization. Information about
   /// the type being deserialized is provided in [specifiedType].
-  T deserialize(Serializers serializers, Iterable<Object> serialized,
+  T deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified});
 }
 
 /// [Error] conveying why deserialization failed.
 class DeserializationError extends Error {
-  final String json;
+  final String? json;
   final FullType type;
   final Error error;
 
-  factory DeserializationError(Object json, FullType type, Error error) {
+  factory DeserializationError(Object? json, FullType type, Error error) {
     var limitedJson = json.toString();
     if (limitedJson.length > 80) {
       limitedJson = limitedJson.replaceRange(77, limitedJson.length, '...');

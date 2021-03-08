@@ -21,7 +21,7 @@ class RegExpSerializer implements PrimitiveSerializer<RegExp> {
   }
 
   @override
-  RegExp deserialize(Serializers serializers, Object serialized,
+  RegExp deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return RegExp(serialized as String);
   }

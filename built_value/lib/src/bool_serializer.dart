@@ -19,7 +19,7 @@ class BoolSerializer implements PrimitiveSerializer<bool> {
   }
 
   @override
-  bool deserialize(Serializers serializers, Object serialized,
+  bool deserialize(Serializers serializers, Object? serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return serialized as bool;
   }

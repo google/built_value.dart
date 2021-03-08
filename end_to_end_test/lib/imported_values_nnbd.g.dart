@@ -21,9 +21,9 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
   final String wireName = 'ImportedValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ImportedValue object,
+  Iterable<Object?> serialize(Serializers serializers, ImportedValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
           specifiedType: const FullType(prefix.SimpleValue)),
@@ -38,7 +38,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
 
   @override
   ImportedValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ImportedValueBuilder();
 
@@ -46,17 +46,17 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(prefix.SimpleValue))
+                  specifiedType: const FullType(prefix.SimpleValue))!
               as prefix.SimpleValue);
           break;
         case 'simpleValues':
           result.simpleValues.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltList, const [const FullType(prefix.SimpleValue)]))
+                      BuiltList, const [const FullType(prefix.SimpleValue)]))!
               as BuiltList<Object>);
           break;
       }
@@ -77,10 +77,10 @@ class _$ImportedCustomValueSerializer
   final String wireName = 'ImportedCustomValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, ImportedCustomValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
           specifiedType: const FullType(prefix.SimpleValue)),
@@ -95,7 +95,7 @@ class _$ImportedCustomValueSerializer
 
   @override
   ImportedCustomValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ImportedCustomValueBuilder();
 
@@ -103,7 +103,7 @@ class _$ImportedCustomValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
@@ -134,10 +134,10 @@ class _$ImportedCustomNestedValueSerializer
   final String wireName = 'ImportedCustomNestedValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, ImportedCustomNestedValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
           specifiedType: const FullType(prefix.SimpleValue)),
@@ -152,7 +152,7 @@ class _$ImportedCustomNestedValueSerializer
 
   @override
   ImportedCustomNestedValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ImportedCustomNestedValueBuilder();
 
@@ -160,17 +160,17 @@ class _$ImportedCustomNestedValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(prefix.SimpleValue))
+                  specifiedType: const FullType(prefix.SimpleValue))!
               as prefix.SimpleValue);
           break;
         case 'simpleValues':
           result.simpleValues.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltList, const [const FullType(prefix.SimpleValue)]))
+                      BuiltList, const [const FullType(prefix.SimpleValue)]))!
               as BuiltList<Object>);
           break;
       }

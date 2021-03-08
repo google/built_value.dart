@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 // @dart=2.12
 
+import 'dart:convert';
+
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
@@ -30,7 +32,7 @@ void main() {
     var specifiedType = FullType(StandardJsonValue);
     var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
-    var serialized = {
+    var serialized = json.decode(json.encode({
       'number': 3,
       'text': 'some text',
       'keyValues': {
@@ -46,7 +48,7 @@ void main() {
       'uniqueZoo': [
         {r'$': 'Cat', 'tail': false, 'legs': 3}
       ],
-    };
+    })) as Object;
 
     test('can be serialized', () {
       expect(
@@ -82,7 +84,7 @@ void main() {
     var specifiedType = FullType(StandardJsonValue);
     var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
-    var serialized = {
+    var serialized = json.decode(json.encode({
       'number': 3,
       'text': 'some text',
       'keyValues': {
@@ -93,7 +95,7 @@ void main() {
         'five': {'one': 1, 'two': 2},
       },
       'strings': null,
-    };
+    })) as Object;
 
     test('can be deserialized', () {
       expect(

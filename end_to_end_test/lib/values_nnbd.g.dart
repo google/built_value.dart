@@ -63,9 +63,9 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   final String wireName = 'SimpleValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, SimpleValue object,
+  Iterable<Object?> serialize(Serializers serializers, SimpleValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
     ];
@@ -88,7 +88,7 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   }
 
   @override
-  SimpleValue deserialize(Serializers serializers, Iterable<Object> serialized,
+  SimpleValue deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new SimpleValueBuilder();
 
@@ -96,7 +96,7 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
@@ -124,9 +124,9 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
   final String wireName = 'CompoundValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, CompoundValue object,
+  Iterable<Object?> serialize(Serializers serializers, CompoundValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
           specifiedType: const FullType(SimpleValue)),
@@ -144,7 +144,7 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
 
   @override
   CompoundValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CompoundValueBuilder();
 
@@ -152,15 +152,16 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue.replace(serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+              specifiedType: const FullType(SimpleValue))! as SimpleValue);
           break;
         case 'validatedValue':
           result.validatedValue.replace(serializers.deserialize(value,
-              specifiedType: const FullType(ValidatedValue)) as ValidatedValue);
+                  specifiedType: const FullType(ValidatedValue))!
+              as ValidatedValue);
           break;
       }
     }
@@ -180,10 +181,10 @@ class _$CompoundValueNoNestingSerializer
   final String wireName = 'CompoundValueNoNesting';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, CompoundValueNoNesting object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
           specifiedType: const FullType(SimpleValue)),
@@ -201,7 +202,7 @@ class _$CompoundValueNoNestingSerializer
 
   @override
   CompoundValueNoNesting deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CompoundValueNoNestingBuilder();
 
@@ -209,7 +210,7 @@ class _$CompoundValueNoNestingSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
@@ -237,10 +238,10 @@ class _$CompoundValueNoAutoNestingSerializer
   final String wireName = 'CompoundValueNoAutoNesting';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, CompoundValueNoAutoNesting object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value,
           specifiedType: const FullType(NoFieldsValue)),
@@ -251,7 +252,7 @@ class _$CompoundValueNoAutoNestingSerializer
 
   @override
   CompoundValueNoAutoNesting deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CompoundValueNoAutoNestingBuilder();
 
@@ -259,7 +260,7 @@ class _$CompoundValueNoAutoNestingSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = (serializers.deserialize(value,
@@ -285,10 +286,10 @@ class _$CompoundValueComparableBuildersSerializer
   final String wireName = 'CompoundValueComparableBuilders';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, CompoundValueComparableBuilders object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
           specifiedType: const FullType(SimpleValue)),
@@ -306,7 +307,7 @@ class _$CompoundValueComparableBuildersSerializer
 
   @override
   CompoundValueComparableBuilders deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CompoundValueComparableBuildersBuilder();
 
@@ -314,7 +315,7 @@ class _$CompoundValueComparableBuildersSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
@@ -342,10 +343,10 @@ class _$CompoundValueExplicitNoNestingSerializer
   final String wireName = 'CompoundValueExplicitNoNesting';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, CompoundValueExplicitNoNesting object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'simpleValue',
       serializers.serialize(object.simpleValue,
           specifiedType: const FullType(SimpleValue)),
@@ -363,7 +364,7 @@ class _$CompoundValueExplicitNoNestingSerializer
 
   @override
   CompoundValueExplicitNoNesting deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CompoundValueExplicitNoNestingBuilder();
 
@@ -371,11 +372,11 @@ class _$CompoundValueExplicitNoNestingSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue.replace(serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+              specifiedType: const FullType(SimpleValue))! as SimpleValue);
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
@@ -396,9 +397,9 @@ class _$ValidatedValueSerializer
   final String wireName = 'ValidatedValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ValidatedValue object,
+  Iterable<Object?> serialize(Serializers serializers, ValidatedValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
     ];
@@ -415,7 +416,7 @@ class _$ValidatedValueSerializer
 
   @override
   ValidatedValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ValidatedValueBuilder();
 
@@ -423,7 +424,7 @@ class _$ValidatedValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
@@ -448,9 +449,10 @@ class _$ValueUsingImportAsSerializer
   final String wireName = 'ValueUsingImportAs';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ValueUsingImportAs object,
+  Iterable<Object?> serialize(
+      Serializers serializers, ValueUsingImportAs object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value,
           specifiedType: const FullType(using_import_as.TestEnum)),
@@ -468,7 +470,7 @@ class _$ValueUsingImportAsSerializer
 
   @override
   ValueUsingImportAs deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ValueUsingImportAsBuilder();
 
@@ -476,7 +478,7 @@ class _$ValueUsingImportAsSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
@@ -502,14 +504,14 @@ class _$NoFieldsValueSerializer implements StructuredSerializer<NoFieldsValue> {
   final String wireName = 'NoFieldsValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, NoFieldsValue object,
+  Iterable<Object?> serialize(Serializers serializers, NoFieldsValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    return <Object>[];
+    return <Object?>[];
   }
 
   @override
   NoFieldsValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return new NoFieldsValueBuilder().build();
   }
@@ -523,9 +525,9 @@ class _$PrimitivesValueSerializer
   final String wireName = 'PrimitivesValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, PrimitivesValue object,
+  Iterable<Object?> serialize(Serializers serializers, PrimitivesValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'boolean',
       serializers.serialize(object.boolean,
           specifiedType: const FullType(bool)),
@@ -561,7 +563,7 @@ class _$PrimitivesValueSerializer
 
   @override
   PrimitivesValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new PrimitivesValueBuilder();
 
@@ -569,7 +571,7 @@ class _$PrimitivesValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'boolean':
           result.boolean = serializers.deserialize(value,
@@ -633,10 +635,10 @@ class _$PartiallySerializableValueSerializer
   final String wireName = 'PartiallySerializableValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, PartiallySerializableValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
     ];
@@ -646,7 +648,7 @@ class _$PartiallySerializableValueSerializer
 
   @override
   PartiallySerializableValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new PartiallySerializableValueBuilder();
 
@@ -654,7 +656,7 @@ class _$PartiallySerializableValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
@@ -675,9 +677,9 @@ class _$NamedFactoryValueSerializer
   final String wireName = 'NamedFactoryValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, NamedFactoryValue object,
+  Iterable<Object?> serialize(Serializers serializers, NamedFactoryValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
     ];
@@ -687,7 +689,7 @@ class _$NamedFactoryValueSerializer
 
   @override
   NamedFactoryValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new NamedFactoryValueBuilder();
 
@@ -695,7 +697,7 @@ class _$NamedFactoryValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
@@ -715,9 +717,9 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
   final String wireName = '\$V';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, WireNameValue object,
+  Iterable<Object?> serialize(Serializers serializers, WireNameValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       '\$v',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
     ];
@@ -727,7 +729,7 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
 
   @override
   WireNameValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new WireNameValueBuilder();
 
@@ -735,7 +737,7 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case '\$v':
           result.value = serializers.deserialize(value,
@@ -759,10 +761,10 @@ class _$FieldDiscoveryValueSerializer
   final String wireName = 'FieldDiscoveryValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, FieldDiscoveryValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value,
           specifiedType: const FullType(DiscoverableValue)),
@@ -784,7 +786,7 @@ class _$FieldDiscoveryValueSerializer
 
   @override
   FieldDiscoveryValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new FieldDiscoveryValueBuilder();
 
@@ -792,22 +794,22 @@ class _$FieldDiscoveryValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(DiscoverableValue))
+                  specifiedType: const FullType(DiscoverableValue))!
               as DiscoverableValue);
           break;
         case 'values':
           result.values.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(ThirdDiscoverableValue)
-              ])) as BuiltList<Object>);
+              ]))! as BuiltList<Object>);
           break;
         case 'recursiveValue':
           result.recursiveValue.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(FieldDiscoveryValue))
+                  specifiedType: const FullType(FieldDiscoveryValue))!
               as FieldDiscoveryValue);
           break;
       }
@@ -825,9 +827,9 @@ class _$DiscoverableValueSerializer
   final String wireName = 'DiscoverableValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, DiscoverableValue object,
+  Iterable<Object?> serialize(Serializers serializers, DiscoverableValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value,
           specifiedType: const FullType(SecondDiscoverableValue)),
@@ -838,7 +840,7 @@ class _$DiscoverableValueSerializer
 
   @override
   DiscoverableValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new DiscoverableValueBuilder();
 
@@ -846,11 +848,11 @@ class _$DiscoverableValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(SecondDiscoverableValue))
+                  specifiedType: const FullType(SecondDiscoverableValue))!
               as SecondDiscoverableValue);
           break;
       }
@@ -871,10 +873,10 @@ class _$SecondDiscoverableValueSerializer
   final String wireName = 'SecondDiscoverableValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, SecondDiscoverableValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
     ];
@@ -884,7 +886,7 @@ class _$SecondDiscoverableValueSerializer
 
   @override
   SecondDiscoverableValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new SecondDiscoverableValueBuilder();
 
@@ -892,7 +894,7 @@ class _$SecondDiscoverableValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
@@ -916,10 +918,10 @@ class _$ThirdDiscoverableValueSerializer
   final String wireName = 'ThirdDiscoverableValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, ThirdDiscoverableValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
     ];
@@ -929,7 +931,7 @@ class _$ThirdDiscoverableValueSerializer
 
   @override
   ThirdDiscoverableValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ThirdDiscoverableValueBuilder();
 
@@ -937,7 +939,7 @@ class _$ThirdDiscoverableValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
@@ -958,9 +960,9 @@ class _$RecursiveValueASerializer
   final String wireName = 'RecursiveValueA';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, RecursiveValueA object,
+  Iterable<Object?> serialize(Serializers serializers, RecursiveValueA object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value,
           specifiedType: const FullType(RecursiveValueB)),
@@ -971,7 +973,7 @@ class _$RecursiveValueASerializer
 
   @override
   RecursiveValueA deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new RecursiveValueABuilder();
 
@@ -979,11 +981,11 @@ class _$RecursiveValueASerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(RecursiveValueB))
+                  specifiedType: const FullType(RecursiveValueB))!
               as RecursiveValueB);
           break;
       }
@@ -1001,9 +1003,9 @@ class _$RecursiveValueBSerializer
   final String wireName = 'RecursiveValueB';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, RecursiveValueB object,
+  Iterable<Object?> serialize(Serializers serializers, RecursiveValueB object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value,
           specifiedType: const FullType(RecursiveValueA)),
@@ -1014,7 +1016,7 @@ class _$RecursiveValueBSerializer
 
   @override
   RecursiveValueB deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new RecursiveValueBBuilder();
 
@@ -1022,11 +1024,11 @@ class _$RecursiveValueBSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(RecursiveValueA))
+                  specifiedType: const FullType(RecursiveValueA))!
               as RecursiveValueA);
           break;
       }
@@ -1043,9 +1045,9 @@ class _$OtherValueSerializer implements StructuredSerializer<OtherValue> {
   final String wireName = 'OtherValue';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, OtherValue object,
+  Iterable<Object?> serialize(Serializers serializers, OtherValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'other',
       serializers.serialize(object.other, specifiedType: const FullType(int)),
     ];
@@ -1054,7 +1056,7 @@ class _$OtherValueSerializer implements StructuredSerializer<OtherValue> {
   }
 
   @override
-  OtherValue deserialize(Serializers serializers, Iterable<Object> serialized,
+  OtherValue deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new OtherValueBuilder();
 
@@ -1062,7 +1064,7 @@ class _$OtherValueSerializer implements StructuredSerializer<OtherValue> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'other':
           result.other = serializers.deserialize(value,
@@ -1086,10 +1088,10 @@ class _$DefaultsForFieldSettingsValueSerializer
   final String wireName = 'DefaultsForFieldSettingsValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, DefaultsForFieldSettingsValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'serialized',
       serializers.serialize(object.serialized,
           specifiedType: const FullType(int)),
@@ -1100,7 +1102,7 @@ class _$DefaultsForFieldSettingsValueSerializer
 
   @override
   DefaultsForFieldSettingsValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new DefaultsForFieldSettingsValueBuilder();
 
@@ -1108,7 +1110,7 @@ class _$DefaultsForFieldSettingsValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'serialized':
           result.serialized = serializers.deserialize(value,
@@ -1132,10 +1134,10 @@ class _$ValueWithBuilderInitializerSerializer
   final String wireName = 'ValueWithBuilderInitializer';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, ValueWithBuilderInitializer object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
       'anIntWithDefault',
@@ -1180,7 +1182,7 @@ class _$ValueWithBuilderInitializerSerializer
 
   @override
   ValueWithBuilderInitializer deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ValueWithBuilderInitializerBuilder();
 
@@ -1188,7 +1190,7 @@ class _$ValueWithBuilderInitializerSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
@@ -1208,20 +1210,20 @@ class _$ValueWithBuilderInitializerSerializer
           break;
         case 'nestedValue':
           result.nestedValue.replace(serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+              specifiedType: const FullType(SimpleValue))! as SimpleValue);
           break;
         case 'nestedValueWithDefault':
           result.nestedValueWithDefault.replace(serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+              specifiedType: const FullType(SimpleValue))! as SimpleValue);
           break;
         case 'nullableNestedValue':
           result.nullableNestedValue.replace(serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+              specifiedType: const FullType(SimpleValue))! as SimpleValue);
           break;
         case 'nullableNestedValueWithDefault':
           result.nullableNestedValueWithDefault.replace(serializers.deserialize(
               value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue);
+              specifiedType: const FullType(SimpleValue))! as SimpleValue);
           break;
       }
     }
@@ -1241,10 +1243,10 @@ class _$ValueWithBuilderFinalizerSerializer
   final String wireName = 'ValueWithBuilderFinalizer';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, ValueWithBuilderFinalizer object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
     ];
@@ -1254,7 +1256,7 @@ class _$ValueWithBuilderFinalizerSerializer
 
   @override
   ValueWithBuilderFinalizer deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ValueWithBuilderFinalizerBuilder();
 
@@ -1262,7 +1264,7 @@ class _$ValueWithBuilderFinalizerSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
