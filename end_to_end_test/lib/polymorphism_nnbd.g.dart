@@ -422,11 +422,11 @@ class CatBuilder implements Builder<Cat, CatBuilder>, MammalBuilder {
 
   bool? _tail;
   bool? get tail => _$this._tail;
-  set tail(bool? tail) => _$this._tail = tail;
+  set tail(covariant bool? tail) => _$this._tail = tail;
 
   int? _legs;
   int? get legs => _$this._legs;
-  set legs(int? legs) => _$this._legs = legs;
+  set legs(covariant int? legs) => _$this._legs = legs;
 
   CatBuilder();
 
@@ -508,11 +508,11 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   int? _fins;
   int? get fins => _$this._fins;
-  set fins(int? fins) => _$this._fins = fins;
+  set fins(covariant int? fins) => _$this._fins = fins;
 
   int? _legs;
   int? get legs => _$this._legs;
-  set legs(int? legs) => _$this._legs = legs;
+  set legs(covariant int? legs) => _$this._legs = legs;
 
   FishBuilder();
 
@@ -865,7 +865,7 @@ class HasStringBuilder
 
   String? _field;
   String? get field => _$this._field;
-  set field(String? field) => _$this._field = field;
+  set field(covariant String? field) => _$this._field = field;
 
   HasStringBuilder();
 
@@ -942,7 +942,7 @@ class HasDoubleBuilder
 
   double? _field;
   double? get field => _$this._field;
-  set field(double? field) => _$this._field = field;
+  set field(covariant double? field) => _$this._field = field;
 
   HasDoubleBuilder();
 
@@ -1116,7 +1116,7 @@ class UsesHandCodedBuilder
 
   int? _fieldInBaseBuilder;
   int? get fieldInBaseBuilder => _$this._fieldInBaseBuilder;
-  set fieldInBaseBuilder(int? fieldInBaseBuilder) =>
+  set fieldInBaseBuilder(covariant int? fieldInBaseBuilder) =>
       _$this._fieldInBaseBuilder = fieldInBaseBuilder;
 
   UsesHandCodedBuilder();
