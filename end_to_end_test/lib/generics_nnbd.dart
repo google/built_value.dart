@@ -11,7 +11,7 @@ part 'generics_nnbd.g.dart';
 
 abstract class GenericValue<T>
     implements Built<GenericValue<T>, GenericValueBuilder<T>> {
-  static Serializer<GenericValue<Object>> get serializer =>
+  static Serializer<GenericValue<Object?>> get serializer =>
       _$genericValueSerializer;
 
   T get value;
@@ -37,7 +37,7 @@ abstract class BoundGenericValue<T extends num>
 abstract class CollectionGenericValue<T>
     implements
         Built<CollectionGenericValue<T>, CollectionGenericValueBuilder<T>> {
-  static Serializer<CollectionGenericValue<Object>> get serializer =>
+  static Serializer<CollectionGenericValue<Object?>> get serializer =>
       _$collectionGenericValueSerializer;
 
   BuiltList<T> get values;
@@ -71,6 +71,22 @@ abstract class DynamicGenericContainer
           [void Function(DynamicGenericContainerBuilder) updates]) =
       _$DynamicGenericContainer;
   DynamicGenericContainer._();
+}
+
+abstract class PassthroughGenericContainer<T>
+    implements
+        Built<PassthroughGenericContainer<T>,
+            PassthroughGenericContainerBuilder<T>> {
+  static Serializer<PassthroughGenericContainer<Object?>> get serializer =>
+      _$passthroughGenericContainerSerializer;
+
+  GenericValue<T> get genericValue;
+  CollectionGenericValue<T> get collectionGenericValue;
+
+  factory PassthroughGenericContainer(
+          [void Function(PassthroughGenericContainerBuilder<T>) updates]) =
+      _$PassthroughGenericContainer<T>;
+  PassthroughGenericContainer._();
 }
 
 abstract class NestedGenericContainer

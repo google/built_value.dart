@@ -46,6 +46,7 @@ part 'serializers_nnbd.g.dart';
   NonBuiltGeneric,
   OtherValue,
   PartiallySerializableValue,
+  PassthroughGenericContainer,
   PrimitivesValue,
   Robot,
   SecondTestEnum,

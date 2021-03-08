@@ -7,14 +7,17 @@ part of 'generics_nnbd.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GenericValue<Object>> _$genericValueSerializer =
+Serializer<GenericValue<Object?>> _$genericValueSerializer =
     new _$GenericValueSerializer();
 Serializer<BoundGenericValue<num>> _$boundGenericValueSerializer =
     new _$BoundGenericValueSerializer();
-Serializer<CollectionGenericValue<Object>> _$collectionGenericValueSerializer =
+Serializer<CollectionGenericValue<Object?>> _$collectionGenericValueSerializer =
     new _$CollectionGenericValueSerializer();
 Serializer<GenericContainer> _$genericContainerSerializer =
     new _$GenericContainerSerializer();
+Serializer<PassthroughGenericContainer<Object?>>
+    _$passthroughGenericContainerSerializer =
+    new _$PassthroughGenericContainerSerializer();
 Serializer<NestedGenericContainer> _$nestedGenericContainerSerializer =
     new _$NestedGenericContainerSerializer();
 Serializer<ConcreteGeneric> _$concreteGenericSerializer =
@@ -23,7 +26,7 @@ Serializer<NonBuiltGeneric> _$nonBuiltGenericSerializer =
     new _$NonBuiltGenericSerializer();
 
 class _$GenericValueSerializer
-    implements StructuredSerializer<GenericValue<Object>> {
+    implements StructuredSerializer<GenericValue<Object?>> {
   @override
   final Iterable<Type> types = const [GenericValue, _$GenericValue];
   @override
@@ -31,7 +34,7 @@ class _$GenericValueSerializer
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GenericValue<Object> object,
+      Serializers serializers, GenericValue<Object?> object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -48,7 +51,7 @@ class _$GenericValueSerializer
   }
 
   @override
-  GenericValue<Object> deserialize(
+  GenericValue<Object?> deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
@@ -58,8 +61,8 @@ class _$GenericValueSerializer
         isUnderspecified ? FullType.object : specifiedType.parameters[0];
 
     final result = isUnderspecified
-        ? new GenericValueBuilder<Object>()
-        : serializers.newBuilder(specifiedType) as GenericValueBuilder<Object>;
+        ? new GenericValueBuilder<Object?>()
+        : serializers.newBuilder(specifiedType) as GenericValueBuilder<Object?>;
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -136,7 +139,7 @@ class _$BoundGenericValueSerializer
 }
 
 class _$CollectionGenericValueSerializer
-    implements StructuredSerializer<CollectionGenericValue<Object>> {
+    implements StructuredSerializer<CollectionGenericValue<Object?>> {
   @override
   final Iterable<Type> types = const [
     CollectionGenericValue,
@@ -147,7 +150,7 @@ class _$CollectionGenericValueSerializer
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, CollectionGenericValue<Object> object,
+      Serializers serializers, CollectionGenericValue<Object?> object,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -165,7 +168,7 @@ class _$CollectionGenericValueSerializer
   }
 
   @override
-  CollectionGenericValue<Object> deserialize(
+  CollectionGenericValue<Object?> deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final isUnderspecified =
@@ -175,9 +178,9 @@ class _$CollectionGenericValueSerializer
         isUnderspecified ? FullType.object : specifiedType.parameters[0];
 
     final result = isUnderspecified
-        ? new CollectionGenericValueBuilder<Object>()
+        ? new CollectionGenericValueBuilder<Object?>()
         : serializers.newBuilder(specifiedType)
-            as CollectionGenericValueBuilder<Object>;
+            as CollectionGenericValueBuilder<Object?>;
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -254,6 +257,77 @@ class _$GenericContainerSerializer
                   specifiedType: const FullType(
                       CollectionGenericValue, const [const FullType(String)]))!
               as CollectionGenericValue<String>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PassthroughGenericContainerSerializer
+    implements StructuredSerializer<PassthroughGenericContainer<Object?>> {
+  @override
+  final Iterable<Type> types = const [
+    PassthroughGenericContainer,
+    _$PassthroughGenericContainer
+  ];
+  @override
+  final String wireName = 'PassthroughGenericContainer';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PassthroughGenericContainer<Object?> object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = <Object?>[
+      'genericValue',
+      serializers.serialize(object.genericValue,
+          specifiedType: new FullType(GenericValue, [parameterT])),
+      'collectionGenericValue',
+      serializers.serialize(object.collectionGenericValue,
+          specifiedType: new FullType(CollectionGenericValue, [parameterT])),
+    ];
+
+    return result;
+  }
+
+  @override
+  PassthroughGenericContainer<Object?> deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = isUnderspecified
+        ? new PassthroughGenericContainerBuilder<Object?>()
+        : serializers.newBuilder(specifiedType)
+            as PassthroughGenericContainerBuilder<Object?>;
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'genericValue':
+          result.genericValue.replace(serializers.deserialize(value,
+                  specifiedType: new FullType(GenericValue, [parameterT]))!
+              as GenericValue<Object>);
+          break;
+        case 'collectionGenericValue':
+          result.collectionGenericValue.replace(serializers.deserialize(value,
+                  specifiedType:
+                      new FullType(CollectionGenericValue, [parameterT]))!
+              as CollectionGenericValue<Object>);
           break;
       }
     }
@@ -875,6 +949,129 @@ class DynamicGenericContainerBuilder
         new _$DynamicGenericContainer._(
             foo: BuiltValueNullFieldError.checkNotNull(
                 foo, 'DynamicGenericContainer', 'foo'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PassthroughGenericContainer<T> extends PassthroughGenericContainer<T> {
+  @override
+  final GenericValue<T> genericValue;
+  @override
+  final CollectionGenericValue<T> collectionGenericValue;
+
+  factory _$PassthroughGenericContainer(
+          [void Function(PassthroughGenericContainerBuilder<T>)? updates]) =>
+      (new PassthroughGenericContainerBuilder<T>()..update(updates)).build();
+
+  _$PassthroughGenericContainer._(
+      {required this.genericValue, required this.collectionGenericValue})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        genericValue, 'PassthroughGenericContainer', 'genericValue');
+    BuiltValueNullFieldError.checkNotNull(collectionGenericValue,
+        'PassthroughGenericContainer', 'collectionGenericValue');
+    if (T == dynamic) {
+      throw new BuiltValueMissingGenericsError(
+          'PassthroughGenericContainer', 'T');
+    }
+  }
+
+  @override
+  PassthroughGenericContainer<T> rebuild(
+          void Function(PassthroughGenericContainerBuilder<T>) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PassthroughGenericContainerBuilder<T> toBuilder() =>
+      new PassthroughGenericContainerBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PassthroughGenericContainer &&
+        genericValue == other.genericValue &&
+        collectionGenericValue == other.collectionGenericValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf(
+        $jc($jc(0, genericValue.hashCode), collectionGenericValue.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('PassthroughGenericContainer')
+          ..add('genericValue', genericValue)
+          ..add('collectionGenericValue', collectionGenericValue))
+        .toString();
+  }
+}
+
+class PassthroughGenericContainerBuilder<T>
+    implements
+        Builder<PassthroughGenericContainer<T>,
+            PassthroughGenericContainerBuilder<T>> {
+  _$PassthroughGenericContainer<T>? _$v;
+
+  GenericValueBuilder<T>? _genericValue;
+  GenericValueBuilder<T> get genericValue =>
+      _$this._genericValue ??= new GenericValueBuilder<T>();
+  set genericValue(GenericValueBuilder<T>? genericValue) =>
+      _$this._genericValue = genericValue;
+
+  CollectionGenericValueBuilder<T>? _collectionGenericValue;
+  CollectionGenericValueBuilder<T> get collectionGenericValue =>
+      _$this._collectionGenericValue ??= new CollectionGenericValueBuilder<T>();
+  set collectionGenericValue(
+          CollectionGenericValueBuilder<T>? collectionGenericValue) =>
+      _$this._collectionGenericValue = collectionGenericValue;
+
+  PassthroughGenericContainerBuilder();
+
+  PassthroughGenericContainerBuilder<T> get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _genericValue = $v.genericValue.toBuilder();
+      _collectionGenericValue = $v.collectionGenericValue.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(PassthroughGenericContainer<T> other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PassthroughGenericContainer<T>;
+  }
+
+  @override
+  void update(void Function(PassthroughGenericContainerBuilder<T>)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$PassthroughGenericContainer<T> build() {
+    _$PassthroughGenericContainer<T> _$result;
+    try {
+      _$result = _$v ??
+          new _$PassthroughGenericContainer<T>._(
+              genericValue: genericValue.build(),
+              collectionGenericValue: collectionGenericValue.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'genericValue';
+        genericValue.build();
+        _$failedField = 'collectionGenericValue';
+        collectionGenericValue.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'PassthroughGenericContainer', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

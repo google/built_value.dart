@@ -6,6 +6,7 @@
 - Allow nulls when serializing/deserializing for better JSON interop.
 - Fix generation bugs around enum wire name and polymorphism.
 - Fix generation with generics for analysis with `strict-raw-types`.
+- Add test coverage around generation for generic serialization.
 
 # 8.0.0
 
