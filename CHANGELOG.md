@@ -1,6 +1,6 @@
 # Changelog
 
-# 8.0.1 (unreleased)
+# 8.0.1
 
 - Update `chat` example to webdev.
 - Allow nulls when serializing/deserializing for better JSON interop.
