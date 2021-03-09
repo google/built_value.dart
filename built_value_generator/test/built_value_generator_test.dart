@@ -8,7 +8,6 @@ import 'dart:async';
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:built_value_generator/built_value_generator.dart';
-import 'package:logging/logging.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
@@ -790,7 +789,7 @@ Future<String> generate(String source) async {
   // Capture any error from generation; if there is one, return that instead of
   // the generated output.
   String error;
-  void captureError(LogRecord logRecord) {
+  void captureError(dynamic logRecord) {
     if (logRecord.error is InvalidGenerationSourceError) {
       if (error != null) throw StateError('Expected at most one error.');
       error = logRecord.error.toString();
