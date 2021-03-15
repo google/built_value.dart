@@ -198,8 +198,8 @@ class BuiltJsonSerializers implements Serializers {
 
   @override
   Object newBuilder(FullType fullType) {
-    var builderFactory = builderFactories[fullType]!;
-    if (identical(builderFactory, null)) _throwMissingBuilderFactory(fullType);
+    var builderFactory = builderFactories[fullType];
+    if (builderFactory == null) _throwMissingBuilderFactory(fullType);
     return builderFactory();
   }
 
@@ -208,7 +208,7 @@ class BuiltJsonSerializers implements Serializers {
     if (!hasBuilder(fullType)) _throwMissingBuilderFactory(fullType);
   }
 
-  void _throwMissingBuilderFactory(FullType fullType) {
+  Never _throwMissingBuilderFactory(FullType fullType) {
     throw StateError('No builder factory for $fullType. '
         'Fix by adding one, see SerializersBuilder.addBuilderFactory.');
   }
