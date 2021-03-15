@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.0.3 (unreleased)
+
+- Fix error message for builder factory not installed.
+
 # 8.0.2
 
 - Bump versions of `analyzer`, `quiver`.
