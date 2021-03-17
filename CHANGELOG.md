@@ -1,8 +1,9 @@
 # Changelog
 
-# 8.0.3 (unreleased)
+# 8.0.3
 
 - Fix error message for builder factory not installed.
+- Bump version of `build`.
 
 # 8.0.2
 
