@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.0.4
+
+- Bump version of `source_gen`.
+
 # 8.0.3
 
 - Fix error message for builder factory not installed.
