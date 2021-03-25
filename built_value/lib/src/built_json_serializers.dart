@@ -183,7 +183,7 @@ class BuiltJsonSerializers implements Serializers {
           return object == null
               ? null
               : serializer.deserialize(this, object,
-              specifiedType: specifiedType);
+                  specifiedType: specifiedType);
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
