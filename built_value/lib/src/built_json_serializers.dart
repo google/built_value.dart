@@ -64,7 +64,7 @@ class BuiltJsonSerializers implements Serializers {
     var transformedObject = object;
     for (var plugin in serializerPlugins) {
       transformedObject =
-          plugin.beforeSerialize(transformedObject!, specifiedType);
+          plugin.beforeSerialize(transformedObject, specifiedType);
     }
     var result = _serialize(transformedObject, specifiedType);
     for (var plugin in serializerPlugins) {
@@ -74,6 +74,9 @@ class BuiltJsonSerializers implements Serializers {
   }
 
   Object? _serialize(Object? object, FullType specifiedType) {
+    if (object == null) {
+      return null;
+    }
     if (specifiedType.isUnspecified) {
       final serializer = serializerForType(object.runtimeType);
       if (serializer == null) {
@@ -127,6 +130,9 @@ class BuiltJsonSerializers implements Serializers {
 
   Object? _deserialize(
       Object? objectBeforePlugins, Object? object, FullType specifiedType) {
+    if (objectBeforePlugins == null) {
+      return null;
+    }
     if (specifiedType.isUnspecified) {
       final wireName = (object as List<Object?>).first as String;
 
@@ -177,7 +183,7 @@ class BuiltJsonSerializers implements Serializers {
           return object == null
               ? null
               : serializer.deserialize(this, object,
-                  specifiedType: specifiedType);
+              specifiedType: specifiedType);
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }

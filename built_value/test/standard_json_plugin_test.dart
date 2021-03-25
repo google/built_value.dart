@@ -5,8 +5,8 @@
 import 'dart:convert';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/standard_json_plugin.dart';
 import 'package:built_value/serializer.dart';
+import 'package:built_value/standard_json_plugin.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -61,6 +61,23 @@ void main() {
     });
 
     group('and known specifiedType', () {
+      group('can take an int? and', () {
+        final int? data = null;
+        final specifiedType = const FullType(int);
+        final serialized = null;
+
+        test('serialize it', () {
+          expect(serializers.serialize(data, specifiedType: specifiedType),
+              serialized);
+        });
+
+        test('deserialize it', () {
+          expect(
+              serializers.deserialize(serialized, specifiedType: specifiedType),
+              data);
+        });
+      });
+
       group('can take an int and', () {
         final data = 1;
         final specifiedType = const FullType(int);
@@ -203,6 +220,19 @@ void main() {
     });
 
     group('and unknown specifiedType', () {
+      group('can take an int? and', () {
+        final int? data = null;
+        final serialized = null;
+
+        test('serialize it', () {
+          expect(serializers.serialize(data), serialized);
+        });
+
+        test('deserialize it', () {
+          expect(serializers.deserialize(serialized), data);
+        });
+      });
+
       group('can take an int and', () {
         final data = 1;
         final serialized = {r'$': 'int', '': 1};
