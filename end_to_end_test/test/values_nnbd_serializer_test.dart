@@ -180,6 +180,138 @@ void main() {
     });
   });
 
+  group('CompoundValueNoNestingField', () {
+    var data = CompoundValueNoNestingField((b) => b
+      ..simpleValue = SimpleValue((b) => b
+        ..anInt = 1
+        ..aString = 'two')
+      ..validatedValue = ValidatedValue((b) => b.anInt = 3)
+      ..simpleValueWithNested.anInt = 1
+      ..simpleValueWithNested.aString = 'two'
+      ..validatedValueWithNested.anInt = 3);
+    var serialized = json.decode(json.encode([
+      'CompoundValueNoNestingField',
+      'simpleValue',
+      [
+        'anInt',
+        1,
+        'aString',
+        'two',
+      ],
+      'simpleValueWithNested',
+      [
+        'anInt',
+        1,
+        'aString',
+        'two',
+      ],
+      'validatedValue',
+      [
+        'anInt',
+        3,
+      ],
+      'validatedValueWithNested',
+      [
+        'anInt',
+        3,
+      ],
+    ])) as Object;
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
+  group('CompoundValueNestingField', () {
+    var data = CompoundValueNestingField((b) => b
+      ..simpleValue = SimpleValue((b) => b
+        ..anInt = 1
+        ..aString = 'two')
+      ..validatedValue = ValidatedValue((b) => b.anInt = 3)
+      ..simpleValueWithNested.anInt = 1
+      ..simpleValueWithNested.aString = 'two'
+      ..validatedValueWithNested.anInt = 3);
+    var serialized = json.decode(json.encode([
+      'CompoundValueNestingField',
+      'simpleValue',
+      [
+        'anInt',
+        1,
+        'aString',
+        'two',
+      ],
+      'simpleValueWithNested',
+      [
+        'anInt',
+        1,
+        'aString',
+        'two',
+      ],
+      'validatedValue',
+      [
+        'anInt',
+        3,
+      ],
+      'validatedValueWithNested',
+      [
+        'anInt',
+        3,
+      ],
+    ])) as Object;
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
+  group('CompoundValueNoAutoNestingField', () {
+    var data = CompoundValueNoAutoNestingField(
+        (b) => b..value = NoFieldsValueBuilder());
+    var serialized = json.decode(json.encode([
+      'CompoundValueNoAutoNestingField',
+      'value',
+      <String>[],
+      'valueWithAutoCreate',
+      <String>[],
+    ])) as Object;
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
+  group('CompoundValueAutoNestingField', () {
+    var data =
+        CompoundValueAutoNestingField((b) => b..value = NoFieldsValueBuilder());
+    var serialized = json.decode(json.encode([
+      'CompoundValueAutoNestingField',
+      'value',
+      <String>[],
+      'valueWithAutoCreate',
+      <String>[],
+    ])) as Object;
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
   group('CompoundValueExplicitNoNesting', () {
     var data = CompoundValueExplicitNoNesting((b) => b
       ..simpleValue.replace(SimpleValue((b) => b

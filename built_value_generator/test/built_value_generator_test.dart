@@ -757,6 +757,28 @@ abstract class Value implements Built<Value, ValueBuilder> {
               '1. Set `nestedBuilders: false` in order to use `comparableBuilders: true`.'));
     });
 
+    test('comparableBuilders with field nestedBuilder', () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+@BuiltValue(comparableBuilders: true, nestedBuilders: false)
+abstract class Value implements Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+  
+  @BuiltValueField(nestedBuilder: true)
+  NestedValue get nestedValue;
+}
+abstract class NestedValue implements Built<NestedValue, NestedValueBuilder> {
+  NestedValue._();
+  factory NestedValue([void Function(NestedValueBuilder) updates]) = _\$NestedValue;
+}
+'''),
+          contains(
+              '1. Make builder field nestedValue have `nestedBuilder: false` in order to use `comparableBuilders: true`.'));
+    });
+
     test('cleans generated class names for private classes', () async {
       expect(
           await generate('''library value;
@@ -831,5 +853,20 @@ class BuiltValue {
       this.instantiable: true,
       this.nestedBuilders: true,
       this.wireName});
+}
+
+class BuiltValueField {
+  final bool? compare;
+  final bool? serialize;
+  final String? wireName;
+  final bool? nestedBuilder;
+  final bool? autoCreateNestedBuilder;
+
+  const BuiltValueField(
+      {this.compare,
+      this.serialize,
+      this.wireName,
+      this.nestedBuilder,
+      this.autoCreateNestedBuilder});
 }
 ''';

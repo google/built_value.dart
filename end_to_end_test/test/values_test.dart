@@ -195,6 +195,22 @@ void main() {
     });
   });
 
+  group('CompoundValueNoNestingField', () {
+    test('does not use nested builders', () {
+      CompoundValueNoNestingField((b) => b
+        ..simpleValue = SimpleValue((b) => b..anInt = 1)
+        ..simpleValueWithNested.anInt = 1);
+    });
+  });
+
+  group('CompoundValueNestingField', () {
+    test('does not use nested builders', () {
+      CompoundValueNestingField((b) => b
+        ..simpleValue = SimpleValue((b) => b..anInt = 1)
+        ..simpleValueWithNested.anInt = 1);
+    });
+  });
+
   group(CompoundValueNoAutoNesting, () {
     test('does not auto create nested builders', () {
       expect(() => CompoundValueNoAutoNesting((b) => b..value),

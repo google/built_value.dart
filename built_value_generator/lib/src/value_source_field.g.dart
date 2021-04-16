@@ -33,6 +33,7 @@ class _$ValueSourceField extends ValueSourceField {
   String __buildElementType;
   String __builderElementTypeWithPrefix;
   bool __isNestedBuilder;
+  bool __isAutoCreateNestedBuilder;
 
   factory _$ValueSourceField(
           [void Function(ValueSourceFieldBuilder) updates]) =>
@@ -106,6 +107,10 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   bool get isNestedBuilder => __isNestedBuilder ??= super.isNestedBuilder;
+
+  @override
+  bool get isAutoCreateNestedBuilder =>
+      __isAutoCreateNestedBuilder ??= super.isAutoCreateNestedBuilder;
 
   @override
   ValueSourceField rebuild(void Function(ValueSourceFieldBuilder) updates) =>

@@ -30,6 +30,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   String __typeWithPrefix;
   String __typeWithPrefixAndNullabilitySuffix;
   bool __builderFieldUsesNestedBuilder;
+  bool __builderFieldAutoCreatesNestedBuilder;
   String __rawType;
   bool __needsBuilder;
 
@@ -96,6 +97,11 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   bool get builderFieldUsesNestedBuilder =>
       __builderFieldUsesNestedBuilder ??= super.builderFieldUsesNestedBuilder;
+
+  @override
+  bool get builderFieldAutoCreatesNestedBuilder =>
+      __builderFieldAutoCreatesNestedBuilder ??=
+          super.builderFieldAutoCreatesNestedBuilder;
 
   @override
   String get rawType => __rawType ??= super.rawType;

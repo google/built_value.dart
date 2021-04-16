@@ -827,7 +827,7 @@ abstract class ValueSourceClass
           result.writeln('@override');
           result.writeln('$typeInBuilder get $name {'
               '_\$this;');
-          if (settings.autoCreateNestedBuilders &&
+          if (field.isAutoCreateNestedBuilder &&
               (field.builderElementTypeIsNullable || !isNonNullByDefault)) {
             result.writeln('return super.$name ??= new $typeInBuilder();');
           } else {
@@ -871,7 +871,7 @@ abstract class ValueSourceClass
         result.writeln('$fieldType$orNull _$name;');
 
         // Getter.
-        if (field.isNestedBuilder && settings.autoCreateNestedBuilders) {
+        if (field.isNestedBuilder && field.isAutoCreateNestedBuilder) {
           result.writeln('$fieldType get $name =>');
           result.writeln('_\$this._$name ??= new $typeInBuilder();');
         } else {
@@ -974,7 +974,7 @@ abstract class ValueSourceClass
       if (!field.isNestedBuilder) {
         fieldBuilders[name] = name;
         if (!field.isNullable) needsNullCheck.add(name);
-      } else if (!field.isNullable && settings.autoCreateNestedBuilders) {
+      } else if (!field.isNullable && field.isAutoCreateNestedBuilder) {
         // If not nullable, go via the public accessor, which instantiates
         // if needed provided `autoCreateNestedBuilders` is true.
         fieldBuilders[name] = '$name.build()';

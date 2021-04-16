@@ -152,7 +152,20 @@ class BuiltValueField {
   /// indicates the name is to be taken from the literal field name.
   final String? wireName;
 
-  const BuiltValueField({this.compare, this.serialize, this.wireName});
+  /// Whether the field overrides the `nestedBuilders` setting from the class. Defaults to `null` which
+  /// indicates the setting is to be taken from the `nestedBuilders` setting on the class.
+  final bool? nestedBuilder;
+
+  /// Whether the field overrides the `autoCreateNestedBuilders` setting from the class. Defaults to `null` which
+  /// indicates the setting is to be taken from the `autoCreateNestedBuilders` setting on the class.
+  final bool? autoCreateNestedBuilder;
+
+  const BuiltValueField(
+      {this.compare,
+      this.serialize,
+      this.wireName,
+      this.nestedBuilder,
+      this.autoCreateNestedBuilder});
 }
 
 /// Optionally, annotate a Built Value `Serializer` getters with this to

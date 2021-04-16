@@ -120,7 +120,10 @@ abstract class ValueSourceField
     return BuiltValueField(
         compare: annotation.getField('compare').toBoolValue(),
         serialize: annotation.getField('serialize').toBoolValue(),
-        wireName: annotation.getField('wireName').toStringValue());
+        wireName: annotation.getField('wireName').toStringValue(),
+        nestedBuilder: annotation.getField('nestedBuilder').toBoolValue(),
+        autoCreateNestedBuilder:
+            annotation.getField('autoCreateNestedBuilder').toBoolValue());
   }
 
   @memoized
@@ -213,8 +216,13 @@ abstract class ValueSourceField
   @memoized
   bool get isNestedBuilder => builderFieldExists
       ? typeInBuilder(null).contains('Builder') ?? false
-      : settings.nestedBuilders &&
+      : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
           DartTypes.needsNestedBuilder(element.getter.returnType);
+
+  @memoized
+  bool get isAutoCreateNestedBuilder =>
+      builtValueField.autoCreateNestedBuilder ??
+      settings.autoCreateNestedBuilders;
 
   static BuiltList<ValueSourceField> fromClassElements(
       BuiltValue settings,
@@ -301,6 +309,12 @@ abstract class ValueSourceField
         ..message =
             'Make builder field $name a normal field or a getter/setter '
                 'pair.'));
+    }
+
+    if (settings.comparableBuilders && builtValueField.nestedBuilder == true) {
+      result.add(GeneratorError((b) => b
+        ..message = 'Make builder field $name have `nestedBuilder: false`'
+            ' in order to use `comparableBuilders: true`.'));
     }
 
     return result;
