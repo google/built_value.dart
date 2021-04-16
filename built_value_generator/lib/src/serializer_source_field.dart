@@ -63,7 +63,10 @@ abstract class SerializerSourceField
     return BuiltValueField(
         compare: annotation.getField('compare').toBoolValue(),
         serialize: annotation.getField('serialize').toBoolValue(),
-        wireName: annotation.getField('wireName').toStringValue());
+        wireName: annotation.getField('wireName').toStringValue(),
+        nestedBuilder: annotation.getField('nestedBuilder').toBoolValue(),
+        autoCreateNestedBuilder:
+            annotation.getField('autoCreateNestedBuilder').toBoolValue());
   }
 
   @memoized
@@ -130,9 +133,14 @@ abstract class SerializerSourceField
     return builderFieldElementIsValid
         ? DartTypes.getName(element.getter.returnType) !=
             DartTypes.getName(builderElement.getter.returnType)
-        : settings.nestedBuilders &&
+        : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
             DartTypes.needsNestedBuilder(element.getter.returnType);
   }
+
+  @memoized
+  bool get builderFieldAutoCreatesNestedBuilder =>
+      builtValueField.autoCreateNestedBuilder ??
+      settings.autoCreateNestedBuilders;
 
   @memoized
   String get rawType => _getBareType(type);
