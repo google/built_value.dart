@@ -25,6 +25,7 @@ part 'serializer_source_class.g.dart';
 abstract class SerializerSourceClass
     implements Built<SerializerSourceClass, SerializerSourceClassBuilder> {
   ClassElement get element;
+
   @nullable
   ClassElement get builderElement;
 
@@ -33,6 +34,7 @@ abstract class SerializerSourceClass
           element: element,
           builderElement:
               element.library.getType(element.displayName + 'Builder'));
+
   SerializerSourceClass._();
 
   @memoized
