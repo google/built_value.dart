@@ -9,6 +9,7 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/enum_source_field.dart';
 import 'package:built_value_generator/src/strings.dart';
@@ -27,7 +28,7 @@ abstract class EnumSourceClass
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      element.library.session.getParsedLibraryByElement(element.library);
+      parsedLibraryResultOrThrowingMock(element.library);
 
   @memoized
   String get name => element.name;
