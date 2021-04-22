@@ -10,6 +10,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/enum_source_class.dart';
 import 'package:built_value_generator/src/enum_source_field.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
@@ -38,7 +39,7 @@ abstract class SerializerSourceClass
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      element.library.session.getParsedLibraryByElement(element.library);
+      parsedLibraryResultOrThrowingMock(element.library);
 
   // TODO(davidmorgan): share common code in a nicer way.
   @memoized
