@@ -653,3 +653,48 @@ abstract class _PrivateValue
   factory _PrivateValue(void Function(_PrivateValueBuilder) updates) =
       _$PrivateValue;
 }
+
+abstract class SerializesNullsValue
+    implements Built<SerializesNullsValue, SerializesNullsValueBuilder> {
+  @BuiltValueSerializer(serializeNulls: true)
+  static Serializer<SerializesNullsValue> get serializer =>
+      _$serializesNullsValueSerializer;
+
+  @nullable
+  String get value;
+
+  factory SerializesNullsValue(
+          [void Function(SerializesNullsValueBuilder) updates]) =
+      _$SerializesNullsValue;
+  SerializesNullsValue._();
+}
+
+abstract class SerializesNullsList
+    implements Built<SerializesNullsList, SerializesNullsListBuilder> {
+  @BuiltValueSerializer(serializeNulls: true)
+  static Serializer<SerializesNullsList> get serializer =>
+      _$serializesNullsListSerializer;
+
+  @nullable
+  BuiltList<int> get list;
+
+  factory SerializesNullsList(
+          [void Function(SerializesNullsListBuilder) updates]) =
+      _$SerializesNullsList;
+  SerializesNullsList._();
+}
+
+abstract class SerializesNullsMap
+    implements Built<SerializesNullsMap, SerializesNullsMapBuilder> {
+  @BuiltValueSerializer(serializeNulls: true)
+  static Serializer<SerializesNullsMap> get serializer =>
+      _$serializesNullsMapSerializer;
+
+  @nullable
+  BuiltMap<int, int> get map;
+
+  factory SerializesNullsMap(
+          [void Function(SerializesNullsMapBuilder) updates]) =
+      _$SerializesNullsMap;
+  SerializesNullsMap._();
+}

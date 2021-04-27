@@ -444,4 +444,37 @@ void main() {
       expect(serializers.deserialize(serializedWhichTriggersHook), data);
     });
   });
+
+  group('SerializesNulls', () {
+    final valueCls = SerializesNullsValue();
+    final listCls = SerializesNullsList();
+    final mapCls = SerializesNullsMap();
+    final value = json.decode(json.encode(['SerializesNullsValue', 'value', null])) as Object;
+    final list = json.decode(json.encode(['SerializesNullsList', 'list', null])) as Object;
+    final map = json.decode(json.encode(['SerializesNullsMap', 'map', null])) as Object;
+
+    test('can serialize null value', () {
+      expect(serializers.serialize(valueCls), value);
+    });
+
+    test('can serialize null list', () {
+      expect(serializers.serialize(listCls), list);
+    });
+
+    test('can serialize null map', () {
+      expect(serializers.serialize(mapCls), map);
+    });
+
+    test('can deserialize null value', () {
+      expect(serializers.deserialize(value), valueCls);
+    });
+
+    test('can deserialize null list', () {
+      expect(serializers.deserialize(list), listCls);
+    });
+
+    test('can deserialize null map', () {
+      expect(serializers.deserialize(map), mapCls);
+    });
+  });
 }

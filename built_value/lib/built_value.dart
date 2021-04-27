@@ -163,7 +163,13 @@ class BuiltValueSerializer {
   /// to `false`.
   final bool custom;
 
-  const BuiltValueSerializer({this.custom = false});
+  /// Whether the generated serializer should output `null`s.
+  ///
+  /// By default this is `false` and nulls are omitted from the output.
+  final bool serializeNulls;
+
+  const BuiltValueSerializer(
+      {this.custom = false, this.serializeNulls = false});
 }
 
 /// Memoized annotation for Built Value getters.

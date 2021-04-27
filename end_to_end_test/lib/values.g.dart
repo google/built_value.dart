@@ -55,6 +55,12 @@ Serializer<ValueWithBuilderInitializer>
     new _$ValueWithBuilderInitializerSerializer();
 Serializer<ValueWithBuilderFinalizer> _$valueWithBuilderFinalizerSerializer =
     new _$ValueWithBuilderFinalizerSerializer();
+Serializer<SerializesNullsValue> _$serializesNullsValueSerializer =
+    new _$SerializesNullsValueSerializer();
+Serializer<SerializesNullsList> _$serializesNullsListSerializer =
+    new _$SerializesNullsListSerializer();
+Serializer<SerializesNullsMap> _$serializesNullsMapSerializer =
+    new _$SerializesNullsMapSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -1255,6 +1261,154 @@ class _$ValueWithBuilderFinalizerSerializer
         case 'anInt':
           result.anInt = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$SerializesNullsValueSerializer
+    implements StructuredSerializer<SerializesNullsValue> {
+  @override
+  final Iterable<Type> types = const [
+    SerializesNullsValue,
+    _$SerializesNullsValue
+  ];
+  @override
+  final String wireName = 'SerializesNullsValue';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, SerializesNullsValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    Object value;
+    value = object.value;
+
+    result
+      ..add('value')
+      ..add(
+          serializers.serialize(value, specifiedType: const FullType(String)));
+
+    return result;
+  }
+
+  @override
+  SerializesNullsValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new SerializesNullsValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$SerializesNullsListSerializer
+    implements StructuredSerializer<SerializesNullsList> {
+  @override
+  final Iterable<Type> types = const [
+    SerializesNullsList,
+    _$SerializesNullsList
+  ];
+  @override
+  final String wireName = 'SerializesNullsList';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, SerializesNullsList object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    Object value;
+    value = object.list;
+
+    result
+      ..add('list')
+      ..add(serializers.serialize(value,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(int)])));
+
+    return result;
+  }
+
+  @override
+  SerializesNullsList deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new SerializesNullsListBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'list':
+          result.list.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(int)]))
+              as BuiltList<Object>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$SerializesNullsMapSerializer
+    implements StructuredSerializer<SerializesNullsMap> {
+  @override
+  final Iterable<Type> types = const [SerializesNullsMap, _$SerializesNullsMap];
+  @override
+  final String wireName = 'SerializesNullsMap';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, SerializesNullsMap object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    Object value;
+    value = object.map;
+
+    result
+      ..add('map')
+      ..add(serializers.serialize(value,
+          specifiedType: const FullType(
+              BuiltMap, const [const FullType(int), const FullType(int)])));
+
+    return result;
+  }
+
+  @override
+  SerializesNullsMap deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new SerializesNullsMapBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'map':
+          result.map.replace(serializers.deserialize(value,
+              specifiedType: const FullType(
+                  BuiltMap, const [const FullType(int), const FullType(int)])));
           break;
       }
     }
@@ -4883,6 +5037,259 @@ class _PrivateValueBuilder
   @override
   _$PrivateValue build() {
     final _$result = _$v ?? new _$PrivateValue._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SerializesNullsValue extends SerializesNullsValue {
+  @override
+  final String value;
+
+  factory _$SerializesNullsValue(
+          [void Function(SerializesNullsValueBuilder) updates]) =>
+      (new SerializesNullsValueBuilder()..update(updates)).build();
+
+  _$SerializesNullsValue._({this.value}) : super._();
+
+  @override
+  SerializesNullsValue rebuild(
+          void Function(SerializesNullsValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SerializesNullsValueBuilder toBuilder() =>
+      new SerializesNullsValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SerializesNullsValue && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SerializesNullsValue')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class SerializesNullsValueBuilder
+    implements Builder<SerializesNullsValue, SerializesNullsValueBuilder> {
+  _$SerializesNullsValue _$v;
+
+  String _value;
+  String get value => _$this._value;
+  set value(String value) => _$this._value = value;
+
+  SerializesNullsValueBuilder();
+
+  SerializesNullsValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SerializesNullsValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$SerializesNullsValue;
+  }
+
+  @override
+  void update(void Function(SerializesNullsValueBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SerializesNullsValue build() {
+    final _$result = _$v ?? new _$SerializesNullsValue._(value: value);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SerializesNullsList extends SerializesNullsList {
+  @override
+  final BuiltList<int> list;
+
+  factory _$SerializesNullsList(
+          [void Function(SerializesNullsListBuilder) updates]) =>
+      (new SerializesNullsListBuilder()..update(updates)).build();
+
+  _$SerializesNullsList._({this.list}) : super._();
+
+  @override
+  SerializesNullsList rebuild(
+          void Function(SerializesNullsListBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SerializesNullsListBuilder toBuilder() =>
+      new SerializesNullsListBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SerializesNullsList && list == other.list;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, list.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SerializesNullsList')
+          ..add('list', list))
+        .toString();
+  }
+}
+
+class SerializesNullsListBuilder
+    implements Builder<SerializesNullsList, SerializesNullsListBuilder> {
+  _$SerializesNullsList _$v;
+
+  ListBuilder<int> _list;
+  ListBuilder<int> get list => _$this._list ??= new ListBuilder<int>();
+  set list(ListBuilder<int> list) => _$this._list = list;
+
+  SerializesNullsListBuilder();
+
+  SerializesNullsListBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _list = $v.list?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SerializesNullsList other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$SerializesNullsList;
+  }
+
+  @override
+  void update(void Function(SerializesNullsListBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SerializesNullsList build() {
+    _$SerializesNullsList _$result;
+    try {
+      _$result = _$v ?? new _$SerializesNullsList._(list: _list?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'list';
+        _list?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SerializesNullsList', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SerializesNullsMap extends SerializesNullsMap {
+  @override
+  final BuiltMap<int, int> map;
+
+  factory _$SerializesNullsMap(
+          [void Function(SerializesNullsMapBuilder) updates]) =>
+      (new SerializesNullsMapBuilder()..update(updates)).build();
+
+  _$SerializesNullsMap._({this.map}) : super._();
+
+  @override
+  SerializesNullsMap rebuild(
+          void Function(SerializesNullsMapBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SerializesNullsMapBuilder toBuilder() =>
+      new SerializesNullsMapBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SerializesNullsMap && map == other.map;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, map.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SerializesNullsMap')..add('map', map))
+        .toString();
+  }
+}
+
+class SerializesNullsMapBuilder
+    implements Builder<SerializesNullsMap, SerializesNullsMapBuilder> {
+  _$SerializesNullsMap _$v;
+
+  MapBuilder<int, int> _map;
+  MapBuilder<int, int> get map => _$this._map ??= new MapBuilder<int, int>();
+  set map(MapBuilder<int, int> map) => _$this._map = map;
+
+  SerializesNullsMapBuilder();
+
+  SerializesNullsMapBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _map = $v.map?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SerializesNullsMap other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$SerializesNullsMap;
+  }
+
+  @override
+  void update(void Function(SerializesNullsMapBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SerializesNullsMap build() {
+    _$SerializesNullsMap _$result;
+    try {
+      _$result = _$v ?? new _$SerializesNullsMap._(map: _map?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'map';
+        _map?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SerializesNullsMap', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

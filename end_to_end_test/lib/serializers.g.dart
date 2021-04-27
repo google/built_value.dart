@@ -41,6 +41,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(RecursiveValueB.serializer)
       ..add(Robot.serializer)
       ..add(SecondDiscoverableValue.serializer)
+      ..add(SerializesNullsList.serializer)
+      ..add(SerializesNullsMap.serializer)
+      ..add(SerializesNullsValue.serializer)
       ..add(SimpleValue.serializer)
       ..add(StandardCat.serializer)
       ..add(StandardJsonValue.serializer)
@@ -73,6 +76,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(
               BuiltList, const [const FullType(ThirdDiscoverableValue)]),
           () => new ListBuilder<ThirdDiscoverableValue>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => new ListBuilder<int>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())
@@ -122,6 +128,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltMap, const [const FullType(int), const FullType(int)]),
+          () => new MapBuilder<int, int>())
       ..addBuilderFactory(
           const FullType(GenericValue, const [
             const FullType(
