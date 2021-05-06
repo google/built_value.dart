@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.0.6
+
+- Bump versions of `build_config` and `build_runner`.
+
 # 8.0.5
 
 - Bump version of `analyzer`.
