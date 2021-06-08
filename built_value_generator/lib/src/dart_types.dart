@@ -69,7 +69,8 @@ class DartTypes {
         return dartType.element.name + suffix;
       } else {
         final typeArgumentsStr = typeArguments
-            .map((type) => getName(type, withNullabilitySuffix: true))
+            .map((type) =>
+                getName(type, withNullabilitySuffix: withNullabilitySuffix))
             .join(', ');
         return '${dartType.element.name}<$typeArgumentsStr>$suffix';
       }
