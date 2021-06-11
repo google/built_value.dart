@@ -66,9 +66,12 @@ abstract class JsonObject {
       return ListJsonObject(value);
     } else if (value is Map<String, Object?>) {
       return MapJsonObject(value);
+    } else if (value is Map) {
+      // Allow wrong type map, check individual values.
+      return MapJsonObject(value.cast());
     } else {
       throw ArgumentError.value(value, 'value',
-          'Must be bool, List<Object>, Map<String, Object>, num or String');
+          'Must be bool, List<Object?>, Map<String?, Object?>, num or String');
     }
   }
 
