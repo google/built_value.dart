@@ -4,6 +4,7 @@
 
 - Support use of nulls in collections when the key or value types are
   explicitly nullable.
+- Allow `JsonObject` to be instantiated from a `Map<dynamic, dynamic>`.
 
 # 8.0.6
 
