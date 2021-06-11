@@ -134,6 +134,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
           ]),
           () => new ListBuilder<Foo<int?>>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(
+                BuiltList, const [const FullType.nullable(int)])
+          ]),
+          () => new ListBuilder<BuiltList<int?>?>())
+      ..addBuilderFactory(
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(JsonObject)]),
           () => new MapBuilder<String, JsonObject>())

@@ -258,6 +258,10 @@ class FullType {
 
   bool get isUnspecified => identical(root, null);
 
+  FullType withNullability(bool nullability) => nullability
+      ? FullType.nullable(root, parameters)
+      : FullType(root, parameters);
+
   @override
   bool operator ==(dynamic other) {
     if (identical(other, this)) return true;

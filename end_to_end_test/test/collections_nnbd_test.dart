@@ -94,6 +94,7 @@ void main() {
             collections.nullableListMultimap,
             collections.nullableSetMultimap,
             collections.nullableInGenericsList,
+            collections.nestedNullablesList,
           ]));
     });
 
