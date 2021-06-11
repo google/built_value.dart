@@ -91,6 +91,26 @@ Serializers _$serializers = (new Serializers().toBuilder()
               const [const FullType(String), const FullType(bool)]),
           () => new SetMultimapBuilder<String, bool>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(int)]),
+          () => new ListBuilder<int?>())
+      ..addBuilderFactory(
+          const FullType(BuiltSet, const [const FullType.nullable(String)]),
+          () => new SetBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType.nullable(String),
+            const FullType.nullable(int)
+          ]),
+          () => new MapBuilder<String?, int?>())
+      ..addBuilderFactory(
+          const FullType(BuiltListMultimap,
+              const [const FullType.nullable(int), const FullType(bool)]),
+          () => new ListMultimapBuilder<int?, bool>())
+      ..addBuilderFactory(
+          const FullType(BuiltSetMultimap,
+              const [const FullType(String), const FullType.nullable(bool)]),
+          () => new SetMultimapBuilder<String, bool?>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())
       ..addBuilderFactory(
@@ -110,7 +130,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new SetMultimapBuilder<String, bool>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
-            const FullType(Foo, const [const FullType(int)])
+            const FullType(Foo, const [const FullType.nullable(int)])
           ]),
           () => new ListBuilder<Foo<int?>>())
       ..addBuilderFactory(

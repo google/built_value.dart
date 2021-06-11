@@ -57,7 +57,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
           result.simpleValues.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(prefix.SimpleValue)]))!
-              as BuiltList<Object>);
+              as BuiltList<Object?>);
           break;
       }
     }
@@ -171,7 +171,7 @@ class _$ImportedCustomNestedValueSerializer
           result.simpleValues.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(prefix.SimpleValue)]))!
-              as BuiltList<Object>);
+              as BuiltList<Object?>);
           break;
       }
     }

@@ -249,7 +249,12 @@ class FullType {
   /// Type parameters of the type.
   final List<FullType> parameters;
 
-  const FullType(this.root, [this.parameters = const []]);
+  /// Whether the type is nullable.
+  final bool nullable;
+
+  const FullType(this.root, [this.parameters = const []]) : nullable = false;
+  const FullType.nullable(this.root, [this.parameters = const []])
+      : nullable = true;
 
   bool get isUnspecified => identical(root, null);
 
@@ -258,6 +263,7 @@ class FullType {
     if (identical(other, this)) return true;
     if (other is! FullType) return false;
     if (root != other.root) return false;
+    if (nullable != other.nullable) return false;
     if (parameters.length != other.parameters.length) return false;
     for (var i = 0; i != parameters.length; ++i) {
       if (parameters[i] != other.parameters[i]) return false;
@@ -267,15 +273,18 @@ class FullType {
 
   @override
   int get hashCode {
-    return hash2(root, hashObjects(parameters));
+    return hash2(root, hashObjects(parameters)) ^ (nullable ? 0x696eefd9 : 0);
   }
 
   @override
   String toString() => isUnspecified
       ? 'unspecified'
-      : parameters.isEmpty
-          ? _getRawName(root)
-          : '${_getRawName(root)}<${parameters.join(", ")}>';
+      : (parameters.isEmpty
+              ? _getRawName(root)
+              : '${_getRawName(root)}<${parameters.join(", ")}>') +
+          _nullabilitySuffix;
+
+  String get _nullabilitySuffix => nullable ? '?' : '';
 
   static String _getRawName(Type? type) {
     var name = type.toString();

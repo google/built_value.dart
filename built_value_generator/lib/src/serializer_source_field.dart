@@ -15,6 +15,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/metadata.dart'
     show metadataToStringValue;
+import 'package:built_value_generator/src/strings.dart';
 
 part 'serializer_source_field.g.dart';
 
@@ -67,6 +68,12 @@ abstract class SerializerSourceField
   }
 
   @memoized
+  bool get isNonNullByDefault => element.library.isNonNullableByDefault;
+
+  @memoized
+  String get orNull => isNonNullByDefault ? '?' : '';
+
+  @memoized
   bool get hasNullableAnnotation => element.getter.metadata
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
 
@@ -85,19 +92,25 @@ abstract class SerializerSourceField
   String get wireName => builtValueField.wireName ?? name;
 
   @memoized
-  String get type => DartTypes.getName(element.getter.returnType);
+  String get type => stripNullabilitySuffix(typeWithNullabilitySuffix);
+
+  @memoized
+  String get typeWithNullabilitySuffix =>
+      DartTypes.getName(element.getter.returnType, withNullabilitySuffix: true);
+
+  /// The [type] plus any import prefix, with any nullability suffix.
+  @memoized
+  String get typeWithPrefix =>
+      stripNullabilitySuffix(typeWithPrefixAndNullabilitySuffix);
 
   /// The [type] plus any import prefix, without any nullability suffix.
   @memoized
-  String get typeWithPrefix {
+  String get typeWithPrefixAndNullabilitySuffix {
     var declaration = parsedLibrary.getElementDeclaration(element.getter);
     var typeFromAst =
         (declaration.node as MethodDeclaration)?.returnType?.toString() ??
             'dynamic';
-    if (typeFromAst.endsWith('?')) {
-      typeFromAst = typeFromAst.substring(0, typeFromAst.length - 1);
-    }
-    var typeFromElement = type;
+    var typeFromElement = typeWithNullabilitySuffix;
 
     // If the type is a function, we can't use the element result; it is
     // formatted incorrectly.
@@ -112,10 +125,17 @@ abstract class SerializerSourceField
 
   /// Returns the type with import prefix if the compilation unit matches,
   /// otherwise the type with no import prefix.
-  String typeInCompilationUnit(CompilationUnitElement compilationUnitElement) {
+  String typeInCompilationUnit(CompilationUnitElement compilationUnitElement) =>
+      stripNullabilitySuffix(
+          typeInCompilationUnitWithNullabilitySuffix(compilationUnitElement));
+
+  /// Returns the type with import prefix if the compilation unit matches,
+  /// otherwise the type with no import prefix.
+  String typeInCompilationUnitWithNullabilitySuffix(
+      CompilationUnitElement compilationUnitElement) {
     return compilationUnitElement == element.library.definingCompilationUnit
-        ? typeWithPrefix
-        : type;
+        ? typeWithPrefixAndNullabilitySuffix
+        : typeWithNullabilitySuffix;
   }
 
   @memoized
@@ -139,7 +159,8 @@ abstract class SerializerSourceField
 
   String generateFullType(CompilationUnitElement compilationUnit,
       [BuiltSet<String> classGenericParameters]) {
-    return _generateFullType(typeInCompilationUnit(compilationUnit),
+    return _generateFullType(
+        typeInCompilationUnitWithNullabilitySuffix(compilationUnit),
         classGenericParameters ?? BuiltSet<String>());
   }
 
@@ -180,29 +201,35 @@ abstract class SerializerSourceField
   }
 
   static String _generateFullType(
-      String type, BuiltSet<String> classGenericParameters) {
+      String type, BuiltSet<String> classGenericParameters,
+      {bool includeNullability = false}) {
     var bareType = _getBareType(type);
     var generics = _getGenerics(type);
     var genericItems = _splitOnTopLevelCommas(generics);
+    var maybeNullability =
+        includeNullability && type.endsWith('?') ? '.nullable' : '';
 
     if (generics.isEmpty) {
       if (classGenericParameters.contains(bareType)) {
         return 'parameter$bareType';
       }
-      return 'const FullType($bareType)';
+      return 'const FullType$maybeNullability($bareType)';
     } else {
       final parameterFullTypes = genericItems
-          .map((item) => _generateFullType(item, classGenericParameters))
+          .map((item) => _generateFullType(item, classGenericParameters,
+              includeNullability: true))
           .join(', ');
       final canUseConst = parameterFullTypes.startsWith('const ');
       final constOrNew = canUseConst ? 'const' : 'new';
       final constOrEmpty = canUseConst ? 'const' : '';
-      return '$constOrNew FullType($bareType, $constOrEmpty [$parameterFullTypes])';
+      return '$constOrNew FullType$maybeNullability('
+          '$bareType, $constOrEmpty [$parameterFullTypes])';
     }
   }
 
   String _generateCast(String type, BuiltMap<String, String> classGenericBounds,
       {bool topLevel = true}) {
+    var resultNullabilitySuffix = (!topLevel && type.endsWith('?')) ? '?' : '';
     var bareType = _getBareType(type);
 
     // `built_collection` `replace` methods don't care about the full generic
@@ -214,7 +241,7 @@ abstract class SerializerSourceField
         DartTypes.isBuiltCollectionTypeName(bareType) &&
         builderFieldUsesNestedBuilder) {
       if (bareType == 'BuiltList' || bareType == 'BuiltSet') {
-        generics = 'Object';
+        generics = 'Object$orNull';
       } else if (bareType == 'BuiltMap' ||
           bareType == 'BuiltListMultimap' ||
           bareType == 'BuiltSetMultimap') {
@@ -235,13 +262,13 @@ abstract class SerializerSourceField
       if (classGenericBounds.keys.contains(bareType)) {
         return classGenericBounds[bareType];
       }
-      return bareType;
+      return bareType + resultNullabilitySuffix;
     } else {
       final parameterFullTypes = genericItems
           .map((item) =>
               _generateCast(item, classGenericBounds, topLevel: false))
           .join(', ');
-      return '$bareType<$parameterFullTypes>';
+      return '$bareType<$parameterFullTypes>$resultNullabilitySuffix';
     }
   }
 
@@ -254,11 +281,11 @@ abstract class SerializerSourceField
 
   static String _getGenerics(String name) {
     var genericsStart = name.indexOf('<');
+    var hasNullableSuffix = name.endsWith('?');
     return genericsStart == -1
         ? ''
-        : name
-            .substring(genericsStart + 1)
-            .substring(0, name.length - genericsStart - 2);
+        : name.substring(genericsStart + 1).substring(
+            0, name.length - genericsStart - 2 - (hasNullableSuffix ? 1 : 0));
   }
 
   /// Splits a generic parameter string on top level commas; that means
