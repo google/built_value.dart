@@ -18,6 +18,12 @@ abstract class Collections implements Built<Collections, CollectionsBuilder> {
   BuiltListMultimap<int, bool> get listMultimap;
   BuiltSetMultimap<String, bool> get setMultimap;
 
+  BuiltList<int?> get nullsInList;
+  BuiltSet<String?> get nullsInSet;
+  BuiltMap<String?, int?> get nullsInMap;
+  BuiltListMultimap<int?, bool> get nullsInListMultimap;
+  BuiltSetMultimap<String, bool?> get nullsInSetMultimap;
+
   BuiltList<int>? get nullableList;
   BuiltSet<String>? get nullableSet;
   BuiltMap<String, int>? get nullableMap;

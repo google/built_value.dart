@@ -102,7 +102,9 @@ class BuiltJsonSerializers implements Serializers {
             .serialize(this, object, specifiedType: specifiedType)
             .toList();
       } else if (serializer is PrimitiveSerializer) {
-        return serializer.serialize(this, object, specifiedType: specifiedType);
+        return object == null
+            ? null
+            : serializer.serialize(this, object, specifiedType: specifiedType);
       } else {
         throw StateError(
             'serializer must be StructuredSerializer or PrimitiveSerializer');

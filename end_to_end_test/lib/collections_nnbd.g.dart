@@ -39,10 +39,32 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
       serializers.serialize(object.setMultimap,
           specifiedType: const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType(bool)])),
+      'nullsInList',
+      serializers.serialize(object.nullsInList,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType.nullable(int)])),
+      'nullsInSet',
+      serializers.serialize(object.nullsInSet,
+          specifiedType: const FullType(
+              BuiltSet, const [const FullType.nullable(String)])),
+      'nullsInMap',
+      serializers.serialize(object.nullsInMap,
+          specifiedType: const FullType(BuiltMap, const [
+            const FullType.nullable(String),
+            const FullType.nullable(int)
+          ])),
+      'nullsInListMultimap',
+      serializers.serialize(object.nullsInListMultimap,
+          specifiedType: const FullType(BuiltListMultimap,
+              const [const FullType.nullable(int), const FullType(bool)])),
+      'nullsInSetMultimap',
+      serializers.serialize(object.nullsInSetMultimap,
+          specifiedType: const FullType(BuiltSetMultimap,
+              const [const FullType(String), const FullType.nullable(bool)])),
       'nullableInGenericsList',
       serializers.serialize(object.nullableInGenericsList,
           specifiedType: const FullType(BuiltList, const [
-            const FullType(Foo, const [const FullType(int)])
+            const FullType(Foo, const [const FullType.nullable(int)])
           ])),
     ];
     Object? value;
@@ -104,13 +126,13 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
           result.list.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(int)]))!
-              as BuiltList<Object>);
+              as BuiltList<Object?>);
           break;
         case 'set':
           result.set.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltSet, const [const FullType(String)]))!
-              as BuiltSet<Object>);
+              as BuiltSet<Object?>);
           break;
         case 'map':
           result.map.replace(serializers.deserialize(value,
@@ -127,17 +149,50 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
               specifiedType: const FullType(BuiltSetMultimap,
                   const [const FullType(String), const FullType(bool)]))!);
           break;
+        case 'nullsInList':
+          result.nullsInList.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType.nullable(int)]))!
+              as BuiltList<Object?>);
+          break;
+        case 'nullsInSet':
+          result.nullsInSet.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltSet, const [const FullType.nullable(String)]))!
+              as BuiltSet<Object?>);
+          break;
+        case 'nullsInMap':
+          result.nullsInMap.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType.nullable(String),
+                const FullType.nullable(int)
+              ]))!);
+          break;
+        case 'nullsInListMultimap':
+          result.nullsInListMultimap.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltListMultimap, const [
+                const FullType.nullable(int),
+                const FullType(bool)
+              ]))!);
+          break;
+        case 'nullsInSetMultimap':
+          result.nullsInSetMultimap.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltSetMultimap, const [
+                const FullType(String),
+                const FullType.nullable(bool)
+              ]))!);
+          break;
         case 'nullableList':
           result.nullableList.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(int)]))!
-              as BuiltList<Object>);
+              as BuiltList<Object?>);
           break;
         case 'nullableSet':
           result.nullableSet.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltSet, const [const FullType(String)]))!
-              as BuiltSet<Object>);
+              as BuiltSet<Object?>);
           break;
         case 'nullableMap':
           result.nullableMap.replace(serializers.deserialize(value,
@@ -157,8 +212,8 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
         case 'nullableInGenericsList':
           result.nullableInGenericsList.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType(Foo, const [const FullType(int)])
-              ]))! as BuiltList<Object>);
+                const FullType(Foo, const [const FullType.nullable(int)])
+              ]))! as BuiltList<Object?>);
           break;
       }
     }
@@ -178,6 +233,16 @@ class _$Collections extends Collections {
   final BuiltListMultimap<int, bool> listMultimap;
   @override
   final BuiltSetMultimap<String, bool> setMultimap;
+  @override
+  final BuiltList<int?> nullsInList;
+  @override
+  final BuiltSet<String?> nullsInSet;
+  @override
+  final BuiltMap<String?, int?> nullsInMap;
+  @override
+  final BuiltListMultimap<int?, bool> nullsInListMultimap;
+  @override
+  final BuiltSetMultimap<String, bool?> nullsInSetMultimap;
   @override
   final BuiltList<int>? nullableList;
   @override
@@ -200,6 +265,11 @@ class _$Collections extends Collections {
       required this.map,
       required this.listMultimap,
       required this.setMultimap,
+      required this.nullsInList,
+      required this.nullsInSet,
+      required this.nullsInMap,
+      required this.nullsInListMultimap,
+      required this.nullsInSetMultimap,
       this.nullableList,
       this.nullableSet,
       this.nullableMap,
@@ -214,6 +284,16 @@ class _$Collections extends Collections {
         listMultimap, 'Collections', 'listMultimap');
     BuiltValueNullFieldError.checkNotNull(
         setMultimap, 'Collections', 'setMultimap');
+    BuiltValueNullFieldError.checkNotNull(
+        nullsInList, 'Collections', 'nullsInList');
+    BuiltValueNullFieldError.checkNotNull(
+        nullsInSet, 'Collections', 'nullsInSet');
+    BuiltValueNullFieldError.checkNotNull(
+        nullsInMap, 'Collections', 'nullsInMap');
+    BuiltValueNullFieldError.checkNotNull(
+        nullsInListMultimap, 'Collections', 'nullsInListMultimap');
+    BuiltValueNullFieldError.checkNotNull(
+        nullsInSetMultimap, 'Collections', 'nullsInSetMultimap');
     BuiltValueNullFieldError.checkNotNull(
         nullableInGenericsList, 'Collections', 'nullableInGenericsList');
   }
@@ -234,6 +314,11 @@ class _$Collections extends Collections {
         map == other.map &&
         listMultimap == other.listMultimap &&
         setMultimap == other.setMultimap &&
+        nullsInList == other.nullsInList &&
+        nullsInSet == other.nullsInSet &&
+        nullsInMap == other.nullsInMap &&
+        nullsInListMultimap == other.nullsInListMultimap &&
+        nullsInSetMultimap == other.nullsInSetMultimap &&
         nullableList == other.nullableList &&
         nullableSet == other.nullableSet &&
         nullableMap == other.nullableMap &&
@@ -253,11 +338,23 @@ class _$Collections extends Collections {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, list.hashCode),
-                                            set.hashCode),
-                                        map.hashCode),
-                                    listMultimap.hashCode),
-                                setMultimap.hashCode),
+                                        $jc(
+                                            $jc(
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(
+                                                                $jc(0,
+                                                                    list.hashCode),
+                                                                set.hashCode),
+                                                            map.hashCode),
+                                                        listMultimap.hashCode),
+                                                    setMultimap.hashCode),
+                                                nullsInList.hashCode),
+                                            nullsInSet.hashCode),
+                                        nullsInMap.hashCode),
+                                    nullsInListMultimap.hashCode),
+                                nullsInSetMultimap.hashCode),
                             nullableList.hashCode),
                         nullableSet.hashCode),
                     nullableMap.hashCode),
@@ -274,6 +371,11 @@ class _$Collections extends Collections {
           ..add('map', map)
           ..add('listMultimap', listMultimap)
           ..add('setMultimap', setMultimap)
+          ..add('nullsInList', nullsInList)
+          ..add('nullsInSet', nullsInSet)
+          ..add('nullsInMap', nullsInMap)
+          ..add('nullsInListMultimap', nullsInListMultimap)
+          ..add('nullsInSetMultimap', nullsInSetMultimap)
           ..add('nullableList', nullableList)
           ..add('nullableSet', nullableSet)
           ..add('nullableMap', nullableMap)
@@ -311,6 +413,38 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
       _$this._setMultimap ??= new SetMultimapBuilder<String, bool>();
   set setMultimap(SetMultimapBuilder<String, bool>? setMultimap) =>
       _$this._setMultimap = setMultimap;
+
+  ListBuilder<int?>? _nullsInList;
+  ListBuilder<int?> get nullsInList =>
+      _$this._nullsInList ??= new ListBuilder<int?>();
+  set nullsInList(ListBuilder<int?>? nullsInList) =>
+      _$this._nullsInList = nullsInList;
+
+  SetBuilder<String?>? _nullsInSet;
+  SetBuilder<String?> get nullsInSet =>
+      _$this._nullsInSet ??= new SetBuilder<String?>();
+  set nullsInSet(SetBuilder<String?>? nullsInSet) =>
+      _$this._nullsInSet = nullsInSet;
+
+  MapBuilder<String?, int?>? _nullsInMap;
+  MapBuilder<String?, int?> get nullsInMap =>
+      _$this._nullsInMap ??= new MapBuilder<String?, int?>();
+  set nullsInMap(MapBuilder<String?, int?>? nullsInMap) =>
+      _$this._nullsInMap = nullsInMap;
+
+  ListMultimapBuilder<int?, bool>? _nullsInListMultimap;
+  ListMultimapBuilder<int?, bool> get nullsInListMultimap =>
+      _$this._nullsInListMultimap ??= new ListMultimapBuilder<int?, bool>();
+  set nullsInListMultimap(
+          ListMultimapBuilder<int?, bool>? nullsInListMultimap) =>
+      _$this._nullsInListMultimap = nullsInListMultimap;
+
+  SetMultimapBuilder<String, bool?>? _nullsInSetMultimap;
+  SetMultimapBuilder<String, bool?> get nullsInSetMultimap =>
+      _$this._nullsInSetMultimap ??= new SetMultimapBuilder<String, bool?>();
+  set nullsInSetMultimap(
+          SetMultimapBuilder<String, bool?>? nullsInSetMultimap) =>
+      _$this._nullsInSetMultimap = nullsInSetMultimap;
 
   ListBuilder<int>? _nullableList;
   ListBuilder<int> get nullableList =>
@@ -360,6 +494,11 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
       _map = $v.map.toBuilder();
       _listMultimap = $v.listMultimap.toBuilder();
       _setMultimap = $v.setMultimap.toBuilder();
+      _nullsInList = $v.nullsInList.toBuilder();
+      _nullsInSet = $v.nullsInSet.toBuilder();
+      _nullsInMap = $v.nullsInMap.toBuilder();
+      _nullsInListMultimap = $v.nullsInListMultimap.toBuilder();
+      _nullsInSetMultimap = $v.nullsInSetMultimap.toBuilder();
       _nullableList = $v.nullableList?.toBuilder();
       _nullableSet = $v.nullableSet?.toBuilder();
       _nullableMap = $v.nullableMap?.toBuilder();
@@ -393,6 +532,11 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
               map: map.build(),
               listMultimap: listMultimap.build(),
               setMultimap: setMultimap.build(),
+              nullsInList: nullsInList.build(),
+              nullsInSet: nullsInSet.build(),
+              nullsInMap: nullsInMap.build(),
+              nullsInListMultimap: nullsInListMultimap.build(),
+              nullsInSetMultimap: nullsInSetMultimap.build(),
               nullableList: _nullableList?.build(),
               nullableSet: _nullableSet?.build(),
               nullableMap: _nullableMap?.build(),
@@ -412,6 +556,16 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
         listMultimap.build();
         _$failedField = 'setMultimap';
         setMultimap.build();
+        _$failedField = 'nullsInList';
+        nullsInList.build();
+        _$failedField = 'nullsInSet';
+        nullsInSet.build();
+        _$failedField = 'nullsInMap';
+        nullsInMap.build();
+        _$failedField = 'nullsInListMultimap';
+        nullsInListMultimap.build();
+        _$failedField = 'nullsInSetMultimap';
+        nullsInSetMultimap.build();
         _$failedField = 'nullableList';
         _nullableList?.build();
         _$failedField = 'nullableSet';

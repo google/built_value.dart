@@ -81,19 +81,19 @@ class _$StandardJsonValueSerializer
           result.zoo.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(Animal)]))!
-              as BuiltList<Object>);
+              as BuiltList<Object?>);
           break;
         case 'uniqueZoo':
           result.uniqueZoo.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltSet, const [const FullType(Animal)]))!
-              as BuiltSet<Object>);
+              as BuiltSet<Object?>);
           break;
         case 'strings':
           result.strings.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(String)]))!
-              as BuiltList<Object>);
+              as BuiltList<Object?>);
           break;
       }
     }

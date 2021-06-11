@@ -18,13 +18,17 @@ class _$SerializerSourceField extends SerializerSourceField {
   final FieldElement builderElement;
   bool __isSerializable;
   BuiltValueField __builtValueField;
+  bool __isNonNullByDefault;
+  String __orNull;
   bool __hasNullableAnnotation;
   bool __hasNullableType;
   bool __isNullable;
   String __name;
   String __wireName;
   String __type;
+  String __typeWithNullabilitySuffix;
   String __typeWithPrefix;
+  String __typeWithPrefixAndNullabilitySuffix;
   bool __builderFieldUsesNestedBuilder;
   String __rawType;
   bool __needsBuilder;
@@ -52,6 +56,13 @@ class _$SerializerSourceField extends SerializerSourceField {
       __builtValueField ??= super.builtValueField;
 
   @override
+  bool get isNonNullByDefault =>
+      __isNonNullByDefault ??= super.isNonNullByDefault;
+
+  @override
+  String get orNull => __orNull ??= super.orNull;
+
+  @override
   bool get hasNullableAnnotation =>
       __hasNullableAnnotation ??= super.hasNullableAnnotation;
 
@@ -71,7 +82,16 @@ class _$SerializerSourceField extends SerializerSourceField {
   String get type => __type ??= super.type;
 
   @override
+  String get typeWithNullabilitySuffix =>
+      __typeWithNullabilitySuffix ??= super.typeWithNullabilitySuffix;
+
+  @override
   String get typeWithPrefix => __typeWithPrefix ??= super.typeWithPrefix;
+
+  @override
+  String get typeWithPrefixAndNullabilitySuffix =>
+      __typeWithPrefixAndNullabilitySuffix ??=
+          super.typeWithPrefixAndNullabilitySuffix;
 
   @override
   bool get builderFieldUsesNestedBuilder =>

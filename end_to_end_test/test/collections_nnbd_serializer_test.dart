@@ -15,6 +15,13 @@ void main() {
       ..list.add(1)
       ..set.add('two')
       ..map['three'] = 4
+      ..nullsInList.replace(<int?>[1, null])
+      ..nullsInSet.replace(<String?>['one', null])
+      ..nullsInMap.addAll({null: 1, 'two': 2})
+      ..nullsInListMultimap.add(null, false)
+      ..nullsInListMultimap.add(1, true)
+      ..nullsInSetMultimap.add('one', null)
+      ..nullsInSetMultimap.add('two', true)
       ..listMultimap.addValues(4, [true, false])
       ..setMultimap.addValues('five', [true, false]));
     var serialized = json.decode(json.encode([
@@ -34,6 +41,26 @@ void main() {
       [
         'five',
         [true, false]
+      ],
+      'nullsInList',
+      <int?>[1, null],
+      'nullsInSet',
+      <String?>['one', null],
+      'nullsInMap',
+      <Object?>[null, 1, 'two', 2],
+      'nullsInListMultimap',
+      [
+        null,
+        [false],
+        1,
+        [true],
+      ],
+      'nullsInSetMultimap',
+      [
+        'one',
+        [null],
+        'two',
+        [true],
       ],
       'nullableInGenericsList',
       <Object>[],
