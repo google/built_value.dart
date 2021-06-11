@@ -5,6 +5,8 @@
 
 import 'dart:convert';
 
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/collections_nnbd.dart';
 import 'package:end_to_end_test/serializers_nnbd.dart';
 import 'package:test/test.dart';
@@ -23,7 +25,11 @@ void main() {
       ..nullsInSetMultimap.add('one', null)
       ..nullsInSetMultimap.add('two', true)
       ..listMultimap.addValues(4, [true, false])
-      ..setMultimap.addValues('five', [true, false]));
+      ..setMultimap.addValues('five', [true, false])
+      ..nestedNullablesList.replace(<BuiltList<int?>?>[
+        null,
+        BuiltList<int?>(<int?>[1, null]),
+      ]));
     var serialized = json.decode(json.encode([
       'Collections',
       'list',
@@ -64,14 +70,23 @@ void main() {
       ],
       'nullableInGenericsList',
       <Object>[],
+      'nestedNullablesList',
+      [
+        null,
+        [1, null],
+      ],
     ])) as Object;
+    var serializersWithBuilder = (serializers.toBuilder()
+          ..addBuilderFactory(FullType(BuiltList, [FullType.nullable(int)]),
+              () => ListBuilder<int?>()))
+        .build();
 
     test('can be serialized', () {
-      expect(serializers.serialize(data), serialized);
+      expect(serializersWithBuilder.serialize(data), serialized);
     });
 
     test('can be deserialized', () {
-      expect(serializers.deserialize(serialized), data);
+      expect(serializersWithBuilder.deserialize(serialized), data);
     });
   });
 }

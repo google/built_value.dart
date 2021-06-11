@@ -98,9 +98,11 @@ class BuiltJsonSerializers implements Serializers {
         return serialize(object);
       }
       if (serializer is StructuredSerializer) {
-        return serializer
-            .serialize(this, object, specifiedType: specifiedType)
-            .toList();
+        return object == null
+            ? null
+            : serializer
+                .serialize(this, object, specifiedType: specifiedType)
+                .toList();
       } else if (serializer is PrimitiveSerializer) {
         return object == null
             ? null
@@ -169,8 +171,10 @@ class BuiltJsonSerializers implements Serializers {
 
       if (serializer is StructuredSerializer) {
         try {
-          return serializer.deserialize(this, object as Iterable<Object?>,
-              specifiedType: specifiedType);
+          return object == null
+              ? null
+              : serializer.deserialize(this, object as Iterable<Object?>,
+                  specifiedType: specifiedType);
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
@@ -278,6 +282,10 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   @override
   void addBuilderFactory(FullType types, Function function) {
     _builderFactories[types] = function;
+    // Nullability of the top level type is irrelevant to serialization, but
+    // lookup might be done with either nullable or not nullable depending
+    // on the context. So, store both for fast lookup.
+    _builderFactories[types.withNullability(!types.nullable)] = function;
   }
 
   @override

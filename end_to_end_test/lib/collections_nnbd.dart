@@ -32,6 +32,8 @@ abstract class Collections implements Built<Collections, CollectionsBuilder> {
 
   BuiltList<Foo<int?>> get nullableInGenericsList;
 
+  BuiltList<BuiltList<int?>?> get nestedNullablesList;
+
   factory Collections([void Function(CollectionsBuilder) updates]) =
       _$Collections;
   Collections._();

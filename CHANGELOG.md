@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.0.7 (unreleased)
+
+- Support use of nulls in collections when the key or value types are
+  explicitly nullable.
+
 # 8.0.6
 
 - Bump versions of `build_config` and `build_runner`.
