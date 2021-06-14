@@ -5,6 +5,7 @@
 import 'package:built_value/serializer.dart';
 import 'package:built_value/src/date_time_serializer.dart';
 import 'package:built_value/src/int_serializer.dart';
+import 'package:built_value/standard_json_plugin.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -13,6 +14,8 @@ void main() {
         ..addAll([TestSerializer()])
         ..addBuilderFactory(FullType(TestSerializer), () => null))
       .build();
+  final serializersWithPlugin =
+      (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
 
   group(Serializers, () {
     test('exposes iterable of serializer', () {
@@ -49,6 +52,43 @@ void main() {
     test('provides convenience fromJson method', () {
       expect(serializers.fromJson(DateTimeSerializer(), '1577836800000000'),
           DateTime.utc(2020, 1, 1));
+    });
+
+    test('serializes null int to null', () {
+      expect(serializers.serialize(null, specifiedType: FullType(int)), null);
+    });
+
+    test('deserializes null int from null', () {
+      expect(serializers.deserialize(null, specifiedType: FullType(int)), null);
+    });
+
+    test('serializes null int to null when plugin is installed', () {
+      expect(
+          serializersWithPlugin.serialize(null, specifiedType: FullType(int)),
+          null);
+    });
+
+    test('deserializes null int from null when plugin is installed', () {
+      expect(
+          serializersWithPlugin.deserialize(null, specifiedType: FullType(int)),
+          null);
+    });
+
+    test('serializes unknown type null to null', () {
+      expect(serializers.serialize(null), ['Null', null]);
+    });
+
+    test('deserializes null from unknown type null', () {
+      expect(serializers.deserialize(['Null', null]), null);
+    });
+
+    test('serializes unknown type null to null when plugin is installed', () {
+      expect(serializersWithPlugin.serialize(null), {r'$': 'Null', '': null});
+    });
+
+    test('deserializes null from unknown type null when plugin is installed',
+        () {
+      expect(serializersWithPlugin.deserialize({r'$': 'Null', '': null}), null);
     });
   });
 }

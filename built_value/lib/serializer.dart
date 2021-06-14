@@ -21,6 +21,7 @@ import 'src/built_set_multimap_serializer.dart';
 import 'src/built_set_serializer.dart';
 import 'src/double_serializer.dart';
 import 'src/int_serializer.dart';
+import 'src/null_serializer.dart';
 import 'src/regexp_serializer.dart';
 import 'src/string_serializer.dart';
 
@@ -67,6 +68,7 @@ abstract class Serializers {
           ..add(IntSerializer())
           ..add(Int64Serializer())
           ..add(JsonObjectSerializer())
+          ..add(NullSerializer())
           ..add(NumSerializer())
           ..add(RegExpSerializer())
           ..add(StringSerializer())
