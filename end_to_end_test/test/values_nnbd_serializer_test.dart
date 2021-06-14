@@ -37,6 +37,41 @@ void main() {
     test('can be deserialized', () {
       expect(serializers.deserialize(serialized), data);
     });
+
+    test('can be deserialized from json with explicit null', () {
+      var data = SimpleValue((b) => b
+        ..anInt = 1
+        ..$mustBeEscaped = true);
+      var serialized = json.decode(json.encode([
+        'SimpleValue',
+        'anInt',
+        1,
+        'aString',
+        null,
+        '\$mustBeEscaped',
+        true,
+      ])) as Object;
+
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
+
+  group('SimpleValue with null nullable field', () {
+    var data = SimpleValue((b) => b
+      ..anInt = 1
+      ..$mustBeEscaped = true);
+    var serialized = json.decode(json.encode([
+      'SimpleValue',
+      'anInt',
+      1,
+      '\$mustBeEscaped',
+      true,
+    ])) as List<Object?>;
+    serialized.addAll(['aString', null]);
+
+    test('can be deserialized with explicit null', () {
+      expect(serializers.deserialize(serialized), data);
+    });
   });
 
   group('CompoundValue', () {

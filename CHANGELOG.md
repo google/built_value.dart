@@ -8,6 +8,7 @@
 - Mark nested builder getters in `instantiable: false` classes not nullable,
   to match the implementations. Use `autoCreateNestedBuilders: false` to get
   the old behaviour.
+- Allow explicit nulls in JSON for nullable fields when deserializing.
 
 # 8.0.6
 
