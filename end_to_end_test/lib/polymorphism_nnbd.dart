@@ -212,3 +212,32 @@ abstract class ImplementsTwo
       _$ImplementsTwo;
   ImplementsTwo._();
 }
+
+// Nullability of nested builders.
+@BuiltValue(instantiable: false)
+abstract class Vehicle {
+  // some property
+  VehicleColor get color;
+
+  // common BuiltValue interface
+  Vehicle rebuild(void Function(VehicleBuilder b) updates);
+  VehicleBuilder toBuilder();
+}
+
+abstract class Car implements Vehicle, Built<Car, CarBuilder> {
+  Car._();
+
+  factory Car([void Function(CarBuilder)? updates]) = _$Car;
+
+  int get seatsCount;
+}
+
+abstract class VehicleColor
+    implements Built<VehicleColor, VehicleColorBuilder> {
+  VehicleColor._();
+
+  factory VehicleColor([void Function(VehicleColorBuilder)? updates]) =
+      _$VehicleColor;
+
+  String get label;
+}

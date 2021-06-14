@@ -145,4 +145,14 @@ void main() {
       expect(updatedHandCoded.fieldInBaseBuilder, 4);
     });
   });
+
+  group(Vehicle, () {
+    test('nested builder getter is not nullable', () {
+      // This is purely a static check, the function isn't actually called.
+      // Access `b.color` without `!` to ensure the getter is not nullable.
+      (Vehicle vehicle) {
+        return vehicle.rebuild((b) => b.color.replace(VehicleColor()));
+      };
+    });
+  });
 }
