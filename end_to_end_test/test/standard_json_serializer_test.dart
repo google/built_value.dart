@@ -56,14 +56,6 @@ void main() {
           serialized);
     });
 
-    test('serializes to Map<String, Object>', () {
-      expect(
-          serializersWithPlugin
-              .serialize(data, specifiedType: specifiedType)
-              .runtimeType,
-          <String, Object>{}.runtimeType);
-    });
-
     test('can be deserialized', () {
       expect(
           serializersWithPlugin.deserialize(serialized,
