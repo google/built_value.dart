@@ -18,6 +18,10 @@ void main() {
     var data = StandardJsonValue((b) => b
       ..number = 3
       ..text = 'some text'
+      ..value.primitive = 4
+      ..value.nullablePrimitive = 5
+      ..value.value.anInt = 6
+      ..value.nullableValue.anInt = 7
       ..keyValues['one'] = JsonObject(1)
       ..keyValues['two'] = JsonObject('two')
       ..keyValues['three'] = JsonObject(true)
@@ -28,13 +32,29 @@ void main() {
         ..legs = 4))
       ..uniqueZoo.add(Cat((b) => b
         ..tail = false
-        ..legs = 3)));
+        ..legs = 3))
+      ..nullsInList.replace(<Object?>[null, 3])
+      ..nullsInSet.replace(<Object?>['three', null])
+      ..nullsInMap['four'] = null
+      ..nullsInMap['five'] = 5
+      ..object = ComplexValue((b) => b
+        ..primitive = 6
+        ..value.anInt = 7)
+      ..objects.add(ComplexValue((b) => b
+        ..primitive = 8
+        ..value.anInt = 9)));
     var specifiedType = FullType(StandardJsonValue);
     var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
     var serialized = json.decode(json.encode({
       'number': 3,
       'text': 'some text',
+      'value': {
+        'primitive': 4,
+        'nullablePrimitive': 5,
+        'value': {'anInt': 6},
+        'nullableValue': {'anInt': 7}
+      },
       'keyValues': {
         'one': 1,
         'two': 'two',
@@ -48,6 +68,21 @@ void main() {
       'uniqueZoo': [
         {r'$': 'Cat', 'tail': false, 'legs': 3}
       ],
+      'nullsInList': <Object?>[null, 3],
+      'nullsInSet': <Object?>['three', null],
+      'nullsInMap': {'four': null, 'five': 5},
+      'object': {
+        r'$': 'ComplexValue',
+        'primitive': 6,
+        'value': {'anInt': 7}
+      },
+      'objects': <Object>[
+        {
+          r'$': 'ComplexValue',
+          'primitive': 8,
+          'value': {'anInt': 9}
+        }
+      ],
     })) as Object;
 
     test('can be serialized', () {
@@ -56,12 +91,12 @@ void main() {
           serialized);
     });
 
-    test('serializes to Map<String, Object>', () {
+    test('serializes to Map<String, Object>>', () {
       expect(
           serializersWithPlugin
               .serialize(data, specifiedType: specifiedType)
               .runtimeType,
-          <String, Object>{}.runtimeType);
+          <String, Object?>{}.runtimeType);
     });
 
     test('can be deserialized', () {
@@ -76,6 +111,8 @@ void main() {
     var data = StandardJsonValue((b) => b
       ..number = 3
       ..text = 'some text'
+      ..value.primitive = 4
+      ..value.value.anInt = 5
       ..keyValues['one'] = JsonObject(1)
       ..keyValues['two'] = JsonObject('two')
       ..keyValues['three'] = JsonObject(true)
@@ -87,6 +124,10 @@ void main() {
     var serialized = json.decode(json.encode({
       'number': 3,
       'text': 'some text',
+      'value': {
+        'primitive': 4,
+        'value': {'anInt': 5}
+      },
       'keyValues': {
         'one': 1,
         'two': 'two',
@@ -109,6 +150,10 @@ void main() {
     var data = StandardJsonValue((b) => b
       ..number = 3
       ..text = 'some text'
+      ..value.primitive = 4
+      ..value.nullablePrimitive = 5
+      ..value.value.anInt = 6
+      ..value.nullableValue.anInt = 7
       ..keyValues['one'] = JsonObject(1)
       ..keyValues['two'] = JsonObject('two')
       ..keyValues['three'] = JsonObject(true)
@@ -116,13 +161,29 @@ void main() {
       ..keyValues['five'] = JsonObject({'one': 1, 'two': 2})
       ..zoo.add(Cat((b) => b
         ..tail = true
-        ..legs = 4)));
+        ..legs = 4))
+      ..nullsInList.replace(<Object?>[null, 3])
+      ..nullsInSet.replace(<Object?>['three', null])
+      ..nullsInMap['four'] = null
+      ..nullsInMap['five'] = 5
+      ..object = ComplexValue((b) => b
+        ..primitive = 6
+        ..value.anInt = 7)
+      ..objects.add(ComplexValue((b) => b
+        ..primitive = 8
+        ..value.anInt = 9)));
     var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
     var serialized = {
       r'$': 'StandardJsonValue',
       'number': 3,
       'text': 'some text',
+      'value': {
+        'primitive': 4,
+        'nullablePrimitive': 5,
+        'value': {'anInt': 6},
+        'nullableValue': {'anInt': 7}
+      },
       'keyValues': {
         'one': 1,
         'two': 'two',
@@ -134,6 +195,21 @@ void main() {
         {r'$': 'Cat', 'tail': true, 'legs': 4}
       ],
       'uniqueZoo': <Object>[],
+      'nullsInList': <Object?>[null, 3],
+      'nullsInSet': <Object?>['three', null],
+      'nullsInMap': {'four': null, 'five': 5},
+      'object': {
+        r'$': 'ComplexValue',
+        'primitive': 6,
+        'value': {'anInt': 7}
+      },
+      'objects': <Object>[
+        {
+          r'$': 'ComplexValue',
+          'primitive': 8,
+          'value': {'anInt': 9}
+        }
+      ],
     };
 
     test('can be serialized', () {

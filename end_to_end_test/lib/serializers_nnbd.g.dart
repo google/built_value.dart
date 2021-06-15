@@ -13,6 +13,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Cat.serializer)
       ..add(CollectionGenericValue.serializer)
       ..add(Collections.serializer)
+      ..add(ComplexValue.serializer)
       ..add(CompoundValue.serializer)
       ..add(CompoundValueExplicitNoNesting.serializer)
       ..add(CompoundValueNoAutoNesting.serializer)
@@ -152,6 +153,19 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(int)]),
+          () => new ListBuilder<int?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap,
+              const [const FullType(String), const FullType.nullable(int)]),
+          () => new MapBuilder<String, int?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Object)]),
+          () => new ListBuilder<Object>())
       ..addBuilderFactory(
           const FullType(GenericValue, const [
             const FullType(

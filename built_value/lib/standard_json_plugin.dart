@@ -61,13 +61,9 @@ class StandardJsonPlugin implements SerializerPlugin {
       if (specifiedType.isUnspecified) {
         return _toListUsingDiscriminator(object);
       } else {
-        return _toList(object, _needsEncodedKeys(specifiedType));
+        return _toList(object, _needsEncodedKeys(specifiedType),
+            keepNulls: specifiedType.root == BuiltMap);
       }
-    } else if (object.runtimeType == _dynamicListRuntimeType) {
-      // built_json_serializers does not support List<dynamic>. As nulls in
-      // built lists are not supported anyway, it is safe to cast List<dynamic>
-      // to List<Object> here.
-      return (object as List).cast<Object>();
     } else {
       return object;
     }
@@ -87,7 +83,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// Converts serialization output, a `List`, to a `Map`, when the serialized
   /// type is known statically.
   Map _toMap(List list, bool needsEncodedKeys) {
-    var result = <String, Object>{};
+    var result = <String, Object?>{};
     for (var i = 0; i != list.length ~/ 2; ++i) {
       final key = list[i * 2];
       final value = list[i * 2 + 1];
@@ -148,14 +144,19 @@ class StandardJsonPlugin implements SerializerPlugin {
 
   /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
   /// when the serialized type is known statically.
-  List<Object> _toList(Map map, bool hasEncodedKeys) {
-    var nullValueCount = map.values.where((value) => value == null).length;
-    var result = List<Object>.filled(
+  ///
+  /// By default keys with null values are dropped, pass [keepNulls] true when
+  /// the map is an actual map with nullable values, so they should be kept.
+  List<Object?> _toList(Map map, bool hasEncodedKeys,
+      {bool keepNulls = false}) {
+    var nullValueCount =
+        keepNulls ? 0 : map.values.where((value) => value == null).length;
+    var result = List<Object?>.filled(
         (map.length - nullValueCount) * 2, 0 /* Will be overwritten. */);
     var i = 0;
     map.forEach((key, value) {
       // Drop null values, they are represented by missing keys.
-      if (value == null) return;
+      if (!keepNulls && value == null) return;
 
       result[i] = hasEncodedKeys ? _decodeKey(key as String) : key;
       result[i + 1] = value;
@@ -219,5 +220,3 @@ class StandardJsonPlugin implements SerializerPlugin {
     return json.decode(key);
   }
 }
-
-final _dynamicListRuntimeType = <dynamic>[].runtimeType;
