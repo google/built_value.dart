@@ -522,10 +522,11 @@ case '${escapeString(field.wireName)}':
 ''';
         }
       } else {
+        var maybeOrNull = field.isNullable ? orNull : '';
         return '''
 case '${escapeString(field.wireName)}':
   result.${field.name} = serializers.deserialize(
-      value, specifiedType: $fullType) $cast;
+      value, specifiedType: $fullType) $cast$maybeOrNull;
   break;
 ''';
       }

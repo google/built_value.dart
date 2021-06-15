@@ -104,11 +104,11 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
           break;
         case 'aString':
           result.aString = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case '\$mustBeEscaped':
           result.$mustBeEscaped = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool)) as bool?;
           break;
       }
     }
@@ -218,7 +218,7 @@ class _$CompoundValueNoNestingSerializer
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
-              specifiedType: const FullType(ValidatedValue)) as ValidatedValue;
+              specifiedType: const FullType(ValidatedValue)) as ValidatedValue?;
           break;
       }
     }
@@ -323,7 +323,7 @@ class _$CompoundValueComparableBuildersSerializer
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
-              specifiedType: const FullType(ValidatedValue)) as ValidatedValue;
+              specifiedType: const FullType(ValidatedValue)) as ValidatedValue?;
           break;
       }
     }
@@ -380,7 +380,7 @@ class _$CompoundValueExplicitNoNestingSerializer
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
-              specifiedType: const FullType(ValidatedValue)) as ValidatedValue;
+              specifiedType: const FullType(ValidatedValue)) as ValidatedValue?;
           break;
       }
     }
@@ -432,7 +432,7 @@ class _$ValidatedValueSerializer
           break;
         case 'aString':
           result.aString = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -488,7 +488,7 @@ class _$ValueUsingImportAsSerializer
         case 'nullableValue':
           result.nullableValue = serializers.deserialize(value,
                   specifiedType: const FullType(using_import_as.TestEnum))
-              as using_import_as.TestEnum;
+              as using_import_as.TestEnum?;
           break;
       }
     }
@@ -1202,11 +1202,11 @@ class _$ValueWithBuilderInitializerSerializer
           break;
         case 'nullableInt':
           result.nullableInt = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'nullableIntWithDefault':
           result.nullableIntWithDefault = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'nestedValue':
           result.nestedValue.replace(serializers.deserialize(value,
