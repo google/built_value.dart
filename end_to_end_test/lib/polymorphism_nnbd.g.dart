@@ -1221,4 +1221,190 @@ class ImplementsTwoBuilder
   }
 }
 
+abstract class VehicleBuilder {
+  void replace(Vehicle other);
+  void update(void Function(VehicleBuilder) updates);
+  VehicleColorBuilder get color;
+  set color(VehicleColorBuilder? color);
+}
+
+class _$Car extends Car {
+  @override
+  final int seatsCount;
+  @override
+  final VehicleColor color;
+
+  factory _$Car([void Function(CarBuilder)? updates]) =>
+      (new CarBuilder()..update(updates)).build();
+
+  _$Car._({required this.seatsCount, required this.color}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(seatsCount, 'Car', 'seatsCount');
+    BuiltValueNullFieldError.checkNotNull(color, 'Car', 'color');
+  }
+
+  @override
+  Car rebuild(void Function(CarBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  CarBuilder toBuilder() => new CarBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Car &&
+        seatsCount == other.seatsCount &&
+        color == other.color;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, seatsCount.hashCode), color.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Car')
+          ..add('seatsCount', seatsCount)
+          ..add('color', color))
+        .toString();
+  }
+}
+
+class CarBuilder implements Builder<Car, CarBuilder>, VehicleBuilder {
+  _$Car? _$v;
+
+  int? _seatsCount;
+  int? get seatsCount => _$this._seatsCount;
+  set seatsCount(covariant int? seatsCount) => _$this._seatsCount = seatsCount;
+
+  VehicleColorBuilder? _color;
+  VehicleColorBuilder get color => _$this._color ??= new VehicleColorBuilder();
+  set color(covariant VehicleColorBuilder? color) => _$this._color = color;
+
+  CarBuilder();
+
+  CarBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _seatsCount = $v.seatsCount;
+      _color = $v.color.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant Car other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$Car;
+  }
+
+  @override
+  void update(void Function(CarBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Car build() {
+    _$Car _$result;
+    try {
+      _$result = _$v ??
+          new _$Car._(
+              seatsCount: BuiltValueNullFieldError.checkNotNull(
+                  seatsCount, 'Car', 'seatsCount'),
+              color: color.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'color';
+        color.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Car', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$VehicleColor extends VehicleColor {
+  @override
+  final String label;
+
+  factory _$VehicleColor([void Function(VehicleColorBuilder)? updates]) =>
+      (new VehicleColorBuilder()..update(updates)).build();
+
+  _$VehicleColor._({required this.label}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(label, 'VehicleColor', 'label');
+  }
+
+  @override
+  VehicleColor rebuild(void Function(VehicleColorBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  VehicleColorBuilder toBuilder() => new VehicleColorBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is VehicleColor && label == other.label;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, label.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('VehicleColor')..add('label', label))
+        .toString();
+  }
+}
+
+class VehicleColorBuilder
+    implements Builder<VehicleColor, VehicleColorBuilder> {
+  _$VehicleColor? _$v;
+
+  String? _label;
+  String? get label => _$this._label;
+  set label(String? label) => _$this._label = label;
+
+  VehicleColorBuilder();
+
+  VehicleColorBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _label = $v.label;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(VehicleColor other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$VehicleColor;
+  }
+
+  @override
+  void update(void Function(VehicleColorBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$VehicleColor build() {
+    final _$result = _$v ??
+        new _$VehicleColor._(
+            label: BuiltValueNullFieldError.checkNotNull(
+                label, 'VehicleColor', 'label'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
