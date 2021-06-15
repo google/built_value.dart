@@ -527,7 +527,8 @@ case '${escapeString(field.wireName)}':
 ''';
         }
       } else {
-        var maybeOrNull = field.isNullable ? orNull : '';
+        // `cast` is empty if no cast is needed.
+        var maybeOrNull = field.isNullable && cast.isNotEmpty ? orNull : '';
         return '''
 case '${escapeString(field.wireName)}':
   result.${field.name} = serializers.deserialize(
