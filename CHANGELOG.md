@@ -9,6 +9,7 @@
   to match the implementations. Use `autoCreateNestedBuilders: false` to get
   the old behaviour.
 - Allow explicit nulls in JSON for nullable fields when deserializing.
+- Fix support for serializing and deserializing nulls.
 
 # 8.0.6
 

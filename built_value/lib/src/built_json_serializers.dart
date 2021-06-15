@@ -64,7 +64,7 @@ class BuiltJsonSerializers implements Serializers {
     var transformedObject = object;
     for (var plugin in serializerPlugins) {
       transformedObject =
-          plugin.beforeSerialize(transformedObject!, specifiedType);
+          plugin.beforeSerialize(transformedObject, specifiedType);
     }
     var result = _serialize(transformedObject, specifiedType);
     for (var plugin in serializerPlugins) {
@@ -83,10 +83,9 @@ class BuiltJsonSerializers implements Serializers {
         final result = <Object?>[serializer.wireName];
         return result..addAll(serializer.serialize(this, object));
       } else if (serializer is PrimitiveSerializer) {
-        return <Object>[
-          serializer.wireName,
-          serializer.serialize(this, object)
-        ];
+        return object == null
+            ? <Object?>[serializer.wireName, null]
+            : <Object>[serializer.wireName, serializer.serialize(this, object)];
       } else {
         throw StateError(
             'serializer must be StructuredSerializer or PrimitiveSerializer');

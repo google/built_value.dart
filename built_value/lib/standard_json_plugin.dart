@@ -111,7 +111,7 @@ class StandardJsonPlugin implements SerializerPlugin {
     // the value.
     if (list.length == 2) {
       // Just a type and a primitive value. Encode the value in the map.
-      return <String, Object>{discriminator: type, valueKey: list[1]};
+      return <String, Object?>{discriminator: type, valueKey: list[1]};
     }
 
     // If a map has non-String keys then they need encoding to strings before
@@ -167,7 +167,7 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// Converts [StandardJsonPlugin] serialization output, a `Map`, to a `List`,
   /// when the serialized type is not known statically. The type is retrieved
   /// from the [discriminator] field.
-  List<Object> _toListUsingDiscriminator(Map map) {
+  List<Object?> _toListUsingDiscriminator(Map map) {
     var type = map[discriminator];
 
     if (type == null) {
@@ -181,7 +181,7 @@ class StandardJsonPlugin implements SerializerPlugin {
 
     if (map.containsKey(valueKey)) {
       // Just a type and a primitive value. Retrieve the value in the map.
-      final result = List<Object>.filled(2, 0 /* Will be overwritten. */);
+      final result = List<Object?>.filled(2, 0 /* Will be overwritten. */);
       result[0] = type;
       result[1] = map[valueKey];
       return result;
