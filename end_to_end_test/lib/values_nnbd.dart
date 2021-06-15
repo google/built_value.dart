@@ -758,3 +758,16 @@ abstract class SerializesNullsValue
       _$SerializesNullsValue;
   SerializesNullsValue._();
 }
+
+abstract class NullableObjectValue
+    implements Built<NullableObjectValue, NullableObjectValueBuilder> {
+  static Serializer<NullableObjectValue> get serializer =>
+      _$nullableObjectValueSerializer;
+
+  Object? get value;
+
+  factory NullableObjectValue(
+          [void Function(NullableObjectValueBuilder) updates]) =
+      _$NullableObjectValue;
+  NullableObjectValue._();
+}

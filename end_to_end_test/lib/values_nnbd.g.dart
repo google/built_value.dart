@@ -68,6 +68,8 @@ Serializer<ValueWithBuilderFinalizer> _$valueWithBuilderFinalizerSerializer =
     new _$ValueWithBuilderFinalizerSerializer();
 Serializer<SerializesNullsValue> _$serializesNullsValueSerializer =
     new _$SerializesNullsValueSerializer();
+Serializer<NullableObjectValue> _$nullableObjectValueSerializer =
+    new _$NullableObjectValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -1591,6 +1593,55 @@ class _$SerializesNullsValueSerializer
         case 'value':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$NullableObjectValueSerializer
+    implements StructuredSerializer<NullableObjectValue> {
+  @override
+  final Iterable<Type> types = const [
+    NullableObjectValue,
+    _$NullableObjectValue
+  ];
+  @override
+  final String wireName = 'NullableObjectValue';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, NullableObjectValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.value;
+    if (value != null) {
+      result
+        ..add('value')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(Object)));
+    }
+    return result;
+  }
+
+  @override
+  NullableObjectValue deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new NullableObjectValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(Object));
           break;
       }
     }
@@ -5854,6 +5905,82 @@ class SerializesNullsValueBuilder
   @override
   _$SerializesNullsValue build() {
     final _$result = _$v ?? new _$SerializesNullsValue._(value: value);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$NullableObjectValue extends NullableObjectValue {
+  @override
+  final Object? value;
+
+  factory _$NullableObjectValue(
+          [void Function(NullableObjectValueBuilder)? updates]) =>
+      (new NullableObjectValueBuilder()..update(updates)).build();
+
+  _$NullableObjectValue._({this.value}) : super._();
+
+  @override
+  NullableObjectValue rebuild(
+          void Function(NullableObjectValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  NullableObjectValueBuilder toBuilder() =>
+      new NullableObjectValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is NullableObjectValue && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('NullableObjectValue')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class NullableObjectValueBuilder
+    implements Builder<NullableObjectValue, NullableObjectValueBuilder> {
+  _$NullableObjectValue? _$v;
+
+  Object? _value;
+  Object? get value => _$this._value;
+  set value(Object? value) => _$this._value = value;
+
+  NullableObjectValueBuilder();
+
+  NullableObjectValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(NullableObjectValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$NullableObjectValue;
+  }
+
+  @override
+  void update(void Function(NullableObjectValueBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$NullableObjectValue build() {
+    final _$result = _$v ?? new _$NullableObjectValue._(value: value);
     replace(_$result);
     return _$result;
   }
