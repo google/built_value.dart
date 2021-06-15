@@ -54,6 +54,7 @@ part 'serializers_nnbd.g.dart';
   PrimitivesValue,
   Robot,
   SecondTestEnum,
+  SerializesNullsValue,
   SimpleValue,
   StandardCat,
   StandardJsonValue,
