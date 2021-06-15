@@ -66,7 +66,10 @@ abstract class SerializerSourceClass
     // If a field does not exist, that means an old `built_value` version; use
     // the default.
     return BuiltValueSerializer(
-        custom: annotation.getField('custom')?.toBoolValue() ?? false);
+      custom: annotation.getField('custom')?.toBoolValue() ?? false,
+      serializeNulls:
+          annotation.getField('serializeNulls')?.toBoolValue() ?? false,
+    );
   }
 
   // TODO(davidmorgan): share common code in a nicer way.
@@ -481,11 +484,11 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
 
           return '''
           value = object.${field.name};
-          if (value != null) {
+          ${serializerSettings.serializeNulls ? '' : 'if (value != null) {'}
             result
               ..add('${escapeString(field.wireName)}')
               ..add($serializeField);
-          }''';
+          ${serializerSettings.serializeNulls ? '' : '}'}''';
         }).join('');
   }
 

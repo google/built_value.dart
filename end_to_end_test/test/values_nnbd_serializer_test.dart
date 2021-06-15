@@ -611,4 +611,18 @@ void main() {
       expect(serializers.deserialize(serializedWhichTriggersHook), data);
     });
   });
+
+  group(SerializesNullsValue, () {
+    final data = SerializesNullsValue();
+    final serialized = json
+        .decode(json.encode(['SerializesNullsValue', 'value', null])) as Object;
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }

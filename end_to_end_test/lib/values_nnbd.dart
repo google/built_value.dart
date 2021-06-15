@@ -744,3 +744,17 @@ abstract class _PrivateValue
   factory _PrivateValue(void Function(_PrivateValueBuilder) updates) =
       _$PrivateValue;
 }
+
+abstract class SerializesNullsValue
+    implements Built<SerializesNullsValue, SerializesNullsValueBuilder> {
+  @BuiltValueSerializer(serializeNulls: true)
+  static Serializer<SerializesNullsValue> get serializer =>
+      _$serializesNullsValueSerializer;
+
+  String? get value;
+
+  factory SerializesNullsValue(
+          [void Function(SerializesNullsValueBuilder) updates]) =
+      _$SerializesNullsValue;
+  SerializesNullsValue._();
+}

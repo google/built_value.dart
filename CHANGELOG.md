@@ -10,6 +10,9 @@
   the old behaviour.
 - Allow explicit nulls in JSON for nullable fields when deserializing.
 - Fix support for serializing and deserializing nulls.
+- Add back `serializeNulls` to `BuiltValueSerializer` annotation. By default
+  generated serializers skip null fields instead of writing them; set
+  `serializeNulls` to write the nulls.
 
 # 8.0.6
 
