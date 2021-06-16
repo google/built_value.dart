@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:meta/meta_meta.dart';
+
 /// Implement this for a Built Value.
 ///
 /// Then use built_value_generator.dart code generation functionality to
@@ -133,6 +135,7 @@ const String nullable = 'nullable';
 
 /// Optionally, annotate a Built Value field with this to specify settings.
 /// This is only needed for advanced use.
+@Target({TargetKind.getter})
 class BuiltValueField {
   /// Whether the field is compared and hashed. Defaults to `null` which means
   /// [BuiltValue.defaultCompare] is used.
@@ -170,6 +173,7 @@ class BuiltValueField {
 
 /// Optionally, annotate a Built Value `Serializer` getters with this to
 /// specify settings. This is only needed for advanced use.
+@Target({TargetKind.getter})
 class BuiltValueSerializer {
   /// Set this to `true` to stop Built Value from generating a serializer for
   /// you. The getter may then return any compatible `Serializer`. Defaults
@@ -194,6 +198,7 @@ const String memoized = 'memoized';
 
 /// Optionally, annotate an `EnumClass` with this to specify settings. This
 /// is only needed for advanced use.
+@Target({TargetKind.classType})
 class BuiltValueEnum {
   /// The wire name when the enum is serialized. Defaults to `null` which
   /// indicates that the name is to be taken from the literal class name.
@@ -204,6 +209,7 @@ class BuiltValueEnum {
 
 /// Optionally, annotate an `EnumClass` constant with this to specify settings.
 /// This is only needed for advanced use.
+@Target({TargetKind.field})
 class BuiltValueEnumConst {
   /// The wire name when the constant is serialized. Defaults to `null` which
   /// indicates the name is to be taken from the literal field name.

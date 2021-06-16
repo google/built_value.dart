@@ -13,6 +13,8 @@
 - Add back `serializeNulls` to `BuiltValueSerializer` annotation. By default
   generated serializers skip null fields instead of writing them; set
   `serializeNulls` to write the nulls.
+- Specify annotation targets; the analyzer will now hint if a `built_value`
+  annotation is used where it has no effect.
 
 # 8.0.6
 
