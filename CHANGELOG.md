@@ -17,6 +17,10 @@
   annotation is used where it has no effect.
 - Removed Angular mixin from example, as this feature is no longer needed:
   Angular now directly supports using static members in templates.
+- Add `@BuiltValueHook` annotation. It provides the same functionality as
+  `_initializeBuilder` and `_finalizeBuilder`, but in a more visible way:
+  annotate a static method on the value class with `@BuiltValueHook` to
+  have it called on builder creation or finalization.
 
 # 8.0.6
 

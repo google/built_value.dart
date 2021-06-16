@@ -70,6 +70,8 @@ Serializer<SerializesNullsValue> _$serializesNullsValueSerializer =
     new _$SerializesNullsValueSerializer();
 Serializer<NullableObjectValue> _$nullableObjectValueSerializer =
     new _$NullableObjectValueSerializer();
+Serializer<ValueWithHooks> _$valueWithHooksSerializer =
+    new _$ValueWithHooksSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -1642,6 +1644,65 @@ class _$NullableObjectValueSerializer
         case 'value':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(Object));
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ValueWithHooksSerializer
+    implements StructuredSerializer<ValueWithHooks> {
+  @override
+  final Iterable<Type> types = const [ValueWithHooks, _$ValueWithHooks];
+  @override
+  final String wireName = 'ValueWithHooks';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, ValueWithHooks object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'hook1Count',
+      serializers.serialize(object.hook1Count,
+          specifiedType: const FullType(int)),
+      'hook2Count',
+      serializers.serialize(object.hook2Count,
+          specifiedType: const FullType(int)),
+      'hookOrdering',
+      serializers.serialize(object.hookOrdering,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(String)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  ValueWithHooks deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new ValueWithHooksBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'hook1Count':
+          result.hook1Count = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'hook2Count':
+          result.hook2Count = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'hookOrdering':
+          result.hookOrdering.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
       }
     }
@@ -5981,6 +6042,143 @@ class NullableObjectValueBuilder
   @override
   _$NullableObjectValue build() {
     final _$result = _$v ?? new _$NullableObjectValue._(value: value);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ValueWithHooks extends ValueWithHooks {
+  @override
+  final int hook1Count;
+  @override
+  final int hook2Count;
+  @override
+  final BuiltList<String> hookOrdering;
+
+  factory _$ValueWithHooks([void Function(ValueWithHooksBuilder)? updates]) =>
+      (new ValueWithHooksBuilder()..update(updates)).build();
+
+  _$ValueWithHooks._(
+      {required this.hook1Count,
+      required this.hook2Count,
+      required this.hookOrdering})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        hook1Count, 'ValueWithHooks', 'hook1Count');
+    BuiltValueNullFieldError.checkNotNull(
+        hook2Count, 'ValueWithHooks', 'hook2Count');
+    BuiltValueNullFieldError.checkNotNull(
+        hookOrdering, 'ValueWithHooks', 'hookOrdering');
+  }
+
+  @override
+  ValueWithHooks rebuild(void Function(ValueWithHooksBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ValueWithHooksBuilder toBuilder() =>
+      new ValueWithHooksBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithHooks &&
+        hook1Count == other.hook1Count &&
+        hook2Count == other.hook2Count &&
+        hookOrdering == other.hookOrdering;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc($jc(0, hook1Count.hashCode), hook2Count.hashCode),
+        hookOrdering.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ValueWithHooks')
+          ..add('hook1Count', hook1Count)
+          ..add('hook2Count', hook2Count)
+          ..add('hookOrdering', hookOrdering))
+        .toString();
+  }
+}
+
+class ValueWithHooksBuilder
+    implements Builder<ValueWithHooks, ValueWithHooksBuilder> {
+  _$ValueWithHooks? _$v;
+
+  int? _hook1Count;
+  int? get hook1Count => _$this._hook1Count;
+  set hook1Count(int? hook1Count) => _$this._hook1Count = hook1Count;
+
+  int? _hook2Count;
+  int? get hook2Count => _$this._hook2Count;
+  set hook2Count(int? hook2Count) => _$this._hook2Count = hook2Count;
+
+  ListBuilder<String>? _hookOrdering;
+  ListBuilder<String> get hookOrdering =>
+      _$this._hookOrdering ??= new ListBuilder<String>();
+  set hookOrdering(ListBuilder<String>? hookOrdering) =>
+      _$this._hookOrdering = hookOrdering;
+
+  ValueWithHooksBuilder() {
+    ValueWithHooks.hook1(this);
+    ValueWithHooks.justInitialize(this);
+    ValueWithHooks.both(this);
+    ValueWithHooks.moreJustInitialize(this);
+    ValueWithHooks.moreBoth(this);
+  }
+
+  ValueWithHooksBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _hook1Count = $v.hook1Count;
+      _hook2Count = $v.hook2Count;
+      _hookOrdering = $v.hookOrdering.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithHooks other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ValueWithHooks;
+  }
+
+  @override
+  void update(void Function(ValueWithHooksBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ValueWithHooks build() {
+    ValueWithHooks.hook2(this);
+    ValueWithHooks.justFinalize(this);
+    ValueWithHooks.both(this);
+    ValueWithHooks.moreJustFinalize(this);
+    ValueWithHooks.moreBoth(this);
+    _$ValueWithHooks _$result;
+    try {
+      _$result = _$v ??
+          new _$ValueWithHooks._(
+              hook1Count: BuiltValueNullFieldError.checkNotNull(
+                  hook1Count, 'ValueWithHooks', 'hook1Count'),
+              hook2Count: BuiltValueNullFieldError.checkNotNull(
+                  hook2Count, 'ValueWithHooks', 'hook2Count'),
+              hookOrdering: hookOrdering.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'hookOrdering';
+        hookOrdering.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ValueWithHooks', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

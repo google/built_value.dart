@@ -244,6 +244,45 @@ abstract class Person implements Built<Person, PersonBuilder> {
 
 ## FAQ
 
+### How do I check a field is valid on instantiation?
+
+The value class private constructor runs when all fields are initialized and
+can do arbitrary checks:
+
+```dart
+abstract class MyValue {
+  MyValue._() {
+    if (field < 0) {
+      throw ArgumentError(field, 'field', 'Must not be negative.');
+    }
+  }
+```
+
+### How do I process a field on instantiation?
+
+Add a hook that runs immediately before a builder is built. For example, you
+could sort a list, so it's always sorted directly before the value is created:
+
+```dart
+abstract class MyValue {
+  @BuiltValueHook(finalizeBuilder: true)
+  static void _sortItems(MyValueBuilder b) =>
+      b..items.sort();
+```
+
+### How do I set a default for a field?
+
+Add a hook that runs whenever a builder is created:
+
+```dart
+abstract class MyValue {
+  @BuiltValueHook(initializeBuilder: true)
+  static void _setDefaults(MyValueBuilder b) =>
+      b
+        ..name = 'defaultName'
+        ..count = 0;
+```
+
 ### Should I check in and/or publish in the generated `.g.dart` files?
 
 See the [build_runner](https://pub.dev/packages/build_runner#source-control)

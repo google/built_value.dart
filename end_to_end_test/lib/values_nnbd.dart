@@ -771,3 +771,57 @@ abstract class NullableObjectValue
       _$NullableObjectValue;
   NullableObjectValue._();
 }
+
+abstract class ValueWithHooks
+    implements Built<ValueWithHooks, ValueWithHooksBuilder> {
+  static Serializer<ValueWithHooks> get serializer =>
+      _$valueWithHooksSerializer;
+
+  @BuiltValueHook(initializeBuilder: true)
+  static void hook1(ValueWithHooksBuilder b) {
+    b.hook1Count = (b.hook1Count ?? 0) + 1;
+  }
+
+  @BuiltValueHook(finalizeBuilder: true)
+  static void hook2(ValueWithHooksBuilder b) {
+    b.hook2Count = (b.hook2Count ?? 0) + 1;
+  }
+
+  @BuiltValueHook(initializeBuilder: true)
+  static void justInitialize(ValueWithHooksBuilder b) {
+    b.hookOrdering.add('justInitialize');
+  }
+
+  @BuiltValueHook(finalizeBuilder: true)
+  static void justFinalize(ValueWithHooksBuilder b) {
+    b.hookOrdering.add('justFinalize');
+  }
+
+  @BuiltValueHook(finalizeBuilder: true, initializeBuilder: true)
+  static void both(ValueWithHooksBuilder b) {
+    b.hookOrdering.add('both');
+  }
+
+  @BuiltValueHook(initializeBuilder: true)
+  static void moreJustInitialize(ValueWithHooksBuilder b) {
+    b.hookOrdering.add('moreJustInitialize');
+  }
+
+  @BuiltValueHook(finalizeBuilder: true)
+  static void moreJustFinalize(ValueWithHooksBuilder b) {
+    b.hookOrdering.add('moreJustFinalize');
+  }
+
+  @BuiltValueHook(finalizeBuilder: true, initializeBuilder: true)
+  static void moreBoth(ValueWithHooksBuilder b) {
+    b.hookOrdering.add('moreBoth');
+  }
+
+  int get hook1Count;
+  int get hook2Count;
+  BuiltList<String> get hookOrdering;
+
+  factory ValueWithHooks([void Function(ValueWithHooksBuilder) updates]) =
+      _$ValueWithHooks;
+  ValueWithHooks._();
+}
