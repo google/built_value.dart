@@ -29,6 +29,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   MethodElement __builderInitializer;
   bool __hasBuilderFinalizer;
   MethodElement __builderFinalizer;
+  BuiltMap<String, BuiltValueHook> __hooks;
   String __builderParameters;
   BuiltList<ValueSourceField> __fields;
   String __source;
@@ -124,6 +125,9 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   MethodElement get builderFinalizer =>
       __builderFinalizer ??= super.builderFinalizer;
+
+  @override
+  BuiltMap<String, BuiltValueHook> get hooks => __hooks ??= super.hooks;
 
   @override
   String get builderParameters =>

@@ -238,6 +238,46 @@ class BuiltValueEnumConst {
       {this.wireName, this.wireNumber, this.fallback = false});
 }
 
+/// Optionally, annotate methods with this to cause them to be called by
+/// generated code.
+@Target({TargetKind.method})
+class BuiltValueHook {
+  /// Marks a static method that will be called when the builder for the
+  /// enclosing value type is initialized.
+  ///
+  /// The method must accept a builder of the enclosing value type.
+  ///
+  /// This example uses it to set a default value:
+  ///
+  /// ```
+  /// @BuiltValueHook(initializeBuilder: true)
+  /// static void _initializeBuilder(MyClassBuilder b) =>
+  ///    b..name = 'defaultName';
+  ///
+  /// Defaults to `false`.
+  /// ```
+  final bool initializeBuilder;
+
+  /// Marks a static method that will be called immediately before the builder
+  /// for the enclosing value type is built.
+  ///
+  /// The method must accept a builder of the enclosing value type.
+  ///
+  /// This example uses it to make `items` sorted:
+  ///
+  /// ```
+  /// @BuiltValueHook(initializeBuilder: true)
+  /// static void _finalizeBuilder(MyClassBuilder b) =>
+  ///    b..items.sort();
+  ///
+  /// Defaults to `false`.
+  /// ```
+  final bool finalizeBuilder;
+
+  const BuiltValueHook(
+      {this.initializeBuilder = false, this.finalizeBuilder = false});
+}
+
 /// Enum Class base class.
 ///
 /// Extend this class then use the built_value.dart code generation

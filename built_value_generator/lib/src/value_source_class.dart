@@ -170,6 +170,8 @@ abstract class ValueSourceClass
   @memoized
   bool get hasBuilder => builderElement != null;
 
+  // The `initializer` methods are no longer recommended, see hooks below.
+
   @memoized
   bool get hasBuilderInitializer => builderInitializer != null;
 
@@ -182,6 +184,26 @@ abstract class ValueSourceClass
 
   @memoized
   MethodElement get builderFinalizer => element.getMethod('_finalizeBuilder');
+
+  @memoized
+  BuiltMap<String, BuiltValueHook> get hooks {
+    var result = MapBuilder<String, BuiltValueHook>();
+    for (var method in element.methods) {
+      var annotations = method.metadata
+          .map((annotation) => annotation.computeConstantValue())
+          .where((value) => DartTypes.getName(value?.type) == 'BuiltValueHook');
+      if (annotations.isEmpty) continue;
+      var annotation = annotations.single;
+      // If a field does not exist, that means an old `built_value` version; use
+      // the default.
+      result[method.name] = BuiltValueHook(
+          initializeBuilder:
+              annotation.getField('initializeBuilder')?.toBoolValue() ?? false,
+          finalizeBuilder:
+              annotation.getField('finalizeBuilder')?.toBoolValue() ?? true);
+    }
+    return result.build();
+  }
 
   @memoized
   String get builderParameters {
@@ -459,41 +481,58 @@ abstract class ValueSourceClass
             'Only "implements" and "extends Object with" are allowed.'));
     }
 
+    bool isStaticBuilderHook(MethodElement method) {
+      return method.isStatic &&
+          method.returnType.isVoid &&
+          method.parameters.length == 1 &&
+          parsedLibrary.getElementDeclaration(method.parameters[0]).node
+              is SimpleFormalParameter &&
+          DartTypes.stripGenerics((parsedLibrary
+                      .getElementDeclaration(method.parameters[0])
+                      .node as SimpleFormalParameter)
+                  .type
+                  ?.toSource()) ==
+              '${name}Builder';
+    }
+
     if (settings.instantiable) {
       if (hasBuilderInitializer) {
-        if (!builderInitializer.isStatic ||
-            !builderInitializer.returnType.isVoid ||
-            builderInitializer.parameters.length != 1 ||
-            parsedLibrary
-                .getElementDeclaration(builderInitializer.parameters[0])
-                .node is! SimpleFormalParameter ||
-            DartTypes.stripGenerics((parsedLibrary
-                        .getElementDeclaration(builderInitializer.parameters[0])
-                        .node as SimpleFormalParameter)
-                    .type
-                    ?.toSource()) !=
-                '${name}Builder') {
+        if (!isStaticBuilderHook(builderInitializer)) {
           result.add(GeneratorError((b) => b
             ..message = 'Fix _initializeBuilder signature: '
                 'static void _initializeBuilder(${name}Builder b)'));
         }
+        if (hooks.containsKey('_initializeBuilder')) {
+          result.add(GeneratorError((b) => b
+            ..message = 'Remove @BuiltValueHook from _initializeBuilder. '
+                'It is a magic method name that is always a hook. '
+                'Or, to use the annotation, please rename the method.'));
+        }
       }
       if (hasBuilderFinalizer) {
-        if (!builderFinalizer.isStatic ||
-            !builderFinalizer.returnType.isVoid ||
-            builderFinalizer.parameters.length != 1 ||
-            parsedLibrary
-                .getElementDeclaration(builderFinalizer.parameters[0])
-                .node is! SimpleFormalParameter ||
-            DartTypes.stripGenerics((parsedLibrary
-                        .getElementDeclaration(builderFinalizer.parameters[0])
-                        .node as SimpleFormalParameter)
-                    .type
-                    ?.toSource()) !=
-                '${name}Builder') {
+        if (!isStaticBuilderHook(builderFinalizer)) {
           result.add(GeneratorError((b) => b
             ..message = 'Fix _finalizeBuilder signature: '
                 'static void _finalizeBuilder(${name}Builder b)'));
+        }
+        if (hooks.containsKey('_finalizeBuilder')) {
+          result.add(GeneratorError((b) => b
+            ..message = 'Remove @BuiltValueHook from _finalizeBuilder. '
+                'It is a magic method name that is always a hook. '
+                'Or, to use the annotation, please rename the method.'));
+        }
+      }
+      for (var hook in hooks.entries.where((hook) =>
+          hook.value.initializeBuilder || hook.value.finalizeBuilder)) {
+        if (hook.key == '_initializeBuilder') continue;
+        if (hook.key == '_finalizeBuilder') continue;
+        var method =
+            element.methods.where((method) => method.name == hook.key).single;
+        if (!isStaticBuilderHook(method)) {
+          result.add(GeneratorError((b) => b
+            ..message =
+                'Fix ${hook.key} signature to use it with @BuiltValueHook: '
+                    'static void ${hook.key}(${name}Builder b)'));
         }
       }
 
@@ -900,9 +939,17 @@ abstract class ValueSourceClass
     } else {
       result.writeln('${name}Builder()');
     }
-    if (hasBuilderInitializer) {
+    if (hasBuilderInitializer ||
+        hooks.values.any((hook) => hook.initializeBuilder)) {
       result.writeln('{');
-      result.writeln('$name._initializeBuilder(this);');
+      if (hasBuilderInitializer) {
+        result.writeln('$name._initializeBuilder(this);');
+      }
+      for (var hook in hooks.entries) {
+        if (hook.value.initializeBuilder) {
+          result.writeln('$name.${hook.key}(this);');
+        }
+      }
       result.writeln('}');
     } else {
       result.writeln(';');
@@ -962,6 +1009,11 @@ abstract class ValueSourceClass
 
     if (hasBuilderFinalizer) {
       result.writeln('$name._finalizeBuilder(this);');
+    }
+    for (var hook in hooks.entries) {
+      if (hook.value.finalizeBuilder) {
+        result.writeln('$name.${hook.key}(this);');
+      }
     }
 
     // Construct a map from field to how it's built. If it's a normal field,

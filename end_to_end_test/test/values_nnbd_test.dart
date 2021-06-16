@@ -430,4 +430,40 @@ void main() {
       expect(valueWithMemoization.hashCode, value.hashCode);
     });
   });
+
+  group(ValueWithHooks, () {
+    test('initialize hooks run', () {
+      var value = ValueWithHooks();
+      expect(value.hook1Count, 1);
+    });
+
+    test('initialize hooks run initially', () {
+      var value = ValueWithHooks((b) => b..hook1Count = 100);
+      expect(value.hook1Count, 100);
+    });
+
+    test('finalize hooks run', () {
+      var value = ValueWithHooks();
+      expect(value.hook2Count, 1);
+    });
+
+    test('finalize hooks run finally', () {
+      var value = ValueWithHooks((b) => b..hook1Count = 100);
+      expect(value.hook2Count, 1);
+    });
+
+    test('multiple hooks ordering', () {
+      var value = ValueWithHooks();
+      expect(value.hookOrdering, [
+        'justInitialize',
+        'both',
+        'moreJustInitialize',
+        'moreBoth',
+        'justFinalize',
+        'both',
+        'moreJustFinalize',
+        'moreBoth',
+      ]);
+    });
+  });
 }

@@ -378,6 +378,86 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
                 'static void _finalizeBuilder(ValueBuilder b)'));
       });
 
+      test('removing annotation from _initializeBuilder', () async {
+        expect(
+            await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  @BuiltValueHook(initializeBuilder: true)
+  static void _initializeBuilder(ValueBuilder b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+            contains('1. Remove @BuiltValueHook from _initializeBuilder. '
+                'It is a magic method name that is always a hook. Or, to use '
+                'the annotation, please rename the method.'));
+      });
+
+      test('fixing signature of @BuiltValueHook(initializeBuilder: true)',
+          () async {
+        expect(
+            await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  @BuiltValueHook(initializeBuilder: true)
+  static String hook(ValueBuilder b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+            contains('1. Fix hook signature to use it with @BuiltValueHook: '
+                'static void hook(ValueBuilder b)'));
+      });
+
+      test('removing annotation from _finalizeBuilder', () async {
+        expect(
+            await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  @BuiltValueHook(finalizeBuilder: true)
+  static void _finalizeBuilder(ValueBuilder b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+            contains('1. Remove @BuiltValueHook from _finalizeBuilder. '
+                'It is a magic method name that is always a hook. Or, to use '
+                'the annotation, please rename the method.'));
+      });
+
+      test('fixing signature of @BuiltValueHook(finalizeBuilder: true)',
+          () async {
+        expect(
+            await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  @BuiltValueHook(finalizeBuilder: true)
+  static String hook(ValueBuilder b) {}
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''),
+            contains('1. Fix hook signature to use it with @BuiltValueHook: '
+                'static void hook(ValueBuilder b)'));
+      });
+
       test('to add constructor to value class', () async {
         expect(await generate('''library value;
 import 'package:built_value/built_value.dart';
@@ -868,5 +948,14 @@ class BuiltValueField {
       this.wireName,
       this.nestedBuilder,
       this.autoCreateNestedBuilder});
+}
+
+class BuiltValueHook {
+  final bool initializeBuilder;
+  final bool finalizeBuilder;
+
+  const BuiltValueHook(
+      {this.initializeBuilder,
+      this.finalizeBuilder});
 }
 ''';
