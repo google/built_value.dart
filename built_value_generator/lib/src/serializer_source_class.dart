@@ -430,7 +430,9 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
 
   String _generateNewBuilder() {
     var parameters = _genericParametersUsedInFields;
-    if (parameters.isEmpty) return 'new ${name}Builder()';
+    if (parameters.isEmpty) {
+      return 'new ${name}Builder$genericBoundsOrObjectString()';
+    }
     return 'isUnderspecified ? '
         'new ${name}Builder$genericBoundsOrObjectString() : '
         'serializers.newBuilder(specifiedType) as '

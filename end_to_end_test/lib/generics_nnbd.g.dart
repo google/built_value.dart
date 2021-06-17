@@ -24,6 +24,8 @@ Serializer<ConcreteGeneric> _$concreteGenericSerializer =
     new _$ConcreteGenericSerializer();
 Serializer<NonBuiltGeneric> _$nonBuiltGenericSerializer =
     new _$NonBuiltGenericSerializer();
+Serializer<EmptyGeneric<Object?, Object?>> _$emptyGenericSerializer =
+    new _$EmptyGenericSerializer();
 
 class _$GenericValueSerializer
     implements StructuredSerializer<GenericValue<Object?>> {
@@ -470,6 +472,28 @@ class _$NonBuiltGenericSerializer
     }
 
     return result.build();
+  }
+}
+
+class _$EmptyGenericSerializer
+    implements StructuredSerializer<EmptyGeneric<Object?, Object?>> {
+  @override
+  final Iterable<Type> types = const [EmptyGeneric, _$EmptyGeneric];
+  @override
+  final String wireName = 'EmptyGeneric';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, EmptyGeneric<Object?, Object?> object,
+      {FullType specifiedType = FullType.unspecified}) {
+    return <Object?>[];
+  }
+
+  @override
+  EmptyGeneric<Object?, Object?> deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    return new EmptyGenericBuilder<Object?, Object?>().build();
   }
 }
 
@@ -1589,6 +1613,70 @@ class NonBuiltGenericBuilder
         new _$NonBuiltGeneric._(
             value: BuiltValueNullFieldError.checkNotNull(
                 value, 'NonBuiltGeneric', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$EmptyGeneric<K, V> extends EmptyGeneric<K, V> {
+  factory _$EmptyGeneric([void Function(EmptyGenericBuilder<K, V>)? updates]) =>
+      (new EmptyGenericBuilder<K, V>()..update(updates)).build();
+
+  _$EmptyGeneric._() : super._() {
+    if (K == dynamic) {
+      throw new BuiltValueMissingGenericsError('EmptyGeneric', 'K');
+    }
+    if (V == dynamic) {
+      throw new BuiltValueMissingGenericsError('EmptyGeneric', 'V');
+    }
+  }
+
+  @override
+  EmptyGeneric<K, V> rebuild(
+          void Function(EmptyGenericBuilder<K, V>) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  EmptyGenericBuilder<K, V> toBuilder() =>
+      new EmptyGenericBuilder<K, V>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is EmptyGeneric;
+  }
+
+  @override
+  int get hashCode {
+    return 592793250;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('EmptyGeneric').toString();
+  }
+}
+
+class EmptyGenericBuilder<K, V>
+    implements Builder<EmptyGeneric<K, V>, EmptyGenericBuilder<K, V>> {
+  _$EmptyGeneric<K, V>? _$v;
+
+  EmptyGenericBuilder();
+
+  @override
+  void replace(EmptyGeneric<K, V> other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$EmptyGeneric<K, V>;
+  }
+
+  @override
+  void update(void Function(EmptyGenericBuilder<K, V>)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$EmptyGeneric<K, V> build() {
+    final _$result = _$v ?? new _$EmptyGeneric<K, V>._();
     replace(_$result);
     return _$result;
   }
