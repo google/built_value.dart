@@ -182,3 +182,13 @@ abstract class NonBuiltGeneric
 }
 
 class NonBuilt<T> {}
+
+// To check generation does not omit the generics.
+abstract class EmptyGeneric<K, V>
+    implements Built<EmptyGeneric<K, V>, EmptyGenericBuilder<K, V>> {
+  factory EmptyGeneric([void Function(EmptyGenericBuilder<K, V>) updates]) =
+      _$EmptyGeneric<K, V>;
+  EmptyGeneric._();
+  static Serializer<EmptyGeneric<Object?, Object?>> get serializer =>
+      _$emptyGenericSerializer;
+}
