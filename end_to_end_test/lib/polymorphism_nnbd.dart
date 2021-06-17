@@ -241,3 +241,10 @@ abstract class VehicleColor
 
   String get label;
 }
+
+@BuiltValue(instantiable: false, nestedBuilders: false)
+abstract class NotInstantiableNotNested
+    implements
+        Built<NotInstantiableNotNested, NotInstantiableNotNestedBuilder> {
+  BuiltList<String> get list;
+}

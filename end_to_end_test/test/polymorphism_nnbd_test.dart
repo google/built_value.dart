@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 // @dart=2.12
 
+import 'package:built_collection/built_collection.dart';
 import 'package:end_to_end_test/polymorphism_nnbd.dart';
 import 'package:test/test.dart';
 
@@ -153,6 +154,15 @@ void main() {
       (Vehicle vehicle) {
         return vehicle.rebuild((b) => b.color.replace(VehicleColor()));
       };
+    });
+  });
+
+  group(NotInstantiableNotNested, () {
+    test('does not nest builders', () {
+      // This is purely a static check, the function isn't actually called.
+      // Check that the builder field is not a nested builder.
+      (NotInstantiableNotNested value) =>
+          value.rebuild((b) => b..list = BuiltList());
     });
   });
 }
