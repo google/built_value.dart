@@ -59,4 +59,14 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group('FallbackNumberEnum', () {
+    var data = FallbackNumberEnum.no;
+    var serialized =
+        json.decode(json.encode(['FallbackNumberEnum', 75])) as Object;
+
+    test('deserializes using fallback', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }

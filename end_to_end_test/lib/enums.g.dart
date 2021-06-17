@@ -209,7 +209,8 @@ class _$WireNameEnumSerializer implements PrimitiveSerializer<WireNameEnum> {
   @override
   WireNameEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
-      WireNameEnum.valueOf(_fromWire[serialized] ?? serialized as String);
+      WireNameEnum.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
 }
 
 class _$WireNumberEnumSerializer
@@ -238,7 +239,8 @@ class _$WireNumberEnumSerializer
   @override
   WireNumberEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
-      WireNumberEnum.valueOf(_fromWire[serialized] ?? serialized as String);
+      WireNumberEnum.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
 }
 
 class _$DollarValueEnumSerializer
@@ -263,7 +265,8 @@ class _$DollarValueEnumSerializer
   @override
   DollarValueEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
-      DollarValueEnum.valueOf(_fromWire[serialized] ?? serialized as String);
+      DollarValueEnum.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
 }
 
 class _$FallbackEnumSerializer implements PrimitiveSerializer<FallbackEnum> {

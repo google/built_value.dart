@@ -410,7 +410,8 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
   @override
   $genericName deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) =>
-    $name.valueOf(_fromWire[serialized] ?? serialized as String);
+    $name.valueOf(_fromWire[serialized] ?? (
+        serialized is String ? serialized : ''));
 }''';
       }
     } else {
