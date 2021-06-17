@@ -153,6 +153,26 @@ final BuiltSet<FallbackEnum> _$fbValues =
   _$fbNo,
 ]);
 
+const FallbackNumberEnum _$fbNumberYes = const FallbackNumberEnum._('yes');
+const FallbackNumberEnum _$fbNumberNo = const FallbackNumberEnum._('no');
+
+FallbackNumberEnum _$fbNumberValueOf(String name) {
+  switch (name) {
+    case 'yes':
+      return _$fbNumberYes;
+    case 'no':
+      return _$fbNumberNo;
+    default:
+      return _$fbNumberNo;
+  }
+}
+
+final BuiltSet<FallbackNumberEnum> _$fbNumberValues =
+    new BuiltSet<FallbackNumberEnum>(const <FallbackNumberEnum>[
+  _$fbNumberYes,
+  _$fbNumberNo,
+]);
+
 Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
 Serializer<WireNameEnum> _$wireNameEnumSerializer =
     new _$WireNameEnumSerializer();
@@ -162,6 +182,8 @@ Serializer<DollarValueEnum> _$dollarValueEnumSerializer =
     new _$DollarValueEnumSerializer();
 Serializer<FallbackEnum> _$fallbackEnumSerializer =
     new _$FallbackEnumSerializer();
+Serializer<FallbackNumberEnum> _$fallbackNumberEnumSerializer =
+    new _$FallbackNumberEnumSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   @override
@@ -205,7 +227,8 @@ class _$WireNameEnumSerializer implements PrimitiveSerializer<WireNameEnum> {
   @override
   WireNameEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
-      WireNameEnum.valueOf(_fromWire[serialized] ?? serialized as String);
+      WireNameEnum.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
 }
 
 class _$WireNumberEnumSerializer
@@ -234,7 +257,8 @@ class _$WireNumberEnumSerializer
   @override
   WireNumberEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
-      WireNumberEnum.valueOf(_fromWire[serialized] ?? serialized as String);
+      WireNumberEnum.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
 }
 
 class _$DollarValueEnumSerializer
@@ -270,6 +294,34 @@ class _$FallbackEnumSerializer implements PrimitiveSerializer<FallbackEnum> {
   FallbackEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
       FallbackEnum.valueOf(serialized as String);
+}
+
+class _$FallbackNumberEnumSerializer
+    implements PrimitiveSerializer<FallbackNumberEnum> {
+  static const Map<String, Object> _toWire = const <String, Object>{
+    'yes': 0,
+    'no': -1,
+  };
+  static const Map<Object, String> _fromWire = const <Object, String>{
+    0: 'yes',
+    -1: 'no',
+  };
+
+  @override
+  final Iterable<Type> types = const <Type>[FallbackNumberEnum];
+  @override
+  final String wireName = 'FallbackNumberEnum';
+
+  @override
+  Object serialize(Serializers serializers, FallbackNumberEnum object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      _toWire[object.name] ?? object.name;
+
+  @override
+  FallbackNumberEnum deserialize(Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      FallbackNumberEnum.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
 }
 
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

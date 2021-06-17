@@ -36,6 +36,7 @@ part 'serializers_nnbd.g.dart';
   ConcreteGeneric,
   EnumWithInt,
   FallbackEnum,
+  FallbackNumberEnum,
   FieldDiscoveryValue,
   Fish,
   GenericContainer,

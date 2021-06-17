@@ -102,3 +102,19 @@ class FallbackEnum extends EnumClass {
   static BuiltSet<FallbackEnum> get values => _$fbValues;
   static FallbackEnum valueOf(String name) => _$fbValueOf(name);
 }
+
+class FallbackNumberEnum extends EnumClass {
+  static Serializer<FallbackNumberEnum> get serializer =>
+      _$fallbackNumberEnumSerializer;
+
+  @BuiltValueEnumConst(wireNumber: 0)
+  static const FallbackNumberEnum yes = _$fbNumberYes;
+
+  @BuiltValueEnumConst(wireNumber: -1, fallback: true)
+  static const FallbackNumberEnum no = _$fbNumberNo;
+
+  const FallbackNumberEnum._(String name) : super(name);
+
+  static BuiltSet<FallbackNumberEnum> get values => _$fbNumberValues;
+  static FallbackNumberEnum valueOf(String name) => _$fbNumberValueOf(name);
+}

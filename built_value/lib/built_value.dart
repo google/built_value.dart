@@ -221,7 +221,7 @@ class BuiltValueEnumConst {
   /// The wire name when the constant is serialized. Defaults to `null` which
   /// indicates the name is to be taken from the literal field name.
   ///
-  /// Or, set [wireNumber] to serialize to a `String`. Only one of the two may
+  /// Or, set [wireName] to serialize to a `String`. Only one of the two may
   /// be used.
   final int? wireNumber;
 

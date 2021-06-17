@@ -16,6 +16,7 @@
 - Specify annotation targets; the analyzer will now hint if a `built_value`
   annotation is used where it has no effect.
 - Fix `nestedBuilders: false` with `instantiable: false`.
+- Fix enum deserialization fallback for `int`.
 - Removed Angular mixin from example, as this feature is no longer needed:
   Angular now directly supports using static members in templates.
 - Add `@BuiltValueHook` annotation. It provides the same functionality as
