@@ -1185,17 +1185,19 @@ abstract class ValueSourceClass
     }
 
     for (var field in fields) {
+      final fieldType = field.typeInCompilationUnit(compilationUnit);
       final typeInBuilder = field.typeInBuilder(compilationUnit);
+      var type = field.isNestedBuilder ? typeInBuilder : fieldType;
       final name = field.name;
 
       final autoCreatedNestedBuilder =
           field.isNestedBuilder && settings.autoCreateNestedBuilders;
       final maybeOrNull = autoCreatedNestedBuilder ? '' : orNull;
 
-      result.writeln('$typeInBuilder$maybeOrNull get $name;');
+      result.writeln('$type$maybeOrNull get $name;');
       // Add `covariant` if we're implementing one or more parent builders.
       result.writeln('set $name(${interfaces.isEmpty ? '' : 'covariant '} '
-          '$typeInBuilder$orNull $name);');
+          '$type$orNull $name);');
 
       result.writeln();
     }
