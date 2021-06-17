@@ -104,6 +104,38 @@ abstract class Value implements Built<Value, ValueBuilder> {
 '''), contains(r'_$serializers'));
     });
 
+    test('errors on annotation on wrong declaration', () async {
+      expect(
+          await generate(r'''
+library value;
+
+import 'package:test_support/test_support.dart';
+
+part 'value.g.dart';
+
+@SerializersFor(const [Value])
+final serializers = _$serializers;
+
+@SerializersFor(const [Value])
+final int moreSerializers = _$moreSerializers;
+
+@SerializersFor(const [Value])
+final Serializers correctSerializers = _$correctSerializers;
+
+abstract class Value implements Built<Value, ValueBuilder> {
+  static Serializer<Value> get serializer => _$valueSerializer;
+  bool get aBool;
+  
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _$Value;
+}
+'''),
+          contains(
+              r'1. These top level getters are annotated @SerializersFor but '
+              'do not have the required type Serializers, please fix the type '
+              'or remove the annotation: serializers, moreSerializers'));
+    });
+
     test('does not crash for incorrect builder getter', () async {
       expect(await generate(r'''
 library value;

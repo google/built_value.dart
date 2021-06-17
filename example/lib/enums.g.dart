@@ -29,20 +29,6 @@ final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const <TestEnum>[
   _$maybe,
 ]);
 
-class _$TestEnumMeta {
-  const _$TestEnumMeta();
-  TestEnum get yes => _$yes;
-  TestEnum get no => _$no;
-  TestEnum get maybe => _$maybe;
-  TestEnum valueOf(String name) => _$valueOf(name);
-  BuiltSet<TestEnum> get values => _$values;
-}
-
-abstract class _$TestEnumMixin {
-  // ignore: non_constant_identifier_names
-  _$TestEnumMeta get TestEnum => const _$TestEnumMeta();
-}
-
 const SecondTestEnum _$ys = const SecondTestEnum._('yes');
 const SecondTestEnum _$n = const SecondTestEnum._('no');
 const SecondTestEnum _$definitely = const SecondTestEnum._('definitely');
@@ -137,7 +123,8 @@ class _$WireNameEnumSerializer implements PrimitiveSerializer<WireNameEnum> {
   @override
   WireNameEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
-      WireNameEnum.valueOf(_fromWire[serialized] ?? serialized as String);
+      WireNameEnum.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
 }
 
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

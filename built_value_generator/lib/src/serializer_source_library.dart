@@ -12,7 +12,6 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/library_elements.dart';
 import 'package:built_value_generator/src/serializer_source_class.dart';
-import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'dart_types.dart';
@@ -54,6 +53,31 @@ abstract class SerializerSourceLibrary
       if (annotations.isEmpty) continue;
 
       result[accessor.name] = annotations.single;
+    }
+
+    return result.build();
+  }
+
+  /// Returns a list of getters annotated `SerializersFor` that have the wrong
+  /// return type.
+  @memoized
+  BuiltList<String> get wrongSerializersDeclarations {
+    var result = ListBuilder<String>();
+    var accessors = element.definingCompilationUnit.accessors
+        .where((element) =>
+            element.isGetter &&
+            DartTypes.getName(element.returnType) != 'Serializers')
+        .toList();
+
+    for (var accessor in accessors) {
+      final annotations = accessor.variable.metadata
+          .where((annotation) =>
+              DartTypes.getName(annotation.computeConstantValue()?.type) ==
+              'SerializersFor')
+          .toList();
+      if (annotations.isEmpty) continue;
+
+      result.add(accessor.name);
     }
 
     return result.build();
@@ -133,11 +157,25 @@ abstract class SerializerSourceLibrary
 
   bool get needsBuiltJson => sourceClasses.isNotEmpty;
 
+  Iterable<String> computeErrors() {
+    var result = <String>[];
+
+    if (wrongSerializersDeclarations.isNotEmpty) {
+      result.add(
+          'These top level getters are annotated @SerializersFor but do not '
+          'have the required type Serializers, please fix the type or remove '
+          'the annotation: ${wrongSerializersDeclarations.join(', ')}');
+    }
+
+    return result;
+  }
+
   /// Generates serializer source for this library.
   String generateCode() {
-    var errors = concat(sourceClasses
-        .map((sourceClass) => sourceClass.computeErrors())
-        .toList());
+    var errors = [
+      ...computeErrors(),
+      for (var sourceClass in sourceClasses) ...sourceClass.computeErrors(),
+    ];
 
     if (errors.isNotEmpty) throw _makeError(errors);
 
