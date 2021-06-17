@@ -19,6 +19,8 @@
 - Fix enum deserialization fallback for `int`.
 - Removed Angular mixin from example, as this feature is no longer needed:
   Angular now directly supports using static members in templates.
+- Annotating a wrong type getter with `@SerializersFor` is now an error,
+  instead of just generating nothing.
 - Add `@BuiltValueHook` annotation. It provides the same functionality as
   `_initializeBuilder` and `_finalizeBuilder`, but in a more visible way:
   annotate a static method on the value class with `@BuiltValueHook` to

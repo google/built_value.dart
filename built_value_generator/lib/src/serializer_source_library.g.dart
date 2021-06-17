@@ -13,6 +13,7 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   ParsedLibraryResult __parsedLibrary;
   bool __hasSerializers;
   BuiltMap<String, ElementAnnotation> __serializersForAnnotations;
+  BuiltList<String> __wrongSerializersDeclarations;
   BuiltSet<SerializerSourceClass> __sourceClasses;
   BuiltSetMultimap<String, SerializerSourceClass> __serializeForClasses;
   BuiltSetMultimap<String, SerializerSourceClass>
@@ -37,6 +38,10 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   @override
   BuiltMap<String, ElementAnnotation> get serializersForAnnotations =>
       __serializersForAnnotations ??= super.serializersForAnnotations;
+
+  @override
+  BuiltList<String> get wrongSerializersDeclarations =>
+      __wrongSerializersDeclarations ??= super.wrongSerializersDeclarations;
 
   @override
   BuiltSet<SerializerSourceClass> get sourceClasses =>
