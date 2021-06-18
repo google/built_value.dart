@@ -8,14 +8,15 @@ library built_value_generator.source_class;
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/memoized_getter.dart';
 import 'package:built_value_generator/src/metadata.dart';
-import 'package:built_value_generator/src/value_source_field.dart';
 import 'package:built_value_generator/src/strings.dart';
+import 'package:built_value_generator/src/value_source_field.dart';
 import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -305,14 +306,29 @@ abstract class ValueSourceClass
     ..add('Builder<$name$_generics, ${name}Builder$_generics>')
     ..addAll(element.interfaces
         .where((interface) => needsBuiltValue(interface.element))
-        .map((interface) {
-      final displayName = DartTypes.getName(interface);
-      if (!displayName.contains('<')) return displayName + 'Builder';
-      final index = displayName.indexOf('<');
-      return displayName.substring(0, index) +
-          'Builder' +
-          displayName.substring(index);
-    })));
+        .map(_parentBuilderInterfaceName)));
+
+  /// Returns the `with` clause for the builder.
+  ///
+  /// If the value class mixes in other value classes, the builder mixes in
+  /// the corresponding builders.
+  @memoized
+  BuiltList<String> get builderMixins => element.mixins
+      .where((interface) => needsBuiltValue(interface.element))
+      .map(_parentBuilderInterfaceName)
+      .toBuiltList();
+
+  String _parentBuilderInterfaceName(InterfaceType interface) {
+    final displayName = DartTypes.getName(interface);
+    if (!displayName.contains('<')) return displayName + 'Builder';
+    final index = displayName.indexOf('<');
+    return displayName.substring(0, index) +
+        'Builder' +
+        displayName.substring(index);
+  }
+
+  bool get _implementsParentBuilder =>
+      builderImplements.length + builderMixins.length > 1;
 
   @memoized
   bool get implementsHashCode {
@@ -846,6 +862,10 @@ abstract class ValueSourceClass
     if (hasBuilder) {
       result.writeln('class ${implName}Builder$_boundedGenerics '
           'extends ${name}Builder$_generics {');
+    } else if (builderMixins.isNotEmpty) {
+      result.writeln('class ${name}Builder$_boundedGenerics '
+          'with ${builderMixins.join(", ")} '
+          'implements ${builderImplements.join(", ")} {');
     } else {
       result.writeln('class ${name}Builder$_boundedGenerics '
           'implements ${builderImplements.join(", ")} {');
@@ -899,7 +919,7 @@ abstract class ValueSourceClass
       }
 
       // Add `covariant` if we're implementing one or more parent builders.
-      var maybeCovariant = (builderImplements.length > 1) ? 'covariant ' : '';
+      var maybeCovariant = _implementsParentBuilder ? 'covariant ' : '';
       for (var field in fields) {
         var type = field.typeInCompilationUnit(compilationUnit);
         var typeInBuilder = field.typeInBuilder(compilationUnit);
@@ -979,12 +999,12 @@ abstract class ValueSourceClass
     }
 
     result.writeln('@override');
-    if (builderImplements.length > 1) {
+    if (_implementsParentBuilder) {
       // If we're overriding `replace` from other builders, tell the analyzer
       // that this builder only accepts values of exactly the right type, by
       // marking the value `covariant`.
 
-      if (builderImplements.length > 2) {
+      if (builderImplements.length + builderMixins.length > 2) {
         // Add this `ignore` as a workaround for analyzer issue:
         // https://github.com/dart-lang/sdk/issues/32025
         result.writeln('// ignore: override_on_non_overriding_method');
@@ -1167,7 +1187,10 @@ abstract class ValueSourceClass
     // https://github.com/dart-lang/sdk/issues/14729. So, we can't implement
     // "Builder". Add the methods explicitly. We can however implement any
     // other built_value interfaces.
-    var interfaces = builderImplements.skip(1).toList();
+    var interfaces = [
+      ...builderImplements.skip(1),
+      ...builderMixins,
+    ];
 
     if (implementsBuilt) {
       result.writeln('abstract class ${name}Builder$_boundedGenerics '

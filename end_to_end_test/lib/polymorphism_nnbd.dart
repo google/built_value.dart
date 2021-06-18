@@ -232,6 +232,18 @@ abstract class Car implements Vehicle, Built<Car, CarBuilder> {
   int get seatsCount;
 }
 
+// Check that generated builders mix in parent buildes when the class mixes
+// in the other class; otherwise, they won't build.
+abstract class MixinCar
+    with Vehicle
+    implements Built<MixinCar, MixinCarBuilder> {
+  MixinCar._();
+
+  factory MixinCar([void Function(MixinCarBuilder)? updates]) = _$MixinCar;
+
+  int get seatsCount;
+}
+
 abstract class VehicleColor
     implements Built<VehicleColor, VehicleColorBuilder> {
   VehicleColor._();

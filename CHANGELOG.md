@@ -25,6 +25,8 @@
   `_initializeBuilder` and `_finalizeBuilder`, but in a more visible way:
   annotate a static method on the value class with `@BuiltValueHook` to
   have it called on builder creation or finalization.
+- Support polymorphism with mixed in parent value type: generated builder
+  now mixes in parent builder.
 
 # 8.0.6
 
