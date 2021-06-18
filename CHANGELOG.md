@@ -1,6 +1,18 @@
 # Changelog
 
-# 8.0.7 (unreleased)
+# 8.1.0
+
+New features:
+
+- Add `@BuiltValueHook` annotation. It provides the same functionality as
+  `_initializeBuilder` and `_finalizeBuilder`, but in a more visible way:
+  annotate a static method on the value class with `@BuiltValueHook` to
+  have it called on builder creation or finalization.
+- Add back `serializeNulls` to `BuiltValueSerializer` annotation. By default
+  generated serializers skip null fields instead of writing them; set
+  `serializeNulls` to write the nulls.
+
+New minor functionality:
 
 - Support use of nulls in collections when the key or value types are
   explicitly nullable.
@@ -9,24 +21,23 @@
   to match the implementations. Use `autoCreateNestedBuilders: false` to get
   the old behaviour.
 - Allow explicit nulls in JSON for nullable fields when deserializing.
-- Fix support for serializing and deserializing nulls.
-- Add back `serializeNulls` to `BuiltValueSerializer` annotation. By default
-  generated serializers skip null fields instead of writing them; set
-  `serializeNulls` to write the nulls.
 - Specify annotation targets; the analyzer will now hint if a `built_value`
   annotation is used where it has no effect.
-- Fix `nestedBuilders: false` with `instantiable: false`.
-- Fix enum deserialization fallback for `int`.
-- Removed Angular mixin from example, as this feature is no longer needed:
-  Angular now directly supports using static members in templates.
-- Annotating a wrong type getter with `@SerializersFor` is now an error,
-  instead of just generating nothing.
-- Add `@BuiltValueHook` annotation. It provides the same functionality as
-  `_initializeBuilder` and `_finalizeBuilder`, but in a more visible way:
-  annotate a static method on the value class with `@BuiltValueHook` to
-  have it called on builder creation or finalization.
 - Support polymorphism with mixed in parent value type: generated builder
   now mixes in parent builder.
+
+Bug fixes:
+
+- Fix support for serializing and deserializing nulls.
+- Fix `nestedBuilders: false` with `instantiable: false`.
+- Fix enum deserialization fallback for `int`.
+- Annotating a wrong type getter with `@SerializersFor` is now an error,
+  instead of just generating nothing.
+
+Cleanup:
+
+- Removed Angular mixin from example, as this feature is no longer needed:
+  Angular now directly supports using static members in templates.
 
 # 8.0.6
 
