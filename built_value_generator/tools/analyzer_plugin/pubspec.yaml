@@ -1,8 +1,8 @@
 name: built_value_analyzer_plugin_loader
-version: 8.0.6
+version: 8.1.0
 description: This pubspec determines the version of the analyzer plugin to load.
 environment:
   sdk: '>=1.24.0-dev.1.0'
 dependencies:
-  built_value_analyzer_plugin: ^8.0.6
-  built_value_generator: ^8.0.6
+  built_value_analyzer_plugin: ^8.1.0
+  built_value_generator: ^8.1.0
