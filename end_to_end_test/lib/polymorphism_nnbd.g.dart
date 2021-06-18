@@ -1330,6 +1330,110 @@ class CarBuilder implements Builder<Car, CarBuilder>, VehicleBuilder {
   }
 }
 
+class _$MixinCar extends MixinCar {
+  @override
+  final int seatsCount;
+  @override
+  final VehicleColor color;
+
+  factory _$MixinCar([void Function(MixinCarBuilder)? updates]) =>
+      (new MixinCarBuilder()..update(updates)).build();
+
+  _$MixinCar._({required this.seatsCount, required this.color}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(seatsCount, 'MixinCar', 'seatsCount');
+    BuiltValueNullFieldError.checkNotNull(color, 'MixinCar', 'color');
+  }
+
+  @override
+  MixinCar rebuild(void Function(MixinCarBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  MixinCarBuilder toBuilder() => new MixinCarBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is MixinCar &&
+        seatsCount == other.seatsCount &&
+        color == other.color;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, seatsCount.hashCode), color.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('MixinCar')
+          ..add('seatsCount', seatsCount)
+          ..add('color', color))
+        .toString();
+  }
+}
+
+class MixinCarBuilder
+    with VehicleBuilder
+    implements Builder<MixinCar, MixinCarBuilder> {
+  _$MixinCar? _$v;
+
+  int? _seatsCount;
+  int? get seatsCount => _$this._seatsCount;
+  set seatsCount(covariant int? seatsCount) => _$this._seatsCount = seatsCount;
+
+  VehicleColorBuilder? _color;
+  VehicleColorBuilder get color => _$this._color ??= new VehicleColorBuilder();
+  set color(covariant VehicleColorBuilder? color) => _$this._color = color;
+
+  MixinCarBuilder();
+
+  MixinCarBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _seatsCount = $v.seatsCount;
+      _color = $v.color.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant MixinCar other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$MixinCar;
+  }
+
+  @override
+  void update(void Function(MixinCarBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$MixinCar build() {
+    _$MixinCar _$result;
+    try {
+      _$result = _$v ??
+          new _$MixinCar._(
+              seatsCount: BuiltValueNullFieldError.checkNotNull(
+                  seatsCount, 'MixinCar', 'seatsCount'),
+              color: color.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'color';
+        color.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'MixinCar', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$VehicleColor extends VehicleColor {
   @override
   final String label;
