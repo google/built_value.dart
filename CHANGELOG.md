@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.1.1
+
+- Bug fix: allow constructors to have annotations. Previously, annotations
+  would cause codegen to fail.
+
 # 8.1.0
 
 New features:

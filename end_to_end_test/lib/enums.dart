@@ -105,3 +105,19 @@ class FallbackEnum extends EnumClass {
   static BuiltSet<FallbackEnum> get values => _$fbValues;
   static FallbackEnum valueOf(String name) => _$fbValueOf(name);
 }
+
+@Deprecated('Testing whether annotations on constructors works.')
+class DeprecatedEnum extends EnumClass {
+  @Deprecated('Testing whether annotations on fields works.')
+  static const DeprecatedEnum yes = _$dYes;
+  @Deprecated('Testing whether annotations on fields works.')
+  static const DeprecatedEnum no = _$dNo;
+
+  @Deprecated('Testing whether annotations on constructors works.')
+  const DeprecatedEnum._(String name) : super(name);
+
+  @Deprecated('Testing whether annotations on methods works.')
+  static BuiltSet<DeprecatedEnum> get values => _$dValues;
+  @Deprecated('Testing whether annotations on methods works.')
+  static DeprecatedEnum valueOf(String name) => _$dValueOf(name);
+}

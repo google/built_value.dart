@@ -84,6 +84,7 @@ class BuiltValueGenerator extends Generator {
           'avoid_as,'
           'avoid_catches_without_on_clauses,'
           'avoid_returning_this,'
+          'deprecated_member_use_from_same_package,'
           'lines_longer_than_80_chars,'
           'omit_local_variable_types,'
           'prefer_expression_function_bodies,'
