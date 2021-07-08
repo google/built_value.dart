@@ -5679,4 +5679,60 @@ class _PrivateValueBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+class _$DeprecatedValue extends DeprecatedValue {
+  factory _$DeprecatedValue([void Function(DeprecatedValueBuilder) updates]) =>
+      (new DeprecatedValueBuilder()..update(updates)).build()
+          as _$DeprecatedValue;
+
+  _$DeprecatedValue._() : super._();
+
+  @override
+  DeprecatedValue rebuild(void Function(DeprecatedValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$DeprecatedValueBuilder toBuilder() =>
+      new _$DeprecatedValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is DeprecatedValue;
+  }
+
+  @override
+  int get hashCode {
+    return 366528157;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('DeprecatedValue').toString();
+  }
+}
+
+class _$DeprecatedValueBuilder extends DeprecatedValueBuilder {
+  _$DeprecatedValue _$v;
+
+  _$DeprecatedValueBuilder() : super._();
+
+  @override
+  void replace(DeprecatedValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$DeprecatedValue;
+  }
+
+  @override
+  void update(void Function(DeprecatedValueBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$DeprecatedValue build() {
+    final _$result = _$v ?? new _$DeprecatedValue._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

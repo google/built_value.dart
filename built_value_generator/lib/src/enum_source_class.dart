@@ -144,7 +144,8 @@ abstract class EnumSourceClass
 
   Iterable<String> _checkConstructor() {
     var expectedCode = 'const $name._(String name) : super(name);';
-    return constructors.length == 1 && constructors.single == expectedCode
+    return constructors.length == 1 &&
+            constructors.single.contains(expectedCode)
         ? <String>[]
         : <String>['Have exactly one constructor: $expectedCode'];
   }

@@ -563,7 +563,7 @@ abstract class ValueSourceClass
       } else if (valueClassConstructors.length > 1) {
         var found = false;
         for (var constructor in valueClassConstructors) {
-          if (constructor.toSource().startsWith(expectedConstructor)) {
+          if (constructor.toSource().contains(expectedConstructor)) {
             found = true;
           } else {
             result.add(GeneratorError((b) => b
@@ -583,10 +583,10 @@ abstract class ValueSourceClass
         }
       } else if (!(valueClassConstructors.single
           .toSource()
-          .startsWith(expectedConstructor))) {
+          .contains(expectedConstructor))) {
         result.add(GeneratorError((b) => b
           ..message =
-              'Make class have exactly one constructor: $expectedConstructor;'
+              'Make class have exactly one constructor: $expectedConstructor'
           ..offset = valueClassConstructors.single.offset
           ..length = valueClassConstructors.single.length
           ..fix = expectedConstructor + ';'));
@@ -658,7 +658,7 @@ abstract class ValueSourceClass
     if (settings.instantiable) {
       final expectedConstructor = '${name}Builder._()';
       if (builderClassConstructors.length != 1 ||
-          !(builderClassConstructors.single.startsWith(expectedConstructor))) {
+          !(builderClassConstructors.single.contains(expectedConstructor))) {
         result.add(GeneratorError((b) => b
           ..message =
               'Make builder class have exactly one constructor: $expectedConstructor;'));
@@ -675,7 +675,7 @@ abstract class ValueSourceClass
       final expectedFactory =
           'factory ${name}Builder() = ${implName}Builder$_generics;';
       if (builderClassFactories.length != 1 ||
-          builderClassFactories.single != expectedFactory) {
+          !builderClassFactories.single.contains(expectedFactory)) {
         result.add(GeneratorError((b) => b
           ..message =
               'Make builder class have exactly one factory: $expectedFactory'));

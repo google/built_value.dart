@@ -758,3 +758,22 @@ abstract class _PrivateValue
   factory _PrivateValue(void Function(_PrivateValueBuilder) updates) =
       _$PrivateValue;
 }
+
+@Deprecated('Testing whether annotations on constructors works.')
+abstract class DeprecatedValue
+    implements Built<DeprecatedValue, DeprecatedValueBuilder> {
+  @Deprecated('Testing whether annotations on constructors works.')
+  factory DeprecatedValue([void Function(DeprecatedValueBuilder) updates]) =
+      _$DeprecatedValue;
+  @Deprecated('Testing whether annotations on constructors works.')
+  DeprecatedValue._();
+}
+
+@Deprecated('Testing whether annotations on constructors works.')
+abstract class DeprecatedValueBuilder
+    implements Builder<DeprecatedValue, DeprecatedValueBuilder> {
+  @Deprecated('Testing whether annotations on constructors works.')
+  factory DeprecatedValueBuilder() = _$DeprecatedValueBuilder;
+  @Deprecated('Testing whether annotations on constructors works.')
+  DeprecatedValueBuilder._();
+}
