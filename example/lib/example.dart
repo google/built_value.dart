@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:example/generics.dart';
 import 'package:example/polymorphism.dart';
@@ -68,6 +69,16 @@ void example() {
     print(serialized);
     assert(serializers.deserialize(serialized) == object);
   }
+
+ final data = {
+    'value': [
+      {
+        'anInt': 818,
+      },
+    ]
+  };
+
+  print(serializers.deserializeWith(GenericValue.serializer, data));
 
   // See chat_example and end_to_end_test for more complex usage!
 }

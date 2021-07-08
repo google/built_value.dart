@@ -45,6 +45,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   BuiltList<String> __builderClassFactories;
   BuiltList<MemoizedGetter> __memoizedGetters;
   BuiltList<String> __builderImplements;
+  BuiltList<String> __builderMixins;
   bool __implementsHashCode;
   bool __declaresMemoizedHashCode;
   bool __implementsOperatorEquals;
@@ -184,6 +185,10 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   BuiltList<String> get builderImplements =>
       __builderImplements ??= super.builderImplements;
+
+  @override
+  BuiltList<String> get builderMixins =>
+      __builderMixins ??= super.builderMixins;
 
   @override
   bool get implementsHashCode =>
