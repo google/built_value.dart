@@ -4,6 +4,7 @@
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_collection/src/internal/hash.dart';
+import 'package:built_value/built_value.dart';
 import 'package:built_value/src/big_int_serializer.dart';
 import 'package:built_value/src/date_time_serializer.dart';
 import 'package:built_value/src/duration_serializer.dart';
@@ -345,6 +346,36 @@ abstract class PrimitiveSerializer<T> implements Serializer<T> {
   T deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified});
 }
+
+/// A [Serializer] that serializes to and from primitive JSON values.
+abstract class EnumSerializer<T extends EnumClass> extends PrimitiveSerializer<T>{
+  /// Serializes [object].
+  ///
+  /// Use [serializers] as needed for nested serialization. Information about
+  /// the type being serialized is provided in [specifiedType].
+  ///
+  /// Returns a value that can be represented as a JSON primitive: a boolean,
+  /// an integer, a double, or a String.
+  ///
+  /// TODO(davidmorgan): document the wire format.
+  @override
+  Object serialize(Serializers serializers, T object,
+      {FullType specifiedType = FullType.unspecified});
+
+  /// Deserializes [serialized].
+  ///
+  /// [serialized] is a boolean, an integer, a double or a String.
+  ///
+  /// Use [serializers] as needed for nested deserialization. Information about
+  /// the type being deserialized is provided in [specifiedType].
+  @override
+  T deserialize(Serializers serializers, Object serialized,
+      {FullType specifiedType = FullType.unspecified});
+
+  Object serializationKey(Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified});
+}
+
 
 /// A [Serializer] that serializes to and from an [Iterable] of primitive JSON
 /// values.
