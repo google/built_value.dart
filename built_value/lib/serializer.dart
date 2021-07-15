@@ -372,8 +372,9 @@ abstract class EnumSerializer<T extends EnumClass> extends PrimitiveSerializer<T
   T deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified});
 
-  Object serializationKey(Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified});
+  Object serializationKey(T object, {FullType specifiedType = FullType.unspecified});
+
+  bool validMapping();
 }
 
 
