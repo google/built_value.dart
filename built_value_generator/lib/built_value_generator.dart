@@ -62,7 +62,7 @@ class BuiltValueGenerator extends Generator {
           st);
     }
 
-    for (var element in libraryElement.units.expand((unit) => unit.types)) {
+    for (var element in libraryElement.units.expand((unit) => unit.classes)) {
       if (ValueSourceClass.needsBuiltValue(element)) {
         try {
           result.writeln(ValueSourceClass(element).generateCode() ?? '');
