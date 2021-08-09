@@ -15,7 +15,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^1.0.0
-  built_value_generator: ^8.1.1
+  built_value_generator: ^8.1.2
   pedantic: ^1.4.0
   quiver: '>=0.21.0 <4.0.0'
   test: ^1.0.0

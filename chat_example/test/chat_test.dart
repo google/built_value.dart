@@ -67,7 +67,9 @@ void main() {
       final alice = environment.newUser();
       final bob = environment.newUser();
 
-      alice..type('/login Alice letmein')..type('Hi, Bob!');
+      alice
+        ..type('/login Alice letmein')
+        ..type('Hi, Bob!');
       bob.expectMatch('Alice: Hi, Bob!');
     });
 

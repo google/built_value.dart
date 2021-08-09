@@ -197,14 +197,14 @@ abstract class SerializerSourceLibrary
                   .map((sourceClass) =>
                       sourceClass.generateTransitiveSerializerAdder())
                   .toList()
-                    ..sort())
+                ..sort())
               .join('\n') +
           (serializeForTransitiveClasses[field]
                   .map((sourceClass) =>
                       sourceClass.generateBuilderFactoryAdders(
                           element.definingCompilationUnit))
                   .toList()
-                    ..sort())
+                ..sort())
               .join('\n') +
           ').build();')
       .join('\n');
