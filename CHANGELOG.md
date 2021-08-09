@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.1.2
+
+- Bump version of `analyzer`.
+
 # 8.1.1
 
 - Bug fix: allow constructors to have annotations. Previously, annotations

@@ -339,7 +339,9 @@ class IndentingBuiltValueToStringHelper implements BuiltValueToStringHelper {
   StringBuffer? _result = StringBuffer();
 
   IndentingBuiltValueToStringHelper(String className) {
-    _result!..write(className)..write(' {\n');
+    _result!
+      ..write(className)
+      ..write(' {\n');
     _indentingBuiltValueToStringHelperIndent += 2;
   }
 
@@ -358,7 +360,9 @@ class IndentingBuiltValueToStringHelper implements BuiltValueToStringHelper {
   @override
   String toString() {
     _indentingBuiltValueToStringHelperIndent -= 2;
-    _result!..write(' ' * _indentingBuiltValueToStringHelperIndent)..write('}');
+    _result!
+      ..write(' ' * _indentingBuiltValueToStringHelperIndent)
+      ..write('}');
     var stringResult = _result.toString();
     _result = null;
     return stringResult;
@@ -373,14 +377,19 @@ class FlatBuiltValueToStringHelper implements BuiltValueToStringHelper {
   bool _previousField = false;
 
   FlatBuiltValueToStringHelper(String className) {
-    _result!..write(className)..write(' {');
+    _result!
+      ..write(className)
+      ..write(' {');
   }
 
   @override
   void add(String field, Object? value) {
     if (value != null) {
       if (_previousField) _result!.write(',');
-      _result!..write(field)..write('=')..write(value);
+      _result!
+        ..write(field)
+        ..write('=')
+        ..write(value);
       _previousField = true;
     }
   }
