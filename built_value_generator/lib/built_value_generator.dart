@@ -20,12 +20,30 @@ class BuiltValueGenerator extends Generator {
 
   @override
   Future<String> generate(LibraryReader library, BuildStep buildStep) async {
+    // Workaround for https://github.com/google/built_value.dart/issues/941.
+    LibraryElement libraryElement;
+    var attempts = 0;
+    while (true) {
+      try {
+        libraryElement = await buildStep.resolver.libraryFor(
+            await buildStep.resolver.assetIdForElement(library.element));
+        libraryElement.session.getParsedLibraryByElement(libraryElement);
+        break;
+      } catch (_) {
+        ++attempts;
+        if (attempts == 10) {
+          log.severe('Analysis session did not stabilize after ten tries!');
+          return null;
+        }
+      }
+    }
+
     var result = StringBuffer();
 
     try {
-      final enumCode = EnumSourceLibrary(library.element).generateCode();
+      final enumCode = EnumSourceLibrary(libraryElement).generateCode();
       if (enumCode != null) result.writeln(enumCode);
-      final serializerSourceLibrary = SerializerSourceLibrary(library.element);
+      final serializerSourceLibrary = SerializerSourceLibrary(libraryElement);
       if (serializerSourceLibrary.needsBuiltJson ||
           serializerSourceLibrary.hasSerializers) {
         result.writeln(serializerSourceLibrary.generateCode());
@@ -34,21 +52,20 @@ class BuiltValueGenerator extends Generator {
       result.writeln(_error(e.message));
       log.severe(
           'Error in BuiltValueGenerator for '
-          '${library.element.source.fullName}.',
+          '${libraryElement.source.fullName}.',
           e,
           st);
     } catch (e, st) {
       result.writeln(_error(e.toString()));
       log.severe(
           'Unknown error in BuiltValueGenerator for '
-          '${library.element.source.fullName}.',
+          '${libraryElement.source.fullName}.',
           e,
           st);
     }
 
-    for (var element in library.allElements) {
-      if (element is ClassElement &&
-          ValueSourceClass.needsBuiltValue(element)) {
+    for (var element in libraryElement.units.expand((unit) => unit.types)) {
+      if (ValueSourceClass.needsBuiltValue(element)) {
         try {
           result.writeln(ValueSourceClass(element).generateCode() ?? '');
         } catch (e, st) {

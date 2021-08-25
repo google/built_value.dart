@@ -3,6 +3,7 @@
 # 7.1.1
 
 - Support analyzer `^0.40.0`.
+- Workaround https://github.com/google/built_value.dart/issues/941.
 
 # 7.1.0
 
