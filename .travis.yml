@@ -1,5 +1,8 @@
 
 language: dart
-dart: dev
+dart: stable
 script:
   - tool/presubmit
+branches:
+  only:
+    - /.*/

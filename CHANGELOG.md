@@ -1,5 +1,10 @@
 # Changelog
 
+# 7.1.1
+
+- Support analyzer `^0.40.0`.
+- Workaround https://github.com/google/built_value.dart/issues/941.
+
 # 7.1.0
 
 - Support private `Built` classes. Note that private classes cannot be made
@@ -547,7 +552,7 @@ Fixes:
 
 ## 1.0.0
 
-- Version bump to 1.0.0. Three minor features are marked as experimental and 
+- Version bump to 1.0.0. Three minor features are marked as experimental and
   may change without a major version increase: BuiltValueToStringHelper,
   JsonObject and SerializerPlugin.
 - Made toString() output customizable.
@@ -562,7 +567,7 @@ Fixes:
 
 - Add serializer for "DateTime" fields.
 - Add JsonObject class and serializer.
-- Add convenience methods Seralizers.serializeWith and deserializeWith. 
+- Add convenience methods Seralizers.serializeWith and deserializeWith.
 - Add example for using StandardJsonPlugin.
 - Support serializing NaN, INF and -INF for double and num.
 
