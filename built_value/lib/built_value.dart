@@ -327,7 +327,7 @@ class FlatBuiltValueToStringHelper implements BuiltValueToStringHelper {
 
   @override
   String toString() {
-    _result..write('}');
+    _result.write('}');
     var stringResult = _result.toString();
     _result = null;
     return stringResult;
