@@ -6,10 +6,10 @@ description: >
 homepage: https://github.com/google/built_value.dart
 
 environment:
-  sdk: '>=2.12.0-0 <3.0.0'
+  sdk: '>=2.14.0 <3.0.0'
 
 dependencies:
-  analyzer: '>=1.8.0 <3.0.0'
+  analyzer: '>=2.6.0 <3.0.0'
   build: '>=1.0.0 <3.0.0'
   build_config: '>=0.3.1 <2.0.0'
   built_collection: ^5.0.0

@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.1.3 (unreleased)
+
+- Bump version of `analyzer`, fix deprecation warnings. 
+
 # 8.1.2
 
 - Bump version of `analyzer`.

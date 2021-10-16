@@ -6,7 +6,7 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 
 ParsedLibraryResult parsedLibraryResultOrThrowingMock(LibraryElement element) {
-  var result = element.session.getParsedLibraryByElement2(element);
+  var result = element.session.getParsedLibraryByElement(element);
   if (result is ParsedLibraryResult) {
     return result;
   }
