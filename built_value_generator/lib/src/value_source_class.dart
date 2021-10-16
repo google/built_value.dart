@@ -450,7 +450,7 @@ abstract class ValueSourceClass
     var expectedInterface = 'Built<$name$_generics, ${name}Builder$_generics>';
 
     var implementsClauseIsCorrect = implementsClause != null &&
-        implementsClause.interfaces
+        implementsClause.interfaces2
             .any((type) => type.toSource() == expectedInterface);
 
     // Built parameters need fixing if they are not as expected, unless 1) the
@@ -460,7 +460,7 @@ abstract class ValueSourceClass
     // same interface twice with different type parameters.
     var implementsClauseIsAllowedToBeIncorrect = !settings.instantiable &&
         (implementsClause == null ||
-            !implementsClause.interfaces.any((type) =>
+            !implementsClause.interfaces2.any((type) =>
                 type.toSource() == 'Built' ||
                 type.toSource().startsWith('Built<')));
 
@@ -473,7 +473,7 @@ abstract class ValueSourceClass
           ..fix = 'implements $expectedInterface'));
       } else {
         var found = false;
-        final interfaces = implementsClause.interfaces.map((type) {
+        final interfaces = implementsClause.interfaces2.map((type) {
           if (type.name.name == 'Built') {
             found = true;
             return expectedInterface;

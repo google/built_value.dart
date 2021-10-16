@@ -26,7 +26,7 @@ class BuiltValueGenerator extends Generator {
       try {
         libraryElement = await buildStep.resolver.libraryFor(
             await buildStep.resolver.assetIdForElement(library.element));
-        libraryElement.session.getParsedLibraryByElement2(libraryElement);
+        libraryElement.session.getParsedLibraryByElement(libraryElement);
         break;
       } catch (_) {
         ++attempts;
