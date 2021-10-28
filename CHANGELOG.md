@@ -2,7 +2,7 @@
 
 # 8.1.3
 
-- Bump version of `analyzer`, fix deprecation warnings. 
+- Bump version of `analyzer`, fix deprecation warnings.
 
 # 8.1.2
 
