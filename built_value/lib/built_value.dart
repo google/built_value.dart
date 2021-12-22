@@ -251,7 +251,7 @@ class BuiltValueHook {
   ///
   /// ```
   /// @BuiltValueHook(initializeBuilder: true)
-  /// static void _initializeBuilder(MyClassBuilder b) =>
+  /// static void _initialize(MyClassBuilder b) =>
   ///    b..name = 'defaultName';
   ///
   /// Defaults to `false`.
@@ -266,8 +266,8 @@ class BuiltValueHook {
   /// This example uses it to make `items` sorted:
   ///
   /// ```
-  /// @BuiltValueHook(initializeBuilder: true)
-  /// static void _finalizeBuilder(MyClassBuilder b) =>
+  /// @BuiltValueHook(finalizeBuilder: true)
+  /// static void _finalize(MyClassBuilder b) =>
   ///    b..items.sort();
   ///
   /// Defaults to `false`.
