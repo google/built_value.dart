@@ -226,6 +226,27 @@ abstract class _Value implements Built<_Value, _ValueBuilder> {
 }
 '''), contains(r'1. Cannot generate serializers for private class _Value'));
     });
+
+    test('deserialize is null safe', () async {
+      final generated = await generate(r'''
+        library value;
+
+        import 'package:test_support/test_support.dart';
+
+        part 'value.g.dart';
+
+        abstract class Value implements Built<Value, ValueBuilder> {
+          static Serializer<Value> get serializer => _$valueSerializer;
+          bool get aBool;
+          
+          Value._();
+          factory Value([void Function(ValueBuilder) updates]) = _$Value;
+        }
+        ''');
+      expect(generated, contains(r'final key = iterator.current! as String;'));
+      expect(generated,
+          contains(r'specifiedType: const FullType(bool))! as bool;'));
+    });
   });
 }
 
