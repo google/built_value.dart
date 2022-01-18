@@ -336,7 +336,7 @@ class $serializerImplName implements StructuredSerializer<$genericName> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current$notNull as String;
       iterator.moveNext();
       final Object$orNull value = iterator.current;
       switch (key) {
@@ -532,10 +532,12 @@ case '${escapeString(field.wireName)}':
       } else {
         // `cast` is empty if no cast is needed.
         var maybeOrNull = field.isNullable && cast.isNotEmpty ? orNull : '';
+        // If cast exists and is not nullable.
+        var maybeNotNull = !field.isNullable && cast.isNotEmpty ? notNull : '';
         return '''
 case '${escapeString(field.wireName)}':
   result.${field.name} = serializers.deserialize(
-      value, specifiedType: $fullType) $cast$maybeOrNull;
+      value, specifiedType: $fullType)$maybeNotNull $cast$maybeOrNull;
   break;
 ''';
       }
