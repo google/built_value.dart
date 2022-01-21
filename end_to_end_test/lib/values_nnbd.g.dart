@@ -111,13 +111,13 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'aString':
           result.aString = serializers.deserialize(value,
@@ -167,7 +167,7 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -225,13 +225,13 @@ class _$CompoundValueNoNestingSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue;
+              specifiedType: const FullType(SimpleValue))! as SimpleValue;
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
@@ -275,13 +275,13 @@ class _$CompoundValueNoAutoNestingSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = (serializers.deserialize(value,
-                      specifiedType: const FullType(NoFieldsValue))
+                      specifiedType: const FullType(NoFieldsValue))!
                   as NoFieldsValue)
               .toBuilder();
           break;
@@ -330,13 +330,13 @@ class _$CompoundValueComparableBuildersSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue;
+              specifiedType: const FullType(SimpleValue))! as SimpleValue;
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
@@ -397,13 +397,13 @@ class _$CompoundValueNoNestingFieldSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue;
+              specifiedType: const FullType(SimpleValue))! as SimpleValue;
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
@@ -473,13 +473,13 @@ class _$CompoundValueNestingFieldSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
-              specifiedType: const FullType(SimpleValue)) as SimpleValue;
+              specifiedType: const FullType(SimpleValue))! as SimpleValue;
           break;
         case 'validatedValue':
           result.validatedValue = serializers.deserialize(value,
@@ -535,13 +535,13 @@ class _$CompoundValueNoAutoNestingFieldSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = (serializers.deserialize(value,
-                      specifiedType: const FullType(NoFieldsValue))
+                      specifiedType: const FullType(NoFieldsValue))!
                   as NoFieldsValue)
               .toBuilder();
           break;
@@ -590,7 +590,7 @@ class _$CompoundValueAutoNestingFieldSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -647,7 +647,7 @@ class _$CompoundValueExplicitNoNestingSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -699,13 +699,13 @@ class _$ValidatedValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'aString':
           result.aString = serializers.deserialize(value,
@@ -753,13 +753,13 @@ class _$ValueUsingImportAsSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
-                  specifiedType: const FullType(using_import_as.TestEnum))
+                  specifiedType: const FullType(using_import_as.TestEnum))!
               as using_import_as.TestEnum;
           break;
         case 'nullableValue':
@@ -846,53 +846,53 @@ class _$PrimitivesValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'boolean':
           result.boolean = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'integer':
           result.integer = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'int64':
           result.int64 = serializers.deserialize(value,
-              specifiedType: const FullType(Int64)) as Int64;
+              specifiedType: const FullType(Int64))! as Int64;
           break;
         case 'dbl':
           result.dbl = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double;
+              specifiedType: const FullType(double))! as double;
           break;
         case 'number':
           result.number = serializers.deserialize(value,
-              specifiedType: const FullType(num)) as num;
+              specifiedType: const FullType(num))! as num;
           break;
         case 'string':
           result.string = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'dateTime':
           result.dateTime = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime))! as DateTime;
           break;
         case 'duration':
           result.duration = serializers.deserialize(value,
-              specifiedType: const FullType(Duration)) as Duration;
+              specifiedType: const FullType(Duration))! as Duration;
           break;
         case 'regExp':
           result.regExp = serializers.deserialize(value,
-              specifiedType: const FullType(RegExp)) as RegExp;
+              specifiedType: const FullType(RegExp))! as RegExp;
           break;
         case 'uri':
           result.uri = serializers.deserialize(value,
-              specifiedType: const FullType(Uri)) as Uri;
+              specifiedType: const FullType(Uri))! as Uri;
           break;
         case 'bigInt':
           result.bigInt = serializers.deserialize(value,
-              specifiedType: const FullType(BigInt)) as BigInt;
+              specifiedType: const FullType(BigInt))! as BigInt;
           break;
       }
     }
@@ -931,13 +931,13 @@ class _$PartiallySerializableValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -972,13 +972,13 @@ class _$NamedFactoryValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -1012,13 +1012,13 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case '\$v':
           result.value = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -1069,7 +1069,7 @@ class _$FieldDiscoveryValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -1123,7 +1123,7 @@ class _$DiscoverableValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -1169,13 +1169,13 @@ class _$SecondDiscoverableValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -1214,13 +1214,13 @@ class _$ThirdDiscoverableValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'value':
           result.value = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -1256,7 +1256,7 @@ class _$RecursiveValueASerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -1299,7 +1299,7 @@ class _$RecursiveValueBSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -1339,13 +1339,13 @@ class _$OtherValueSerializer implements StructuredSerializer<OtherValue> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'other':
           result.other = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -1385,13 +1385,13 @@ class _$DefaultsForFieldSettingsValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'serialized':
           result.serialized = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -1465,17 +1465,17 @@ class _$ValueWithBuilderInitializerSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'anIntWithDefault':
           result.anIntWithDefault = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'nullableInt':
           result.nullableInt = serializers.deserialize(value,
@@ -1539,13 +1539,13 @@ class _$ValueWithBuilderFinalizerSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -1588,7 +1588,7 @@ class _$SerializesNullsValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -1637,7 +1637,7 @@ class _$NullableObjectValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -1686,17 +1686,17 @@ class _$ValueWithHooksSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'hook1Count':
           result.hook1Count = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'hook2Count':
           result.hook2Count = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'hookOrdering':
           result.hookOrdering.replace(serializers.deserialize(value,
