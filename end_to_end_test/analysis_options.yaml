@@ -7,3 +7,7 @@ analyzer:
 
   language:
     strict-raw-types: true
+
+linter:
+  rules:
+    - cast_nullable_to_non_nullable

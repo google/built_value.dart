@@ -513,6 +513,8 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
       final fullType = field.generateFullType(
           compilationUnit, genericParameters.toBuiltSet());
       final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
+      // If cast exists and is not nullable.
+      var maybeNotNull = !field.isNullable && cast.isNotEmpty ? notNull : '';
       if (field.builderFieldUsesNestedBuilder) {
         if (field.builderFieldAutoCreatesNestedBuilder || hasBuilder) {
           return '''
@@ -525,15 +527,13 @@ case '${escapeString(field.wireName)}':
           return '''
 case '${escapeString(field.wireName)}':
   result.${field.name} = (serializers.deserialize(
-      value, specifiedType: $fullType) $cast).toBuilder();
+      value, specifiedType: $fullType)$maybeNotNull $cast).toBuilder();
   break;
 ''';
         }
       } else {
         // `cast` is empty if no cast is needed.
         var maybeOrNull = field.isNullable && cast.isNotEmpty ? orNull : '';
-        // If cast exists and is not nullable.
-        var maybeNotNull = !field.isNullable && cast.isNotEmpty ? notNull : '';
         return '''
 case '${escapeString(field.wireName)}':
   result.${field.name} = serializers.deserialize(

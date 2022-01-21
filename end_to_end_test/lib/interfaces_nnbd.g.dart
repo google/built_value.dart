@@ -64,17 +64,17 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'note':
           result.note = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -127,13 +127,13 @@ class _$ValueWithHasIntSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'hasInt':
           result.hasInt = serializers.deserialize(value,
-              specifiedType: const FullType(HasInt)) as HasInt;
+              specifiedType: const FullType(HasInt))! as HasInt;
           break;
       }
     }

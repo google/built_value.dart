@@ -43,17 +43,17 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'tail':
           result.tail = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'legs':
           result.legs = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -88,17 +88,17 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'fins':
           result.fins = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'legs':
           result.legs = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -133,17 +133,17 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'fins':
           result.fins = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'legs':
           result.legs = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -181,13 +181,13 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'inhabitant':
           result.inhabitant = serializers.deserialize(value,
-              specifiedType: const FullType(Animal)) as Animal;
+              specifiedType: const FullType(Animal))! as Animal;
           break;
         case 'otherInhabitants':
           result.otherInhabitants.replace(serializers.deserialize(value,
@@ -226,13 +226,13 @@ class _$StandardCatSerializer implements StructuredSerializer<StandardCat> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'tail':
           result.tail = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
       }
     }
@@ -266,13 +266,13 @@ class _$HasStringSerializer implements StructuredSerializer<HasString> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'field':
           result.field = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -306,13 +306,13 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'field':
           result.field = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double;
+              specifiedType: const FullType(double))! as double;
           break;
       }
     }
@@ -347,13 +347,13 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'fieldInBaseBuilder':
           result.fieldInBaseBuilder = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }

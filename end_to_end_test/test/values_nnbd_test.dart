@@ -33,6 +33,7 @@ void main() {
       expect(
           () => SimpleValue((b) => b
             ..anInt = 1
+            // ignore: cast_nullable_to_non_nullable
             ..replace(null as SimpleValue)),
           throwsA(const TypeMatcher<Error>()));
     });

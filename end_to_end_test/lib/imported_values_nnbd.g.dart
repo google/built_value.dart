@@ -44,7 +44,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -101,19 +101,19 @@ class _$ImportedCustomValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'simpleValue':
           result.simpleValue = serializers.deserialize(value,
-                  specifiedType: const FullType(prefix.SimpleValue))
+                  specifiedType: const FullType(prefix.SimpleValue))!
               as prefix.SimpleValue;
           break;
         case 'simpleValues':
           result.simpleValues = serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltList, const [const FullType(prefix.SimpleValue)]))
+                      BuiltList, const [const FullType(prefix.SimpleValue)]))!
               as BuiltList<prefix.SimpleValue>;
           break;
       }
@@ -158,7 +158,7 @@ class _$ImportedCustomNestedValueSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
