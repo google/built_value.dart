@@ -80,7 +80,7 @@ abstract class EnumSourceClass
     var source = parsedLibrary.getElementDeclaration(getter).node.toSource();
     var matches = RegExp(r'static ' +
             element.displayName +
-            r' valueOf\(String name\) \=\> (\_\$\w+)\(name\)\;')
+            r' valueOf\((?:final )?String name\) \=\> (\_\$\w+)\(name\)\;')
         .allMatches(source);
     return matches.isEmpty ? null : matches.first.group(1);
   }
@@ -143,11 +143,16 @@ abstract class EnumSourceClass
   }
 
   Iterable<String> _checkConstructor() {
-    var expectedCode = 'const $name._(String name) : super(name);';
+    var expectedCode =
+        RegExp('const $name._\\((?:final )?String name\\) : super\\(name\\);');
+    print(constructors[0].toString());
     return constructors.length == 1 &&
             constructors.single.contains(expectedCode)
         ? <String>[]
-        : <String>['Have exactly one constructor: $expectedCode'];
+        : <String>[
+            'Have exactly one constructor: '
+                'const $name._((final )?String name) : super(name);'
+          ];
   }
 
   Iterable<String> _checkValuesGetter() {
@@ -162,7 +167,7 @@ abstract class EnumSourceClass
     var result = <String>[];
     if (valueOfIdentifier == null) {
       result.add('Add method: '
-          'static $name valueOf(String name) => _\$valueOf(name)');
+          'static $name valueOf((final )?String name) => _\$valueOf(name)');
     }
     return result;
   }
