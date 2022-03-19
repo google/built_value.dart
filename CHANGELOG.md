@@ -2,6 +2,7 @@
 
 # 8.2.0 (unreleased)
 
+- Support final parameters in EnumClass constructor and valueOf method.
 - Make generator output additional explicit null checks so the generated code complies with the cast_nullable_to_non_nullable lint.
 
 # 8.1.4

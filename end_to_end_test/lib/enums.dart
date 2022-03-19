@@ -31,10 +31,10 @@ class SecondTestEnum extends EnumClass {
   static const SecondTestEnum no = _$n;
   static const SecondTestEnum definitely = _$definitely;
 
-  const SecondTestEnum._(String name) : super(name);
+  const SecondTestEnum._(final String name) : super(name);
 
   static BuiltSet<SecondTestEnum> get values => _$vls;
-  static SecondTestEnum valueOf(String name) => _$vlOf(name);
+  static SecondTestEnum valueOf(final String name) => _$vlOf(name);
 }
 
 @BuiltValueEnum(wireName: 'E')
