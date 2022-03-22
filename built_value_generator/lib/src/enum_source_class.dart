@@ -151,7 +151,7 @@ abstract class EnumSourceClass
         ? <String>[]
         : <String>[
             'Have exactly one constructor: '
-                'const $name._((final )?String name) : super(name);'
+                'const $name._(String name) : super(name);'
           ];
   }
 
@@ -167,7 +167,7 @@ abstract class EnumSourceClass
     var result = <String>[];
     if (valueOfIdentifier == null) {
       result.add('Add method: '
-          'static $name valueOf((final )?String name) => _\$valueOf(name)');
+          'static $name valueOf(String name) => _\$valueOf(name)');
     }
     return result;
   }

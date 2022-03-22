@@ -222,7 +222,7 @@ class TestEnum extends EnumClass {
 }
 '''), endsWith(r'''Please make the following changes to use EnumClass:
 
-1. Have exactly one constructor: const TestEnum._((final )?String name) : super(name);'''));
+1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
       });
 
       test('with error on incorrect constructor', () async {
@@ -245,7 +245,7 @@ class TestEnum extends EnumClass {
 }
 '''), endsWith(r'''Please make the following changes to use EnumClass:
 
-1. Have exactly one constructor: const TestEnum._((final )?String name) : super(name);'''));
+1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
       });
 
       test('with error on too many constructors', () async {
@@ -272,7 +272,7 @@ abstract class BuiltSet<T> {
 }
 '''), endsWith(r'''Please make the following changes to use EnumClass:
 
-1. Have exactly one constructor: const TestEnum._((final )?String name) : super(name);'''));
+1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
       });
 
       test('with error on missing values getter', () async {
@@ -316,7 +316,7 @@ class TestEnum extends EnumClass {
 }
 '''), endsWith(r'''Please make the following changes to use EnumClass:
 
-1. Add method: static TestEnum valueOf((final )?String name) => _$valueOf(name)'''));
+1. Add method: static TestEnum valueOf(String name) => _$valueOf(name)'''));
       });
 
       test('with error on wrong mixin declaration', () async {
