@@ -337,6 +337,7 @@ class _$MigratedWireNameValueSerializer
   MigratedWireNameValue deserialize(
       Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
+    var $haveSetValidatedValue = false;
     final result = new MigratedWireNameValueBuilder();
 
     final iterator = serialized.iterator;
@@ -355,12 +356,15 @@ class _$MigratedWireNameValueSerializer
           break;
         case 'validatedValueV1':
         case 'validatedValueV2':
+          if ($haveSetValidatedValue) break;
           result.validatedValue.replace(serializers.deserialize(value,
               specifiedType: const FullType(ValidatedValue)) as ValidatedValue);
+          $haveSetValidatedValue = true;
           break;
         case 'validatedValue':
           result.validatedValue.replace(serializers.deserialize(value,
               specifiedType: const FullType(ValidatedValue)) as ValidatedValue);
+          $haveSetValidatedValue = true;
           break;
       }
     }

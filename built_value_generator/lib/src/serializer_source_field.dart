@@ -97,6 +97,10 @@ abstract class SerializerSourceField
   String get name => element.displayName;
 
   @memoized
+  String get capitalizedName =>
+      name.substring(0, 1).toUpperCase() + name.substring(1);
+
+  @memoized
   String get wireName => builtValueField.wireName ?? name;
 
   @memoized

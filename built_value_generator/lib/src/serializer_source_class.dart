@@ -330,7 +330,7 @@ class $serializerImplName implements StructuredSerializer<$genericName> {
   @override
   $genericName deserialize(Serializers serializers, Iterable<Object$orNull> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    ${_generateGenericsSerializerPreamble()}
+    ${_generateGenericsSerializerPreamble()} ${_generateHaveSetValueDeclarations()}
     ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
     final result = ${_generateNewBuilder()};
 
@@ -521,14 +521,19 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
         if (field.builderFieldAutoCreatesNestedBuilder || hasBuilder) {
           final oldWireNamesCases = '''
 $oldWireNamesCaseDeclarations
+  if(\$haveSet${field.capitalizedName}) break;
   result.${field.name}.replace(serializers.deserialize(
       value, specifiedType: $fullType)$notNull $cast);
+  \$haveSet${field.capitalizedName} = true;
   break;
 ''';
+          final oldWireNameSetter = field.oldWireNames.isEmpty
+              ? ''
+              : '\$haveSet${field.capitalizedName} = true;';
           final fundamentalFieldCase = '''
 case '${escapeString(field.wireName)}':
   result.${field.name}.replace(serializers.deserialize(
-      value, specifiedType: $fullType)$notNull $cast);
+      value, specifiedType: $fullType)$notNull $cast); $oldWireNameSetter
   break;
 ''';
           return field.oldWireNames.isEmpty
@@ -573,6 +578,22 @@ case '${escapeString(field.wireName)}':
             : oldWireNamesCases + fundamentalFieldCase;
       }
     }).join('');
+  }
+
+  String _generateHaveSetValueDeclarations() {
+    return fields.fold<List<String>>(
+      <String>[],
+      (agg, field) {
+        if (field.builderFieldUsesNestedBuilder &&
+            field.oldWireNames.isNotEmpty) {
+          if (field.builderFieldAutoCreatesNestedBuilder || hasBuilder) {
+            return [...agg, 'var \$haveSet${field.capitalizedName} = false;'];
+          }
+        }
+
+        return agg;
+      },
+    ).join('\n');
   }
 
   static String _toCamelCase(String name) {
