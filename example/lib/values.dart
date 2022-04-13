@@ -191,3 +191,24 @@ abstract class WireNameValue
 
   WireNameValue._();
 }
+
+/// If you need to migrate to a different wirename you can do so using the
+/// [BuiltValue.oldWireNames] annotation field
+@BuiltValue(wireName: 'V')
+abstract class MigratedWireNameValue
+    implements Built<MigratedWireNameValue, MigratedWireNameValueBuilder> {
+  static Serializer<MigratedWireNameValue> get serializer =>
+      _$migratedWireNameValueSerializer;
+
+  @BuiltValueField(wireName: 'value', oldWireNames: ['v'])
+  int get value;
+
+  @BuiltValueField(oldWireNames: ['validatedValueV1', 'validatedValueV2'])
+  ValidatedValue get validatedValue;
+
+  factory MigratedWireNameValue(
+          [void Function(MigratedWireNameValueBuilder) updates]) =
+      _$MigratedWireNameValue;
+
+  MigratedWireNameValue._();
+}

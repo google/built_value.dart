@@ -65,6 +65,11 @@ abstract class SerializerSourceField
         compare: annotation.getField('compare').toBoolValue(),
         serialize: annotation.getField('serialize').toBoolValue(),
         wireName: annotation.getField('wireName').toStringValue(),
+        oldWireNames: annotation
+            .getField('oldWireNames')
+            .toListValue()
+            .map((value) => value.toStringValue())
+            .toList(),
         nestedBuilder: annotation.getField('nestedBuilder').toBoolValue(),
         autoCreateNestedBuilder:
             annotation.getField('autoCreateNestedBuilder').toBoolValue());
@@ -93,6 +98,9 @@ abstract class SerializerSourceField
 
   @memoized
   String get wireName => builtValueField.wireName ?? name;
+
+  @memoized
+  List<String> get oldWireNames => builtValueField.oldWireNames ?? [];
 
   @memoized
   String get type => stripNullabilitySuffix(typeWithNullabilitySuffix);

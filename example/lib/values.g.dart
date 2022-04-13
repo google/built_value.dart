@@ -16,6 +16,8 @@ Serializer<ValidatedValue> _$validatedValueSerializer =
 Serializer<Account> _$accountSerializer = new _$AccountSerializer();
 Serializer<WireNameValue> _$wireNameValueSerializer =
     new _$WireNameValueSerializer();
+Serializer<MigratedWireNameValue> _$migratedWireNameValueSerializer =
+    new _$MigratedWireNameValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -298,6 +300,67 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
         case 'v':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$MigratedWireNameValueSerializer
+    implements StructuredSerializer<MigratedWireNameValue> {
+  @override
+  final Iterable<Type> types = const [
+    MigratedWireNameValue,
+    _$MigratedWireNameValue
+  ];
+  @override
+  final String wireName = 'V';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, MigratedWireNameValue object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
+      'validatedValue',
+      serializers.serialize(object.validatedValue,
+          specifiedType: const FullType(ValidatedValue)),
+    ];
+
+    return result;
+  }
+
+  @override
+  MigratedWireNameValue deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new MigratedWireNameValueBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'v':
+          result.value ??= serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'validatedValueV1':
+        case 'validatedValueV2':
+          result.validatedValue.replace(serializers.deserialize(value,
+              specifiedType: const FullType(ValidatedValue)) as ValidatedValue);
+          break;
+        case 'validatedValue':
+          result.validatedValue.replace(serializers.deserialize(value,
+              specifiedType: const FullType(ValidatedValue)) as ValidatedValue);
           break;
       }
     }
@@ -1139,6 +1202,116 @@ class WireNameValueBuilder
         new _$WireNameValue._(
             value: BuiltValueNullFieldError.checkNotNull(
                 value, 'WireNameValue', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$MigratedWireNameValue extends MigratedWireNameValue {
+  @override
+  final int value;
+  @override
+  final ValidatedValue validatedValue;
+
+  factory _$MigratedWireNameValue(
+          [void Function(MigratedWireNameValueBuilder) updates]) =>
+      (new MigratedWireNameValueBuilder()..update(updates)).build();
+
+  _$MigratedWireNameValue._({this.value, this.validatedValue}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        value, 'MigratedWireNameValue', 'value');
+    BuiltValueNullFieldError.checkNotNull(
+        validatedValue, 'MigratedWireNameValue', 'validatedValue');
+  }
+
+  @override
+  MigratedWireNameValue rebuild(
+          void Function(MigratedWireNameValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  MigratedWireNameValueBuilder toBuilder() =>
+      new MigratedWireNameValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is MigratedWireNameValue &&
+        value == other.value &&
+        validatedValue == other.validatedValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, value.hashCode), validatedValue.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('MigratedWireNameValue')
+          ..add('value', value)
+          ..add('validatedValue', validatedValue))
+        .toString();
+  }
+}
+
+class MigratedWireNameValueBuilder
+    implements Builder<MigratedWireNameValue, MigratedWireNameValueBuilder> {
+  _$MigratedWireNameValue _$v;
+
+  int _value;
+  int get value => _$this._value;
+  set value(int value) => _$this._value = value;
+
+  ValidatedValueBuilder _validatedValue;
+  ValidatedValueBuilder get validatedValue =>
+      _$this._validatedValue ??= new ValidatedValueBuilder();
+  set validatedValue(ValidatedValueBuilder validatedValue) =>
+      _$this._validatedValue = validatedValue;
+
+  MigratedWireNameValueBuilder();
+
+  MigratedWireNameValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _validatedValue = $v.validatedValue.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(MigratedWireNameValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$MigratedWireNameValue;
+  }
+
+  @override
+  void update(void Function(MigratedWireNameValueBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$MigratedWireNameValue build() {
+    _$MigratedWireNameValue _$result;
+    try {
+      _$result = _$v ??
+          new _$MigratedWireNameValue._(
+              value: BuiltValueNullFieldError.checkNotNull(
+                  value, 'MigratedWireNameValue', 'value'),
+              validatedValue: validatedValue.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'validatedValue';
+        validatedValue.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'MigratedWireNameValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
