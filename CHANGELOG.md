@@ -1,9 +1,10 @@
 # Changelog
 
-# 8.2.0 (unreleased)
+# 8.2.0
 
 - Support final parameters in EnumClass constructor and valueOf method.
 - Make generator output additional explicit null checks so the generated code complies with the cast_nullable_to_non_nullable lint.
+- Bump version of `analyzer`.
 
 # 8.1.4
 
