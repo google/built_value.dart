@@ -22,7 +22,3 @@ dev_dependencies:
   build_runner: '>=1.0.0 <3.0.0'
   pedantic: ^1.4.0
   test: ^1.0.0
-
-dependency_overrides:
-  built_value:
-    path: ../built_value
