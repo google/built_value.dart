@@ -3,7 +3,7 @@ version: 8.2.0
 description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library provides test support.
-homepage: https://github.com/google/built_value.dart
+repository: https://github.com/google/built_value.dart/tree/master/built_value_test
 
 environment:
   sdk: '>=2.3.0 <3.0.0'
