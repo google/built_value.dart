@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.2.1
+
+- Fix deps: allow `built_value_generator` to use `built_value 8.2.0`.
+
 # 8.2.0
 
 - Allow writing final parameters in EnumClass constructor and valueOf method.
