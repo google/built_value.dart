@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.3.0
+
+- Serialization performance: if `toString` is used to map types, cache the
+  result to improve performance.
+
 # 8.2.1
 
 - Fix deps: allow `built_value_generator` to use `built_value 8.2.0`.

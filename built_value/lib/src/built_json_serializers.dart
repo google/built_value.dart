@@ -316,7 +316,9 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   }
 }
 
-Map<Type, String> _rawNameMap = <Type, String>{};
+/// Raw name uses `toString` which is not particularly fast, so cache the
+/// results.
+Map<Type?, String> _rawNameMap = <Type?, String>{};
 
 String _getRawName(Type? type) {
   var maybeResult = _rawNameMap[type];
