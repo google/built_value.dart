@@ -316,8 +316,13 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   }
 }
 
+Map<Type, String> _rawNameMap = <Type, String>{};
+
 String _getRawName(Type? type) {
+  var maybeResult = _rawNameMap[type];
+  if (maybeResult != null) return maybeResult;
   var name = type.toString();
   var genericsStart = name.indexOf('<');
-  return genericsStart == -1 ? name : name.substring(0, genericsStart);
+  var result = genericsStart == -1 ? name : name.substring(0, genericsStart);
+  return _rawNameMap[type] = result;
 }
