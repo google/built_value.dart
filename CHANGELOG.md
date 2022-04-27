@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.2.2
+
+- Bug fix: remove a `print` from the enum generator.
+
 # 8.2.1
 
 - Fix deps: allow `built_value_generator` to use `built_value 8.2.0`.
