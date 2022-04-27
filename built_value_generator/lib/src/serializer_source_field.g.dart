@@ -25,6 +25,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   bool __isNullable;
   String __name;
   String __wireName;
+  List<String> __oldWireNames;
   String __type;
   String __typeWithNullabilitySuffix;
   String __typeWithPrefix;
@@ -78,6 +79,9 @@ class _$SerializerSourceField extends SerializerSourceField {
 
   @override
   String get wireName => __wireName ??= super.wireName;
+
+  @override
+  List<String> get oldWireNames => __oldWireNames ??= super.oldWireNames;
 
   @override
   String get type => __type ??= super.type;

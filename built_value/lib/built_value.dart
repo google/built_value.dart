@@ -163,12 +163,17 @@ class BuiltValueField {
   /// indicates the setting is to be taken from the `autoCreateNestedBuilders` setting on the class.
   final bool? autoCreateNestedBuilder;
 
+  /// Previously used wirenames. Will deserialize old wirenames to this field if they
+  /// are available. Current wirename is given priority. Defaults to an empty list.
+  final List<String> oldWireNames;
+
   const BuiltValueField(
       {this.compare,
       this.serialize,
       this.wireName,
       this.nestedBuilder,
-      this.autoCreateNestedBuilder});
+      this.autoCreateNestedBuilder,
+      this.oldWireNames = const []});
 }
 
 /// Optionally, annotate a Built Value `Serializer` getters with this to

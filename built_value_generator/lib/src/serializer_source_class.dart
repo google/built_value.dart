@@ -330,7 +330,7 @@ class $serializerImplName implements StructuredSerializer<$genericName> {
   @override
   $genericName deserialize(Serializers serializers, Iterable<Object$orNull> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    ${_generateGenericsSerializerPreamble()}
+    ${_generateGenericsSerializerPreamble()} ${_generateHaveSetValueDeclarations()}
     ${fields.isEmpty ? 'return ${_generateNewBuilder()}.build();' : '''
     final result = ${_generateNewBuilder()};
 
@@ -515,33 +515,85 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
       final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
       // If cast exists and is not nullable.
       var maybeNotNull = !field.isNullable && cast.isNotEmpty ? notNull : '';
+      var oldWireNamesCaseDeclarations =
+          field.oldWireNames.map((name) => "case '$name':").join('\n');
       if (field.builderFieldUsesNestedBuilder) {
         if (field.builderFieldAutoCreatesNestedBuilder || hasBuilder) {
-          return '''
-case '${escapeString(field.wireName)}':
+          final oldWireNamesCases = '''
+$oldWireNamesCaseDeclarations
+  if(\$haveSet${field.capitalizedName}) break;
   result.${field.name}.replace(serializers.deserialize(
       value, specifiedType: $fullType)$notNull $cast);
+  \$haveSet${field.capitalizedName} = true;
   break;
 ''';
+          final oldWireNameSetter = field.oldWireNames.isEmpty
+              ? ''
+              : '\$haveSet${field.capitalizedName} = true;';
+          final fundamentalFieldCase = '''
+case '${escapeString(field.wireName)}':
+  result.${field.name}.replace(serializers.deserialize(
+      value, specifiedType: $fullType)$notNull $cast); $oldWireNameSetter
+  break;
+''';
+          return field.oldWireNames.isEmpty
+              ? fundamentalFieldCase
+              : oldWireNamesCases + fundamentalFieldCase;
         } else {
-          return '''
+          final oldWireNamesCases = '''
+$oldWireNamesCaseDeclarations
+  result.${field.name} ??= (serializers.deserialize(
+      value, specifiedType: $fullType)$maybeNotNull $cast).toBuilder();
+  break;
+''';
+          final fundamentalFieldCase = '''
 case '${escapeString(field.wireName)}':
   result.${field.name} = (serializers.deserialize(
       value, specifiedType: $fullType)$maybeNotNull $cast).toBuilder();
   break;
 ''';
+
+          return field.oldWireNames.isEmpty
+              ? fundamentalFieldCase
+              : oldWireNamesCases + fundamentalFieldCase;
         }
       } else {
         // `cast` is empty if no cast is needed.
         var maybeOrNull = field.isNullable && cast.isNotEmpty ? orNull : '';
-        return '''
+        final oldWireNamesCases = '''
+$oldWireNamesCaseDeclarations
+  result.${field.name} ??= serializers.deserialize(
+      value, specifiedType: $fullType)$maybeNotNull $cast$maybeOrNull;
+  break;
+''';
+        final fundamentalFieldCase = '''
 case '${escapeString(field.wireName)}':
   result.${field.name} = serializers.deserialize(
       value, specifiedType: $fullType)$maybeNotNull $cast$maybeOrNull;
   break;
 ''';
+
+        return field.oldWireNames.isEmpty
+            ? fundamentalFieldCase
+            : oldWireNamesCases + fundamentalFieldCase;
       }
     }).join('');
+  }
+
+  String _generateHaveSetValueDeclarations() {
+    return fields.fold<List<String>>(
+      <String>[],
+      (agg, field) {
+        if (field.builderFieldUsesNestedBuilder &&
+            field.oldWireNames.isNotEmpty) {
+          if (field.builderFieldAutoCreatesNestedBuilder || hasBuilder) {
+            return [...agg, 'var \$haveSet${field.capitalizedName} = false;'];
+          }
+        }
+
+        return agg;
+      },
+    ).join('\n');
   }
 
   static String _toCamelCase(String name) {
