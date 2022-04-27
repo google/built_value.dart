@@ -145,7 +145,6 @@ abstract class EnumSourceClass
   Iterable<String> _checkConstructor() {
     var expectedCode =
         RegExp('const $name._\\((?:final )?String name\\) : super\\(name\\);');
-    print(constructors[0].toString());
     return constructors.length == 1 &&
             constructors.single.contains(expectedCode)
         ? <String>[]
