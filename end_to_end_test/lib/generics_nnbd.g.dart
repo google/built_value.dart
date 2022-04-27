@@ -26,6 +26,8 @@ Serializer<NonBuiltGeneric> _$nonBuiltGenericSerializer =
     new _$NonBuiltGenericSerializer();
 Serializer<EmptyGeneric<Object?, Object?>> _$emptyGenericSerializer =
     new _$EmptyGenericSerializer();
+Serializer<ConstAndGeneric<Object?>> _$constAndGenericSerializer =
+    new _$ConstAndGenericSerializer();
 
 class _$GenericValueSerializer
     implements StructuredSerializer<GenericValue<Object?>> {
@@ -494,6 +496,66 @@ class _$EmptyGenericSerializer
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return new EmptyGenericBuilder<Object?, Object?>().build();
+  }
+}
+
+class _$ConstAndGenericSerializer
+    implements StructuredSerializer<ConstAndGeneric<Object?>> {
+  @override
+  final Iterable<Type> types = const [ConstAndGeneric, _$ConstAndGeneric];
+  @override
+  final String wireName = 'ConstAndGeneric';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, ConstAndGeneric<Object?> object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = <Object?>[
+      'map',
+      serializers.serialize(object.map,
+          specifiedType:
+              new FullType(BuiltMap, [const FullType(String), parameterT])),
+    ];
+
+    return result;
+  }
+
+  @override
+  ConstAndGeneric<Object?> deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = isUnderspecified
+        ? new ConstAndGenericBuilder<Object?>()
+        : serializers.newBuilder(specifiedType)
+            as ConstAndGenericBuilder<Object?>;
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'map':
+          result.map.replace(serializers.deserialize(value,
+              specifiedType: new FullType(
+                  BuiltMap, [const FullType(String), parameterT]))!);
+          break;
+      }
+    }
+
+    return result.build();
   }
 }
 
@@ -1677,6 +1739,99 @@ class EmptyGenericBuilder<K, V>
   @override
   _$EmptyGeneric<K, V> build() {
     final _$result = _$v ?? new _$EmptyGeneric<K, V>._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ConstAndGeneric<T> extends ConstAndGeneric<T> {
+  @override
+  final BuiltMap<String, T> map;
+
+  factory _$ConstAndGeneric(
+          [void Function(ConstAndGenericBuilder<T>)? updates]) =>
+      (new ConstAndGenericBuilder<T>()..update(updates)).build();
+
+  _$ConstAndGeneric._({required this.map}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(map, 'ConstAndGeneric', 'map');
+    if (T == dynamic) {
+      throw new BuiltValueMissingGenericsError('ConstAndGeneric', 'T');
+    }
+  }
+
+  @override
+  ConstAndGeneric<T> rebuild(
+          void Function(ConstAndGenericBuilder<T>) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ConstAndGenericBuilder<T> toBuilder() =>
+      new ConstAndGenericBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ConstAndGeneric && map == other.map;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, map.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ConstAndGeneric')..add('map', map))
+        .toString();
+  }
+}
+
+class ConstAndGenericBuilder<T>
+    implements Builder<ConstAndGeneric<T>, ConstAndGenericBuilder<T>> {
+  _$ConstAndGeneric<T>? _$v;
+
+  MapBuilder<String, T>? _map;
+  MapBuilder<String, T> get map => _$this._map ??= new MapBuilder<String, T>();
+  set map(MapBuilder<String, T>? map) => _$this._map = map;
+
+  ConstAndGenericBuilder();
+
+  ConstAndGenericBuilder<T> get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _map = $v.map.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ConstAndGeneric<T> other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ConstAndGeneric<T>;
+  }
+
+  @override
+  void update(void Function(ConstAndGenericBuilder<T>)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ConstAndGeneric<T> build() {
+    _$ConstAndGeneric<T> _$result;
+    try {
+      _$result = _$v ?? new _$ConstAndGeneric<T>._(map: map.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'map';
+        map.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ConstAndGeneric', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
