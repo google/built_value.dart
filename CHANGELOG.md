@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.2.3
+
+- Bug fix: fix a corner case with generics that had incorrect serializer generation.
+
 # 8.2.2
 
 - Bug fix: remove a `print` from the enum generator.
