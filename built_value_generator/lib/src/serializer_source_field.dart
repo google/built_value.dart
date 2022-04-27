@@ -223,15 +223,15 @@ abstract class SerializerSourceField
       }
       return 'const FullType$maybeNullability($bareType)';
     } else {
-      final parameterFullTypes = genericItems
-          .map((item) => _generateFullType(item, classGenericParameters,
-              includeNullability: true))
-          .join(', ');
-      final canUseConst = parameterFullTypes.startsWith('const ');
+      final parameterFullTypes = genericItems.map((item) => _generateFullType(
+          item, classGenericParameters,
+          includeNullability: true));
+      final canUseConst =
+          parameterFullTypes.every((param) => param.startsWith('const '));
       final constOrNew = canUseConst ? 'const' : 'new';
       final constOrEmpty = canUseConst ? 'const' : '';
       return '$constOrNew FullType$maybeNullability('
-          '$bareType, $constOrEmpty [$parameterFullTypes])';
+          '$bareType, $constOrEmpty [${parameterFullTypes.join(', ')}])';
     }
   }
 

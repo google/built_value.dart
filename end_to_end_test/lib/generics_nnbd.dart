@@ -192,3 +192,17 @@ abstract class EmptyGeneric<K, V>
   static Serializer<EmptyGeneric<Object?, Object?>> get serializer =>
       _$emptyGenericSerializer;
 }
+
+// To check generation of `FullType` in serializer when first param can be
+// const but second can't.
+abstract class ConstAndGeneric<T>
+    implements Built<ConstAndGeneric<T>, ConstAndGenericBuilder<T>> {
+  static Serializer<ConstAndGeneric<Object?>> get serializer =>
+      _$constAndGenericSerializer;
+
+  factory ConstAndGeneric([void Function(ConstAndGenericBuilder<T>) updates]) =
+      _$ConstAndGeneric<T>;
+  ConstAndGeneric._();
+
+  BuiltMap<String, T> get map;
+}
