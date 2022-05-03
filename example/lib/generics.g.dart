@@ -260,7 +260,7 @@ class _$GenericValue<T> extends GenericValue<T> {
   final T value;
 
   factory _$GenericValue([void Function(GenericValueBuilder<T>) updates]) =>
-      (new GenericValueBuilder<T>()..update(updates)).build();
+      (new GenericValueBuilder<T>()..update(updates))._build();
 
   _$GenericValue._({this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'GenericValue', 'value');
@@ -326,7 +326,9 @@ class GenericValueBuilder<T>
   }
 
   @override
-  _$GenericValue<T> build() {
+  GenericValue<T> build() => _build();
+
+  _$GenericValue<T> _build() {
     final _$result = _$v ??
         new _$GenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -342,7 +344,7 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
 
   factory _$BoundGenericValue(
           [void Function(BoundGenericValueBuilder<T>) updates]) =>
-      (new BoundGenericValueBuilder<T>()..update(updates)).build();
+      (new BoundGenericValueBuilder<T>()..update(updates))._build();
 
   _$BoundGenericValue._({this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'BoundGenericValue', 'value');
@@ -410,7 +412,9 @@ class BoundGenericValueBuilder<T extends num>
   }
 
   @override
-  _$BoundGenericValue<T> build() {
+  BoundGenericValue<T> build() => _build();
+
+  _$BoundGenericValue<T> _build() {
     final _$result = _$v ??
         new _$BoundGenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -426,7 +430,7 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
 
   factory _$CollectionGenericValue(
           [void Function(CollectionGenericValueBuilder<T>) updates]) =>
-      (new CollectionGenericValueBuilder<T>()..update(updates)).build();
+      (new CollectionGenericValueBuilder<T>()..update(updates))._build();
 
   _$CollectionGenericValue._({this.values}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -496,7 +500,9 @@ class CollectionGenericValueBuilder<T>
   }
 
   @override
-  _$CollectionGenericValue<T> build() {
+  CollectionGenericValue<T> build() => _build();
+
+  _$CollectionGenericValue<T> _build() {
     _$CollectionGenericValue<T> _$result;
     try {
       _$result =
@@ -527,7 +533,7 @@ class _$GenericContainer extends GenericContainer {
 
   factory _$GenericContainer(
           [void Function(GenericContainerBuilder) updates]) =>
-      (new GenericContainerBuilder()..update(updates)).build();
+      (new GenericContainerBuilder()..update(updates))._build();
 
   _$GenericContainer._(
       {this.genericValue, this.boundGenericValue, this.collectionGenericValue})
@@ -623,7 +629,9 @@ class GenericContainerBuilder
   }
 
   @override
-  _$GenericContainer build() {
+  GenericContainer build() => _build();
+
+  _$GenericContainer _build() {
     _$GenericContainer _$result;
     try {
       _$result = _$v ??
@@ -651,4 +659,4 @@ class GenericContainerBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

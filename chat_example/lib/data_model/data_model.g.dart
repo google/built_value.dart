@@ -440,7 +440,7 @@ class _$Chat extends Chat {
   final BuiltSet<String> targets;
 
   factory _$Chat([void Function(ChatBuilder) updates]) =>
-      (new ChatBuilder()..update(updates)).build();
+      (new ChatBuilder()..update(updates))._build();
 
   _$Chat._({this.text, this.targets}) : super._() {
     BuiltValueNullFieldError.checkNotNull(text, 'Chat', 'text');
@@ -510,7 +510,9 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   }
 
   @override
-  _$Chat build() {
+  Chat build() => _build();
+
+  _$Chat _build() {
     _$Chat _$result;
     try {
       _$result = _$v ??
@@ -540,7 +542,7 @@ class _$Login extends Login {
   final String password;
 
   factory _$Login([void Function(LoginBuilder) updates]) =>
-      (new LoginBuilder()..update(updates)).build();
+      (new LoginBuilder()..update(updates))._build();
 
   _$Login._({this.username, this.password}) : super._() {
     BuiltValueNullFieldError.checkNotNull(username, 'Login', 'username');
@@ -611,7 +613,9 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   }
 
   @override
-  _$Login build() {
+  Login build() => _build();
+
+  _$Login _build() {
     final _$result = _$v ??
         new _$Login._(
             username: BuiltValueNullFieldError.checkNotNull(
@@ -630,7 +634,7 @@ class _$Status extends Status {
   final StatusType type;
 
   factory _$Status([void Function(StatusBuilder) updates]) =>
-      (new StatusBuilder()..update(updates)).build();
+      (new StatusBuilder()..update(updates))._build();
 
   _$Status._({this.message, this.type}) : super._() {
     BuiltValueNullFieldError.checkNotNull(message, 'Status', 'message');
@@ -699,7 +703,9 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   }
 
   @override
-  _$Status build() {
+  Status build() => _build();
+
+  _$Status _build() {
     final _$result = _$v ??
         new _$Status._(
             message: BuiltValueNullFieldError.checkNotNull(
@@ -716,7 +722,7 @@ class _$ListUsers extends ListUsers {
   final BuiltSet<StatusType> statusTypes;
 
   factory _$ListUsers([void Function(ListUsersBuilder) updates]) =>
-      (new ListUsersBuilder()..update(updates)).build();
+      (new ListUsersBuilder()..update(updates))._build();
 
   _$ListUsers._({this.statusTypes}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -781,7 +787,9 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
   }
 
   @override
-  _$ListUsers build() {
+  ListUsers build() => _build();
+
+  _$ListUsers _build() {
     _$ListUsers _$result;
     try {
       _$result = _$v ?? new _$ListUsers._(statusTypes: statusTypes.build());
@@ -810,7 +818,7 @@ class _$ShowChat extends ShowChat {
   final String text;
 
   factory _$ShowChat([void Function(ShowChatBuilder) updates]) =>
-      (new ShowChatBuilder()..update(updates)).build();
+      (new ShowChatBuilder()..update(updates))._build();
 
   _$ShowChat._({this.username, this.private, this.text}) : super._() {
     BuiltValueNullFieldError.checkNotNull(username, 'ShowChat', 'username');
@@ -890,7 +898,9 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   }
 
   @override
-  _$ShowChat build() {
+  ShowChat build() => _build();
+
+  _$ShowChat _build() {
     final _$result = _$v ??
         new _$ShowChat._(
             username: BuiltValueNullFieldError.checkNotNull(
@@ -911,7 +921,7 @@ class _$Welcome extends Welcome {
   final String message;
 
   factory _$Welcome([void Function(WelcomeBuilder) updates]) =>
-      (new WelcomeBuilder()..update(updates)).build();
+      (new WelcomeBuilder()..update(updates))._build();
 
   _$Welcome._({this.log, this.message}) : super._() {
     BuiltValueNullFieldError.checkNotNull(log, 'Welcome', 'log');
@@ -980,7 +990,9 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   }
 
   @override
-  _$Welcome build() {
+  Welcome build() => _build();
+
+  _$Welcome _build() {
     _$Welcome _$result;
     try {
       _$result = _$v ??
@@ -1010,7 +1022,7 @@ class _$ListUsersResponse extends ListUsersResponse {
 
   factory _$ListUsersResponse(
           [void Function(ListUsersResponseBuilder) updates]) =>
-      (new ListUsersResponseBuilder()..update(updates)).build();
+      (new ListUsersResponseBuilder()..update(updates))._build();
 
   _$ListUsersResponse._({this.statuses}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -1077,7 +1089,9 @@ class ListUsersResponseBuilder
   }
 
   @override
-  _$ListUsersResponse build() {
+  ListUsersResponse build() => _build();
+
+  _$ListUsersResponse _build() {
     _$ListUsersResponse _$result;
     try {
       _$result = _$v ?? new _$ListUsersResponse._(statuses: statuses.build());
@@ -1097,4 +1111,4 @@ class ListUsersResponseBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
