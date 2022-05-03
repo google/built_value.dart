@@ -1,5 +1,13 @@
 # Changelog
 
+# 8.2.4 (unreleased)
+
+- Change generated `build` methods to return only public types, creating
+  `_build` methods that return the generated impl types. This means dartdoc
+  will no longer reference the generated types.
+- Ignore the `no_leading_underscores_for_local_identifiers` lint in generated
+  code.
+
 # 8.2.3
 
 - Bug fix: fix a corner case with generics that had incorrect serializer generation.

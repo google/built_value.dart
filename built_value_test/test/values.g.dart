@@ -21,7 +21,7 @@ class _$SimpleValue extends SimpleValue {
   final BuiltSetMultimap<int, bool> setMultimap;
 
   factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
-      (new SimpleValueBuilder()..update(updates)).build();
+      (new SimpleValueBuilder()..update(updates))._build();
 
   _$SimpleValue._(
       {this.anInt,
@@ -144,7 +144,9 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 
   @override
-  _$SimpleValue build() {
+  SimpleValue build() => _build();
+
+  _$SimpleValue _build() {
     _$SimpleValue _$result;
     try {
       _$result = _$v ??
@@ -187,7 +189,7 @@ class _$CompoundValue extends CompoundValue {
   final String string;
 
   factory _$CompoundValue([void Function(CompoundValueBuilder) updates]) =>
-      (new CompoundValueBuilder()..update(updates)).build();
+      (new CompoundValueBuilder()..update(updates))._build();
 
   _$CompoundValue._({this.simpleValue, this.string}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -261,7 +263,9 @@ class CompoundValueBuilder
   }
 
   @override
-  _$CompoundValue build() {
+  CompoundValue build() => _build();
+
+  _$CompoundValue _build() {
     _$CompoundValue _$result;
     try {
       _$result = _$v ??
@@ -290,7 +294,7 @@ class _$ComparedValue extends ComparedValue {
   final Function onChanged;
 
   factory _$ComparedValue([void Function(ComparedValueBuilder) updates]) =>
-      (new ComparedValueBuilder()..update(updates)).build();
+      (new ComparedValueBuilder()..update(updates))._build();
 
   _$ComparedValue._({this.name, this.onChanged}) : super._() {
     BuiltValueNullFieldError.checkNotNull(name, 'ComparedValue', 'name');
@@ -361,7 +365,9 @@ class ComparedValueBuilder
   }
 
   @override
-  _$ComparedValue build() {
+  ComparedValue build() => _build();
+
+  _$ComparedValue _build() {
     final _$result = _$v ??
         new _$ComparedValue._(
             name: BuiltValueNullFieldError.checkNotNull(
@@ -373,4 +379,4 @@ class ComparedValueBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

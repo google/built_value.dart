@@ -564,7 +564,7 @@ class _$GenericValue<T> extends GenericValue<T> {
   final T value;
 
   factory _$GenericValue([void Function(GenericValueBuilder<T>)? updates]) =>
-      (new GenericValueBuilder<T>()..update(updates)).build();
+      (new GenericValueBuilder<T>()..update(updates))._build();
 
   _$GenericValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'GenericValue', 'value');
@@ -630,7 +630,9 @@ class GenericValueBuilder<T>
   }
 
   @override
-  _$GenericValue<T> build() {
+  GenericValue<T> build() => _build();
+
+  _$GenericValue<T> _build() {
     final _$result = _$v ??
         new _$GenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -646,7 +648,7 @@ class _$InitializeGenericValue<T> extends InitializeGenericValue<T> {
 
   factory _$InitializeGenericValue(
           [void Function(InitializeGenericValueBuilder<T>)? updates]) =>
-      (new InitializeGenericValueBuilder<T>()..update(updates)).build();
+      (new InitializeGenericValueBuilder<T>()..update(updates))._build();
 
   _$InitializeGenericValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -718,7 +720,9 @@ class InitializeGenericValueBuilder<T>
   }
 
   @override
-  _$InitializeGenericValue<T> build() {
+  InitializeGenericValue<T> build() => _build();
+
+  _$InitializeGenericValue<T> _build() {
     final _$result = _$v ??
         new _$InitializeGenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -734,7 +738,7 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
 
   factory _$BoundGenericValue(
           [void Function(BoundGenericValueBuilder<T>)? updates]) =>
-      (new BoundGenericValueBuilder<T>()..update(updates)).build();
+      (new BoundGenericValueBuilder<T>()..update(updates))._build();
 
   _$BoundGenericValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'BoundGenericValue', 'value');
@@ -802,7 +806,9 @@ class BoundGenericValueBuilder<T extends num>
   }
 
   @override
-  _$BoundGenericValue<T> build() {
+  BoundGenericValue<T> build() => _build();
+
+  _$BoundGenericValue<T> _build() {
     final _$result = _$v ??
         new _$BoundGenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -818,7 +824,7 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
 
   factory _$CollectionGenericValue(
           [void Function(CollectionGenericValueBuilder<T>)? updates]) =>
-      (new CollectionGenericValueBuilder<T>()..update(updates)).build();
+      (new CollectionGenericValueBuilder<T>()..update(updates))._build();
 
   _$CollectionGenericValue._({required this.values}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -888,7 +894,9 @@ class CollectionGenericValueBuilder<T>
   }
 
   @override
-  _$CollectionGenericValue<T> build() {
+  CollectionGenericValue<T> build() => _build();
+
+  _$CollectionGenericValue<T> _build() {
     _$CollectionGenericValue<T> _$result;
     try {
       _$result =
@@ -919,7 +927,7 @@ class _$GenericContainer extends GenericContainer {
 
   factory _$GenericContainer(
           [void Function(GenericContainerBuilder)? updates]) =>
-      (new GenericContainerBuilder()..update(updates)).build();
+      (new GenericContainerBuilder()..update(updates))._build();
 
   _$GenericContainer._(
       {required this.genericValue,
@@ -1017,7 +1025,9 @@ class GenericContainerBuilder
   }
 
   @override
-  _$GenericContainer build() {
+  GenericContainer build() => _build();
+
+  _$GenericContainer _build() {
     _$GenericContainer _$result;
     try {
       _$result = _$v ??
@@ -1051,7 +1061,7 @@ class _$DynamicGenericContainer extends DynamicGenericContainer {
 
   factory _$DynamicGenericContainer(
           [void Function(DynamicGenericContainerBuilder)? updates]) =>
-      (new DynamicGenericContainerBuilder()..update(updates)).build();
+      (new DynamicGenericContainerBuilder()..update(updates))._build();
 
   _$DynamicGenericContainer._({required this.foo}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -1118,7 +1128,9 @@ class DynamicGenericContainerBuilder
   }
 
   @override
-  _$DynamicGenericContainer build() {
+  DynamicGenericContainer build() => _build();
+
+  _$DynamicGenericContainer _build() {
     final _$result = _$v ??
         new _$DynamicGenericContainer._(
             foo: BuiltValueNullFieldError.checkNotNull(
@@ -1136,7 +1148,7 @@ class _$PassthroughGenericContainer<T> extends PassthroughGenericContainer<T> {
 
   factory _$PassthroughGenericContainer(
           [void Function(PassthroughGenericContainerBuilder<T>)? updates]) =>
-      (new PassthroughGenericContainerBuilder<T>()..update(updates)).build();
+      (new PassthroughGenericContainerBuilder<T>()..update(updates))._build();
 
   _$PassthroughGenericContainer._(
       {required this.genericValue, required this.collectionGenericValue})
@@ -1226,7 +1238,9 @@ class PassthroughGenericContainerBuilder<T>
   }
 
   @override
-  _$PassthroughGenericContainer<T> build() {
+  PassthroughGenericContainer<T> build() => _build();
+
+  _$PassthroughGenericContainer<T> _build() {
     _$PassthroughGenericContainer<T> _$result;
     try {
       _$result = _$v ??
@@ -1257,7 +1271,7 @@ class _$NestedGenericContainer extends NestedGenericContainer {
 
   factory _$NestedGenericContainer(
           [void Function(NestedGenericContainerBuilder)? updates]) =>
-      (new NestedGenericContainerBuilder()..update(updates)).build();
+      (new NestedGenericContainerBuilder()..update(updates))._build();
 
   _$NestedGenericContainer._({required this.map}) : super._() {
     BuiltValueNullFieldError.checkNotNull(map, 'NestedGenericContainer', 'map');
@@ -1323,7 +1337,9 @@ class NestedGenericContainerBuilder
   }
 
   @override
-  _$NestedGenericContainer build() {
+  NestedGenericContainer build() => _build();
+
+  _$NestedGenericContainer _build() {
     _$NestedGenericContainer _$result;
     try {
       _$result = _$v ?? new _$NestedGenericContainer._(map: map.build());
@@ -1428,7 +1444,9 @@ class _$CustomBuilderGenericValueBuilder<T>
   }
 
   @override
-  _$CustomBuilderGenericValue<T> build() {
+  CustomBuilderGenericValue<T> build() => _build();
+
+  _$CustomBuilderGenericValue<T> _build() {
     final _$result = _$v ??
         new _$CustomBuilderGenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -1443,7 +1461,7 @@ class _$ConcreteGeneric extends ConcreteGeneric {
   final int value;
 
   factory _$ConcreteGeneric([void Function(ConcreteGenericBuilder)? updates]) =>
-      (new ConcreteGenericBuilder()..update(updates)).build();
+      (new ConcreteGenericBuilder()..update(updates))._build();
 
   _$ConcreteGeneric._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'ConcreteGeneric', 'value');
@@ -1506,7 +1524,9 @@ class ConcreteGenericBuilder
   }
 
   @override
-  _$ConcreteGeneric build() {
+  ConcreteGeneric build() => _build();
+
+  _$ConcreteGeneric _build() {
     final _$result = _$v ??
         new _$ConcreteGeneric._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -1522,7 +1542,7 @@ class _$GenericFunction<T> extends GenericFunction<T> {
 
   factory _$GenericFunction(
           [void Function(GenericFunctionBuilder<T>)? updates]) =>
-      (new GenericFunctionBuilder<T>()..update(updates)).build();
+      (new GenericFunctionBuilder<T>()..update(updates))._build();
 
   _$GenericFunction._({required this.function}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -1592,7 +1612,9 @@ class GenericFunctionBuilder<T>
   }
 
   @override
-  _$GenericFunction<T> build() {
+  GenericFunction<T> build() => _build();
+
+  _$GenericFunction<T> _build() {
     final _$result = _$v ??
         new _$GenericFunction<T>._(
             function: BuiltValueNullFieldError.checkNotNull(
@@ -1607,7 +1629,7 @@ class _$NonBuiltGeneric extends NonBuiltGeneric {
   final NonBuilt<int> value;
 
   factory _$NonBuiltGeneric([void Function(NonBuiltGenericBuilder)? updates]) =>
-      (new NonBuiltGenericBuilder()..update(updates)).build();
+      (new NonBuiltGenericBuilder()..update(updates))._build();
 
   _$NonBuiltGeneric._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'NonBuiltGeneric', 'value');
@@ -1670,7 +1692,9 @@ class NonBuiltGenericBuilder
   }
 
   @override
-  _$NonBuiltGeneric build() {
+  NonBuiltGeneric build() => _build();
+
+  _$NonBuiltGeneric _build() {
     final _$result = _$v ??
         new _$NonBuiltGeneric._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -1682,7 +1706,7 @@ class NonBuiltGenericBuilder
 
 class _$EmptyGeneric<K, V> extends EmptyGeneric<K, V> {
   factory _$EmptyGeneric([void Function(EmptyGenericBuilder<K, V>)? updates]) =>
-      (new EmptyGenericBuilder<K, V>()..update(updates)).build();
+      (new EmptyGenericBuilder<K, V>()..update(updates))._build();
 
   _$EmptyGeneric._() : super._() {
     if (K == dynamic) {
@@ -1737,7 +1761,9 @@ class EmptyGenericBuilder<K, V>
   }
 
   @override
-  _$EmptyGeneric<K, V> build() {
+  EmptyGeneric<K, V> build() => _build();
+
+  _$EmptyGeneric<K, V> _build() {
     final _$result = _$v ?? new _$EmptyGeneric<K, V>._();
     replace(_$result);
     return _$result;
@@ -1750,7 +1776,7 @@ class _$ConstAndGeneric<T> extends ConstAndGeneric<T> {
 
   factory _$ConstAndGeneric(
           [void Function(ConstAndGenericBuilder<T>)? updates]) =>
-      (new ConstAndGenericBuilder<T>()..update(updates)).build();
+      (new ConstAndGenericBuilder<T>()..update(updates))._build();
 
   _$ConstAndGeneric._({required this.map}) : super._() {
     BuiltValueNullFieldError.checkNotNull(map, 'ConstAndGeneric', 'map');
@@ -1817,7 +1843,9 @@ class ConstAndGenericBuilder<T>
   }
 
   @override
-  _$ConstAndGeneric<T> build() {
+  ConstAndGeneric<T> build() => _build();
+
+  _$ConstAndGeneric<T> _build() {
     _$ConstAndGeneric<T> _$result;
     try {
       _$result = _$v ?? new _$ConstAndGeneric<T>._(map: map.build());
@@ -1837,4 +1865,4 @@ class ConstAndGenericBuilder<T>
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

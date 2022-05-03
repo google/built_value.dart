@@ -313,7 +313,7 @@ class _$SimpleValue extends SimpleValue {
   final String aString;
 
   factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
-      (new SimpleValueBuilder()..update(updates)).build();
+      (new SimpleValueBuilder()..update(updates))._build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, 'SimpleValue', 'anInt');
@@ -383,7 +383,9 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 
   @override
-  _$SimpleValue build() {
+  SimpleValue build() => _build();
+
+  _$SimpleValue _build() {
     final _$result = _$v ??
         new _$SimpleValue._(
             anInt: BuiltValueNullFieldError.checkNotNull(
@@ -399,7 +401,7 @@ class _$VerySimpleValue extends VerySimpleValue {
   final int value;
 
   factory _$VerySimpleValue([void Function(VerySimpleValueBuilder) updates]) =>
-      (new VerySimpleValueBuilder()..update(updates)).build();
+      (new VerySimpleValueBuilder()..update(updates))._build();
 
   _$VerySimpleValue._({this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'VerySimpleValue', 'value');
@@ -462,7 +464,9 @@ class VerySimpleValueBuilder
   }
 
   @override
-  _$VerySimpleValue build() {
+  VerySimpleValue build() => _build();
+
+  _$VerySimpleValue _build() {
     final _$result = _$v ??
         new _$VerySimpleValue._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -479,7 +483,7 @@ class _$CompoundValue extends CompoundValue {
   final ValidatedValue validatedValue;
 
   factory _$CompoundValue([void Function(CompoundValueBuilder) updates]) =>
-      (new CompoundValueBuilder()..update(updates)).build();
+      (new CompoundValueBuilder()..update(updates))._build();
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -555,7 +559,9 @@ class CompoundValueBuilder
   }
 
   @override
-  _$CompoundValue build() {
+  CompoundValue build() => _build();
+
+  _$CompoundValue _build() {
     _$CompoundValue _$result;
     try {
       _$result = _$v ??
@@ -587,7 +593,7 @@ class _$ValidatedValue extends ValidatedValue {
   final String aString;
 
   factory _$ValidatedValue([void Function(ValidatedValueBuilder) updates]) =>
-      (new ValidatedValueBuilder()..update(updates)).build();
+      (new ValidatedValueBuilder()..update(updates))._build();
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, 'ValidatedValue', 'anInt');
@@ -659,7 +665,9 @@ class ValidatedValueBuilder
   }
 
   @override
-  _$ValidatedValue build() {
+  ValidatedValue build() => _build();
+
+  _$ValidatedValue _build() {
     final _$result = _$v ??
         new _$ValidatedValue._(
             anInt: BuiltValueNullFieldError.checkNotNull(
@@ -677,7 +685,7 @@ class _$ValueWithCode extends ValueWithCode {
   final String aString;
 
   factory _$ValueWithCode([void Function(ValueWithCodeBuilder) updates]) =>
-      (new ValueWithCodeBuilder()..update(updates)).build();
+      (new ValueWithCodeBuilder()..update(updates))._build();
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, 'ValueWithCode', 'anInt');
@@ -748,7 +756,9 @@ class ValueWithCodeBuilder
   }
 
   @override
-  _$ValueWithCode build() {
+  ValueWithCode build() => _build();
+
+  _$ValueWithCode _build() {
     final _$result = _$v ??
         new _$ValueWithCode._(
             anInt: BuiltValueNullFieldError.checkNotNull(
@@ -855,7 +865,9 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   }
 
   @override
-  _$ValueWithDefaults build() {
+  ValueWithDefaults build() => _build();
+
+  _$ValueWithDefaults _build() {
     final _$result = _$v ??
         new _$ValueWithDefaults._(
             anInt: BuiltValueNullFieldError.checkNotNull(
@@ -873,7 +885,7 @@ class _$DerivedValue extends DerivedValue {
   Iterable<String> __derivedString;
 
   factory _$DerivedValue([void Function(DerivedValueBuilder) updates]) =>
-      (new DerivedValueBuilder()..update(updates)).build();
+      (new DerivedValueBuilder()..update(updates))._build();
 
   _$DerivedValue._({this.anInt}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, 'DerivedValue', 'anInt');
@@ -941,7 +953,9 @@ class DerivedValueBuilder
   }
 
   @override
-  _$DerivedValue build() {
+  DerivedValue build() => _build();
+
+  _$DerivedValue _build() {
     final _$result = _$v ??
         new _$DerivedValue._(
             anInt: BuiltValueNullFieldError.checkNotNull(
@@ -960,7 +974,7 @@ class _$Account extends Account {
   final BuiltMap<String, JsonObject> keyValues;
 
   factory _$Account([void Function(AccountBuilder) updates]) =>
-      (new AccountBuilder()..update(updates)).build();
+      (new AccountBuilder()..update(updates))._build();
 
   _$Account._({this.id, this.name, this.keyValues}) : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'Account', 'id');
@@ -1042,7 +1056,9 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
   }
 
   @override
-  _$Account build() {
+  Account build() => _build();
+
+  _$Account _build() {
     _$Account _$result;
     try {
       _$result = _$v ??
@@ -1072,7 +1088,7 @@ class _$WireNameValue extends WireNameValue {
   final int value;
 
   factory _$WireNameValue([void Function(WireNameValueBuilder) updates]) =>
-      (new WireNameValueBuilder()..update(updates)).build();
+      (new WireNameValueBuilder()..update(updates))._build();
 
   _$WireNameValue._({this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, 'WireNameValue', 'value');
@@ -1134,7 +1150,9 @@ class WireNameValueBuilder
   }
 
   @override
-  _$WireNameValue build() {
+  WireNameValue build() => _build();
+
+  _$WireNameValue _build() {
     final _$result = _$v ??
         new _$WireNameValue._(
             value: BuiltValueNullFieldError.checkNotNull(
@@ -1144,4 +1162,4 @@ class WireNameValueBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

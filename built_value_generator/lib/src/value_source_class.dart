@@ -753,11 +753,19 @@ abstract class ValueSourceClass
 
     // If there is a manually maintained builder we have to cast the "build()"
     // result to the generated value class. If the builder is generated, that
-    // can return the right type directly and needs no cast.
-    var cast = hasBuilder ? 'as $implName$_generics' : '';
-    result.writeln('factory $implName(['
-        'void Function(${name}Builder$_generics)$orNull updates]) '
-        '=> (new ${name}Builder$_generics()..update(updates)).build() $cast;');
+    // returns the right type directly in private `_build` so there is no need
+    // to cast.
+    if (hasBuilder) {
+      result.writeln('factory $implName(['
+          'void Function(${name}Builder$_generics)$orNull updates]) '
+          '=> (new ${name}Builder$_generics()..update(updates)).build()'
+          ' as $implName$_generics;');
+    } else {
+      result.writeln('factory $implName(['
+          'void Function(${name}Builder$_generics)$orNull updates]) '
+          '=> (new ${name}Builder$_generics()..update(updates))._build();');
+    }
+
     result.writeln();
 
     if (fields.isEmpty) {
@@ -1025,7 +1033,9 @@ abstract class ValueSourceClass
     result.writeln();
 
     result.writeln('@override');
-    result.writeln('$implName$_generics build() {');
+    result.writeln('$name$_generics build() => _build();');
+    result.writeln();
+    result.writeln('$implName$_generics _build() {');
 
     if (hasBuilderFinalizer) {
       result.writeln('$name._finalizeBuilder(this);');

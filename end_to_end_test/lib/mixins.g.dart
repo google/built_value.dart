@@ -33,7 +33,7 @@ class _$UsesMixin extends UsesMixin {
   final String Function(String) typeDef;
 
   factory _$UsesMixin([void Function(UsesMixinBuilder) updates]) =>
-      (new UsesMixinBuilder()..update(updates)).build();
+      (new UsesMixinBuilder()..update(updates))._build();
 
   _$UsesMixin._({this.typeDef}) : super._() {
     BuiltValueNullFieldError.checkNotNull(typeDef, 'UsesMixin', 'typeDef');
@@ -95,7 +95,9 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
   }
 
   @override
-  _$UsesMixin build() {
+  UsesMixin build() => _build();
+
+  _$UsesMixin _build() {
     final _$result = _$v ??
         new _$UsesMixin._(
             typeDef: BuiltValueNullFieldError.checkNotNull(
@@ -111,7 +113,7 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
 
   factory _$GetsCorrectFieldsViaMixins(
           [void Function(GetsCorrectFieldsViaMixinsBuilder) updates]) =>
-      (new GetsCorrectFieldsViaMixinsBuilder()..update(updates)).build();
+      (new GetsCorrectFieldsViaMixinsBuilder()..update(updates))._build();
 
   _$GetsCorrectFieldsViaMixins._({this.shouldBeAField}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -180,7 +182,9 @@ class GetsCorrectFieldsViaMixinsBuilder
   }
 
   @override
-  _$GetsCorrectFieldsViaMixins build() {
+  GetsCorrectFieldsViaMixins build() => _build();
+
+  _$GetsCorrectFieldsViaMixins _build() {
     final _$result = _$v ??
         new _$GetsCorrectFieldsViaMixins._(
             shouldBeAField: BuiltValueNullFieldError.checkNotNull(
@@ -192,4 +196,4 @@ class GetsCorrectFieldsViaMixinsBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

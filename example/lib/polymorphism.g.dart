@@ -113,7 +113,7 @@ class _$Cat extends Cat {
   final int legs;
 
   factory _$Cat([void Function(CatBuilder) updates]) =>
-      (new CatBuilder()..update(updates)).build();
+      (new CatBuilder()..update(updates))._build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(tail, 'Cat', 'tail');
@@ -182,7 +182,9 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   }
 
   @override
-  _$Cat build() {
+  Cat build() => _build();
+
+  _$Cat _build() {
     final _$result = _$v ??
         new _$Cat._(
             tail: BuiltValueNullFieldError.checkNotNull(tail, 'Cat', 'tail'),
@@ -199,7 +201,7 @@ class _$Fish extends Fish {
   final int legs;
 
   factory _$Fish([void Function(FishBuilder) updates]) =>
-      (new FishBuilder()..update(updates)).build();
+      (new FishBuilder()..update(updates))._build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(fins, 'Fish', 'fins');
@@ -268,7 +270,9 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 
   @override
-  _$Fish build() {
+  Fish build() => _build();
+
+  _$Fish _build() {
     final _$result = _$v ??
         new _$Fish._(
             fins: BuiltValueNullFieldError.checkNotNull(fins, 'Fish', 'fins'),
@@ -278,4 +282,4 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

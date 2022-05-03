@@ -383,7 +383,7 @@ class _$Cat extends Cat {
   final int legs;
 
   factory _$Cat([void Function(CatBuilder) updates]) =>
-      (new CatBuilder()..update(updates)).build();
+      (new CatBuilder()..update(updates))._build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(tail, 'Cat', 'tail');
@@ -452,7 +452,9 @@ class CatBuilder implements Builder<Cat, CatBuilder>, MammalBuilder {
   }
 
   @override
-  _$Cat build() {
+  Cat build() => _build();
+
+  _$Cat _build() {
     final _$result = _$v ??
         new _$Cat._(
             tail: BuiltValueNullFieldError.checkNotNull(tail, 'Cat', 'tail'),
@@ -469,7 +471,7 @@ class _$Fish extends Fish {
   final int legs;
 
   factory _$Fish([void Function(FishBuilder) updates]) =>
-      (new FishBuilder()..update(updates)).build();
+      (new FishBuilder()..update(updates))._build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(fins, 'Fish', 'fins');
@@ -538,7 +540,9 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 
   @override
-  _$Fish build() {
+  Fish build() => _build();
+
+  _$Fish _build() {
     final _$result = _$v ??
         new _$Fish._(
             fins: BuiltValueNullFieldError.checkNotNull(fins, 'Fish', 'fins'),
@@ -555,7 +559,7 @@ class _$Robot extends Robot {
   final int legs;
 
   factory _$Robot([void Function(RobotBuilder) updates]) =>
-      (new RobotBuilder()..update(updates)).build();
+      (new RobotBuilder()..update(updates))._build();
 
   _$Robot._({this.fins, this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(fins, 'Robot', 'fins');
@@ -624,7 +628,9 @@ class RobotBuilder implements Builder<Robot, RobotBuilder> {
   }
 
   @override
-  _$Robot build() {
+  Robot build() => _build();
+
+  _$Robot _build() {
     final _$result = _$v ??
         new _$Robot._(
             fins: BuiltValueNullFieldError.checkNotNull(fins, 'Robot', 'fins'),
@@ -641,7 +647,7 @@ class _$Cage extends Cage {
   final BuiltList<Animal> otherInhabitants;
 
   factory _$Cage([void Function(CageBuilder) updates]) =>
-      (new CageBuilder()..update(updates)).build();
+      (new CageBuilder()..update(updates))._build();
 
   _$Cage._({this.inhabitant, this.otherInhabitants}) : super._() {
     BuiltValueNullFieldError.checkNotNull(inhabitant, 'Cage', 'inhabitant');
@@ -715,7 +721,9 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
   }
 
   @override
-  _$Cage build() {
+  Cage build() => _build();
+
+  _$Cage _build() {
     _$Cage _$result;
     try {
       _$result = _$v ??
@@ -744,7 +752,7 @@ class _$StandardCat extends StandardCat {
   final bool tail;
 
   factory _$StandardCat([void Function(StandardCatBuilder) updates]) =>
-      (new StandardCatBuilder()..update(updates)).build();
+      (new StandardCatBuilder()..update(updates))._build();
 
   _$StandardCat._({this.tail}) : super._() {
     BuiltValueNullFieldError.checkNotNull(tail, 'StandardCat', 'tail');
@@ -805,7 +813,9 @@ class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
   }
 
   @override
-  _$StandardCat build() {
+  StandardCat build() => _build();
+
+  _$StandardCat _build() {
     final _$result = _$v ??
         new _$StandardCat._(
             tail: BuiltValueNullFieldError.checkNotNull(
@@ -827,7 +837,7 @@ class _$HasString extends HasString {
   final String field;
 
   factory _$HasString([void Function(HasStringBuilder) updates]) =>
-      (new HasStringBuilder()..update(updates)).build();
+      (new HasStringBuilder()..update(updates))._build();
 
   _$HasString._({this.field}) : super._() {
     BuiltValueNullFieldError.checkNotNull(field, 'HasString', 'field');
@@ -889,7 +899,9 @@ class HasStringBuilder
   }
 
   @override
-  _$HasString build() {
+  HasString build() => _build();
+
+  _$HasString _build() {
     final _$result = _$v ??
         new _$HasString._(
             field: BuiltValueNullFieldError.checkNotNull(
@@ -904,7 +916,7 @@ class _$HasDouble extends HasDouble {
   final double field;
 
   factory _$HasDouble([void Function(HasDoubleBuilder) updates]) =>
-      (new HasDoubleBuilder()..update(updates)).build();
+      (new HasDoubleBuilder()..update(updates))._build();
 
   _$HasDouble._({this.field}) : super._() {
     BuiltValueNullFieldError.checkNotNull(field, 'HasDouble', 'field');
@@ -966,7 +978,9 @@ class HasDoubleBuilder
   }
 
   @override
-  _$HasDouble build() {
+  HasDouble build() => _build();
+
+  _$HasDouble _build() {
     final _$result = _$v ??
         new _$HasDouble._(
             field: BuiltValueNullFieldError.checkNotNull(
@@ -984,7 +998,7 @@ class _$UsesChainedInterface extends UsesChainedInterface {
 
   factory _$UsesChainedInterface(
           [void Function(UsesChainedInterfaceBuilder) updates]) =>
-      (new UsesChainedInterfaceBuilder()..update(updates)).build();
+      (new UsesChainedInterfaceBuilder()..update(updates))._build();
 
   _$UsesChainedInterface._({this.bar, this.foo}) : super._() {
     BuiltValueNullFieldError.checkNotNull(bar, 'UsesChainedInterface', 'bar');
@@ -1058,7 +1072,9 @@ class UsesChainedInterfaceBuilder
   }
 
   @override
-  _$UsesChainedInterface build() {
+  UsesChainedInterface build() => _build();
+
+  _$UsesChainedInterface _build() {
     final _$result = _$v ??
         new _$UsesChainedInterface._(
             bar: BuiltValueNullFieldError.checkNotNull(
@@ -1075,7 +1091,7 @@ class _$UsesHandCoded extends UsesHandCoded {
   final int fieldInBaseBuilder;
 
   factory _$UsesHandCoded([void Function(UsesHandCodedBuilder) updates]) =>
-      (new UsesHandCodedBuilder()..update(updates)).build();
+      (new UsesHandCodedBuilder()..update(updates))._build();
 
   _$UsesHandCoded._({this.fieldInBaseBuilder}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -1141,7 +1157,9 @@ class UsesHandCodedBuilder
   }
 
   @override
-  _$UsesHandCoded build() {
+  UsesHandCoded build() => _build();
+
+  _$UsesHandCoded _build() {
     final _$result = _$v ??
         new _$UsesHandCoded._(
             fieldInBaseBuilder: BuiltValueNullFieldError.checkNotNull(
@@ -1163,7 +1181,7 @@ abstract class TwoBuilder {
 
 class _$ImplementsTwo extends ImplementsTwo {
   factory _$ImplementsTwo([void Function(ImplementsTwoBuilder) updates]) =>
-      (new ImplementsTwoBuilder()..update(updates)).build();
+      (new ImplementsTwoBuilder()..update(updates))._build();
 
   _$ImplementsTwo._() : super._();
 
@@ -1213,7 +1231,9 @@ class ImplementsTwoBuilder
   }
 
   @override
-  _$ImplementsTwo build() {
+  ImplementsTwo build() => _build();
+
+  _$ImplementsTwo _build() {
     final _$result = _$v ?? new _$ImplementsTwo._();
     replace(_$result);
     return _$result;
@@ -1243,7 +1263,7 @@ class _$InstantiableGroundedArgument<T, G extends Object>
   factory _$InstantiableGroundedArgument(
           [void Function(InstantiableGroundedArgumentBuilder<T, G>) updates]) =>
       (new InstantiableGroundedArgumentBuilder<T, G>()..update(updates))
-          .build();
+          ._build();
 
   _$InstantiableGroundedArgument._({this.slot}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -1321,7 +1341,9 @@ class InstantiableGroundedArgumentBuilder<T, G extends Object>
   }
 
   @override
-  _$InstantiableGroundedArgument<T, G> build() {
+  InstantiableGroundedArgument<T, G> build() => _build();
+
+  _$InstantiableGroundedArgument<T, G> _build() {
     final _$result = _$v ??
         new _$InstantiableGroundedArgument<T, G>._(
             slot: BuiltValueNullFieldError.checkNotNull(
@@ -1331,4 +1353,4 @@ class InstantiableGroundedArgumentBuilder<T, G extends Object>
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
