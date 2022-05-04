@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
 part of built_value_generator.source_class;
 
@@ -10,53 +9,56 @@ part of built_value_generator.source_class;
 class _$ValueSourceClass extends ValueSourceClass {
   @override
   final ClassElement element;
-  ParsedLibraryResult __parsedLibrary;
-  String __name;
-  bool __isNonNullByDefault;
-  String __orNull;
-  String __notNull;
-  String __late;
-  String __implName;
-  ClassElement __builderElement;
-  bool __implementsBuilt;
-  bool __extendsIsAllowed;
-  BuiltValue __settings;
-  BuiltList<String> __genericParameters;
-  BuiltList<String> __genericBounds;
-  ClassDeclaration __classDeclaration;
-  bool __hasBuilder;
-  bool __hasBuilderInitializer;
-  MethodElement __builderInitializer;
-  bool __hasBuilderFinalizer;
-  MethodElement __builderFinalizer;
-  BuiltMap<String, BuiltValueHook> __hooks;
-  String __builderParameters;
-  BuiltList<ValueSourceField> __fields;
-  String __source;
-  String __partStatement;
-  bool __hasPartStatement;
-  bool __hasBuiltValueImportWithShow;
-  bool __hasBuiltValueImportWithAs;
-  bool __valueClassIsAbstract;
-  BuiltList<ConstructorDeclaration> __valueClassConstructors;
-  BuiltList<ConstructorDeclaration> __valueClassFactories;
-  bool __builderClassIsAbstract;
-  BuiltList<String> __builderClassConstructors;
-  BuiltList<String> __builderClassFactories;
-  BuiltList<MemoizedGetter> __memoizedGetters;
-  BuiltList<String> __builderImplements;
-  BuiltList<String> __builderMixins;
-  bool __implementsHashCode;
-  bool __declaresMemoizedHashCode;
-  bool __implementsOperatorEquals;
-  bool __implementsToString;
-  CompilationUnitElement __compilationUnit;
+  ParsedLibraryResult? __parsedLibrary;
+  String? __name;
+  bool? __isNonNullByDefault;
+  String? __orNull;
+  String? __notNull;
+  String? __late;
+  String? __implName;
+  ClassElement? __builderElement;
+  bool ___builderElement = false;
+  bool? __implementsBuilt;
+  bool? __extendsIsAllowed;
+  BuiltValue? __settings;
+  BuiltList<String>? __genericParameters;
+  BuiltList<String>? __genericBounds;
+  ClassDeclaration? __classDeclaration;
+  bool? __hasBuilder;
+  bool? __hasBuilderInitializer;
+  MethodElement? __builderInitializer;
+  bool ___builderInitializer = false;
+  bool? __hasBuilderFinalizer;
+  MethodElement? __builderFinalizer;
+  bool ___builderFinalizer = false;
+  BuiltMap<String, BuiltValueHook>? __hooks;
+  String? __builderParameters;
+  BuiltList<ValueSourceField>? __fields;
+  String? __source;
+  String? __partStatement;
+  bool? __hasPartStatement;
+  bool? __hasBuiltValueImportWithShow;
+  bool? __hasBuiltValueImportWithAs;
+  bool? __valueClassIsAbstract;
+  BuiltList<ConstructorDeclaration>? __valueClassConstructors;
+  BuiltList<ConstructorDeclaration>? __valueClassFactories;
+  bool? __builderClassIsAbstract;
+  BuiltList<String>? __builderClassConstructors;
+  BuiltList<String>? __builderClassFactories;
+  BuiltList<MemoizedGetter>? __memoizedGetters;
+  BuiltList<String>? __builderImplements;
+  BuiltList<String>? __builderMixins;
+  bool? __implementsHashCode;
+  bool? __declaresMemoizedHashCode;
+  bool? __implementsOperatorEquals;
+  bool? __implementsToString;
+  CompilationUnitElement? __compilationUnit;
 
   factory _$ValueSourceClass(
-          [void Function(ValueSourceClassBuilder) updates]) =>
+          [void Function(ValueSourceClassBuilder)? updates]) =>
       (new ValueSourceClassBuilder()..update(updates))._build();
 
-  _$ValueSourceClass._({this.element}) : super._() {
+  _$ValueSourceClass._({required this.element}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
         element, 'ValueSourceClass', 'element');
   }
@@ -85,7 +87,13 @@ class _$ValueSourceClass extends ValueSourceClass {
   String get implName => __implName ??= super.implName;
 
   @override
-  ClassElement get builderElement => __builderElement ??= super.builderElement;
+  ClassElement? get builderElement {
+    if (!___builderElement) {
+      __builderElement = super.builderElement;
+      ___builderElement = true;
+    }
+    return __builderElement;
+  }
 
   @override
   bool get implementsBuilt => __implementsBuilt ??= super.implementsBuilt;
@@ -116,16 +124,26 @@ class _$ValueSourceClass extends ValueSourceClass {
       __hasBuilderInitializer ??= super.hasBuilderInitializer;
 
   @override
-  MethodElement get builderInitializer =>
-      __builderInitializer ??= super.builderInitializer;
+  MethodElement? get builderInitializer {
+    if (!___builderInitializer) {
+      __builderInitializer = super.builderInitializer;
+      ___builderInitializer = true;
+    }
+    return __builderInitializer;
+  }
 
   @override
   bool get hasBuilderFinalizer =>
       __hasBuilderFinalizer ??= super.hasBuilderFinalizer;
 
   @override
-  MethodElement get builderFinalizer =>
-      __builderFinalizer ??= super.builderFinalizer;
+  MethodElement? get builderFinalizer {
+    if (!___builderFinalizer) {
+      __builderFinalizer = super.builderFinalizer;
+      ___builderFinalizer = true;
+    }
+    return __builderFinalizer;
+  }
 
   @override
   BuiltMap<String, BuiltValueHook> get hooks => __hooks ??= super.hooks;
@@ -239,11 +257,11 @@ class _$ValueSourceClass extends ValueSourceClass {
 
 class ValueSourceClassBuilder
     implements Builder<ValueSourceClass, ValueSourceClassBuilder> {
-  _$ValueSourceClass _$v;
+  _$ValueSourceClass? _$v;
 
-  ClassElement _element;
-  ClassElement get element => _$this._element;
-  set element(ClassElement element) => _$this._element = element;
+  ClassElement? _element;
+  ClassElement? get element => _$this._element;
+  set element(ClassElement? element) => _$this._element = element;
 
   ValueSourceClassBuilder();
 
@@ -263,7 +281,7 @@ class ValueSourceClassBuilder
   }
 
   @override
-  void update(void Function(ValueSourceClassBuilder) updates) {
+  void update(void Function(ValueSourceClassBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

@@ -1,7 +1,6 @@
 // Copyright (c) 2017, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.11
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
@@ -43,14 +42,21 @@ class DartTypes {
   static bool isBuiltCollectionTypeName(String name) =>
       _builtCollectionNames.contains(name);
 
-  /// Gets the name of a `DartType`. Supports `Function` types, which will
-  /// be returned using the `Function()` syntax.
-  static String getName(DartType dartType,
+  /// As [getName] but allows `dartType` to be `null`.
+  ///
+  /// If it's `null`, returns `null`.
+  static String? tryGetName(DartType? dartType,
       {bool withNullabilitySuffix = false}) {
     if (dartType == null) {
       return null;
     }
+    return getName(dartType, withNullabilitySuffix: withNullabilitySuffix);
+  }
 
+  /// Gets the name of a `DartType`. Supports `Function` types, which will
+  /// be returned using the `Function()` syntax.
+  static String getName(DartType dartType,
+      {bool withNullabilitySuffix = false}) {
     var suffix = withNullabilitySuffix &&
             dartType.nullabilitySuffix == NullabilitySuffix.question
         ? '?'

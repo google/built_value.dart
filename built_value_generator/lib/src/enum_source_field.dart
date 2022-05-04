@@ -1,7 +1,6 @@
 // Copyright (c) 2016, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.11
 
 library built_value_generator.enum_source_field;
 
@@ -28,19 +27,19 @@ abstract class EnumSourceField
   String get name => element.displayName;
 
   @memoized
-  String get type => DartTypes.getName(element.getter.returnType);
+  String? get type => DartTypes.tryGetName(element.getter?.returnType);
 
   @memoized
   BuiltValueEnumConst get settings {
     var annotations = element.metadata
         .map((annotation) => annotation.computeConstantValue())
-        .where(
-            (value) => DartTypes.getName(value?.type) == 'BuiltValueEnumConst');
+        .where((value) =>
+            DartTypes.tryGetName(value?.type) == 'BuiltValueEnumConst');
     if (annotations.isEmpty) return const BuiltValueEnumConst();
-    var annotation = annotations.single;
+    var annotation = annotations.single!;
     return BuiltValueEnumConst(
         fallback: annotation.getField('fallback')?.toBoolValue() ?? false,
-        wireName: annotation.getField('wireName').toStringValue(),
+        wireName: annotation.getField('wireName')!.toStringValue(),
         // Field added in version `7.1.0`, might be missing.
         wireNumber: annotation.getField('wireNumber')?.toIntValue());
   }
@@ -49,7 +48,7 @@ abstract class EnumSourceField
   String get generatedIdentifier {
     var fieldName = element.displayName;
     return parsedLibrary
-        .getElementDeclaration(element)
+        .getElementDeclaration(element)!
         .node
         .toSource()
         .substring('$fieldName = '.length);
@@ -67,7 +66,7 @@ abstract class EnumSourceField
 
     var enumName = classElement.displayName;
     for (var fieldElement in classElement.fields) {
-      final type = DartTypes.getName(fieldElement.getter.returnType);
+      final type = DartTypes.tryGetName(fieldElement.getter?.returnType);
       if (!fieldElement.isSynthetic &&
           (type == enumName || type == 'dynamic')) {
         result.add(EnumSourceField(parsedLibrary, fieldElement));

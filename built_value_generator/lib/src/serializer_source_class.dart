@@ -1,7 +1,6 @@
 // Copyright (c) 2015, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.11
 
 library built_value_generator.source_class;
 
@@ -26,8 +25,7 @@ abstract class SerializerSourceClass
     implements Built<SerializerSourceClass, SerializerSourceClassBuilder> {
   ClassElement get element;
 
-  @nullable
-  ClassElement get builderElement;
+  ClassElement? get builderElement;
 
   factory SerializerSourceClass(ClassElement element) =>
       _$SerializerSourceClass._(
@@ -56,13 +54,13 @@ abstract class SerializerSourceClass
     var serializerField = serializerFields.single;
     if (serializerField.getter == null) return const BuiltValueSerializer();
 
-    var annotations = serializerField.getter.metadata
+    var annotations = serializerField.getter!.metadata
         .map((annotation) => annotation.computeConstantValue())
         .where((value) =>
-            DartTypes.getName(value?.type) == 'BuiltValueSerializer');
+            DartTypes.tryGetName(value?.type) == 'BuiltValueSerializer');
     if (annotations.isEmpty) return const BuiltValueSerializer();
 
-    var annotation = annotations.single;
+    var annotation = annotations.single!;
     // If a field does not exist, that means an old `built_value` version; use
     // the default.
     return BuiltValueSerializer(
@@ -107,9 +105,9 @@ abstract class SerializerSourceClass
     if (serializerFields.isEmpty) return '';
     var serializerField = serializerFields.single;
     var result = parsedLibrary
-            .getElementDeclaration(serializerField.getter)
+            .getElementDeclaration(serializerField.getter!)
             ?.node
-            ?.toSource() ??
+            .toSource() ??
         '';
     // Strip off annotations.
     if (result.startsWith('@')) {
@@ -128,7 +126,7 @@ abstract class SerializerSourceClass
   @memoized
   BuiltList<String> get genericBounds =>
       BuiltList<String>(element.typeParameters
-          .map((element) => DartTypes.getName(element.bound) ?? ''));
+          .map((element) => DartTypes.tryGetName(element.bound) ?? ''));
 
   @memoized
   String get genericBoundsOrObjectString => genericBounds.isEmpty
@@ -356,9 +354,9 @@ class $serializerImplName implements StructuredSerializer<$genericName> {
               .forEach((field) {
             final enumSourceField = EnumSourceField(parsedLibrary, field);
             if (enumSourceField.settings.wireName != null) {
-              b[field.name] = enumSourceField.settings.wireName;
+              b[field.name] = enumSourceField.settings.wireName!;
             } else if (enumSourceField.settings.wireNumber != null) {
-              b[field.name] = enumSourceField.settings.wireNumber;
+              b[field.name] = enumSourceField.settings.wireNumber!;
             }
           }));
 
@@ -419,13 +417,13 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
     }
   }
 
-  static String _toCode(Object object) {
+  static String _toCode(Object? object) {
     if (object is String) {
       return "'${escapeString(object)}'";
     } else if (object is int) {
       return object.toString();
     } else {
-      throw UnsupportedError(object);
+      throw UnsupportedError('$object');
     }
   }
 

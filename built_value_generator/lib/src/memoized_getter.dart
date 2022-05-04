@@ -1,4 +1,3 @@
-// @dart=2.11
 library built_value_generator.memoized_getter;
 
 import 'package:analyzer/dart/element/element.dart';
@@ -26,12 +25,12 @@ abstract class MemoizedGetter
     return classElement.fields
         .where((field) =>
             field.getter != null &&
-            !field.getter.isAbstract &&
-            field.getter.metadata.any(
+            !field.getter!.isAbstract &&
+            field.getter!.metadata.any(
                 (metadata) => metadataToStringValue(metadata) == 'memoized'))
         .map((field) => MemoizedGetter((b) => b
-          ..returnType = DartTypes.getName(field.getter.returnType)
-          ..nullabilitySuffix = field.getter.returnType.nullabilitySuffix
+          ..returnType = DartTypes.getName(field.getter!.returnType)
+          ..nullabilitySuffix = field.getter!.returnType.nullabilitySuffix
           ..name = field.displayName))
         .toList();
   }

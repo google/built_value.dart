@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
 part of built_value_generator.enum_source_library;
 
@@ -10,17 +9,17 @@ part of built_value_generator.enum_source_library;
 class _$EnumSourceLibrary extends EnumSourceLibrary {
   @override
   final LibraryElement element;
-  ParsedLibraryResult __parsedLibrary;
-  String __name;
-  String __fileName;
-  String __source;
-  BuiltList<EnumSourceClass> __classes;
+  ParsedLibraryResult? __parsedLibrary;
+  String? __name;
+  String? __fileName;
+  String? __source;
+  BuiltList<EnumSourceClass>? __classes;
 
   factory _$EnumSourceLibrary(
-          [void Function(EnumSourceLibraryBuilder) updates]) =>
+          [void Function(EnumSourceLibraryBuilder)? updates]) =>
       (new EnumSourceLibraryBuilder()..update(updates))._build();
 
-  _$EnumSourceLibrary._({this.element}) : super._() {
+  _$EnumSourceLibrary._({required this.element}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
         element, 'EnumSourceLibrary', 'element');
   }
@@ -70,11 +69,11 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
 
 class EnumSourceLibraryBuilder
     implements Builder<EnumSourceLibrary, EnumSourceLibraryBuilder> {
-  _$EnumSourceLibrary _$v;
+  _$EnumSourceLibrary? _$v;
 
-  LibraryElement _element;
-  LibraryElement get element => _$this._element;
-  set element(LibraryElement element) => _$this._element = element;
+  LibraryElement? _element;
+  LibraryElement? get element => _$this._element;
+  set element(LibraryElement? element) => _$this._element = element;
 
   EnumSourceLibraryBuilder();
 
@@ -94,7 +93,7 @@ class EnumSourceLibraryBuilder
   }
 
   @override
-  void update(void Function(EnumSourceLibraryBuilder) updates) {
+  void update(void Function(EnumSourceLibraryBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

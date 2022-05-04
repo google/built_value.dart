@@ -1,7 +1,6 @@
 // Copyright (c) 2015, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.11
 
 import 'dart:async';
 
@@ -243,7 +242,7 @@ Future<String> generate(String source) async {
 
   // Capture any error from generation; if there is one, return that instead of
   // the generated output.
-  String error;
+  String? error;
   void captureError(dynamic logRecord) {
     if (logRecord.error is InvalidGenerationSourceError) {
       if (error != null) throw StateError('Expected at most one error.');

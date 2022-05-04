@@ -1,7 +1,6 @@
 // Copyright (c) 2015, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.11
 
 library built_value_generator.source_field;
 
@@ -32,14 +31,13 @@ abstract class SerializerSourceField
   BuiltValue get settings;
   ParsedLibraryResult get parsedLibrary;
   FieldElement get element;
-  @nullable
-  FieldElement get builderElement;
+  FieldElement? get builderElement;
 
   factory SerializerSourceField(
           BuiltValue settings,
           ParsedLibraryResult parsedLibrary,
           FieldElement element,
-          FieldElement builderElement) =>
+          FieldElement? builderElement) =>
       _$SerializerSourceField._(
           settings: settings,
           parsedLibrary: parsedLibrary,
@@ -50,24 +48,25 @@ abstract class SerializerSourceField
   @memoized
   bool get isSerializable =>
       element.getter != null &&
-      element.getter.isAbstract &&
+      element.getter!.isAbstract &&
       !element.isStatic &&
       (builtValueField.serialize ?? settings.defaultSerialize);
 
   @memoized
   BuiltValueField get builtValueField {
-    var annotations = element.getter.metadata
+    var annotations = element.getter!.metadata
         .map((annotation) => annotation.computeConstantValue())
-        .where((value) => DartTypes.getName(value?.type) == 'BuiltValueField');
+        .where(
+            (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueField');
     if (annotations.isEmpty) return const BuiltValueField();
-    var annotation = annotations.single;
+    var annotation = annotations.single!;
     return BuiltValueField(
-        compare: annotation.getField('compare').toBoolValue(),
-        serialize: annotation.getField('serialize').toBoolValue(),
-        wireName: annotation.getField('wireName').toStringValue(),
-        nestedBuilder: annotation.getField('nestedBuilder').toBoolValue(),
+        compare: annotation.getField('compare')?.toBoolValue(),
+        serialize: annotation.getField('serialize')?.toBoolValue(),
+        wireName: annotation.getField('wireName')?.toStringValue(),
+        nestedBuilder: annotation.getField('nestedBuilder')?.toBoolValue(),
         autoCreateNestedBuilder:
-            annotation.getField('autoCreateNestedBuilder').toBoolValue());
+            annotation.getField('autoCreateNestedBuilder')?.toBoolValue());
   }
 
   @memoized
@@ -77,12 +76,12 @@ abstract class SerializerSourceField
   String get orNull => isNonNullByDefault ? '?' : '';
 
   @memoized
-  bool get hasNullableAnnotation => element.getter.metadata
+  bool get hasNullableAnnotation => element.getter!.metadata
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
 
   @memoized
   bool get hasNullableType =>
-      element?.getter?.returnType?.nullabilitySuffix ==
+      element.getter?.returnType.nullabilitySuffix ==
       NullabilitySuffix.question;
 
   @memoized
@@ -99,7 +98,8 @@ abstract class SerializerSourceField
 
   @memoized
   String get typeWithNullabilitySuffix =>
-      DartTypes.getName(element.getter.returnType, withNullabilitySuffix: true);
+      DartTypes.getName(element.getter!.returnType,
+          withNullabilitySuffix: true);
 
   /// The [type] plus any import prefix, with any nullability suffix.
   @memoized
@@ -109,9 +109,9 @@ abstract class SerializerSourceField
   /// The [type] plus any import prefix, without any nullability suffix.
   @memoized
   String get typeWithPrefixAndNullabilitySuffix {
-    var declaration = parsedLibrary.getElementDeclaration(element.getter);
+    var declaration = parsedLibrary.getElementDeclaration(element.getter!)!;
     var typeFromAst =
-        (declaration.node as MethodDeclaration)?.returnType?.toString() ??
+        (declaration.node as MethodDeclaration).returnType?.toString() ??
             'dynamic';
     var typeFromElement = typeWithNullabilitySuffix;
 
@@ -145,16 +145,16 @@ abstract class SerializerSourceField
   bool get builderFieldUsesNestedBuilder {
     var builderFieldElementIsValid =
         (builderElement?.getter?.isAbstract == false) &&
-            !builderElement.isStatic;
+            !builderElement!.isStatic;
 
     // If the builder is present, check it to determine whether a nested
     // builder is needed. Otherwise, use the same logic as built_value when
     // it decides whether to use a nested builder.
     return builderFieldElementIsValid
-        ? DartTypes.getName(element.getter.returnType) !=
-            DartTypes.getName(builderElement.getter.returnType)
+        ? DartTypes.getName(element.getter!.returnType) !=
+            DartTypes.getName(builderElement!.getter!.returnType)
         : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
-            DartTypes.needsNestedBuilder(element.getter.returnType);
+            DartTypes.needsNestedBuilder(element.getter!.returnType);
   }
 
   @memoized
@@ -166,7 +166,7 @@ abstract class SerializerSourceField
   String get rawType => _getBareType(type);
 
   String generateFullType(CompilationUnitElement compilationUnit,
-      [BuiltSet<String> classGenericParameters]) {
+      [BuiltSet<String>? classGenericParameters]) {
     return _generateFullType(
         typeInCompilationUnitWithNullabilitySuffix(compilationUnit),
         classGenericParameters ?? BuiltSet<String>());
@@ -174,11 +174,11 @@ abstract class SerializerSourceField
 
   @memoized
   bool get needsBuilder =>
-      DartTypes.getName(element.getter.returnType).contains('<') &&
-      DartTypes.isBuilt(element.getter.returnType);
+      DartTypes.getName(element.getter!.returnType).contains('<') &&
+      DartTypes.isBuilt(element.getter!.returnType);
 
   Iterable<String> computeErrors() {
-    if (isSerializable && element.getter.returnType is FunctionType) {
+    if (isSerializable && element.getter!.returnType is FunctionType) {
       return [
         'Function fields are not serializable. '
             'Remove "$name" or mark it "@BuiltValueField(serialize: false)".'
@@ -268,7 +268,7 @@ abstract class SerializerSourceField
 
     if (generics.isEmpty) {
       if (classGenericBounds.keys.contains(bareType)) {
-        return classGenericBounds[bareType];
+        return classGenericBounds[bareType]!;
       }
       return bareType + resultNullabilitySuffix;
     } else {

@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
 part of built_value_generator.enum_source_field;
 
@@ -12,17 +11,19 @@ class _$EnumSourceField extends EnumSourceField {
   final ParsedLibraryResult parsedLibrary;
   @override
   final FieldElement element;
-  String __name;
-  String __type;
-  BuiltValueEnumConst __settings;
-  String __generatedIdentifier;
-  bool __isConst;
-  bool __isStatic;
+  String? __name;
+  String? __type;
+  bool ___type = false;
+  BuiltValueEnumConst? __settings;
+  String? __generatedIdentifier;
+  bool? __isConst;
+  bool? __isStatic;
 
-  factory _$EnumSourceField([void Function(EnumSourceFieldBuilder) updates]) =>
+  factory _$EnumSourceField([void Function(EnumSourceFieldBuilder)? updates]) =>
       (new EnumSourceFieldBuilder()..update(updates))._build();
 
-  _$EnumSourceField._({this.parsedLibrary, this.element}) : super._() {
+  _$EnumSourceField._({required this.parsedLibrary, required this.element})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
         parsedLibrary, 'EnumSourceField', 'parsedLibrary');
     BuiltValueNullFieldError.checkNotNull(
@@ -33,7 +34,13 @@ class _$EnumSourceField extends EnumSourceField {
   String get name => __name ??= super.name;
 
   @override
-  String get type => __type ??= super.type;
+  String? get type {
+    if (!___type) {
+      __type = super.type;
+      ___type = true;
+    }
+    return __type;
+  }
 
   @override
   BuiltValueEnumConst get settings => __settings ??= super.settings;
@@ -80,16 +87,16 @@ class _$EnumSourceField extends EnumSourceField {
 
 class EnumSourceFieldBuilder
     implements Builder<EnumSourceField, EnumSourceFieldBuilder> {
-  _$EnumSourceField _$v;
+  _$EnumSourceField? _$v;
 
-  ParsedLibraryResult _parsedLibrary;
-  ParsedLibraryResult get parsedLibrary => _$this._parsedLibrary;
-  set parsedLibrary(ParsedLibraryResult parsedLibrary) =>
+  ParsedLibraryResult? _parsedLibrary;
+  ParsedLibraryResult? get parsedLibrary => _$this._parsedLibrary;
+  set parsedLibrary(ParsedLibraryResult? parsedLibrary) =>
       _$this._parsedLibrary = parsedLibrary;
 
-  FieldElement _element;
-  FieldElement get element => _$this._element;
-  set element(FieldElement element) => _$this._element = element;
+  FieldElement? _element;
+  FieldElement? get element => _$this._element;
+  set element(FieldElement? element) => _$this._element = element;
 
   EnumSourceFieldBuilder();
 
@@ -110,7 +117,7 @@ class EnumSourceFieldBuilder
   }
 
   @override
-  void update(void Function(EnumSourceFieldBuilder) updates) {
+  void update(void Function(EnumSourceFieldBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

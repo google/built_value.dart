@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
 part of built_value_generator.source_class;
 
@@ -11,37 +10,38 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   final ClassElement element;
   @override
-  final ClassElement builderElement;
-  ParsedLibraryResult __parsedLibrary;
-  BuiltValue __builtValueSettings;
-  bool __hasBuilder;
-  BuiltValueSerializer __serializerSettings;
-  BuiltValueEnum __enumClassSettings;
-  String __name;
-  bool __isNonNullByDefault;
-  String __orNull;
-  String __notNull;
-  String __wireName;
-  String __serializerDeclaration;
-  BuiltList<String> __genericParameters;
-  BuiltList<String> __genericBounds;
-  String __genericBoundsOrObjectString;
-  bool __isBuiltValue;
-  bool __isEnumClass;
-  BuiltList<SerializerSourceField> __fields;
-  BuiltSet<SerializerSourceClass> __fieldClasses;
-  CompilationUnitElement __compilationUnit;
-  String __serializerImplName;
-  String __serializerInstanceName;
-  bool __isSerializable;
-  bool __needsGeneratedSerializer;
-  String __implName;
+  final ClassElement? builderElement;
+  ParsedLibraryResult? __parsedLibrary;
+  BuiltValue? __builtValueSettings;
+  bool? __hasBuilder;
+  BuiltValueSerializer? __serializerSettings;
+  BuiltValueEnum? __enumClassSettings;
+  String? __name;
+  bool? __isNonNullByDefault;
+  String? __orNull;
+  String? __notNull;
+  String? __wireName;
+  String? __serializerDeclaration;
+  BuiltList<String>? __genericParameters;
+  BuiltList<String>? __genericBounds;
+  String? __genericBoundsOrObjectString;
+  bool? __isBuiltValue;
+  bool? __isEnumClass;
+  BuiltList<SerializerSourceField>? __fields;
+  BuiltSet<SerializerSourceClass>? __fieldClasses;
+  CompilationUnitElement? __compilationUnit;
+  String? __serializerImplName;
+  String? __serializerInstanceName;
+  bool? __isSerializable;
+  bool? __needsGeneratedSerializer;
+  String? __implName;
 
   factory _$SerializerSourceClass(
-          [void Function(SerializerSourceClassBuilder) updates]) =>
+          [void Function(SerializerSourceClassBuilder)? updates]) =>
       (new SerializerSourceClassBuilder()..update(updates))._build();
 
-  _$SerializerSourceClass._({this.element, this.builderElement}) : super._() {
+  _$SerializerSourceClass._({required this.element, this.builderElement})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
         element, 'SerializerSourceClass', 'element');
   }
@@ -165,15 +165,15 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
 class SerializerSourceClassBuilder
     implements Builder<SerializerSourceClass, SerializerSourceClassBuilder> {
-  _$SerializerSourceClass _$v;
+  _$SerializerSourceClass? _$v;
 
-  ClassElement _element;
-  ClassElement get element => _$this._element;
-  set element(ClassElement element) => _$this._element = element;
+  ClassElement? _element;
+  ClassElement? get element => _$this._element;
+  set element(ClassElement? element) => _$this._element = element;
 
-  ClassElement _builderElement;
-  ClassElement get builderElement => _$this._builderElement;
-  set builderElement(ClassElement builderElement) =>
+  ClassElement? _builderElement;
+  ClassElement? get builderElement => _$this._builderElement;
+  set builderElement(ClassElement? builderElement) =>
       _$this._builderElement = builderElement;
 
   SerializerSourceClassBuilder();
@@ -195,7 +195,7 @@ class SerializerSourceClassBuilder
   }
 
   @override
-  void update(void Function(SerializerSourceClassBuilder) updates) {
+  void update(void Function(SerializerSourceClassBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

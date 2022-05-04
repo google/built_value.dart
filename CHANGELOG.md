@@ -7,6 +7,8 @@
   will no longer reference the generated types.
 - Ignore the `no_leading_underscores_for_local_identifiers` lint in generated
   code.
+- Migrated `built_value_generator` to null safety. This is purely an internal
+  change, the generator can still generate legacy code as and when needed.
 
 # 8.2.3
 

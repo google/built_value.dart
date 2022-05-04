@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
 part of built_value_generator.enum_source_class;
 
@@ -10,23 +9,26 @@ part of built_value_generator.enum_source_class;
 class _$EnumSourceClass extends EnumSourceClass {
   @override
   final ClassElement element;
-  ParsedLibraryResult __parsedLibrary;
-  String __name;
-  String __wireName;
-  BuiltValueEnum __settings;
-  bool __isAbstract;
-  BuiltList<EnumSourceField> __fields;
-  BuiltList<String> __constructors;
-  String __valuesIdentifier;
-  String __valueOfIdentifier;
-  bool __usesMixin;
-  String __mixinDeclaration;
-  Iterable<String> __identifiers;
+  ParsedLibraryResult? __parsedLibrary;
+  String? __name;
+  String? __wireName;
+  BuiltValueEnum? __settings;
+  bool? __isAbstract;
+  BuiltList<EnumSourceField>? __fields;
+  BuiltList<String>? __constructors;
+  String? __valuesIdentifier;
+  bool ___valuesIdentifier = false;
+  String? __valueOfIdentifier;
+  bool ___valueOfIdentifier = false;
+  bool? __usesMixin;
+  String? __mixinDeclaration;
+  bool ___mixinDeclaration = false;
+  Iterable<String>? __identifiers;
 
-  factory _$EnumSourceClass([void Function(EnumSourceClassBuilder) updates]) =>
+  factory _$EnumSourceClass([void Function(EnumSourceClassBuilder)? updates]) =>
       (new EnumSourceClassBuilder()..update(updates))._build();
 
-  _$EnumSourceClass._({this.element}) : super._() {
+  _$EnumSourceClass._({required this.element}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
         element, 'EnumSourceClass', 'element');
   }
@@ -54,17 +56,34 @@ class _$EnumSourceClass extends EnumSourceClass {
   BuiltList<String> get constructors => __constructors ??= super.constructors;
 
   @override
-  String get valuesIdentifier => __valuesIdentifier ??= super.valuesIdentifier;
+  String? get valuesIdentifier {
+    if (!___valuesIdentifier) {
+      __valuesIdentifier = super.valuesIdentifier;
+      ___valuesIdentifier = true;
+    }
+    return __valuesIdentifier;
+  }
 
   @override
-  String get valueOfIdentifier =>
-      __valueOfIdentifier ??= super.valueOfIdentifier;
+  String? get valueOfIdentifier {
+    if (!___valueOfIdentifier) {
+      __valueOfIdentifier = super.valueOfIdentifier;
+      ___valueOfIdentifier = true;
+    }
+    return __valueOfIdentifier;
+  }
 
   @override
   bool get usesMixin => __usesMixin ??= super.usesMixin;
 
   @override
-  String get mixinDeclaration => __mixinDeclaration ??= super.mixinDeclaration;
+  String? get mixinDeclaration {
+    if (!___mixinDeclaration) {
+      __mixinDeclaration = super.mixinDeclaration;
+      ___mixinDeclaration = true;
+    }
+    return __mixinDeclaration;
+  }
 
   @override
   Iterable<String> get identifiers => __identifiers ??= super.identifiers;
@@ -98,11 +117,11 @@ class _$EnumSourceClass extends EnumSourceClass {
 
 class EnumSourceClassBuilder
     implements Builder<EnumSourceClass, EnumSourceClassBuilder> {
-  _$EnumSourceClass _$v;
+  _$EnumSourceClass? _$v;
 
-  ClassElement _element;
-  ClassElement get element => _$this._element;
-  set element(ClassElement element) => _$this._element = element;
+  ClassElement? _element;
+  ClassElement? get element => _$this._element;
+  set element(ClassElement? element) => _$this._element = element;
 
   EnumSourceClassBuilder();
 
@@ -122,7 +141,7 @@ class EnumSourceClassBuilder
   }
 
   @override
-  void update(void Function(EnumSourceClassBuilder) updates) {
+  void update(void Function(EnumSourceClassBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
