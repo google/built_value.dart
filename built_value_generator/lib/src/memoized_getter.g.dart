@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
 part of built_value_generator.memoized_getter;
 
@@ -15,10 +14,13 @@ class _$MemoizedGetter extends MemoizedGetter {
   @override
   final String name;
 
-  factory _$MemoizedGetter([void Function(MemoizedGetterBuilder) updates]) =>
+  factory _$MemoizedGetter([void Function(MemoizedGetterBuilder)? updates]) =>
       (new MemoizedGetterBuilder()..update(updates))._build();
 
-  _$MemoizedGetter._({this.returnType, this.nullabilitySuffix, this.name})
+  _$MemoizedGetter._(
+      {required this.returnType,
+      required this.nullabilitySuffix,
+      required this.name})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         returnType, 'MemoizedGetter', 'returnType');
@@ -62,20 +64,20 @@ class _$MemoizedGetter extends MemoizedGetter {
 
 class MemoizedGetterBuilder
     implements Builder<MemoizedGetter, MemoizedGetterBuilder> {
-  _$MemoizedGetter _$v;
+  _$MemoizedGetter? _$v;
 
-  String _returnType;
-  String get returnType => _$this._returnType;
-  set returnType(String returnType) => _$this._returnType = returnType;
+  String? _returnType;
+  String? get returnType => _$this._returnType;
+  set returnType(String? returnType) => _$this._returnType = returnType;
 
-  NullabilitySuffix _nullabilitySuffix;
-  NullabilitySuffix get nullabilitySuffix => _$this._nullabilitySuffix;
-  set nullabilitySuffix(NullabilitySuffix nullabilitySuffix) =>
+  NullabilitySuffix? _nullabilitySuffix;
+  NullabilitySuffix? get nullabilitySuffix => _$this._nullabilitySuffix;
+  set nullabilitySuffix(NullabilitySuffix? nullabilitySuffix) =>
       _$this._nullabilitySuffix = nullabilitySuffix;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
   MemoizedGetterBuilder();
 
@@ -97,7 +99,7 @@ class MemoizedGetterBuilder
   }
 
   @override
-  void update(void Function(MemoizedGetterBuilder) updates) {
+  void update(void Function(MemoizedGetterBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

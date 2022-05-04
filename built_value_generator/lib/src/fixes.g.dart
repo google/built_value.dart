@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
 part of 'fixes.dart';
 
@@ -11,16 +10,17 @@ class _$GeneratorError extends GeneratorError {
   @override
   final String message;
   @override
-  final int offset;
+  final int? offset;
   @override
-  final int length;
+  final int? length;
   @override
-  final String fix;
+  final String? fix;
 
-  factory _$GeneratorError([void Function(GeneratorErrorBuilder) updates]) =>
+  factory _$GeneratorError([void Function(GeneratorErrorBuilder)? updates]) =>
       (new GeneratorErrorBuilder()..update(updates))._build();
 
-  _$GeneratorError._({this.message, this.offset, this.length, this.fix})
+  _$GeneratorError._(
+      {required this.message, this.offset, this.length, this.fix})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(message, 'GeneratorError', 'message');
   }
@@ -63,23 +63,23 @@ class _$GeneratorError extends GeneratorError {
 
 class GeneratorErrorBuilder
     implements Builder<GeneratorError, GeneratorErrorBuilder> {
-  _$GeneratorError _$v;
+  _$GeneratorError? _$v;
 
-  String _message;
-  String get message => _$this._message;
-  set message(String message) => _$this._message = message;
+  String? _message;
+  String? get message => _$this._message;
+  set message(String? message) => _$this._message = message;
 
-  int _offset;
-  int get offset => _$this._offset;
-  set offset(int offset) => _$this._offset = offset;
+  int? _offset;
+  int? get offset => _$this._offset;
+  set offset(int? offset) => _$this._offset = offset;
 
-  int _length;
-  int get length => _$this._length;
-  set length(int length) => _$this._length = length;
+  int? _length;
+  int? get length => _$this._length;
+  set length(int? length) => _$this._length = length;
 
-  String _fix;
-  String get fix => _$this._fix;
-  set fix(String fix) => _$this._fix = fix;
+  String? _fix;
+  String? get fix => _$this._fix;
+  set fix(String? fix) => _$this._fix = fix;
 
   GeneratorErrorBuilder();
 
@@ -102,7 +102,7 @@ class GeneratorErrorBuilder
   }
 
   @override
-  void update(void Function(GeneratorErrorBuilder) updates) {
+  void update(void Function(GeneratorErrorBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

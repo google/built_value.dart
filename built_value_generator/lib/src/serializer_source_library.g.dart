@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
 part of built_value_generator.source_library;
 
@@ -10,20 +9,20 @@ part of built_value_generator.source_library;
 class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   @override
   final LibraryElement element;
-  ParsedLibraryResult __parsedLibrary;
-  bool __hasSerializers;
-  BuiltMap<String, ElementAnnotation> __serializersForAnnotations;
-  BuiltList<String> __wrongSerializersDeclarations;
-  BuiltSet<SerializerSourceClass> __sourceClasses;
-  BuiltSetMultimap<String, SerializerSourceClass> __serializeForClasses;
-  BuiltSetMultimap<String, SerializerSourceClass>
+  ParsedLibraryResult? __parsedLibrary;
+  bool? __hasSerializers;
+  BuiltMap<String, ElementAnnotation>? __serializersForAnnotations;
+  BuiltList<String>? __wrongSerializersDeclarations;
+  BuiltSet<SerializerSourceClass>? __sourceClasses;
+  BuiltSetMultimap<String, SerializerSourceClass>? __serializeForClasses;
+  BuiltSetMultimap<String, SerializerSourceClass>?
       __serializeForTransitiveClasses;
 
   factory _$SerializerSourceLibrary(
-          [void Function(SerializerSourceLibraryBuilder) updates]) =>
+          [void Function(SerializerSourceLibraryBuilder)? updates]) =>
       (new SerializerSourceLibraryBuilder()..update(updates))._build();
 
-  _$SerializerSourceLibrary._({this.element}) : super._() {
+  _$SerializerSourceLibrary._({required this.element}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
         element, 'SerializerSourceLibrary', 'element');
   }
@@ -87,11 +86,11 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
 class SerializerSourceLibraryBuilder
     implements
         Builder<SerializerSourceLibrary, SerializerSourceLibraryBuilder> {
-  _$SerializerSourceLibrary _$v;
+  _$SerializerSourceLibrary? _$v;
 
-  LibraryElement _element;
-  LibraryElement get element => _$this._element;
-  set element(LibraryElement element) => _$this._element = element;
+  LibraryElement? _element;
+  LibraryElement? get element => _$this._element;
+  set element(LibraryElement? element) => _$this._element = element;
 
   SerializerSourceLibraryBuilder();
 
@@ -111,7 +110,7 @@ class SerializerSourceLibraryBuilder
   }
 
   @override
-  void update(void Function(SerializerSourceLibraryBuilder) updates) {
+  void update(void Function(SerializerSourceLibraryBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

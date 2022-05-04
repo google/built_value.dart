@@ -1,7 +1,6 @@
 // Copyright (c) 2016, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.11
 
 library built_value_generator.enum_source_library;
 
@@ -50,7 +49,7 @@ abstract class EnumSourceLibrary
     return result.build();
   }
 
-  String generateCode() {
+  String? generateCode() {
     if (classes.isEmpty) return null;
 
     var errors = _computeErrors();

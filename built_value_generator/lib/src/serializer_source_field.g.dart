@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
 part of built_value_generator.source_field;
 
@@ -15,31 +14,34 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   final FieldElement element;
   @override
-  final FieldElement builderElement;
-  bool __isSerializable;
-  BuiltValueField __builtValueField;
-  bool __isNonNullByDefault;
-  String __orNull;
-  bool __hasNullableAnnotation;
-  bool __hasNullableType;
-  bool __isNullable;
-  String __name;
-  String __wireName;
-  String __type;
-  String __typeWithNullabilitySuffix;
-  String __typeWithPrefix;
-  String __typeWithPrefixAndNullabilitySuffix;
-  bool __builderFieldUsesNestedBuilder;
-  bool __builderFieldAutoCreatesNestedBuilder;
-  String __rawType;
-  bool __needsBuilder;
+  final FieldElement? builderElement;
+  bool? __isSerializable;
+  BuiltValueField? __builtValueField;
+  bool? __isNonNullByDefault;
+  String? __orNull;
+  bool? __hasNullableAnnotation;
+  bool? __hasNullableType;
+  bool? __isNullable;
+  String? __name;
+  String? __wireName;
+  String? __type;
+  String? __typeWithNullabilitySuffix;
+  String? __typeWithPrefix;
+  String? __typeWithPrefixAndNullabilitySuffix;
+  bool? __builderFieldUsesNestedBuilder;
+  bool? __builderFieldAutoCreatesNestedBuilder;
+  String? __rawType;
+  bool? __needsBuilder;
 
   factory _$SerializerSourceField(
-          [void Function(SerializerSourceFieldBuilder) updates]) =>
+          [void Function(SerializerSourceFieldBuilder)? updates]) =>
       (new SerializerSourceFieldBuilder()..update(updates))._build();
 
   _$SerializerSourceField._(
-      {this.settings, this.parsedLibrary, this.element, this.builderElement})
+      {required this.settings,
+      required this.parsedLibrary,
+      required this.element,
+      this.builderElement})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         settings, 'SerializerSourceField', 'settings');
@@ -149,24 +151,24 @@ class _$SerializerSourceField extends SerializerSourceField {
 
 class SerializerSourceFieldBuilder
     implements Builder<SerializerSourceField, SerializerSourceFieldBuilder> {
-  _$SerializerSourceField _$v;
+  _$SerializerSourceField? _$v;
 
-  BuiltValue _settings;
-  BuiltValue get settings => _$this._settings;
-  set settings(BuiltValue settings) => _$this._settings = settings;
+  BuiltValue? _settings;
+  BuiltValue? get settings => _$this._settings;
+  set settings(BuiltValue? settings) => _$this._settings = settings;
 
-  ParsedLibraryResult _parsedLibrary;
-  ParsedLibraryResult get parsedLibrary => _$this._parsedLibrary;
-  set parsedLibrary(ParsedLibraryResult parsedLibrary) =>
+  ParsedLibraryResult? _parsedLibrary;
+  ParsedLibraryResult? get parsedLibrary => _$this._parsedLibrary;
+  set parsedLibrary(ParsedLibraryResult? parsedLibrary) =>
       _$this._parsedLibrary = parsedLibrary;
 
-  FieldElement _element;
-  FieldElement get element => _$this._element;
-  set element(FieldElement element) => _$this._element = element;
+  FieldElement? _element;
+  FieldElement? get element => _$this._element;
+  set element(FieldElement? element) => _$this._element = element;
 
-  FieldElement _builderElement;
-  FieldElement get builderElement => _$this._builderElement;
-  set builderElement(FieldElement builderElement) =>
+  FieldElement? _builderElement;
+  FieldElement? get builderElement => _$this._builderElement;
+  set builderElement(FieldElement? builderElement) =>
       _$this._builderElement = builderElement;
 
   SerializerSourceFieldBuilder();
@@ -190,7 +192,7 @@ class SerializerSourceFieldBuilder
   }
 
   @override
-  void update(void Function(SerializerSourceFieldBuilder) updates) {
+  void update(void Function(SerializerSourceFieldBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

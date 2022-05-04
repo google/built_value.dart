@@ -1,7 +1,6 @@
 // Copyright (c) 2015, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.11
 
 library built_value_generator.source_library;
 
@@ -47,7 +46,7 @@ abstract class SerializerSourceLibrary
     for (var accessor in accessors) {
       final annotations = accessor.variable.metadata
           .where((annotation) =>
-              DartTypes.getName(annotation.computeConstantValue()?.type) ==
+              DartTypes.tryGetName(annotation.computeConstantValue()?.type) ==
               'SerializersFor')
           .toList();
       if (annotations.isEmpty) continue;
@@ -72,7 +71,7 @@ abstract class SerializerSourceLibrary
     for (var accessor in accessors) {
       final annotations = accessor.variable.metadata
           .where((annotation) =>
-              DartTypes.getName(annotation.computeConstantValue()?.type) ==
+              DartTypes.tryGetName(annotation.computeConstantValue()?.type) ==
               'SerializersFor')
           .toList();
       if (annotations.isEmpty) continue;
@@ -106,11 +105,11 @@ abstract class SerializerSourceLibrary
     var result = SetMultimapBuilder<String, SerializerSourceClass>();
 
     for (var field in serializersForAnnotations.keys) {
-      final serializersForAnnotation = serializersForAnnotations[field];
+      final serializersForAnnotation = serializersForAnnotations[field]!;
 
       final types = serializersForAnnotation
-          .computeConstantValue()
-          .getField('types')
+          .computeConstantValue()!
+          .getField('types')!
           .toListValue()
           ?.map((dartObject) => dartObject.toTypeValue());
 
@@ -123,7 +122,7 @@ abstract class SerializerSourceLibrary
       result.addValues(
           field,
           types.map(
-              (type) => SerializerSourceClass(type.element as ClassElement)));
+              (type) => SerializerSourceClass(type!.element as ClassElement)));
     }
     return result.build();
   }
@@ -137,9 +136,9 @@ abstract class SerializerSourceLibrary
 
     for (var field in serializersForAnnotations.keys) {
       var currentResult = BuiltSet<SerializerSourceClass>(
-          serializeForClasses[field].where(
+          serializeForClasses[field]!.where(
               (serializerSourceClass) => serializerSourceClass.isSerializable));
-      BuiltSet<SerializerSourceClass> expandedResult;
+      BuiltSet<SerializerSourceClass>? expandedResult;
 
       while (currentResult != expandedResult) {
         currentResult = expandedResult ?? currentResult;
@@ -193,13 +192,13 @@ abstract class SerializerSourceLibrary
   String _generateSerializersTopLevelFields() => serializersForAnnotations.keys
       .map((field) =>
           'Serializers _\$$field = (new Serializers().toBuilder()' +
-          (serializeForTransitiveClasses[field]
+          (serializeForTransitiveClasses[field]!
                   .map((sourceClass) =>
                       sourceClass.generateTransitiveSerializerAdder())
                   .toList()
                 ..sort())
               .join('\n') +
-          (serializeForTransitiveClasses[field]
+          (serializeForTransitiveClasses[field]!
                   .map((sourceClass) =>
                       sourceClass.generateBuilderFactoryAdders(
                           element.definingCompilationUnit))

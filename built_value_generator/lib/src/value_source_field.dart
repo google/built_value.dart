@@ -1,7 +1,6 @@
 // Copyright (c) 2016, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.11
 
 library built_value_generator.source_field;
 
@@ -33,14 +32,13 @@ abstract class ValueSourceField
   BuiltValue get settings;
   ParsedLibraryResult get parsedLibrary;
   FieldElement get element;
-  @nullable
-  FieldElement get builderElement;
+  FieldElement? get builderElement;
 
   factory ValueSourceField(
           BuiltValue settings,
           ParsedLibraryResult parsedLibrary,
           FieldElement element,
-          FieldElement builderElement) =>
+          FieldElement? builderElement) =>
       _$ValueSourceField._(
           settings: settings,
           parsedLibrary: parsedLibrary,
@@ -58,7 +56,7 @@ abstract class ValueSourceField
   String get orNull => isNonNullByDefault ? '?' : '';
 
   @memoized
-  String get type => DartTypes.getName(element.getter.returnType);
+  String get type => DartTypes.getName(element.getter!.returnType);
 
   @memoized
   bool get isFunctionType => type.contains('(');
@@ -66,9 +64,10 @@ abstract class ValueSourceField
   /// The [type] plus any import prefix, without any nullability suffix.
   @memoized
   String get typeWithPrefix {
-    var typeFromAst = (parsedLibrary.getElementDeclaration(element.getter).node
-                as MethodDeclaration)
-            ?.returnType
+    var typeFromAst = (parsedLibrary
+                .getElementDeclaration(element.getter!)!
+                .node as MethodDeclaration)
+            .returnType
             ?.toSource() ??
         'dynamic';
     if (typeFromAst.endsWith('?')) {
@@ -89,22 +88,22 @@ abstract class ValueSourceField
 
   /// Returns the type with import prefix if the compilation unit matches,
   /// otherwise the type with no import prefix.
-  String typeInCompilationUnit(CompilationUnitElement compilationUnitElement) {
+  String typeInCompilationUnit(CompilationUnitElement? compilationUnitElement) {
     return compilationUnitElement == element.library.definingCompilationUnit
         ? typeWithPrefix
         : type;
   }
 
   @memoized
-  bool get isGetter => element.getter != null && !element.getter.isSynthetic;
+  bool get isGetter => element.getter != null && !element.getter!.isSynthetic;
 
   @memoized
-  bool get hasNullableAnnotation => element.getter.metadata
+  bool get hasNullableAnnotation => element.getter!.metadata
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
 
   @memoized
   bool get hasNullableType =>
-      element?.getter?.returnType?.nullabilitySuffix ==
+      element.getter?.returnType.nullabilitySuffix ==
       NullabilitySuffix.question;
 
   @memoized
@@ -112,18 +111,19 @@ abstract class ValueSourceField
 
   @memoized
   BuiltValueField get builtValueField {
-    var annotations = element.getter.metadata
+    var annotations = element.getter!.metadata
         .map((annotation) => annotation.computeConstantValue())
-        .where((value) => DartTypes.getName(value?.type) == 'BuiltValueField');
+        .where(
+            (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueField');
     if (annotations.isEmpty) return const BuiltValueField();
-    var annotation = annotations.single;
+    var annotation = annotations.single!;
     return BuiltValueField(
-        compare: annotation.getField('compare').toBoolValue(),
-        serialize: annotation.getField('serialize').toBoolValue(),
-        wireName: annotation.getField('wireName').toStringValue(),
-        nestedBuilder: annotation.getField('nestedBuilder').toBoolValue(),
+        compare: annotation.getField('compare')?.toBoolValue(),
+        serialize: annotation.getField('serialize')?.toBoolValue(),
+        wireName: annotation.getField('wireName')?.toStringValue(),
+        nestedBuilder: annotation.getField('nestedBuilder')?.toBoolValue(),
         autoCreateNestedBuilder:
-            annotation.getField('autoCreateNestedBuilder').toBoolValue());
+            annotation.getField('autoCreateNestedBuilder')?.toBoolValue());
   }
 
   @memoized
@@ -132,28 +132,28 @@ abstract class ValueSourceField
   @memoized
   bool get builderFieldIsNormalField =>
       builderFieldExists &&
-      builderElement.getter != null &&
-      !builderElement.getter.isAbstract &&
-      builderElement.getter.isSynthetic;
+      builderElement!.getter != null &&
+      !builderElement!.getter!.isAbstract &&
+      builderElement!.getter!.isSynthetic;
 
   @memoized
   bool get builderFieldIsGetterSetterPair =>
       builderFieldExists &&
-      (builderElement.getter != null && builderElement.setter != null);
+      (builderElement!.getter != null && builderElement!.setter != null);
 
   @memoized
   String get buildElementType {
     // Try to get a resolved type first, it's faster.
-    var result = DartTypes.getName(builderElement.getter?.returnType);
+    var result = DartTypes.tryGetName(builderElement!.getter?.returnType);
     if (result != null && result != 'dynamic') return result;
     // Go via AST to allow use of unresolvable types not yet generated;
     // this includes generated Builder types.
     result = parsedLibrary
-            .getElementDeclaration(builderElement)
+            .getElementDeclaration(builderElement!)
             ?.node
-            ?.parent
+            .parent
             ?.childEntities
-            ?.first
+            .first
             .toString() ??
         'dynamic';
     // If we went via the AST there may be an import prefix, but we don't
@@ -166,13 +166,13 @@ abstract class ValueSourceField
 
   bool get builderElementTypeIsNullable =>
       parsedLibrary
-          .getElementDeclaration(builderElement)
+          .getElementDeclaration(builderElement!)
           ?.node
-          ?.parent
+          .parent
           ?.childEntities
-          ?.first
+          .first
           .toString()
-          ?.endsWith('?') ??
+          .endsWith('?') ??
       false;
 
   /// The [builderElementType] plus any import prefix.
@@ -180,20 +180,20 @@ abstract class ValueSourceField
   String get builderElementTypeWithPrefix {
     // If it's a real field, it's a [VariableDeclaration] which is guaranteed
     // to have parent node [VariableDeclarationList] giving the type.
-    var fieldDeclaration = parsedLibrary.getElementDeclaration(builderElement);
+    var fieldDeclaration = parsedLibrary.getElementDeclaration(builderElement!);
     if (fieldDeclaration != null) {
       return _removeNullabilitySuffix(
           (((fieldDeclaration.node as VariableDeclaration).parent)
-                      as VariableDeclarationList)
+                      as VariableDeclarationList?)
                   ?.type
                   ?.toSource() ??
               'dynamic');
     } else {
       // Otherwise it's an explicit getter/setter pair; get the type from the getter.
       return _removeNullabilitySuffix((parsedLibrary
-                  .getElementDeclaration(builderElement.getter)
+                  .getElementDeclaration(builderElement!.getter!)!
                   .node as MethodDeclaration)
-              ?.returnType
+              .returnType
               ?.toSource() ??
           'dynamic');
     }
@@ -206,18 +206,17 @@ abstract class ValueSourceField
   /// Gets the type name for the builder. Specify the compilation unit to
   /// get the name for as [compilationUnit]; this affects whether an import
   /// prefix is used. Pass `null` for [compilationUnit] to just omit the prefix.
-  String typeInBuilder(
-          CompilationUnitElement compilationUnit) =>
+  String? typeInBuilder(CompilationUnitElement? compilationUnit) =>
       builderFieldExists
           ? buildElementType
-          : _toBuilderType(element.getter.returnType,
+          : _toBuilderType(element.getter!.returnType,
               typeInCompilationUnit(compilationUnit));
 
   @memoized
   bool get isNestedBuilder => builderFieldExists
-      ? typeInBuilder(null).contains('Builder') ?? false
+      ? typeInBuilder(null)?.contains('Builder') ?? false
       : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
-          DartTypes.needsNestedBuilder(element.getter.returnType);
+          DartTypes.needsNestedBuilder(element.getter!.returnType);
 
   @memoized
   bool get isAutoCreateNestedBuilder =>
@@ -228,13 +227,13 @@ abstract class ValueSourceField
       BuiltValue settings,
       ParsedLibraryResult parsedLibrary,
       ClassElement classElement,
-      ClassElement builderClassElement) {
+      ClassElement? builderClassElement) {
     var result = ListBuilder<ValueSourceField>();
 
     for (var field in collectFields(classElement)) {
       if (!field.isStatic &&
           field.getter != null &&
-          (field.getter.isAbstract || field.getter.isSynthetic)) {
+          (field.getter!.isAbstract || field.getter!.isSynthetic)) {
         final builderField = builderClassElement?.getField(field.name);
         result.add(
             ValueSourceField(settings, parsedLibrary, field, builderField));
@@ -244,7 +243,7 @@ abstract class ValueSourceField
     return result.build();
   }
 
-  static String _toBuilderType(DartType type, String displayName) {
+  static String? _toBuilderType(DartType type, String displayName) {
     if (DartTypes.isBuiltCollection(type)) {
       return displayName
           .replaceFirst('Built', '')
