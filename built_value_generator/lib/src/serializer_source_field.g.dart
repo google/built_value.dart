@@ -44,11 +44,11 @@ class _$SerializerSourceField extends SerializerSourceField {
       this.builderElement})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        settings, 'SerializerSourceField', 'settings');
+        settings, r'SerializerSourceField', 'settings');
     BuiltValueNullFieldError.checkNotNull(
-        parsedLibrary, 'SerializerSourceField', 'parsedLibrary');
+        parsedLibrary, r'SerializerSourceField', 'parsedLibrary');
     BuiltValueNullFieldError.checkNotNull(
-        element, 'SerializerSourceField', 'element');
+        element, r'SerializerSourceField', 'element');
   }
 
   @override
@@ -140,7 +140,7 @@ class _$SerializerSourceField extends SerializerSourceField {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SerializerSourceField')
+    return (newBuiltValueToStringHelper(r'SerializerSourceField')
           ..add('settings', settings)
           ..add('parsedLibrary', parsedLibrary)
           ..add('element', element)
@@ -203,11 +203,11 @@ class SerializerSourceFieldBuilder
     final _$result = _$v ??
         new _$SerializerSourceField._(
             settings: BuiltValueNullFieldError.checkNotNull(
-                settings, 'SerializerSourceField', 'settings'),
+                settings, r'SerializerSourceField', 'settings'),
             parsedLibrary: BuiltValueNullFieldError.checkNotNull(
-                parsedLibrary, 'SerializerSourceField', 'parsedLibrary'),
+                parsedLibrary, r'SerializerSourceField', 'parsedLibrary'),
             element: BuiltValueNullFieldError.checkNotNull(
-                element, 'SerializerSourceField', 'element'),
+                element, r'SerializerSourceField', 'element'),
             builderElement: builderElement);
     replace(_$result);
     return _$result;

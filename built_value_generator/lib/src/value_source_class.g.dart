@@ -60,7 +60,7 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   _$ValueSourceClass._({required this.element}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        element, 'ValueSourceClass', 'element');
+        element, r'ValueSourceClass', 'element');
   }
 
   @override
@@ -249,7 +249,7 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ValueSourceClass')
+    return (newBuiltValueToStringHelper(r'ValueSourceClass')
           ..add('element', element))
         .toString();
   }
@@ -292,7 +292,7 @@ class ValueSourceClassBuilder
     final _$result = _$v ??
         new _$ValueSourceClass._(
             element: BuiltValueNullFieldError.checkNotNull(
-                element, 'ValueSourceClass', 'element'));
+                element, r'ValueSourceClass', 'element'));
     replace(_$result);
     return _$result;
   }

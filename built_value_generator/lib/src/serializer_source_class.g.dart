@@ -43,7 +43,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   _$SerializerSourceClass._({required this.element, this.builderElement})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        element, 'SerializerSourceClass', 'element');
+        element, r'SerializerSourceClass', 'element');
   }
 
   @override
@@ -156,7 +156,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SerializerSourceClass')
+    return (newBuiltValueToStringHelper(r'SerializerSourceClass')
           ..add('element', element)
           ..add('builderElement', builderElement))
         .toString();
@@ -206,7 +206,7 @@ class SerializerSourceClassBuilder
     final _$result = _$v ??
         new _$SerializerSourceClass._(
             element: BuiltValueNullFieldError.checkNotNull(
-                element, 'SerializerSourceClass', 'element'),
+                element, r'SerializerSourceClass', 'element'),
             builderElement: builderElement);
     replace(_$result);
     return _$result;

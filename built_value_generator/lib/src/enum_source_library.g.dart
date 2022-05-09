@@ -21,7 +21,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
 
   _$EnumSourceLibrary._({required this.element}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        element, 'EnumSourceLibrary', 'element');
+        element, r'EnumSourceLibrary', 'element');
   }
 
   @override
@@ -61,7 +61,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('EnumSourceLibrary')
+    return (newBuiltValueToStringHelper(r'EnumSourceLibrary')
           ..add('element', element))
         .toString();
   }
@@ -104,7 +104,7 @@ class EnumSourceLibraryBuilder
     final _$result = _$v ??
         new _$EnumSourceLibrary._(
             element: BuiltValueNullFieldError.checkNotNull(
-                element, 'EnumSourceLibrary', 'element'));
+                element, r'EnumSourceLibrary', 'element'));
     replace(_$result);
     return _$result;
   }
