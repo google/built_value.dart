@@ -30,7 +30,7 @@ class _$EnumSourceClass extends EnumSourceClass {
 
   _$EnumSourceClass._({required this.element}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        element, 'EnumSourceClass', 'element');
+        element, r'EnumSourceClass', 'element');
   }
 
   @override
@@ -109,7 +109,7 @@ class _$EnumSourceClass extends EnumSourceClass {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('EnumSourceClass')
+    return (newBuiltValueToStringHelper(r'EnumSourceClass')
           ..add('element', element))
         .toString();
   }
@@ -152,7 +152,7 @@ class EnumSourceClassBuilder
     final _$result = _$v ??
         new _$EnumSourceClass._(
             element: BuiltValueNullFieldError.checkNotNull(
-                element, 'EnumSourceClass', 'element'));
+                element, r'EnumSourceClass', 'element'));
     replace(_$result);
     return _$result;
   }

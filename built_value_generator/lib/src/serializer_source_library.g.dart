@@ -24,7 +24,7 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
 
   _$SerializerSourceLibrary._({required this.element}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        element, 'SerializerSourceLibrary', 'element');
+        element, r'SerializerSourceLibrary', 'element');
   }
 
   @override
@@ -77,7 +77,7 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SerializerSourceLibrary')
+    return (newBuiltValueToStringHelper(r'SerializerSourceLibrary')
           ..add('element', element))
         .toString();
   }
@@ -121,7 +121,7 @@ class SerializerSourceLibraryBuilder
     final _$result = _$v ??
         new _$SerializerSourceLibrary._(
             element: BuiltValueNullFieldError.checkNotNull(
-                element, 'SerializerSourceLibrary', 'element'));
+                element, r'SerializerSourceLibrary', 'element'));
     replace(_$result);
     return _$result;
   }

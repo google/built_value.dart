@@ -45,11 +45,11 @@ class _$ValueSourceField extends ValueSourceField {
       this.builderElement})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        settings, 'ValueSourceField', 'settings');
+        settings, r'ValueSourceField', 'settings');
     BuiltValueNullFieldError.checkNotNull(
-        parsedLibrary, 'ValueSourceField', 'parsedLibrary');
+        parsedLibrary, r'ValueSourceField', 'parsedLibrary');
     BuiltValueNullFieldError.checkNotNull(
-        element, 'ValueSourceField', 'element');
+        element, r'ValueSourceField', 'element');
   }
 
   @override
@@ -142,7 +142,7 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ValueSourceField')
+    return (newBuiltValueToStringHelper(r'ValueSourceField')
           ..add('settings', settings)
           ..add('parsedLibrary', parsedLibrary)
           ..add('element', element)
@@ -205,11 +205,11 @@ class ValueSourceFieldBuilder
     final _$result = _$v ??
         new _$ValueSourceField._(
             settings: BuiltValueNullFieldError.checkNotNull(
-                settings, 'ValueSourceField', 'settings'),
+                settings, r'ValueSourceField', 'settings'),
             parsedLibrary: BuiltValueNullFieldError.checkNotNull(
-                parsedLibrary, 'ValueSourceField', 'parsedLibrary'),
+                parsedLibrary, r'ValueSourceField', 'parsedLibrary'),
             element: BuiltValueNullFieldError.checkNotNull(
-                element, 'ValueSourceField', 'element'),
+                element, r'ValueSourceField', 'element'),
             builderElement: builderElement);
     replace(_$result);
     return _$result;

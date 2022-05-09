@@ -787,14 +787,14 @@ abstract class ValueSourceClass
       result.writeln('{');
       for (var field in requiredFields) {
         result.writeln('BuiltValueNullFieldError.checkNotNull(${field.name}, '
-            "'$name', '${escapeString(field.name)}');");
+            "r'$name', '${escapeString(field.name)}');");
       }
       // If there are generic parameters, check they are not "dynamic".
       if (genericParameters.isNotEmpty) {
         for (var genericParameter in genericParameters) {
           result.writeln('if ($genericParameter == dynamic) {');
           result.writeln('throw new BuiltValueMissingGenericsError('
-              "'$name', '$genericParameter');");
+              "r'$name', '$genericParameter');");
           result.writeln('}');
         }
       }
@@ -847,10 +847,10 @@ abstract class ValueSourceClass
       result.writeln('@override');
       result.writeln('String toString() {');
       if (fields.isEmpty) {
-        result
-            .writeln("return newBuiltValueToStringHelper('$name').toString();");
+        result.writeln(
+            "return newBuiltValueToStringHelper(r'$name').toString();");
       } else {
-        result.writeln("return (newBuiltValueToStringHelper('$name')");
+        result.writeln("return (newBuiltValueToStringHelper(r'$name')");
         result.writeln(fields
             .map((field) =>
                 "..add('${escapeString(field.name)}',  ${field.name})")
@@ -1089,7 +1089,7 @@ abstract class ValueSourceClass
     result.write(fieldBuilders.keys.map((field) {
       if (needsNullCheck.contains(field)) {
         return '$field: BuiltValueNullFieldError.checkNotNull('
-            "${fieldBuilders[field]}, '$name', '${escapeString(field)}')";
+            "${fieldBuilders[field]}, r'$name', '${escapeString(field)}')";
       } else {
         return '$field: ${fieldBuilders[field]}';
       }
@@ -1111,7 +1111,7 @@ abstract class ValueSourceClass
 
       result.writeln('} catch (e) {');
       result.writeln('throw new BuiltValueNestedFieldError('
-          "'$name', _\$failedField, e.toString());");
+          "r'$name', _\$failedField, e.toString());");
       result.writeln('}');
       result.writeln('rethrow;');
       result.writeln('}');

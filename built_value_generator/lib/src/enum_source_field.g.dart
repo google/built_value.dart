@@ -25,9 +25,9 @@ class _$EnumSourceField extends EnumSourceField {
   _$EnumSourceField._({required this.parsedLibrary, required this.element})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        parsedLibrary, 'EnumSourceField', 'parsedLibrary');
+        parsedLibrary, r'EnumSourceField', 'parsedLibrary');
     BuiltValueNullFieldError.checkNotNull(
-        element, 'EnumSourceField', 'element');
+        element, r'EnumSourceField', 'element');
   }
 
   @override
@@ -78,7 +78,7 @@ class _$EnumSourceField extends EnumSourceField {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('EnumSourceField')
+    return (newBuiltValueToStringHelper(r'EnumSourceField')
           ..add('parsedLibrary', parsedLibrary)
           ..add('element', element))
         .toString();
@@ -128,9 +128,9 @@ class EnumSourceFieldBuilder
     final _$result = _$v ??
         new _$EnumSourceField._(
             parsedLibrary: BuiltValueNullFieldError.checkNotNull(
-                parsedLibrary, 'EnumSourceField', 'parsedLibrary'),
+                parsedLibrary, r'EnumSourceField', 'parsedLibrary'),
             element: BuiltValueNullFieldError.checkNotNull(
-                element, 'EnumSourceField', 'element'));
+                element, r'EnumSourceField', 'element'));
     replace(_$result);
     return _$result;
   }

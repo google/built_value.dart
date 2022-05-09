@@ -22,7 +22,8 @@ class _$GeneratorError extends GeneratorError {
   _$GeneratorError._(
       {required this.message, this.offset, this.length, this.fix})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(message, 'GeneratorError', 'message');
+    BuiltValueNullFieldError.checkNotNull(
+        message, r'GeneratorError', 'message');
   }
 
   @override
@@ -52,7 +53,7 @@ class _$GeneratorError extends GeneratorError {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GeneratorError')
+    return (newBuiltValueToStringHelper(r'GeneratorError')
           ..add('message', message)
           ..add('offset', offset)
           ..add('length', length)
@@ -113,7 +114,7 @@ class GeneratorErrorBuilder
     final _$result = _$v ??
         new _$GeneratorError._(
             message: BuiltValueNullFieldError.checkNotNull(
-                message, 'GeneratorError', 'message'),
+                message, r'GeneratorError', 'message'),
             offset: offset,
             length: length,
             fix: fix);

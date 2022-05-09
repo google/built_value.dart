@@ -23,10 +23,10 @@ class _$MemoizedGetter extends MemoizedGetter {
       required this.name})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        returnType, 'MemoizedGetter', 'returnType');
+        returnType, r'MemoizedGetter', 'returnType');
     BuiltValueNullFieldError.checkNotNull(
-        nullabilitySuffix, 'MemoizedGetter', 'nullabilitySuffix');
-    BuiltValueNullFieldError.checkNotNull(name, 'MemoizedGetter', 'name');
+        nullabilitySuffix, r'MemoizedGetter', 'nullabilitySuffix');
+    BuiltValueNullFieldError.checkNotNull(name, r'MemoizedGetter', 'name');
   }
 
   @override
@@ -54,7 +54,7 @@ class _$MemoizedGetter extends MemoizedGetter {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('MemoizedGetter')
+    return (newBuiltValueToStringHelper(r'MemoizedGetter')
           ..add('returnType', returnType)
           ..add('nullabilitySuffix', nullabilitySuffix)
           ..add('name', name))
@@ -110,11 +110,11 @@ class MemoizedGetterBuilder
     final _$result = _$v ??
         new _$MemoizedGetter._(
             returnType: BuiltValueNullFieldError.checkNotNull(
-                returnType, 'MemoizedGetter', 'returnType'),
+                returnType, r'MemoizedGetter', 'returnType'),
             nullabilitySuffix: BuiltValueNullFieldError.checkNotNull(
-                nullabilitySuffix, 'MemoizedGetter', 'nullabilitySuffix'),
+                nullabilitySuffix, r'MemoizedGetter', 'nullabilitySuffix'),
             name: BuiltValueNullFieldError.checkNotNull(
-                name, 'MemoizedGetter', 'name'));
+                name, r'MemoizedGetter', 'name'));
     replace(_$result);
     return _$result;
   }
