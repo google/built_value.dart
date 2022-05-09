@@ -157,6 +157,27 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 '''), contains('implements StructuredSerializer<Value>'));
     });
 
+    test('handle \$ special character in class name', () async {
+      expect(
+          await generate(r'''
+library value;
+
+import 'package:test_support/test_support.dart';
+
+part 'value.g.dart';
+
+abstract class $Value implements Built<$Value, $ValueBuilder> {
+  static Serializer<$Value> get serializer => _$$valueSerializer;
+  bool get aBool;
+  
+  $Value._();
+  factory $Value([void Function($ValueBuilder) updates]) = _$$Value;
+}
+'''),
+          contains(
+              r'Serializer<$Value> _$$valueSerializer = new _$$ValueSerializer();'));
+    });
+
     test('checks serializer declarations use correct values', () async {
       expect(
           await generate(r'''

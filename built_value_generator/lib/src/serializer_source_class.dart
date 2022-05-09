@@ -549,6 +549,8 @@ case '${escapeString(field.wireName)}':
     for (var char in name.split('')) {
       if (char == '_') {
         upperCase = true;
+      } else if (char == '\$') {
+        result += '\$';
       } else {
         result += firstCharacter
             ? char.toLowerCase()
