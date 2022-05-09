@@ -10,6 +10,8 @@ import 'package:meta/meta_meta.dart';
 /// provide the rest of the implementation.
 ///
 /// See https://github.com/google/built_value.dart/tree/master/example
+/// Intro doc:
+/// https://medium.com/dartlang/darts-built-collection-for-immutable-collections-db662f705eff
 abstract class Built<V extends Built<V, B>, B extends Builder<V, B>> {
   /// Rebuilds the instance.
   ///
