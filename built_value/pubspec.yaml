@@ -6,7 +6,7 @@ description: >
 repository: https://github.com/google/built_value.dart/tree/master/built_value
 
 environment:
-  sdk: '>=2.12.0-0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   built_collection: ^5.0.0
