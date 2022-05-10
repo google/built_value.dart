@@ -1,6 +1,6 @@
 # Changelog
 
-# 8.2.4 (unreleased)
+# 8.3.0
 
 - Change generated `build` methods to return only public types, creating
   `_build` methods that return the generated impl types. This means dartdoc
