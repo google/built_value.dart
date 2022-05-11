@@ -36,7 +36,7 @@ class _$UsesMixin extends UsesMixin {
       (new UsesMixinBuilder()..update(updates))._build();
 
   _$UsesMixin._({required this.typeDef}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(typeDef, 'UsesMixin', 'typeDef');
+    BuiltValueNullFieldError.checkNotNull(typeDef, r'UsesMixin', 'typeDef');
   }
 
   @override
@@ -60,7 +60,7 @@ class _$UsesMixin extends UsesMixin {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('UsesMixin')..add('typeDef', typeDef))
+    return (newBuiltValueToStringHelper(r'UsesMixin')..add('typeDef', typeDef))
         .toString();
   }
 }
@@ -101,7 +101,7 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
     final _$result = _$v ??
         new _$UsesMixin._(
             typeDef: BuiltValueNullFieldError.checkNotNull(
-                typeDef, 'UsesMixin', 'typeDef'));
+                typeDef, r'UsesMixin', 'typeDef'));
     replace(_$result);
     return _$result;
   }
@@ -117,7 +117,7 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
 
   _$GetsCorrectFieldsViaMixins._({required this.shouldBeAField}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        shouldBeAField, 'GetsCorrectFieldsViaMixins', 'shouldBeAField');
+        shouldBeAField, r'GetsCorrectFieldsViaMixins', 'shouldBeAField');
   }
 
   @override
@@ -143,7 +143,7 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GetsCorrectFieldsViaMixins')
+    return (newBuiltValueToStringHelper(r'GetsCorrectFieldsViaMixins')
           ..add('shouldBeAField', shouldBeAField))
         .toString();
   }
@@ -189,7 +189,7 @@ class GetsCorrectFieldsViaMixinsBuilder
         new _$GetsCorrectFieldsViaMixins._(
             shouldBeAField: BuiltValueNullFieldError.checkNotNull(
                 shouldBeAField,
-                'GetsCorrectFieldsViaMixins',
+                r'GetsCorrectFieldsViaMixins',
                 'shouldBeAField'));
     replace(_$result);
     return _$result;

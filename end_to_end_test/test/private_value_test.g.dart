@@ -15,7 +15,7 @@ class _$PrivateValue extends _PrivateValue {
       (new _PrivateValueBuilder()..update(updates))._build();
 
   _$PrivateValue._({this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, '_PrivateValue', 'value');
+    BuiltValueNullFieldError.checkNotNull(value, r'_PrivateValue', 'value');
   }
 
   @override
@@ -38,7 +38,7 @@ class _$PrivateValue extends _PrivateValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('_PrivateValue')..add('value', value))
+    return (newBuiltValueToStringHelper(r'_PrivateValue')..add('value', value))
         .toString();
   }
 }
@@ -80,7 +80,7 @@ class _PrivateValueBuilder
     final _$result = _$v ??
         new _$PrivateValue._(
             value: BuiltValueNullFieldError.checkNotNull(
-                value, '_PrivateValue', 'value'));
+                value, r'_PrivateValue', 'value'));
     replace(_$result);
     return _$result;
   }

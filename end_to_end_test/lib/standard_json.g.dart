@@ -127,13 +127,13 @@ class _$StandardJsonValue extends StandardJsonValue {
       this.strings})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        number, 'StandardJsonValue', 'number');
-    BuiltValueNullFieldError.checkNotNull(text, 'StandardJsonValue', 'text');
+        number, r'StandardJsonValue', 'number');
+    BuiltValueNullFieldError.checkNotNull(text, r'StandardJsonValue', 'text');
     BuiltValueNullFieldError.checkNotNull(
-        keyValues, 'StandardJsonValue', 'keyValues');
-    BuiltValueNullFieldError.checkNotNull(zoo, 'StandardJsonValue', 'zoo');
+        keyValues, r'StandardJsonValue', 'keyValues');
+    BuiltValueNullFieldError.checkNotNull(zoo, r'StandardJsonValue', 'zoo');
     BuiltValueNullFieldError.checkNotNull(
-        uniqueZoo, 'StandardJsonValue', 'uniqueZoo');
+        uniqueZoo, r'StandardJsonValue', 'uniqueZoo');
   }
 
   @override
@@ -170,7 +170,7 @@ class _$StandardJsonValue extends StandardJsonValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('StandardJsonValue')
+    return (newBuiltValueToStringHelper(r'StandardJsonValue')
           ..add('number', number)
           ..add('text', text)
           ..add('keyValues', keyValues)
@@ -249,9 +249,9 @@ class StandardJsonValueBuilder
       _$result = _$v ??
           new _$StandardJsonValue._(
               number: BuiltValueNullFieldError.checkNotNull(
-                  number, 'StandardJsonValue', 'number'),
+                  number, r'StandardJsonValue', 'number'),
               text: BuiltValueNullFieldError.checkNotNull(
-                  text, 'StandardJsonValue', 'text'),
+                  text, r'StandardJsonValue', 'text'),
               keyValues: keyValues.build(),
               zoo: zoo.build(),
               uniqueZoo: uniqueZoo.build(),
@@ -269,7 +269,7 @@ class StandardJsonValueBuilder
         _strings?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'StandardJsonValue', _$failedField, e.toString());
+            r'StandardJsonValue', _$failedField, e.toString());
       }
       rethrow;
     }
