@@ -777,3 +777,16 @@ abstract class DeprecatedValueBuilder
   @Deprecated('Testing whether annotations on constructors works.')
   DeprecatedValueBuilder._();
 }
+
+abstract class $ValueSpecial
+    implements Built<$ValueSpecial, $ValueSpecialBuilder> {
+  static Serializer<$ValueSpecial> get serializer => _$$valueSpecialSerializer;
+
+  int get anInt;
+
+  bool get $mustBeEscaped;
+
+  factory $ValueSpecial([void Function($ValueSpecialBuilder) updates]) =
+      _$$ValueSpecial;
+  $ValueSpecial._();
+}

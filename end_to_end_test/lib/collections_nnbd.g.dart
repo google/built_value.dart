@@ -293,27 +293,27 @@ class _$Collections extends Collections {
       required this.nullableInGenericsList,
       required this.nestedNullablesList})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(list, 'Collections', 'list');
-    BuiltValueNullFieldError.checkNotNull(set, 'Collections', 'set');
-    BuiltValueNullFieldError.checkNotNull(map, 'Collections', 'map');
+    BuiltValueNullFieldError.checkNotNull(list, r'Collections', 'list');
+    BuiltValueNullFieldError.checkNotNull(set, r'Collections', 'set');
+    BuiltValueNullFieldError.checkNotNull(map, r'Collections', 'map');
     BuiltValueNullFieldError.checkNotNull(
-        listMultimap, 'Collections', 'listMultimap');
+        listMultimap, r'Collections', 'listMultimap');
     BuiltValueNullFieldError.checkNotNull(
-        setMultimap, 'Collections', 'setMultimap');
+        setMultimap, r'Collections', 'setMultimap');
     BuiltValueNullFieldError.checkNotNull(
-        nullsInList, 'Collections', 'nullsInList');
+        nullsInList, r'Collections', 'nullsInList');
     BuiltValueNullFieldError.checkNotNull(
-        nullsInSet, 'Collections', 'nullsInSet');
+        nullsInSet, r'Collections', 'nullsInSet');
     BuiltValueNullFieldError.checkNotNull(
-        nullsInMap, 'Collections', 'nullsInMap');
+        nullsInMap, r'Collections', 'nullsInMap');
     BuiltValueNullFieldError.checkNotNull(
-        nullsInListMultimap, 'Collections', 'nullsInListMultimap');
+        nullsInListMultimap, r'Collections', 'nullsInListMultimap');
     BuiltValueNullFieldError.checkNotNull(
-        nullsInSetMultimap, 'Collections', 'nullsInSetMultimap');
+        nullsInSetMultimap, r'Collections', 'nullsInSetMultimap');
     BuiltValueNullFieldError.checkNotNull(
-        nullableInGenericsList, 'Collections', 'nullableInGenericsList');
+        nullableInGenericsList, r'Collections', 'nullableInGenericsList');
     BuiltValueNullFieldError.checkNotNull(
-        nestedNullablesList, 'Collections', 'nestedNullablesList');
+        nestedNullablesList, r'Collections', 'nestedNullablesList');
   }
 
   @override
@@ -390,7 +390,7 @@ class _$Collections extends Collections {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Collections')
+    return (newBuiltValueToStringHelper(r'Collections')
           ..add('list', list)
           ..add('set', set)
           ..add('map', map)
@@ -618,7 +618,7 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
         nestedNullablesList.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'Collections', _$failedField, e.toString());
+            r'Collections', _$failedField, e.toString());
       }
       rethrow;
     }

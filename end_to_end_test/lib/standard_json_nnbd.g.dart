@@ -299,22 +299,22 @@ class _$StandardJsonValue extends StandardJsonValue {
       required this.objects})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        number, 'StandardJsonValue', 'number');
-    BuiltValueNullFieldError.checkNotNull(text, 'StandardJsonValue', 'text');
-    BuiltValueNullFieldError.checkNotNull(value, 'StandardJsonValue', 'value');
+        number, r'StandardJsonValue', 'number');
+    BuiltValueNullFieldError.checkNotNull(text, r'StandardJsonValue', 'text');
+    BuiltValueNullFieldError.checkNotNull(value, r'StandardJsonValue', 'value');
     BuiltValueNullFieldError.checkNotNull(
-        keyValues, 'StandardJsonValue', 'keyValues');
-    BuiltValueNullFieldError.checkNotNull(zoo, 'StandardJsonValue', 'zoo');
+        keyValues, r'StandardJsonValue', 'keyValues');
+    BuiltValueNullFieldError.checkNotNull(zoo, r'StandardJsonValue', 'zoo');
     BuiltValueNullFieldError.checkNotNull(
-        uniqueZoo, 'StandardJsonValue', 'uniqueZoo');
+        uniqueZoo, r'StandardJsonValue', 'uniqueZoo');
     BuiltValueNullFieldError.checkNotNull(
-        nullsInList, 'StandardJsonValue', 'nullsInList');
+        nullsInList, r'StandardJsonValue', 'nullsInList');
     BuiltValueNullFieldError.checkNotNull(
-        nullsInSet, 'StandardJsonValue', 'nullsInSet');
+        nullsInSet, r'StandardJsonValue', 'nullsInSet');
     BuiltValueNullFieldError.checkNotNull(
-        nullsInMap, 'StandardJsonValue', 'nullsInMap');
+        nullsInMap, r'StandardJsonValue', 'nullsInMap');
     BuiltValueNullFieldError.checkNotNull(
-        objects, 'StandardJsonValue', 'objects');
+        objects, r'StandardJsonValue', 'objects');
   }
 
   @override
@@ -371,7 +371,7 @@ class _$StandardJsonValue extends StandardJsonValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('StandardJsonValue')
+    return (newBuiltValueToStringHelper(r'StandardJsonValue')
           ..add('number', number)
           ..add('text', text)
           ..add('value', value)
@@ -493,9 +493,9 @@ class StandardJsonValueBuilder
       _$result = _$v ??
           new _$StandardJsonValue._(
               number: BuiltValueNullFieldError.checkNotNull(
-                  number, 'StandardJsonValue', 'number'),
+                  number, r'StandardJsonValue', 'number'),
               text: BuiltValueNullFieldError.checkNotNull(
-                  text, 'StandardJsonValue', 'text'),
+                  text, r'StandardJsonValue', 'text'),
               value: value.build(),
               keyValues: keyValues.build(),
               zoo: zoo.build(),
@@ -530,7 +530,7 @@ class StandardJsonValueBuilder
         objects.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'StandardJsonValue', _$failedField, e.toString());
+            r'StandardJsonValue', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -565,8 +565,8 @@ class _$ComplexValue extends ComplexValue {
       this.nullableValueDoNotUse})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        primitive, 'ComplexValue', 'primitive');
-    BuiltValueNullFieldError.checkNotNull(value, 'ComplexValue', 'value');
+        primitive, r'ComplexValue', 'primitive');
+    BuiltValueNullFieldError.checkNotNull(value, r'ComplexValue', 'value');
   }
 
   @override
@@ -602,7 +602,7 @@ class _$ComplexValue extends ComplexValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ComplexValue')
+    return (newBuiltValueToStringHelper(r'ComplexValue')
           ..add('primitive', primitive)
           ..add('nullablePrimitive', nullablePrimitive)
           ..add('nullablePrimitiveDoNotUse', nullablePrimitiveDoNotUse)
@@ -683,7 +683,7 @@ class ComplexValueBuilder
       _$result = _$v ??
           new _$ComplexValue._(
               primitive: BuiltValueNullFieldError.checkNotNull(
-                  primitive, 'ComplexValue', 'primitive'),
+                  primitive, r'ComplexValue', 'primitive'),
               nullablePrimitive: nullablePrimitive,
               nullablePrimitiveDoNotUse: nullablePrimitiveDoNotUse,
               value: value.build(),
@@ -700,7 +700,7 @@ class ComplexValueBuilder
         _nullableValueDoNotUse?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'ComplexValue', _$failedField, e.toString());
+            r'ComplexValue', _$failedField, e.toString());
       }
       rethrow;
     }

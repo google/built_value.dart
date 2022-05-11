@@ -825,3 +825,17 @@ abstract class ValueWithHooks
       _$ValueWithHooks;
   ValueWithHooks._();
 }
+
+abstract class $ValueSpecial
+    implements Built<$ValueSpecial, $ValueSpecialBuilder> {
+  static Serializer<$ValueSpecial> get serializer => _$$valueSpecialSerializer;
+
+  int get anInt;
+
+  String? get aString;
+  bool? get $mustBeEscaped;
+
+  factory $ValueSpecial([void Function($ValueSpecialBuilder) updates]) =
+      _$$ValueSpecial;
+  $ValueSpecial._();
+}

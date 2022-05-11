@@ -152,8 +152,8 @@ class _$ValueWithInt extends ValueWithInt {
       (new ValueWithIntBuilder()..update(updates))._build();
 
   _$ValueWithInt._({required this.anInt, required this.note}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, 'ValueWithInt', 'anInt');
-    BuiltValueNullFieldError.checkNotNull(note, 'ValueWithInt', 'note');
+    BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithInt', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(note, r'ValueWithInt', 'note');
   }
 
   @override
@@ -176,7 +176,7 @@ class _$ValueWithInt extends ValueWithInt {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ValueWithInt')
+    return (newBuiltValueToStringHelper(r'ValueWithInt')
           ..add('anInt', anInt)
           ..add('note', note))
         .toString();
@@ -225,9 +225,9 @@ class ValueWithIntBuilder
     final _$result = _$v ??
         new _$ValueWithInt._(
             anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, 'ValueWithInt', 'anInt'),
+                anInt, r'ValueWithInt', 'anInt'),
             note: BuiltValueNullFieldError.checkNotNull(
-                note, 'ValueWithInt', 'note'));
+                note, r'ValueWithInt', 'note'));
     replace(_$result);
     return _$result;
   }
@@ -241,7 +241,7 @@ class _$ValueWithHasInt extends ValueWithHasInt {
       (new ValueWithHasIntBuilder()..update(updates))._build();
 
   _$ValueWithHasInt._({required this.hasInt}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(hasInt, 'ValueWithHasInt', 'hasInt');
+    BuiltValueNullFieldError.checkNotNull(hasInt, r'ValueWithHasInt', 'hasInt');
   }
 
   @override
@@ -265,7 +265,7 @@ class _$ValueWithHasInt extends ValueWithHasInt {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ValueWithHasInt')
+    return (newBuiltValueToStringHelper(r'ValueWithHasInt')
           ..add('hasInt', hasInt))
         .toString();
   }
@@ -308,7 +308,7 @@ class ValueWithHasIntBuilder
     final _$result = _$v ??
         new _$ValueWithHasInt._(
             hasInt: BuiltValueNullFieldError.checkNotNull(
-                hasInt, 'ValueWithHasInt', 'hasInt'));
+                hasInt, r'ValueWithHasInt', 'hasInt'));
     replace(_$result);
     return _$result;
   }
