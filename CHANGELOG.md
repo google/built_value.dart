@@ -9,6 +9,7 @@
   code.
 - Migrated `built_value_generator` to null safety. This is purely an internal
   change, the generator can still generate legacy code as and when needed.
+- fixed generation for classes that started with `$` 
 
 # 8.2.3
 
