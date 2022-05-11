@@ -872,17 +872,6 @@ abstract class _Value implements Built<_Value, _ValueBuilder> {
             isNot(contains(r'1.')),
           ));
     });
-
-    test(r'escape classes with $', () async {
-      expect(await generate('''library value;
-import 'package:built_value/built_value.dart';
-part 'value.g.dart';
-abstract class \$Value implements Built<\$Value, \$ValueBuilder> {
-  num get foo;
-  \$Value._();
-  factory \$Value([void Function(\$ValueBuilder) updates]) = _\$\$Value;
-}'''), contains(r"r'$Value'"));
-    });
   });
 }
 
