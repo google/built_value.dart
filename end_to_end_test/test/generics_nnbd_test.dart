@@ -67,6 +67,20 @@ void main() {
     });
   });
 
+  group('BoundNullableGenericValue', () {
+    test('can be instantiated', () {
+      BoundNullableGenericValue<int>((b) => b.value = 3);
+      BoundNullableGenericValue<int?>();
+      BoundNullableGenericValue<int?>((b) => b.value = null);
+      BoundNullableGenericValue<int?>((b) => b.value = 3);
+    });
+
+    test('throws on null for non-nullable fields on build', () {
+      expect(() => BoundNullableGenericValue<int>(),
+          throwsA(const TypeMatcher<BuiltValueNullFieldError>()));
+    });
+  });
+
   group('GenericFunction', () {
     test('can be compared', () {
       // Generic functions have troublesome behaviour when casting. Check that
