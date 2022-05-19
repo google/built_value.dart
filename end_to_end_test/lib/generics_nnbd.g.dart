@@ -11,6 +11,9 @@ Serializer<GenericValue<Object?>> _$genericValueSerializer =
     new _$GenericValueSerializer();
 Serializer<BoundGenericValue<num>> _$boundGenericValueSerializer =
     new _$BoundGenericValueSerializer();
+Serializer<BoundNullableGenericValue<num>>
+    _$boundNullableGenericValueSerializer =
+    new _$BoundNullableGenericValueSerializer();
 Serializer<CollectionGenericValue<Object?>> _$collectionGenericValueSerializer =
     new _$CollectionGenericValueSerializer();
 Serializer<GenericContainer> _$genericContainerSerializer =
@@ -124,6 +127,66 @@ class _$BoundGenericValueSerializer
         ? new BoundGenericValueBuilder<num>()
         : serializers.newBuilder(specifiedType)
             as BoundGenericValueBuilder<num>;
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'value':
+          result.value =
+              serializers.deserialize(value, specifiedType: parameterT)! as num;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$BoundNullableGenericValueSerializer
+    implements StructuredSerializer<BoundNullableGenericValue<num>> {
+  @override
+  final Iterable<Type> types = const [
+    BoundNullableGenericValue,
+    _$BoundNullableGenericValue
+  ];
+  @override
+  final String wireName = 'BoundNullableGenericValue';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, BoundNullableGenericValue<num> object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = <Object?>[
+      'value',
+      serializers.serialize(object.value, specifiedType: parameterT),
+    ];
+
+    return result;
+  }
+
+  @override
+  BoundNullableGenericValue<num> deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = isUnderspecified
+        ? new BoundNullableGenericValueBuilder<num>()
+        : serializers.newBuilder(specifiedType)
+            as BoundNullableGenericValueBuilder<num>;
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -813,6 +876,97 @@ class BoundGenericValueBuilder<T extends num>
         new _$BoundGenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
                 value, r'BoundGenericValue', 'value'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$BoundNullableGenericValue<T extends num?>
+    extends BoundNullableGenericValue<T> {
+  @override
+  final T value;
+
+  factory _$BoundNullableGenericValue(
+          [void Function(BoundNullableGenericValueBuilder<T>)? updates]) =>
+      (new BoundNullableGenericValueBuilder<T>()..update(updates))._build();
+
+  _$BoundNullableGenericValue._({required this.value}) : super._() {
+    if (T == dynamic) {
+      throw new BuiltValueMissingGenericsError(
+          'BoundNullableGenericValue', 'T');
+    }
+  }
+
+  @override
+  BoundNullableGenericValue<T> rebuild(
+          void Function(BoundNullableGenericValueBuilder<T>) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  BoundNullableGenericValueBuilder<T> toBuilder() =>
+      new BoundNullableGenericValueBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is BoundNullableGenericValue && value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('BoundNullableGenericValue')
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class BoundNullableGenericValueBuilder<T extends num?>
+    implements
+        Builder<BoundNullableGenericValue<T>,
+            BoundNullableGenericValueBuilder<T>> {
+  _$BoundNullableGenericValue<T>? _$v;
+
+  T? _value;
+  T? get value => _$this._value;
+  set value(T? value) => _$this._value = value;
+
+  BoundNullableGenericValueBuilder();
+
+  BoundNullableGenericValueBuilder<T> get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(BoundNullableGenericValue<T> other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$BoundNullableGenericValue<T>;
+  }
+
+  @override
+  void update(void Function(BoundNullableGenericValueBuilder<T>)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  BoundNullableGenericValue<T> build() => _build();
+
+  _$BoundNullableGenericValue<T> _build() {
+    final _$result = _$v ??
+        new _$BoundNullableGenericValue<T>._(
+            value: null is T
+                ? value as T
+                : BuiltValueNullFieldError.checkNotNull(
+                    value, 'BoundNullableGenericValue', 'value'));
     replace(_$result);
     return _$result;
   }

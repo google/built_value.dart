@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.3.1
+
+- Add support for optional generic bounds, e.g. `class Foo<T extends Object?>`.
+
 # 8.3.0
 
 - Change generated `build` methods to return only public types, creating

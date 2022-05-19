@@ -7,6 +7,7 @@ library built_value_generator.source_class;
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -158,7 +159,10 @@ abstract class ValueSourceClass
       BuiltList<String>(element.typeParameters.map((element) {
         var bound = element.bound;
         if (bound == null) return '';
-        return DartTypes.getName(bound);
+        return DartTypes.getName(bound) +
+            (element.bound!.nullabilitySuffix == NullabilitySuffix.question
+                ? '?'
+                : '');
       }));
 
   @memoized
@@ -780,7 +784,8 @@ abstract class ValueSourceClass
       }).join(', '));
       result.write('}) : super._()');
     }
-    var requiredFields = fields.where((field) => !field.isNullable);
+    var requiredFields = fields
+        .where((field) => !field.isNullable && !field.hasNullableGenericType);
     if (requiredFields.isEmpty && genericParameters.isEmpty) {
       result.writeln(';');
     } else {
@@ -1052,11 +1057,17 @@ abstract class ValueSourceClass
     // invocation of the nested builder taking into account nullability.
     var fieldBuilders = <String, String>{};
     var needsNullCheck = <String>{};
+    var genericFields = <String, String>{};
     fields.forEach((field) {
       final name = field.name;
       if (!field.isNestedBuilder) {
         fieldBuilders[name] = name;
-        if (!field.isNullable) needsNullCheck.add(name);
+        if (field.hasNullableGenericType) {
+          genericFields[name] =
+              field.element.getter!.returnType.element!.displayName;
+        } else if (!field.isNullable) {
+          needsNullCheck.add(name);
+        }
       } else if (!field.isNullable && field.isAutoCreateNestedBuilder) {
         // If not nullable, go via the public accessor, which instantiates
         // if needed provided `autoCreateNestedBuilders` is true.
@@ -1090,6 +1101,11 @@ abstract class ValueSourceClass
       if (needsNullCheck.contains(field)) {
         return '$field: BuiltValueNullFieldError.checkNotNull('
             "${fieldBuilders[field]}, r'$name', '${escapeString(field)}')";
+      } else if (genericFields.containsKey(field)) {
+        final genericType = genericFields[field];
+        return '$field: null is $genericType ? $field as $genericType : '
+            'BuiltValueNullFieldError.checkNotNull(${fieldBuilders[field]}, '
+            "r'$name', '${escapeString(field)}')";
       } else {
         return '$field: ${fieldBuilders[field]}';
       }
