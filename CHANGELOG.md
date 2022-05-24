@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.3.2
+
+- Migrate `built_value_test` to null safety.
+
 # 8.3.1
 
 - Fix generation support for optional generic bounds, e.g. 
