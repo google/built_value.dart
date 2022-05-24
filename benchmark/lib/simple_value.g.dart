@@ -16,8 +16,8 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates))._build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, 'SimpleValue', 'anInt');
-    BuiltValueNullFieldError.checkNotNull(aString, 'SimpleValue', 'aString');
+    BuiltValueNullFieldError.checkNotNull(anInt, r'SimpleValue', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(aString, r'SimpleValue', 'aString');
   }
 
   @override
@@ -42,7 +42,7 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SimpleValue')
+    return (newBuiltValueToStringHelper(r'SimpleValue')
           ..add('anInt', anInt)
           ..add('aString', aString))
         .toString();
@@ -90,9 +90,9 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
     final _$result = _$v ??
         new _$SimpleValue._(
             anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, 'SimpleValue', 'anInt'),
+                anInt, r'SimpleValue', 'anInt'),
             aString: BuiltValueNullFieldError.checkNotNull(
-                aString, 'SimpleValue', 'aString'));
+                aString, r'SimpleValue', 'aString'));
     replace(_$result);
     return _$result;
   }

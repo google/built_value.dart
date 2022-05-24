@@ -42,7 +42,7 @@ class _$Node extends Node {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Node')
+    return (newBuiltValueToStringHelper(r'Node')
           ..add('label', label)
           ..add('left', left)
           ..add('right', right))
@@ -107,7 +107,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
         _right?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'Node', _$failedField, e.toString());
+            r'Node', _$failedField, e.toString());
       }
       rethrow;
     }

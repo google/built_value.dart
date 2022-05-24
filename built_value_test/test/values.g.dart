@@ -31,13 +31,13 @@ class _$SimpleValue extends SimpleValue {
       this.aSet,
       this.setMultimap})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, 'SimpleValue', 'anInt');
-    BuiltValueNullFieldError.checkNotNull(list, 'SimpleValue', 'list');
-    BuiltValueNullFieldError.checkNotNull(multimap, 'SimpleValue', 'multimap');
-    BuiltValueNullFieldError.checkNotNull(map, 'SimpleValue', 'map');
-    BuiltValueNullFieldError.checkNotNull(aSet, 'SimpleValue', 'aSet');
+    BuiltValueNullFieldError.checkNotNull(anInt, r'SimpleValue', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(list, r'SimpleValue', 'list');
+    BuiltValueNullFieldError.checkNotNull(multimap, r'SimpleValue', 'multimap');
+    BuiltValueNullFieldError.checkNotNull(map, r'SimpleValue', 'map');
+    BuiltValueNullFieldError.checkNotNull(aSet, r'SimpleValue', 'aSet');
     BuiltValueNullFieldError.checkNotNull(
-        setMultimap, 'SimpleValue', 'setMultimap');
+        setMultimap, r'SimpleValue', 'setMultimap');
   }
 
   @override
@@ -73,7 +73,7 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SimpleValue')
+    return (newBuiltValueToStringHelper(r'SimpleValue')
           ..add('anInt', anInt)
           ..add('list', list)
           ..add('multimap', multimap)
@@ -152,7 +152,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
       _$result = _$v ??
           new _$SimpleValue._(
               anInt: BuiltValueNullFieldError.checkNotNull(
-                  anInt, 'SimpleValue', 'anInt'),
+                  anInt, r'SimpleValue', 'anInt'),
               list: list.build(),
               multimap: multimap.build(),
               map: map.build(),
@@ -173,7 +173,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
         setMultimap.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'SimpleValue', _$failedField, e.toString());
+            r'SimpleValue', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -193,7 +193,7 @@ class _$CompoundValue extends CompoundValue {
 
   _$CompoundValue._({this.simpleValue, this.string}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        simpleValue, 'CompoundValue', 'simpleValue');
+        simpleValue, r'CompoundValue', 'simpleValue');
   }
 
   @override
@@ -218,7 +218,7 @@ class _$CompoundValue extends CompoundValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('CompoundValue')
+    return (newBuiltValueToStringHelper(r'CompoundValue')
           ..add('simpleValue', simpleValue)
           ..add('string', string))
         .toString();
@@ -278,7 +278,7 @@ class CompoundValueBuilder
         simpleValue.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'CompoundValue', _$failedField, e.toString());
+            r'CompoundValue', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -297,9 +297,9 @@ class _$ComparedValue extends ComparedValue {
       (new ComparedValueBuilder()..update(updates))._build();
 
   _$ComparedValue._({this.name, this.onChanged}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, 'ComparedValue', 'name');
+    BuiltValueNullFieldError.checkNotNull(name, r'ComparedValue', 'name');
     BuiltValueNullFieldError.checkNotNull(
-        onChanged, 'ComparedValue', 'onChanged');
+        onChanged, r'ComparedValue', 'onChanged');
   }
 
   @override
@@ -322,7 +322,7 @@ class _$ComparedValue extends ComparedValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ComparedValue')
+    return (newBuiltValueToStringHelper(r'ComparedValue')
           ..add('name', name)
           ..add('onChanged', onChanged))
         .toString();
@@ -371,9 +371,9 @@ class ComparedValueBuilder
     final _$result = _$v ??
         new _$ComparedValue._(
             name: BuiltValueNullFieldError.checkNotNull(
-                name, 'ComparedValue', 'name'),
+                name, r'ComparedValue', 'name'),
             onChanged: BuiltValueNullFieldError.checkNotNull(
-                onChanged, 'ComparedValue', 'onChanged'));
+                onChanged, r'ComparedValue', 'onChanged'));
     replace(_$result);
     return _$result;
   }

@@ -24,6 +24,7 @@ class _$ValueSourceField extends ValueSourceField {
   bool? __isGetter;
   bool? __hasNullableAnnotation;
   bool? __hasNullableType;
+  bool? __hasNullableGenericType;
   bool? __isNullable;
   BuiltValueField? __builtValueField;
   bool? __builderFieldExists;
@@ -80,6 +81,10 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   bool get hasNullableType => __hasNullableType ??= super.hasNullableType;
+
+  @override
+  bool get hasNullableGenericType =>
+      __hasNullableGenericType ??= super.hasNullableGenericType;
 
   @override
   bool get isNullable => __isNullable ??= super.isNullable;

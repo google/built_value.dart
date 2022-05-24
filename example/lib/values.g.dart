@@ -316,7 +316,7 @@ class _$SimpleValue extends SimpleValue {
       (new SimpleValueBuilder()..update(updates))._build();
 
   _$SimpleValue._({this.anInt, this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, 'SimpleValue', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(anInt, r'SimpleValue', 'anInt');
   }
 
   @override
@@ -341,7 +341,7 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SimpleValue')
+    return (newBuiltValueToStringHelper(r'SimpleValue')
           ..add('anInt', anInt)
           ..add('aString', aString))
         .toString();
@@ -389,7 +389,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
     final _$result = _$v ??
         new _$SimpleValue._(
             anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, 'SimpleValue', 'anInt'),
+                anInt, r'SimpleValue', 'anInt'),
             aString: aString);
     replace(_$result);
     return _$result;
@@ -404,7 +404,7 @@ class _$VerySimpleValue extends VerySimpleValue {
       (new VerySimpleValueBuilder()..update(updates))._build();
 
   _$VerySimpleValue._({this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, 'VerySimpleValue', 'value');
+    BuiltValueNullFieldError.checkNotNull(value, r'VerySimpleValue', 'value');
   }
 
   @override
@@ -428,7 +428,8 @@ class _$VerySimpleValue extends VerySimpleValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('VerySimpleValue')..add('value', value))
+    return (newBuiltValueToStringHelper(r'VerySimpleValue')
+          ..add('value', value))
         .toString();
   }
 }
@@ -470,7 +471,7 @@ class VerySimpleValueBuilder
     final _$result = _$v ??
         new _$VerySimpleValue._(
             value: BuiltValueNullFieldError.checkNotNull(
-                value, 'VerySimpleValue', 'value'));
+                value, r'VerySimpleValue', 'value'));
     replace(_$result);
     return _$result;
   }
@@ -487,7 +488,7 @@ class _$CompoundValue extends CompoundValue {
 
   _$CompoundValue._({this.simpleValue, this.validatedValue}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        simpleValue, 'CompoundValue', 'simpleValue');
+        simpleValue, r'CompoundValue', 'simpleValue');
   }
 
   @override
@@ -512,7 +513,7 @@ class _$CompoundValue extends CompoundValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('CompoundValue')
+    return (newBuiltValueToStringHelper(r'CompoundValue')
           ..add('simpleValue', simpleValue)
           ..add('validatedValue', validatedValue))
         .toString();
@@ -577,7 +578,7 @@ class CompoundValueBuilder
         _validatedValue?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'CompoundValue', _$failedField, e.toString());
+            r'CompoundValue', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -596,7 +597,7 @@ class _$ValidatedValue extends ValidatedValue {
       (new ValidatedValueBuilder()..update(updates))._build();
 
   _$ValidatedValue._({this.anInt, this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, 'ValidatedValue', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(anInt, r'ValidatedValue', 'anInt');
   }
 
   @override
@@ -622,7 +623,7 @@ class _$ValidatedValue extends ValidatedValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ValidatedValue')
+    return (newBuiltValueToStringHelper(r'ValidatedValue')
           ..add('anInt', anInt)
           ..add('aString', aString))
         .toString();
@@ -671,7 +672,7 @@ class ValidatedValueBuilder
     final _$result = _$v ??
         new _$ValidatedValue._(
             anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, 'ValidatedValue', 'anInt'),
+                anInt, r'ValidatedValue', 'anInt'),
             aString: aString);
     replace(_$result);
     return _$result;
@@ -688,7 +689,7 @@ class _$ValueWithCode extends ValueWithCode {
       (new ValueWithCodeBuilder()..update(updates))._build();
 
   _$ValueWithCode._({this.anInt, this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, 'ValueWithCode', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithCode', 'anInt');
   }
 
   @override
@@ -713,7 +714,7 @@ class _$ValueWithCode extends ValueWithCode {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ValueWithCode')
+    return (newBuiltValueToStringHelper(r'ValueWithCode')
           ..add('anInt', anInt)
           ..add('aString', aString))
         .toString();
@@ -762,7 +763,7 @@ class ValueWithCodeBuilder
     final _$result = _$v ??
         new _$ValueWithCode._(
             anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, 'ValueWithCode', 'anInt'),
+                anInt, r'ValueWithCode', 'anInt'),
             aString: aString);
     replace(_$result);
     return _$result;
@@ -781,7 +782,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
           as _$ValueWithDefaults;
 
   _$ValueWithDefaults._({this.anInt, this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, 'ValueWithDefaults', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithDefaults', 'anInt');
   }
 
   @override
@@ -807,7 +808,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ValueWithDefaults')
+    return (newBuiltValueToStringHelper(r'ValueWithDefaults')
           ..add('anInt', anInt)
           ..add('aString', aString))
         .toString();
@@ -871,7 +872,7 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
     final _$result = _$v ??
         new _$ValueWithDefaults._(
             anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, 'ValueWithDefaults', 'anInt'),
+                anInt, r'ValueWithDefaults', 'anInt'),
             aString: aString);
     replace(_$result);
     return _$result;
@@ -888,7 +889,7 @@ class _$DerivedValue extends DerivedValue {
       (new DerivedValueBuilder()..update(updates))._build();
 
   _$DerivedValue._({this.anInt}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, 'DerivedValue', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(anInt, r'DerivedValue', 'anInt');
   }
 
   @override
@@ -917,7 +918,7 @@ class _$DerivedValue extends DerivedValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('DerivedValue')..add('anInt', anInt))
+    return (newBuiltValueToStringHelper(r'DerivedValue')..add('anInt', anInt))
         .toString();
   }
 }
@@ -959,7 +960,7 @@ class DerivedValueBuilder
     final _$result = _$v ??
         new _$DerivedValue._(
             anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, 'DerivedValue', 'anInt'));
+                anInt, r'DerivedValue', 'anInt'));
     replace(_$result);
     return _$result;
   }
@@ -977,9 +978,9 @@ class _$Account extends Account {
       (new AccountBuilder()..update(updates))._build();
 
   _$Account._({this.id, this.name, this.keyValues}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, 'Account', 'id');
-    BuiltValueNullFieldError.checkNotNull(name, 'Account', 'name');
-    BuiltValueNullFieldError.checkNotNull(keyValues, 'Account', 'keyValues');
+    BuiltValueNullFieldError.checkNotNull(id, r'Account', 'id');
+    BuiltValueNullFieldError.checkNotNull(name, r'Account', 'name');
+    BuiltValueNullFieldError.checkNotNull(keyValues, r'Account', 'keyValues');
   }
 
   @override
@@ -1006,7 +1007,7 @@ class _$Account extends Account {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Account')
+    return (newBuiltValueToStringHelper(r'Account')
           ..add('id', id)
           ..add('name', name)
           ..add('keyValues', keyValues))
@@ -1063,9 +1064,9 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
     try {
       _$result = _$v ??
           new _$Account._(
-              id: BuiltValueNullFieldError.checkNotNull(id, 'Account', 'id'),
+              id: BuiltValueNullFieldError.checkNotNull(id, r'Account', 'id'),
               name: BuiltValueNullFieldError.checkNotNull(
-                  name, 'Account', 'name'),
+                  name, r'Account', 'name'),
               keyValues: keyValues.build());
     } catch (_) {
       String _$failedField;
@@ -1074,7 +1075,7 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
         keyValues.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'Account', _$failedField, e.toString());
+            r'Account', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -1091,7 +1092,7 @@ class _$WireNameValue extends WireNameValue {
       (new WireNameValueBuilder()..update(updates))._build();
 
   _$WireNameValue._({this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, 'WireNameValue', 'value');
+    BuiltValueNullFieldError.checkNotNull(value, r'WireNameValue', 'value');
   }
 
   @override
@@ -1114,7 +1115,7 @@ class _$WireNameValue extends WireNameValue {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('WireNameValue')..add('value', value))
+    return (newBuiltValueToStringHelper(r'WireNameValue')..add('value', value))
         .toString();
   }
 }
@@ -1156,7 +1157,7 @@ class WireNameValueBuilder
     final _$result = _$v ??
         new _$WireNameValue._(
             value: BuiltValueNullFieldError.checkNotNull(
-                value, 'WireNameValue', 'value'));
+                value, r'WireNameValue', 'value'));
     replace(_$result);
     return _$result;
   }

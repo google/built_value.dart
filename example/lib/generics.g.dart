@@ -263,9 +263,9 @@ class _$GenericValue<T> extends GenericValue<T> {
       (new GenericValueBuilder<T>()..update(updates))._build();
 
   _$GenericValue._({this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, 'GenericValue', 'value');
+    BuiltValueNullFieldError.checkNotNull(value, r'GenericValue', 'value');
     if (T == dynamic) {
-      throw new BuiltValueMissingGenericsError('GenericValue', 'T');
+      throw new BuiltValueMissingGenericsError(r'GenericValue', 'T');
     }
   }
 
@@ -290,7 +290,7 @@ class _$GenericValue<T> extends GenericValue<T> {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GenericValue')..add('value', value))
+    return (newBuiltValueToStringHelper(r'GenericValue')..add('value', value))
         .toString();
   }
 }
@@ -332,7 +332,7 @@ class GenericValueBuilder<T>
     final _$result = _$v ??
         new _$GenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
-                value, 'GenericValue', 'value'));
+                value, r'GenericValue', 'value'));
     replace(_$result);
     return _$result;
   }
@@ -347,9 +347,9 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
       (new BoundGenericValueBuilder<T>()..update(updates))._build();
 
   _$BoundGenericValue._({this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, 'BoundGenericValue', 'value');
+    BuiltValueNullFieldError.checkNotNull(value, r'BoundGenericValue', 'value');
     if (T == dynamic) {
-      throw new BuiltValueMissingGenericsError('BoundGenericValue', 'T');
+      throw new BuiltValueMissingGenericsError(r'BoundGenericValue', 'T');
     }
   }
 
@@ -375,7 +375,7 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('BoundGenericValue')
+    return (newBuiltValueToStringHelper(r'BoundGenericValue')
           ..add('value', value))
         .toString();
   }
@@ -418,7 +418,7 @@ class BoundGenericValueBuilder<T extends num>
     final _$result = _$v ??
         new _$BoundGenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
-                value, 'BoundGenericValue', 'value'));
+                value, r'BoundGenericValue', 'value'));
     replace(_$result);
     return _$result;
   }
@@ -434,9 +434,9 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
 
   _$CollectionGenericValue._({this.values}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        values, 'CollectionGenericValue', 'values');
+        values, r'CollectionGenericValue', 'values');
     if (T == dynamic) {
-      throw new BuiltValueMissingGenericsError('CollectionGenericValue', 'T');
+      throw new BuiltValueMissingGenericsError(r'CollectionGenericValue', 'T');
     }
   }
 
@@ -462,7 +462,7 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('CollectionGenericValue')
+    return (newBuiltValueToStringHelper(r'CollectionGenericValue')
           ..add('values', values))
         .toString();
   }
@@ -514,7 +514,7 @@ class CollectionGenericValueBuilder<T>
         values.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'CollectionGenericValue', _$failedField, e.toString());
+            r'CollectionGenericValue', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -539,11 +539,11 @@ class _$GenericContainer extends GenericContainer {
       {this.genericValue, this.boundGenericValue, this.collectionGenericValue})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        genericValue, 'GenericContainer', 'genericValue');
+        genericValue, r'GenericContainer', 'genericValue');
     BuiltValueNullFieldError.checkNotNull(
-        boundGenericValue, 'GenericContainer', 'boundGenericValue');
+        boundGenericValue, r'GenericContainer', 'boundGenericValue');
     BuiltValueNullFieldError.checkNotNull(
-        collectionGenericValue, 'GenericContainer', 'collectionGenericValue');
+        collectionGenericValue, r'GenericContainer', 'collectionGenericValue');
   }
 
   @override
@@ -572,7 +572,7 @@ class _$GenericContainer extends GenericContainer {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GenericContainer')
+    return (newBuiltValueToStringHelper(r'GenericContainer')
           ..add('genericValue', genericValue)
           ..add('boundGenericValue', boundGenericValue)
           ..add('collectionGenericValue', collectionGenericValue))
@@ -650,7 +650,7 @@ class GenericContainerBuilder
         collectionGenericValue.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'GenericContainer', _$failedField, e.toString());
+            r'GenericContainer', _$failedField, e.toString());
       }
       rethrow;
     }
