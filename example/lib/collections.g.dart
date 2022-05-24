@@ -192,13 +192,13 @@ class _$Collections extends Collections {
       this.nullableListMultimap,
       this.nullableSetMultimap})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(list, 'Collections', 'list');
-    BuiltValueNullFieldError.checkNotNull(set, 'Collections', 'set');
-    BuiltValueNullFieldError.checkNotNull(map, 'Collections', 'map');
+    BuiltValueNullFieldError.checkNotNull(list, r'Collections', 'list');
+    BuiltValueNullFieldError.checkNotNull(set, r'Collections', 'set');
+    BuiltValueNullFieldError.checkNotNull(map, r'Collections', 'map');
     BuiltValueNullFieldError.checkNotNull(
-        listMultimap, 'Collections', 'listMultimap');
+        listMultimap, r'Collections', 'listMultimap');
     BuiltValueNullFieldError.checkNotNull(
-        setMultimap, 'Collections', 'setMultimap');
+        setMultimap, r'Collections', 'setMultimap');
   }
 
   @override
@@ -246,7 +246,7 @@ class _$Collections extends Collections {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Collections')
+    return (newBuiltValueToStringHelper(r'Collections')
           ..add('list', list)
           ..add('set', set)
           ..add('map', map)
@@ -395,7 +395,7 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
         _nullableSetMultimap?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'Collections', _$failedField, e.toString());
+            r'Collections', _$failedField, e.toString());
       }
       rethrow;
     }

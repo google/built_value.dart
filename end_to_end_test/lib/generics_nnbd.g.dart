@@ -893,7 +893,7 @@ class _$BoundNullableGenericValue<T extends num?>
   _$BoundNullableGenericValue._({required this.value}) : super._() {
     if (T == dynamic) {
       throw new BuiltValueMissingGenericsError(
-          'BoundNullableGenericValue', 'T');
+          r'BoundNullableGenericValue', 'T');
     }
   }
 
@@ -919,7 +919,7 @@ class _$BoundNullableGenericValue<T extends num?>
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('BoundNullableGenericValue')
+    return (newBuiltValueToStringHelper(r'BoundNullableGenericValue')
           ..add('value', value))
         .toString();
   }
@@ -966,7 +966,7 @@ class BoundNullableGenericValueBuilder<T extends num?>
             value: null is T
                 ? value as T
                 : BuiltValueNullFieldError.checkNotNull(
-                    value, 'BoundNullableGenericValue', 'value'));
+                    value, r'BoundNullableGenericValue', 'value'));
     replace(_$result);
     return _$result;
   }

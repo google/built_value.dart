@@ -106,8 +106,8 @@ class _$ValueWithInt extends ValueWithInt {
       (new ValueWithIntBuilder()..update(updates)).build() as _$ValueWithInt;
 
   _$ValueWithInt._({this.anInt, this.note}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, 'ValueWithInt', 'anInt');
-    BuiltValueNullFieldError.checkNotNull(note, 'ValueWithInt', 'note');
+    BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithInt', 'anInt');
+    BuiltValueNullFieldError.checkNotNull(note, r'ValueWithInt', 'note');
   }
 
   @override
@@ -131,7 +131,7 @@ class _$ValueWithInt extends ValueWithInt {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ValueWithInt')
+    return (newBuiltValueToStringHelper(r'ValueWithInt')
           ..add('anInt', anInt)
           ..add('note', note))
         .toString();
@@ -195,9 +195,9 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
     final _$result = _$v ??
         new _$ValueWithInt._(
             anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, 'ValueWithInt', 'anInt'),
+                anInt, r'ValueWithInt', 'anInt'),
             note: BuiltValueNullFieldError.checkNotNull(
-                note, 'ValueWithInt', 'note'));
+                note, r'ValueWithInt', 'note'));
     replace(_$result);
     return _$result;
   }

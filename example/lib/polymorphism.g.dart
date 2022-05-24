@@ -116,8 +116,8 @@ class _$Cat extends Cat {
       (new CatBuilder()..update(updates))._build();
 
   _$Cat._({this.tail, this.legs}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(tail, 'Cat', 'tail');
-    BuiltValueNullFieldError.checkNotNull(legs, 'Cat', 'legs');
+    BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail');
+    BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs');
   }
 
   @override
@@ -140,7 +140,7 @@ class _$Cat extends Cat {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Cat')
+    return (newBuiltValueToStringHelper(r'Cat')
           ..add('tail', tail)
           ..add('legs', legs))
         .toString();
@@ -187,8 +187,8 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   _$Cat _build() {
     final _$result = _$v ??
         new _$Cat._(
-            tail: BuiltValueNullFieldError.checkNotNull(tail, 'Cat', 'tail'),
-            legs: BuiltValueNullFieldError.checkNotNull(legs, 'Cat', 'legs'));
+            tail: BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail'),
+            legs: BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs'));
     replace(_$result);
     return _$result;
   }
@@ -204,8 +204,8 @@ class _$Fish extends Fish {
       (new FishBuilder()..update(updates))._build();
 
   _$Fish._({this.fins, this.legs}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(fins, 'Fish', 'fins');
-    BuiltValueNullFieldError.checkNotNull(legs, 'Fish', 'legs');
+    BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins');
+    BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs');
   }
 
   @override
@@ -228,7 +228,7 @@ class _$Fish extends Fish {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Fish')
+    return (newBuiltValueToStringHelper(r'Fish')
           ..add('fins', fins)
           ..add('legs', legs))
         .toString();
@@ -275,8 +275,8 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   _$Fish _build() {
     final _$result = _$v ??
         new _$Fish._(
-            fins: BuiltValueNullFieldError.checkNotNull(fins, 'Fish', 'fins'),
-            legs: BuiltValueNullFieldError.checkNotNull(legs, 'Fish', 'legs'));
+            fins: BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins'),
+            legs: BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs'));
     replace(_$result);
     return _$result;
   }

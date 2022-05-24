@@ -54,13 +54,16 @@ abstract class BoundGenericValue<T extends num>
 }
 
 abstract class BoundNullableGenericValue<T extends num?>
-    implements Built<BoundNullableGenericValue<T>, BoundNullableGenericValueBuilder<T>> {
+    implements
+        Built<BoundNullableGenericValue<T>,
+            BoundNullableGenericValueBuilder<T>> {
   static Serializer<BoundNullableGenericValue> get serializer =>
       _$boundNullableGenericValueSerializer;
 
   T get value;
 
-  factory BoundNullableGenericValue([Function(BoundNullableGenericValueBuilder<T>) updates]) =
+  factory BoundNullableGenericValue(
+          [Function(BoundNullableGenericValueBuilder<T>) updates]) =
       _$BoundNullableGenericValue<T>;
   BoundNullableGenericValue._();
 }
