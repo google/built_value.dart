@@ -2,7 +2,10 @@
 
 # 8.3.1
 
-- Add support for optional generic bounds, e.g. `class Foo<T extends Object?>`.
+- Fix generation support for optional generic bounds, e.g. 
+  `class Foo<T extends Object?>`.
+- Fix generation for classes with names starting `$`.
+- Ignore lint `unnecessary_lambdas` in generated code.
 
 # 8.3.0
 
@@ -13,7 +16,6 @@
   code.
 - Migrated `built_value_generator` to null safety. This is purely an internal
   change, the generator can still generate legacy code as and when needed.
-- fixed generation for classes that started with `$` 
 
 # 8.2.3
 

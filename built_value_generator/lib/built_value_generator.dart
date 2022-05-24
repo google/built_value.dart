@@ -91,7 +91,8 @@ class BuiltValueGenerator extends Generator {
           'sort_constructors_first,'
           'test_types_in_equals,'
           'unnecessary_const,'
-          'unnecessary_new';
+          'unnecessary_new,'
+          'unnecessary_lambdas';
     } else {
       return null;
     }
