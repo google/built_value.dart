@@ -24,8 +24,7 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
 abstract class CompoundValue
     implements Built<CompoundValue, CompoundValueBuilder> {
   SimpleValue get simpleValue;
-  @nullable
-  String get string;
+  String? get string;
 
   factory CompoundValue([Function(CompoundValueBuilder) updates]) =
       _$CompoundValue;

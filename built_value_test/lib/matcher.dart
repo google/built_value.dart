@@ -46,7 +46,7 @@ class _BuiltValueMatcher implements Matcher {
 }
 
 /// Converts a Built to a map.
-Map<String, Object> _toMap(Object built) {
+Map<String, Object?> _toMap(Object? built) {
   // Save the current newBuiltValueToStringHelper so we can restore it on
   // return.
   final previousNewBuiltValueToStringHelper = newBuiltValueToStringHelper;
@@ -72,10 +72,10 @@ Map<String, Object> _toMap(Object built) {
 
 /// Captures values in a Map instead of converting to a String.
 class _CapturingToStringHelper implements BuiltValueToStringHelper {
-  final Map<String, Object> map = <String, Object>{};
+  final Map<String, Object?> map = <String, Object?>{};
 
   @override
-  void add(String field, Object value) {
+  void add(String field, Object? value) {
     if (value is Built) {
       map[field] = _toMap(value);
     } else if (value is BuiltList) {
