@@ -9,7 +9,7 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  built_collection: ^5.0.0
+  built_collection: ^5.0.0 
   collection: ^1.15.0
   fixnum: ^1.0.0
   meta: ^1.3.0
