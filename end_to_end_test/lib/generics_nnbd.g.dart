@@ -109,7 +109,13 @@ class _$BoundGenericValueSerializer
       'value',
       serializers.serialize(object.value, specifiedType: parameterT),
     ];
-
+    Object? value;
+    value = object.nullableValue;
+    if (value != null) {
+      result
+        ..add('nullableValue')
+        ..add(serializers.serialize(value, specifiedType: parameterT));
+    }
     return result;
   }
 
@@ -137,6 +143,10 @@ class _$BoundGenericValueSerializer
         case 'value':
           result.value =
               serializers.deserialize(value, specifiedType: parameterT)! as num;
+          break;
+        case 'nullableValue':
+          result.nullableValue =
+              serializers.deserialize(value, specifiedType: parameterT) as num?;
           break;
       }
     }
@@ -798,12 +808,14 @@ class InitializeGenericValueBuilder<T>
 class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
   @override
   final T value;
+  @override
+  final T? nullableValue;
 
   factory _$BoundGenericValue(
           [void Function(BoundGenericValueBuilder<T>)? updates]) =>
       (new BoundGenericValueBuilder<T>()..update(updates))._build();
 
-  _$BoundGenericValue._({required this.value}) : super._() {
+  _$BoundGenericValue._({required this.value, this.nullableValue}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, r'BoundGenericValue', 'value');
     if (T == dynamic) {
       throw new BuiltValueMissingGenericsError(r'BoundGenericValue', 'T');
@@ -822,18 +834,21 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is BoundGenericValue && value == other.value;
+    return other is BoundGenericValue &&
+        value == other.value &&
+        nullableValue == other.nullableValue;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    return $jf($jc($jc(0, value.hashCode), nullableValue.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'BoundGenericValue')
-          ..add('value', value))
+          ..add('value', value)
+          ..add('nullableValue', nullableValue))
         .toString();
   }
 }
@@ -846,12 +861,17 @@ class BoundGenericValueBuilder<T extends num>
   T? get value => _$this._value;
   set value(T? value) => _$this._value = value;
 
+  T? _nullableValue;
+  T? get nullableValue => _$this._nullableValue;
+  set nullableValue(T? nullableValue) => _$this._nullableValue = nullableValue;
+
   BoundGenericValueBuilder();
 
   BoundGenericValueBuilder<T> get _$this {
     final $v = _$v;
     if ($v != null) {
       _value = $v.value;
+      _nullableValue = $v.nullableValue;
       _$v = null;
     }
     return this;
@@ -875,7 +895,8 @@ class BoundGenericValueBuilder<T extends num>
     final _$result = _$v ??
         new _$BoundGenericValue<T>._(
             value: BuiltValueNullFieldError.checkNotNull(
-                value, r'BoundGenericValue', 'value'));
+                value, r'BoundGenericValue', 'value'),
+            nullableValue: nullableValue);
     replace(_$result);
     return _$result;
   }

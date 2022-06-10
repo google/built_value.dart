@@ -47,6 +47,7 @@ abstract class BoundGenericValue<T extends num>
       _$boundGenericValueSerializer;
 
   T get value;
+  T? get nullableValue;
 
   factory BoundGenericValue([Function(BoundGenericValueBuilder<T>) updates]) =
       _$BoundGenericValue<T>;

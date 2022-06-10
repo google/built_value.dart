@@ -64,6 +64,9 @@ void main() {
   group('BoundGenericValue', () {
     test('can be instantiated', () {
       BoundGenericValue<int>((b) => b.value = 0);
+      BoundGenericValue<int>((b) => b
+        ..value = 0
+        ..nullableValue = 1);
     });
   });
 

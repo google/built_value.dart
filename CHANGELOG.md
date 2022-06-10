@@ -1,5 +1,7 @@
 # Changelog
 
+- Fix erroneously generated null check for fields with generic bounds.
+
 # 8.3.2
 
 - Migrate `built_value_test` to null safety.
