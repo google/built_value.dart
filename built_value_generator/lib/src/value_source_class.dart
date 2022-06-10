@@ -1099,16 +1099,16 @@ abstract class ValueSourceClass
     result.writeln('new $implName$_generics._(');
     result.write(fieldBuilders.keys.map((field) {
       if (needsNullCheck.contains(field)) {
+        if (genericFields.containsKey(field)) {
+         final genericType = genericFields[field];
+          return '$field: null is $genericType ? $field as $genericType : '
+              'BuiltValueNullFieldError.checkNotNull(${fieldBuilders[field]}, '
+              "r'$name', '${escapeString(field)}')";
+        }
         return '$field: BuiltValueNullFieldError.checkNotNull('
             "${fieldBuilders[field]}, r'$name', '${escapeString(field)}')";
-      } else if (genericFields.containsKey(field)) {
-        final genericType = genericFields[field];
-        return '$field: null is $genericType ? $field as $genericType : '
-            'BuiltValueNullFieldError.checkNotNull(${fieldBuilders[field]}, '
-            "r'$name', '${escapeString(field)}')";
-      } else {
-        return '$field: ${fieldBuilders[field]}';
       }
+      return '$field: ${fieldBuilders[field]}';
     }).join(','));
     result.writeln(');');
 
