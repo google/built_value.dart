@@ -982,12 +982,7 @@ class BoundNullableGenericValueBuilder<T extends num?>
   BoundNullableGenericValue<T> build() => _build();
 
   _$BoundNullableGenericValue<T> _build() {
-    final _$result = _$v ??
-        new _$BoundNullableGenericValue<T>._(
-            value: null is T
-                ? value as T
-                : BuiltValueNullFieldError.checkNotNull(
-                    value, r'BoundNullableGenericValue', 'value'));
+    final _$result = _$v ?? new _$BoundNullableGenericValue<T>._(value: value);
     replace(_$result);
     return _$result;
   }
