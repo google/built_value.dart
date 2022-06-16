@@ -1100,7 +1100,7 @@ abstract class ValueSourceClass
     result.write(fieldBuilders.keys.map((field) {
       if (needsNullCheck.contains(field)) {
         if (genericFields.containsKey(field)) {
-         final genericType = genericFields[field];
+          final genericType = genericFields[field];
           return '$field: null is $genericType ? $field as $genericType : '
               'BuiltValueNullFieldError.checkNotNull(${fieldBuilders[field]}, '
               "r'$name', '${escapeString(field)}')";
