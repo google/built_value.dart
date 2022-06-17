@@ -72,10 +72,15 @@ void main() {
 
   group('BoundNullableGenericValue', () {
     test('can be instantiated', () {
-      BoundNullableGenericValue<int>((b) => b.value = 3);
+      BoundNullableGenericValue<int>((b) => b.value = 1);
+      BoundNullableGenericValue<int>((b) => b
+        ..value = 1
+        ..nullableValue = 2);
       BoundNullableGenericValue<int?>();
-      BoundNullableGenericValue<int?>((b) => b.value = null);
-      BoundNullableGenericValue<int?>((b) => b.value = 3);
+      BoundNullableGenericValue<int?>((b) => b.value = 1);
+      BoundNullableGenericValue<int?>((b) => b
+        ..value = 1
+        ..nullableValue = 2);
     });
 
     test('throws on null for non-nullable fields on build', () {

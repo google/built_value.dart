@@ -1062,11 +1062,12 @@ abstract class ValueSourceClass
       final name = field.name;
       if (!field.isNestedBuilder) {
         fieldBuilders[name] = name;
+        if (!field.isNullable) {
+          needsNullCheck.add(name);
+        }
         if (field.hasNullableGenericType) {
           genericFields[name] =
               field.element.getter!.returnType.element!.displayName;
-        } else if (!field.isNullable) {
-          needsNullCheck.add(name);
         }
       } else if (!field.isNullable && field.isAutoCreateNestedBuilder) {
         // If not nullable, go via the public accessor, which instantiates
@@ -1098,17 +1099,18 @@ abstract class ValueSourceClass
     result.writeln('_\$result = _\$v ?? ');
     result.writeln('new $implName$_generics._(');
     result.write(fieldBuilders.keys.map((field) {
+      final fieldBuilder = fieldBuilders[field];
       if (needsNullCheck.contains(field)) {
         if (genericFields.containsKey(field)) {
           final genericType = genericFields[field];
-          return '$field: null is $genericType ? $field as $genericType : '
-              'BuiltValueNullFieldError.checkNotNull(${fieldBuilders[field]}, '
-              "r'$name', '${escapeString(field)}')";
+          return '$field: null is $genericType ? $fieldBuilder as $genericType '
+              ': BuiltValueNullFieldError.checkNotNull($fieldBuilder'
+              ", r'$name', '${escapeString(field)}')";
         }
-        return '$field: BuiltValueNullFieldError.checkNotNull('
-            "${fieldBuilders[field]}, r'$name', '${escapeString(field)}')";
+        return '$field: BuiltValueNullFieldError.checkNotNull($fieldBuilder, '
+            "r'$name', '${escapeString(field)}')";
       }
-      return '$field: ${fieldBuilders[field]}';
+      return '$field: $fieldBuilder';
     }).join(','));
     result.writeln(');');
 
