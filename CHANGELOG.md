@@ -1,5 +1,7 @@
 # Changelog
 
+# 8.3.3
+
 - Fix erroneously generated null check for fields with generic bounds.
 
 # 8.3.2
