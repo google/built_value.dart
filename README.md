@@ -105,9 +105,9 @@ class.
 ### Generating boilerplate for Value Types
 
 Value types require a bit of boilerplate in order to connect it to generated
-code. Luckily, even this bit of boilerplate can be got automated using code
+code. Luckily, even this bit of boilerplate can be automated using code
 snippets support in your favourite text editor. For example, in IntelliJ you
-can use following live template:
+can use the following live template:
 
 ```dart
 abstract class $CLASS_NAME$ implements Built<$CLASS_NAME$, $CLASS_NAME$Builder> {
@@ -116,8 +116,8 @@ abstract class $CLASS_NAME$ implements Built<$CLASS_NAME$, $CLASS_NAME$Builder> 
 }
 ```
 
-Using this template you would only have to manually enter a name of your data
-class name which is something that can't be automated.
+Using this template, you would only have to manually enter a name for your data
+class, which is something that can't be automated.
 
 ## Enum Class
 
