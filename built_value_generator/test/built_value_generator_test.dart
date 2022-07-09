@@ -636,7 +636,8 @@ abstract class Value implements Built<Value, ValueBuilder> {
 }'''), contains('1. Make field _foo public; remove the underscore.'));
       });
 
-      test('builder fields must be normal fields', () async {
+      test('builder fields must be normal fields or getter/setter pairs',
+          () async {
         expect(
             await generate('''library value;
 import 'package:built_value/built_value.dart';
@@ -653,6 +654,26 @@ abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
 }'''),
             contains('1. Make builder field foo a normal field or a '
                 'getter/setter pair.'));
+      });
+
+      test('builder field getter/setter pairs must both be abstract or defined',
+          () async {
+        expect(await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  int get foo;
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+}
+abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
+  int get foo;
+  set foo(int value) {
+    print('hi');
+  }
+  ValueBuilder._();
+  factory ValueBuilder() = _\$ValueBuilder;
+}'''), contains('1. Explicit getter/setter pair must both be defined.'));
       });
 
       test('builder fields must be in sync', () async {

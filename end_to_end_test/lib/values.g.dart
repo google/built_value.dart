@@ -4881,10 +4881,10 @@ class ValueWithOnSetBuilder
     implements Builder<ValueWithOnSet, ValueWithOnSetBuilder> {
   _$ValueWithOnSet _$v;
 
-  void Function() onSet = () {};
-
   int _value;
   int get value => _$this._value;
+  void Function() onSet = () {};
+
   set value(int value) {
     _$this._value = value;
     onSet();

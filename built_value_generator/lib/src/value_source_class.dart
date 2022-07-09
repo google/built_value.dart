@@ -889,83 +889,84 @@ abstract class ValueSourceClass
     result.writeln('$implName$_generics$orNull _\$v;');
     result.writeln('');
 
-    if (hasBuilder) {
-      for (var field in fields) {
-        final type = field.typeInCompilationUnit(compilationUnit);
-        final typeInBuilder = field.builderElementTypeWithPrefix;
-        final name = field.name;
+    for (var field in fields) {
+      late final String type;
 
-        var maybeOrNull = field.builderElementTypeIsNullable ? orNull : '';
-        if (field.isNestedBuilder) {
-          result.writeln('@override');
-          result.writeln('$typeInBuilder get $name {'
-              '_\$this;');
-          if (field.isAutoCreateNestedBuilder &&
-              (field.builderElementTypeIsNullable || !isNonNullByDefault)) {
-            result.writeln('return super.$name ??= new $typeInBuilder();');
-          } else {
-            result.writeln('return super.$name;');
-          }
-          result.writeln('}');
-          result.writeln('@override');
-          result.writeln('set $name($typeInBuilder$maybeOrNull $name) {'
-              '_\$this;'
-              'super.$name = $name;'
-              '}');
-        } else {
-          result.writeln('@override');
-          result.writeln('$typeInBuilder$maybeOrNull get $name {'
-              '_\$this;'
-              'return super.$name;'
-              '}');
-          result.writeln('@override');
-          result.writeln('set $name($type$maybeOrNull $name) {'
-              '_\$this;'
-              'super.$name = $name;'
-              '}');
-        }
-        result.writeln();
+      if (field.isNestedBuilder) {
+        type = hasBuilder
+            ? field.builderElementTypeWithPrefix
+            : field.typeInBuilder(compilationUnit)!;
+      } else {
+        type = field.typeInCompilationUnit(compilationUnit);
       }
-    } else {
-      if (settings.generateBuilderOnSetField) {
+
+      final name = field.name;
+
+      final isNullableNestedBuilder = field.isAutoCreateNestedBuilder &&
+          field.isNestedBuilder &&
+          (!hasBuilder ||
+              field.builderElementSetterIsNullable ||
+              !isNonNullByDefault);
+      final hasNullableSetter = !hasBuilder ||
+          isNullableNestedBuilder ||
+          field.builderElementSetterIsNullable;
+      final getterMaybeOrNull = hasNullableSetter &&
+              (!field.isNestedBuilder || !field.isAutoCreateNestedBuilder)
+          ? orNull
+          : '';
+      final setterMaybeOrNull = hasNullableSetter ? orNull : '';
+      final maybeLate = !hasNullableSetter ? late : '';
+
+      late String trackedVariable;
+
+      if (field.builderFieldExists && !field.builderFieldIsAbstract) {
+        trackedVariable = 'super.$name';
+      } else {
+        result.writeln('$maybeLate$type$setterMaybeOrNull _$name;');
+        trackedVariable = hasBuilder ? '_$name' : '_\$this._$name';
+      }
+
+      if (hasBuilder) result.writeln('@override');
+      result.write('$type$getterMaybeOrNull get $name ');
+      if (hasBuilder) {
+        result.writeln('{');
+        result.writeln('_\$this;');
+        result.write('return');
+      } else {
+        result.writeln('=>');
+      }
+      result.write(' $trackedVariable');
+      if (isNullableNestedBuilder) {
+        result.write('??= new $type()');
+      }
+      result.writeln(';');
+      if (hasBuilder) result.writeln('}');
+
+      final shouldGenerateOnSet =
+          !hasBuilder && settings.generateBuilderOnSetField;
+      // Add `covariant` if we're implementing one or more parent builders.
+      final maybeCovariant =
+          !hasBuilder && _implementsParentBuilder ? 'covariant ' : '';
+
+      if (shouldGenerateOnSet) {
         result.writeln('void Function() onSet = () {};');
         result.writeln();
       }
 
-      // Add `covariant` if we're implementing one or more parent builders.
-      var maybeCovariant = _implementsParentBuilder ? 'covariant ' : '';
-      for (var field in fields) {
-        var type = field.typeInCompilationUnit(compilationUnit);
-        var typeInBuilder = field.typeInBuilder(compilationUnit);
-        var fieldType = field.isNestedBuilder ? typeInBuilder : type;
-        var name = field.name;
-
-        // Field.
-        result.writeln('$fieldType$orNull _$name;');
-
-        // Getter.
-        if (field.isNestedBuilder && field.isAutoCreateNestedBuilder) {
-          result.writeln('$fieldType get $name =>');
-          result.writeln('_\$this._$name ??= new $typeInBuilder();');
-        } else {
-          result.writeln('$fieldType$orNull get $name =>');
-          result.writeln('_\$this._$name;');
-        }
-
-        // Setter.
-        if (settings.generateBuilderOnSetField) {
-          result.writeln('set $name($maybeCovariant$fieldType$orNull $name) {'
-              '_\$this._$name = $name;'
-              'onSet();'
-              '}');
-        } else {
-          result.writeln('set $name($maybeCovariant$fieldType$orNull $name) =>'
-              '_\$this._$name = $name;');
-        }
-
-        result.writeln();
+      final isMultilineSetter = hasBuilder || shouldGenerateOnSet;
+      if (hasBuilder) result.writeln('@override');
+      result.write('set $name($maybeCovariant$type$setterMaybeOrNull $name) ');
+      result.writeln(isMultilineSetter ? '{' : '=>');
+      if (hasBuilder) result.writeln('_\$this;');
+      result.writeln('$trackedVariable = $name;');
+      if (shouldGenerateOnSet) {
+        result.writeln('onSet();');
       }
+      if (isMultilineSetter) result.writeln('}');
+
+      result.writeln();
     }
+
     result.writeln();
 
     if (hasBuilder) {
@@ -997,7 +998,10 @@ abstract class ValueSourceClass
       result.writeln('if (\$v != null) {');
       for (var field in fields) {
         final name = field.name;
-        final nameInBuilder = hasBuilder ? 'super.$name' : '_$name';
+        final nameInBuilder =
+            field.builderFieldExists && !field.builderFieldIsAbstract
+                ? 'super.$name'
+                : '_$name';
         if (field.isNestedBuilder) {
           var maybeOrNull = field.isNullable ? '?' : '';
           result.writeln(
@@ -1073,7 +1077,7 @@ abstract class ValueSourceClass
         // If not nullable, go via the public accessor, which instantiates
         // if needed provided `autoCreateNestedBuilders` is true.
         fieldBuilders[name] = '$name.build()';
-      } else if (hasBuilder) {
+      } else if (hasBuilder && !field.builderFieldIsAbstract) {
         // Otherwise access the private field: in super if there's a manually
         // maintained builder.
         fieldBuilders[name] = 'super.$name?.build()';
@@ -1237,9 +1241,9 @@ abstract class ValueSourceClass
     }
 
     for (var field in fields) {
-      final fieldType = field.typeInCompilationUnit(compilationUnit);
-      final typeInBuilder = field.typeInBuilder(compilationUnit);
-      var type = field.isNestedBuilder ? typeInBuilder : fieldType;
+      var type = field.isNestedBuilder
+          ? field.typeInBuilder(compilationUnit)
+          : field.typeInCompilationUnit(compilationUnit);
       final name = field.name;
 
       final autoCreatedNestedBuilder =

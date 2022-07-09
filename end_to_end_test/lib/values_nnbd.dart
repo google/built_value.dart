@@ -233,6 +233,30 @@ abstract class ExplicitNestedListBuilder
   ExplicitNestedListBuilder._();
 }
 
+abstract class ExplicitNonNullBuilderNullableSetter
+    implements
+        Built<ExplicitNonNullBuilderNullableSetter,
+            ExplicitNonNullBuilderNullableSetterBuilder> {
+  SimpleValue? get simpleValue;
+
+  factory ExplicitNonNullBuilderNullableSetter(
+      [void Function(ExplicitNonNullBuilderNullableSetterBuilder)
+          updates]) = _$ExplicitNonNullBuilderNullableSetter;
+  ExplicitNonNullBuilderNullableSetter._();
+}
+
+abstract class ExplicitNonNullBuilderNullableSetterBuilder
+    implements
+        Builder<ExplicitNonNullBuilderNullableSetter,
+            ExplicitNonNullBuilderNullableSetterBuilder> {
+  SimpleValueBuilder get simpleValue;
+  set simpleValue(SimpleValueBuilder? value);
+
+  factory ExplicitNonNullBuilderNullableSetterBuilder() =
+      _$ExplicitNonNullBuilderNullableSetterBuilder;
+  ExplicitNonNullBuilderNullableSetterBuilder._();
+}
+
 abstract class DerivedValue
     implements Built<DerivedValue, DerivedValueBuilder> {
   int get anInt;
