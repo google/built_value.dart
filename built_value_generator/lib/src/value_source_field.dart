@@ -150,20 +150,45 @@ abstract class ValueSourceField
       (builderElement!.getter != null && builderElement!.setter != null);
 
   @memoized
-  String get buildElementType {
+  bool get builderFieldIsAbstract =>
+      builderFieldExists &&
+      builderElement!.getter != null &&
+      builderElement!.getter!.isAbstract;
+
+  @memoized
+  String get _fullBuildElementType {
+    if (!builderFieldExists) return 'dynamic';
+
     // Try to get a resolved type first, it's faster.
-    var result = DartTypes.tryGetName(builderElement!.getter?.returnType);
+    var result = DartTypes.tryGetName(builderElement!.getter?.returnType,
+        withNullabilitySuffix: true);
+
     if (result != null && result != 'dynamic') return result;
     // Go via AST to allow use of unresolvable types not yet generated;
     // this includes generated Builder types.
     result = parsedLibrary
-            .getElementDeclaration(builderElement!)
-            ?.node
-            .parent
-            ?.childEntities
-            .first
-            .toString() ??
-        'dynamic';
+        .getElementDeclaration(builderElement!)
+        ?.node
+        .parent
+        ?.childEntities
+        .first
+        .toString();
+
+    if (result != null) return result;
+
+    result = builderElement!.getter != null
+        ? (parsedLibrary.getElementDeclaration(builderElement!.getter!)?.node
+                as MethodDeclaration?)
+            ?.returnType
+            .toString()
+        : null;
+
+    return result ?? 'dynamic';
+  }
+
+  @memoized
+  String get buildElementType {
+    var result = _fullBuildElementType;
     // If we went via the AST there may be an import prefix, but we don't
     // want one here. Strip it off.
     if (result.contains('.')) {
@@ -172,16 +197,43 @@ abstract class ValueSourceField
     return _removeNullabilitySuffix(result);
   }
 
-  bool get builderElementTypeIsNullable =>
-      parsedLibrary
+  bool get builderElementTypeIsNullable => _fullBuildElementType.endsWith('?');
+
+  bool get builderElementSetterIsNullable {
+    if (!builderFieldExists) return false;
+
+    // Try to get a resolved type first, it's faster.
+    var result = DartTypes.tryGetName(
+        builderElement!.setter?.parameters.first.type,
+        withNullabilitySuffix: true);
+
+    if (result == null || result == 'dynamic') {
+      // Go via AST to allow use of unresolvable types not yet generated;
+      // this includes generated Builder types.
+      result = parsedLibrary
           .getElementDeclaration(builderElement!)
           ?.node
           .parent
           ?.childEntities
           .first
-          .toString()
-          .endsWith('?') ??
-      false;
+          .toString();
+    }
+
+    if (result == null || result == 'dynamic') {
+      result = builderElement!.setter != null
+          ? (parsedLibrary.getElementDeclaration(builderElement!.setter!)?.node
+                  as MethodDeclaration?)
+              ?.parameters!
+              .parameters
+              .first
+              .childEntities
+              .first
+              .toString()
+          : null;
+    }
+
+    return result?.endsWith('?') ?? false;
+  }
 
   /// The [builderElementType] plus any import prefix.
   @memoized
@@ -301,8 +353,11 @@ abstract class ValueSourceField
     if (builderFieldExists) {
       var builderElementTypeOrNull = buildElementType;
       if (builderElementTypeIsNullable) builderElementTypeOrNull += orNull;
+      final builderType = _toBuilderType(element.type, type);
       if (builderElementTypeOrNull != type + orNull &&
-          builderElementTypeOrNull != _toBuilderType(element.type, type)) {
+          (builderType == null ||
+              (builderElementTypeOrNull != builderType &&
+                  builderElementTypeOrNull != builderType + orNull))) {
         result.add(GeneratorError((b) => b
           ..message = 'Make builder field $name have type: '
               '$type$orNull (or, if applicable, builder)'));
@@ -316,6 +371,14 @@ abstract class ValueSourceField
         ..message =
             'Make builder field $name a normal field or a getter/setter '
                 'pair.'));
+    }
+
+    if (builderFieldExists &&
+        builderFieldIsGetterSetterPair &&
+        (builderElement!.getter!.isAbstract ^
+            builderElement!.setter!.isAbstract)) {
+      result.add(GeneratorError((b) =>
+          b..message = 'Explicit getter/setter pair must both be defined.'));
     }
 
     if (settings.comparableBuilders && builtValueField.nestedBuilder == true) {

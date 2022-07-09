@@ -256,6 +256,30 @@ void main() {
     });
   });
 
+  group('ExplicitNonNullBuilderNullableSetter', () {
+    final simpleValue = SimpleValue((b) => b.anInt = 1);
+
+    test('defaults the value to null', () {
+      expect(ExplicitNonNullBuilderNullableSetter().simpleValue, isNull);
+    });
+
+    test('allows setting the value', () {
+      final value = ExplicitNonNullBuilderNullableSetter(
+          (b) => b.simpleValue.replace(simpleValue));
+
+      expect(value.simpleValue, equals(simpleValue));
+    });
+
+    test('allows setting the value to null', () {
+      var value = ExplicitNonNullBuilderNullableSetter(
+          (b) => b.simpleValue.replace(simpleValue));
+
+      value = value.rebuild((b) => b.simpleValue = null);
+
+      expect(value.simpleValue, isNull);
+    });
+  });
+
   group('DerivedValue', () {
     test('caches derivedValue', () {
       final value = DerivedValue((b) => b..anInt = 7);

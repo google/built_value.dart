@@ -3062,6 +3062,115 @@ class _$ExplicitNestedListBuilder extends ExplicitNestedListBuilder {
   }
 }
 
+class _$ExplicitNonNullBuilderNullableSetter
+    extends ExplicitNonNullBuilderNullableSetter {
+  @override
+  final SimpleValue? simpleValue;
+
+  factory _$ExplicitNonNullBuilderNullableSetter(
+          [void Function(ExplicitNonNullBuilderNullableSetterBuilder)?
+              updates]) =>
+      (new ExplicitNonNullBuilderNullableSetterBuilder()..update(updates))
+          .build() as _$ExplicitNonNullBuilderNullableSetter;
+
+  _$ExplicitNonNullBuilderNullableSetter._({this.simpleValue}) : super._();
+
+  @override
+  ExplicitNonNullBuilderNullableSetter rebuild(
+          void Function(ExplicitNonNullBuilderNullableSetterBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$ExplicitNonNullBuilderNullableSetterBuilder toBuilder() =>
+      new _$ExplicitNonNullBuilderNullableSetterBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ExplicitNonNullBuilderNullableSetter &&
+        simpleValue == other.simpleValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, simpleValue.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'ExplicitNonNullBuilderNullableSetter')
+          ..add('simpleValue', simpleValue))
+        .toString();
+  }
+}
+
+class _$ExplicitNonNullBuilderNullableSetterBuilder
+    extends ExplicitNonNullBuilderNullableSetterBuilder {
+  _$ExplicitNonNullBuilderNullableSetter? _$v;
+
+  SimpleValueBuilder? _simpleValue;
+  @override
+  SimpleValueBuilder get simpleValue {
+    _$this;
+    return _simpleValue ??= new SimpleValueBuilder();
+  }
+
+  @override
+  set simpleValue(SimpleValueBuilder? simpleValue) {
+    _$this;
+    _simpleValue = simpleValue;
+  }
+
+  _$ExplicitNonNullBuilderNullableSetterBuilder() : super._();
+
+  ExplicitNonNullBuilderNullableSetterBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _simpleValue = $v.simpleValue?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ExplicitNonNullBuilderNullableSetter other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ExplicitNonNullBuilderNullableSetter;
+  }
+
+  @override
+  void update(
+      void Function(ExplicitNonNullBuilderNullableSetterBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  ExplicitNonNullBuilderNullableSetter build() => _build();
+
+  _$ExplicitNonNullBuilderNullableSetter _build() {
+    _$ExplicitNonNullBuilderNullableSetter _$result;
+    try {
+      _$result = _$v ??
+          new _$ExplicitNonNullBuilderNullableSetter._(
+              simpleValue: _simpleValue?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        _simpleValue?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'ExplicitNonNullBuilderNullableSetter',
+            _$failedField,
+            e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$DerivedValue extends DerivedValue {
   @override
   final int anInt;
@@ -5112,10 +5221,10 @@ class ValueWithOnSetBuilder
     implements Builder<ValueWithOnSet, ValueWithOnSetBuilder> {
   _$ValueWithOnSet? _$v;
 
-  void Function() onSet = () {};
-
   int? _value;
   int? get value => _$this._value;
+  void Function() onSet = () {};
+
   set value(int? value) {
     _$this._value = value;
     onSet();

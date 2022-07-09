@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.4.0
+
+- Allow abstract getters and setters in custom builders (necessary to use autocreated nested builders in custom builders).
+
 # 8.3.3
 
 - Fix erroneously generated null check for fields with generic bounds.
