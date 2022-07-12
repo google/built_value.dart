@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.12
+// @dart=2.17
 
 part of enums_nnbd;
 

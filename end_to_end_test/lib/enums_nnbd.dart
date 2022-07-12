@@ -1,7 +1,7 @@
 // Copyright (c) 2017, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.12
+// @dart=2.17
 
 library enums_nnbd;
 
@@ -18,7 +18,7 @@ class TestEnum extends EnumClass {
   static const TestEnum no = _$no;
   static const TestEnum maybe = _$maybe;
 
-  const TestEnum._(String name) : super(name);
+  const TestEnum._(super.name);
 
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);

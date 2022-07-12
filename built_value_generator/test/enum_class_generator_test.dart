@@ -204,7 +204,8 @@ class TestEnum extends EnumClass {
       });
 
       test('with error on missing constructor', () async {
-        expect(await generate(r'''
+        expect(
+            await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -219,13 +220,16 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''),
+            endsWith(r'''Please make the following changes to use EnumClass:
 
-1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
+1. Have exactly one constructor: const TestEnum._(String name) : super(name); '''
+                'or in Dart>=2.17: const TestEnum._(super.name);'));
       });
 
       test('with error on incorrect constructor', () async {
-        expect(await generate(r'''
+        expect(
+            await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -242,13 +246,16 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''),
+            endsWith(r'''Please make the following changes to use EnumClass:
 
-1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
+1. Have exactly one constructor: const TestEnum._(String name) : super(name); '''
+                'or in Dart>=2.17: const TestEnum._(super.name);'));
       });
 
       test('with error on too many constructors', () async {
-        expect(await generate(r'''
+        expect(
+            await generate(r'''
 library test_enum;
 
 import 'package:built_value/built_value.dart';
@@ -269,9 +276,11 @@ class TestEnum extends EnumClass {
 
 abstract class BuiltSet<T> {
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''),
+            endsWith(r'''Please make the following changes to use EnumClass:
 
-1. Have exactly one constructor: const TestEnum._(String name) : super(name);'''));
+1. Have exactly one constructor: const TestEnum._(String name) : super(name); '''
+                'or in Dart>=2.17: const TestEnum._(super.name);'));
       });
 
       test('with error on missing values getter', () async {

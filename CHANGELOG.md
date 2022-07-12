@@ -3,6 +3,7 @@
 # 8.4.0
 
 - Allow abstract getters and setters in custom builders (necessary to use autocreated nested builders in custom builders).
+- Allow use of super field initialization in `EnumClass`.
 
 # 8.3.3
 
