@@ -147,12 +147,14 @@ abstract class EnumSourceClass
   Iterable<String> _checkConstructor() {
     var expectedCode =
         RegExp('const $name._\\((?:final )?String name\\) : super\\(name\\);');
+    var expectedCode217 = RegExp('const $name._\\(super.name\\);');
     return constructors.length == 1 &&
-            constructors.single.contains(expectedCode)
+            (constructors.single.contains(expectedCode) ||
+                constructors.single.contains(expectedCode217))
         ? <String>[]
         : <String>[
             'Have exactly one constructor: '
-                'const $name._(String name) : super(name);'
+                'const $name._(String name) : super(name); or in Dart>=2.17: const $name._(super.name);'
           ];
   }
 
