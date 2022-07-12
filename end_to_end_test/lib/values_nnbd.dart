@@ -257,6 +257,29 @@ abstract class ExplicitNonNullBuilderNullableSetterBuilder
   ExplicitNonNullBuilderNullableSetterBuilder._();
 }
 
+abstract class ExplicitNonNullBuilderNullableField
+    implements
+        Built<ExplicitNonNullBuilderNullableField,
+            ExplicitNonNullBuilderNullableFieldBuilder> {
+  SimpleValue? get simpleValue;
+
+  factory ExplicitNonNullBuilderNullableField(
+          [void Function(ExplicitNonNullBuilderNullableFieldBuilder) updates]) =
+      _$ExplicitNonNullBuilderNullableField;
+  ExplicitNonNullBuilderNullableField._();
+}
+
+abstract class ExplicitNonNullBuilderNullableFieldBuilder
+    implements
+        Builder<ExplicitNonNullBuilderNullableField,
+            ExplicitNonNullBuilderNullableFieldBuilder> {
+  SimpleValueBuilder? simpleValue;
+
+  factory ExplicitNonNullBuilderNullableFieldBuilder() =
+      _$ExplicitNonNullBuilderNullableFieldBuilder;
+  ExplicitNonNullBuilderNullableFieldBuilder._();
+}
+
 abstract class DerivedValue
     implements Built<DerivedValue, DerivedValueBuilder> {
   int get anInt;
