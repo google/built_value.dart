@@ -27,7 +27,3 @@ dev_dependencies:
 dependency_overrides:
   built_value:
     path: ../built_value
-
-dependency_overrides:
-  built_value:
-    path: ../built_value
