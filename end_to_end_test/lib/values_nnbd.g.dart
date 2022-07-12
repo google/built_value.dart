@@ -3171,6 +3171,114 @@ class _$ExplicitNonNullBuilderNullableSetterBuilder
   }
 }
 
+class _$ExplicitNonNullBuilderNullableField
+    extends ExplicitNonNullBuilderNullableField {
+  @override
+  final SimpleValue? simpleValue;
+
+  factory _$ExplicitNonNullBuilderNullableField(
+          [void Function(ExplicitNonNullBuilderNullableFieldBuilder)?
+              updates]) =>
+      (new ExplicitNonNullBuilderNullableFieldBuilder()..update(updates))
+          .build() as _$ExplicitNonNullBuilderNullableField;
+
+  _$ExplicitNonNullBuilderNullableField._({this.simpleValue}) : super._();
+
+  @override
+  ExplicitNonNullBuilderNullableField rebuild(
+          void Function(ExplicitNonNullBuilderNullableFieldBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$ExplicitNonNullBuilderNullableFieldBuilder toBuilder() =>
+      new _$ExplicitNonNullBuilderNullableFieldBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ExplicitNonNullBuilderNullableField &&
+        simpleValue == other.simpleValue;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, simpleValue.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'ExplicitNonNullBuilderNullableField')
+          ..add('simpleValue', simpleValue))
+        .toString();
+  }
+}
+
+class _$ExplicitNonNullBuilderNullableFieldBuilder
+    extends ExplicitNonNullBuilderNullableFieldBuilder {
+  _$ExplicitNonNullBuilderNullableField? _$v;
+
+  @override
+  SimpleValueBuilder get simpleValue {
+    _$this;
+    return super.simpleValue ??= new SimpleValueBuilder();
+  }
+
+  @override
+  set simpleValue(SimpleValueBuilder? simpleValue) {
+    _$this;
+    super.simpleValue = simpleValue;
+  }
+
+  _$ExplicitNonNullBuilderNullableFieldBuilder() : super._();
+
+  ExplicitNonNullBuilderNullableFieldBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      super.simpleValue = $v.simpleValue?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ExplicitNonNullBuilderNullableField other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ExplicitNonNullBuilderNullableField;
+  }
+
+  @override
+  void update(
+      void Function(ExplicitNonNullBuilderNullableFieldBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  ExplicitNonNullBuilderNullableField build() => _build();
+
+  _$ExplicitNonNullBuilderNullableField _build() {
+    _$ExplicitNonNullBuilderNullableField _$result;
+    try {
+      _$result = _$v ??
+          new _$ExplicitNonNullBuilderNullableField._(
+              simpleValue: super.simpleValue?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'simpleValue';
+        super.simpleValue?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'ExplicitNonNullBuilderNullableField',
+            _$failedField,
+            e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$DerivedValue extends DerivedValue {
   @override
   final int anInt;

@@ -280,6 +280,30 @@ void main() {
     });
   });
 
+  group('ExplicitNonNullBuilderNullableField', () {
+    final simpleValue = SimpleValue((b) => b.anInt = 1);
+
+    test('defaults the value to null', () {
+      expect(ExplicitNonNullBuilderNullableField().simpleValue, isNull);
+    });
+
+    test('allows setting the value', () {
+      final value = ExplicitNonNullBuilderNullableField(
+          (b) => b.simpleValue!.replace(simpleValue));
+
+      expect(value.simpleValue, equals(simpleValue));
+    });
+
+    test('allows setting the value to null', () {
+      var value = ExplicitNonNullBuilderNullableField(
+          (b) => b.simpleValue!.replace(simpleValue));
+
+      value = value.rebuild((b) => b.simpleValue = null);
+
+      expect(value.simpleValue, isNull);
+    });
+  });
+
   group('DerivedValue', () {
     test('caches derivedValue', () {
       final value = DerivedValue((b) => b..anInt = 7);
