@@ -2,7 +2,12 @@
 
 # 8.4.0
 
-- Allow abstract getters and setters in custom builders (necessary to use autocreated nested builders in custom builders).
+- Fix custom builders in null safe code: allow nested builder fields to be
+  nullable.
+- Improve custom builders for null safe code: allow abstract setter/getter
+  pairs instead of fields. This allows nested builders to have a setter that
+  accepts `null` and a getter that guarantees not to return `null`, which is
+  what auto instantiation of nested builders already provides.
 - Allow use of super field initialization in `EnumClass`.
 
 # 8.3.3
