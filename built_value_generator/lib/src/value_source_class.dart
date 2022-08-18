@@ -65,7 +65,7 @@ abstract class ValueSourceClass
 
   @memoized
   ClassElement? get builderElement {
-    var result = element.library.getType(name + 'Builder');
+    var result = element.library.getClass(name + 'Builder');
     if (result == null) return null;
     // If the builder is in a generated file, then we're analyzing _after_ code
     // generation. Ignore it. This happens when running as an analyzer plugin.
@@ -75,7 +75,7 @@ abstract class ValueSourceClass
 
   @memoized
   bool get implementsBuilt => element.allSupertypes
-      .any((interfaceType) => interfaceType.element.name == 'Built');
+      .any((interfaceType) => interfaceType.element2.name == 'Built');
 
   @memoized
   bool get extendsIsAllowed {
@@ -93,15 +93,18 @@ abstract class ValueSourceClass
 
     for (var supertype in [
       element.supertype,
-      ...element.supertype!.element.allSupertypes
+      ...element.supertype!.element2.allSupertypes
     ]) {
       if (DartTypes.tryGetName(supertype) == 'Object') continue;
 
       // Base class must be abstract.
-      if (!supertype!.element.isAbstract) return false;
+      final superElement = supertype!.element2;
+      if (superElement is! ClassElement || !superElement.isAbstract) {
+        return false;
+      }
 
       // Base class must have no fields.
-      if (supertype.element.fields
+      if (supertype.element2.fields
           .any((field) => !field.isStatic && !field.isSynthetic)) {
         return false;
       }
@@ -113,9 +116,9 @@ abstract class ValueSourceClass
       }
 
       // Base class must not implement operator==, hashCode or toString.
-      if (supertype.element.getMethod('hashCode') != null) return false;
-      if (supertype.element.getMethod('==') != null) return false;
-      if (supertype.element.getMethod('toString') != null) return false;
+      if (supertype.element2.getMethod('hashCode') != null) return false;
+      if (supertype.element2.getMethod('==') != null) return false;
+      if (supertype.element2.getMethod('toString') != null) return false;
     }
 
     return true;
@@ -213,7 +216,7 @@ abstract class ValueSourceClass
   @memoized
   String get builderParameters {
     return builderElement!.allSupertypes
-        .where((interfaceType) => interfaceType.element.name == 'Builder')
+        .where((interfaceType) => interfaceType.element2.name == 'Builder')
         .single
         .typeArguments
         .map((type) => DartTypes.getName(type))
@@ -310,7 +313,7 @@ abstract class ValueSourceClass
   BuiltList<String> get builderImplements => BuiltList<String>.build((b) => b
     ..add('Builder<$name$_generics, ${name}Builder$_generics>')
     ..addAll(element.interfaces
-        .where((interface) => needsBuiltValue(interface.element))
+        .where((interface) => needsBuiltValue(interface.element2))
         .map(_parentBuilderInterfaceName)));
 
   /// Returns the `with` clause for the builder.
@@ -319,7 +322,7 @@ abstract class ValueSourceClass
   /// the corresponding builders.
   @memoized
   BuiltList<String> get builderMixins => element.mixins
-      .where((interface) => needsBuiltValue(interface.element))
+      .where((interface) => needsBuiltValue(interface.element2))
       .map(_parentBuilderInterfaceName)
       .toBuiltList();
 
@@ -358,7 +361,7 @@ abstract class ValueSourceClass
     // Check for any `toString` implementation apart from the one defined on
     // `Object`.
     var method = element.lookUpConcreteMethod('toString', element.library)!;
-    var clazz = method.enclosingElement;
+    var clazz = method.enclosingElement3;
     return clazz is! ClassElement || clazz.name != 'Object';
   }
 
@@ -366,11 +369,11 @@ abstract class ValueSourceClass
   CompilationUnitElement get compilationUnit =>
       element.library.definingCompilationUnit;
 
-  static bool needsBuiltValue(ClassElement classElement) {
+  static bool needsBuiltValue(InterfaceElement classElement) {
     // TODO(davidmorgan): more exact type check.
     return !classElement.displayName.startsWith('_\$') &&
         (classElement.allSupertypes.any(
-                (interfaceType) => interfaceType.element.name == 'Built') ||
+                (interfaceType) => interfaceType.element2.name == 'Built') ||
             classElement.metadata
                 .map((annotation) => annotation.computeConstantValue())
                 .any((value) =>
@@ -1071,7 +1074,7 @@ abstract class ValueSourceClass
         }
         if (field.hasNullableGenericType) {
           genericFields[name] =
-              field.element.getter!.returnType.element!.displayName;
+              field.element.getter!.returnType.element2!.displayName;
         }
       } else if (!field.isNullable && field.isAutoCreateNestedBuilder) {
         // If not nullable, go via the public accessor, which instantiates
