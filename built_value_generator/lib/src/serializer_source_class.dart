@@ -31,7 +31,7 @@ abstract class SerializerSourceClass
       _$SerializerSourceClass._(
           element: element,
           builderElement:
-              element.library.getType(element.displayName + 'Builder'));
+              element.library.getClass(element.displayName + 'Builder'));
 
   SerializerSourceClass._();
 
@@ -143,7 +143,7 @@ abstract class SerializerSourceClass
   @memoized
   bool get isBuiltValue =>
       element.allSupertypes
-          .map((type) => type.element.name)
+          .map((type) => type.element2.name)
           .any((name) => name.startsWith('Built')) &&
       !element.name.startsWith(r'_$') &&
       element.fields.any((field) => field.name == 'serializer');
@@ -152,7 +152,7 @@ abstract class SerializerSourceClass
   @memoized
   bool get isEnumClass =>
       element.allSupertypes
-          .map((type) => type.element.name)
+          .map((type) => type.element2.name)
           .any((name) => name == 'EnumClass') &&
       !element.name.startsWith(r'_$') &&
       element.fields.any((field) => field.name == 'serializer');
@@ -192,19 +192,22 @@ abstract class SerializerSourceClass
       if (fieldElement.isStatic) continue;
       if (fieldElement.setter != null) continue;
 
+      final fieldType = fieldElement.type;
+      final fieldTypeElement = fieldType.element2;
+
       // Type is not fully specified, ignore.
-      if (fieldElement.type.element is! ClassElement) continue;
+      if (fieldTypeElement is! ClassElement) continue;
 
       // Also find classes used as generic parameters; for example a field
       // of type List<Foo> means we need to be able to serialize Foo.
-      if (fieldElement.type is ParameterizedType) {
-        for (var type
-            in (fieldElement.type as ParameterizedType).typeArguments) {
-          // Type is not fully specified, ignore.
-          if (type.element is! ClassElement) continue;
+      if (fieldType is ParameterizedType) {
+        for (final type in fieldType.typeArguments) {
+          final typeElement = type.element2;
 
-          final sourceClass =
-              SerializerSourceClass(type.element as ClassElement);
+          // Type is not fully specified, ignore.
+          if (typeElement is! ClassElement) continue;
+
+          final sourceClass = SerializerSourceClass(typeElement);
 
           if (sourceClass != this &&
               !result.build().contains(sourceClass) &&
@@ -215,8 +218,7 @@ abstract class SerializerSourceClass
         }
       }
 
-      final sourceClass =
-          SerializerSourceClass(fieldElement.type.element as ClassElement);
+      final sourceClass = SerializerSourceClass(fieldTypeElement);
       if (sourceClass != this &&
           !result.build().contains(sourceClass) &&
           sourceClass.isSerializable) {

@@ -122,7 +122,7 @@ abstract class SerializerSourceLibrary
       result.addValues(
           field,
           types.map(
-              (type) => SerializerSourceClass(type!.element as ClassElement)));
+              (type) => SerializerSourceClass(type!.element2 as ClassElement)));
     }
     return result.build();
   }

@@ -88,11 +88,11 @@ abstract class EnumSourceClass
   }
 
   @memoized
-  bool get usesMixin => element.library.getType(name + 'Mixin') != null;
+  bool get usesMixin => element.library.getClass(name + 'Mixin') != null;
 
   @memoized
   String? get mixinDeclaration {
-    var mixinElement = element.library.getType(name + 'Mixin');
+    var mixinElement = element.library.getClass(name + 'Mixin');
     if (mixinElement == null) return null;
     return parsedLibrary.getElementDeclaration(mixinElement)!.node.toSource();
   }
