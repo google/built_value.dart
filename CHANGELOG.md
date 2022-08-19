@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.4.1
+
+- Bump version of `analyzer`.
+
 # 8.4.0
 
 - Fix custom builders in null safe code: allow nested builder fields to be
