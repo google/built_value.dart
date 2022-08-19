@@ -47,7 +47,6 @@ for directory in $directories; do
   dart analyze \
       --fatal-warnings \
       --fatal-infos \
-      --packages="$PWD/.packages" \
       $(find bin lib test -name \*.dart 2>/dev/null)
 done
 
