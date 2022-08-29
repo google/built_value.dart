@@ -31,9 +31,9 @@ const String _importWithDoubleQuotes =
 
 abstract class ValueSourceClass
     implements Built<ValueSourceClass, ValueSourceClassBuilder> {
-  ClassElement get element;
+  InterfaceElement get element;
 
-  factory ValueSourceClass(ClassElement element) =>
+  factory ValueSourceClass(InterfaceElement element) =>
       _$ValueSourceClass._(element: element);
   ValueSourceClass._();
 
@@ -262,7 +262,10 @@ abstract class ValueSourceClass
   }
 
   @memoized
-  bool get valueClassIsAbstract => element.isAbstract;
+  bool get valueClassIsAbstract {
+    final element = this.element;
+    return element is ClassElement && element.isAbstract;
+  }
 
   @memoized
   BuiltList<ConstructorDeclaration> get valueClassConstructors =>

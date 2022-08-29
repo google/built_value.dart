@@ -286,7 +286,7 @@ abstract class ValueSourceField
   static BuiltList<ValueSourceField> fromClassElements(
       BuiltValue settings,
       ParsedLibraryResult parsedLibrary,
-      ClassElement classElement,
+      InterfaceElement classElement,
       ClassElement? builderClassElement) {
     var result = ListBuilder<ValueSourceField>();
 

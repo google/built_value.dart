@@ -21,7 +21,8 @@ abstract class MemoizedGetter
 
   bool get isNullable => nullabilitySuffix == NullabilitySuffix.question;
 
-  static Iterable<MemoizedGetter> fromClassElement(ClassElement classElement) {
+  static Iterable<MemoizedGetter> fromClassElement(
+      InterfaceElement classElement) {
     return classElement.fields
         .where((field) =>
             field.getter != null &&

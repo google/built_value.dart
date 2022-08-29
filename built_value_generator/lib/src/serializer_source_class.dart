@@ -23,11 +23,11 @@ part 'serializer_source_class.g.dart';
 
 abstract class SerializerSourceClass
     implements Built<SerializerSourceClass, SerializerSourceClassBuilder> {
-  ClassElement get element;
+  InterfaceElement get element;
 
   ClassElement? get builderElement;
 
-  factory SerializerSourceClass(ClassElement element) =>
+  factory SerializerSourceClass(InterfaceElement element) =>
       _$SerializerSourceClass._(
           element: element,
           builderElement:

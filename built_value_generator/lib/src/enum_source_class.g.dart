@@ -8,7 +8,7 @@ part of built_value_generator.enum_source_class;
 
 class _$EnumSourceClass extends EnumSourceClass {
   @override
-  final ClassElement element;
+  final InterfaceElement element;
   ParsedLibraryResult? __parsedLibrary;
   String? __name;
   String? __wireName;
@@ -119,9 +119,9 @@ class EnumSourceClassBuilder
     implements Builder<EnumSourceClass, EnumSourceClassBuilder> {
   _$EnumSourceClass? _$v;
 
-  ClassElement? _element;
-  ClassElement? get element => _$this._element;
-  set element(ClassElement? element) => _$this._element = element;
+  InterfaceElement? _element;
+  InterfaceElement? get element => _$this._element;
+  set element(InterfaceElement? element) => _$this._element = element;
 
   EnumSourceClassBuilder();
 
