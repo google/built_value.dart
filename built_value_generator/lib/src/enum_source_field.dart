@@ -61,7 +61,7 @@ abstract class EnumSourceField
   bool get isStatic => element.isStatic;
 
   static BuiltList<EnumSourceField> fromClassElement(
-      ParsedLibraryResult parsedLibrary, ClassElement classElement) {
+      ParsedLibraryResult parsedLibrary, InterfaceElement classElement) {
     var result = ListBuilder<EnumSourceField>();
 
     var enumName = classElement.displayName;

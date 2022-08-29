@@ -20,10 +20,10 @@ part 'enum_source_class.g.dart';
 
 abstract class EnumSourceClass
     implements Built<EnumSourceClass, EnumSourceClassBuilder> {
-  ClassElement get element;
+  InterfaceElement get element;
 
   factory EnumSourceClass(
-          ParsedLibraryResult parsedLibrary, ClassElement element) =>
+          ParsedLibraryResult parsedLibrary, InterfaceElement element) =>
       _$EnumSourceClass._(element: element);
   EnumSourceClass._();
 
@@ -50,7 +50,10 @@ abstract class EnumSourceClass
   }
 
   @memoized
-  bool get isAbstract => element.isAbstract;
+  bool get isAbstract {
+    final element = this.element;
+    return element is ClassElement && element.isAbstract;
+  }
 
   @memoized
   BuiltList<EnumSourceField> get fields =>

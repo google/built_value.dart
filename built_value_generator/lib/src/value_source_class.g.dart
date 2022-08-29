@@ -8,7 +8,7 @@ part of built_value_generator.source_class;
 
 class _$ValueSourceClass extends ValueSourceClass {
   @override
-  final ClassElement element;
+  final InterfaceElement element;
   ParsedLibraryResult? __parsedLibrary;
   String? __name;
   bool? __isNonNullByDefault;
@@ -259,9 +259,9 @@ class ValueSourceClassBuilder
     implements Builder<ValueSourceClass, ValueSourceClassBuilder> {
   _$ValueSourceClass? _$v;
 
-  ClassElement? _element;
-  ClassElement? get element => _$this._element;
-  set element(ClassElement? element) => _$this._element = element;
+  InterfaceElement? _element;
+  InterfaceElement? get element => _$this._element;
+  set element(InterfaceElement? element) => _$this._element = element;
 
   ValueSourceClassBuilder();
 

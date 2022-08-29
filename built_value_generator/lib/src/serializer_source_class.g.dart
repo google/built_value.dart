@@ -8,7 +8,7 @@ part of built_value_generator.source_class;
 
 class _$SerializerSourceClass extends SerializerSourceClass {
   @override
-  final ClassElement element;
+  final InterfaceElement element;
   @override
   final ClassElement? builderElement;
   ParsedLibraryResult? __parsedLibrary;
@@ -167,9 +167,9 @@ class SerializerSourceClassBuilder
     implements Builder<SerializerSourceClass, SerializerSourceClassBuilder> {
   _$SerializerSourceClass? _$v;
 
-  ClassElement? _element;
-  ClassElement? get element => _$this._element;
-  set element(ClassElement? element) => _$this._element = element;
+  InterfaceElement? _element;
+  InterfaceElement? get element => _$this._element;
+  set element(InterfaceElement? element) => _$this._element = element;
 
   ClassElement? _builderElement;
   ClassElement? get builderElement => _$this._builderElement;
