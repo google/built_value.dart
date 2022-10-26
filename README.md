@@ -1,6 +1,6 @@
-# Built Values for Dart
-[![Build Status](https://travis-ci.org/google/built_value.dart.svg?branch=master)](https://travis-ci.org/google/built_value.dart)
-## Introduction
+![Build Status](https://github.com/google/built_value.dart/workflows/Dart/badge.svg)](https://github.com/google/built_value.dart/actions)
+
+## Built Values for Dart - Introduction
 
 Built Value provides:
 
