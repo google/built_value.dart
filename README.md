@@ -1,4 +1,4 @@
-![Build Status](https://github.com/google/built_value.dart/workflows/Dart/badge.svg)](https://github.com/google/built_value.dart/actions)
+[![Build Status](https://github.com/google/built_value.dart/workflows/Dart/badge.svg)](https://github.com/google/built_value.dart/actions)
 
 ## Built Values for Dart - Introduction
 
