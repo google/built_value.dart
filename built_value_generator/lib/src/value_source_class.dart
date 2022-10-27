@@ -75,7 +75,7 @@ abstract class ValueSourceClass
 
   @memoized
   bool get implementsBuilt => element.allSupertypes
-      .any((interfaceType) => interfaceType.element2.name == 'Built');
+      .any((interfaceType) => interfaceType.element.name == 'Built');
 
   @memoized
   bool get extendsIsAllowed {
@@ -93,18 +93,18 @@ abstract class ValueSourceClass
 
     for (var supertype in [
       element.supertype,
-      ...element.supertype!.element2.allSupertypes
+      ...element.supertype!.element.allSupertypes
     ]) {
       if (DartTypes.tryGetName(supertype) == 'Object') continue;
 
       // Base class must be abstract.
-      final superElement = supertype!.element2;
+      final superElement = supertype!.element;
       if (superElement is! ClassElement || !superElement.isAbstract) {
         return false;
       }
 
       // Base class must have no fields.
-      if (supertype.element2.fields
+      if (supertype.element.fields
           .any((field) => !field.isStatic && !field.isSynthetic)) {
         return false;
       }
@@ -116,9 +116,9 @@ abstract class ValueSourceClass
       }
 
       // Base class must not implement operator==, hashCode or toString.
-      if (supertype.element2.getMethod('hashCode') != null) return false;
-      if (supertype.element2.getMethod('==') != null) return false;
-      if (supertype.element2.getMethod('toString') != null) return false;
+      if (supertype.element.getMethod('hashCode') != null) return false;
+      if (supertype.element.getMethod('==') != null) return false;
+      if (supertype.element.getMethod('toString') != null) return false;
     }
 
     return true;
@@ -216,7 +216,7 @@ abstract class ValueSourceClass
   @memoized
   String get builderParameters {
     return builderElement!.allSupertypes
-        .where((interfaceType) => interfaceType.element2.name == 'Builder')
+        .where((interfaceType) => interfaceType.element.name == 'Builder')
         .single
         .typeArguments
         .map((type) => DartTypes.getName(type))
@@ -316,7 +316,7 @@ abstract class ValueSourceClass
   BuiltList<String> get builderImplements => BuiltList<String>.build((b) => b
     ..add('Builder<$name$_generics, ${name}Builder$_generics>')
     ..addAll(element.interfaces
-        .where((interface) => needsBuiltValue(interface.element2))
+        .where((interface) => needsBuiltValue(interface.element))
         .map(_parentBuilderInterfaceName)));
 
   /// Returns the `with` clause for the builder.
@@ -325,7 +325,7 @@ abstract class ValueSourceClass
   /// the corresponding builders.
   @memoized
   BuiltList<String> get builderMixins => element.mixins
-      .where((interface) => needsBuiltValue(interface.element2))
+      .where((interface) => needsBuiltValue(interface.element))
       .map(_parentBuilderInterfaceName)
       .toBuiltList();
 
@@ -364,7 +364,7 @@ abstract class ValueSourceClass
     // Check for any `toString` implementation apart from the one defined on
     // `Object`.
     var method = element.lookUpConcreteMethod('toString', element.library)!;
-    var clazz = method.enclosingElement3;
+    var clazz = method.enclosingElement;
     return clazz is! ClassElement || clazz.name != 'Object';
   }
 
@@ -376,7 +376,7 @@ abstract class ValueSourceClass
     // TODO(davidmorgan): more exact type check.
     return !classElement.displayName.startsWith('_\$') &&
         (classElement.allSupertypes.any(
-                (interfaceType) => interfaceType.element2.name == 'Built') ||
+                (interfaceType) => interfaceType.element.name == 'Built') ||
             classElement.metadata
                 .map((annotation) => annotation.computeConstantValue())
                 .any((value) =>
@@ -1077,7 +1077,7 @@ abstract class ValueSourceClass
         }
         if (field.hasNullableGenericType) {
           genericFields[name] =
-              field.element.getter!.returnType.element2!.displayName;
+              field.element.getter!.returnType.element!.displayName;
         }
       } else if (!field.isNullable && field.isAutoCreateNestedBuilder) {
         // If not nullable, go via the public accessor, which instantiates

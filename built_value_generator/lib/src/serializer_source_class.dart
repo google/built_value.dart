@@ -143,7 +143,7 @@ abstract class SerializerSourceClass
   @memoized
   bool get isBuiltValue =>
       element.allSupertypes
-          .map((type) => type.element2.name)
+          .map((type) => type.element.name)
           .any((name) => name.startsWith('Built')) &&
       !element.name.startsWith(r'_$') &&
       element.fields.any((field) => field.name == 'serializer');
@@ -152,7 +152,7 @@ abstract class SerializerSourceClass
   @memoized
   bool get isEnumClass =>
       element.allSupertypes
-          .map((type) => type.element2.name)
+          .map((type) => type.element.name)
           .any((name) => name == 'EnumClass') &&
       !element.name.startsWith(r'_$') &&
       element.fields.any((field) => field.name == 'serializer');
@@ -193,7 +193,7 @@ abstract class SerializerSourceClass
       if (fieldElement.setter != null) continue;
 
       final fieldType = fieldElement.type;
-      final fieldTypeElement = fieldType.element2;
+      final fieldTypeElement = fieldType.element;
 
       // Type is not fully specified, ignore.
       if (fieldTypeElement is! ClassElement) continue;
@@ -202,7 +202,7 @@ abstract class SerializerSourceClass
       // of type List<Foo> means we need to be able to serialize Foo.
       if (fieldType is ParameterizedType) {
         for (final type in fieldType.typeArguments) {
-          final typeElement = type.element2;
+          final typeElement = type.element;
 
           // Type is not fully specified, ignore.
           if (typeElement is! ClassElement) continue;

@@ -23,13 +23,13 @@ class DartTypes {
 
   static bool isInstantiableBuiltValue(DartType type) {
     return isBuiltValue(type) &&
-        ValueSourceClass(type.element2 as ClassElement).settings.instantiable;
+        ValueSourceClass(type.element as ClassElement).settings.instantiable;
   }
 
   static bool isBuiltValue(DartType type) =>
       type is InterfaceType &&
-      type.element2.allSupertypes
-          .any((interfaceType) => interfaceType.element2.name == 'Built');
+      type.element.allSupertypes
+          .any((interfaceType) => interfaceType.element.name == 'Built');
 
   static bool isBuiltCollection(DartType type) {
     return _builtCollectionNames
@@ -72,15 +72,15 @@ class DartTypes {
     } else if (dartType is InterfaceType) {
       var typeArguments = dartType.typeArguments;
       if (typeArguments.isEmpty) {
-        return dartType.element2.name + suffix;
+        return dartType.element.name + suffix;
       } else {
         final typeArgumentsStr = typeArguments
             .map((type) => getName(type, withNullabilitySuffix: true))
             .join(', ');
-        return '${dartType.element2.name}<$typeArgumentsStr>$suffix';
+        return '${dartType.element.name}<$typeArgumentsStr>$suffix';
       }
     } else if (dartType is TypeParameterType) {
-      return dartType.element2.name + suffix;
+      return dartType.element.name + suffix;
     } else if (dartType.isVoid) {
       return 'void';
     } else {
