@@ -1,8 +1,9 @@
 # Changelog
 
-# 8.4.2 (unpublished)
+# 8.4.2
 
 - Prepare for breaking analyzer changes.
+- Bump version of `analyzer`.
 
 # 8.4.1
 
