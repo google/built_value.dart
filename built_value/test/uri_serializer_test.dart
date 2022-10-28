@@ -11,8 +11,8 @@ void main() {
   var serializers = Serializers();
 
   group('SimpleUri with known specifiedType', () {
-    var data = Uri.parse('https://github.com/google/built_value.dart');
-    var serialized = 'https://github.com/google/built_value.dart';
+    var data = Uri.parse('https://github.com');
+    var serialized = 'https://github.com';
     var specifiedType = const FullType(Uri);
 
     test('has expected type', () {
