@@ -1202,15 +1202,24 @@ abstract class ValueSourceClass
     if (comparedFields.isEmpty) {
       result.writeln('return ${name.hashCode};');
     } else {
-      result.writeln(
-          'return ${generateMemoizedHashCode ? '__hashCode ??= ' : ''}\$jf(');
-      result.writeln(r'$jc(' * comparedFields.length);
-      // Use a different seed for builders than for values, so they do not have
-      // identical hashCodes if the values are identical.
-      result.writeln(forBuilder ? '1, ' : '0, ');
-      result.write(
-          comparedFields.map((field) => '${field.name}.hashCode').join('), '));
-      result.writeln('));');
+      if (generateMemoizedHashCode) {
+        result.writeln('if (__hashCode != null) return __hashCode$notNull;');
+      }
+
+      final seed = forBuilder ? 1 : 0;
+      result.writeln('int hash  = $seed;');
+
+      for (var field in comparedFields) {
+        result.writeln('hash = \$jc(hash, ${field.name}.hashCode);');
+      }
+
+      result.writeln('hash = \$jf(hash);');
+
+      if (generateMemoizedHashCode) {
+        result.writeln('return __hashCode ??= hash;');
+      } else {
+        result.writeln('return hash;');
+      }
     }
     result.writeln('}');
     result.writeln();
