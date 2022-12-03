@@ -1206,6 +1206,8 @@ abstract class ValueSourceClass
         result.writeln('if (__hashCode != null) return __hashCode$notNull;');
       }
 
+      // Use a different seed for builders than for values, so they do not have
+      // identical hashCodes if the values are identical.
       final seed = forBuilder ? 1 : 0;
       result.writeln('int hash  = $seed;');
 
