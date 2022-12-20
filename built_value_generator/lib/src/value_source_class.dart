@@ -17,7 +17,7 @@ import 'package:built_value_generator/src/memoized_getter.dart';
 import 'package:built_value_generator/src/metadata.dart';
 import 'package:built_value_generator/src/strings.dart';
 import 'package:built_value_generator/src/value_source_field.dart';
-import 'package:quiver/iterables.dart';
+import 'package:collection/collection.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'dart_types.dart';
@@ -384,14 +384,14 @@ abstract class ValueSourceClass
   }
 
   Iterable<GeneratorError> computeErrors() {
-    return concat([
-      _checkPart(),
-      _checkSettings(),
-      _checkValueClass(),
-      _checkBuilderClass(),
-      _checkFieldList(),
-      concat(fields.map((field) => field.computeErrors()))
-    ]);
+    return [
+      ..._checkPart(),
+      ..._checkSettings(),
+      ..._checkValueClass(),
+      ..._checkBuilderClass(),
+      ..._checkFieldList(),
+      for (var field in fields) ...field.computeErrors()
+    ];
   }
 
   Iterable<GeneratorError> _checkPart() {
@@ -719,9 +719,9 @@ abstract class ValueSourceClass
   String get _boundedGenerics => genericParameters.isEmpty
       ? ''
       : '<' +
-          zip(<Iterable>[genericParameters, genericBounds]).map((zipped) {
-            final parameter = zipped[0] as String;
-            final bound = zipped[1] as String;
+          IterableZip([genericParameters, genericBounds]).map((zipped) {
+            final parameter = zipped[0];
+            final bound = zipped[1];
             return bound.isEmpty ? parameter : '$parameter extends $bound';
           }).join(', ') +
           '>';

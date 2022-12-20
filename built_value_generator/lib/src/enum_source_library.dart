@@ -11,7 +11,6 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/enum_source_class.dart';
 import 'package:built_value_generator/src/library_elements.dart';
-import 'package:quiver/iterables.dart';
 import 'package:source_gen/source_gen.dart';
 
 part 'enum_source_library.g.dart';
@@ -59,11 +58,11 @@ abstract class EnumSourceLibrary
   }
 
   Iterable<String> _computeErrors() {
-    return concat([
-      _checkPart(),
-      _checkIdentifiers(),
-      concat(classes.map((c) => c.computeErrors()))
-    ]);
+    return [
+      ..._checkPart(),
+      ..._checkIdentifiers(),
+      for (var c in classes) ...c.computeErrors(),
+    ];
   }
 
   Iterable<String> _checkPart() {
