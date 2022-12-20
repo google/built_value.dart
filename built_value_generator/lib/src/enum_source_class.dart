@@ -14,7 +14,6 @@ import 'package:built_value_generator/src/enum_source_field.dart';
 import 'package:built_value_generator/src/strings.dart';
 import 'package:collection/collection.dart'
     show IterableExtension, IterableNullableExtension;
-import 'package:quiver/iterables.dart';
 
 part 'enum_source_class.g.dart';
 
@@ -102,10 +101,11 @@ abstract class EnumSourceClass
 
   @memoized
   Iterable<String> get identifiers {
-    return concat([
-      <String?>[valuesIdentifier, valueOfIdentifier],
-      fields.map<String?>((field) => field.generatedIdentifier)
-    ]).whereNotNull().toList();
+    return [
+      valuesIdentifier,
+      valueOfIdentifier,
+      for (var field in fields) field.generatedIdentifier,
+    ].whereNotNull().toList();
   }
 
   static bool needsEnumClass(ClassElement classElement) {
@@ -114,15 +114,15 @@ abstract class EnumSourceClass
   }
 
   Iterable<String> computeErrors() {
-    return concat([
-      _checkAbstract(),
-      _checkFields(),
-      _checkFallbackFields(),
-      _checkConstructor(),
-      _checkValuesGetter(),
-      _checkValueOf(),
-      _checkMixin(),
-    ]).toList();
+    return [
+      ..._checkAbstract(),
+      ..._checkFields(),
+      ..._checkFallbackFields(),
+      ..._checkConstructor(),
+      ..._checkValuesGetter(),
+      ..._checkValueOf(),
+      ..._checkMixin(),
+    ];
   }
 
   Iterable<String> _checkAbstract() {
@@ -130,7 +130,7 @@ abstract class EnumSourceClass
   }
 
   Iterable<String> _checkFields() {
-    return concat(fields.map((field) => field.errors));
+    return fields.expand((field) => field.errors);
   }
 
   Iterable<String> _checkFallbackFields() {
