@@ -62,6 +62,7 @@ part 'serializers_nnbd.g.dart';
   TestEnum,
   UsesHandCoded,
   ValueUsingImportAs,
+  ValueWithAwkwardNestedBuilder,
   ValueWithBuilderFinalizer,
   ValueWithBuilderInitializer,
   ValueWithCustomSerializer,

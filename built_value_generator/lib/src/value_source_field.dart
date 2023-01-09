@@ -12,6 +12,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
+import 'package:built_value_generator/src/field_mixin.dart';
 import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
 import 'package:built_value_generator/src/metadata.dart'
@@ -28,10 +29,13 @@ const _suggestedTypes = <String, String>{
 };
 
 abstract class ValueSourceField
+    with FieldMixin
     implements Built<ValueSourceField, ValueSourceFieldBuilder> {
   BuiltValue get settings;
+  @override
   ParsedLibraryResult get parsedLibrary;
   FieldElement get element;
+  @override
   FieldElement? get builderElement;
 
   factory ValueSourceField(
@@ -135,9 +139,6 @@ abstract class ValueSourceField
   }
 
   @memoized
-  bool get builderFieldExists => builderElement != null;
-
-  @memoized
   bool get builderFieldIsNormalField =>
       builderFieldExists &&
       builderElement!.getter != null &&
@@ -156,39 +157,12 @@ abstract class ValueSourceField
       builderElement!.getter!.isAbstract;
 
   @memoized
-  String get _fullBuildElementType {
-    if (!builderFieldExists) return 'dynamic';
-
-    // Try to get a resolved type first, it's faster.
-    var result = DartTypes.tryGetName(builderElement!.getter?.returnType,
-        withNullabilitySuffix: true);
-
-    if (result != null && result != 'dynamic') return result;
-    // Go via AST to allow use of unresolvable types not yet generated;
-    // this includes generated Builder types.
-    result = parsedLibrary
-        .getElementDeclaration(builderElement!)
-        ?.node
-        .parent
-        ?.childEntities
-        .first
-        .toString();
-
-    if (result != null) return result;
-
-    result = builderElement!.getter != null
-        ? (parsedLibrary.getElementDeclaration(builderElement!.getter!)?.node
-                as MethodDeclaration?)
-            ?.returnType
-            .toString()
-        : null;
-
-    return result ?? 'dynamic';
-  }
+  @override
+  String get fullBuildElementType => super.fullBuildElementType;
 
   @memoized
   String get buildElementType {
-    var result = _fullBuildElementType;
+    var result = fullBuildElementType;
     // If we went via the AST there may be an import prefix, but we don't
     // want one here. Strip it off.
     if (result.contains('.')) {
@@ -197,7 +171,7 @@ abstract class ValueSourceField
     return _removeNullabilitySuffix(result);
   }
 
-  bool get builderElementTypeIsNullable => _fullBuildElementType.endsWith('?');
+  bool get builderElementTypeIsNullable => fullBuildElementType.endsWith('?');
 
   bool get builderElementSetterIsNullable {
     if (!builderFieldExists) return false;

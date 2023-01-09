@@ -154,6 +154,8 @@ class _$ImportedCustomNestedValueSerializer
   ImportedCustomNestedValue deserialize(
       Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
+    T $cast<T>(dynamic any) => any as T;
+
     final result = new ImportedCustomNestedValueBuilder();
 
     final iterator = serialized.iterator;
@@ -163,15 +165,27 @@ class _$ImportedCustomNestedValueSerializer
       final Object value = iterator.current;
       switch (key) {
         case 'simpleValue':
-          result.simpleValue.replace(serializers.deserialize(value,
+          var maybeBuilder = result.simpleValue;
+          var fieldValue = serializers.deserialize(value,
                   specifiedType: const FullType(prefix.SimpleValue))
-              as prefix.SimpleValue);
+              as prefix.SimpleValue;
+          if (maybeBuilder == null) {
+            result.simpleValue = $cast(fieldValue.toBuilder());
+          } else {
+            maybeBuilder.replace(fieldValue);
+          }
           break;
         case 'simpleValues':
-          result.simpleValues.replace(serializers.deserialize(value,
+          var maybeBuilder = result.simpleValues;
+          var fieldValue = serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(prefix.SimpleValue)]))
-              as BuiltList<Object>);
+              as BuiltList<prefix.SimpleValue>;
+          if (maybeBuilder == null) {
+            result.simpleValues = $cast(fieldValue.toBuilder());
+          } else {
+            maybeBuilder.replace(fieldValue);
+          }
           break;
       }
     }

@@ -12,6 +12,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
+import 'package:built_value_generator/src/field_mixin.dart';
 import 'package:built_value_generator/src/metadata.dart'
     show metadataToStringValue;
 import 'package:built_value_generator/src/strings.dart';
@@ -19,6 +20,7 @@ import 'package:built_value_generator/src/strings.dart';
 part 'serializer_source_field.g.dart';
 
 abstract class SerializerSourceField
+    with FieldMixin
     implements Built<SerializerSourceField, SerializerSourceFieldBuilder> {
   static final BuiltMap<String, String> typesWithBuilder =
       BuiltMap<String, String>({
@@ -29,8 +31,10 @@ abstract class SerializerSourceField
     'BuiltSetMultimap': 'SetMultimapBuilder',
   });
   BuiltValue get settings;
+  @override
   ParsedLibraryResult get parsedLibrary;
   FieldElement get element;
+  @override
   FieldElement? get builderElement;
 
   factory SerializerSourceField(
@@ -142,11 +146,12 @@ abstract class SerializerSourceField
   }
 
   @memoized
-  bool get builderFieldUsesNestedBuilder {
-    var builderFieldElementIsValid =
-        (builderElement?.getter?.isAbstract == false) &&
-            !builderElement!.isStatic;
+  bool get builderFieldElementIsValid =>
+      (builderElement?.getter?.isAbstract == false) &&
+      !builderElement!.isStatic;
 
+  @memoized
+  bool get builderFieldUsesNestedBuilder {
     // If the builder is present, check it to determine whether a nested
     // builder is needed. Otherwise, use the same logic as built_value when
     // it decides whether to use a nested builder.
@@ -155,6 +160,19 @@ abstract class SerializerSourceField
             DartTypes.getName(builderElement!.getter!.returnType)
         : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
             DartTypes.needsNestedBuilder(element.getter!.returnType);
+  }
+
+  @memoized
+  @override
+  String get fullBuildElementType => super.fullBuildElementType;
+
+  @memoized
+  bool get builderFieldIsNullable {
+    if (!isNonNullByDefault) return true;
+    if (!builderFieldElementIsValid) return true;
+
+    return fullBuildElementType == 'dynamic' ||
+        fullBuildElementType.endsWith('?');
   }
 
   @memoized
@@ -192,10 +210,15 @@ abstract class SerializerSourceField
   ///
   /// Generics are cast to the bound of the generic. If there is no bound,
   /// no cast is needed, and an empty string is returned.
+  ///
+  /// Set [forReplace] to loosen generics of cast where possible for calling
+  /// a `replace` method.
   String generateCast(CompilationUnitElement compilationUnit,
-      BuiltMap<String, String> classGenericBounds) {
+      BuiltMap<String, String> classGenericBounds,
+      {bool forReplace = false}) {
     var result = _generateCast(
-        typeInCompilationUnit(compilationUnit), classGenericBounds);
+        typeInCompilationUnit(compilationUnit), classGenericBounds,
+        forReplace: forReplace);
     return result == 'Object' ? '' : 'as $result';
   }
 
@@ -236,7 +259,7 @@ abstract class SerializerSourceField
   }
 
   String _generateCast(String type, BuiltMap<String, String> classGenericBounds,
-      {bool topLevel = true}) {
+      {bool topLevel = true, bool forReplace = false}) {
     var resultNullabilitySuffix = (!topLevel && type.endsWith('?')) ? '?' : '';
     var bareType = _getBareType(type);
 
@@ -244,8 +267,11 @@ abstract class SerializerSourceField
     // type, so we can be less precise about the cast. This doesn't add any
     // particular value for vanilla `built_value` but it allows plugging in
     // serializers that don't get the generic types correct.
+    //
+    // Only if `forReplace` was passed.
     String generics;
-    if (topLevel &&
+    if (forReplace &&
+        topLevel &&
         DartTypes.isBuiltCollectionTypeName(bareType) &&
         builderFieldUsesNestedBuilder) {
       if (bareType == 'BuiltList' || bareType == 'BuiltSet') {
