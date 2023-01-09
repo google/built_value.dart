@@ -3,6 +3,7 @@
 # 8.4.3 (unreleased)
 
 - Drop dev dependency on `quiver`.
+- Disable all linting of generated code.
 
 # 8.4.2
 
