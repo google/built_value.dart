@@ -886,3 +886,44 @@ abstract class $ValueSpecial
       _$$ValueSpecial;
   $ValueSpecial._();
 }
+
+/// Value with manually written builder.
+///
+/// The manually written builder has nullable nested builders; it always
+/// auto-instantiates one and never instantiates the other.
+@BuiltValue()
+abstract class ValueWithAwkwardNestedBuilder
+    implements
+        Built<ValueWithAwkwardNestedBuilder,
+            ValueWithAwkwardNestedBuilderBuilder> {
+  @BuiltValueSerializer(serializeNulls: true)
+  static Serializer<ValueWithAwkwardNestedBuilder> get serializer =>
+      _$valueWithAwkwardNestedBuilderSerializer;
+
+  SimpleValue? get value1;
+  SimpleValue? get value2;
+  // Check built_collection types as casts are handled differently.
+  BuiltList<int> get values;
+  BuiltMap<int, String> get map;
+
+  factory ValueWithAwkwardNestedBuilder(
+          [void Function(ValueWithAwkwardNestedBuilderBuilder) updates]) =
+      _$ValueWithAwkwardNestedBuilder;
+  ValueWithAwkwardNestedBuilder._();
+}
+
+abstract class ValueWithAwkwardNestedBuilderBuilder
+    implements
+        Builder<ValueWithAwkwardNestedBuilder,
+            ValueWithAwkwardNestedBuilderBuilder> {
+  SimpleValueBuilder? value1;
+  SimpleValueBuilder? _value2;
+  SimpleValueBuilder? get value2 => (_value2 ??= SimpleValueBuilder());
+  set value2(SimpleValueBuilder? b) => _value2 = b;
+  ListBuilder<int>? values = ListBuilder<int>();
+  MapBuilder<int, String>? map = MapBuilder<int, String>();
+
+  factory ValueWithAwkwardNestedBuilderBuilder() =
+      _$ValueWithAwkwardNestedBuilderBuilder;
+  ValueWithAwkwardNestedBuilderBuilder._();
+}

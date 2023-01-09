@@ -28,7 +28,10 @@ class _$SerializerSourceField extends SerializerSourceField {
   String? __typeWithNullabilitySuffix;
   String? __typeWithPrefix;
   String? __typeWithPrefixAndNullabilitySuffix;
+  bool? __builderFieldElementIsValid;
   bool? __builderFieldUsesNestedBuilder;
+  String? __fullBuildElementType;
+  bool? __builderFieldIsNullable;
   bool? __builderFieldAutoCreatesNestedBuilder;
   String? __rawType;
   bool? __needsBuilder;
@@ -97,8 +100,20 @@ class _$SerializerSourceField extends SerializerSourceField {
           super.typeWithPrefixAndNullabilitySuffix;
 
   @override
+  bool get builderFieldElementIsValid =>
+      __builderFieldElementIsValid ??= super.builderFieldElementIsValid;
+
+  @override
   bool get builderFieldUsesNestedBuilder =>
       __builderFieldUsesNestedBuilder ??= super.builderFieldUsesNestedBuilder;
+
+  @override
+  String get fullBuildElementType =>
+      __fullBuildElementType ??= super.fullBuildElementType;
+
+  @override
+  bool get builderFieldIsNullable =>
+      __builderFieldIsNullable ??= super.builderFieldIsNullable;
 
   @override
   bool get builderFieldAutoCreatesNestedBuilder =>

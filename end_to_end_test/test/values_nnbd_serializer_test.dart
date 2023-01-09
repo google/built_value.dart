@@ -625,4 +625,34 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group(ValueWithAwkwardNestedBuilder, () {
+    final data = ValueWithAwkwardNestedBuilder((b) => b
+      ..value1 = SimpleValue((b) => b
+        ..anInt = 1
+        ..aString = '1').toBuilder()
+      ..value2!.anInt = 2
+      ..value2!.aString = '2'
+      ..values!.add(3)
+      ..map![4] = '4');
+    final serialized = json.decode(json.encode([
+      'ValueWithAwkwardNestedBuilder',
+      'values',
+      [3],
+      'map',
+      [4, '4'],
+      'value1',
+      ['anInt', 1, 'aString', '1'],
+      'value2',
+      ['anInt', 2, 'aString', '2'],
+    ])) as Object;
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }

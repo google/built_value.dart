@@ -55,6 +55,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(UsesHandCoded.serializer)
       ..add(ValidatedValue.serializer)
       ..add(ValueUsingImportAs.serializer)
+      ..add(ValueWithAwkwardNestedBuilder.serializer)
       ..add(ValueWithBuilderFinalizer.serializer)
       ..add(ValueWithBuilderInitializer.serializer)
       ..add(ValueWithCustomSerializer.serializer)
@@ -79,6 +80,13 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(
               BuiltList, const [const FullType(ThirdDiscoverableValue)]),
           () => new ListBuilder<ThirdDiscoverableValue>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => new ListBuilder<int>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltMap, const [const FullType(int), const FullType(String)]),
+          () => new MapBuilder<int, String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())

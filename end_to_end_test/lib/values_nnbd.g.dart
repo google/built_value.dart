@@ -74,6 +74,9 @@ Serializer<ValueWithHooks> _$valueWithHooksSerializer =
     new _$ValueWithHooksSerializer();
 Serializer<$ValueSpecial> _$$valueSpecialSerializer =
     new _$$ValueSpecialSerializer();
+Serializer<ValueWithAwkwardNestedBuilder>
+    _$valueWithAwkwardNestedBuilderSerializer =
+    new _$ValueWithAwkwardNestedBuilderSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -1767,6 +1770,113 @@ class _$$ValueSpecialSerializer implements StructuredSerializer<$ValueSpecial> {
         case '\$mustBeEscaped':
           result.$mustBeEscaped = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ValueWithAwkwardNestedBuilderSerializer
+    implements StructuredSerializer<ValueWithAwkwardNestedBuilder> {
+  @override
+  final Iterable<Type> types = const [
+    ValueWithAwkwardNestedBuilder,
+    _$ValueWithAwkwardNestedBuilder
+  ];
+  @override
+  final String wireName = 'ValueWithAwkwardNestedBuilder';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, ValueWithAwkwardNestedBuilder object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'values',
+      serializers.serialize(object.values,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(int)])),
+      'map',
+      serializers.serialize(object.map,
+          specifiedType: const FullType(
+              BuiltMap, const [const FullType(int), const FullType(String)])),
+    ];
+    Object? value;
+    value = object.value1;
+
+    result
+      ..add('value1')
+      ..add(serializers.serialize(value,
+          specifiedType: const FullType(SimpleValue)));
+    value = object.value2;
+
+    result
+      ..add('value2')
+      ..add(serializers.serialize(value,
+          specifiedType: const FullType(SimpleValue)));
+
+    return result;
+  }
+
+  @override
+  ValueWithAwkwardNestedBuilder deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    T $cast<T>(dynamic any) => any as T;
+
+    final result = new ValueWithAwkwardNestedBuilderBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'value1':
+          var maybeBuilder = result.value1;
+          var fieldValue = serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue))! as SimpleValue;
+          if (maybeBuilder == null) {
+            result.value1 = $cast(fieldValue.toBuilder());
+          } else {
+            maybeBuilder.replace(fieldValue);
+          }
+          break;
+        case 'value2':
+          var maybeBuilder = result.value2;
+          var fieldValue = serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue))! as SimpleValue;
+          if (maybeBuilder == null) {
+            result.value2 = $cast(fieldValue.toBuilder());
+          } else {
+            maybeBuilder.replace(fieldValue);
+          }
+          break;
+        case 'values':
+          var maybeBuilder = result.values;
+          var fieldValue = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(int)]))!
+              as BuiltList<int>;
+          if (maybeBuilder == null) {
+            result.values = $cast(fieldValue.toBuilder());
+          } else {
+            maybeBuilder.replace(fieldValue);
+          }
+          break;
+        case 'map':
+          var maybeBuilder = result.map;
+          var fieldValue = serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(int),
+                const FullType(String)
+              ]))! as BuiltMap<int, String>;
+          if (maybeBuilder == null) {
+            result.map = $cast(fieldValue.toBuilder());
+          } else {
+            maybeBuilder.replace(fieldValue);
+          }
           break;
       }
     }
@@ -6794,6 +6904,182 @@ class $ValueSpecialBuilder
                 anInt, r'$ValueSpecial', 'anInt'),
             aString: aString,
             $mustBeEscaped: $mustBeEscaped);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ValueWithAwkwardNestedBuilder extends ValueWithAwkwardNestedBuilder {
+  @override
+  final SimpleValue? value1;
+  @override
+  final SimpleValue? value2;
+  @override
+  final BuiltList<int> values;
+  @override
+  final BuiltMap<int, String> map;
+
+  factory _$ValueWithAwkwardNestedBuilder(
+          [void Function(ValueWithAwkwardNestedBuilderBuilder)? updates]) =>
+      (new ValueWithAwkwardNestedBuilderBuilder()..update(updates)).build()
+          as _$ValueWithAwkwardNestedBuilder;
+
+  _$ValueWithAwkwardNestedBuilder._(
+      {this.value1, this.value2, required this.values, required this.map})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        values, r'ValueWithAwkwardNestedBuilder', 'values');
+    BuiltValueNullFieldError.checkNotNull(
+        map, r'ValueWithAwkwardNestedBuilder', 'map');
+  }
+
+  @override
+  ValueWithAwkwardNestedBuilder rebuild(
+          void Function(ValueWithAwkwardNestedBuilderBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  _$ValueWithAwkwardNestedBuilderBuilder toBuilder() =>
+      new _$ValueWithAwkwardNestedBuilderBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ValueWithAwkwardNestedBuilder &&
+        value1 == other.value1 &&
+        value2 == other.value2 &&
+        values == other.values &&
+        map == other.map;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value1.hashCode);
+    _$hash = $jc(_$hash, value2.hashCode);
+    _$hash = $jc(_$hash, values.hashCode);
+    _$hash = $jc(_$hash, map.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'ValueWithAwkwardNestedBuilder')
+          ..add('value1', value1)
+          ..add('value2', value2)
+          ..add('values', values)
+          ..add('map', map))
+        .toString();
+  }
+}
+
+class _$ValueWithAwkwardNestedBuilderBuilder
+    extends ValueWithAwkwardNestedBuilderBuilder {
+  _$ValueWithAwkwardNestedBuilder? _$v;
+
+  @override
+  SimpleValueBuilder get value1 {
+    _$this;
+    return super.value1 ??= new SimpleValueBuilder();
+  }
+
+  @override
+  set value1(SimpleValueBuilder? value1) {
+    _$this;
+    super.value1 = value1;
+  }
+
+  @override
+  SimpleValueBuilder get value2 {
+    _$this;
+    return super.value2 ??= new SimpleValueBuilder();
+  }
+
+  @override
+  set value2(SimpleValueBuilder? value2) {
+    _$this;
+    super.value2 = value2;
+  }
+
+  @override
+  ListBuilder<int> get values {
+    _$this;
+    return super.values ??= new ListBuilder<int>();
+  }
+
+  @override
+  set values(ListBuilder<int>? values) {
+    _$this;
+    super.values = values;
+  }
+
+  @override
+  MapBuilder<int, String> get map {
+    _$this;
+    return super.map ??= new MapBuilder<int, String>();
+  }
+
+  @override
+  set map(MapBuilder<int, String>? map) {
+    _$this;
+    super.map = map;
+  }
+
+  _$ValueWithAwkwardNestedBuilderBuilder() : super._();
+
+  ValueWithAwkwardNestedBuilderBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      super.value1 = $v.value1?.toBuilder();
+      super.value2 = $v.value2?.toBuilder();
+      super.values = $v.values.toBuilder();
+      super.map = $v.map.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ValueWithAwkwardNestedBuilder other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ValueWithAwkwardNestedBuilder;
+  }
+
+  @override
+  void update(void Function(ValueWithAwkwardNestedBuilderBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  ValueWithAwkwardNestedBuilder build() => _build();
+
+  _$ValueWithAwkwardNestedBuilder _build() {
+    _$ValueWithAwkwardNestedBuilder _$result;
+    try {
+      _$result = _$v ??
+          new _$ValueWithAwkwardNestedBuilder._(
+              value1: super.value1?.build(),
+              value2: super.value2?.build(),
+              values: values.build(),
+              map: map.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'value1';
+        super.value1?.build();
+        _$failedField = 'value2';
+        super.value2?.build();
+        _$failedField = 'values';
+        values.build();
+        _$failedField = 'map';
+        map.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'ValueWithAwkwardNestedBuilder', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

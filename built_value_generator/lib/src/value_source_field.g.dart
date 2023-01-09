@@ -27,11 +27,10 @@ class _$ValueSourceField extends ValueSourceField {
   bool? __hasNullableGenericType;
   bool? __isNullable;
   BuiltValueField? __builtValueField;
-  bool? __builderFieldExists;
   bool? __builderFieldIsNormalField;
   bool? __builderFieldIsGetterSetterPair;
   bool? __builderFieldIsAbstract;
-  String? ___fullBuildElementType;
+  String? __fullBuildElementType;
   String? __buildElementType;
   String? __builderElementTypeWithPrefix;
   bool? __isNestedBuilder;
@@ -96,10 +95,6 @@ class _$ValueSourceField extends ValueSourceField {
       __builtValueField ??= super.builtValueField;
 
   @override
-  bool get builderFieldExists =>
-      __builderFieldExists ??= super.builderFieldExists;
-
-  @override
   bool get builderFieldIsNormalField =>
       __builderFieldIsNormalField ??= super.builderFieldIsNormalField;
 
@@ -112,8 +107,8 @@ class _$ValueSourceField extends ValueSourceField {
       __builderFieldIsAbstract ??= super.builderFieldIsAbstract;
 
   @override
-  String get _fullBuildElementType =>
-      ___fullBuildElementType ??= super._fullBuildElementType;
+  String get fullBuildElementType =>
+      __fullBuildElementType ??= super.fullBuildElementType;
 
   @override
   String get buildElementType => __buildElementType ??= super.buildElementType;

@@ -2,6 +2,8 @@
 
 # 8.4.3 (unreleased)
 
+- Fix generated deserialization code when there is a manually written builder
+  with nullable fields.
 - Drop dev dependency on `quiver`.
 - Disable all linting of generated code.
 - Change generated hash code implementation so it formats better when there are
