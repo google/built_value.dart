@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.4.3 (unreleased)
+
+- Drop dev dependency on `quiver`.
+
 # 8.4.2
 
 - Prepare for breaking analyzer changes.
