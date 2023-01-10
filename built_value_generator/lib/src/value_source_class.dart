@@ -1209,7 +1209,7 @@ abstract class ValueSourceClass
       // Use a different seed for builders than for values, so they do not have
       // identical hashCodes if the values are identical.
       final seed = forBuilder ? 1 : 0;
-      result.writeln('int _\$hash  = $seed;');
+      result.writeln('var _\$hash  = $seed;');
 
       for (var field in comparedFields) {
         result.writeln('_\$hash = \$jc(_\$hash, ${field.name}.hashCode);');
