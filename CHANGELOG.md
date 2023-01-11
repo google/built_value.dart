@@ -4,6 +4,8 @@
 
 - Drop dev dependency on `quiver`.
 - Disable all linting of generated code.
+- Change generated hash code implementation so it formats better when there are
+  many fields.
 
 # 8.4.2
 

@@ -48,8 +48,12 @@ class _$MemoizedGetter extends MemoizedGetter {
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, returnType.hashCode), nullabilitySuffix.hashCode),
-        name.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, returnType.hashCode);
+    _$hash = $jc(_$hash, nullabilitySuffix.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

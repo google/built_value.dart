@@ -405,7 +405,11 @@ class _$Cat extends Cat {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, tail.hashCode), legs.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, tail.hashCode);
+    _$hash = $jc(_$hash, legs.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -493,7 +497,11 @@ class _$Fish extends Fish {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, fins.hashCode), legs.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, fins.hashCode);
+    _$hash = $jc(_$hash, legs.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -581,7 +589,11 @@ class _$Robot extends Robot {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, fins.hashCode), legs.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, fins.hashCode);
+    _$hash = $jc(_$hash, legs.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -674,7 +686,11 @@ class _$Cage extends Cage {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, inhabitant.hashCode), otherInhabitants.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, inhabitant.hashCode);
+    _$hash = $jc(_$hash, otherInhabitants.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -775,7 +791,10 @@ class _$StandardCat extends StandardCat {
 
   @override
   int get hashCode {
-    return $jf($jc(0, tail.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, tail.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -860,7 +879,10 @@ class _$HasString extends HasString {
 
   @override
   int get hashCode {
-    return $jf($jc(0, field.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, field.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -939,7 +961,10 @@ class _$HasDouble extends HasDouble {
 
   @override
   int get hashCode {
-    return $jf($jc(0, field.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, field.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1026,7 +1051,11 @@ class _$UsesChainedInterface extends UsesChainedInterface {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, bar.hashCode), foo.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, bar.hashCode);
+    _$hash = $jc(_$hash, foo.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1116,7 +1145,10 @@ class _$UsesHandCoded extends UsesHandCoded {
 
   @override
   int get hashCode {
-    return $jf($jc(0, fieldInBaseBuilder.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, fieldInBaseBuilder.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1280,7 +1312,11 @@ class _$Car extends Car {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, seatsCount.hashCode), color.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, seatsCount.hashCode);
+    _$hash = $jc(_$hash, color.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1385,7 +1421,11 @@ class _$MixinCar extends MixinCar {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, seatsCount.hashCode), color.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, seatsCount.hashCode);
+    _$hash = $jc(_$hash, color.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1486,7 +1526,10 @@ class _$VehicleColor extends VehicleColor {
 
   @override
   int get hashCode {
-    return $jf($jc(0, label.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, label.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

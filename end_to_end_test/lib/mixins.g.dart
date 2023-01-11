@@ -55,7 +55,10 @@ class _$UsesMixin extends UsesMixin {
 
   @override
   int get hashCode {
-    return $jf($jc(0, typeDef.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, typeDef.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -138,7 +141,10 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
 
   @override
   int get hashCode {
-    return $jf($jc(0, shouldBeAField.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, shouldBeAField.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

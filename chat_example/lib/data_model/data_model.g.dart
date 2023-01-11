@@ -462,7 +462,11 @@ class _$Chat extends Chat {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, text.hashCode), targets.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, text.hashCode);
+    _$hash = $jc(_$hash, targets.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -567,7 +571,11 @@ class _$Login extends Login {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, username.hashCode), password.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, username.hashCode);
+    _$hash = $jc(_$hash, password.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -657,7 +665,11 @@ class _$Status extends Status {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, message.hashCode), type.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, message.hashCode);
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -745,7 +757,10 @@ class _$ListUsers extends ListUsers {
 
   @override
   int get hashCode {
-    return $jf($jc(0, statusTypes.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, statusTypes.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -845,8 +860,12 @@ class _$ShowChat extends ShowChat {
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, username.hashCode), private.hashCode), text.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, username.hashCode);
+    _$hash = $jc(_$hash, private.hashCode);
+    _$hash = $jc(_$hash, text.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -944,7 +963,11 @@ class _$Welcome extends Welcome {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, log.hashCode), message.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, log.hashCode);
+    _$hash = $jc(_$hash, message.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1046,7 +1069,10 @@ class _$ListUsersResponse extends ListUsersResponse {
 
   @override
   int get hashCode {
-    return $jf($jc(0, statuses.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, statuses.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

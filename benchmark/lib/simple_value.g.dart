@@ -37,7 +37,11 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, aString.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

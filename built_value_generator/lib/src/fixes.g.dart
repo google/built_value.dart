@@ -46,9 +46,13 @@ class _$GeneratorError extends GeneratorError {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, message.hashCode), offset.hashCode), length.hashCode),
-        fix.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, message.hashCode);
+    _$hash = $jc(_$hash, offset.hashCode);
+    _$hash = $jc(_$hash, length.hashCode);
+    _$hash = $jc(_$hash, fix.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

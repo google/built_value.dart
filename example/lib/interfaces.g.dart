@@ -126,7 +126,11 @@ class _$ValueWithInt extends ValueWithInt {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), note.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, note.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

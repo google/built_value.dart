@@ -244,7 +244,10 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   int get hashCode {
-    return $jf($jc(0, element.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, element.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

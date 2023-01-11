@@ -345,28 +345,21 @@ class _$StandardJsonValue extends StandardJsonValue {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc(
-                            $jc(
-                                $jc(
-                                    $jc(
-                                        $jc(
-                                            $jc($jc(0, number.hashCode),
-                                                text.hashCode),
-                                            value.hashCode),
-                                        keyValues.hashCode),
-                                    zoo.hashCode),
-                                uniqueZoo.hashCode),
-                            strings.hashCode),
-                        nullsInList.hashCode),
-                    nullsInSet.hashCode),
-                nullsInMap.hashCode),
-            object.hashCode),
-        objects.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, number.hashCode);
+    _$hash = $jc(_$hash, text.hashCode);
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, keyValues.hashCode);
+    _$hash = $jc(_$hash, zoo.hashCode);
+    _$hash = $jc(_$hash, uniqueZoo.hashCode);
+    _$hash = $jc(_$hash, strings.hashCode);
+    _$hash = $jc(_$hash, nullsInList.hashCode);
+    _$hash = $jc(_$hash, nullsInSet.hashCode);
+    _$hash = $jc(_$hash, nullsInMap.hashCode);
+    _$hash = $jc(_$hash, object.hashCode);
+    _$hash = $jc(_$hash, objects.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -590,14 +583,15 @@ class _$ComplexValue extends ComplexValue {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc($jc($jc(0, primitive.hashCode), nullablePrimitive.hashCode),
-                    nullablePrimitiveDoNotUse.hashCode),
-                value.hashCode),
-            nullableValue.hashCode),
-        nullableValueDoNotUse.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, primitive.hashCode);
+    _$hash = $jc(_$hash, nullablePrimitive.hashCode);
+    _$hash = $jc(_$hash, nullablePrimitiveDoNotUse.hashCode);
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, nullableValue.hashCode);
+    _$hash = $jc(_$hash, nullableValueDoNotUse.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

@@ -73,7 +73,11 @@ class _$EnumSourceField extends EnumSourceField {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, parsedLibrary.hashCode), element.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, parsedLibrary.hashCode);
+    _$hash = $jc(_$hash, element.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
