@@ -672,7 +672,10 @@ class _$GenericValue<T> extends GenericValue<T> {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -758,7 +761,10 @@ class _$InitializeGenericValue<T> extends InitializeGenericValue<T> {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -851,7 +857,11 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, value.hashCode), nullableValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, nullableValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -950,7 +960,11 @@ class _$BoundNullableGenericValue<T extends num?>
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, value.hashCode), nullableValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, nullableValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1048,7 +1062,10 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
 
   @override
   int get hashCode {
-    return $jf($jc(0, values.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, values.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1158,9 +1175,12 @@ class _$GenericContainer extends GenericContainer {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc(0, genericValue.hashCode), boundGenericValue.hashCode),
-        collectionGenericValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, genericValue.hashCode);
+    _$hash = $jc(_$hash, boundGenericValue.hashCode);
+    _$hash = $jc(_$hash, collectionGenericValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1282,7 +1302,10 @@ class _$DynamicGenericContainer extends DynamicGenericContainer {
 
   @override
   int get hashCode {
-    return $jf($jc(0, foo.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, foo.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1379,8 +1402,11 @@ class _$PassthroughGenericContainer<T> extends PassthroughGenericContainer<T> {
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc(0, genericValue.hashCode), collectionGenericValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, genericValue.hashCode);
+    _$hash = $jc(_$hash, collectionGenericValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1492,7 +1518,10 @@ class _$NestedGenericContainer extends NestedGenericContainer {
 
   @override
   int get hashCode {
-    return $jf($jc(0, map.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, map.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1592,7 +1621,10 @@ class _$CustomBuilderGenericValue<T> extends CustomBuilderGenericValue<T> {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1681,7 +1713,10 @@ class _$ConcreteGeneric extends ConcreteGeneric {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1769,7 +1804,10 @@ class _$GenericFunction<T> extends GenericFunction<T> {
 
   @override
   int get hashCode {
-    return $jf($jc(0, function.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, function.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1850,7 +1888,10 @@ class _$NonBuiltGeneric extends NonBuiltGeneric {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2002,7 +2043,10 @@ class _$ConstAndGeneric<T> extends ConstAndGeneric<T> {
 
   @override
   int get hashCode {
-    return $jf($jc(0, map.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, map.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

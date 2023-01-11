@@ -158,14 +158,15 @@ class _$StandardJsonValue extends StandardJsonValue {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc($jc($jc(0, number.hashCode), text.hashCode),
-                    keyValues.hashCode),
-                zoo.hashCode),
-            uniqueZoo.hashCode),
-        strings.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, number.hashCode);
+    _$hash = $jc(_$hash, text.hashCode);
+    _$hash = $jc(_$hash, keyValues.hashCode);
+    _$hash = $jc(_$hash, zoo.hashCode);
+    _$hash = $jc(_$hash, uniqueZoo.hashCode);
+    _$hash = $jc(_$hash, strings.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

@@ -151,7 +151,11 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, element.hashCode), builderElement.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, element.hashCode);
+    _$hash = $jc(_$hash, builderElement.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

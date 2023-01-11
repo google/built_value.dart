@@ -336,7 +336,11 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, aString.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -423,7 +427,10 @@ class _$VerySimpleValue extends VerySimpleValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -508,7 +515,11 @@ class _$CompoundValue extends CompoundValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, validatedValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -618,7 +629,11 @@ class _$ValidatedValue extends ValidatedValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, aString.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -709,7 +724,11 @@ class _$ValueWithCode extends ValueWithCode {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, aString.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -803,7 +822,11 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, aString.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -913,7 +936,10 @@ class _$DerivedValue extends DerivedValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, anInt.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1001,8 +1027,12 @@ class _$Account extends Account {
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, id.hashCode), name.hashCode), keyValues.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, keyValues.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1110,7 +1140,10 @@ class _$WireNameValue extends WireNameValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

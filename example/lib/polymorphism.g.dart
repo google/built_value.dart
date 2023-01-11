@@ -135,7 +135,11 @@ class _$Cat extends Cat {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, tail.hashCode), legs.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, tail.hashCode);
+    _$hash = $jc(_$hash, legs.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -223,7 +227,11 @@ class _$Fish extends Fish {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, fins.hashCode), legs.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, fins.hashCode);
+    _$hash = $jc(_$hash, legs.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

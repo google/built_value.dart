@@ -1614,8 +1614,12 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, anInt.hashCode), aString.hashCode),
-        $mustBeEscaped.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, aString.hashCode);
+    _$hash = $jc(_$hash, $mustBeEscaped.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1714,7 +1718,11 @@ class _$CompoundValue extends CompoundValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, validatedValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1828,7 +1836,11 @@ class _$CompoundValueNoNesting extends CompoundValueNoNesting {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, validatedValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1920,7 +1932,10 @@ class _$CompoundValueNoAutoNesting extends CompoundValueNoAutoNesting {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2024,7 +2039,11 @@ class _$CompoundValueComparableBuilders
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, validatedValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2097,7 +2116,11 @@ class CompoundValueComparableBuildersBuilder
 
   @override
   int get hashCode {
-    return $jf($jc($jc(1, simpleValue.hashCode), validatedValue.hashCode));
+    var _$hash = 1;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, validatedValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 }
 
@@ -2148,10 +2171,13 @@ class _$CompoundValueNoNestingField extends CompoundValueNoNestingField {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode),
-            simpleValueWithNested.hashCode),
-        validatedValueWithNested.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, validatedValue.hashCode);
+    _$hash = $jc(_$hash, simpleValueWithNested.hashCode);
+    _$hash = $jc(_$hash, validatedValueWithNested.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2296,10 +2322,13 @@ class _$CompoundValueNestingField extends CompoundValueNestingField {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode),
-            simpleValueWithNested.hashCode),
-        validatedValueWithNested.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, validatedValue.hashCode);
+    _$hash = $jc(_$hash, simpleValueWithNested.hashCode);
+    _$hash = $jc(_$hash, validatedValueWithNested.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2434,7 +2463,11 @@ class _$CompoundValueNoAutoNestingField
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, value.hashCode), valueWithAutoCreate.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, valueWithAutoCreate.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2551,7 +2584,11 @@ class _$CompoundValueAutoNestingField extends CompoundValueAutoNestingField {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, value.hashCode), valueWithAutoCreate.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, valueWithAutoCreate.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2667,7 +2704,11 @@ class _$CompoundValueExplicitNoNesting extends CompoundValueExplicitNoNesting {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), validatedValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, validatedValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2786,7 +2827,10 @@ class _$ExplicitNestedList extends ExplicitNestedList {
 
   @override
   int get hashCode {
-    return $jf($jc(0, nestedList.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, nestedList.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2892,7 +2936,10 @@ class _$DerivedValue extends DerivedValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, anInt.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -2975,7 +3022,11 @@ class _$ValueWithCode extends ValueWithCode {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, aString.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -3073,8 +3124,12 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, anInt.hashCode), aString.hashCode), value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, aString.hashCode);
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -3209,7 +3264,10 @@ class _$ValueWithBuilderSmarts extends ValueWithBuilderSmarts {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -3301,7 +3359,11 @@ class _$ValidatedValue extends ValidatedValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), aString.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, aString.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -3392,7 +3454,10 @@ class _$ValueUsingImportAs extends ValueUsingImportAs {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -3587,26 +3652,20 @@ class _$PrimitivesValue extends PrimitivesValue {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc(
-                            $jc(
-                                $jc(
-                                    $jc(
-                                        $jc($jc(0, boolean.hashCode),
-                                            integer.hashCode),
-                                        int64.hashCode),
-                                    dbl.hashCode),
-                                number.hashCode),
-                            string.hashCode),
-                        dateTime.hashCode),
-                    duration.hashCode),
-                regExp.hashCode),
-            uri.hashCode),
-        bigInt.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, boolean.hashCode);
+    _$hash = $jc(_$hash, integer.hashCode);
+    _$hash = $jc(_$hash, int64.hashCode);
+    _$hash = $jc(_$hash, dbl.hashCode);
+    _$hash = $jc(_$hash, number.hashCode);
+    _$hash = $jc(_$hash, string.hashCode);
+    _$hash = $jc(_$hash, dateTime.hashCode);
+    _$hash = $jc(_$hash, duration.hashCode);
+    _$hash = $jc(_$hash, regExp.hashCode);
+    _$hash = $jc(_$hash, uri.hashCode);
+    _$hash = $jc(_$hash, bigInt.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -3767,7 +3826,10 @@ class _$FunctionValue extends FunctionValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, function.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, function.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -3853,7 +3915,10 @@ class _$ListOfFunctionValue extends ListOfFunctionValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, functions.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, functions.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -3955,7 +4020,11 @@ class _$PartiallySerializableValue extends PartiallySerializableValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, value.hashCode), transientValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, transientValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4046,7 +4115,10 @@ class _$NamedFactoryValue extends NamedFactoryValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4126,7 +4198,10 @@ class _$WireNameValue extends WireNameValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4219,8 +4294,12 @@ class _$FieldDiscoveryValue extends FieldDiscoveryValue {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc(0, value.hashCode), values.hashCode), recursiveValue.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, values.hashCode);
+    _$hash = $jc(_$hash, recursiveValue.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4337,7 +4416,10 @@ class _$DiscoverableValue extends DiscoverableValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4432,7 +4514,10 @@ class _$SecondDiscoverableValue extends SecondDiscoverableValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4517,7 +4602,10 @@ class _$ThirdDiscoverableValue extends ThirdDiscoverableValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4598,7 +4686,10 @@ class _$RecursiveValueA extends RecursiveValueA {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4690,7 +4781,10 @@ class _$RecursiveValueB extends RecursiveValueB {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4785,7 +4879,10 @@ class _$ValueWithCustomSerializer extends ValueWithCustomSerializer {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -4867,7 +4964,10 @@ class _$ValueWithOnSet extends ValueWithOnSet {
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -5006,7 +5106,10 @@ class _$OtherValue extends OtherValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, other.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, other.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -5098,7 +5201,10 @@ class _$DefaultsForFieldSettingsValue extends DefaultsForFieldSettingsValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, compared.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, compared.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -5237,20 +5343,17 @@ class _$ValueWithBuilderInitializer extends ValueWithBuilderInitializer {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc(
-                            $jc($jc(0, anInt.hashCode),
-                                anIntWithDefault.hashCode),
-                            nullableInt.hashCode),
-                        nullableIntWithDefault.hashCode),
-                    nestedValue.hashCode),
-                nestedValueWithDefault.hashCode),
-            nullableNestedValue.hashCode),
-        nullableNestedValueWithDefault.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, anIntWithDefault.hashCode);
+    _$hash = $jc(_$hash, nullableInt.hashCode);
+    _$hash = $jc(_$hash, nullableIntWithDefault.hashCode);
+    _$hash = $jc(_$hash, nestedValue.hashCode);
+    _$hash = $jc(_$hash, nestedValueWithDefault.hashCode);
+    _$hash = $jc(_$hash, nullableNestedValue.hashCode);
+    _$hash = $jc(_$hash, nullableNestedValueWithDefault.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -5423,7 +5526,10 @@ class _$ValueWithBuilderFinalizer extends ValueWithBuilderFinalizer {
 
   @override
   int get hashCode {
-    return $jf($jc(0, anInt.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -5515,7 +5621,10 @@ class _$ValueWithGenericBuilderInitializer<T>
 
   @override
   int get hashCode {
-    return $jf($jc(0, value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -5601,7 +5710,11 @@ class _$HashcodeValue extends HashcodeValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, x.hashCode), y.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, x.hashCode);
+    _$hash = $jc(_$hash, y.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -5694,7 +5807,12 @@ class _$MemoizedHashcodeValue extends MemoizedHashcodeValue {
   int __hashCode;
   @override
   int get hashCode {
-    return __hashCode ??= $jf($jc($jc(0, x.hashCode), y.hashCode));
+    if (__hashCode != null) return __hashCode;
+    var _$hash = 0;
+    _$hash = $jc(_$hash, x.hashCode);
+    _$hash = $jc(_$hash, y.hashCode);
+    _$hash = $jf(_$hash);
+    return __hashCode ??= _$hash;
   }
 
   @override
@@ -5903,7 +6021,11 @@ class _$$ValueSpecial extends $ValueSpecial {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, anInt.hashCode), $mustBeEscaped.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, $mustBeEscaped.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

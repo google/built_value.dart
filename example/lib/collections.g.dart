@@ -226,22 +226,19 @@ class _$Collections extends Collections {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc(
-                            $jc(
-                                $jc($jc($jc(0, list.hashCode), set.hashCode),
-                                    map.hashCode),
-                                listMultimap.hashCode),
-                            setMultimap.hashCode),
-                        nullableList.hashCode),
-                    nullableSet.hashCode),
-                nullableMap.hashCode),
-            nullableListMultimap.hashCode),
-        nullableSetMultimap.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, list.hashCode);
+    _$hash = $jc(_$hash, set.hashCode);
+    _$hash = $jc(_$hash, map.hashCode);
+    _$hash = $jc(_$hash, listMultimap.hashCode);
+    _$hash = $jc(_$hash, setMultimap.hashCode);
+    _$hash = $jc(_$hash, nullableList.hashCode);
+    _$hash = $jc(_$hash, nullableSet.hashCode);
+    _$hash = $jc(_$hash, nullableMap.hashCode);
+    _$hash = $jc(_$hash, nullableListMultimap.hashCode);
+    _$hash = $jc(_$hash, nullableSetMultimap.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

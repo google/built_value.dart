@@ -37,7 +37,12 @@ class _$Node extends Node {
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, label.hashCode), left.hashCode), right.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, label.hashCode);
+    _$hash = $jc(_$hash, left.hashCode);
+    _$hash = $jc(_$hash, right.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

@@ -149,10 +149,13 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, settings.hashCode), parsedLibrary.hashCode),
-            element.hashCode),
-        builderElement.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, settings.hashCode);
+    _$hash = $jc(_$hash, parsedLibrary.hashCode);
+    _$hash = $jc(_$hash, element.hashCode);
+    _$hash = $jc(_$hash, builderElement.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

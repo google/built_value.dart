@@ -213,7 +213,11 @@ class _$ImportedValue extends ImportedValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), simpleValues.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, simpleValues.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -329,7 +333,11 @@ class _$ImportedCustomValue extends ImportedCustomValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), simpleValues.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, simpleValues.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -444,7 +452,11 @@ class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), simpleValues.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, simpleValues.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override

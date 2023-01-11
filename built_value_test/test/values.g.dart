@@ -61,14 +61,15 @@ class _$SimpleValue extends SimpleValue {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc($jc($jc(0, anInt.hashCode), list.hashCode),
-                    multimap.hashCode),
-                map.hashCode),
-            aSet.hashCode),
-        setMultimap.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anInt.hashCode);
+    _$hash = $jc(_$hash, list.hashCode);
+    _$hash = $jc(_$hash, multimap.hashCode);
+    _$hash = $jc(_$hash, map.hashCode);
+    _$hash = $jc(_$hash, aSet.hashCode);
+    _$hash = $jc(_$hash, setMultimap.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -213,7 +214,11 @@ class _$CompoundValue extends CompoundValue {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, simpleValue.hashCode), string.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, simpleValue.hashCode);
+    _$hash = $jc(_$hash, string.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -317,7 +322,10 @@ class _$ComparedValue extends ComparedValue {
 
   @override
   int get hashCode {
-    return $jf($jc(0, name.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
