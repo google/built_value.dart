@@ -1,6 +1,6 @@
 # Changelog
 
-# 8.4.3 (unreleased)
+# 8.4.3
 
 - Fix generated deserialization code when there is a manually written builder
   with nullable fields.
