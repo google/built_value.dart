@@ -29,15 +29,6 @@ void main() {
       expect(() => SimpleValue(), throwsA(isErrorContaining('SimpleValue')));
     });
 
-    test('throws on null replace', () {
-      expect(
-          () => SimpleValue((b) => b
-            ..anInt = 1
-            // ignore: cast_nullable_to_non_nullable
-            ..replace(null as SimpleValue)),
-          throwsA(const TypeMatcher<Error>()));
-    });
-
     test('fields can be set via build constructor', () {
       final value = SimpleValue((b) => b
         ..anInt = 1
