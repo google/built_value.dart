@@ -79,3 +79,5 @@ final Serializers serializers = _$serializers;
   Cat,
 ])
 final Serializers moreSerializers = _$moreSerializers;
+
+Never get never => throw 'Never!';
