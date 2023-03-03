@@ -83,6 +83,8 @@ class DartTypes {
       return dartType.element.name + suffix;
     } else if (dartType.isVoid) {
       return 'void';
+    } else if (dartType.isBottom) {
+      return 'Never' + suffix;
     } else {
       throw UnimplementedError('(${dartType.runtimeType}) $dartType');
     }

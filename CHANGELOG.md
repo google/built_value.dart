@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.4.4
+
+- Increase minimum version of `analyzer`.
+- Fix generation with the type `Never`.
+
 # 8.4.3
 
 - Fix generated deserialization code when there is a manually written builder
