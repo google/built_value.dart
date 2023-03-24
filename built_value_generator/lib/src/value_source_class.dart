@@ -21,6 +21,7 @@ import 'package:collection/collection.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'dart_types.dart';
+import 'library_elements.dart';
 
 part 'value_source_class.g.dart';
 
@@ -43,6 +44,13 @@ abstract class ValueSourceClass
 
   @memoized
   String get name => element.displayName;
+
+  /// Returns `mixin class` if class modifiers are available, `class` otherwise.
+  ///
+  /// The two are equivalent as class modifiers change the meaning of `class`.
+  String get _class => LibraryElements.areClassMixinsEnabled(element.library)
+      ? 'mixin class'
+      : 'class';
 
   @memoized
   bool get isNonNullByDefault => element.library.isNonNullableByDefault;
@@ -743,7 +751,7 @@ abstract class ValueSourceClass
   /// Generates the value class implementation.
   String _generateImpl() {
     var result = StringBuffer();
-    result.writeln('class $implName$_boundedGenerics '
+    result.writeln('$_class $implName$_boundedGenerics '
         'extends $name$_generics {');
     for (var field in fields) {
       final type = field.typeInCompilationUnit(compilationUnit);
@@ -880,14 +888,14 @@ abstract class ValueSourceClass
   String _generateBuilder() {
     var result = StringBuffer();
     if (hasBuilder) {
-      result.writeln('class ${implName}Builder$_boundedGenerics '
+      result.writeln('$_class ${implName}Builder$_boundedGenerics '
           'extends ${name}Builder$_generics {');
     } else if (builderMixins.isNotEmpty) {
-      result.writeln('class ${name}Builder$_boundedGenerics '
+      result.writeln('$_class ${name}Builder$_boundedGenerics '
           'with ${builderMixins.join(", ")} '
           'implements ${builderImplements.join(", ")} {');
     } else {
-      result.writeln('class ${name}Builder$_boundedGenerics '
+      result.writeln('$_class ${name}Builder$_boundedGenerics '
           'implements ${builderImplements.join(", ")} {');
     }
 
@@ -1243,10 +1251,10 @@ abstract class ValueSourceClass
     ];
 
     if (implementsBuilt) {
-      result.writeln('abstract class ${name}Builder$_boundedGenerics '
+      result.writeln('abstract $_class ${name}Builder$_boundedGenerics '
           'implements ${builderImplements.join(", ")} {');
     } else {
-      result.writeln('abstract class ${name}Builder$_boundedGenerics '
+      result.writeln('abstract $_class ${name}Builder$_boundedGenerics '
           '${interfaces.isEmpty ? '' : 'implements ' + interfaces.join(', ')}'
           '{');
 
