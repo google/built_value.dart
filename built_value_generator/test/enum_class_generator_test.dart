@@ -625,7 +625,7 @@ Builder get builder => PartBuilder([BuiltValueGenerator()], '.g.dart');
 Future<String> generate(String source) async {
   final srcs = <String, String>{
     'built_value|lib/built_value.dart': builtValueSource,
-    '$pkgName|lib/test_enum.dart': source,
+    '$pkgName|lib/test_enum.dart': '// @dart=2.19\n$source',
   };
 
   // Capture any error from generation; if there is one, return that instead of
@@ -649,8 +649,8 @@ Future<String> generate(String source) async {
 Future<String> generateTwo(String source, String source2) async {
   final srcs = {
     'built_value|lib/built_value.dart': builtValueSource,
-    '$pkgName|lib/test_enum.dart': source,
-    '$pkgName|lib/test_enum_two.dart': source2
+    '$pkgName|lib/test_enum.dart': '// @dart=2.19\n$source',
+    '$pkgName|lib/test_enum_two.dart': '// @dart=2.19\n$source2',
   };
 
   final writer = InMemoryAssetWriter();
