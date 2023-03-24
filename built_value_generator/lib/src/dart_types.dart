@@ -81,7 +81,7 @@ class DartTypes {
       }
     } else if (dartType is TypeParameterType) {
       return dartType.element.name + suffix;
-    } else if (dartType.isVoid) {
+    } else if (dartType is VoidType) {
       return 'void';
     } else if (dartType.isBottom) {
       return 'Never' + suffix;

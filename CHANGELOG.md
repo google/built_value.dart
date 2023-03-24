@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.4.5
+
+- Stop using deprecated analyzer API.
+
 # 8.4.4
 
 - Increase minimum version of `analyzer`.

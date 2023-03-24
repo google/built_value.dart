@@ -510,7 +510,7 @@ abstract class ValueSourceClass
 
     bool isStaticBuilderHook(MethodElement method) {
       return method.isStatic &&
-          method.returnType.isVoid &&
+          method.returnType is VoidType &&
           method.parameters.length == 1 &&
           parsedLibrary.getElementDeclaration(method.parameters[0])!.node
               is SimpleFormalParameter &&
