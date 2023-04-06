@@ -10,6 +10,7 @@ import 'package:built_value/src/duration_serializer.dart';
 import 'package:built_value/src/int64_serializer.dart';
 import 'package:built_value/src/json_object_serializer.dart';
 import 'package:built_value/src/num_serializer.dart';
+import 'package:built_value/src/uint8list_serializer.dart';
 import 'package:built_value/src/uri_serializer.dart';
 
 import 'src/bool_serializer.dart';
@@ -73,6 +74,7 @@ abstract class Serializers {
           ..add(RegExpSerializer())
           ..add(StringSerializer())
           ..add(UriSerializer())
+          ..add(UInt8ListSerializer())
           ..addBuilderFactory(const FullType(BuiltList, [FullType.object]),
               () => ListBuilder<Object>())
           ..addBuilderFactory(
