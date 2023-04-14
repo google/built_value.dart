@@ -73,8 +73,8 @@ abstract class Serializers {
           ..add(NumSerializer())
           ..add(RegExpSerializer())
           ..add(StringSerializer())
-          ..add(UriSerializer())
           ..add(UInt8ListSerializer())
+          ..add(UriSerializer())
           ..addBuilderFactory(const FullType(BuiltList, [FullType.object]),
               () => ListBuilder<Object>())
           ..addBuilderFactory(
