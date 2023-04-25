@@ -18,7 +18,6 @@ import 'package:built_value_generator/src/strings.dart';
 import 'package:built_value_generator/src/value_source_class.dart';
 
 import 'dart_types.dart';
-import 'library_elements.dart';
 
 part 'serializer_source_class.g.dart';
 
@@ -78,13 +77,6 @@ abstract class SerializerSourceClass
 
   @memoized
   String get name => element.name;
-
-  /// Returns `mixin class` if class modifiers are available, `class` otherwise.
-  ///
-  /// The two are equivalent as class modifiers change the meaning of `class`.
-  String get _class => LibraryElements.areClassMixinsEnabled(element.library)
-      ? 'mixin class'
-      : 'class';
 
   @memoized
   bool get isNonNullByDefault => element.library.isNonNullableByDefault;
@@ -329,7 +321,7 @@ T $cast<T>(dynamic any) => any as T;
           : '';
 
       return '''
-$_class $serializerImplName implements StructuredSerializer<$genericName> {
+class $serializerImplName implements StructuredSerializer<$genericName> {
   @override
   final Iterable<Type> types = const [$name, $implName];
   @override
@@ -385,7 +377,7 @@ $_class $serializerImplName implements StructuredSerializer<$genericName> {
       if (wireNameMapping.isEmpty) {
         // No wire names. Just use the enum names directly.
         return '''
-$_class $serializerImplName implements PrimitiveSerializer<$genericName> {
+class $serializerImplName implements PrimitiveSerializer<$genericName> {
   @override
   final Iterable<Type> types = const <Type>[$name];
   @override
@@ -413,7 +405,7 @@ $_class $serializerImplName implements PrimitiveSerializer<$genericName> {
          };''';
 
         return '''
-$_class $serializerImplName implements PrimitiveSerializer<$genericName> {
+class $serializerImplName implements PrimitiveSerializer<$genericName> {
   $toWire
   $fromWire
 

@@ -31,9 +31,7 @@ abstract class Mammal implements Animal {
   MammalBuilder toBuilder();
 }
 
-abstract class Cat extends Object
-    with Walker
-    implements Mammal, Built<Cat, CatBuilder> {
+abstract class Cat with Walker implements Mammal, Built<Cat, CatBuilder> {
   static Serializer<Cat> get serializer => _$catSerializer;
 
   bool get tail;

@@ -15,8 +15,6 @@ import 'package:built_value_generator/src/strings.dart';
 import 'package:collection/collection.dart'
     show IterableExtension, IterableNullableExtension;
 
-import 'library_elements.dart';
-
 part 'enum_source_class.g.dart';
 
 abstract class EnumSourceClass
@@ -34,13 +32,6 @@ abstract class EnumSourceClass
 
   @memoized
   String get name => element.name;
-
-  /// Returns `mixin class` if class modifiers are available, `class` otherwise.
-  ///
-  /// The two are equivalent as class modifiers change the meaning of `class`.
-  String get _class => LibraryElements.areClassMixinsEnabled(element.library)
-      ? 'mixin class'
-      : 'class';
 
   @memoized
   String get wireName => settings.wireName ?? name;
@@ -190,7 +181,7 @@ abstract class EnumSourceClass
   Iterable<String> _checkMixin() {
     if (usesMixin) {
       final expectedCode =
-          'abstract $_class ${name}Mixin = Object with _\$${name}Mixin;';
+          'abstract class ${name}Mixin = Object with _\$${name}Mixin;';
       if (!mixinDeclaration!.contains(expectedCode)) {
         return ['Remove mixin or declare using exactly: $expectedCode'];
       }
@@ -243,7 +234,7 @@ abstract class EnumSourceClass
     var result = StringBuffer();
 
     result
-      ..writeln('$_class _\$${name}Meta {')
+      ..writeln('class _\$${name}Meta {')
       ..writeln('const _\$${name}Meta();');
     for (var field in fields) {
       result
@@ -253,7 +244,7 @@ abstract class EnumSourceClass
       ..writeln('$name valueOf(String name) => $valueOfIdentifier(name);')
       ..writeln('BuiltSet<$name> get values => $valuesIdentifier;')
       ..writeln('}')
-      ..writeln('abstract $_class _\$${name}Mixin {')
+      ..writeln('abstract class _\$${name}Mixin {')
       ..writeln('  // ignore: non_constant_identifier_names')
       ..writeln('_\$${name}Meta get $name => const _\$${name}Meta();')
       ..writeln('}');
