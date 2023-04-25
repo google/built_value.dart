@@ -751,7 +751,7 @@ abstract class ValueSourceClass
   /// Generates the value class implementation.
   String _generateImpl() {
     var result = StringBuffer();
-    result.writeln('$_class $implName$_boundedGenerics '
+    result.writeln('class $implName$_boundedGenerics '
         'extends $name$_generics {');
     for (var field in fields) {
       final type = field.typeInCompilationUnit(compilationUnit);
@@ -888,14 +888,14 @@ abstract class ValueSourceClass
   String _generateBuilder() {
     var result = StringBuffer();
     if (hasBuilder) {
-      result.writeln('$_class ${implName}Builder$_boundedGenerics '
+      result.writeln('class ${implName}Builder$_boundedGenerics '
           'extends ${name}Builder$_generics {');
     } else if (builderMixins.isNotEmpty) {
-      result.writeln('$_class ${name}Builder$_boundedGenerics '
+      result.writeln('class ${name}Builder$_boundedGenerics '
           'with ${builderMixins.join(", ")} '
           'implements ${builderImplements.join(", ")} {');
     } else {
-      result.writeln('$_class ${name}Builder$_boundedGenerics '
+      result.writeln('class ${name}Builder$_boundedGenerics '
           'implements ${builderImplements.join(", ")} {');
     }
 

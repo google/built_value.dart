@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.4.6
+
+- Fix to code generator for Dart 3.
+
 # 8.4.5
 
 - Stop using deprecated analyzer API.
