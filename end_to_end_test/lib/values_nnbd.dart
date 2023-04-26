@@ -882,6 +882,10 @@ abstract class $ValueSpecial
   String? get aString;
   bool? get $mustBeEscaped;
 
+  SimpleValue? get $mustAlsoEscaped;
+  SimpleValue? get $assert;
+  SimpleValue? get $10;
+
   factory $ValueSpecial([void Function($ValueSpecialBuilder) updates]) =
       _$$ValueSpecial;
   $ValueSpecial._();
