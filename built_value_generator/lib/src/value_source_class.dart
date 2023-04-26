@@ -1142,7 +1142,7 @@ abstract class ValueSourceClass
       result.write(fieldBuilders.keys.map((field) {
         final fieldBuilder = fieldBuilders[field];
         if (fieldBuilder == field) return '';
-        return "_\$failedField = '$field'; $fieldBuilder;";
+        return "_\$failedField = '${escapeString(field)}'; $fieldBuilder;";
       }).join('\n'));
 
       result.writeln('} catch (e) {');

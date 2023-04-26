@@ -8,6 +8,7 @@ part of serializers_nnbd;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add($ValueSpecial.serializer)
       ..add(BoundGenericValue.serializer)
       ..add(Cage.serializer)
       ..add(Cat.serializer)

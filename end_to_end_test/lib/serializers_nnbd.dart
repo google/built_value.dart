@@ -61,6 +61,7 @@ part 'serializers_nnbd.g.dart';
   StandardJsonValue,
   TestEnum,
   UsesHandCoded,
+  $ValueSpecial,
   ValueUsingImportAs,
   ValueWithAwkwardNestedBuilder,
   ValueWithBuilderFinalizer,

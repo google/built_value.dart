@@ -1744,6 +1744,27 @@ class _$$ValueSpecialSerializer implements StructuredSerializer<$ValueSpecial> {
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.$mustAlsoEscaped;
+    if (value != null) {
+      result
+        ..add('\$mustAlsoEscaped')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(SimpleValue)));
+    }
+    value = object.$assert;
+    if (value != null) {
+      result
+        ..add('\$assert')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(SimpleValue)));
+    }
+    value = object.$10;
+    if (value != null) {
+      result
+        ..add('\$10')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(SimpleValue)));
+    }
     return result;
   }
 
@@ -1770,6 +1791,18 @@ class _$$ValueSpecialSerializer implements StructuredSerializer<$ValueSpecial> {
         case '\$mustBeEscaped':
           result.$mustBeEscaped = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
+          break;
+        case '\$mustAlsoEscaped':
+          result.$mustAlsoEscaped.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue))! as SimpleValue);
+          break;
+        case '\$assert':
+          result.$assert.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue))! as SimpleValue);
+          break;
+        case '\$10':
+          result.$10.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SimpleValue))! as SimpleValue);
           break;
       }
     }
@@ -6808,11 +6841,23 @@ class _$$ValueSpecial extends $ValueSpecial {
   final String? aString;
   @override
   final bool? $mustBeEscaped;
+  @override
+  final SimpleValue? $mustAlsoEscaped;
+  @override
+  final SimpleValue? $assert;
+  @override
+  final SimpleValue? $10;
 
   factory _$$ValueSpecial([void Function($ValueSpecialBuilder)? updates]) =>
       (new $ValueSpecialBuilder()..update(updates))._build();
 
-  _$$ValueSpecial._({required this.anInt, this.aString, this.$mustBeEscaped})
+  _$$ValueSpecial._(
+      {required this.anInt,
+      this.aString,
+      this.$mustBeEscaped,
+      this.$mustAlsoEscaped,
+      this.$assert,
+      this.$10})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'$ValueSpecial', 'anInt');
   }
@@ -6830,7 +6875,10 @@ class _$$ValueSpecial extends $ValueSpecial {
     return other is $ValueSpecial &&
         anInt == other.anInt &&
         aString == other.aString &&
-        $mustBeEscaped == other.$mustBeEscaped;
+        $mustBeEscaped == other.$mustBeEscaped &&
+        $mustAlsoEscaped == other.$mustAlsoEscaped &&
+        $assert == other.$assert &&
+        $10 == other.$10;
   }
 
   @override
@@ -6839,6 +6887,9 @@ class _$$ValueSpecial extends $ValueSpecial {
     _$hash = $jc(_$hash, anInt.hashCode);
     _$hash = $jc(_$hash, aString.hashCode);
     _$hash = $jc(_$hash, $mustBeEscaped.hashCode);
+    _$hash = $jc(_$hash, $mustAlsoEscaped.hashCode);
+    _$hash = $jc(_$hash, $assert.hashCode);
+    _$hash = $jc(_$hash, $10.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -6848,7 +6899,10 @@ class _$$ValueSpecial extends $ValueSpecial {
     return (newBuiltValueToStringHelper(r'$ValueSpecial')
           ..add('anInt', anInt)
           ..add('aString', aString)
-          ..add('\$mustBeEscaped', $mustBeEscaped))
+          ..add('\$mustBeEscaped', $mustBeEscaped)
+          ..add('\$mustAlsoEscaped', $mustAlsoEscaped)
+          ..add('\$assert', $assert)
+          ..add('\$10', $10))
         .toString();
   }
 }
@@ -6870,6 +6924,21 @@ class $ValueSpecialBuilder
   set $mustBeEscaped(bool? $mustBeEscaped) =>
       _$this._$mustBeEscaped = $mustBeEscaped;
 
+  SimpleValueBuilder? _$mustAlsoEscaped;
+  SimpleValueBuilder get $mustAlsoEscaped =>
+      _$this._$mustAlsoEscaped ??= new SimpleValueBuilder();
+  set $mustAlsoEscaped(SimpleValueBuilder? $mustAlsoEscaped) =>
+      _$this._$mustAlsoEscaped = $mustAlsoEscaped;
+
+  SimpleValueBuilder? _$assert;
+  SimpleValueBuilder get $assert =>
+      _$this._$assert ??= new SimpleValueBuilder();
+  set $assert(SimpleValueBuilder? $assert) => _$this._$assert = $assert;
+
+  SimpleValueBuilder? _$10;
+  SimpleValueBuilder get $10 => _$this._$10 ??= new SimpleValueBuilder();
+  set $10(SimpleValueBuilder? $10) => _$this._$10 = $10;
+
   $ValueSpecialBuilder();
 
   $ValueSpecialBuilder get _$this {
@@ -6878,6 +6947,9 @@ class $ValueSpecialBuilder
       _anInt = $v.anInt;
       _aString = $v.aString;
       _$mustBeEscaped = $v.$mustBeEscaped;
+      _$mustAlsoEscaped = $v.$mustAlsoEscaped?.toBuilder();
+      _$assert = $v.$assert?.toBuilder();
+      _$10 = $v.$10?.toBuilder();
       _$v = null;
     }
     return this;
@@ -6898,12 +6970,32 @@ class $ValueSpecialBuilder
   $ValueSpecial build() => _build();
 
   _$$ValueSpecial _build() {
-    final _$result = _$v ??
-        new _$$ValueSpecial._(
-            anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, r'$ValueSpecial', 'anInt'),
-            aString: aString,
-            $mustBeEscaped: $mustBeEscaped);
+    _$$ValueSpecial _$result;
+    try {
+      _$result = _$v ??
+          new _$$ValueSpecial._(
+              anInt: BuiltValueNullFieldError.checkNotNull(
+                  anInt, r'$ValueSpecial', 'anInt'),
+              aString: aString,
+              $mustBeEscaped: $mustBeEscaped,
+              $mustAlsoEscaped: _$mustAlsoEscaped?.build(),
+              $assert: _$assert?.build(),
+              $10: _$10?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = '\$mustAlsoEscaped';
+        _$mustAlsoEscaped?.build();
+        _$failedField = '\$assert';
+        _$assert?.build();
+        _$failedField = '\$10';
+        _$10?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'$ValueSpecial', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

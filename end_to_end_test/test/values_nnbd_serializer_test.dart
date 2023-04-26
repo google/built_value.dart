@@ -655,4 +655,51 @@ void main() {
       expect(serializers.deserialize(serialized), data);
     });
   });
+
+  group(r'$ValueSpecial', () {
+    var data = $ValueSpecial(
+      (b) => b
+        ..aString = 'String'
+        ..anInt = 42
+        ..$mustBeEscaped = true
+        ..$mustAlsoEscaped = SimpleValue(
+          (b) => b
+            ..anInt = 1
+            ..aString = '1',
+        ).toBuilder()
+        ..$assert = SimpleValue(
+          (b) => b
+            ..anInt = 1
+            ..aString = '1',
+        ).toBuilder()
+        ..$10 = SimpleValue(
+          (b) => b
+            ..anInt = 1
+            ..aString = '1',
+        ).toBuilder(),
+    );
+    var serialized = json.decode(json.encode([
+      r'$ValueSpecial',
+      'anInt',
+      42,
+      'aString',
+      'String',
+      r'$mustBeEscaped',
+      true,
+      r'$mustAlsoEscaped',
+      ['anInt', 1, 'aString', '1'],
+      r'$assert',
+      ['anInt', 1, 'aString', '1'],
+      r'$10',
+      ['anInt', 1, 'aString', '1']
+    ])) as Object;
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+  });
 }
