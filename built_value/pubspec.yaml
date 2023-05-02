@@ -4,6 +4,7 @@ description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library is the runtime dependency.
 repository: https://github.com/google/built_value.dart/tree/master/built_value
+ - built-value
 
 environment:
   sdk: '>=2.12.0 <3.0.0'

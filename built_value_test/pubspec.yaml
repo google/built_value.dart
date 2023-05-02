@@ -4,6 +4,11 @@ description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library provides test support.
 repository: https://github.com/google/built_value.dart/tree/master/built_value_test
+topics:
+ - testing
+ - built-value
+ - codegen
+ - build-runner
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
