@@ -3,6 +3,7 @@ version: 8.4.4
 description: >
   Experimental analyzer plugin for the built_value code generator.
 homepage: https://github.com/google/built_value.dart
+ - built-value
 
 environment:
   sdk: '>=2.3.0 <3.0.0'
