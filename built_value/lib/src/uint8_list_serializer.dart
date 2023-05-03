@@ -8,20 +8,20 @@ import 'dart:typed_data';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 
-class UInt8ListSerializer implements PrimitiveSerializer<Uint8List> {
+class Uint8ListSerializer implements PrimitiveSerializer<Uint8List> {
   @override
   final String wireName = 'UInt8List';
 
   @override
   Object serialize(Serializers serializers, Uint8List uint8list,
       {FullType specifiedType = FullType.unspecified}) {
-    return base64Encode(uint8list).toString();
+    return base64Encode(uint8list);
   }
 
   @override
   Uint8List deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    return base64Decode(serialized.toString());
+    return base64Decode(serialized as String);
   }
 
   @override
