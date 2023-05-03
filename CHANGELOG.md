@@ -1,9 +1,11 @@
 # Changelog
 
-# 8.4.5
+# 8.5.0
 
-- Stop using deprecated analyzer API.
+- Add `Uint8ListSerializer`.
 - Generate Dart-3-compatible code if needed.
+- Stop using deprecated analyzer API.
+- Fix codegen for optional fields with `$` in the name.
 
 # 8.4.4
 
