@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of simple_value;
+part of 'simple_value.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -12,10 +12,10 @@ class _$SimpleValue extends SimpleValue {
   @override
   final String aString;
 
-  factory _$SimpleValue([void Function(SimpleValueBuilder) updates]) =>
+  factory _$SimpleValue([void Function(SimpleValueBuilder)? updates]) =>
       (new SimpleValueBuilder()..update(updates))._build();
 
-  _$SimpleValue._({this.anInt, this.aString}) : super._() {
+  _$SimpleValue._({required this.anInt, required this.aString}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'SimpleValue', 'anInt');
     BuiltValueNullFieldError.checkNotNull(aString, r'SimpleValue', 'aString');
   }
@@ -54,15 +54,15 @@ class _$SimpleValue extends SimpleValue {
 }
 
 class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
-  _$SimpleValue _$v;
+  _$SimpleValue? _$v;
 
-  int _anInt;
-  int get anInt => _$this._anInt;
-  set anInt(int anInt) => _$this._anInt = anInt;
+  int? _anInt;
+  int? get anInt => _$this._anInt;
+  set anInt(int? anInt) => _$this._anInt = anInt;
 
-  String _aString;
-  String get aString => _$this._aString;
-  set aString(String aString) => _$this._aString = aString;
+  String? _aString;
+  String? get aString => _$this._aString;
+  set aString(String? aString) => _$this._aString = aString;
 
   SimpleValueBuilder();
 
@@ -83,7 +83,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   }
 
   @override
-  void update(void Function(SimpleValueBuilder) updates) {
+  void update(void Function(SimpleValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

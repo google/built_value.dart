@@ -9,14 +9,11 @@ import 'package:built_value/built_value.dart';
 part 'node.g.dart';
 
 abstract class Node implements Built<Node, NodeBuilder> {
-  @nullable
-  String get label;
+  String? get label;
 
-  @nullable
-  Node get left;
+  Node? get left;
 
-  @nullable
-  Node get right;
+  Node? get right;
 
   factory Node([Function(NodeBuilder) updates]) = _$Node;
   Node._();

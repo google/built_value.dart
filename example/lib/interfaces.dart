@@ -46,8 +46,8 @@ abstract class ValueWithInt
 /// Builder class for [ValueWithInt].
 abstract class ValueWithIntBuilder
     implements Builder<ValueWithInt, ValueWithIntBuilder> {
-  int anInt;
-  String note;
+  int? anInt;
+  String? note;
 
   factory ValueWithIntBuilder() = _$ValueWithIntBuilder;
   ValueWithIntBuilder._();

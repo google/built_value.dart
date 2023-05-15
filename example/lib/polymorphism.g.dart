@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of polymorphism;
+part of 'polymorphism.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -16,9 +16,9 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   final String wireName = 'Cat';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Cat object,
+  Iterable<Object?> serialize(Serializers serializers, Cat object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'tail',
       serializers.serialize(object.tail, specifiedType: const FullType(bool)),
       'legs',
@@ -29,23 +29,23 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   }
 
   @override
-  Cat deserialize(Serializers serializers, Iterable<Object> serialized,
+  Cat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CatBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'tail':
           result.tail = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'legs':
           result.legs = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -61,9 +61,9 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   final String wireName = 'Fish';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Fish object,
+  Iterable<Object?> serialize(Serializers serializers, Fish object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'fins',
       serializers.serialize(object.fins, specifiedType: const FullType(int)),
       'legs',
@@ -74,23 +74,23 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   }
 
   @override
-  Fish deserialize(Serializers serializers, Iterable<Object> serialized,
+  Fish deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new FishBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'fins':
           result.fins = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'legs':
           result.legs = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -102,8 +102,8 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
 abstract class AnimalBuilder {
   void replace(Animal other);
   void update(void Function(AnimalBuilder) updates);
-  int get legs;
-  set legs(int legs);
+  int? get legs;
+  set legs(int? legs);
 }
 
 class _$Cat extends Cat {
@@ -112,10 +112,10 @@ class _$Cat extends Cat {
   @override
   final int legs;
 
-  factory _$Cat([void Function(CatBuilder) updates]) =>
+  factory _$Cat([void Function(CatBuilder)? updates]) =>
       (new CatBuilder()..update(updates))._build();
 
-  _$Cat._({this.tail, this.legs}) : super._() {
+  _$Cat._({required this.tail, required this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail');
     BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs');
   }
@@ -152,15 +152,15 @@ class _$Cat extends Cat {
 }
 
 class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
-  _$Cat _$v;
+  _$Cat? _$v;
 
-  bool _tail;
-  bool get tail => _$this._tail;
-  set tail(covariant bool tail) => _$this._tail = tail;
+  bool? _tail;
+  bool? get tail => _$this._tail;
+  set tail(covariant bool? tail) => _$this._tail = tail;
 
-  int _legs;
-  int get legs => _$this._legs;
-  set legs(covariant int legs) => _$this._legs = legs;
+  int? _legs;
+  int? get legs => _$this._legs;
+  set legs(covariant int? legs) => _$this._legs = legs;
 
   CatBuilder();
 
@@ -181,7 +181,7 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   }
 
   @override
-  void update(void Function(CatBuilder) updates) {
+  void update(void Function(CatBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -204,10 +204,10 @@ class _$Fish extends Fish {
   @override
   final int legs;
 
-  factory _$Fish([void Function(FishBuilder) updates]) =>
+  factory _$Fish([void Function(FishBuilder)? updates]) =>
       (new FishBuilder()..update(updates))._build();
 
-  _$Fish._({this.fins, this.legs}) : super._() {
+  _$Fish._({required this.fins, required this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins');
     BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs');
   }
@@ -244,15 +244,15 @@ class _$Fish extends Fish {
 }
 
 class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
-  _$Fish _$v;
+  _$Fish? _$v;
 
-  int _fins;
-  int get fins => _$this._fins;
-  set fins(covariant int fins) => _$this._fins = fins;
+  int? _fins;
+  int? get fins => _$this._fins;
+  set fins(covariant int? fins) => _$this._fins = fins;
 
-  int _legs;
-  int get legs => _$this._legs;
-  set legs(covariant int legs) => _$this._legs = legs;
+  int? _legs;
+  int? get legs => _$this._legs;
+  set legs(covariant int? legs) => _$this._legs = legs;
 
   FishBuilder();
 
@@ -273,7 +273,7 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   }
 
   @override
-  void update(void Function(FishBuilder) updates) {
+  void update(void Function(FishBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

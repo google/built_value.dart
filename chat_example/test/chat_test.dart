@@ -7,7 +7,7 @@ import 'package:chat_example/testing/fake_environment.dart';
 import 'package:test/test.dart';
 
 void main() {
-  FakeEnvironment environment;
+  late FakeEnvironment environment;
 
   setUp(() {
     environment = FakeEnvironment();

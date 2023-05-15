@@ -1,5 +1,11 @@
 # Changelog
 
+# 8.5.1 (unreleased)
+
+- Migrate benchmark and examples to null safety.
+- Remove pre-null-safe test cases.
+- Remove analyzer plugin.
+
 # 8.5.0
 
 - Add `Uint8ListSerializer`.

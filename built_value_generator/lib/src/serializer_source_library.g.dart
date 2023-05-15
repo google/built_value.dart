@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of built_value_generator.source_library;
+part of 'serializer_source_library.dart';
 
 // **************************************************************************
 // BuiltValueGenerator

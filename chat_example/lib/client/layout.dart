@@ -7,9 +7,9 @@ import 'dart:html';
 /// Forces focus to the input box.
 class Layout {
   Layout() {
-    final screen = querySelector('#screen');
-    final text = querySelector('#text');
-    final input = querySelector('#input');
+    final screen = querySelector('#screen')!;
+    final text = querySelector('#text')!;
+    final input = querySelector('#input')!;
 
     input.focus();
 

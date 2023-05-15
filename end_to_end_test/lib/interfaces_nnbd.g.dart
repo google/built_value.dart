@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // @dart=2.12
 
-part of interfaces;
+part of 'interfaces_nnbd.dart';
 
 // **************************************************************************
 // BuiltValueGenerator

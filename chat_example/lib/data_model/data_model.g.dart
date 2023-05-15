@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of data_model;
+part of 'data_model.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -73,9 +73,9 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
   final String wireName = 'Chat';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Chat object,
+  Iterable<Object?> serialize(Serializers serializers, Chat object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'text',
       serializers.serialize(object.text, specifiedType: const FullType(String)),
       'targets',
@@ -88,25 +88,25 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
   }
 
   @override
-  Chat deserialize(Serializers serializers, Iterable<Object> serialized,
+  Chat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ChatBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'text':
           result.text = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'targets':
           result.targets.replace(serializers.deserialize(value,
                   specifiedType:
-                      const FullType(BuiltSet, const [const FullType(String)]))
-              as BuiltSet<Object>);
+                      const FullType(BuiltSet, const [const FullType(String)]))!
+              as BuiltSet<Object?>);
           break;
       }
     }
@@ -122,9 +122,9 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
   final String wireName = 'Login';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Login object,
+  Iterable<Object?> serialize(Serializers serializers, Login object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'username',
       serializers.serialize(object.username,
           specifiedType: const FullType(String)),
@@ -137,23 +137,23 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
   }
 
   @override
-  Login deserialize(Serializers serializers, Iterable<Object> serialized,
+  Login deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new LoginBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'username':
           result.username = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'password':
           result.password = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -169,9 +169,9 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
   final String wireName = 'Status';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Status object,
+  Iterable<Object?> serialize(Serializers serializers, Status object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'message',
       serializers.serialize(object.message,
           specifiedType: const FullType(String)),
@@ -184,23 +184,23 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
   }
 
   @override
-  Status deserialize(Serializers serializers, Iterable<Object> serialized,
+  Status deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new StatusBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'message':
           result.message = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'type':
           result.type = serializers.deserialize(value,
-              specifiedType: const FullType(StatusType)) as StatusType;
+              specifiedType: const FullType(StatusType))! as StatusType;
           break;
       }
     }
@@ -233,9 +233,9 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
   final String wireName = 'ListUsers';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ListUsers object,
+  Iterable<Object?> serialize(Serializers serializers, ListUsers object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'statusTypes',
       serializers.serialize(object.statusTypes,
           specifiedType:
@@ -246,21 +246,21 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
   }
 
   @override
-  ListUsers deserialize(Serializers serializers, Iterable<Object> serialized,
+  ListUsers deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ListUsersBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'statusTypes':
           result.statusTypes.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltSet, const [const FullType(StatusType)]))
-              as BuiltSet<Object>);
+                      BuiltSet, const [const FullType(StatusType)]))!
+              as BuiltSet<Object?>);
           break;
       }
     }
@@ -293,9 +293,9 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
   final String wireName = 'ShowChat';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ShowChat object,
+  Iterable<Object?> serialize(Serializers serializers, ShowChat object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'username',
       serializers.serialize(object.username,
           specifiedType: const FullType(String)),
@@ -310,27 +310,27 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
   }
 
   @override
-  ShowChat deserialize(Serializers serializers, Iterable<Object> serialized,
+  ShowChat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ShowChatBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'username':
           result.username = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'private':
           result.private = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'text':
           result.text = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -346,9 +346,9 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
   final String wireName = 'Welcome';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Welcome object,
+  Iterable<Object?> serialize(Serializers serializers, Welcome object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'log',
       serializers.serialize(object.log,
           specifiedType:
@@ -362,25 +362,25 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
   }
 
   @override
-  Welcome deserialize(Serializers serializers, Iterable<Object> serialized,
+  Welcome deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new WelcomeBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'log':
           result.log.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltList, const [const FullType(Response)]))
-              as BuiltList<Object>);
+                      BuiltList, const [const FullType(Response)]))!
+              as BuiltList<Object?>);
           break;
         case 'message':
           result.message = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -397,9 +397,9 @@ class _$ListUsersResponseSerializer
   final String wireName = 'ListUsersResponse';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ListUsersResponse object,
+  Iterable<Object?> serialize(Serializers serializers, ListUsersResponse object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'statuses',
       serializers.serialize(object.statuses,
           specifiedType: const FullType(BuiltMap,
@@ -411,20 +411,20 @@ class _$ListUsersResponseSerializer
 
   @override
   ListUsersResponse deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ListUsersResponseBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'statuses':
           result.statuses.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltMap,
-                  const [const FullType(String), const FullType(Status)])));
+                  const [const FullType(String), const FullType(Status)]))!);
           break;
       }
     }
@@ -439,10 +439,10 @@ class _$Chat extends Chat {
   @override
   final BuiltSet<String> targets;
 
-  factory _$Chat([void Function(ChatBuilder) updates]) =>
+  factory _$Chat([void Function(ChatBuilder)? updates]) =>
       (new ChatBuilder()..update(updates))._build();
 
-  _$Chat._({this.text, this.targets}) : super._() {
+  _$Chat._({required this.text, required this.targets}) : super._() {
     BuiltValueNullFieldError.checkNotNull(text, r'Chat', 'text');
     BuiltValueNullFieldError.checkNotNull(targets, r'Chat', 'targets');
   }
@@ -479,16 +479,16 @@ class _$Chat extends Chat {
 }
 
 class ChatBuilder implements Builder<Chat, ChatBuilder> {
-  _$Chat _$v;
+  _$Chat? _$v;
 
-  String _text;
-  String get text => _$this._text;
-  set text(String text) => _$this._text = text;
+  String? _text;
+  String? get text => _$this._text;
+  set text(String? text) => _$this._text = text;
 
-  SetBuilder<String> _targets;
+  SetBuilder<String>? _targets;
   SetBuilder<String> get targets =>
       _$this._targets ??= new SetBuilder<String>();
-  set targets(SetBuilder<String> targets) => _$this._targets = targets;
+  set targets(SetBuilder<String>? targets) => _$this._targets = targets;
 
   ChatBuilder();
 
@@ -509,7 +509,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   }
 
   @override
-  void update(void Function(ChatBuilder) updates) {
+  void update(void Function(ChatBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -525,7 +525,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
                   BuiltValueNullFieldError.checkNotNull(text, r'Chat', 'text'),
               targets: targets.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'targets';
         targets.build();
@@ -546,10 +546,10 @@ class _$Login extends Login {
   @override
   final String password;
 
-  factory _$Login([void Function(LoginBuilder) updates]) =>
+  factory _$Login([void Function(LoginBuilder)? updates]) =>
       (new LoginBuilder()..update(updates))._build();
 
-  _$Login._({this.username, this.password}) : super._() {
+  _$Login._({required this.username, required this.password}) : super._() {
     BuiltValueNullFieldError.checkNotNull(username, r'Login', 'username');
     BuiltValueNullFieldError.checkNotNull(password, r'Login', 'password');
   }
@@ -588,15 +588,15 @@ class _$Login extends Login {
 }
 
 class LoginBuilder implements Builder<Login, LoginBuilder> {
-  _$Login _$v;
+  _$Login? _$v;
 
-  String _username;
-  String get username => _$this._username;
-  set username(String username) => _$this._username = username;
+  String? _username;
+  String? get username => _$this._username;
+  set username(String? username) => _$this._username = username;
 
-  String _password;
-  String get password => _$this._password;
-  set password(String password) => _$this._password = password;
+  String? _password;
+  String? get password => _$this._password;
+  set password(String? password) => _$this._password = password;
 
   LoginBuilder();
 
@@ -617,7 +617,7 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   }
 
   @override
-  void update(void Function(LoginBuilder) updates) {
+  void update(void Function(LoginBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -642,10 +642,10 @@ class _$Status extends Status {
   @override
   final StatusType type;
 
-  factory _$Status([void Function(StatusBuilder) updates]) =>
+  factory _$Status([void Function(StatusBuilder)? updates]) =>
       (new StatusBuilder()..update(updates))._build();
 
-  _$Status._({this.message, this.type}) : super._() {
+  _$Status._({required this.message, required this.type}) : super._() {
     BuiltValueNullFieldError.checkNotNull(message, r'Status', 'message');
     BuiltValueNullFieldError.checkNotNull(type, r'Status', 'type');
   }
@@ -682,15 +682,15 @@ class _$Status extends Status {
 }
 
 class StatusBuilder implements Builder<Status, StatusBuilder> {
-  _$Status _$v;
+  _$Status? _$v;
 
-  String _message;
-  String get message => _$this._message;
-  set message(String message) => _$this._message = message;
+  String? _message;
+  String? get message => _$this._message;
+  set message(String? message) => _$this._message = message;
 
-  StatusType _type;
-  StatusType get type => _$this._type;
-  set type(StatusType type) => _$this._type = type;
+  StatusType? _type;
+  StatusType? get type => _$this._type;
+  set type(StatusType? type) => _$this._type = type;
 
   StatusBuilder();
 
@@ -711,7 +711,7 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   }
 
   @override
-  void update(void Function(StatusBuilder) updates) {
+  void update(void Function(StatusBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -734,10 +734,10 @@ class _$ListUsers extends ListUsers {
   @override
   final BuiltSet<StatusType> statusTypes;
 
-  factory _$ListUsers([void Function(ListUsersBuilder) updates]) =>
+  factory _$ListUsers([void Function(ListUsersBuilder)? updates]) =>
       (new ListUsersBuilder()..update(updates))._build();
 
-  _$ListUsers._({this.statusTypes}) : super._() {
+  _$ListUsers._({required this.statusTypes}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
         statusTypes, r'ListUsers', 'statusTypes');
   }
@@ -772,12 +772,12 @@ class _$ListUsers extends ListUsers {
 }
 
 class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
-  _$ListUsers _$v;
+  _$ListUsers? _$v;
 
-  SetBuilder<StatusType> _statusTypes;
+  SetBuilder<StatusType>? _statusTypes;
   SetBuilder<StatusType> get statusTypes =>
       _$this._statusTypes ??= new SetBuilder<StatusType>();
-  set statusTypes(SetBuilder<StatusType> statusTypes) =>
+  set statusTypes(SetBuilder<StatusType>? statusTypes) =>
       _$this._statusTypes = statusTypes;
 
   ListUsersBuilder();
@@ -798,7 +798,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
   }
 
   @override
-  void update(void Function(ListUsersBuilder) updates) {
+  void update(void Function(ListUsersBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -810,7 +810,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
     try {
       _$result = _$v ?? new _$ListUsers._(statusTypes: statusTypes.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'statusTypes';
         statusTypes.build();
@@ -833,10 +833,12 @@ class _$ShowChat extends ShowChat {
   @override
   final String text;
 
-  factory _$ShowChat([void Function(ShowChatBuilder) updates]) =>
+  factory _$ShowChat([void Function(ShowChatBuilder)? updates]) =>
       (new ShowChatBuilder()..update(updates))._build();
 
-  _$ShowChat._({this.username, this.private, this.text}) : super._() {
+  _$ShowChat._(
+      {required this.username, required this.private, required this.text})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(username, r'ShowChat', 'username');
     BuiltValueNullFieldError.checkNotNull(private, r'ShowChat', 'private');
     BuiltValueNullFieldError.checkNotNull(text, r'ShowChat', 'text');
@@ -879,19 +881,19 @@ class _$ShowChat extends ShowChat {
 }
 
 class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
-  _$ShowChat _$v;
+  _$ShowChat? _$v;
 
-  String _username;
-  String get username => _$this._username;
-  set username(String username) => _$this._username = username;
+  String? _username;
+  String? get username => _$this._username;
+  set username(String? username) => _$this._username = username;
 
-  bool _private;
-  bool get private => _$this._private;
-  set private(bool private) => _$this._private = private;
+  bool? _private;
+  bool? get private => _$this._private;
+  set private(bool? private) => _$this._private = private;
 
-  String _text;
-  String get text => _$this._text;
-  set text(String text) => _$this._text = text;
+  String? _text;
+  String? get text => _$this._text;
+  set text(String? text) => _$this._text = text;
 
   ShowChatBuilder();
 
@@ -913,7 +915,7 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   }
 
   @override
-  void update(void Function(ShowChatBuilder) updates) {
+  void update(void Function(ShowChatBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -940,10 +942,10 @@ class _$Welcome extends Welcome {
   @override
   final String message;
 
-  factory _$Welcome([void Function(WelcomeBuilder) updates]) =>
+  factory _$Welcome([void Function(WelcomeBuilder)? updates]) =>
       (new WelcomeBuilder()..update(updates))._build();
 
-  _$Welcome._({this.log, this.message}) : super._() {
+  _$Welcome._({required this.log, required this.message}) : super._() {
     BuiltValueNullFieldError.checkNotNull(log, r'Welcome', 'log');
     BuiltValueNullFieldError.checkNotNull(message, r'Welcome', 'message');
   }
@@ -980,15 +982,15 @@ class _$Welcome extends Welcome {
 }
 
 class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
-  _$Welcome _$v;
+  _$Welcome? _$v;
 
-  ListBuilder<Response> _log;
+  ListBuilder<Response>? _log;
   ListBuilder<Response> get log => _$this._log ??= new ListBuilder<Response>();
-  set log(ListBuilder<Response> log) => _$this._log = log;
+  set log(ListBuilder<Response>? log) => _$this._log = log;
 
-  String _message;
-  String get message => _$this._message;
-  set message(String message) => _$this._message = message;
+  String? _message;
+  String? get message => _$this._message;
+  set message(String? message) => _$this._message = message;
 
   WelcomeBuilder();
 
@@ -1009,7 +1011,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   }
 
   @override
-  void update(void Function(WelcomeBuilder) updates) {
+  void update(void Function(WelcomeBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -1025,7 +1027,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
               message: BuiltValueNullFieldError.checkNotNull(
                   message, r'Welcome', 'message'));
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'log';
         log.build();
@@ -1045,10 +1047,10 @@ class _$ListUsersResponse extends ListUsersResponse {
   final BuiltMap<String, Status> statuses;
 
   factory _$ListUsersResponse(
-          [void Function(ListUsersResponseBuilder) updates]) =>
+          [void Function(ListUsersResponseBuilder)? updates]) =>
       (new ListUsersResponseBuilder()..update(updates))._build();
 
-  _$ListUsersResponse._({this.statuses}) : super._() {
+  _$ListUsersResponse._({required this.statuses}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
         statuses, r'ListUsersResponse', 'statuses');
   }
@@ -1085,12 +1087,12 @@ class _$ListUsersResponse extends ListUsersResponse {
 
 class ListUsersResponseBuilder
     implements Builder<ListUsersResponse, ListUsersResponseBuilder> {
-  _$ListUsersResponse _$v;
+  _$ListUsersResponse? _$v;
 
-  MapBuilder<String, Status> _statuses;
+  MapBuilder<String, Status>? _statuses;
   MapBuilder<String, Status> get statuses =>
       _$this._statuses ??= new MapBuilder<String, Status>();
-  set statuses(MapBuilder<String, Status> statuses) =>
+  set statuses(MapBuilder<String, Status>? statuses) =>
       _$this._statuses = statuses;
 
   ListUsersResponseBuilder();
@@ -1111,7 +1113,7 @@ class ListUsersResponseBuilder
   }
 
   @override
-  void update(void Function(ListUsersResponseBuilder) updates) {
+  void update(void Function(ListUsersResponseBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -1123,7 +1125,7 @@ class ListUsersResponseBuilder
     try {
       _$result = _$v ?? new _$ListUsersResponse._(statuses: statuses.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'statuses';
         statuses.build();

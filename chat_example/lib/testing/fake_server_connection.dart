@@ -14,7 +14,7 @@ class FakeServerConnection implements ServerConnection {
       StreamController<String>(sync: true);
 
   @override
-  String username;
+  late String username;
 
   @override
   void sendToClient(String data) {

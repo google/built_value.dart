@@ -14,7 +14,7 @@ class Input {
 
     input.onKeyPress.listen((keyEvent) {
       if (keyEvent.keyCode == KeyCode.ENTER) {
-        _streamController.add(input.value);
+        _streamController.add(input.value!);
         input.value = '';
       }
     });
