@@ -13,7 +13,7 @@ class HttpServerConnection implements ServerConnection {
   final StreamController<String> _streamController = StreamController<String>();
 
   @override
-  String username;
+  late String username;
 
   HttpServerConnection(this._webSocketChannel) {
     _webSocketChannel.stream.listen((data) {

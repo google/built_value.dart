@@ -493,7 +493,7 @@ abstract class ValueSourceClass
       } else {
         var found = false;
         final interfaces = implementsClause.interfaces.map((type) {
-          if (type.name.name == 'Built') {
+          if (type.name2.lexeme == 'Built') {
             found = true;
             return expectedInterface;
           } else {

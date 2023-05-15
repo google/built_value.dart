@@ -62,7 +62,7 @@ class DartTypes {
         ? '?'
         : '';
 
-    if (dartType.isDynamic) {
+    if (dartType is DynamicType) {
       return 'dynamic';
     } else if (dartType is FunctionType) {
       return getName(dartType.returnType) +

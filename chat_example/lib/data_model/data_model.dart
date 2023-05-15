@@ -160,7 +160,7 @@ abstract class ListUsersResponse
   String render() {
     final result = StringBuffer('The following users are online:\n\n');
     for (final username in statuses.keys) {
-      final status = statuses[username];
+      final status = statuses[username]!;
       result.write(
           status.message.isEmpty ? username : '$username ${status.message}');
       result.write('\n');

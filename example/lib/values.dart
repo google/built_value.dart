@@ -26,9 +26,7 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
 
   int get anInt;
 
-  // Only fields marked @nullable can hold null.
-  @nullable
-  String get aString;
+  String? get aString;
 
   /// The recommended factory exposes the generated builder interface. This
   /// works well for classes with many fields, or for classes that might be
@@ -68,8 +66,7 @@ abstract class CompoundValue
   static Serializer<CompoundValue> get serializer => _$compoundValueSerializer;
 
   SimpleValue get simpleValue;
-  @nullable
-  ValidatedValue get validatedValue;
+  ValidatedValue? get validatedValue;
 
   factory CompoundValue([void Function(CompoundValueBuilder) updates]) =
       _$CompoundValue;
@@ -83,8 +80,7 @@ abstract class ValidatedValue
       _$validatedValueSerializer;
 
   int get anInt;
-  @nullable
-  String get aString;
+  String? get aString;
 
   factory ValidatedValue([void Function(ValidatedValueBuilder) updates]) =
       _$ValidatedValue;
@@ -100,10 +96,9 @@ abstract class ValueWithCode
   static final int youCanHaveStaticFields = 3;
 
   int get anInt;
-  @nullable
-  String get aString;
+  String? get aString;
 
-  String get youCanWriteDerivedGetters => anInt.toString() + aString;
+  String get youCanWriteDerivedGetters => anInt.toString() + aString!;
 
   factory ValueWithCode([void Function(ValueWithCodeBuilder) updates]) =
       _$ValueWithCode;
@@ -122,8 +117,7 @@ abstract class ValueWithCode
 abstract class ValueWithDefaults
     implements Built<ValueWithDefaults, ValueWithDefaultsBuilder> {
   int get anInt;
-  @nullable
-  String get aString;
+  String? get aString;
 
   factory ValueWithDefaults([void Function(ValueWithDefaultsBuilder) updates]) =
       _$ValueWithDefaults;
@@ -137,8 +131,7 @@ abstract class ValueWithDefaultsBuilder
     implements Builder<ValueWithDefaults, ValueWithDefaultsBuilder> {
   int anInt = 7;
 
-  @nullable
-  String aString;
+  String? aString;
 
   factory ValueWithDefaultsBuilder() = _$ValueWithDefaultsBuilder;
   ValueWithDefaultsBuilder._();

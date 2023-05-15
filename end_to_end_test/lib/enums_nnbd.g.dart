@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // @dart=2.17
 
-part of enums_nnbd;
+part of 'enums_nnbd.dart';
 
 // **************************************************************************
 // BuiltValueGenerator

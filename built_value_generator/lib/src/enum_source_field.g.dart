@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of built_value_generator.enum_source_field;
+part of 'enum_source_field.dart';
 
 // **************************************************************************
 // BuiltValueGenerator

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of interfaces;
+part of 'interfaces.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -41,9 +41,9 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   final String wireName = 'ValueWithInt';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ValueWithInt object,
+  Iterable<Object?> serialize(Serializers serializers, ValueWithInt object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'anInt',
       serializers.serialize(object.anInt, specifiedType: const FullType(int)),
       'note',
@@ -54,23 +54,24 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   }
 
   @override
-  ValueWithInt deserialize(Serializers serializers, Iterable<Object> serialized,
+  ValueWithInt deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ValueWithIntBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'anInt':
           result.anInt = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'note':
           result.note = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -102,10 +103,10 @@ class _$ValueWithInt extends ValueWithInt {
   @override
   final String note;
 
-  factory _$ValueWithInt([void Function(ValueWithIntBuilder) updates]) =>
+  factory _$ValueWithInt([void Function(ValueWithIntBuilder)? updates]) =>
       (new ValueWithIntBuilder()..update(updates)).build() as _$ValueWithInt;
 
-  _$ValueWithInt._({this.anInt, this.note}) : super._() {
+  _$ValueWithInt._({required this.anInt, required this.note}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithInt', 'anInt');
     BuiltValueNullFieldError.checkNotNull(note, r'ValueWithInt', 'note');
   }
@@ -143,28 +144,28 @@ class _$ValueWithInt extends ValueWithInt {
 }
 
 class _$ValueWithIntBuilder extends ValueWithIntBuilder {
-  _$ValueWithInt _$v;
+  _$ValueWithInt? _$v;
 
   @override
-  int get anInt {
+  int? get anInt {
     _$this;
     return super.anInt;
   }
 
   @override
-  set anInt(int anInt) {
+  set anInt(int? anInt) {
     _$this;
     super.anInt = anInt;
   }
 
   @override
-  String get note {
+  String? get note {
     _$this;
     return super.note;
   }
 
   @override
-  set note(String note) {
+  set note(String? note) {
     _$this;
     super.note = note;
   }
@@ -188,7 +189,7 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
   }
 
   @override
-  void update(void Function(ValueWithIntBuilder) updates) {
+  void update(void Function(ValueWithIntBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.11
 
-part of value_test;
+part of 'private_value_test.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -11,10 +10,10 @@ class _$PrivateValue extends _PrivateValue {
   @override
   final int value;
 
-  factory _$PrivateValue([void Function(_PrivateValueBuilder) updates]) =>
+  factory _$PrivateValue([void Function(_PrivateValueBuilder)? updates]) =>
       (new _PrivateValueBuilder()..update(updates))._build();
 
-  _$PrivateValue._({this.value}) : super._() {
+  _$PrivateValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, r'_PrivateValue', 'value');
   }
 
@@ -48,11 +47,11 @@ class _$PrivateValue extends _PrivateValue {
 
 class _PrivateValueBuilder
     implements Builder<_PrivateValue, _PrivateValueBuilder> {
-  _$PrivateValue _$v;
+  _$PrivateValue? _$v;
 
-  int _value;
-  int get value => _$this._value;
-  set value(int value) => _$this._value = value;
+  int? _value;
+  int? get value => _$this._value;
+  set value(int? value) => _$this._value = value;
 
   _PrivateValueBuilder();
 
@@ -72,7 +71,7 @@ class _PrivateValueBuilder
   }
 
   @override
-  void update(void Function(_PrivateValueBuilder) updates) {
+  void update(void Function(_PrivateValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

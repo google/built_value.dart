@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of enums;
+part of 'enums.dart';
 
 // **************************************************************************
 // BuiltValueGenerator

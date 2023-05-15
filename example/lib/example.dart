@@ -48,8 +48,9 @@ void example() {
       ..legs = 0
       ..fins = 4),
   ];
-  final modifiedAnimals =
-      animals.map((animal) => animal.rebuild((b) => b.legs++)).toList();
+  final modifiedAnimals = animals
+      .map((animal) => animal.rebuild((b) => b.legs = b.legs! + 1))
+      .toList();
 
   // Everything is serializable.
   for (var object in [
@@ -106,13 +107,13 @@ void standardJsonExample() {
 
   // Use the deserializeWith method to specify what type you're deserializing.
   final value = standardSerializers.deserializeWith(
-      Account.serializer, serializedAccount);
+      Account.serializer, serializedAccount)!;
   print(value);
 
   assert(value.id == 3);
   assert(value.name == 'John Smith');
-  assert(value.keyValues['tags'].asList[2] == 4001);
-  assert(value.keyValues['preferences'].asMap['colorScheme'] == 'light');
+  assert(value.keyValues['tags']!.asList[2] == 4001);
+  assert(value.keyValues['preferences']!.asMap['colorScheme'] == 'light');
 
   // Use the serializeWith method to specify what type you're serializing.
   final serializedAgain =

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of node;
+part of 'node.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -8,13 +8,13 @@ part of node;
 
 class _$Node extends Node {
   @override
-  final String label;
+  final String? label;
   @override
-  final Node left;
+  final Node? left;
   @override
-  final Node right;
+  final Node? right;
 
-  factory _$Node([void Function(NodeBuilder) updates]) =>
+  factory _$Node([void Function(NodeBuilder)? updates]) =>
       (new NodeBuilder()..update(updates))._build();
 
   _$Node._({this.label, this.left, this.right}) : super._();
@@ -56,19 +56,19 @@ class _$Node extends Node {
 }
 
 class NodeBuilder implements Builder<Node, NodeBuilder> {
-  _$Node _$v;
+  _$Node? _$v;
 
-  String _label;
-  String get label => _$this._label;
-  set label(String label) => _$this._label = label;
+  String? _label;
+  String? get label => _$this._label;
+  set label(String? label) => _$this._label = label;
 
-  NodeBuilder _left;
+  NodeBuilder? _left;
   NodeBuilder get left => _$this._left ??= new NodeBuilder();
-  set left(NodeBuilder left) => _$this._left = left;
+  set left(NodeBuilder? left) => _$this._left = left;
 
-  NodeBuilder _right;
+  NodeBuilder? _right;
   NodeBuilder get right => _$this._right ??= new NodeBuilder();
-  set right(NodeBuilder right) => _$this._right = right;
+  set right(NodeBuilder? right) => _$this._right = right;
 
   NodeBuilder();
 
@@ -90,7 +90,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
   }
 
   @override
-  void update(void Function(NodeBuilder) updates) {
+  void update(void Function(NodeBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -104,7 +104,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
           new _$Node._(
               label: label, left: _left?.build(), right: _right?.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'left';
         _left?.build();
