@@ -2,6 +2,8 @@
 
 # 8.5.1 (unreleased)
 
+- Add support for value types with record fields.
+- Fix generator failure due to top level record field.
 - Migrate benchmark and examples to null safety.
 - Remove pre-null-safe test cases.
 - Remove analyzer plugin.

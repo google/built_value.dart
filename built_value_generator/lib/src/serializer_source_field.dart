@@ -203,6 +203,13 @@ abstract class SerializerSourceField
       ];
     }
 
+    if (isSerializable && element.getter!.returnType is RecordType) {
+      return [
+        'Record fields are not (yet) serializable. '
+            'Remove "$name" or mark it "@BuiltValueField(serialize: false)".'
+      ];
+    }
+
     return [];
   }
 
