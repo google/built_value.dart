@@ -96,7 +96,7 @@ final Serializers serializers = _$serializers;
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
   bool get aBool;
-  
+
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _$Value;
 }
@@ -124,7 +124,7 @@ final Serializers correctSerializers = _$correctSerializers;
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
   bool get aBool;
-  
+
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _$Value;
 }
@@ -146,7 +146,7 @@ part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
   bool get aBool;
-  
+
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _$Value;
 }
@@ -169,7 +169,7 @@ part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
   bool get aBool;
-  
+
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _$Value;
 }
@@ -177,7 +177,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
 abstract class OtherValue implements Built<OtherValue, OtherValueBuilder> {
   static Serializer<Value> get serializer => _$serializer;
   bool get aBool;
-  
+
   OtherValue._();
   factory OtherValue([void Function(OtherValueBuilder) updates]) = _$OtherValue;
 }
@@ -199,7 +199,7 @@ part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
   Function() get function;
-  
+
   factory Value() => new _$Value();
   Value._();
 }
@@ -219,11 +219,33 @@ part 'value.g.dart';
 abstract class _Value implements Built<_Value, _ValueBuilder> {
   static Serializer<_Value> get serializer => _$valueSerializer;
   bool get aBool;
-  
+
   _Value._();
   factory _Value([void Function(ValueBuilder) updates]) = _$Value;
 }
 '''), contains(r'1. Cannot generate serializers for private class _Value'));
+    });
+
+    test('cannot generate serializer if there are record fields', () async {
+      expect(
+          await generate(r'''
+library value;
+
+import 'package:test_support/test_support.dart';
+
+part 'value.g.dart';
+
+abstract class Value implements Built<Value, ValueBuilder> {
+  static Serializer<Value> get serializer => _$valueSerializer;
+  (int, int) get record;
+
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _$Value;
+}
+'''),
+          contains(r'1. Record fields are not (yet) serializable. '
+              'Remove "record" or mark it '
+              '"@BuiltValueField(serialize: false)".'));
     });
   });
 }

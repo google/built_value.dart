@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.12
 
 part of 'serializers_nnbd.dart';
 
@@ -47,6 +46,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(PrimitivesValue.serializer)
       ..add(Robot.serializer)
       ..add(SecondDiscoverableValue.serializer)
+      ..add(SerializableRecordValue.serializer)
       ..add(SerializesNullsValue.serializer)
       ..add(SimpleValue.serializer)
       ..add(StandardCat.serializer)

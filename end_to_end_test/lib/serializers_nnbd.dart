@@ -1,7 +1,6 @@
 // Copyright (c) 2020, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.12
 
 library serializers_nnbd;
 
@@ -14,6 +13,7 @@ import 'package:end_to_end_test/generics_nnbd.dart';
 import 'package:end_to_end_test/imported_values_nnbd.dart';
 import 'package:end_to_end_test/interfaces_nnbd.dart';
 import 'package:end_to_end_test/polymorphism_nnbd.dart';
+import 'package:end_to_end_test/records_nnbd.dart';
 import 'package:end_to_end_test/standard_json_nnbd.dart';
 import 'package:end_to_end_test/values_nnbd.dart';
 
@@ -56,6 +56,7 @@ part 'serializers_nnbd.g.dart';
   Robot,
   SecondTestEnum,
   SerializesNullsValue,
+  SerializableRecordValue,
   SimpleValue,
   StandardCat,
   StandardJsonValue,
@@ -81,4 +82,8 @@ final Serializers serializers = _$serializers;
 ])
 final Serializers moreSerializers = _$moreSerializers;
 
+// Check that generation does not fail due to new type `Never`.
 Never get never => throw 'Never!';
+
+// Check that generation does not fail due to new type `Record`.
+(int, int) get record => (0, 0);

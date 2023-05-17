@@ -81,6 +81,8 @@ class DartTypes {
       }
     } else if (dartType is TypeParameterType) {
       return dartType.element.name + suffix;
+    } else if (dartType is RecordType) {
+      return dartType.getDisplayString(withNullability: false);
     } else if (dartType is VoidType) {
       return 'void';
     } else if (dartType.isBottom) {
