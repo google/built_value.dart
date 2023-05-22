@@ -62,7 +62,11 @@ class DartTypes {
         ? '?'
         : '';
 
-    if (dartType is DynamicType) {
+    if (dartType is InvalidType) {
+      // InvalidType might indicate a type that has not yet been generated,
+      // handle as if the type is unknown.
+      return 'dynamic';
+    } else if (dartType is DynamicType) {
       return 'dynamic';
     } else if (dartType is FunctionType) {
       return getName(dartType.returnType) +
