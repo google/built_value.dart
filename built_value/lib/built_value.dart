@@ -128,9 +128,9 @@ class BuiltValue {
       this.defaultSerialize = true});
 }
 
-/// Nullable annotation for Built Value fields.
+/// Nullable annotation for nullable Built Value fields in legacy code.
 ///
-/// Fields marked with this annotation are allowed to be null.
+/// In null safe code, instead make the field type nullable with `?`.
 const String nullable = 'nullable';
 
 /// Optionally, annotate a Built Value field with this to specify settings.
@@ -147,7 +147,7 @@ class BuiltValueField {
   /// Whether the field is serialized. Defaults to `null` which means
   /// [BuiltValue.defaultSerialize] is used.
   ///
-  /// If a field is not serialized, it must either be `@nullable` or specify a
+  /// If a field is not serialized, it must either be nullable or specify a
   /// default for deserialization to succeed.
   final bool? serialize;
 
@@ -404,7 +404,7 @@ class FlatBuiltValueToStringHelper implements BuiltValueToStringHelper {
 }
 
 /// [Error] indicating that a built_value class constructor was called with
-/// a `null` value for a field not marked `@nullable`.
+/// a `null` value for a field not marked nullable.
 class BuiltValueNullFieldError extends Error {
   final String type;
   final String field;
@@ -421,8 +421,7 @@ class BuiltValueNullFieldError extends Error {
 
   @override
   String toString() =>
-      'Tried to construct class "$type" with null field "$field". '
-      'This is forbidden; to allow it, mark "$field" with @nullable.';
+      'Tried to construct class "$type" with null for non-nullable field "$field".';
 }
 
 /// [Error] indicating that a built_value class constructor was called with
