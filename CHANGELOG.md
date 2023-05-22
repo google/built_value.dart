@@ -1,8 +1,9 @@
 # Changelog
 
-# 8.5.1 (unreleased)
+# 8.6.0
 
-- Add support for value types with record fields.
+- Add support for value types with record fields. Serialization with records
+  is not yet supported.
 - Fix generator failure due to top level record field.
 - Migrate benchmark and examples to null safety.
 - Remove pre-null-safe test cases.
