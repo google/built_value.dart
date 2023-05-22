@@ -7,6 +7,8 @@
 - Migrate benchmark and examples to null safety.
 - Remove pre-null-safe test cases.
 - Remove analyzer plugin.
+- Remove reference to `@nullable` annotation from failure-to-instantiate
+  message.
 
 # 8.5.0
 
