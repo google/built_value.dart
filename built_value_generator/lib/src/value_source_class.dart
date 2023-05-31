@@ -280,15 +280,16 @@ abstract class ValueSourceClass
       BuiltList<ConstructorDeclaration>(element.constructors
           .where((constructor) =>
               !constructor.isFactory && !constructor.isSynthetic)
-          .map((constructor) =>
-              parsedLibrary.getElementDeclaration(constructor)!.node));
+          .map((constructor) => parsedLibrary
+              .getElementDeclaration(constructor)!
+              .node as ConstructorDeclaration));
 
   @memoized
   BuiltList<ConstructorDeclaration> get valueClassFactories =>
       BuiltList<ConstructorDeclaration>(element.constructors
           .where((constructor) => constructor.isFactory)
-          .map(
-              (factory) => parsedLibrary.getElementDeclaration(factory)!.node));
+          .map((factory) => parsedLibrary.getElementDeclaration(factory)!.node
+              as ConstructorDeclaration));
 
   @memoized
   bool get builderClassIsAbstract => builderElement!.isAbstract;
