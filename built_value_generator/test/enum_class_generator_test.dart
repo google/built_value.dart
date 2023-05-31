@@ -327,29 +327,6 @@ class TestEnum extends EnumClass {
 1. Add method: static TestEnum valueOf(String name) => _$valueOf(name)'''));
       });
 
-      test('with error on wrong mixin declaration', () async {
-        expect(await generate(r'''
-library test_enum;
-
-import 'package:built_value/built_value.dart';
-
-part 'test_enum.g.dart';
-
-class TestEnum extends EnumClass {
-  static const TestEnum yes = _$yes;
-
-  const TestEnum._(String name) : super(name);
-
-  static BuiltSet<TestEnum> get values => _$values;
-  static TestEnum valueOf(String name) => _$valueOf(name);
-}
-
-class TestEnumMixin = Object with _$TestEnumMixin;
-'''), endsWith(r'''Please make the following changes to use EnumClass:
-
-1. Remove mixin or declare using exactly: abstract class TestEnumMixin = Object with _$TestEnumMixin;'''));
-      });
-
       test('with error on abstract class', () async {
         expect(await generate(r'''
 library test_enum;

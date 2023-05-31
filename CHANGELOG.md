@@ -1,5 +1,12 @@
 # Changelog
 
+# 8.6.1
+
+- Fix support for generating enum mixins for Dart 3. Instead of triggering
+  mixin generation with `abstract class TestEnumMixin = Object with
+  _$TestEnumMixin` it must now be triggered with `typedef TestEnumMixin =
+  _$TestEnumMixin`.
+
 # 8.6.0
 
 - Add support for value types with record fields. Serialization with records

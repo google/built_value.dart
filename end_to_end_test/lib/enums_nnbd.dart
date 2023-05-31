@@ -1,8 +1,6 @@
 // Copyright (c) 2017, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.17
-
 library enums_nnbd;
 
 import 'package:built_collection/built_collection.dart';
@@ -24,7 +22,7 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 
-abstract class TestEnumMixin = Object with _$TestEnumMixin;
+typedef TestEnumMixin = _$TestEnumMixin;
 
 class SecondTestEnum extends EnumClass {
   static const SecondTestEnum yes = _$ys;

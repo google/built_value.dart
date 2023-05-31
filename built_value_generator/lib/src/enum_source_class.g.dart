@@ -77,15 +77,6 @@ class _$EnumSourceClass extends EnumSourceClass {
   bool get usesMixin => __usesMixin ??= super.usesMixin;
 
   @override
-  String? get mixinDeclaration {
-    if (!___mixinDeclaration) {
-      __mixinDeclaration = super.mixinDeclaration;
-      ___mixinDeclaration = true;
-    }
-    return __mixinDeclaration;
-  }
-
-  @override
   Iterable<String> get identifiers => __identifiers ??= super.identifiers;
 
   @override
