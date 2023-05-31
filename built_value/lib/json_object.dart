@@ -75,7 +75,7 @@ abstract class JsonObject {
     }
   }
 
-  JsonObject._();
+  const JsonObject._();
 
   @override
   String toString() {
@@ -88,7 +88,7 @@ class BoolJsonObject extends JsonObject {
   @override
   final bool value;
 
-  BoolJsonObject(this.value) : super._();
+  const BoolJsonObject(this.value) : super._();
 
   @override
   bool get isBool => true;
@@ -164,7 +164,7 @@ class NumJsonObject extends JsonObject {
   @override
   final num value;
 
-  NumJsonObject(this.value) : super._();
+  const NumJsonObject(this.value) : super._();
 
   @override
   bool get isNum => true;
@@ -188,7 +188,7 @@ class StringJsonObject extends JsonObject {
   @override
   final String value;
 
-  StringJsonObject(this.value) : super._();
+  const StringJsonObject(this.value) : super._();
 
   @override
   bool get isString => true;
