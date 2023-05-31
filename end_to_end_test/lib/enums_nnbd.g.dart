@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.17
 
 part of 'enums_nnbd.dart';
 
@@ -39,7 +38,7 @@ class _$TestEnumMeta {
   BuiltSet<TestEnum> get values => _$values;
 }
 
-abstract class _$TestEnumMixin {
+mixin _$TestEnumMixin {
   // ignore: non_constant_identifier_names
   _$TestEnumMeta get TestEnum => const _$TestEnumMeta();
 }

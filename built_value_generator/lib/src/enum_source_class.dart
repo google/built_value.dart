@@ -15,6 +15,8 @@ import 'package:built_value_generator/src/strings.dart';
 import 'package:collection/collection.dart'
     show IterableExtension, IterableNullableExtension;
 
+import 'library_elements.dart';
+
 part 'enum_source_class.g.dart';
 
 abstract class EnumSourceClass
@@ -32,6 +34,14 @@ abstract class EnumSourceClass
 
   @memoized
   String get name => element.name;
+
+  /// Returns `mixin` if class modifiers are available, `abstract class`
+  /// otherwise.
+  ///
+  /// The two are equivalent as class modifiers change the meaning of `class`.
+  String get _mixin => LibraryElements.areClassMixinsEnabled(element.library)
+      ? 'mixin'
+      : 'abstract class';
 
   @memoized
   String get wireName => settings.wireName ?? name;
@@ -90,14 +100,10 @@ abstract class EnumSourceClass
   }
 
   @memoized
-  bool get usesMixin => element.library.getClass(name + 'Mixin') != null;
-
-  @memoized
-  String? get mixinDeclaration {
-    var mixinElement = element.library.getClass(name + 'Mixin');
-    if (mixinElement == null) return null;
-    return parsedLibrary.getElementDeclaration(mixinElement)!.node.toSource();
-  }
+  bool get usesMixin =>
+      element.library.getClass(name + 'Mixin') != null ||
+      element.library.definingCompilationUnit.typeAliases
+          .any((a) => a.name == name + 'Mixin');
 
   @memoized
   Iterable<String> get identifiers {
@@ -121,7 +127,6 @@ abstract class EnumSourceClass
       ..._checkConstructor(),
       ..._checkValuesGetter(),
       ..._checkValueOf(),
-      ..._checkMixin(),
     ];
   }
 
@@ -176,17 +181,6 @@ abstract class EnumSourceClass
           'static $name valueOf(String name) => _\$valueOf(name)');
     }
     return result;
-  }
-
-  Iterable<String> _checkMixin() {
-    if (usesMixin) {
-      final expectedCode =
-          'abstract class ${name}Mixin = Object with _\$${name}Mixin;';
-      if (!mixinDeclaration!.contains(expectedCode)) {
-        return ['Remove mixin or declare using exactly: $expectedCode'];
-      }
-    }
-    return [];
   }
 
   String generateCode() {
@@ -244,7 +238,7 @@ abstract class EnumSourceClass
       ..writeln('$name valueOf(String name) => $valueOfIdentifier(name);')
       ..writeln('BuiltSet<$name> get values => $valuesIdentifier;')
       ..writeln('}')
-      ..writeln('abstract class _\$${name}Mixin {')
+      ..writeln('$_mixin _\$${name}Mixin {')
       ..writeln('  // ignore: non_constant_identifier_names')
       ..writeln('_\$${name}Meta get $name => const _\$${name}Meta();')
       ..writeln('}');
