@@ -21,8 +21,6 @@ class _$EnumSourceClass extends EnumSourceClass {
   String? __valueOfIdentifier;
   bool ___valueOfIdentifier = false;
   bool? __usesMixin;
-  String? __mixinDeclaration;
-  bool ___mixinDeclaration = false;
   Iterable<String>? __identifiers;
 
   factory _$EnumSourceClass([void Function(EnumSourceClassBuilder)? updates]) =>
