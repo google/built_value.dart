@@ -142,7 +142,7 @@ class BuiltJsonSerializers implements Serializers {
         try {
           return serializer.deserialize(this, object.sublist(1));
         } on Error catch (error) {
-          throw DeserializationError(specifiedType, error);
+          throw DeserializationError(object, specifiedType, error);
         }
       } else if (serializer is PrimitiveSerializer) {
         try {
@@ -151,7 +151,7 @@ class BuiltJsonSerializers implements Serializers {
               ? null
               : serializer.deserialize(this, primitive);
         } on Error catch (error) {
-          throw DeserializationError(specifiedType, error);
+          throw DeserializationError(object, specifiedType, error);
         }
       } else {
         throw StateError(
@@ -175,7 +175,7 @@ class BuiltJsonSerializers implements Serializers {
               : serializer.deserialize(this, object as Iterable<Object?>,
                   specifiedType: specifiedType);
         } on Error catch (error) {
-          throw DeserializationError(specifiedType, error);
+          throw DeserializationError(object, specifiedType, error);
         }
       } else if (serializer is PrimitiveSerializer) {
         try {
@@ -184,7 +184,7 @@ class BuiltJsonSerializers implements Serializers {
               : serializer.deserialize(this, object,
                   specifiedType: specifiedType);
         } on Error catch (error) {
-          throw DeserializationError(specifiedType, error);
+          throw DeserializationError(object, specifiedType, error);
         }
       } else {
         throw StateError(
