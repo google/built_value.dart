@@ -376,20 +376,15 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
 
 /// [Error] conveying why deserialization failed.
 class DeserializationError extends Error {
-  final String? json;
   final FullType type;
   final Error error;
 
-  factory DeserializationError(Object? json, FullType type, Error error) {
-    var limitedJson = json.toString();
-    if (limitedJson.length > 80) {
-      limitedJson = limitedJson.replaceRange(77, limitedJson.length, '...');
-    }
-    return DeserializationError._(limitedJson, type, error);
+  factory DeserializationError(FullType type, Error error) {
+    return DeserializationError._(type, error);
   }
 
-  DeserializationError._(this.json, this.type, this.error);
+  DeserializationError._(this.type, this.error);
 
   @override
-  String toString() => "Deserializing '$json' to '$type' failed due to: $error";
+  String toString() => "Deserializing json content to '$type' failed due to: $error";
 }
