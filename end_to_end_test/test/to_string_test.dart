@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_value/built_value.dart';
-import 'package:end_to_end_test/values_nnbd.dart';
+import 'package:end_to_end_test/values.dart';
 import 'package:test/test.dart';
 
 void main() {
