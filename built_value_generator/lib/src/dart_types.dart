@@ -69,10 +69,31 @@ class DartTypes {
     } else if (dartType is DynamicType) {
       return 'dynamic';
     } else if (dartType is FunctionType) {
-      return getName(dartType.returnType) +
-          ' Function(' +
-          dartType.parameters.map((p) => getName(p.type)).join(', ') +
-          ')$suffix';
+      final parameters = StringBuffer();
+
+      parameters.write(
+          dartType.normalParameterTypes.map((t) => getName(t)).join(', '));
+
+      if (dartType.optionalParameterTypes.isNotEmpty) {
+        if (parameters.isNotEmpty) parameters.write(', ');
+        parameters.write('[');
+        parameters.write(
+            dartType.optionalParameterTypes.map((t) => getName(t)).join(', '));
+        parameters.write(']');
+      }
+
+      if (dartType.namedParameterTypes.isNotEmpty) {
+        if (parameters.isNotEmpty) parameters.write(', ');
+        parameters.write('{');
+        parameters.write(dartType.parameters
+            .where((p) => p.isOptionalNamed || p.isRequiredNamed)
+            .map((p) => '${p.isRequiredNamed ? 'required ' : ''}'
+                '${getName(p.type)} ${p.name}')
+            .join(', '));
+        parameters.write('}');
+      }
+
+      return getName(dartType.returnType) + ' Function($parameters)$suffix';
     } else if (dartType is InterfaceType) {
       var typeArguments = dartType.typeArguments;
       if (typeArguments.isEmpty) {

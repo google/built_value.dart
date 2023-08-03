@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.12
 
 part of 'values.dart';
 
@@ -7172,6 +7171,296 @@ class _$ValueWithAwkwardNestedBuilderBuilder
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$VariousFunctionsValue extends VariousFunctionsValue {
+  @override
+  final Function bareFunction;
+  @override
+  final Future<void> Function(int, double) positionalFunction;
+  @override
+  final Future<void> Function(int, [double]) optionalFunction;
+  @override
+  final Future<void> Function(int x, double y) positionalNamedFunction;
+  @override
+  final Future<void> Function(int x, {int y, double z}) namedFunction;
+  @override
+  final Future<void> Function(int x, {required int y, required double z})
+      requiredNamedFunction;
+  @override
+  final Function mixinBareFunction;
+  @override
+  final Future<void> Function(int, double) mixinPositionalFunction;
+  @override
+  final Future<void> Function(int, [double]) mixinOptionalFunction;
+  @override
+  final Future<void> Function(int, double) mixinPositionalNamedFunction;
+  @override
+  final Future<void> Function(int, {int y, double z}) mixinNamedFunction;
+  @override
+  final Future<void> Function(int, {required int y, required double z})
+      mixinRequiredNamedFunction;
+
+  factory _$VariousFunctionsValue(
+          [void Function(VariousFunctionsValueBuilder)? updates]) =>
+      (new VariousFunctionsValueBuilder()..update(updates))._build();
+
+  _$VariousFunctionsValue._(
+      {required this.bareFunction,
+      required this.positionalFunction,
+      required this.optionalFunction,
+      required this.positionalNamedFunction,
+      required this.namedFunction,
+      required this.requiredNamedFunction,
+      required this.mixinBareFunction,
+      required this.mixinPositionalFunction,
+      required this.mixinOptionalFunction,
+      required this.mixinPositionalNamedFunction,
+      required this.mixinNamedFunction,
+      required this.mixinRequiredNamedFunction})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        bareFunction, r'VariousFunctionsValue', 'bareFunction');
+    BuiltValueNullFieldError.checkNotNull(
+        positionalFunction, r'VariousFunctionsValue', 'positionalFunction');
+    BuiltValueNullFieldError.checkNotNull(
+        optionalFunction, r'VariousFunctionsValue', 'optionalFunction');
+    BuiltValueNullFieldError.checkNotNull(positionalNamedFunction,
+        r'VariousFunctionsValue', 'positionalNamedFunction');
+    BuiltValueNullFieldError.checkNotNull(
+        namedFunction, r'VariousFunctionsValue', 'namedFunction');
+    BuiltValueNullFieldError.checkNotNull(requiredNamedFunction,
+        r'VariousFunctionsValue', 'requiredNamedFunction');
+    BuiltValueNullFieldError.checkNotNull(
+        mixinBareFunction, r'VariousFunctionsValue', 'mixinBareFunction');
+    BuiltValueNullFieldError.checkNotNull(mixinPositionalFunction,
+        r'VariousFunctionsValue', 'mixinPositionalFunction');
+    BuiltValueNullFieldError.checkNotNull(mixinOptionalFunction,
+        r'VariousFunctionsValue', 'mixinOptionalFunction');
+    BuiltValueNullFieldError.checkNotNull(mixinPositionalNamedFunction,
+        r'VariousFunctionsValue', 'mixinPositionalNamedFunction');
+    BuiltValueNullFieldError.checkNotNull(
+        mixinNamedFunction, r'VariousFunctionsValue', 'mixinNamedFunction');
+    BuiltValueNullFieldError.checkNotNull(mixinRequiredNamedFunction,
+        r'VariousFunctionsValue', 'mixinRequiredNamedFunction');
+  }
+
+  @override
+  VariousFunctionsValue rebuild(
+          void Function(VariousFunctionsValueBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  VariousFunctionsValueBuilder toBuilder() =>
+      new VariousFunctionsValueBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    final dynamic _$dynamicOther = other;
+    return other is VariousFunctionsValue &&
+        bareFunction == other.bareFunction &&
+        positionalFunction == _$dynamicOther.positionalFunction &&
+        optionalFunction == _$dynamicOther.optionalFunction &&
+        positionalNamedFunction == _$dynamicOther.positionalNamedFunction &&
+        namedFunction == _$dynamicOther.namedFunction &&
+        requiredNamedFunction == _$dynamicOther.requiredNamedFunction &&
+        mixinBareFunction == other.mixinBareFunction &&
+        mixinPositionalFunction == _$dynamicOther.mixinPositionalFunction &&
+        mixinOptionalFunction == _$dynamicOther.mixinOptionalFunction &&
+        mixinPositionalNamedFunction ==
+            _$dynamicOther.mixinPositionalNamedFunction &&
+        mixinNamedFunction == _$dynamicOther.mixinNamedFunction &&
+        mixinRequiredNamedFunction == _$dynamicOther.mixinRequiredNamedFunction;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, bareFunction.hashCode);
+    _$hash = $jc(_$hash, positionalFunction.hashCode);
+    _$hash = $jc(_$hash, optionalFunction.hashCode);
+    _$hash = $jc(_$hash, positionalNamedFunction.hashCode);
+    _$hash = $jc(_$hash, namedFunction.hashCode);
+    _$hash = $jc(_$hash, requiredNamedFunction.hashCode);
+    _$hash = $jc(_$hash, mixinBareFunction.hashCode);
+    _$hash = $jc(_$hash, mixinPositionalFunction.hashCode);
+    _$hash = $jc(_$hash, mixinOptionalFunction.hashCode);
+    _$hash = $jc(_$hash, mixinPositionalNamedFunction.hashCode);
+    _$hash = $jc(_$hash, mixinNamedFunction.hashCode);
+    _$hash = $jc(_$hash, mixinRequiredNamedFunction.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'VariousFunctionsValue')
+          ..add('bareFunction', bareFunction)
+          ..add('positionalFunction', positionalFunction)
+          ..add('optionalFunction', optionalFunction)
+          ..add('positionalNamedFunction', positionalNamedFunction)
+          ..add('namedFunction', namedFunction)
+          ..add('requiredNamedFunction', requiredNamedFunction)
+          ..add('mixinBareFunction', mixinBareFunction)
+          ..add('mixinPositionalFunction', mixinPositionalFunction)
+          ..add('mixinOptionalFunction', mixinOptionalFunction)
+          ..add('mixinPositionalNamedFunction', mixinPositionalNamedFunction)
+          ..add('mixinNamedFunction', mixinNamedFunction)
+          ..add('mixinRequiredNamedFunction', mixinRequiredNamedFunction))
+        .toString();
+  }
+}
+
+class VariousFunctionsValueBuilder
+    implements Builder<VariousFunctionsValue, VariousFunctionsValueBuilder> {
+  _$VariousFunctionsValue? _$v;
+
+  Function? _bareFunction;
+  Function? get bareFunction => _$this._bareFunction;
+  set bareFunction(Function? bareFunction) =>
+      _$this._bareFunction = bareFunction;
+
+  Future<void> Function(int, double)? _positionalFunction;
+  Future<void> Function(int, double)? get positionalFunction =>
+      _$this._positionalFunction;
+  set positionalFunction(
+          Future<void> Function(int, double)? positionalFunction) =>
+      _$this._positionalFunction = positionalFunction;
+
+  Future<void> Function(int, [double])? _optionalFunction;
+  Future<void> Function(int, [double])? get optionalFunction =>
+      _$this._optionalFunction;
+  set optionalFunction(
+          Future<void> Function(int, [double])? optionalFunction) =>
+      _$this._optionalFunction = optionalFunction;
+
+  Future<void> Function(int x, double y)? _positionalNamedFunction;
+  Future<void> Function(int x, double y)? get positionalNamedFunction =>
+      _$this._positionalNamedFunction;
+  set positionalNamedFunction(
+          Future<void> Function(int x, double y)? positionalNamedFunction) =>
+      _$this._positionalNamedFunction = positionalNamedFunction;
+
+  Future<void> Function(int x, {int y, double z})? _namedFunction;
+  Future<void> Function(int x, {int y, double z})? get namedFunction =>
+      _$this._namedFunction;
+  set namedFunction(
+          Future<void> Function(int x, {int y, double z})? namedFunction) =>
+      _$this._namedFunction = namedFunction;
+
+  Future<void> Function(int x, {required int y, required double z})?
+      _requiredNamedFunction;
+  Future<void> Function(int x, {required int y, required double z})?
+      get requiredNamedFunction => _$this._requiredNamedFunction;
+  set requiredNamedFunction(
+          Future<void> Function(int x, {required int y, required double z})?
+              requiredNamedFunction) =>
+      _$this._requiredNamedFunction = requiredNamedFunction;
+
+  Function? _mixinBareFunction;
+  Function? get mixinBareFunction => _$this._mixinBareFunction;
+  set mixinBareFunction(Function? mixinBareFunction) =>
+      _$this._mixinBareFunction = mixinBareFunction;
+
+  Future<void> Function(int, double)? _mixinPositionalFunction;
+  Future<void> Function(int, double)? get mixinPositionalFunction =>
+      _$this._mixinPositionalFunction;
+  set mixinPositionalFunction(
+          Future<void> Function(int, double)? mixinPositionalFunction) =>
+      _$this._mixinPositionalFunction = mixinPositionalFunction;
+
+  Future<void> Function(int, [double])? _mixinOptionalFunction;
+  Future<void> Function(int, [double])? get mixinOptionalFunction =>
+      _$this._mixinOptionalFunction;
+  set mixinOptionalFunction(
+          Future<void> Function(int, [double])? mixinOptionalFunction) =>
+      _$this._mixinOptionalFunction = mixinOptionalFunction;
+
+  Future<void> Function(int, double)? _mixinPositionalNamedFunction;
+  Future<void> Function(int, double)? get mixinPositionalNamedFunction =>
+      _$this._mixinPositionalNamedFunction;
+  set mixinPositionalNamedFunction(
+          Future<void> Function(int, double)? mixinPositionalNamedFunction) =>
+      _$this._mixinPositionalNamedFunction = mixinPositionalNamedFunction;
+
+  Future<void> Function(int, {int y, double z})? _mixinNamedFunction;
+  Future<void> Function(int, {int y, double z})? get mixinNamedFunction =>
+      _$this._mixinNamedFunction;
+  set mixinNamedFunction(
+          Future<void> Function(int, {int y, double z})? mixinNamedFunction) =>
+      _$this._mixinNamedFunction = mixinNamedFunction;
+
+  Future<void> Function(int, {required int y, required double z})?
+      _mixinRequiredNamedFunction;
+  Future<void> Function(int, {required int y, required double z})?
+      get mixinRequiredNamedFunction => _$this._mixinRequiredNamedFunction;
+  set mixinRequiredNamedFunction(
+          Future<void> Function(int, {required int y, required double z})?
+              mixinRequiredNamedFunction) =>
+      _$this._mixinRequiredNamedFunction = mixinRequiredNamedFunction;
+
+  VariousFunctionsValueBuilder();
+
+  VariousFunctionsValueBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _bareFunction = $v.bareFunction;
+      _positionalFunction = $v.positionalFunction;
+      _optionalFunction = $v.optionalFunction;
+      _positionalNamedFunction = $v.positionalNamedFunction;
+      _namedFunction = $v.namedFunction;
+      _requiredNamedFunction = $v.requiredNamedFunction;
+      _mixinBareFunction = $v.mixinBareFunction;
+      _mixinPositionalFunction = $v.mixinPositionalFunction;
+      _mixinOptionalFunction = $v.mixinOptionalFunction;
+      _mixinPositionalNamedFunction = $v.mixinPositionalNamedFunction;
+      _mixinNamedFunction = $v.mixinNamedFunction;
+      _mixinRequiredNamedFunction = $v.mixinRequiredNamedFunction;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(VariousFunctionsValue other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$VariousFunctionsValue;
+  }
+
+  @override
+  void update(void Function(VariousFunctionsValueBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  VariousFunctionsValue build() => _build();
+
+  _$VariousFunctionsValue _build() {
+    final _$result = _$v ??
+        new _$VariousFunctionsValue._(
+            bareFunction: BuiltValueNullFieldError.checkNotNull(
+                bareFunction, r'VariousFunctionsValue', 'bareFunction'),
+            positionalFunction: BuiltValueNullFieldError.checkNotNull(
+                positionalFunction, r'VariousFunctionsValue', 'positionalFunction'),
+            optionalFunction: BuiltValueNullFieldError.checkNotNull(
+                optionalFunction, r'VariousFunctionsValue', 'optionalFunction'),
+            positionalNamedFunction: BuiltValueNullFieldError.checkNotNull(
+                positionalNamedFunction, r'VariousFunctionsValue', 'positionalNamedFunction'),
+            namedFunction: BuiltValueNullFieldError.checkNotNull(
+                namedFunction, r'VariousFunctionsValue', 'namedFunction'),
+            requiredNamedFunction: BuiltValueNullFieldError.checkNotNull(
+                requiredNamedFunction, r'VariousFunctionsValue', 'requiredNamedFunction'),
+            mixinBareFunction: BuiltValueNullFieldError.checkNotNull(
+                mixinBareFunction, r'VariousFunctionsValue', 'mixinBareFunction'),
+            mixinPositionalFunction: BuiltValueNullFieldError.checkNotNull(mixinPositionalFunction, r'VariousFunctionsValue', 'mixinPositionalFunction'),
+            mixinOptionalFunction: BuiltValueNullFieldError.checkNotNull(mixinOptionalFunction, r'VariousFunctionsValue', 'mixinOptionalFunction'),
+            mixinPositionalNamedFunction: BuiltValueNullFieldError.checkNotNull(mixinPositionalNamedFunction, r'VariousFunctionsValue', 'mixinPositionalNamedFunction'),
+            mixinNamedFunction: BuiltValueNullFieldError.checkNotNull(mixinNamedFunction, r'VariousFunctionsValue', 'mixinNamedFunction'),
+            mixinRequiredNamedFunction: BuiltValueNullFieldError.checkNotNull(mixinRequiredNamedFunction, r'VariousFunctionsValue', 'mixinRequiredNamedFunction'));
     replace(_$result);
     return _$result;
   }

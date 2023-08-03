@@ -1,12 +1,12 @@
 // Copyright (c) 2020, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// @dart=2.12
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:end_to_end_test/enums.dart' as using_import_as;
+import 'package:end_to_end_test/mixins_src.dart';
 import 'package:fixnum/fixnum.dart';
 
 part 'values.g.dart';
@@ -930,4 +930,25 @@ abstract class ValueWithAwkwardNestedBuilderBuilder
   factory ValueWithAwkwardNestedBuilderBuilder() =
       _$ValueWithAwkwardNestedBuilderBuilder;
   ValueWithAwkwardNestedBuilderBuilder._();
+}
+
+abstract class VariousFunctionsValue
+    // Functions declared in a different file are rendered via DartType instead
+    // of using the AST, so check those too.
+    with
+        FunctionMixin
+    implements
+        Built<VariousFunctionsValue, VariousFunctionsValueBuilder> {
+  Function get bareFunction;
+  Future<void> Function(int, double) get positionalFunction;
+  Future<void> Function(int, [double]) get optionalFunction;
+  Future<void> Function(int x, double y) get positionalNamedFunction;
+  Future<void> Function(int x, {int y, double z}) get namedFunction;
+  Future<void> Function(int x, {required int y, required double z})
+      get requiredNamedFunction;
+
+  factory VariousFunctionsValue(
+          [void Function(VariousFunctionsValueBuilder) updates]) =
+      _$VariousFunctionsValue;
+  VariousFunctionsValue._();
 }
