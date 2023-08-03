@@ -1,5 +1,11 @@
 # Changelog
 
+# 8.6.2
+
+- Fix generation for fields that are `Function` types that are declared
+  separately, for example in a `mixin` defined in another source file, and use
+  named or positional parameters.
+
 # 8.6.1
 
 - Fix support for generating enum mixins for Dart 3. Instead of triggering
