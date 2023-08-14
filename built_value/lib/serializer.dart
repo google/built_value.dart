@@ -391,5 +391,5 @@ class DeserializationError extends Error {
   DeserializationError._(this.json, this.type, this.error);
 
   @override
-  String toString() => "Deserializing json content to '$type' failed due to: $error";
+  String toString() => "Deserializing to '$type' failed due to: $error";
 }
