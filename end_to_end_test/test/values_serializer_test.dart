@@ -123,8 +123,8 @@ void main() {
           () => serializers.deserialize(incorrectSerialized),
           throwsA(isErrorContaining(
               'Deserializing to '
-              "'unspecified' failed due to: Deserializing json content to "
-              "'ValidatedValue' failed due to: Deserializing json content to 'int' "
+              "'unspecified' failed due to: Deserializing to "
+              "'ValidatedValue' failed due to: Deserializing to 'int' "
               "failed due to: type 'String' is not a subtype of type "
               "'int' in type cast")));
     });
