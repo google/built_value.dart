@@ -122,7 +122,7 @@ void main() {
       expect(
           () => serializers.deserialize(incorrectSerialized),
           throwsA(isErrorContaining(
-              "Deserializing to "
+              'Deserializing to '
               "'unspecified' failed due to: Deserializing json content to "
               "'ValidatedValue' failed due to: Deserializing json content to 'int' "
               "failed due to: type 'String' is not a subtype of type "
