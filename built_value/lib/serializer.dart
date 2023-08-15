@@ -375,6 +375,9 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
 }
 
 /// [Error] conveying why deserialization failed.
+///
+/// The Object that failed to deseralize is included as [json] but is not displayed
+/// in the error message to prevent accidental inclusion in logs.
 class DeserializationError extends Error {
   final String? json;
   final FullType type;
