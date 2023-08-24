@@ -2,6 +2,9 @@
 
 # 8.6.2
 
+- Remove JSON from `DeserializationError` message to prevent data accidentally
+  leaking into logs. The JSON is still available on the `DeserializationError`
+  object.
 - Fix generation for fields that are `Function` types that are declared
   separately, for example in a `mixin` defined in another source file, and use
   named or positional parameters.

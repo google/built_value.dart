@@ -121,8 +121,7 @@ void main() {
       ];
       expect(
           () => serializers.deserialize(incorrectSerialized),
-          throwsA(isErrorContaining(
-              'Deserializing to '
+          throwsA(isErrorContaining('Deserializing to '
               "'unspecified' failed due to: Deserializing to "
               "'ValidatedValue' failed due to: Deserializing to 'int' "
               "failed due to: type 'String' is not a subtype of type "
