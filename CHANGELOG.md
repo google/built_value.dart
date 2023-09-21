@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.6.3
+
+- Bump version of `analyzer`.
+
 # 8.6.2
 
 - Remove JSON from `DeserializationError` message to prevent data accidentally
