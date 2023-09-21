@@ -651,8 +651,8 @@ class EnumClass {
 }
 
 class BuiltValueEnumConst {
-  final String wireName;
-  final String wireNumber;
+  final String? wireName;
+  final int? wireNumber;
   final bool fallback;
 
   const BuiltValueEnumConst({

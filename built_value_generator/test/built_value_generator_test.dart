@@ -218,7 +218,7 @@ part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _\$Value;
-  
+
   @nullable
   int get x;
 }'''),
@@ -866,7 +866,7 @@ part 'value.g.dart';
 abstract class Value implements Built<Value, ValueBuilder> {
   Value._();
   factory Value([void Function(ValueBuilder) updates]) = _\$Value;
-  
+
   @BuiltValueField(nestedBuilder: true)
   NestedValue get nestedValue;
 }
@@ -946,12 +946,12 @@ class BuiltValue {
   final bool comparableBuilders;
   final bool instantiable;
   final bool nestedBuilders;
-  final String wireName;
+  final String? wireName;
 
   const BuiltValue({
-      this.comparableBuilders: false,
-      this.instantiable: true,
-      this.nestedBuilders: true,
+      this.comparableBuilders = false,
+      this.instantiable = true,
+      this.nestedBuilders = true,
       this.wireName});
 }
 
@@ -975,7 +975,7 @@ class BuiltValueHook {
   final bool finalizeBuilder;
 
   const BuiltValueHook(
-      {this.initializeBuilder,
-      this.finalizeBuilder});
+      {this.initializeBuilder = false,
+      this.finalizeBuilder = false});
 }
 ''';
