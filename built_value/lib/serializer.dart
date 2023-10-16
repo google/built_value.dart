@@ -7,6 +7,7 @@ import 'package:built_collection/src/internal/hash.dart';
 import 'package:built_value/src/big_int_serializer.dart';
 import 'package:built_value/src/date_time_serializer.dart';
 import 'package:built_value/src/duration_serializer.dart';
+import 'package:built_value/src/int32_serializer.dart';
 import 'package:built_value/src/int64_serializer.dart';
 import 'package:built_value/src/json_object_serializer.dart';
 import 'package:built_value/src/num_serializer.dart';
@@ -67,6 +68,7 @@ abstract class Serializers {
           ..add(DoubleSerializer())
           ..add(DurationSerializer())
           ..add(IntSerializer())
+          ..add(Int32Serializer())
           ..add(Int64Serializer())
           ..add(JsonObjectSerializer())
           ..add(NullSerializer())
