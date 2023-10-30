@@ -1,5 +1,5 @@
 name: end_to_end_test
-version: 8.6.3
+version: 8.7.0
 publish_to: none
 description: >
   Tests, not for publishing.
@@ -10,12 +10,12 @@ environment:
 
 dependencies:
   built_collection: ^5.0.0
-  built_value: ^8.6.0
+  built_value: ^8.7.0
 
 dev_dependencies:
   build: '>=1.0.0 <3.0.0'
   build_runner: '>=1.0.0 <3.0.0'
-  built_value_generator: ^8.6.3
+  built_value_generator: ^8.7.0
   fixnum: ^1.0.0
   pedantic: ^1.4.0
   quiver: '>=0.21.0 <4.0.0'

@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.7.0
+
+- Add `Int32` serializer.
+
 # 8.6.3
 
 - Bump version of `analyzer`.
