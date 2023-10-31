@@ -202,7 +202,11 @@ abstract class EnumSourceClass
 
     var fallback = fields.firstWhereOrNull((field) => field.settings.fallback);
     if (fallback == null) {
-      result.writeln('default: throw new ArgumentError(name);');
+      result
+        ..writeln('default: throw new ArgumentError(')
+        ..writeln("'`\$name` is not one of the supported values: '")
+        ..writeln("'${fields.map((field) => field.name).join(', ')}',")
+        ..writeln(');');
     } else {
       result.writeln('default: return ${fallback.generatedIdentifier};');
     }
