@@ -99,7 +99,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   }
 }
 
-abstract class AnimalBuilder {
+abstract mixin class AnimalBuilder {
   void replace(Animal other);
   void update(void Function(AnimalBuilder) updates);
   int? get legs;

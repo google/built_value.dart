@@ -79,15 +79,6 @@ abstract class SerializerSourceClass
   String get name => element.name;
 
   @memoized
-  bool get isNonNullByDefault => element.library.isNonNullableByDefault;
-
-  @memoized
-  String get orNull => isNonNullByDefault ? '?' : '';
-
-  @memoized
-  String get notNull => isNonNullByDefault ? '!' : '';
-
-  @memoized
   String get wireName {
     if (isBuiltValue) {
       return builtValueSettings.wireName ?? name;
@@ -133,7 +124,7 @@ abstract class SerializerSourceClass
       ? ''
       : '<' +
           genericBounds
-              .map((bound) => bound.isEmpty ? 'Object$orNull' : bound)
+              .map((bound) => bound.isEmpty ? 'Object?' : bound)
               .join(', ') +
           '>';
 
@@ -328,18 +319,18 @@ class $serializerImplName implements StructuredSerializer<$genericName> {
   final String wireName = '${escapeString(wireName)}';
 
   @override
-  Iterable<Object$orNull> serialize(Serializers serializers, $genericName object,
+  Iterable<Object?> serialize(Serializers serializers, $genericName object,
       {FullType specifiedType = FullType.unspecified}) {
-    ${fields.isEmpty ? 'return <Object$orNull>[];' : '''
+    ${fields.isEmpty ? 'return <Object?>[];' : '''
     ${_generateGenericsSerializerPreamble()}
-    final result = <Object$orNull>[${_generateRequiredFieldSerializers()}];
+    final result = <Object?>[${_generateRequiredFieldSerializers()}];
     ${_generateNullableFieldSerializers()}
     return result;
     '''}
   }
 
   @override
-  $genericName deserialize(Serializers serializers, Iterable<Object$orNull> serialized,
+  $genericName deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     ${_generateGenericsSerializerPreamble()}
     $maybeCastFn
@@ -348,9 +339,9 @@ class $serializerImplName implements StructuredSerializer<$genericName> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current$notNull as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object$orNull value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         ${_generateFieldDeserializers()}
       }
@@ -490,7 +481,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
     var nullableFields = fields.where((field) => field.isNullable).toList();
     if (nullableFields.isEmpty) return '';
 
-    return 'Object$orNull value;' +
+    return 'Object? value;' +
         nullableFields.map((field) {
           var serializeField = '''serializers.serialize(
           value,
@@ -526,7 +517,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
           compilationUnit, genericParameters.toBuiltSet());
       final cast = field.generateCast(compilationUnit, _genericBoundsAsMap);
       // If cast exists and is not nullable.
-      var maybeNotNull = !field.isNullable && cast.isNotEmpty ? notNull : '';
+      var maybeNotNull = !field.isNullable && cast.isNotEmpty ? '!' : '';
       if (field.builderFieldUsesNestedBuilder) {
         if (hasBuilder && field.builderFieldIsNullable) {
           // The manually implemented builder might or might not return a
@@ -536,7 +527,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
 case '${escapeString(field.wireName)}':
   var maybeBuilder = result.${field.name};
   var fieldValue = serializers.deserialize(
-      value, specifiedType: $fullType)$notNull $cast;
+      value, specifiedType: $fullType)! $cast;
   if (maybeBuilder == null) {
     result.${field.name} = \$cast(fieldValue.toBuilder());
   } else {
@@ -552,7 +543,7 @@ case '${escapeString(field.wireName)}':
           return '''
 case '${escapeString(field.wireName)}':
   result.${field.name}.replace(serializers.deserialize(
-      value, specifiedType: $fullType)$notNull $looseCast);
+      value, specifiedType: $fullType)! $looseCast);
   break;
 ''';
         } else {
@@ -565,7 +556,7 @@ case '${escapeString(field.wireName)}':
         }
       } else {
         // `cast` is empty if no cast is needed.
-        var maybeOrNull = field.isNullable && cast.isNotEmpty ? orNull : '';
+        var maybeOrNull = field.isNullable && cast.isNotEmpty ? '?' : '';
         return '''
 case '${escapeString(field.wireName)}':
   result.${field.name} = serializers.deserialize(

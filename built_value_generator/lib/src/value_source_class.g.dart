@@ -11,10 +11,6 @@ class _$ValueSourceClass extends ValueSourceClass {
   final InterfaceElement element;
   ParsedLibraryResult? __parsedLibrary;
   String? __name;
-  bool? __isNonNullByDefault;
-  String? __orNull;
-  String? __notNull;
-  String? __late;
   String? __implName;
   ClassElement? __builderElement;
   bool ___builderElement = false;
@@ -69,19 +65,6 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   String get name => __name ??= super.name;
-
-  @override
-  bool get isNonNullByDefault =>
-      __isNonNullByDefault ??= super.isNonNullByDefault;
-
-  @override
-  String get orNull => __orNull ??= super.orNull;
-
-  @override
-  String get notNull => __notNull ??= super.notNull;
-
-  @override
-  String get late => __late ??= super.late;
 
   @override
   String get implName => __implName ??= super.implName;
