@@ -52,18 +52,6 @@ abstract class ValueSourceClass
       ? 'mixin class'
       : 'class';
 
-  @memoized
-  bool get isNonNullByDefault => element.library.isNonNullableByDefault;
-
-  @memoized
-  String get orNull => isNonNullByDefault ? '?' : '';
-
-  @memoized
-  String get notNull => isNonNullByDefault ? '!' : '';
-
-  @memoized
-  String get late => isNonNullByDefault ? 'late ' : '';
-
   /// Returns the class name for the generated implementation. If the manually
   /// maintained class is private then we ignore the underscore here, to avoid
   /// returning a class name starting `_$_`.
@@ -623,7 +611,7 @@ abstract class ValueSourceClass
       if (!valueClassFactories.any(
           (factory) => factory.toSource().contains('$implName$_generics'))) {
         final exampleFactory = 'factory $name('
-            '[void Function(${name}Builder$_generics)$orNull updates]) = '
+            '[void Function(${name}Builder$_generics)? updates]) = '
             '$implName$_generics;';
         result.add(GeneratorError((b) => b
           ..message =
@@ -757,12 +745,11 @@ abstract class ValueSourceClass
     for (var field in fields) {
       final type = field.typeInCompilationUnit(compilationUnit);
       result.writeln('@override');
-      result.writeln(
-          'final $type${field.isNullable ? orNull : ''} ${field.name};');
+      result
+          .writeln('final $type${field.isNullable ? '?' : ''} ${field.name};');
     }
     for (var memoizedGetter in memoizedGetters) {
-      result.writeln(
-          '${memoizedGetter.returnType}$orNull __${memoizedGetter.name};');
+      result.writeln('${memoizedGetter.returnType}? __${memoizedGetter.name};');
       if (memoizedGetter.isNullable) {
         // Nullable memoiozed getters needs a field to store whether they are
         // initialized.
@@ -777,12 +764,12 @@ abstract class ValueSourceClass
     // to cast.
     if (hasBuilder) {
       result.writeln('factory $implName(['
-          'void Function(${name}Builder$_generics)$orNull updates]) '
+          'void Function(${name}Builder$_generics)? updates]) '
           '=> (new ${name}Builder$_generics()..update(updates)).build()'
           ' as $implName$_generics;');
     } else {
       result.writeln('factory $implName(['
-          'void Function(${name}Builder$_generics)$orNull updates]) '
+          'void Function(${name}Builder$_generics)? updates]) '
           '=> (new ${name}Builder$_generics()..update(updates))._build();');
     }
 
@@ -793,8 +780,7 @@ abstract class ValueSourceClass
     } else {
       result.write('$implName._({');
       result.write(fields.map((field) {
-        var maybeRequired =
-            (isNonNullByDefault && !field.isNullable) ? 'required ' : '';
+        var maybeRequired = field.isNullable ? '' : 'required ';
         return '${maybeRequired}this.${field.name}';
       }).join(', '));
       result.write('}) : super._()');
@@ -901,7 +887,7 @@ abstract class ValueSourceClass
     }
 
     // Builder holds a reference to a value, copies from it lazily.
-    result.writeln('$implName$_generics$orNull _\$v;');
+    result.writeln('$implName$_generics? _\$v;');
     result.writeln('');
 
     for (var field in fields) {
@@ -919,18 +905,16 @@ abstract class ValueSourceClass
 
       final isNullableNestedBuilder = field.isAutoCreateNestedBuilder &&
           field.isNestedBuilder &&
-          (!hasBuilder ||
-              field.builderElementSetterIsNullable ||
-              !isNonNullByDefault);
+          (!hasBuilder || field.builderElementSetterIsNullable);
       final hasNullableSetter = !hasBuilder ||
           isNullableNestedBuilder ||
           field.builderElementSetterIsNullable;
       final getterMaybeOrNull = hasNullableSetter &&
               (!field.isNestedBuilder || !field.isAutoCreateNestedBuilder)
-          ? orNull
+          ? '?'
           : '';
-      final setterMaybeOrNull = hasNullableSetter ? orNull : '';
-      final maybeLate = !hasNullableSetter ? late : '';
+      final setterMaybeOrNull = hasNullableSetter ? '?' : '';
+      final maybeLate = !hasNullableSetter ? 'late ' : '';
 
       late String trackedVariable;
 
@@ -1053,7 +1037,7 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     result.writeln(
-        'void update(void Function(${name}Builder$_generics)$orNull updates) {'
+        'void update(void Function(${name}Builder$_generics)? updates) {'
         ' if (updates != null) updates(this); }');
     result.writeln();
 
@@ -1138,7 +1122,7 @@ abstract class ValueSourceClass
       // in a nested builder then throw with more information. Otherwise,
       // just rethrow.
       result.writeln('} catch (_) {');
-      result.writeln('${late}String _\$failedField;');
+      result.writeln('late String _\$failedField;');
       result.writeln('try {');
       result.write(fieldBuilders.keys.map((field) {
         final fieldBuilder = fieldBuilders[field];
@@ -1202,7 +1186,7 @@ abstract class ValueSourceClass
     var generateMemoizedHashCode =
         declaresMemoizedHashCode && comparedFields.isNotEmpty;
     if (generateMemoizedHashCode) {
-      result.writeln('int$orNull __hashCode;');
+      result.writeln('int? __hashCode;');
     }
 
     result.writeln('@override');
@@ -1212,7 +1196,7 @@ abstract class ValueSourceClass
       result.writeln('return ${name.hashCode};');
     } else {
       if (generateMemoizedHashCode) {
-        result.writeln('if (__hashCode != null) return __hashCode$notNull;');
+        result.writeln('if (__hashCode != null) return __hashCode!;');
       }
 
       // Use a different seed for builders than for values, so they do not have
@@ -1274,12 +1258,12 @@ abstract class ValueSourceClass
 
       final autoCreatedNestedBuilder =
           field.isNestedBuilder && settings.autoCreateNestedBuilders;
-      final maybeOrNull = autoCreatedNestedBuilder ? '' : orNull;
+      final maybeOrNull = autoCreatedNestedBuilder ? '' : '?';
 
       result.writeln('$type$maybeOrNull get $name;');
       // Add `covariant` if we're implementing one or more parent builders.
       result.writeln('set $name(${interfaces.isEmpty ? '' : 'covariant '} '
-          '$type$orNull $name);');
+          '$type? $name);');
 
       result.writeln();
     }

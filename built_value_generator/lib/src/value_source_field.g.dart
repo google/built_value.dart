@@ -16,8 +16,6 @@ class _$ValueSourceField extends ValueSourceField {
   @override
   final FieldElement? builderElement;
   String? __name;
-  bool? __isNonNullByDefault;
-  String? __orNull;
   String? __type;
   bool? __isFunctionType;
   String? __typeWithPrefix;
@@ -56,13 +54,6 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   String get name => __name ??= super.name;
-
-  @override
-  bool get isNonNullByDefault =>
-      __isNonNullByDefault ??= super.isNonNullByDefault;
-
-  @override
-  String get orNull => __orNull ??= super.orNull;
 
   @override
   String get type => __type ??= super.type;

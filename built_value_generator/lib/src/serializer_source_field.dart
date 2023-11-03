@@ -74,12 +74,6 @@ abstract class SerializerSourceField
   }
 
   @memoized
-  bool get isNonNullByDefault => element.library.isNonNullableByDefault;
-
-  @memoized
-  String get orNull => isNonNullByDefault ? '?' : '';
-
-  @memoized
   bool get hasNullableAnnotation => element.getter!.metadata
       .any((metadata) => metadataToStringValue(metadata) == 'nullable');
 
@@ -168,7 +162,6 @@ abstract class SerializerSourceField
 
   @memoized
   bool get builderFieldIsNullable {
-    if (!isNonNullByDefault) return true;
     if (!builderFieldElementIsValid) return true;
 
     return fullBuildElementType == 'dynamic' ||
@@ -288,7 +281,7 @@ abstract class SerializerSourceField
         DartTypes.isBuiltCollectionTypeName(bareType) &&
         builderFieldUsesNestedBuilder) {
       if (bareType == 'BuiltList' || bareType == 'BuiltSet') {
-        generics = 'Object$orNull';
+        generics = 'Object?';
       } else if (bareType == 'BuiltMap' ||
           bareType == 'BuiltListMultimap' ||
           bareType == 'BuiltSetMultimap') {

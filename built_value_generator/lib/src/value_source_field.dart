@@ -13,8 +13,8 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/field_mixin.dart';
-import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
+import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/metadata.dart'
     show metadataToStringValue;
 
@@ -52,12 +52,6 @@ abstract class ValueSourceField
 
   @memoized
   String get name => element.displayName;
-
-  @memoized
-  bool get isNonNullByDefault => element.library.isNonNullableByDefault;
-
-  @memoized
-  String get orNull => isNonNullByDefault ? '?' : '';
 
   @memoized
   String get type => DartTypes.getName(element.getter!.returnType);
@@ -318,23 +312,23 @@ abstract class ValueSourceField
             'The current type, "$type", is not allowed because it is mutable.'));
     }
 
-    if (isNonNullByDefault && hasNullableAnnotation) {
+    if (hasNullableAnnotation) {
       result.add(GeneratorError((b) => b
         ..message = 'Remove "@nullable" from field "$name". '
-            'In null safe code, add "?" to the field type instead.'));
+            'Add "?" to the field type instead.'));
     }
 
     if (builderFieldExists) {
       var builderElementTypeOrNull = buildElementType;
-      if (builderElementTypeIsNullable) builderElementTypeOrNull += orNull;
+      if (builderElementTypeIsNullable) builderElementTypeOrNull += '?';
       final builderType = _toBuilderType(element.type, type);
-      if (builderElementTypeOrNull != type + orNull &&
+      if (builderElementTypeOrNull != type + '?' &&
           (builderType == null ||
               (builderElementTypeOrNull != builderType &&
-                  builderElementTypeOrNull != builderType + orNull))) {
+                  builderElementTypeOrNull != builderType + '?'))) {
         result.add(GeneratorError((b) => b
           ..message = 'Make builder field $name have type: '
-              '$type$orNull (or, if applicable, builder)'));
+              '$type? (or, if applicable, builder)'));
       }
     }
 

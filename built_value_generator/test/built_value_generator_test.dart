@@ -223,7 +223,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
   int get x;
 }'''),
             contains('1. Remove "@nullable" from field "x". '
-                'In null safe code, add "?" to the field type instead.'));
+                'Add "?" to the field type instead.'));
       });
     });
 

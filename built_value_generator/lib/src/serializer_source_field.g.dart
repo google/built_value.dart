@@ -17,8 +17,6 @@ class _$SerializerSourceField extends SerializerSourceField {
   final FieldElement? builderElement;
   bool? __isSerializable;
   BuiltValueField? __builtValueField;
-  bool? __isNonNullByDefault;
-  String? __orNull;
   bool? __hasNullableAnnotation;
   bool? __hasNullableType;
   bool? __isNullable;
@@ -60,13 +58,6 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   BuiltValueField get builtValueField =>
       __builtValueField ??= super.builtValueField;
-
-  @override
-  bool get isNonNullByDefault =>
-      __isNonNullByDefault ??= super.isNonNullByDefault;
-
-  @override
-  String get orNull => __orNull ??= super.orNull;
 
   @override
   bool get hasNullableAnnotation =>

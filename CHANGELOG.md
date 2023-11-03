@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.8.1 (unreleased)
+
+- Remove support for generating legacy (not null safe) code.
+
 # 8.8.0
 
 - Allow classes with record fields to be serialized if they use a typedef for

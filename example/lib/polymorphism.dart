@@ -65,14 +65,14 @@ abstract class Fish extends Object
 }
 
 /// As with any Built Value, behaviour can be added via mixins.
-abstract class Walker {
+mixin Walker {
   int get legs;
 
   bool get canWalk => legs > 0;
 }
 
 /// As with any Built Value, behaviour can be added via mixins.
-abstract class Swimmer {
+mixin Swimmer {
   int get fins;
 
   bool get canSwim => fins > 1;

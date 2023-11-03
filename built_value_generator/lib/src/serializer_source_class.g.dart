@@ -17,9 +17,6 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   BuiltValueSerializer? __serializerSettings;
   BuiltValueEnum? __enumClassSettings;
   String? __name;
-  bool? __isNonNullByDefault;
-  String? __orNull;
-  String? __notNull;
   String? __wireName;
   String? __serializerDeclaration;
   BuiltList<String>? __genericParameters;
@@ -67,16 +64,6 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   @override
   String get name => __name ??= super.name;
-
-  @override
-  bool get isNonNullByDefault =>
-      __isNonNullByDefault ??= super.isNonNullByDefault;
-
-  @override
-  String get orNull => __orNull ??= super.orNull;
-
-  @override
-  String get notNull => __notNull ??= super.notNull;
 
   @override
   String get wireName => __wireName ??= super.wireName;
