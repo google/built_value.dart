@@ -27,7 +27,14 @@ class _$SerializableRecordValueSerializer
       'value',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
     ];
-
+    Object? value;
+    value = object.record;
+    if (value != null) {
+      result
+        ..add('record')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(RecordOfIntInt)));
+    }
     return result;
   }
 
@@ -46,6 +53,10 @@ class _$SerializableRecordValueSerializer
         case 'value':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
+          break;
+        case 'record':
+          result.record = serializers.deserialize(value,
+              specifiedType: const FullType(RecordOfIntInt)) as RecordOfIntInt?;
           break;
       }
     }
@@ -435,7 +446,7 @@ class _$SerializableRecordValue extends SerializableRecordValue {
   @override
   final int value;
   @override
-  final (int, int)? record;
+  final RecordOfIntInt? record;
 
   factory _$SerializableRecordValue(
           [void Function(SerializableRecordValueBuilder)? updates]) =>
@@ -491,9 +502,9 @@ class SerializableRecordValueBuilder
   int? get value => _$this._value;
   set value(int? value) => _$this._value = value;
 
-  (int, int)? _record;
-  (int, int)? get record => _$this._record;
-  set record((int, int)? record) => _$this._record = record;
+  RecordOfIntInt? _record;
+  RecordOfIntInt? get record => _$this._record;
+  set record(RecordOfIntInt? record) => _$this._record = record;
 
   SerializableRecordValueBuilder();
 

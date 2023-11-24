@@ -55,6 +55,8 @@ abstract class ComplexRecordValue
   ComplexRecordValue._();
 }
 
+typedef RecordOfIntInt = (int, int);
+
 // Record serialization is not supported, so a class with records is only
 // serializable if record fields are not serialized.
 abstract class SerializableRecordValue
@@ -63,11 +65,31 @@ abstract class SerializableRecordValue
       _$serializableRecordValueSerializer;
 
   int get value;
-  @BuiltValueField(serialize: false)
-  (int, int)? get record;
+  RecordOfIntInt? get record;
 
   factory SerializableRecordValue(
           [void Function(SerializableRecordValueBuilder) updates]) =
       _$SerializableRecordValue;
   SerializableRecordValue._();
+}
+
+class RecordOfIntIntSerializer implements StructuredSerializer<RecordOfIntInt> {
+  @override
+  RecordOfIntInt deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    return (serialized.elementAt(0)! as int, serialized.elementAt(1)! as int);
+  }
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, RecordOfIntInt object,
+      {FullType specifiedType = FullType.unspecified}) {
+    return [object.$1, object.$2];
+  }
+
+  @override
+  Iterable<Type> get types => [RecordOfIntInt];
+
+  @override
+  String get wireName => 'RecordOfIntInt';
 }

@@ -243,9 +243,9 @@ abstract class Value implements Built<Value, ValueBuilder> {
   factory Value([void Function(ValueBuilder) updates]) = _$Value;
 }
 '''),
-          contains(r'1. Record fields are not (yet) serializable. '
-              'Remove "record" or mark it '
-              '"@BuiltValueField(serialize: false)".'));
+          contains(r'1. Fields declared with record types are not '
+              'automatically serializable. '
+              'To allow the class to be serialized, modify "record" by'));
     });
   });
 }

@@ -77,7 +77,8 @@ class BuiltJsonSerializers implements Serializers {
     if (specifiedType.isUnspecified) {
       final serializer = serializerForType(object.runtimeType);
       if (serializer == null) {
-        throw StateError("No serializer for '${object.runtimeType}'.");
+        throw StateError(
+            _noSerializerMessageFor(object.runtimeType.toString()));
       }
       if (serializer is StructuredSerializer) {
         final result = <Object?>[serializer.wireName];
@@ -135,7 +136,7 @@ class BuiltJsonSerializers implements Serializers {
 
       final serializer = serializerForWireName(wireName);
       if (serializer == null) {
-        throw StateError("No serializer for '$wireName'.");
+        throw StateError(_noSerializerMessageFor(wireName));
       }
 
       if (serializer is StructuredSerializer) {
@@ -164,7 +165,8 @@ class BuiltJsonSerializers implements Serializers {
           // Might be an interface; try resolving using the type on the wire.
           return deserialize(objectBeforePlugins);
         } else {
-          throw StateError("No serializer for '${specifiedType.root}'.");
+          throw StateError(
+              _noSerializerMessageFor(specifiedType.root.toString()));
         }
       }
 
@@ -320,4 +322,12 @@ String _getRawName(Type? type) {
   var name = type.toString();
   var genericsStart = name.indexOf('<');
   return genericsStart == -1 ? name : name.substring(0, genericsStart);
+}
+
+String _noSerializerMessageFor(String typeName) {
+  final maybeRecordAdvice = typeName.contains('(')
+      ? ' Note that record types are not automatically serializable, '
+          'please write and install your own `Serializer`.'
+      : '';
+  return "No serializer for '$typeName'.$maybeRecordAdvice";
 }
