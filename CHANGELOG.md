@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.8.0 (unreleased)
+
+- Allow classes with record fields to be serialized if they use a typedef for
+  the record type and install a custom `Serializer` for it.
+
 # 8.7.0
 
 - Add `Int32` serializer.

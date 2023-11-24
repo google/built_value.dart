@@ -203,10 +203,16 @@ abstract class SerializerSourceField
       ];
     }
 
-    if (isSerializable && element.getter!.returnType is RecordType) {
+    if (isSerializable &&
+        element.getter!.returnType is RecordType &&
+        typeWithPrefix.contains('(')) {
       return [
-        'Record fields are not (yet) serializable. '
-            'Remove "$name" or mark it "@BuiltValueField(serialize: false)".'
+        'Fields declared with record types are not automatically serializable. '
+            'To allow the class to be serialized, modify "$name" by: '
+            'a) removing it,  or '
+            'b) marking it "@BuiltValueField(serialize: false)", or '
+            'c) creating a `typedef` to represent the record type then '
+            'writing and installing a custom `Serializer` for it.'
       ];
     }
 
