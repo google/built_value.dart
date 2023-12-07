@@ -397,11 +397,11 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
         // Generate maps between enum names and wire names.
         final toWire = '''
          static const Map<String, Object> _toWire = const <String, Object>{
-           ${wireNameMapping.keys.map((key) => "'$key': ${_toCode(wireNameMapping[key])},").join('\n')}
+           ${wireNameMapping.keys.map((key) => "'${escapeString(key)}': ${_toCode(wireNameMapping[key])},").join('\n')}
          };''';
         final fromWire = '''
          static const Map<Object, String> _fromWire = const <Object, String>{
-           ${wireNameMapping.keys.map((key) => "${_toCode(wireNameMapping[key])}: '$key',").join('\n')}
+           ${wireNameMapping.keys.map((key) => "${_toCode(wireNameMapping[key])}: '${escapeString(key)}',").join('\n')}
          };''';
 
         return '''
