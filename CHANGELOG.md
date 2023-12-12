@@ -1,8 +1,9 @@
 # Changelog
 
-# 8.8.1 (unreleased)
+# 8.8.1
 
-- Remove support for generating legacy (not null safe) code.
+- Fix codegen for enum wire keys when there is a `$` in the field name.
+- Remove support for generating legacy (<2.12) Dart code.
 
 # 8.8.0
 
