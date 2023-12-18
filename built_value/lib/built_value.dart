@@ -4,6 +4,8 @@
 
 import 'package:meta/meta_meta.dart';
 
+final int ABC = 3;
+
 /// Implement this for a Built Value.
 ///
 /// Then use built_value_generator.dart code generation functionality to
