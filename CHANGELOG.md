@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.9.0-wip
+
+- Add ignoring types that the StandardJsonPlugin should leave as a List.
+
 # 8.8.1
 
 - Fix codegen for enum wire keys when there is a `$` in the field name.

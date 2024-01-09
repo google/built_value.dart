@@ -24,11 +24,19 @@ class StandardJsonPlugin implements SerializerPlugin {
   /// The field used to specify the value type if needed. Defaults to `$`.
   final String discriminator;
 
-  // The key used when there is just a single value, for example if serializing
-  // an `int`.
+  /// The key used when there is just a single value, for example if serializing
+  /// an `int`.
   final String valueKey;
 
-  StandardJsonPlugin({this.discriminator = r'$', this.valueKey = ''});
+  /// The types to leave as a list when converting into json.
+  final BuiltSet<Type> typesToLeaveAsList;
+
+  StandardJsonPlugin({
+    this.discriminator = r'$',
+    this.valueKey = '',
+    Iterable<Type>? typesToLeaveAsList,
+  }) : typesToLeaveAsList = BuiltSet<Type>(
+            {BuiltList, BuiltSet, JsonObject, ...?typesToLeaveAsList});
 
   @override
   Object? beforeSerialize(Object? object, FullType specifiedType) {
@@ -41,10 +49,7 @@ class StandardJsonPlugin implements SerializerPlugin {
 
   @override
   Object? afterSerialize(Object? object, FullType specifiedType) {
-    if (object is List &&
-        specifiedType.root != BuiltList &&
-        specifiedType.root != BuiltSet &&
-        specifiedType.root != JsonObject) {
+    if (object is List && !typesToLeaveAsList.contains(specifiedType.root)) {
       if (specifiedType.isUnspecified) {
         return _toMapWithDiscriminator(object);
       } else {

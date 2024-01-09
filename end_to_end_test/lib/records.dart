@@ -66,6 +66,7 @@ abstract class SerializableRecordValue
 
   int get value;
   RecordOfIntInt? get record;
+  RecordOfIntOrList? get intOrList;
 
   factory SerializableRecordValue(
           [void Function(SerializableRecordValueBuilder) updates]) =
@@ -92,4 +93,59 @@ class RecordOfIntIntSerializer implements StructuredSerializer<RecordOfIntInt> {
 
   @override
   String get wireName => 'RecordOfIntInt';
+}
+
+typedef RecordOfIntOrList = (int?, BuiltList<String>?);
+
+class RecordOfIntOrListSerializer
+    implements PrimitiveSerializer<RecordOfIntOrList> {
+  const RecordOfIntOrListSerializer();
+
+  @override
+  Iterable<Type> get types => const [RecordOfIntOrList];
+
+  @override
+  String get wireName => 'RecordOfIntOrList';
+
+  @override
+  Object serialize(
+    Serializers serializers,
+    RecordOfIntOrList object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
+    dynamic value;
+    value = object.$1;
+    if (value != null) {
+      return serializers.serialize(value, specifiedType: const FullType(int))!;
+    }
+    value = object.$2;
+    if (value != null) {
+      return serializers.serialize(value,
+          specifiedType: const FullType(BuiltList, [FullType(String)]))!;
+    }
+
+    throw StateError('Tried to serialize without any value.');
+  }
+
+  @override
+  RecordOfIntOrList deserialize(
+    Serializers serializers,
+    Object data, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
+    BuiltList<String>? list;
+    try {
+      list = serializers.deserialize(
+        data,
+        specifiedType: const FullType(BuiltList, [FullType(String)]),
+      )! as BuiltList<String>;
+    } catch (_) {}
+    int? number;
+    try {
+      number = serializers.deserialize(data,
+          specifiedType: const FullType(int))! as int;
+    } catch (_) {}
+
+    return (number, list);
+  }
 }

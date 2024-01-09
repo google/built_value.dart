@@ -4,6 +4,9 @@
 
 import 'dart:convert';
 
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/serializer.dart';
+import 'package:built_value/standard_json_plugin.dart';
 import 'package:end_to_end_test/errors_matchers.dart';
 import 'package:end_to_end_test/records.dart';
 import 'package:end_to_end_test/serializers.dart';
@@ -61,6 +64,35 @@ void main() {
 
     test('can be deserialized with custom deserializer', () {
       expect(serializersWithCustomSerializer.deserialize(serialized), data);
+    });
+  });
+
+  group('$SerializableRecordValue with a record list value', () {
+    var data = SerializableRecordValue((b) => b
+      ..value = 1
+      ..intOrList = (null, BuiltList(['value0', 'value1', 'value2'])));
+    var serialized = json.decode(json.encode({
+      'value': 1,
+      'intOrList': ['value0', 'value1', 'value2'],
+    })) as Object;
+    var serializersWithCustomSerializer = (serializers.toBuilder()
+          ..addPlugin(
+              StandardJsonPlugin(typesToLeaveAsList: {RecordOfIntOrList}))
+          ..add(RecordOfIntOrListSerializer()))
+        .build();
+
+    test('can be serialized with custom serializer', () {
+      expect(
+          serializersWithCustomSerializer.serialize(data,
+              specifiedType: FullType(SerializableRecordValue)),
+          serialized);
+    });
+
+    test('can be deserialized with custom deserializer', () {
+      expect(
+          serializersWithCustomSerializer.deserialize(serialized,
+              specifiedType: FullType(SerializableRecordValue)),
+          data);
     });
   });
 }
