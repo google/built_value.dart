@@ -334,7 +334,7 @@ abstract class PrimitiveSerializer<T> implements Serializer<T> {
   /// the type being serialized is provided in [specifiedType].
   ///
   /// Returns a value that can be represented as a JSON primitive: a boolean,
-  /// an integer, a double, or a String.
+  /// an integer, a double, a String or a List.
   ///
   /// TODO(davidmorgan): document the wire format.
   Object serialize(Serializers serializers, T object,

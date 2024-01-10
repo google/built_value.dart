@@ -35,6 +35,13 @@ class _$SerializableRecordValueSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(RecordOfIntInt)));
     }
+    value = object.intOrList;
+    if (value != null) {
+      result
+        ..add('intOrList')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(RecordOfIntOrList)));
+    }
     return result;
   }
 
@@ -57,6 +64,11 @@ class _$SerializableRecordValueSerializer
         case 'record':
           result.record = serializers.deserialize(value,
               specifiedType: const FullType(RecordOfIntInt)) as RecordOfIntInt?;
+          break;
+        case 'intOrList':
+          result.intOrList = serializers.deserialize(value,
+                  specifiedType: const FullType(RecordOfIntOrList))
+              as RecordOfIntOrList?;
           break;
       }
     }
@@ -447,12 +459,16 @@ class _$SerializableRecordValue extends SerializableRecordValue {
   final int value;
   @override
   final RecordOfIntInt? record;
+  @override
+  final RecordOfIntOrList? intOrList;
 
   factory _$SerializableRecordValue(
           [void Function(SerializableRecordValueBuilder)? updates]) =>
       (new SerializableRecordValueBuilder()..update(updates))._build();
 
-  _$SerializableRecordValue._({required this.value, this.record}) : super._() {
+  _$SerializableRecordValue._(
+      {required this.value, this.record, this.intOrList})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
         value, r'SerializableRecordValue', 'value');
   }
@@ -472,7 +488,8 @@ class _$SerializableRecordValue extends SerializableRecordValue {
     final dynamic _$dynamicOther = other;
     return other is SerializableRecordValue &&
         value == other.value &&
-        record == _$dynamicOther.record;
+        record == _$dynamicOther.record &&
+        intOrList == _$dynamicOther.intOrList;
   }
 
   @override
@@ -480,6 +497,7 @@ class _$SerializableRecordValue extends SerializableRecordValue {
     var _$hash = 0;
     _$hash = $jc(_$hash, value.hashCode);
     _$hash = $jc(_$hash, record.hashCode);
+    _$hash = $jc(_$hash, intOrList.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -488,7 +506,8 @@ class _$SerializableRecordValue extends SerializableRecordValue {
   String toString() {
     return (newBuiltValueToStringHelper(r'SerializableRecordValue')
           ..add('value', value)
-          ..add('record', record))
+          ..add('record', record)
+          ..add('intOrList', intOrList))
         .toString();
   }
 }
@@ -506,6 +525,10 @@ class SerializableRecordValueBuilder
   RecordOfIntInt? get record => _$this._record;
   set record(RecordOfIntInt? record) => _$this._record = record;
 
+  RecordOfIntOrList? _intOrList;
+  RecordOfIntOrList? get intOrList => _$this._intOrList;
+  set intOrList(RecordOfIntOrList? intOrList) => _$this._intOrList = intOrList;
+
   SerializableRecordValueBuilder();
 
   SerializableRecordValueBuilder get _$this {
@@ -513,6 +536,7 @@ class SerializableRecordValueBuilder
     if ($v != null) {
       _value = $v.value;
       _record = $v.record;
+      _intOrList = $v.intOrList;
       _$v = null;
     }
     return this;
@@ -537,7 +561,8 @@ class SerializableRecordValueBuilder
         new _$SerializableRecordValue._(
             value: BuiltValueNullFieldError.checkNotNull(
                 value, r'SerializableRecordValue', 'value'),
-            record: record);
+            record: record,
+            intOrList: intOrList);
     replace(_$result);
     return _$result;
   }
