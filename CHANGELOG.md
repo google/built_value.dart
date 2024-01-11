@@ -3,6 +3,7 @@
 # 8.9.0-wip
 
 - Add ignoring types that the StandardJsonPlugin should leave as a List.
+- Allow non alphanumeric characters in enum class names.
 
 # 8.8.1
 

@@ -119,3 +119,23 @@ class FallbackNumberEnum extends EnumClass {
   static BuiltSet<FallbackNumberEnum> get values => _$fbNumberValues;
   static FallbackNumberEnum valueOf(String name) => _$fbNumberValueOf(name);
 }
+
+class EnumWith$Dollar_UnderScore extends EnumClass {
+  static Serializer<EnumWith$Dollar_UnderScore> get serializer =>
+      _$enumWith$DollarUnderScoreSerializer;
+
+  @BuiltValueEnumConst(wireNumber: 0)
+  static const EnumWith$Dollar_UnderScore $value =
+      _$dollar_UnderScoreEnum$Value;
+
+  @BuiltValueEnumConst(wireNumber: -1, fallback: true)
+  static const EnumWith$Dollar_UnderScore value$ =
+      _$dollar_UnderScoreEnumValue$;
+
+  const EnumWith$Dollar_UnderScore._(String name) : super(name);
+
+  static BuiltSet<EnumWith$Dollar_UnderScore> get values =>
+      _$enum$Dollar_UnderScoreValues;
+  static EnumWith$Dollar_UnderScore valueOf(String name) =>
+      _$enum$Dollar_UnderScoreValueOf(name);
+}

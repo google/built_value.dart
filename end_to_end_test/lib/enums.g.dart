@@ -176,6 +176,28 @@ final BuiltSet<FallbackNumberEnum> _$fbNumberValues =
   _$fbNumberNo,
 ]);
 
+const EnumWith$Dollar_UnderScore _$dollar_UnderScoreEnum$Value =
+    const EnumWith$Dollar_UnderScore._('\$value');
+const EnumWith$Dollar_UnderScore _$dollar_UnderScoreEnumValue$ =
+    const EnumWith$Dollar_UnderScore._('value\$');
+
+EnumWith$Dollar_UnderScore _$enum$Dollar_UnderScoreValueOf(String name) {
+  switch (name) {
+    case '\$value':
+      return _$dollar_UnderScoreEnum$Value;
+    case 'value\$':
+      return _$dollar_UnderScoreEnumValue$;
+    default:
+      return _$dollar_UnderScoreEnumValue$;
+  }
+}
+
+final BuiltSet<EnumWith$Dollar_UnderScore> _$enum$Dollar_UnderScoreValues =
+    new BuiltSet<EnumWith$Dollar_UnderScore>(const <EnumWith$Dollar_UnderScore>[
+  _$dollar_UnderScoreEnum$Value,
+  _$dollar_UnderScoreEnumValue$,
+]);
+
 Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
 Serializer<WireNameEnum> _$wireNameEnumSerializer =
     new _$WireNameEnumSerializer();
@@ -187,6 +209,8 @@ Serializer<FallbackEnum> _$fallbackEnumSerializer =
     new _$FallbackEnumSerializer();
 Serializer<FallbackNumberEnum> _$fallbackNumberEnumSerializer =
     new _$FallbackNumberEnumSerializer();
+Serializer<EnumWith$Dollar_UnderScore> _$enumWith$DollarUnderScoreSerializer =
+    new _$EnumWith$Dollar_UnderScoreSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   @override
@@ -332,6 +356,35 @@ class _$FallbackNumberEnumSerializer
   FallbackNumberEnum deserialize(Serializers serializers, Object serialized,
           {FullType specifiedType = FullType.unspecified}) =>
       FallbackNumberEnum.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
+}
+
+class _$EnumWith$Dollar_UnderScoreSerializer
+    implements PrimitiveSerializer<EnumWith$Dollar_UnderScore> {
+  static const Map<String, Object> _toWire = const <String, Object>{
+    '\$value': 0,
+    'value\$': -1,
+  };
+  static const Map<Object, String> _fromWire = const <Object, String>{
+    0: '\$value',
+    -1: 'value\$',
+  };
+
+  @override
+  final Iterable<Type> types = const <Type>[EnumWith$Dollar_UnderScore];
+  @override
+  final String wireName = 'EnumWith\$Dollar_UnderScore';
+
+  @override
+  Object serialize(Serializers serializers, EnumWith$Dollar_UnderScore object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      _toWire[object.name] ?? object.name;
+
+  @override
+  EnumWith$Dollar_UnderScore deserialize(
+          Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      EnumWith$Dollar_UnderScore.valueOf(
           _fromWire[serialized] ?? (serialized is String ? serialized : ''));
 }
 
