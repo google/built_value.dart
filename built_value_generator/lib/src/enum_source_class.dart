@@ -81,8 +81,8 @@ abstract class EnumSourceClass
     if (getter == null) return null;
     var source = parsedLibrary.getElementDeclaration(getter)!.node.toSource();
     var matches = RegExp(r'static BuiltSet<' +
-            element.displayName +
-            r'> get values => (_\$\w+)\;')
+            RegExp.escape(element.displayName) +
+            r'> get values => (_\$[\w$]+)\;')
         .allMatches(source);
     return matches.isEmpty ? null : matches.first.group(1);
   }
@@ -93,8 +93,8 @@ abstract class EnumSourceClass
     if (getter == null) return null;
     var source = parsedLibrary.getElementDeclaration(getter)!.node.toSource();
     var matches = RegExp(r'static ' +
-            element.displayName +
-            r' valueOf\((?:final )?String name\) \=\> (\_\$\w+)\(name\)\;')
+            RegExp.escape(element.displayName) +
+            r' valueOf\((?:final )?String name\) \=\> (\_\$[\w$]+)\(name\)\;')
         .allMatches(source);
     return matches.isEmpty ? null : matches.first.group(1);
   }
@@ -153,9 +153,10 @@ abstract class EnumSourceClass
   }
 
   Iterable<String> _checkConstructor() {
-    var expectedCode =
-        RegExp('const $name._\\((?:final )?String name\\) : super\\(name\\);');
-    var expectedCode217 = RegExp('const $name._\\(super.name\\);');
+    var expectedCode = RegExp(
+        'const ${RegExp.escape(name)}._\\((?:final )?String name\\) : super\\(name\\);');
+    var expectedCode217 =
+        RegExp('const ${RegExp.escape(name)}._\\(super.name\\);');
     return constructors.length == 1 &&
             (constructors.single.contains(expectedCode) ||
                 constructors.single.contains(expectedCode217))
