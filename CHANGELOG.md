@@ -1,9 +1,10 @@
 # Changelog
 
-# 8.9.0-wip
+# 8.9.0
 
-- Add ignoring types that the StandardJsonPlugin should leave as a List.
-- Allow non alphanumeric characters in enum class names.
+- In `StandardJsonPlugin`, add support for specifying types that should be left
+  as `List`.
+- Allow non alphanumeric characters in `EnumClass` names.
 
 # 8.8.1
 
