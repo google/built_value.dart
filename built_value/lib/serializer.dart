@@ -269,7 +269,7 @@ class FullType {
       : FullType(root, parameters);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
     if (other is! FullType) return false;
     if (root != other.root) return false;

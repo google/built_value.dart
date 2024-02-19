@@ -97,7 +97,7 @@ class BoolJsonObject extends JsonObject {
   bool get asBool => value;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
     if (other is! BoolJsonObject) return false;
     return value == other.value;
@@ -123,7 +123,7 @@ class ListJsonObject extends JsonObject {
   List<Object?> get asList => value;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
     if (other is! ListJsonObject) return false;
     return const DeepCollectionEquality().equals(value, other.value);
@@ -149,7 +149,7 @@ class MapJsonObject extends JsonObject {
   Map<String, Object?> get asMap => value;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
     if (other is! MapJsonObject) return false;
     return const DeepCollectionEquality().equals(value, other.value);
@@ -173,7 +173,7 @@ class NumJsonObject extends JsonObject {
   num get asNum => value;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
     if (other is! NumJsonObject) return false;
     return value == other.value;
@@ -197,7 +197,7 @@ class StringJsonObject extends JsonObject {
   String get asString => value;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
     if (other is! StringJsonObject) return false;
     return value == other.value;

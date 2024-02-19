@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.9.1
+
+- Fix for new warning about `operator==` param type.
+
 # 8.9.0
 
 - In `StandardJsonPlugin`, add support for specifying types that should be left
