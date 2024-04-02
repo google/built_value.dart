@@ -8,6 +8,8 @@ part of 'value_source_field.dart';
 
 class _$ValueSourceField extends ValueSourceField {
   @override
+  final ParsedLibraryResults parsedLibraryResults;
+  @override
   final BuiltValue settings;
   @override
   final ParsedLibraryResult parsedLibrary;
@@ -39,11 +41,14 @@ class _$ValueSourceField extends ValueSourceField {
       (new ValueSourceFieldBuilder()..update(updates))._build();
 
   _$ValueSourceField._(
-      {required this.settings,
+      {required this.parsedLibraryResults,
+      required this.settings,
       required this.parsedLibrary,
       required this.element,
       this.builderElement})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        parsedLibraryResults, r'ValueSourceField', 'parsedLibraryResults');
     BuiltValueNullFieldError.checkNotNull(
         settings, r'ValueSourceField', 'settings');
     BuiltValueNullFieldError.checkNotNull(
@@ -127,6 +132,7 @@ class _$ValueSourceField extends ValueSourceField {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is ValueSourceField &&
+        parsedLibraryResults == other.parsedLibraryResults &&
         settings == other.settings &&
         parsedLibrary == other.parsedLibrary &&
         element == other.element &&
@@ -136,6 +142,7 @@ class _$ValueSourceField extends ValueSourceField {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, parsedLibraryResults.hashCode);
     _$hash = $jc(_$hash, settings.hashCode);
     _$hash = $jc(_$hash, parsedLibrary.hashCode);
     _$hash = $jc(_$hash, element.hashCode);
@@ -147,6 +154,7 @@ class _$ValueSourceField extends ValueSourceField {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'ValueSourceField')
+          ..add('parsedLibraryResults', parsedLibraryResults)
           ..add('settings', settings)
           ..add('parsedLibrary', parsedLibrary)
           ..add('element', element)
@@ -158,6 +166,12 @@ class _$ValueSourceField extends ValueSourceField {
 class ValueSourceFieldBuilder
     implements Builder<ValueSourceField, ValueSourceFieldBuilder> {
   _$ValueSourceField? _$v;
+
+  ParsedLibraryResults? _parsedLibraryResults;
+  ParsedLibraryResults? get parsedLibraryResults =>
+      _$this._parsedLibraryResults;
+  set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
+      _$this._parsedLibraryResults = parsedLibraryResults;
 
   BuiltValue? _settings;
   BuiltValue? get settings => _$this._settings;
@@ -182,6 +196,7 @@ class ValueSourceFieldBuilder
   ValueSourceFieldBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _parsedLibraryResults = $v.parsedLibraryResults;
       _settings = $v.settings;
       _parsedLibrary = $v.parsedLibrary;
       _element = $v.element;
@@ -208,6 +223,10 @@ class ValueSourceFieldBuilder
   _$ValueSourceField _build() {
     final _$result = _$v ??
         new _$ValueSourceField._(
+            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+                parsedLibraryResults,
+                r'ValueSourceField',
+                'parsedLibraryResults'),
             settings: BuiltValueNullFieldError.checkNotNull(
                 settings, r'ValueSourceField', 'settings'),
             parsedLibrary: BuiltValueNullFieldError.checkNotNull(

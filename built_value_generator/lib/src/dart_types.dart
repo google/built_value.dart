@@ -6,6 +6,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:built_value_generator/src/value_source_class.dart';
 
 BuiltSet<String> _builtCollectionNames = BuiltSet<String>([
@@ -17,13 +18,18 @@ BuiltSet<String> _builtCollectionNames = BuiltSet<String>([
 ]);
 
 class DartTypes {
-  static bool needsNestedBuilder(DartType type) {
-    return isInstantiableBuiltValue(type) || isBuiltCollection(type);
+  static bool needsNestedBuilder(
+      ParsedLibraryResults parsedLibraryResults, DartType type) {
+    return isInstantiableBuiltValue(parsedLibraryResults, type) ||
+        isBuiltCollection(type);
   }
 
-  static bool isInstantiableBuiltValue(DartType type) {
+  static bool isInstantiableBuiltValue(
+      ParsedLibraryResults parsedLibraryResults, DartType type) {
     return isBuiltValue(type) &&
-        ValueSourceClass(type.element as ClassElement).settings.instantiable;
+        ValueSourceClass(parsedLibraryResults, type.element as ClassElement)
+            .settings
+            .instantiable;
   }
 
   static bool isBuiltValue(DartType type) =>

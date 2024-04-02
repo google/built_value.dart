@@ -15,6 +15,7 @@ import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/field_mixin.dart';
 import 'package:built_value_generator/src/metadata.dart'
     show metadataToStringValue;
+import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:built_value_generator/src/strings.dart';
 
 part 'serializer_source_field.g.dart';
@@ -30,6 +31,7 @@ abstract class SerializerSourceField
     'BuiltSet': 'SetBuilder',
     'BuiltSetMultimap': 'SetMultimapBuilder',
   });
+  ParsedLibraryResults get parsedLibraryResults;
   BuiltValue get settings;
   @override
   ParsedLibraryResult get parsedLibrary;
@@ -38,11 +40,13 @@ abstract class SerializerSourceField
   FieldElement? get builderElement;
 
   factory SerializerSourceField(
+          ParsedLibraryResults parsedLibraryResults,
           BuiltValue settings,
           ParsedLibraryResult parsedLibrary,
           FieldElement element,
           FieldElement? builderElement) =>
       _$SerializerSourceField._(
+          parsedLibraryResults: parsedLibraryResults,
           settings: settings,
           parsedLibrary: parsedLibrary,
           element: element,
@@ -153,7 +157,8 @@ abstract class SerializerSourceField
         ? DartTypes.getName(element.getter!.returnType) !=
             DartTypes.getName(builderElement!.getter!.returnType)
         : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
-            DartTypes.needsNestedBuilder(element.getter!.returnType);
+            DartTypes.needsNestedBuilder(
+                parsedLibraryResults, element.getter!.returnType);
   }
 
   @memoized

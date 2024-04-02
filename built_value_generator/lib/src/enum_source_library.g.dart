@@ -8,6 +8,8 @@ part of 'enum_source_library.dart';
 
 class _$EnumSourceLibrary extends EnumSourceLibrary {
   @override
+  final ParsedLibraryResults parsedLibraryResults;
+  @override
   final LibraryElement element;
   ParsedLibraryResult? __parsedLibrary;
   String? __name;
@@ -19,7 +21,11 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
           [void Function(EnumSourceLibraryBuilder)? updates]) =>
       (new EnumSourceLibraryBuilder()..update(updates))._build();
 
-  _$EnumSourceLibrary._({required this.element}) : super._() {
+  _$EnumSourceLibrary._(
+      {required this.parsedLibraryResults, required this.element})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        parsedLibraryResults, r'EnumSourceLibrary', 'parsedLibraryResults');
     BuiltValueNullFieldError.checkNotNull(
         element, r'EnumSourceLibrary', 'element');
   }
@@ -51,12 +57,15 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is EnumSourceLibrary && element == other.element;
+    return other is EnumSourceLibrary &&
+        parsedLibraryResults == other.parsedLibraryResults &&
+        element == other.element;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, parsedLibraryResults.hashCode);
     _$hash = $jc(_$hash, element.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -65,6 +74,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'EnumSourceLibrary')
+          ..add('parsedLibraryResults', parsedLibraryResults)
           ..add('element', element))
         .toString();
   }
@@ -73,6 +83,12 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
 class EnumSourceLibraryBuilder
     implements Builder<EnumSourceLibrary, EnumSourceLibraryBuilder> {
   _$EnumSourceLibrary? _$v;
+
+  ParsedLibraryResults? _parsedLibraryResults;
+  ParsedLibraryResults? get parsedLibraryResults =>
+      _$this._parsedLibraryResults;
+  set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
+      _$this._parsedLibraryResults = parsedLibraryResults;
 
   LibraryElement? _element;
   LibraryElement? get element => _$this._element;
@@ -83,6 +99,7 @@ class EnumSourceLibraryBuilder
   EnumSourceLibraryBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _parsedLibraryResults = $v.parsedLibraryResults;
       _element = $v.element;
       _$v = null;
     }
@@ -106,6 +123,10 @@ class EnumSourceLibraryBuilder
   _$EnumSourceLibrary _build() {
     final _$result = _$v ??
         new _$EnumSourceLibrary._(
+            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+                parsedLibraryResults,
+                r'EnumSourceLibrary',
+                'parsedLibraryResults'),
             element: BuiltValueNullFieldError.checkNotNull(
                 element, r'EnumSourceLibrary', 'element'));
     replace(_$result);

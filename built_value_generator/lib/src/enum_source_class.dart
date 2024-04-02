@@ -8,9 +8,9 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/enum_source_field.dart';
+import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:built_value_generator/src/strings.dart';
 import 'package:collection/collection.dart'
     show IterableExtension, IterableNullableExtension;
@@ -21,16 +21,19 @@ part 'enum_source_class.g.dart';
 
 abstract class EnumSourceClass
     implements Built<EnumSourceClass, EnumSourceClassBuilder> {
+  ParsedLibraryResults get parsedLibraryResults;
+
   InterfaceElement get element;
 
-  factory EnumSourceClass(
-          ParsedLibraryResult parsedLibrary, InterfaceElement element) =>
-      _$EnumSourceClass._(element: element);
+  factory EnumSourceClass(ParsedLibraryResults parsedLibraryResults,
+          InterfaceElement element) =>
+      _$EnumSourceClass._(
+          parsedLibraryResults: parsedLibraryResults, element: element);
   EnumSourceClass._();
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResultOrThrowingMock(element.library);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   @memoized
   String get name => element.name;

@@ -8,6 +8,8 @@ part of 'serializer_source_class.dart';
 
 class _$SerializerSourceClass extends SerializerSourceClass {
   @override
+  final ParsedLibraryResults parsedLibraryResults;
+  @override
   final InterfaceElement element;
   @override
   final ClassElement? builderElement;
@@ -37,8 +39,13 @@ class _$SerializerSourceClass extends SerializerSourceClass {
           [void Function(SerializerSourceClassBuilder)? updates]) =>
       (new SerializerSourceClassBuilder()..update(updates))._build();
 
-  _$SerializerSourceClass._({required this.element, this.builderElement})
+  _$SerializerSourceClass._(
+      {required this.parsedLibraryResults,
+      required this.element,
+      this.builderElement})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        parsedLibraryResults, r'SerializerSourceClass', 'parsedLibraryResults');
     BuiltValueNullFieldError.checkNotNull(
         element, r'SerializerSourceClass', 'element');
   }
@@ -132,6 +139,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is SerializerSourceClass &&
+        parsedLibraryResults == other.parsedLibraryResults &&
         element == other.element &&
         builderElement == other.builderElement;
   }
@@ -139,6 +147,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, parsedLibraryResults.hashCode);
     _$hash = $jc(_$hash, element.hashCode);
     _$hash = $jc(_$hash, builderElement.hashCode);
     _$hash = $jf(_$hash);
@@ -148,6 +157,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'SerializerSourceClass')
+          ..add('parsedLibraryResults', parsedLibraryResults)
           ..add('element', element)
           ..add('builderElement', builderElement))
         .toString();
@@ -157,6 +167,12 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 class SerializerSourceClassBuilder
     implements Builder<SerializerSourceClass, SerializerSourceClassBuilder> {
   _$SerializerSourceClass? _$v;
+
+  ParsedLibraryResults? _parsedLibraryResults;
+  ParsedLibraryResults? get parsedLibraryResults =>
+      _$this._parsedLibraryResults;
+  set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
+      _$this._parsedLibraryResults = parsedLibraryResults;
 
   InterfaceElement? _element;
   InterfaceElement? get element => _$this._element;
@@ -172,6 +188,7 @@ class SerializerSourceClassBuilder
   SerializerSourceClassBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _parsedLibraryResults = $v.parsedLibraryResults;
       _element = $v.element;
       _builderElement = $v.builderElement;
       _$v = null;
@@ -196,6 +213,10 @@ class SerializerSourceClassBuilder
   _$SerializerSourceClass _build() {
     final _$result = _$v ??
         new _$SerializerSourceClass._(
+            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+                parsedLibraryResults,
+                r'SerializerSourceClass',
+                'parsedLibraryResults'),
             element: BuiltValueNullFieldError.checkNotNull(
                 element, r'SerializerSourceClass', 'element'),
             builderElement: builderElement);

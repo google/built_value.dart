@@ -8,6 +8,8 @@ part of 'serializer_source_field.dart';
 
 class _$SerializerSourceField extends SerializerSourceField {
   @override
+  final ParsedLibraryResults parsedLibraryResults;
+  @override
   final BuiltValue settings;
   @override
   final ParsedLibraryResult parsedLibrary;
@@ -39,11 +41,14 @@ class _$SerializerSourceField extends SerializerSourceField {
       (new SerializerSourceFieldBuilder()..update(updates))._build();
 
   _$SerializerSourceField._(
-      {required this.settings,
+      {required this.parsedLibraryResults,
+      required this.settings,
       required this.parsedLibrary,
       required this.element,
       this.builderElement})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        parsedLibraryResults, r'SerializerSourceField', 'parsedLibraryResults');
     BuiltValueNullFieldError.checkNotNull(
         settings, r'SerializerSourceField', 'settings');
     BuiltValueNullFieldError.checkNotNull(
@@ -130,6 +135,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is SerializerSourceField &&
+        parsedLibraryResults == other.parsedLibraryResults &&
         settings == other.settings &&
         parsedLibrary == other.parsedLibrary &&
         element == other.element &&
@@ -139,6 +145,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, parsedLibraryResults.hashCode);
     _$hash = $jc(_$hash, settings.hashCode);
     _$hash = $jc(_$hash, parsedLibrary.hashCode);
     _$hash = $jc(_$hash, element.hashCode);
@@ -150,6 +157,7 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'SerializerSourceField')
+          ..add('parsedLibraryResults', parsedLibraryResults)
           ..add('settings', settings)
           ..add('parsedLibrary', parsedLibrary)
           ..add('element', element)
@@ -161,6 +169,12 @@ class _$SerializerSourceField extends SerializerSourceField {
 class SerializerSourceFieldBuilder
     implements Builder<SerializerSourceField, SerializerSourceFieldBuilder> {
   _$SerializerSourceField? _$v;
+
+  ParsedLibraryResults? _parsedLibraryResults;
+  ParsedLibraryResults? get parsedLibraryResults =>
+      _$this._parsedLibraryResults;
+  set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
+      _$this._parsedLibraryResults = parsedLibraryResults;
 
   BuiltValue? _settings;
   BuiltValue? get settings => _$this._settings;
@@ -185,6 +199,7 @@ class SerializerSourceFieldBuilder
   SerializerSourceFieldBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _parsedLibraryResults = $v.parsedLibraryResults;
       _settings = $v.settings;
       _parsedLibrary = $v.parsedLibrary;
       _element = $v.element;
@@ -211,6 +226,10 @@ class SerializerSourceFieldBuilder
   _$SerializerSourceField _build() {
     final _$result = _$v ??
         new _$SerializerSourceField._(
+            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+                parsedLibraryResults,
+                r'SerializerSourceField',
+                'parsedLibraryResults'),
             settings: BuiltValueNullFieldError.checkNotNull(
                 settings, r'SerializerSourceField', 'settings'),
             parsedLibrary: BuiltValueNullFieldError.checkNotNull(

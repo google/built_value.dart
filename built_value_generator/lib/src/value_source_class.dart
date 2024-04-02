@@ -11,10 +11,10 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/memoized_getter.dart';
 import 'package:built_value_generator/src/metadata.dart';
+import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:built_value_generator/src/strings.dart';
 import 'package:built_value_generator/src/value_source_field.dart';
 import 'package:collection/collection.dart';
@@ -32,15 +32,18 @@ const String _importWithDoubleQuotes =
 
 abstract class ValueSourceClass
     implements Built<ValueSourceClass, ValueSourceClassBuilder> {
+  ParsedLibraryResults get parsedLibraryResults;
   InterfaceElement get element;
 
-  factory ValueSourceClass(InterfaceElement element) =>
-      _$ValueSourceClass._(element: element);
+  factory ValueSourceClass(ParsedLibraryResults parsedLibraryResults,
+          InterfaceElement element) =>
+      _$ValueSourceClass._(
+          parsedLibraryResults: parsedLibraryResults, element: element);
   ValueSourceClass._();
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResultOrThrowingMock(element.library);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   @memoized
   String get name => element.displayName;
@@ -221,7 +224,7 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltList<ValueSourceField> get fields => ValueSourceField.fromClassElements(
-      settings, parsedLibrary, element, builderElement);
+      parsedLibraryResults, settings, parsedLibrary, element, builderElement);
 
   @memoized
   String get source =>

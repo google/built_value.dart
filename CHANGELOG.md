@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.9.2
+
+- Improve build performance when there are lots of `built_value` classes.
+
 # 8.9.1
 
 - Fix for new warning about `operator==` param type.

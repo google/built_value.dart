@@ -8,6 +8,8 @@ part of 'value_source_class.dart';
 
 class _$ValueSourceClass extends ValueSourceClass {
   @override
+  final ParsedLibraryResults parsedLibraryResults;
+  @override
   final InterfaceElement element;
   ParsedLibraryResult? __parsedLibrary;
   String? __name;
@@ -54,7 +56,11 @@ class _$ValueSourceClass extends ValueSourceClass {
           [void Function(ValueSourceClassBuilder)? updates]) =>
       (new ValueSourceClassBuilder()..update(updates))._build();
 
-  _$ValueSourceClass._({required this.element}) : super._() {
+  _$ValueSourceClass._(
+      {required this.parsedLibraryResults, required this.element})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        parsedLibraryResults, r'ValueSourceClass', 'parsedLibraryResults');
     BuiltValueNullFieldError.checkNotNull(
         element, r'ValueSourceClass', 'element');
   }
@@ -222,12 +228,15 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ValueSourceClass && element == other.element;
+    return other is ValueSourceClass &&
+        parsedLibraryResults == other.parsedLibraryResults &&
+        element == other.element;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, parsedLibraryResults.hashCode);
     _$hash = $jc(_$hash, element.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -236,6 +245,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'ValueSourceClass')
+          ..add('parsedLibraryResults', parsedLibraryResults)
           ..add('element', element))
         .toString();
   }
@@ -244,6 +254,12 @@ class _$ValueSourceClass extends ValueSourceClass {
 class ValueSourceClassBuilder
     implements Builder<ValueSourceClass, ValueSourceClassBuilder> {
   _$ValueSourceClass? _$v;
+
+  ParsedLibraryResults? _parsedLibraryResults;
+  ParsedLibraryResults? get parsedLibraryResults =>
+      _$this._parsedLibraryResults;
+  set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
+      _$this._parsedLibraryResults = parsedLibraryResults;
 
   InterfaceElement? _element;
   InterfaceElement? get element => _$this._element;
@@ -254,6 +270,7 @@ class ValueSourceClassBuilder
   ValueSourceClassBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _parsedLibraryResults = $v.parsedLibraryResults;
       _element = $v.element;
       _$v = null;
     }
@@ -277,6 +294,10 @@ class ValueSourceClassBuilder
   _$ValueSourceClass _build() {
     final _$result = _$v ??
         new _$ValueSourceClass._(
+            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+                parsedLibraryResults,
+                r'ValueSourceClass',
+                'parsedLibraryResults'),
             element: BuiltValueNullFieldError.checkNotNull(
                 element, r'ValueSourceClass', 'element'));
     replace(_$result);
