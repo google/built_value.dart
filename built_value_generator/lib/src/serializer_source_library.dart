@@ -8,8 +8,8 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/library_elements.dart';
+import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:built_value_generator/src/serializer_source_class.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -19,15 +19,18 @@ part 'serializer_source_library.g.dart';
 
 abstract class SerializerSourceLibrary
     implements Built<SerializerSourceLibrary, SerializerSourceLibraryBuilder> {
+  ParsedLibraryResults get parsedLibraryResults;
   LibraryElement get element;
 
-  factory SerializerSourceLibrary(LibraryElement element) =>
-      _$SerializerSourceLibrary._(element: element);
+  factory SerializerSourceLibrary(
+          ParsedLibraryResults parsedLibraryResults, LibraryElement element) =>
+      _$SerializerSourceLibrary._(
+          parsedLibraryResults: parsedLibraryResults, element: element);
   SerializerSourceLibrary._();
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResultOrThrowingMock(element.library);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   @memoized
   bool get hasSerializers => serializersForAnnotations.isNotEmpty;
@@ -90,7 +93,8 @@ abstract class SerializerSourceLibrary
     var result = SetBuilder<SerializerSourceClass>();
     var classElements = LibraryElements.getClassElements(element);
     for (var classElement in classElements) {
-      final sourceClass = SerializerSourceClass(classElement);
+      final sourceClass =
+          SerializerSourceClass(parsedLibraryResults, classElement);
       if (sourceClass.isSerializable) {
         result.add(sourceClass);
       }
@@ -121,8 +125,8 @@ abstract class SerializerSourceLibrary
 
       result.addValues(
           field,
-          types.map((type) =>
-              SerializerSourceClass(type!.element as InterfaceElement)));
+          types.map((type) => SerializerSourceClass(
+              parsedLibraryResults, type!.element as InterfaceElement)));
     }
     return result.build();
   }

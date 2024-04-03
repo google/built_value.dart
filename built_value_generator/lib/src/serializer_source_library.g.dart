@@ -8,6 +8,8 @@ part of 'serializer_source_library.dart';
 
 class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   @override
+  final ParsedLibraryResults parsedLibraryResults;
+  @override
   final LibraryElement element;
   ParsedLibraryResult? __parsedLibrary;
   bool? __hasSerializers;
@@ -22,7 +24,11 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
           [void Function(SerializerSourceLibraryBuilder)? updates]) =>
       (new SerializerSourceLibraryBuilder()..update(updates))._build();
 
-  _$SerializerSourceLibrary._({required this.element}) : super._() {
+  _$SerializerSourceLibrary._(
+      {required this.parsedLibraryResults, required this.element})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(parsedLibraryResults,
+        r'SerializerSourceLibrary', 'parsedLibraryResults');
     BuiltValueNullFieldError.checkNotNull(
         element, r'SerializerSourceLibrary', 'element');
   }
@@ -67,12 +73,15 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is SerializerSourceLibrary && element == other.element;
+    return other is SerializerSourceLibrary &&
+        parsedLibraryResults == other.parsedLibraryResults &&
+        element == other.element;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
+    _$hash = $jc(_$hash, parsedLibraryResults.hashCode);
     _$hash = $jc(_$hash, element.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -81,6 +90,7 @@ class _$SerializerSourceLibrary extends SerializerSourceLibrary {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'SerializerSourceLibrary')
+          ..add('parsedLibraryResults', parsedLibraryResults)
           ..add('element', element))
         .toString();
   }
@@ -91,6 +101,12 @@ class SerializerSourceLibraryBuilder
         Builder<SerializerSourceLibrary, SerializerSourceLibraryBuilder> {
   _$SerializerSourceLibrary? _$v;
 
+  ParsedLibraryResults? _parsedLibraryResults;
+  ParsedLibraryResults? get parsedLibraryResults =>
+      _$this._parsedLibraryResults;
+  set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
+      _$this._parsedLibraryResults = parsedLibraryResults;
+
   LibraryElement? _element;
   LibraryElement? get element => _$this._element;
   set element(LibraryElement? element) => _$this._element = element;
@@ -100,6 +116,7 @@ class SerializerSourceLibraryBuilder
   SerializerSourceLibraryBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _parsedLibraryResults = $v.parsedLibraryResults;
       _element = $v.element;
       _$v = null;
     }
@@ -123,6 +140,10 @@ class SerializerSourceLibraryBuilder
   _$SerializerSourceLibrary _build() {
     final _$result = _$v ??
         new _$SerializerSourceLibrary._(
+            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+                parsedLibraryResults,
+                r'SerializerSourceLibrary',
+                'parsedLibraryResults'),
             element: BuiltValueNullFieldError.checkNotNull(
                 element, r'SerializerSourceLibrary', 'element'));
     replace(_$result);

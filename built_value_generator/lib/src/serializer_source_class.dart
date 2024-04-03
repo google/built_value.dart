@@ -9,10 +9,10 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/enum_source_class.dart';
 import 'package:built_value_generator/src/enum_source_field.dart';
 import 'package:built_value_generator/src/fields.dart' show collectFields;
+import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:built_value_generator/src/serializer_source_field.dart';
 import 'package:built_value_generator/src/strings.dart';
 import 'package:built_value_generator/src/value_source_class.dart';
@@ -23,12 +23,15 @@ part 'serializer_source_class.g.dart';
 
 abstract class SerializerSourceClass
     implements Built<SerializerSourceClass, SerializerSourceClassBuilder> {
+  ParsedLibraryResults get parsedLibraryResults;
   InterfaceElement get element;
 
   ClassElement? get builderElement;
 
-  factory SerializerSourceClass(InterfaceElement element) =>
+  factory SerializerSourceClass(ParsedLibraryResults parsedLibraryResults,
+          InterfaceElement element) =>
       _$SerializerSourceClass._(
+          parsedLibraryResults: parsedLibraryResults,
           element: element,
           builderElement:
               element.library.getClass(element.displayName + 'Builder'));
@@ -37,11 +40,12 @@ abstract class SerializerSourceClass
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResultOrThrowingMock(element.library);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   // TODO(davidmorgan): share common code in a nicer way.
   @memoized
-  BuiltValue get builtValueSettings => ValueSourceClass(element).settings;
+  BuiltValue get builtValueSettings =>
+      ValueSourceClass(parsedLibraryResults, element).settings;
 
   @memoized
   bool get hasBuilder => builderElement != null;
@@ -73,7 +77,7 @@ abstract class SerializerSourceClass
   // TODO(davidmorgan): share common code in a nicer way.
   @memoized
   BuiltValueEnum get enumClassSettings =>
-      EnumSourceClass(parsedLibrary, element).settings;
+      EnumSourceClass(parsedLibraryResults, element).settings;
 
   @memoized
   String get name => element.name;
@@ -154,7 +158,7 @@ abstract class SerializerSourceClass
     for (var fieldElement in collectFields(element)) {
       final builderFieldElement =
           builderElement?.getField(fieldElement.displayName);
-      final sourceField = SerializerSourceField(
+      final sourceField = SerializerSourceField(parsedLibraryResults,
           builtValueSettings, parsedLibrary, fieldElement, builderFieldElement);
       if (sourceField.isSerializable) {
         result.add(sourceField);
@@ -198,7 +202,8 @@ abstract class SerializerSourceClass
           // Type is not fully specified, ignore.
           if (typeElement is! ClassElement) continue;
 
-          final sourceClass = SerializerSourceClass(typeElement);
+          final sourceClass =
+              SerializerSourceClass(parsedLibraryResults, typeElement);
 
           if (sourceClass != this &&
               !result.build().contains(sourceClass) &&
@@ -209,7 +214,8 @@ abstract class SerializerSourceClass
         }
       }
 
-      final sourceClass = SerializerSourceClass(fieldTypeElement);
+      final sourceClass =
+          SerializerSourceClass(parsedLibraryResults, fieldTypeElement);
       if (sourceClass != this &&
           !result.build().contains(sourceClass) &&
           sourceClass.isSerializable) {

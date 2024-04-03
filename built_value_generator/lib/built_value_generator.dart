@@ -5,8 +5,9 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:built_value_generator/src/enum_source_library.dart';
-import 'package:built_value_generator/src/value_source_class.dart';
+import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:built_value_generator/src/serializer_source_library.dart';
+import 'package:built_value_generator/src/value_source_class.dart';
 import 'package:source_gen/source_gen.dart';
 
 /// Generator for Enum Class and Built Values.
@@ -18,6 +19,8 @@ class BuiltValueGenerator extends Generator {
 
   @override
   Future<String?> generate(LibraryReader library, BuildStep buildStep) async {
+    var parsedLibraryResults = ParsedLibraryResults();
+
     // Workaround for https://github.com/google/built_value.dart/issues/941.
     LibraryElement libraryElement;
     var attempts = 0;
@@ -25,7 +28,7 @@ class BuiltValueGenerator extends Generator {
       try {
         libraryElement = await buildStep.resolver.libraryFor(
             await buildStep.resolver.assetIdForElement(library.element));
-        libraryElement.session.getParsedLibraryByElement(libraryElement);
+        parsedLibraryResults.parsedLibraryResultOrThrowingMock(libraryElement);
         break;
       } catch (_) {
         ++attempts;
@@ -38,9 +41,11 @@ class BuiltValueGenerator extends Generator {
 
     var result = StringBuffer();
     try {
-      final enumCode = EnumSourceLibrary(libraryElement).generateCode();
+      final enumCode = EnumSourceLibrary(parsedLibraryResults, libraryElement)
+          .generateCode();
       if (enumCode != null) result.writeln(enumCode);
-      final serializerSourceLibrary = SerializerSourceLibrary(libraryElement);
+      final serializerSourceLibrary =
+          SerializerSourceLibrary(parsedLibraryResults, libraryElement);
       if (serializerSourceLibrary.needsBuiltJson ||
           serializerSourceLibrary.hasSerializers) {
         result.writeln(serializerSourceLibrary.generateCode());
@@ -64,7 +69,8 @@ class BuiltValueGenerator extends Generator {
     for (var element in libraryElement.units.expand((unit) => unit.classes)) {
       if (ValueSourceClass.needsBuiltValue(element)) {
         try {
-          result.writeln(ValueSourceClass(element).generateCode());
+          result.writeln(
+              ValueSourceClass(parsedLibraryResults, element).generateCode());
         } catch (e, st) {
           result.writeln(_error(e));
           log.severe('Error in BuiltValueGenerator for $element.', e, st);

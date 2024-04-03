@@ -8,24 +8,27 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/analyzer.dart';
 import 'package:built_value_generator/src/enum_source_class.dart';
 import 'package:built_value_generator/src/library_elements.dart';
+import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:source_gen/source_gen.dart';
 
 part 'enum_source_library.g.dart';
 
 abstract class EnumSourceLibrary
     implements Built<EnumSourceLibrary, EnumSourceLibraryBuilder> {
+  ParsedLibraryResults get parsedLibraryResults;
   LibraryElement get element;
 
-  factory EnumSourceLibrary(LibraryElement element) =>
-      _$EnumSourceLibrary._(element: element);
+  factory EnumSourceLibrary(
+          ParsedLibraryResults parsedLibraryResults, LibraryElement element) =>
+      _$EnumSourceLibrary._(
+          parsedLibraryResults: parsedLibraryResults, element: element);
   EnumSourceLibrary._();
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResultOrThrowingMock(element.library);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   @memoized
   String get name => element.name;
@@ -42,7 +45,7 @@ abstract class EnumSourceLibrary
 
     for (var classElement in LibraryElements.getClassElements(element)) {
       if (EnumSourceClass.needsEnumClass(classElement)) {
-        result.add(EnumSourceClass(parsedLibrary, classElement));
+        result.add(EnumSourceClass(parsedLibraryResults, classElement));
       }
     }
     return result.build();

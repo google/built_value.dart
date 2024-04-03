@@ -17,6 +17,7 @@ import 'package:built_value_generator/src/fields.dart' show collectFields;
 import 'package:built_value_generator/src/fixes.dart';
 import 'package:built_value_generator/src/metadata.dart'
     show metadataToStringValue;
+import 'package:built_value_generator/src/parsed_library_results.dart';
 
 part 'value_source_field.g.dart';
 
@@ -31,6 +32,7 @@ const _suggestedTypes = <String, String>{
 abstract class ValueSourceField
     with FieldMixin
     implements Built<ValueSourceField, ValueSourceFieldBuilder> {
+  ParsedLibraryResults get parsedLibraryResults;
   BuiltValue get settings;
   @override
   ParsedLibraryResult get parsedLibrary;
@@ -39,11 +41,13 @@ abstract class ValueSourceField
   FieldElement? get builderElement;
 
   factory ValueSourceField(
+          ParsedLibraryResults parsedLibraryResults,
           BuiltValue settings,
           ParsedLibraryResult parsedLibrary,
           FieldElement element,
           FieldElement? builderElement) =>
       _$ValueSourceField._(
+          parsedLibraryResults: parsedLibraryResults,
           settings: settings,
           parsedLibrary: parsedLibrary,
           element: element,
@@ -237,14 +241,15 @@ abstract class ValueSourceField
   String? typeInBuilder(CompilationUnitElement? compilationUnit) =>
       builderFieldExists
           ? buildElementType
-          : _toBuilderType(element.getter!.returnType,
+          : _toBuilderType(parsedLibraryResults, element.getter!.returnType,
               typeInCompilationUnit(compilationUnit));
 
   @memoized
   bool get isNestedBuilder => builderFieldExists
       ? typeInBuilder(null)?.contains('Builder') ?? false
       : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
-          DartTypes.needsNestedBuilder(element.getter!.returnType);
+          DartTypes.needsNestedBuilder(
+              parsedLibraryResults, element.getter!.returnType);
 
   @memoized
   bool get isAutoCreateNestedBuilder =>
@@ -252,6 +257,7 @@ abstract class ValueSourceField
       settings.autoCreateNestedBuilders;
 
   static BuiltList<ValueSourceField> fromClassElements(
+      ParsedLibraryResults parsedLibraryResults,
       BuiltValue settings,
       ParsedLibraryResult parsedLibrary,
       InterfaceElement classElement,
@@ -263,20 +269,21 @@ abstract class ValueSourceField
           field.getter != null &&
           (field.getter!.isAbstract || field.getter!.isSynthetic)) {
         final builderField = builderClassElement?.getField(field.name);
-        result.add(
-            ValueSourceField(settings, parsedLibrary, field, builderField));
+        result.add(ValueSourceField(parsedLibraryResults, settings,
+            parsedLibrary, field, builderField));
       }
     }
 
     return result.build();
   }
 
-  static String? _toBuilderType(DartType type, String displayName) {
+  static String? _toBuilderType(ParsedLibraryResults parsedLibraryResults,
+      DartType type, String displayName) {
     if (DartTypes.isBuiltCollection(type)) {
       return displayName
           .replaceFirst('Built', '')
           .replaceFirst('<', 'Builder<');
-    } else if (DartTypes.isInstantiableBuiltValue(type)) {
+    } else if (DartTypes.isInstantiableBuiltValue(parsedLibraryResults, type)) {
       return displayName.contains('<')
           ? displayName.replaceFirst('<', 'Builder<')
           : '${displayName}Builder';
@@ -321,7 +328,8 @@ abstract class ValueSourceField
     if (builderFieldExists) {
       var builderElementTypeOrNull = buildElementType;
       if (builderElementTypeIsNullable) builderElementTypeOrNull += '?';
-      final builderType = _toBuilderType(element.type, type);
+      final builderType =
+          _toBuilderType(parsedLibraryResults, element.type, type);
       if (builderElementTypeOrNull != type + '?' &&
           (builderType == null ||
               (builderElementTypeOrNull != builderType &&
