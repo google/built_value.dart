@@ -69,12 +69,22 @@ abstract class EnumSourceLibrary
   }
 
   Iterable<String> _checkPart() {
-    var expectedCode = "part '$fileName.g.dart';";
-    var alternativeExpectedCode = 'part "$fileName.g.dart";';
-    return source.contains(expectedCode) ||
-            source.contains(alternativeExpectedCode)
-        ? <String>[]
-        : <String>['Import generated part: $expectedCode'];
+    String expectedFileName = "$fileName.g.dart";
+
+    String regexSource = r'''part\s*['"]([^'\"]*''' +
+        RegExp.escape(expectedFileName) +
+        r''')['"];''';
+
+    final RegExp regex = RegExp(regexSource);
+    final hasMatch = regex.firstMatch(source) != null;
+
+    if (hasMatch) {
+      return <String>[];
+    } else {
+      return <String>[
+        'Import generated part: part "{path}/$expectedFileName";'
+      ];
+    }
   }
 
   Iterable<String> _checkIdentifiers() {
