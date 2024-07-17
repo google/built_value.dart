@@ -45,7 +45,10 @@ TestEnum _$valueOf(String name) {
     case 'maybe':
       return _$maybe;
     default:
-      throw new ArgumentError(name);
+      throw new ArgumentError(
+        '`$name` is not one of the supported values: '
+        'yes, no, maybe',
+      );
   }
 }
 
@@ -482,7 +485,10 @@ TestEnum _$valueOf(String name) {
     case 'maybe':
       return _$yes;
     default:
-      throw new ArgumentError(name);
+      throw new ArgumentError(
+        '`$name` is not one of the supported values: '
+        'yes, no, maybe',
+      );
   }
 }
 
@@ -526,7 +532,10 @@ TestEnum _$vlOf(String name) {
     case 'maybe':
       return _$maybe;
     default:
-      throw new ArgumentError(name);
+      throw new ArgumentError(
+        '`$name` is not one of the supported values: '
+        'yes, no, maybe',
+      );
   }
 }
 
