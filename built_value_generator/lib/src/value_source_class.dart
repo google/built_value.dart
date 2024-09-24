@@ -364,7 +364,7 @@ abstract class ValueSourceClass
     // Check for any `toString` implementation apart from the one defined on
     // `Object`.
     var method = element.lookUpConcreteMethod('toString', element.library)!;
-    var clazz = method.enclosingElement;
+    var clazz = method.enclosingElement3;
     return clazz is! ClassElement || clazz.name != 'Object';
   }
 

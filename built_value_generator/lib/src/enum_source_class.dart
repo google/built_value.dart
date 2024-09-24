@@ -12,8 +12,7 @@ import 'package:built_value_generator/src/dart_types.dart';
 import 'package:built_value_generator/src/enum_source_field.dart';
 import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:built_value_generator/src/strings.dart';
-import 'package:collection/collection.dart'
-    show IterableExtension, IterableNullableExtension;
+import 'package:collection/collection.dart' show IterableExtension;
 
 import 'library_elements.dart';
 
@@ -114,7 +113,7 @@ abstract class EnumSourceClass
       valuesIdentifier,
       valueOfIdentifier,
       for (var field in fields) field.generatedIdentifier,
-    ].whereNotNull().toList();
+    ].nonNulls.toList();
   }
 
   static bool needsEnumClass(ClassElement classElement) {

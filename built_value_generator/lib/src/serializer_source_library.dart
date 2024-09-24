@@ -47,7 +47,7 @@ abstract class SerializerSourceLibrary
         .toList();
 
     for (var accessor in accessors) {
-      final annotations = accessor.variable.metadata
+      final annotations = accessor.variable2!.metadata
           .where((annotation) =>
               DartTypes.tryGetName(annotation.computeConstantValue()?.type) ==
               'SerializersFor')
@@ -72,7 +72,7 @@ abstract class SerializerSourceLibrary
         .toList();
 
     for (var accessor in accessors) {
-      final annotations = accessor.variable.metadata
+      final annotations = accessor.variable2!.metadata
           .where((annotation) =>
               DartTypes.tryGetName(annotation.computeConstantValue()?.type) ==
               'SerializersFor')
