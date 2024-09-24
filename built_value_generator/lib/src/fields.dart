@@ -57,7 +57,7 @@ BuiltList<FieldElement> _fieldElementsForType(InterfaceType type) {
   var result = ListBuilder<FieldElement>();
   for (var accessor in type.accessors) {
     if (accessor.isSetter) continue;
-    result.add(accessor.variable as FieldElement);
+    result.add(accessor.variable2 as FieldElement);
   }
   return result.build();
 }
