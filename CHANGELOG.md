@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.9.3 (unreleased)
+
+- Mark `@nullable` deprecated: it does nothing and should not be used.
+
 # 8.9.2
 
 - Improve build performance when there are lots of `built_value` classes.
