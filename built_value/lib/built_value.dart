@@ -128,9 +128,10 @@ class BuiltValue {
       this.defaultSerialize = true});
 }
 
-/// Nullable annotation for nullable Built Value fields in legacy code.
+/// Annotation that was used to mark nullable Built Value fields.
 ///
-/// In null safe code, instead make the field type nullable with `?`.
+/// Now it does nothing or causes an error whenever used.
+@Deprecated('Add `?` to the field type to make it nullable instead')
 const String nullable = 'nullable';
 
 /// Optionally, annotate a Built Value field with this to specify settings.
