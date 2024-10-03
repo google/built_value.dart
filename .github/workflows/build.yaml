@@ -14,14 +14,10 @@ permissions: read-all
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        sdk: [2.12.0, dev]
-
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
       - uses: dart-lang/setup-dart@0a8a0fc875eb934c15d08629302413c671d3f672
-
+        with:
+          sdk: dev
       - name: Run Presubmits
         run: tool/presubmit

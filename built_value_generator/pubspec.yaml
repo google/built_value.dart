@@ -10,7 +10,7 @@ topics:
  - build-runner
 
 environment:
-  sdk: '>=3.6.0-edge <4.0.0'
+  sdk: '>=3.6.0-300.0.dev <4.0.0'
 
 dependencies:
   analyzer: '>=6.9.0 <7.0.0'
