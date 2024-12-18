@@ -152,13 +152,14 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
     try {
       _$result = _$v ??
           new _$SimpleValue._(
-              anInt: BuiltValueNullFieldError.checkNotNull(
-                  anInt, r'SimpleValue', 'anInt'),
-              list: list.build(),
-              multimap: multimap.build(),
-              map: map.build(),
-              aSet: aSet.build(),
-              setMultimap: setMultimap.build());
+            anInt: BuiltValueNullFieldError.checkNotNull(
+                anInt, r'SimpleValue', 'anInt'),
+            list: list.build(),
+            multimap: multimap.build(),
+            map: map.build(),
+            aSet: aSet.build(),
+            setMultimap: setMultimap.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -275,7 +276,9 @@ class CompoundValueBuilder
     try {
       _$result = _$v ??
           new _$CompoundValue._(
-              simpleValue: simpleValue.build(), string: string);
+            simpleValue: simpleValue.build(),
+            string: string,
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -378,10 +381,11 @@ class ComparedValueBuilder
   _$ComparedValue _build() {
     final _$result = _$v ??
         new _$ComparedValue._(
-            name: BuiltValueNullFieldError.checkNotNull(
-                name, r'ComparedValue', 'name'),
-            onChanged: BuiltValueNullFieldError.checkNotNull(
-                onChanged, r'ComparedValue', 'onChanged'));
+          name: BuiltValueNullFieldError.checkNotNull(
+              name, r'ComparedValue', 'name'),
+          onChanged: BuiltValueNullFieldError.checkNotNull(
+              onChanged, r'ComparedValue', 'onChanged'),
+        );
     replace(_$result);
     return _$result;
   }

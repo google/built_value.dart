@@ -157,8 +157,9 @@ class SimpleRecordValueBuilder
   _$SimpleRecordValue _build() {
     final _$result = _$v ??
         new _$SimpleRecordValue._(
-            record: BuiltValueNullFieldError.checkNotNull(
-                record, r'SimpleRecordValue', 'record'));
+          record: BuiltValueNullFieldError.checkNotNull(
+              record, r'SimpleRecordValue', 'record'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -425,30 +426,32 @@ class ComplexRecordValueBuilder
   _$ComplexRecordValue _build() {
     final _$result = _$v ??
         new _$ComplexRecordValue._(
-            record2: BuiltValueNullFieldError.checkNotNull(
-                record2, r'ComplexRecordValue', 'record2'),
-            record2p: BuiltValueNullFieldError.checkNotNull(
-                record2p, r'ComplexRecordValue', 'record2p'),
-            record2n: record2n,
-            record3: BuiltValueNullFieldError.checkNotNull(
-                record3, r'ComplexRecordValue', 'record3'),
-            record3p: BuiltValueNullFieldError.checkNotNull(
-                record3p, r'ComplexRecordValue', 'record3p'),
-            record3n: record3n,
-            record4: BuiltValueNullFieldError.checkNotNull(
-                record4, r'ComplexRecordValue', 'record4'),
-            record4p: BuiltValueNullFieldError.checkNotNull(
-                record4p, r'ComplexRecordValue', 'record4p'),
-            record4n: record4n,
-            record5: BuiltValueNullFieldError.checkNotNull(
-                record5, r'ComplexRecordValue', 'record5'),
-            record5p: BuiltValueNullFieldError.checkNotNull(
-                record5p, r'ComplexRecordValue', 'record5p'),
-            record5n: record5n,
-            record6: BuiltValueNullFieldError.checkNotNull(
-                record6, r'ComplexRecordValue', 'record6'),
-            record6p: BuiltValueNullFieldError.checkNotNull(record6p, r'ComplexRecordValue', 'record6p'),
-            record6n: record6n);
+          record2: BuiltValueNullFieldError.checkNotNull(
+              record2, r'ComplexRecordValue', 'record2'),
+          record2p: BuiltValueNullFieldError.checkNotNull(
+              record2p, r'ComplexRecordValue', 'record2p'),
+          record2n: record2n,
+          record3: BuiltValueNullFieldError.checkNotNull(
+              record3, r'ComplexRecordValue', 'record3'),
+          record3p: BuiltValueNullFieldError.checkNotNull(
+              record3p, r'ComplexRecordValue', 'record3p'),
+          record3n: record3n,
+          record4: BuiltValueNullFieldError.checkNotNull(
+              record4, r'ComplexRecordValue', 'record4'),
+          record4p: BuiltValueNullFieldError.checkNotNull(
+              record4p, r'ComplexRecordValue', 'record4p'),
+          record4n: record4n,
+          record5: BuiltValueNullFieldError.checkNotNull(
+              record5, r'ComplexRecordValue', 'record5'),
+          record5p: BuiltValueNullFieldError.checkNotNull(
+              record5p, r'ComplexRecordValue', 'record5p'),
+          record5n: record5n,
+          record6: BuiltValueNullFieldError.checkNotNull(
+              record6, r'ComplexRecordValue', 'record6'),
+          record6p: BuiltValueNullFieldError.checkNotNull(
+              record6p, r'ComplexRecordValue', 'record6p'),
+          record6n: record6n,
+        );
     replace(_$result);
     return _$result;
   }
@@ -559,10 +562,11 @@ class SerializableRecordValueBuilder
   _$SerializableRecordValue _build() {
     final _$result = _$v ??
         new _$SerializableRecordValue._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'SerializableRecordValue', 'value'),
-            record: record,
-            intOrList: intOrList);
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'SerializableRecordValue', 'value'),
+          record: record,
+          intOrList: intOrList,
+        );
     replace(_$result);
     return _$result;
   }

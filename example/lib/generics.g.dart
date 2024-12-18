@@ -334,8 +334,9 @@ class GenericValueBuilder<T>
   _$GenericValue<T> _build() {
     final _$result = _$v ??
         new _$GenericValue<T>._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'GenericValue', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'GenericValue', 'value'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -423,8 +424,9 @@ class BoundGenericValueBuilder<T extends num>
   _$BoundGenericValue<T> _build() {
     final _$result = _$v ??
         new _$BoundGenericValue<T>._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'BoundGenericValue', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'BoundGenericValue', 'value'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -514,8 +516,10 @@ class CollectionGenericValueBuilder<T>
   _$CollectionGenericValue<T> _build() {
     _$CollectionGenericValue<T> _$result;
     try {
-      _$result =
-          _$v ?? new _$CollectionGenericValue<T>._(values: values.build());
+      _$result = _$v ??
+          new _$CollectionGenericValue<T>._(
+            values: values.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -650,9 +654,10 @@ class GenericContainerBuilder
     try {
       _$result = _$v ??
           new _$GenericContainer._(
-              genericValue: genericValue.build(),
-              boundGenericValue: boundGenericValue.build(),
-              collectionGenericValue: collectionGenericValue.build());
+            genericValue: genericValue.build(),
+            boundGenericValue: boundGenericValue.build(),
+            collectionGenericValue: collectionGenericValue.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

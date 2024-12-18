@@ -228,10 +228,11 @@ class ValueWithIntBuilder
   _$ValueWithInt _build() {
     final _$result = _$v ??
         new _$ValueWithInt._(
-            anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, r'ValueWithInt', 'anInt'),
-            note: BuiltValueNullFieldError.checkNotNull(
-                note, r'ValueWithInt', 'note'));
+          anInt: BuiltValueNullFieldError.checkNotNull(
+              anInt, r'ValueWithInt', 'anInt'),
+          note: BuiltValueNullFieldError.checkNotNull(
+              note, r'ValueWithInt', 'note'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -314,8 +315,9 @@ class ValueWithHasIntBuilder
   _$ValueWithHasInt _build() {
     final _$result = _$v ??
         new _$ValueWithHasInt._(
-            hasInt: BuiltValueNullFieldError.checkNotNull(
-                hasInt, r'ValueWithHasInt', 'hasInt'));
+          hasInt: BuiltValueNullFieldError.checkNotNull(
+              hasInt, r'ValueWithHasInt', 'hasInt'),
+        );
     replace(_$result);
     return _$result;
   }

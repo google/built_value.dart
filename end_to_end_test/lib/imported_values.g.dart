@@ -277,8 +277,9 @@ class ImportedValueBuilder
     try {
       _$result = _$v ??
           new _$ImportedValue._(
-              simpleValue: simpleValue.build(),
-              simpleValues: simpleValues.build());
+            simpleValue: simpleValue.build(),
+            simpleValues: simpleValues.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -408,10 +409,11 @@ class _$ImportedCustomValueBuilder extends ImportedCustomValueBuilder {
   _$ImportedCustomValue _build() {
     final _$result = _$v ??
         new _$ImportedCustomValue._(
-            simpleValue: BuiltValueNullFieldError.checkNotNull(
-                simpleValue, r'ImportedCustomValue', 'simpleValue'),
-            simpleValues: BuiltValueNullFieldError.checkNotNull(
-                simpleValues, r'ImportedCustomValue', 'simpleValues'));
+          simpleValue: BuiltValueNullFieldError.checkNotNull(
+              simpleValue, r'ImportedCustomValue', 'simpleValue'),
+          simpleValues: BuiltValueNullFieldError.checkNotNull(
+              simpleValues, r'ImportedCustomValue', 'simpleValues'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -531,8 +533,9 @@ class _$ImportedCustomNestedValueBuilder
     try {
       _$result = _$v ??
           new _$ImportedCustomNestedValue._(
-              simpleValue: simpleValue.build(),
-              simpleValues: simpleValues.build());
+            simpleValue: simpleValue.build(),
+            simpleValues: simpleValues.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

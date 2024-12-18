@@ -81,8 +81,9 @@ class _PrivateValueBuilder
   _$PrivateValue _build() {
     final _$result = _$v ??
         new _$PrivateValue._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'_PrivateValue', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'_PrivateValue', 'value'),
+        );
     replace(_$result);
     return _$result;
   }

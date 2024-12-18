@@ -357,16 +357,17 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
     try {
       _$result = _$v ??
           new _$Collections._(
-              list: list.build(),
-              set: set.build(),
-              map: map.build(),
-              listMultimap: listMultimap.build(),
-              setMultimap: setMultimap.build(),
-              nullableList: _nullableList?.build(),
-              nullableSet: _nullableSet?.build(),
-              nullableMap: _nullableMap?.build(),
-              nullableListMultimap: _nullableListMultimap?.build(),
-              nullableSetMultimap: _nullableSetMultimap?.build());
+            list: list.build(),
+            set: set.build(),
+            map: map.build(),
+            listMultimap: listMultimap.build(),
+            setMultimap: setMultimap.build(),
+            nullableList: _nullableList?.build(),
+            nullableSet: _nullableSet?.build(),
+            nullableMap: _nullableMap?.build(),
+            nullableListMultimap: _nullableListMultimap?.build(),
+            nullableSetMultimap: _nullableSetMultimap?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

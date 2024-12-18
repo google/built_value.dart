@@ -117,11 +117,12 @@ class GeneratorErrorBuilder
   _$GeneratorError _build() {
     final _$result = _$v ??
         new _$GeneratorError._(
-            message: BuiltValueNullFieldError.checkNotNull(
-                message, r'GeneratorError', 'message'),
-            offset: offset,
-            length: length,
-            fix: fix);
+          message: BuiltValueNullFieldError.checkNotNull(
+              message, r'GeneratorError', 'message'),
+          offset: offset,
+          length: length,
+          fix: fix,
+        );
     replace(_$result);
     return _$result;
   }

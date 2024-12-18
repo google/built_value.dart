@@ -102,7 +102,10 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
     try {
       _$result = _$v ??
           new _$Node._(
-              label: label, left: _left?.build(), right: _right?.build());
+            label: label,
+            left: _left?.build(),
+            right: _right?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

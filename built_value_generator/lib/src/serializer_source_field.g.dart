@@ -226,17 +226,18 @@ class SerializerSourceFieldBuilder
   _$SerializerSourceField _build() {
     final _$result = _$v ??
         new _$SerializerSourceField._(
-            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
-                parsedLibraryResults,
-                r'SerializerSourceField',
-                'parsedLibraryResults'),
-            settings: BuiltValueNullFieldError.checkNotNull(
-                settings, r'SerializerSourceField', 'settings'),
-            parsedLibrary: BuiltValueNullFieldError.checkNotNull(
-                parsedLibrary, r'SerializerSourceField', 'parsedLibrary'),
-            element: BuiltValueNullFieldError.checkNotNull(
-                element, r'SerializerSourceField', 'element'),
-            builderElement: builderElement);
+          parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+              parsedLibraryResults,
+              r'SerializerSourceField',
+              'parsedLibraryResults'),
+          settings: BuiltValueNullFieldError.checkNotNull(
+              settings, r'SerializerSourceField', 'settings'),
+          parsedLibrary: BuiltValueNullFieldError.checkNotNull(
+              parsedLibrary, r'SerializerSourceField', 'parsedLibrary'),
+          element: BuiltValueNullFieldError.checkNotNull(
+              element, r'SerializerSourceField', 'element'),
+          builderElement: builderElement,
+        );
     replace(_$result);
     return _$result;
   }

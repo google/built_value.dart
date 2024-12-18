@@ -395,9 +395,10 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   _$SimpleValue _build() {
     final _$result = _$v ??
         new _$SimpleValue._(
-            anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, r'SimpleValue', 'anInt'),
-            aString: aString);
+          anInt: BuiltValueNullFieldError.checkNotNull(
+              anInt, r'SimpleValue', 'anInt'),
+          aString: aString,
+        );
     replace(_$result);
     return _$result;
   }
@@ -480,8 +481,9 @@ class VerySimpleValueBuilder
   _$VerySimpleValue _build() {
     final _$result = _$v ??
         new _$VerySimpleValue._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'VerySimpleValue', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'VerySimpleValue', 'value'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -582,8 +584,9 @@ class CompoundValueBuilder
     try {
       _$result = _$v ??
           new _$CompoundValue._(
-              simpleValue: simpleValue.build(),
-              validatedValue: _validatedValue?.build());
+            simpleValue: simpleValue.build(),
+            validatedValue: _validatedValue?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -690,9 +693,10 @@ class ValidatedValueBuilder
   _$ValidatedValue _build() {
     final _$result = _$v ??
         new _$ValidatedValue._(
-            anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, r'ValidatedValue', 'anInt'),
-            aString: aString);
+          anInt: BuiltValueNullFieldError.checkNotNull(
+              anInt, r'ValidatedValue', 'anInt'),
+          aString: aString,
+        );
     replace(_$result);
     return _$result;
   }
@@ -785,9 +789,10 @@ class ValueWithCodeBuilder
   _$ValueWithCode _build() {
     final _$result = _$v ??
         new _$ValueWithCode._(
-            anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, r'ValueWithCode', 'anInt'),
-            aString: aString);
+          anInt: BuiltValueNullFieldError.checkNotNull(
+              anInt, r'ValueWithCode', 'anInt'),
+          aString: aString,
+        );
     replace(_$result);
     return _$result;
   }
@@ -898,9 +903,10 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
   _$ValueWithDefaults _build() {
     final _$result = _$v ??
         new _$ValueWithDefaults._(
-            anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, r'ValueWithDefaults', 'anInt'),
-            aString: aString);
+          anInt: BuiltValueNullFieldError.checkNotNull(
+              anInt, r'ValueWithDefaults', 'anInt'),
+          aString: aString,
+        );
     replace(_$result);
     return _$result;
   }
@@ -989,8 +995,9 @@ class DerivedValueBuilder
   _$DerivedValue _build() {
     final _$result = _$v ??
         new _$DerivedValue._(
-            anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, r'DerivedValue', 'anInt'));
+          anInt: BuiltValueNullFieldError.checkNotNull(
+              anInt, r'DerivedValue', 'anInt'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1099,10 +1106,11 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
     try {
       _$result = _$v ??
           new _$Account._(
-              id: BuiltValueNullFieldError.checkNotNull(id, r'Account', 'id'),
-              name: BuiltValueNullFieldError.checkNotNull(
-                  name, r'Account', 'name'),
-              keyValues: keyValues.build());
+            id: BuiltValueNullFieldError.checkNotNull(id, r'Account', 'id'),
+            name:
+                BuiltValueNullFieldError.checkNotNull(name, r'Account', 'name'),
+            keyValues: keyValues.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -1194,8 +1202,9 @@ class WireNameValueBuilder
   _$WireNameValue _build() {
     final _$result = _$v ??
         new _$WireNameValue._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'WireNameValue', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'WireNameValue', 'value'),
+        );
     replace(_$result);
     return _$result;
   }
