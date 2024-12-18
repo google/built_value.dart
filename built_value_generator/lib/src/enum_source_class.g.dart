@@ -160,12 +160,11 @@ class EnumSourceClassBuilder
   _$EnumSourceClass _build() {
     final _$result = _$v ??
         new _$EnumSourceClass._(
-            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
-                parsedLibraryResults,
-                r'EnumSourceClass',
-                'parsedLibraryResults'),
-            element: BuiltValueNullFieldError.checkNotNull(
-                element, r'EnumSourceClass', 'element'));
+          parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+              parsedLibraryResults, r'EnumSourceClass', 'parsedLibraryResults'),
+          element: BuiltValueNullFieldError.checkNotNull(
+              element, r'EnumSourceClass', 'element'),
+        );
     replace(_$result);
     return _$result;
   }

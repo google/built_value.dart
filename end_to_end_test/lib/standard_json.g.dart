@@ -485,20 +485,21 @@ class StandardJsonValueBuilder
     try {
       _$result = _$v ??
           new _$StandardJsonValue._(
-              number: BuiltValueNullFieldError.checkNotNull(
-                  number, r'StandardJsonValue', 'number'),
-              text: BuiltValueNullFieldError.checkNotNull(
-                  text, r'StandardJsonValue', 'text'),
-              value: value.build(),
-              keyValues: keyValues.build(),
-              zoo: zoo.build(),
-              uniqueZoo: uniqueZoo.build(),
-              strings: _strings?.build(),
-              nullsInList: nullsInList.build(),
-              nullsInSet: nullsInSet.build(),
-              nullsInMap: nullsInMap.build(),
-              object: object,
-              objects: objects.build());
+            number: BuiltValueNullFieldError.checkNotNull(
+                number, r'StandardJsonValue', 'number'),
+            text: BuiltValueNullFieldError.checkNotNull(
+                text, r'StandardJsonValue', 'text'),
+            value: value.build(),
+            keyValues: keyValues.build(),
+            zoo: zoo.build(),
+            uniqueZoo: uniqueZoo.build(),
+            strings: _strings?.build(),
+            nullsInList: nullsInList.build(),
+            nullsInSet: nullsInSet.build(),
+            nullsInMap: nullsInMap.build(),
+            object: object,
+            objects: objects.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -676,13 +677,14 @@ class ComplexValueBuilder
     try {
       _$result = _$v ??
           new _$ComplexValue._(
-              primitive: BuiltValueNullFieldError.checkNotNull(
-                  primitive, r'ComplexValue', 'primitive'),
-              nullablePrimitive: nullablePrimitive,
-              nullablePrimitiveDoNotUse: nullablePrimitiveDoNotUse,
-              value: value.build(),
-              nullableValue: _nullableValue?.build(),
-              nullableValueDoNotUse: _nullableValueDoNotUse?.build());
+            primitive: BuiltValueNullFieldError.checkNotNull(
+                primitive, r'ComplexValue', 'primitive'),
+            nullablePrimitive: nullablePrimitive,
+            nullablePrimitiveDoNotUse: nullablePrimitiveDoNotUse,
+            value: value.build(),
+            nullableValue: _nullableValue?.build(),
+            nullableValueDoNotUse: _nullableValueDoNotUse?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

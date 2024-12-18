@@ -123,12 +123,13 @@ class EnumSourceLibraryBuilder
   _$EnumSourceLibrary _build() {
     final _$result = _$v ??
         new _$EnumSourceLibrary._(
-            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
-                parsedLibraryResults,
-                r'EnumSourceLibrary',
-                'parsedLibraryResults'),
-            element: BuiltValueNullFieldError.checkNotNull(
-                element, r'EnumSourceLibrary', 'element'));
+          parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+              parsedLibraryResults,
+              r'EnumSourceLibrary',
+              'parsedLibraryResults'),
+          element: BuiltValueNullFieldError.checkNotNull(
+              element, r'EnumSourceLibrary', 'element'),
+        );
     replace(_$result);
     return _$result;
   }

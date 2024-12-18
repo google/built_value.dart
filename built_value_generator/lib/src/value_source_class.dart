@@ -1104,20 +1104,23 @@ abstract class ValueSourceClass
     }
     result.writeln('_\$result = _\$v ?? ');
     result.writeln('new $implName$_generics._(');
-    result.write(fieldBuilders.keys.map((field) {
-      final fieldBuilder = fieldBuilders[field];
-      if (needsNullCheck.contains(field)) {
-        if (genericFields.containsKey(field)) {
-          final genericType = genericFields[field];
-          return '$field: null is $genericType ? $fieldBuilder as $genericType '
-              ': BuiltValueNullFieldError.checkNotNull($fieldBuilder'
-              ", r'$name', '${escapeString(field)}')";
-        }
-        return '$field: BuiltValueNullFieldError.checkNotNull($fieldBuilder, '
-            "r'$name', '${escapeString(field)}')";
-      }
-      return '$field: $fieldBuilder';
-    }).join(','));
+    result.write(fieldBuilders.keys
+        .map((field) {
+          final fieldBuilder = fieldBuilders[field];
+          if (needsNullCheck.contains(field)) {
+            if (genericFields.containsKey(field)) {
+              final genericType = genericFields[field];
+              return '$field: null is $genericType ? $fieldBuilder as $genericType '
+                  ': BuiltValueNullFieldError.checkNotNull($fieldBuilder'
+                  ", r'$name', '${escapeString(field)}')";
+            }
+            return '$field: BuiltValueNullFieldError.checkNotNull($fieldBuilder, '
+                "r'$name', '${escapeString(field)}')";
+          }
+          return '$field: $fieldBuilder';
+        })
+        .map((fieldBuilder) => '$fieldBuilder,')
+        .join(''));
     result.writeln(');');
 
     if (needsTryCatchOnBuild) {

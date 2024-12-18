@@ -199,10 +199,11 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
   _$ValueWithInt _build() {
     final _$result = _$v ??
         new _$ValueWithInt._(
-            anInt: BuiltValueNullFieldError.checkNotNull(
-                anInt, r'ValueWithInt', 'anInt'),
-            note: BuiltValueNullFieldError.checkNotNull(
-                note, r'ValueWithInt', 'note'));
+          anInt: BuiltValueNullFieldError.checkNotNull(
+              anInt, r'ValueWithInt', 'anInt'),
+          note: BuiltValueNullFieldError.checkNotNull(
+              note, r'ValueWithInt', 'note'),
+        );
     replace(_$result);
     return _$result;
   }

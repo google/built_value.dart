@@ -521,9 +521,9 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
     try {
       _$result = _$v ??
           new _$Chat._(
-              text:
-                  BuiltValueNullFieldError.checkNotNull(text, r'Chat', 'text'),
-              targets: targets.build());
+            text: BuiltValueNullFieldError.checkNotNull(text, r'Chat', 'text'),
+            targets: targets.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -627,10 +627,11 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   _$Login _build() {
     final _$result = _$v ??
         new _$Login._(
-            username: BuiltValueNullFieldError.checkNotNull(
-                username, r'Login', 'username'),
-            password: BuiltValueNullFieldError.checkNotNull(
-                password, r'Login', 'password'));
+          username: BuiltValueNullFieldError.checkNotNull(
+              username, r'Login', 'username'),
+          password: BuiltValueNullFieldError.checkNotNull(
+              password, r'Login', 'password'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -721,10 +722,10 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   _$Status _build() {
     final _$result = _$v ??
         new _$Status._(
-            message: BuiltValueNullFieldError.checkNotNull(
-                message, r'Status', 'message'),
-            type:
-                BuiltValueNullFieldError.checkNotNull(type, r'Status', 'type'));
+          message: BuiltValueNullFieldError.checkNotNull(
+              message, r'Status', 'message'),
+          type: BuiltValueNullFieldError.checkNotNull(type, r'Status', 'type'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -808,7 +809,10 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
   _$ListUsers _build() {
     _$ListUsers _$result;
     try {
-      _$result = _$v ?? new _$ListUsers._(statusTypes: statusTypes.build());
+      _$result = _$v ??
+          new _$ListUsers._(
+            statusTypes: statusTypes.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -925,12 +929,13 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   _$ShowChat _build() {
     final _$result = _$v ??
         new _$ShowChat._(
-            username: BuiltValueNullFieldError.checkNotNull(
-                username, r'ShowChat', 'username'),
-            private: BuiltValueNullFieldError.checkNotNull(
-                private, r'ShowChat', 'private'),
-            text: BuiltValueNullFieldError.checkNotNull(
-                text, r'ShowChat', 'text'));
+          username: BuiltValueNullFieldError.checkNotNull(
+              username, r'ShowChat', 'username'),
+          private: BuiltValueNullFieldError.checkNotNull(
+              private, r'ShowChat', 'private'),
+          text:
+              BuiltValueNullFieldError.checkNotNull(text, r'ShowChat', 'text'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1023,9 +1028,10 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
     try {
       _$result = _$v ??
           new _$Welcome._(
-              log: log.build(),
-              message: BuiltValueNullFieldError.checkNotNull(
-                  message, r'Welcome', 'message'));
+            log: log.build(),
+            message: BuiltValueNullFieldError.checkNotNull(
+                message, r'Welcome', 'message'),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -1123,7 +1129,10 @@ class ListUsersResponseBuilder
   _$ListUsersResponse _build() {
     _$ListUsersResponse _$result;
     try {
-      _$result = _$v ?? new _$ListUsersResponse._(statuses: statuses.build());
+      _$result = _$v ??
+          new _$ListUsersResponse._(
+            statuses: statuses.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

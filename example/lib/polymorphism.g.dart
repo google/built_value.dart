@@ -191,8 +191,9 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
   _$Cat _build() {
     final _$result = _$v ??
         new _$Cat._(
-            tail: BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail'),
-            legs: BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs'));
+          tail: BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail'),
+          legs: BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -283,8 +284,9 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   _$Fish _build() {
     final _$result = _$v ??
         new _$Fish._(
-            fins: BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins'),
-            legs: BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs'));
+          fins: BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins'),
+          legs: BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs'),
+        );
     replace(_$result);
     return _$result;
   }

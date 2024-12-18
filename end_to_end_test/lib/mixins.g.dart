@@ -103,8 +103,9 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
   _$UsesMixin _build() {
     final _$result = _$v ??
         new _$UsesMixin._(
-            typeDef: BuiltValueNullFieldError.checkNotNull(
-                typeDef, r'UsesMixin', 'typeDef'));
+          typeDef: BuiltValueNullFieldError.checkNotNull(
+              typeDef, r'UsesMixin', 'typeDef'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -193,10 +194,9 @@ class GetsCorrectFieldsViaMixinsBuilder
   _$GetsCorrectFieldsViaMixins _build() {
     final _$result = _$v ??
         new _$GetsCorrectFieldsViaMixins._(
-            shouldBeAField: BuiltValueNullFieldError.checkNotNull(
-                shouldBeAField,
-                r'GetsCorrectFieldsViaMixins',
-                'shouldBeAField'));
+          shouldBeAField: BuiltValueNullFieldError.checkNotNull(
+              shouldBeAField, r'GetsCorrectFieldsViaMixins', 'shouldBeAField'),
+        );
     replace(_$result);
     return _$result;
   }

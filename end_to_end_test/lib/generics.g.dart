@@ -721,8 +721,9 @@ class GenericValueBuilder<T>
   _$GenericValue<T> _build() {
     final _$result = _$v ??
         new _$GenericValue<T>._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'GenericValue', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'GenericValue', 'value'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -814,8 +815,9 @@ class InitializeGenericValueBuilder<T>
   _$InitializeGenericValue<T> _build() {
     final _$result = _$v ??
         new _$InitializeGenericValue<T>._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'InitializeGenericValue', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'InitializeGenericValue', 'value'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -914,9 +916,10 @@ class BoundGenericValueBuilder<T extends num>
   _$BoundGenericValue<T> _build() {
     final _$result = _$v ??
         new _$BoundGenericValue<T>._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'BoundGenericValue', 'value'),
-            nullableValue: nullableValue);
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'BoundGenericValue', 'value'),
+          nullableValue: nullableValue,
+        );
     replace(_$result);
     return _$result;
   }
@@ -1019,11 +1022,12 @@ class BoundNullableGenericValueBuilder<T extends num?>
   _$BoundNullableGenericValue<T> _build() {
     final _$result = _$v ??
         new _$BoundNullableGenericValue<T>._(
-            value: null is T
-                ? value as T
-                : BuiltValueNullFieldError.checkNotNull(
-                    value, r'BoundNullableGenericValue', 'value'),
-            nullableValue: nullableValue);
+          value: null is T
+              ? value as T
+              : BuiltValueNullFieldError.checkNotNull(
+                  value, r'BoundNullableGenericValue', 'value'),
+          nullableValue: nullableValue,
+        );
     replace(_$result);
     return _$result;
   }
@@ -1113,8 +1117,10 @@ class CollectionGenericValueBuilder<T>
   _$CollectionGenericValue<T> _build() {
     _$CollectionGenericValue<T> _$result;
     try {
-      _$result =
-          _$v ?? new _$CollectionGenericValue<T>._(values: values.build());
+      _$result = _$v ??
+          new _$CollectionGenericValue<T>._(
+            values: values.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -1249,9 +1255,10 @@ class GenericContainerBuilder
     try {
       _$result = _$v ??
           new _$GenericContainer._(
-              genericValue: genericValue.build(),
-              boundGenericValue: boundGenericValue.build(),
-              collectionGenericValue: collectionGenericValue.build());
+            genericValue: genericValue.build(),
+            boundGenericValue: boundGenericValue.build(),
+            collectionGenericValue: collectionGenericValue.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -1353,8 +1360,9 @@ class DynamicGenericContainerBuilder
   _$DynamicGenericContainer _build() {
     final _$result = _$v ??
         new _$DynamicGenericContainer._(
-            foo: BuiltValueNullFieldError.checkNotNull(
-                foo, r'DynamicGenericContainer', 'foo'));
+          foo: BuiltValueNullFieldError.checkNotNull(
+              foo, r'DynamicGenericContainer', 'foo'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1468,8 +1476,9 @@ class PassthroughGenericContainerBuilder<T>
     try {
       _$result = _$v ??
           new _$PassthroughGenericContainer<T>._(
-              genericValue: genericValue.build(),
-              collectionGenericValue: collectionGenericValue.build());
+            genericValue: genericValue.build(),
+            collectionGenericValue: collectionGenericValue.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -1569,7 +1578,10 @@ class NestedGenericContainerBuilder
   _$NestedGenericContainer _build() {
     _$NestedGenericContainer _$result;
     try {
-      _$result = _$v ?? new _$NestedGenericContainer._(map: map.build());
+      _$result = _$v ??
+          new _$NestedGenericContainer._(
+            map: map.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -1679,8 +1691,9 @@ class _$CustomBuilderGenericValueBuilder<T>
   _$CustomBuilderGenericValue<T> _build() {
     final _$result = _$v ??
         new _$CustomBuilderGenericValue<T>._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'CustomBuilderGenericValue', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'CustomBuilderGenericValue', 'value'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1763,8 +1776,9 @@ class ConcreteGenericBuilder
   _$ConcreteGeneric _build() {
     final _$result = _$v ??
         new _$ConcreteGeneric._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'ConcreteGeneric', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'ConcreteGeneric', 'value'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1854,8 +1868,9 @@ class GenericFunctionBuilder<T>
   _$GenericFunction<T> _build() {
     final _$result = _$v ??
         new _$GenericFunction<T>._(
-            function: BuiltValueNullFieldError.checkNotNull(
-                function, r'GenericFunction', 'function'));
+          function: BuiltValueNullFieldError.checkNotNull(
+              function, r'GenericFunction', 'function'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1938,8 +1953,9 @@ class NonBuiltGenericBuilder
   _$NonBuiltGeneric _build() {
     final _$result = _$v ??
         new _$NonBuiltGeneric._(
-            value: BuiltValueNullFieldError.checkNotNull(
-                value, r'NonBuiltGeneric', 'value'));
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'NonBuiltGeneric', 'value'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -2092,7 +2108,10 @@ class ConstAndGenericBuilder<T>
   _$ConstAndGeneric<T> _build() {
     _$ConstAndGeneric<T> _$result;
     try {
-      _$result = _$v ?? new _$ConstAndGeneric<T>._(map: map.build());
+      _$result = _$v ??
+          new _$ConstAndGeneric<T>._(
+            map: map.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

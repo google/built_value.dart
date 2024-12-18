@@ -223,17 +223,18 @@ class ValueSourceFieldBuilder
   _$ValueSourceField _build() {
     final _$result = _$v ??
         new _$ValueSourceField._(
-            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
-                parsedLibraryResults,
-                r'ValueSourceField',
-                'parsedLibraryResults'),
-            settings: BuiltValueNullFieldError.checkNotNull(
-                settings, r'ValueSourceField', 'settings'),
-            parsedLibrary: BuiltValueNullFieldError.checkNotNull(
-                parsedLibrary, r'ValueSourceField', 'parsedLibrary'),
-            element: BuiltValueNullFieldError.checkNotNull(
-                element, r'ValueSourceField', 'element'),
-            builderElement: builderElement);
+          parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+              parsedLibraryResults,
+              r'ValueSourceField',
+              'parsedLibraryResults'),
+          settings: BuiltValueNullFieldError.checkNotNull(
+              settings, r'ValueSourceField', 'settings'),
+          parsedLibrary: BuiltValueNullFieldError.checkNotNull(
+              parsedLibrary, r'ValueSourceField', 'parsedLibrary'),
+          element: BuiltValueNullFieldError.checkNotNull(
+              element, r'ValueSourceField', 'element'),
+          builderElement: builderElement,
+        );
     replace(_$result);
     return _$result;
   }

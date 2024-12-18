@@ -2,6 +2,8 @@
 
 # 8.9.3 (unreleased)
 
+- Generate code that formats faster with current "short" style. Both versions
+  are fast with the coming "tall" style.
 - Mark `@nullable` deprecated: it does nothing and should not be used.
 
 # 8.9.2

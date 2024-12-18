@@ -544,23 +544,24 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
     try {
       _$result = _$v ??
           new _$Collections._(
-              list: list.build(),
-              set: set.build(),
-              map: map.build(),
-              listMultimap: listMultimap.build(),
-              setMultimap: setMultimap.build(),
-              nullsInList: nullsInList.build(),
-              nullsInSet: nullsInSet.build(),
-              nullsInMap: nullsInMap.build(),
-              nullsInListMultimap: nullsInListMultimap.build(),
-              nullsInSetMultimap: nullsInSetMultimap.build(),
-              nullableList: _nullableList?.build(),
-              nullableSet: _nullableSet?.build(),
-              nullableMap: _nullableMap?.build(),
-              nullableListMultimap: _nullableListMultimap?.build(),
-              nullableSetMultimap: _nullableSetMultimap?.build(),
-              nullableInGenericsList: nullableInGenericsList.build(),
-              nestedNullablesList: nestedNullablesList.build());
+            list: list.build(),
+            set: set.build(),
+            map: map.build(),
+            listMultimap: listMultimap.build(),
+            setMultimap: setMultimap.build(),
+            nullsInList: nullsInList.build(),
+            nullsInSet: nullsInSet.build(),
+            nullsInMap: nullsInMap.build(),
+            nullsInListMultimap: nullsInListMultimap.build(),
+            nullsInSetMultimap: nullsInSetMultimap.build(),
+            nullableList: _nullableList?.build(),
+            nullableSet: _nullableSet?.build(),
+            nullableMap: _nullableMap?.build(),
+            nullableListMultimap: _nullableListMultimap?.build(),
+            nullableSetMultimap: _nullableSetMultimap?.build(),
+            nullableInGenericsList: nullableInGenericsList.build(),
+            nestedNullablesList: nestedNullablesList.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {

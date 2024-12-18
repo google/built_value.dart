@@ -140,12 +140,13 @@ class SerializerSourceLibraryBuilder
   _$SerializerSourceLibrary _build() {
     final _$result = _$v ??
         new _$SerializerSourceLibrary._(
-            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
-                parsedLibraryResults,
-                r'SerializerSourceLibrary',
-                'parsedLibraryResults'),
-            element: BuiltValueNullFieldError.checkNotNull(
-                element, r'SerializerSourceLibrary', 'element'));
+          parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+              parsedLibraryResults,
+              r'SerializerSourceLibrary',
+              'parsedLibraryResults'),
+          element: BuiltValueNullFieldError.checkNotNull(
+              element, r'SerializerSourceLibrary', 'element'),
+        );
     replace(_$result);
     return _$result;
   }

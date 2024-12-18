@@ -294,12 +294,13 @@ class ValueSourceClassBuilder
   _$ValueSourceClass _build() {
     final _$result = _$v ??
         new _$ValueSourceClass._(
-            parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
-                parsedLibraryResults,
-                r'ValueSourceClass',
-                'parsedLibraryResults'),
-            element: BuiltValueNullFieldError.checkNotNull(
-                element, r'ValueSourceClass', 'element'));
+          parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
+              parsedLibraryResults,
+              r'ValueSourceClass',
+              'parsedLibraryResults'),
+          element: BuiltValueNullFieldError.checkNotNull(
+              element, r'ValueSourceClass', 'element'),
+        );
     replace(_$result);
     return _$result;
   }

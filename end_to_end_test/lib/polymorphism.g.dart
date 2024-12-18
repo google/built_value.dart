@@ -461,8 +461,9 @@ class CatBuilder implements Builder<Cat, CatBuilder>, MammalBuilder {
   _$Cat _build() {
     final _$result = _$v ??
         new _$Cat._(
-            tail: BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail'),
-            legs: BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs'));
+          tail: BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail'),
+          legs: BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -553,8 +554,9 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
   _$Fish _build() {
     final _$result = _$v ??
         new _$Fish._(
-            fins: BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins'),
-            legs: BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs'));
+          fins: BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins'),
+          legs: BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -645,9 +647,9 @@ class RobotBuilder implements Builder<Robot, RobotBuilder> {
   _$Robot _build() {
     final _$result = _$v ??
         new _$Robot._(
-            fins: BuiltValueNullFieldError.checkNotNull(fins, r'Robot', 'fins'),
-            legs:
-                BuiltValueNullFieldError.checkNotNull(legs, r'Robot', 'legs'));
+          fins: BuiltValueNullFieldError.checkNotNull(fins, r'Robot', 'fins'),
+          legs: BuiltValueNullFieldError.checkNotNull(legs, r'Robot', 'legs'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -746,9 +748,10 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
     try {
       _$result = _$v ??
           new _$Cage._(
-              inhabitant: BuiltValueNullFieldError.checkNotNull(
-                  inhabitant, r'Cage', 'inhabitant'),
-              otherInhabitants: otherInhabitants.build());
+            inhabitant: BuiltValueNullFieldError.checkNotNull(
+                inhabitant, r'Cage', 'inhabitant'),
+            otherInhabitants: otherInhabitants.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -839,8 +842,9 @@ class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
   _$StandardCat _build() {
     final _$result = _$v ??
         new _$StandardCat._(
-            tail: BuiltValueNullFieldError.checkNotNull(
-                tail, r'StandardCat', 'tail'));
+          tail: BuiltValueNullFieldError.checkNotNull(
+              tail, r'StandardCat', 'tail'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -928,8 +932,9 @@ class HasStringBuilder
   _$HasString _build() {
     final _$result = _$v ??
         new _$HasString._(
-            field: BuiltValueNullFieldError.checkNotNull(
-                field, r'HasString', 'field'));
+          field: BuiltValueNullFieldError.checkNotNull(
+              field, r'HasString', 'field'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1010,8 +1015,9 @@ class HasDoubleBuilder
   _$HasDouble _build() {
     final _$result = _$v ??
         new _$HasDouble._(
-            field: BuiltValueNullFieldError.checkNotNull(
-                field, r'HasDouble', 'field'));
+          field: BuiltValueNullFieldError.checkNotNull(
+              field, r'HasDouble', 'field'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1108,10 +1114,11 @@ class UsesChainedInterfaceBuilder
   _$UsesChainedInterface _build() {
     final _$result = _$v ??
         new _$UsesChainedInterface._(
-            bar: BuiltValueNullFieldError.checkNotNull(
-                bar, r'UsesChainedInterface', 'bar'),
-            foo: BuiltValueNullFieldError.checkNotNull(
-                foo, r'UsesChainedInterface', 'foo'));
+          bar: BuiltValueNullFieldError.checkNotNull(
+              bar, r'UsesChainedInterface', 'bar'),
+          foo: BuiltValueNullFieldError.checkNotNull(
+              foo, r'UsesChainedInterface', 'foo'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1196,8 +1203,9 @@ class UsesHandCodedBuilder
   _$UsesHandCoded _build() {
     final _$result = _$v ??
         new _$UsesHandCoded._(
-            fieldInBaseBuilder: BuiltValueNullFieldError.checkNotNull(
-                fieldInBaseBuilder, r'UsesHandCoded', 'fieldInBaseBuilder'));
+          fieldInBaseBuilder: BuiltValueNullFieldError.checkNotNull(
+              fieldInBaseBuilder, r'UsesHandCoded', 'fieldInBaseBuilder'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1370,9 +1378,10 @@ class CarBuilder implements Builder<Car, CarBuilder>, VehicleBuilder {
     try {
       _$result = _$v ??
           new _$Car._(
-              seatsCount: BuiltValueNullFieldError.checkNotNull(
-                  seatsCount, r'Car', 'seatsCount'),
-              color: color.build());
+            seatsCount: BuiltValueNullFieldError.checkNotNull(
+                seatsCount, r'Car', 'seatsCount'),
+            color: color.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -1481,9 +1490,10 @@ class MixinCarBuilder
     try {
       _$result = _$v ??
           new _$MixinCar._(
-              seatsCount: BuiltValueNullFieldError.checkNotNull(
-                  seatsCount, r'MixinCar', 'seatsCount'),
-              color: color.build());
+            seatsCount: BuiltValueNullFieldError.checkNotNull(
+                seatsCount, r'MixinCar', 'seatsCount'),
+            color: color.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -1575,8 +1585,9 @@ class VehicleColorBuilder
   _$VehicleColor _build() {
     final _$result = _$v ??
         new _$VehicleColor._(
-            label: BuiltValueNullFieldError.checkNotNull(
-                label, r'VehicleColor', 'label'));
+          label: BuiltValueNullFieldError.checkNotNull(
+              label, r'VehicleColor', 'label'),
+        );
     replace(_$result);
     return _$result;
   }

@@ -113,12 +113,13 @@ class MemoizedGetterBuilder
   _$MemoizedGetter _build() {
     final _$result = _$v ??
         new _$MemoizedGetter._(
-            returnType: BuiltValueNullFieldError.checkNotNull(
-                returnType, r'MemoizedGetter', 'returnType'),
-            nullabilitySuffix: BuiltValueNullFieldError.checkNotNull(
-                nullabilitySuffix, r'MemoizedGetter', 'nullabilitySuffix'),
-            name: BuiltValueNullFieldError.checkNotNull(
-                name, r'MemoizedGetter', 'name'));
+          returnType: BuiltValueNullFieldError.checkNotNull(
+              returnType, r'MemoizedGetter', 'returnType'),
+          nullabilitySuffix: BuiltValueNullFieldError.checkNotNull(
+              nullabilitySuffix, r'MemoizedGetter', 'nullabilitySuffix'),
+          name: BuiltValueNullFieldError.checkNotNull(
+              name, r'MemoizedGetter', 'name'),
+        );
     replace(_$result);
     return _$result;
   }
