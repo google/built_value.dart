@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
@@ -27,15 +27,15 @@ class DartTypes {
   static bool isInstantiableBuiltValue(
       ParsedLibraryResults parsedLibraryResults, DartType type) {
     return isBuiltValue(type) &&
-        ValueSourceClass(parsedLibraryResults, type.element as ClassElement)
+        ValueSourceClass(parsedLibraryResults, type.element3 as ClassElement2)
             .settings
             .instantiable;
   }
 
   static bool isBuiltValue(DartType type) =>
       type is InterfaceType &&
-      type.element.allSupertypes
-          .any((interfaceType) => interfaceType.element.name == 'Built');
+      type.element3.allSupertypes
+          .any((interfaceType) => interfaceType.element3.name3 == 'Built');
 
   static bool isBuiltCollection(DartType type) {
     return _builtCollectionNames
@@ -91,10 +91,10 @@ class DartTypes {
       if (dartType.namedParameterTypes.isNotEmpty) {
         if (parameters.isNotEmpty) parameters.write(', ');
         parameters.write('{');
-        parameters.write(dartType.parameters
+        parameters.write(dartType.formalParameters
             .where((p) => p.isOptionalNamed || p.isRequiredNamed)
             .map((p) => '${p.isRequiredNamed ? 'required ' : ''}'
-                '${getName(p.type)} ${p.name}')
+                '${getName(p.type)} ${p.name3}')
             .join(', '));
         parameters.write('}');
       }
@@ -103,15 +103,15 @@ class DartTypes {
     } else if (dartType is InterfaceType) {
       var typeArguments = dartType.typeArguments;
       if (typeArguments.isEmpty) {
-        return dartType.element.name + suffix;
+        return dartType.element3.name3! + suffix;
       } else {
         final typeArgumentsStr = typeArguments
             .map((type) => getName(type, withNullabilitySuffix: true))
             .join(', ');
-        return '${dartType.element.name}<$typeArgumentsStr>$suffix';
+        return '${dartType.element3.name3}<$typeArgumentsStr>$suffix';
       }
     } else if (dartType is TypeParameterType) {
-      return dartType.element.name + suffix;
+      return dartType.element3.name3! + suffix;
     } else if (dartType is RecordType) {
       return dartType.getDisplayString();
     } else if (dartType is VoidType) {

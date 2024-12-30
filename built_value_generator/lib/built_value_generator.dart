@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/build.dart';
 import 'package:built_value_generator/src/enum_source_library.dart';
 import 'package:built_value_generator/src/parsed_library_results.dart';
@@ -22,12 +22,12 @@ class BuiltValueGenerator extends Generator {
     var parsedLibraryResults = ParsedLibraryResults();
 
     // Workaround for https://github.com/google/built_value.dart/issues/941.
-    LibraryElement libraryElement;
+    LibraryElement2 libraryElement;
     var attempts = 0;
     while (true) {
       try {
-        libraryElement = await buildStep.resolver.libraryFor(
-            await buildStep.resolver.assetIdForElement(library.element));
+        libraryElement = await buildStep.resolver.libraryFor2(
+            await buildStep.resolver.assetIdForElement2(library.element2));
         parsedLibraryResults.parsedLibraryResultOrThrowingMock(libraryElement);
         break;
       } catch (_) {
@@ -54,19 +54,19 @@ class BuiltValueGenerator extends Generator {
       result.writeln(_error(e.message));
       log.severe(
           'Error in BuiltValueGenerator for '
-          '${libraryElement.source.fullName}.',
+          '${libraryElement.firstFragment.source.fullName}.',
           e,
           st);
     } catch (e, st) {
       result.writeln(_error(e.toString()));
       log.severe(
           'Unknown error in BuiltValueGenerator for '
-          '${libraryElement.source.fullName}.',
+          '${libraryElement.firstFragment.source.fullName}.',
           e,
           st);
     }
 
-    for (var element in libraryElement.units.expand((unit) => unit.classes)) {
+    for (var element in libraryElement.classes) {
       if (ValueSourceClass.needsBuiltValue(element)) {
         try {
           result.writeln(

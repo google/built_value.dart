@@ -1,12 +1,12 @@
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 
 /// Common logic between `ValueSourceField` and `SerializerSourceField`.
 mixin FieldMixin {
-  FieldElement? get builderElement;
+  FieldElement2? get builderElement;
   ParsedLibraryResult get parsedLibrary;
 
   bool get builderFieldExists => builderElement != null;
@@ -23,14 +23,14 @@ mixin FieldMixin {
     if (!builderFieldExists) return 'dynamic';
 
     // Try to get a resolved type first, it's faster.
-    var result = DartTypes.tryGetName(builderElement!.getter?.returnType,
+    var result = DartTypes.tryGetName(builderElement!.getter2?.returnType,
         withNullabilitySuffix: true);
 
     if (result != null && result != 'dynamic') return result;
     // Go via AST to allow use of unresolvable types not yet generated;
     // this includes generated Builder types.
     result = parsedLibrary
-        .getElementDeclaration(builderElement!)
+        .getElementDeclaration2(builderElement!.firstFragment)
         ?.node
         .parent
         ?.childEntities
@@ -39,9 +39,10 @@ mixin FieldMixin {
 
     if (result != null) return result;
 
-    result = builderElement!.getter != null
-        ? (parsedLibrary.getElementDeclaration(builderElement!.getter!)?.node
-                as MethodDeclaration?)
+    result = builderElement!.getter2 != null
+        ? (parsedLibrary
+                .getElementDeclaration2(builderElement!.getter2!.firstFragment)
+                ?.node as MethodDeclaration?)
             ?.returnType
             .toString()
         : null;
