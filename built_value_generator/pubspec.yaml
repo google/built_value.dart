@@ -31,8 +31,17 @@ dependency_overrides:
  analyzer:
    path: /Users/scheglov/Source/Dart/sdk.git/sdk/pkg/analyzer
  build:
-   path: /Users/scheglov/dart/build/build
+   git:
+     url: https://github.com/dart-lang/build.git
+     path: build
+     ref: resolver-2-methods
  build_resolvers:
-   path: /Users/scheglov/dart/build/build_resolvers
+   git:
+     url: https://github.com/dart-lang/build.git
+     path: build_resolvers
+     ref: resolver-2-methods
  source_gen:
-   path: /Users/scheglov/dart/source_gen/source_gen
+   git:
+     url: https://github.com/dart-lang/source_gen.git
+     path: source_gen
+     ref: analyzer-element2
