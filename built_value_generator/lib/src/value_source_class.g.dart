@@ -62,7 +62,7 @@ class _$ValueSourceClass extends ValueSourceClass {
     BuiltValueNullFieldError.checkNotNull(
         parsedLibraryResults, r'ValueSourceClass', 'parsedLibraryResults');
     BuiltValueNullFieldError.checkNotNull(
-        element.asElement, r'ValueSourceClass', 'element');
+        element, r'ValueSourceClass', 'element');
   }
 
   @override
