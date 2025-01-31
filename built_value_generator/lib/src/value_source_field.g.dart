@@ -14,9 +14,9 @@ class _$ValueSourceField extends ValueSourceField {
   @override
   final ParsedLibraryResult parsedLibrary;
   @override
-  final FieldElement element;
+  final FieldElement2 element;
   @override
-  final FieldElement? builderElement;
+  final FieldElement2? builderElement;
   String? __name;
   String? __type;
   bool? __isFunctionType;
@@ -182,13 +182,13 @@ class ValueSourceFieldBuilder
   set parsedLibrary(ParsedLibraryResult? parsedLibrary) =>
       _$this._parsedLibrary = parsedLibrary;
 
-  FieldElement? _element;
-  FieldElement? get element => _$this._element;
-  set element(FieldElement? element) => _$this._element = element;
+  FieldElement2? _element;
+  FieldElement2? get element => _$this._element;
+  set element(FieldElement2? element) => _$this._element = element;
 
-  FieldElement? _builderElement;
-  FieldElement? get builderElement => _$this._builderElement;
-  set builderElement(FieldElement? builderElement) =>
+  FieldElement2? _builderElement;
+  FieldElement2? get builderElement => _$this._builderElement;
+  set builderElement(FieldElement2? builderElement) =>
       _$this._builderElement = builderElement;
 
   ValueSourceFieldBuilder();

@@ -10,9 +10,9 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   final ParsedLibraryResults parsedLibraryResults;
   @override
-  final InterfaceElement element;
+  final InterfaceElement2 element;
   @override
-  final ClassElement? builderElement;
+  final ClassElement2? builderElement;
   ParsedLibraryResult? __parsedLibrary;
   BuiltValue? __builtValueSettings;
   bool? __hasBuilder;
@@ -28,7 +28,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   bool? __isEnumClass;
   BuiltList<SerializerSourceField>? __fields;
   BuiltSet<SerializerSourceClass>? __fieldClasses;
-  CompilationUnitElement? __compilationUnit;
+  LibraryFragment? __compilationUnit;
   String? __serializerImplName;
   String? __serializerInstanceName;
   bool? __isSerializable;
@@ -105,7 +105,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       __fieldClasses ??= super.fieldClasses;
 
   @override
-  CompilationUnitElement get compilationUnit =>
+  LibraryFragment get compilationUnit =>
       __compilationUnit ??= super.compilationUnit;
 
   @override
@@ -174,13 +174,13 @@ class SerializerSourceClassBuilder
   set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
       _$this._parsedLibraryResults = parsedLibraryResults;
 
-  InterfaceElement? _element;
-  InterfaceElement? get element => _$this._element;
-  set element(InterfaceElement? element) => _$this._element = element;
+  InterfaceElement2? _element;
+  InterfaceElement2? get element => _$this._element;
+  set element(InterfaceElement2? element) => _$this._element = element;
 
-  ClassElement? _builderElement;
-  ClassElement? get builderElement => _$this._builderElement;
-  set builderElement(ClassElement? builderElement) =>
+  ClassElement2? _builderElement;
+  ClassElement2? get builderElement => _$this._builderElement;
+  set builderElement(ClassElement2? builderElement) =>
       _$this._builderElement = builderElement;
 
   SerializerSourceClassBuilder();

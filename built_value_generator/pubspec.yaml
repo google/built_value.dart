@@ -13,7 +13,7 @@ environment:
   sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
-  analyzer: '>=6.9.0 <7.0.0'
+  analyzer: '>=7.1.0 <8.0.0'
   build: '>=1.0.0 <3.0.0'
   build_config: '>=0.3.1 <2.0.0'
   built_collection: ^5.0.0
@@ -26,3 +26,22 @@ dev_dependencies:
   build_runner: '>=1.0.0 <3.0.0'
   pedantic: ^1.4.0
   test: ^1.0.0
+
+dependency_overrides:
+ analyzer:
+   path: /Users/scheglov/Source/Dart/sdk.git/sdk/pkg/analyzer
+ build:
+   git:
+     url: https://github.com/dart-lang/build.git
+     path: build
+     ref: resolver-2-methods
+ build_resolvers:
+   git:
+     url: https://github.com/dart-lang/build.git
+     path: build_resolvers
+     ref: resolver-2-methods
+ source_gen:
+   git:
+     url: https://github.com/dart-lang/source_gen.git
+     path: source_gen
+     ref: analyzer-element2
