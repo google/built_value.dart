@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.9.4 (unreleased)
+
+- Bump `analyzer` version.
+
 # 8.9.3
 
 - Generate code that formats faster with current "short" style. Both versions

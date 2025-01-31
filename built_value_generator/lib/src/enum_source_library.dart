@@ -33,7 +33,8 @@ abstract class EnumSourceLibrary
   String get name => element.name3!;
 
   @memoized
-  String get fileName => element.firstFragment.source.shortName.replaceAll('.dart', '');
+  String get fileName =>
+      element.firstFragment.source.shortName.replaceAll('.dart', '');
 
   @memoized
   String get source => element.firstFragment.source.contents.data;
@@ -44,8 +45,7 @@ abstract class EnumSourceLibrary
 
     for (var classElement in element.classes) {
       if (EnumSourceClass.needsEnumClass(classElement)) {
-        result
-            .add(EnumSourceClass(parsedLibraryResults, classElement));
+        result.add(EnumSourceClass(parsedLibraryResults, classElement));
       }
     }
     return result.build();
