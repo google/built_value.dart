@@ -242,11 +242,10 @@ abstract class ValueSourceField
   /// Gets the type name for the builder. Specify the compilation unit to
   /// get the name for as [compilationUnit]; this affects whether an import
   /// prefix is used. Pass `null` for [compilationUnit] to just omit the prefix.
-  String? typeInBuilder(LibraryFragment? compilationUnit) =>
-      builderFieldExists
-          ? buildElementType
-          : _toBuilderType(parsedLibraryResults, element.getter2!.returnType,
-              typeInCompilationUnit(compilationUnit));
+  String? typeInBuilder(LibraryFragment? compilationUnit) => builderFieldExists
+      ? buildElementType
+      : _toBuilderType(parsedLibraryResults, element.getter2!.returnType,
+          typeInCompilationUnit(compilationUnit));
 
   @memoized
   bool get isNestedBuilder => builderFieldExists

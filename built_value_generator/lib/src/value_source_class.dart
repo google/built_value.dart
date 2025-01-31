@@ -377,8 +377,7 @@ abstract class ValueSourceClass
   }
 
   @memoized
-  LibraryFragment get compilationUnit =>
-      element.library2.firstFragment;
+  LibraryFragment get compilationUnit => element.library2.firstFragment;
 
   static bool needsBuiltValue(InterfaceElement2 classElement) {
     // TODO(davidmorgan): more exact type check.
