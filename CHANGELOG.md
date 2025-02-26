@@ -1,8 +1,12 @@
 # Changelog
 
-# 8.9.4 (unreleased)
+# 8.9.5 (unreleased)
 
 - Bump `analyzer` version.
+
+# 8.9.4
+
+- Allow `build_value_generator` to use `source_gen 3.0.0`.
 
 # 8.9.3
 
