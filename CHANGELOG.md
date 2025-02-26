@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.9.4
+
+- Allow `build_value_generator` to use `source_gen 3.0.0`.
+
 # 8.9.3
 
 - Generate code that formats faster with current "short" style. Both versions
