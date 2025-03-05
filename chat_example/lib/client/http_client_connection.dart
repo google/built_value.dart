@@ -3,9 +3,10 @@
 // license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:html';
+import 'dart:js_interop';
 
 import 'package:chat_example/client/client_connection.dart';
+import 'package:web/web.dart';
 
 /// [ClientConnection] using a web socket.
 class HttpClientConnection implements ClientConnection {
@@ -27,6 +28,6 @@ class HttpClientConnection implements ClientConnection {
 
   @override
   void sendToServer(String data) {
-    _websocket.send(data);
+    _websocket.send(data.toJS);
   }
 }

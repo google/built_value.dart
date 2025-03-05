@@ -3,18 +3,19 @@
 // license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:html';
+
+import 'package:web/web.dart';
 
 /// An input box using `dart:html`.
 class Input {
   final StreamController<String> _streamController = StreamController<String>();
 
   Input() {
-    final input = querySelector('#input') as InputElement;
+    final input = document.querySelector('#input')! as HTMLInputElement;
 
     input.onKeyPress.listen((keyEvent) {
       if (keyEvent.keyCode == KeyCode.ENTER) {
-        _streamController.add(input.value!);
+        _streamController.add(input.value);
         input.value = '';
       }
     });
