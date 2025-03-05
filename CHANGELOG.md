@@ -1,8 +1,12 @@
 # Changelog
 
+# 8.9.5
+
+- Allow `built_value_generator` to use `analyzer 7.0.0`.
+
 # 8.9.4
 
-- Allow `build_value_generator` to use `source_gen 3.0.0`.
+- Allow `built_value_generator` to use `source_gen 2.0.0`.
 
 # 8.9.3
 
