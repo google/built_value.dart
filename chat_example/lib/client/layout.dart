@@ -2,14 +2,14 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'dart:html';
+import 'package:web/web.dart';
 
 /// Forces focus to the input box.
 class Layout {
   Layout() {
-    final screen = querySelector('#screen')!;
-    final text = querySelector('#text')!;
-    final input = querySelector('#input')!;
+    final screen = document.querySelector('#screen')!;
+    final text = document.querySelector('#text')!;
+    final input = document.querySelector('#input')! as HTMLInputElement;
 
     input.focus();
 

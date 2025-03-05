@@ -6,7 +6,7 @@ description: >
 homepage: https://github.com/google/built_value.dart
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'
 
 dependencies:
   built_collection: ^5.0.0
@@ -14,6 +14,7 @@ dependencies:
   shelf: ^1.0.0
   shelf_proxy: ^1.0.0
   shelf_web_socket: ^1.0.0
+  web: ^1.1.1
   web_socket_channel: ^2.0.0
 
 dev_dependencies:
