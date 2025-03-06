@@ -1,5 +1,5 @@
 name: built_value_generator
-version: 8.9.4
+version: 8.9.5
 description: >
   Value types with builders, Dart classes as enums, and serialization.
   This library is the dev dependency.
@@ -13,7 +13,7 @@ environment:
   sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
-  analyzer: '>=6.9.0 <7.0.0'
+  analyzer: '>=6.9.0 <8.0.0'
   build: '>=1.0.0 <3.0.0'
   build_config: '>=0.3.1 <2.0.0'
   built_collection: ^5.0.0
