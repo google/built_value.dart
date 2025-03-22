@@ -31,7 +31,7 @@ void format(String path) {
           line2.trim() == 'b' &&
           line3.trim().startsWith('..')) {
         // Push `(b) => b` onto the previous line.
-        outputLines.last = '${outputLines.last}(b) => b';
+        outputLines.last = '${outputLines.last}(b) {';
         // Trim indentation from the next lines.
         trimIndentation.add(line.indexOf('(') - 1);
         i++;
@@ -46,8 +46,16 @@ void format(String path) {
         final indentation = line.indexOf(trimmedLine.substring(0, 1)) - 1;
         if (indentation <= trimIndentation.last) {
           trimIndentation.removeLast();
+          line = line.replaceFirst(')', '})');
         }
         line = line.substring(6 * trimIndentation.length);
+        if (line.contains(' ..')) {
+          if (!outputLines.last.contains('(b) {')) {
+            outputLines.last = '${outputLines.last};';
+          }
+          line = line.replaceAll(' ..', ' b.');
+          if (line.endsWith(',')) line = '${line.substring(0, line.length - 1)};';
+        }
       }
     }
 
