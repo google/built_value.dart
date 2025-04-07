@@ -7,9 +7,9 @@ library built_value_generator.source_class;
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element2.dart';
-import 'package:analyzer/src/utilities/extensions/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:analyzer/src/utilities/extensions/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/fixes.dart';
@@ -173,7 +173,7 @@ abstract class ValueSourceClass
 
   @memoized
   ClassDeclaration get classDeclaration {
-    return parsedLibrary.getElementDeclaration2(element.firstFragment)!.node
+    return parsedLibrary.getFragmentDeclaration(element.firstFragment)!.node
         as ClassDeclaration;
   }
 
@@ -277,7 +277,7 @@ abstract class ValueSourceClass
           .where((constructor) =>
               !constructor.isFactory && !constructor.isSynthetic)
           .map((constructor) => parsedLibrary
-              .getElementDeclaration2(constructor.firstFragment)!
+              .getFragmentDeclaration(constructor.firstFragment)!
               .node as ConstructorDeclaration));
 
   @memoized
@@ -285,7 +285,7 @@ abstract class ValueSourceClass
       BuiltList<ConstructorDeclaration>(element.constructors2
           .where((constructor) => constructor.isFactory)
           .map((factory) => parsedLibrary
-              .getElementDeclaration2(factory.firstFragment)!
+              .getFragmentDeclaration(factory.firstFragment)!
               .node as ConstructorDeclaration));
 
   @memoized
@@ -297,7 +297,7 @@ abstract class ValueSourceClass
           .where((constructor) =>
               !constructor.isFactory && !constructor.isSynthetic)
           .map((constructor) => parsedLibrary
-              .getElementDeclaration2(constructor.firstFragment)!
+              .getFragmentDeclaration(constructor.firstFragment)!
               .node
               .toSource()));
 
@@ -306,7 +306,7 @@ abstract class ValueSourceClass
       BuiltList<String>(builderElement!.constructors2
           .where((constructor) => constructor.isFactory)
           .map((factory) => parsedLibrary
-              .getElementDeclaration2(factory.firstFragment)!
+              .getFragmentDeclaration(factory.firstFragment)!
               .node
               .toSource()));
 
@@ -520,10 +520,10 @@ abstract class ValueSourceClass
           method.returnType is VoidType &&
           method.formalParameters.length == 1 &&
           parsedLibrary
-              .getElementDeclaration2(method.formalParameters[0].firstFragment)!
+              .getFragmentDeclaration(method.formalParameters[0].firstFragment)!
               .node is SimpleFormalParameter &&
           DartTypes.stripGenerics((parsedLibrary
-                      .getElementDeclaration2(
+                      .getFragmentDeclaration(
                           method.formalParameters[0].firstFragment)!
                       .node as SimpleFormalParameter)
                   .type!

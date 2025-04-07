@@ -48,7 +48,7 @@ abstract class EnumSourceField
   String get generatedIdentifier {
     var fieldName = element.displayName;
     return parsedLibrary
-        .getElementDeclaration2(element.firstFragment)!
+        .getFragmentDeclaration(element.firstFragment)!
         .node
         .toSource()
         .substring('$fieldName = '.length);

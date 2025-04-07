@@ -67,7 +67,7 @@ abstract class ValueSourceField
   @memoized
   String get typeWithPrefix {
     var typeFromAst = (parsedLibrary
-                .getElementDeclaration2(element.getter2!.firstFragment)!
+                .getFragmentDeclaration(element.getter2!.firstFragment)!
                 .node as MethodDeclaration)
             .returnType
             ?.toSource() ??
@@ -183,7 +183,7 @@ abstract class ValueSourceField
       // Go via AST to allow use of unresolvable types not yet generated;
       // this includes generated Builder types.
       result = parsedLibrary
-          .getElementDeclaration2(builderElement!.firstFragment)
+          .getFragmentDeclaration(builderElement!.firstFragment)
           ?.node
           .parent
           ?.childEntities
@@ -194,7 +194,7 @@ abstract class ValueSourceField
     if (result == null || result == 'dynamic') {
       result = builderElement!.setter2 != null
           ? (parsedLibrary
-                  .getElementDeclaration2(
+                  .getFragmentDeclaration(
                       builderElement!.setter2!.firstFragment)
                   ?.node as MethodDeclaration?)
               ?.parameters!
@@ -215,7 +215,7 @@ abstract class ValueSourceField
     // If it's a real field, it's a [VariableDeclaration] which is guaranteed
     // to have parent node [VariableDeclarationList] giving the type.
     var fieldDeclaration =
-        parsedLibrary.getElementDeclaration2(builderElement!.firstFragment);
+        parsedLibrary.getFragmentDeclaration(builderElement!.firstFragment);
     if (fieldDeclaration != null) {
       return _removeNullabilitySuffix(
           (((fieldDeclaration.node as VariableDeclaration).parent)
@@ -226,7 +226,7 @@ abstract class ValueSourceField
     } else {
       // Otherwise it's an explicit getter/setter pair; get the type from the getter.
       return _removeNullabilitySuffix((parsedLibrary
-                  .getElementDeclaration2(
+                  .getFragmentDeclaration(
                       builderElement!.getter2!.firstFragment)!
                   .node as MethodDeclaration)
               .returnType

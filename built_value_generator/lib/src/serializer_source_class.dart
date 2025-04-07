@@ -100,7 +100,7 @@ abstract class SerializerSourceClass
     if (serializerFields.isEmpty) return '';
     var serializerField = serializerFields.single;
     var result = parsedLibrary
-            .getElementDeclaration2(serializerField.getter2!.firstFragment)
+            .getFragmentDeclaration(serializerField.getter2!.firstFragment)
             ?.node
             .toSource() ??
         '';
