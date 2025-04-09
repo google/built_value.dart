@@ -20,11 +20,20 @@ dev_dependencies:
   test: ^1.0.0
 
 dependency_overrides:
+  _fe_analyzer_shared:
+    git:
+      url: https://github.com/dart-lang/sdk.git
+      path: pkg/_fe_analyzer_shared
+      ref: 3.8.0-158.0.dev
+  analyzer:
+    git:
+      url: https://github.com/dart-lang/sdk.git
+      path: pkg/analyzer
+      ref: 3.8.0-158.0.dev
   built_value:
     path: ../built_value
   built_value_generator:
     path: ../built_value_generator
-  analyzer: ^7.2.0
   build:
    git:
      url: https://github.com/dart-lang/build.git
@@ -34,6 +43,11 @@ dependency_overrides:
     git:
       url: https://github.com/dart-lang/build.git
       path: build_resolvers
+      ref: resolver-2-methods
+  build_runner:
+    git:
+      url: https://github.com/dart-lang/build.git
+      path: build_runner
       ref: resolver-2-methods
   source_gen:
     git:

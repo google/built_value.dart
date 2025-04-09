@@ -74,7 +74,7 @@ abstract class EnumSourceClass
   BuiltList<String> get constructors =>
       BuiltList<String>(element.constructors2.map((element) {
         final declaration =
-            parsedLibrary.getElementDeclaration2(element.firstFragment);
+            parsedLibrary.getFragmentDeclaration(element.firstFragment);
         return declaration?.node.toSource() ?? '';
       }));
 
@@ -83,7 +83,7 @@ abstract class EnumSourceClass
     var getter = element.getGetter2('values');
     if (getter == null) return null;
     var source = parsedLibrary
-        .getElementDeclaration2(getter.firstFragment)!
+        .getFragmentDeclaration(getter.firstFragment)!
         .node
         .toSource();
     var matches = RegExp(r'static BuiltSet<' +
@@ -98,7 +98,7 @@ abstract class EnumSourceClass
     var getter = element.getMethod2('valueOf');
     if (getter == null) return null;
     var source = parsedLibrary
-        .getElementDeclaration2(getter.firstFragment)!
+        .getFragmentDeclaration(getter.firstFragment)!
         .node
         .toSource();
     var matches = RegExp(r'static ' +

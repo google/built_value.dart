@@ -112,7 +112,7 @@ abstract class SerializerSourceField
   @memoized
   String get typeWithPrefixAndNullabilitySuffix {
     var declaration =
-        parsedLibrary.getElementDeclaration2(element.getter2!.firstFragment)!;
+        parsedLibrary.getFragmentDeclaration(element.getter2!.firstFragment)!;
     var typeFromAst =
         (declaration.node as MethodDeclaration).returnType?.toString() ??
             'dynamic';

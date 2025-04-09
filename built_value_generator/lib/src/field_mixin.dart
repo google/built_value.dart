@@ -30,7 +30,7 @@ mixin FieldMixin {
     // Go via AST to allow use of unresolvable types not yet generated;
     // this includes generated Builder types.
     result = parsedLibrary
-        .getElementDeclaration2(builderElement!.firstFragment)
+        .getFragmentDeclaration(builderElement!.firstFragment)
         ?.node
         .parent
         ?.childEntities
@@ -41,7 +41,7 @@ mixin FieldMixin {
 
     result = builderElement!.getter2 != null
         ? (parsedLibrary
-                .getElementDeclaration2(builderElement!.getter2!.firstFragment)
+                .getFragmentDeclaration(builderElement!.getter2!.firstFragment)
                 ?.node as MethodDeclaration?)
             ?.returnType
             .toString()

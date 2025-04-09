@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.9.6 (unreleased)
+
+- Changes for post-element2-migration `source_gen`.
+
 # 8.9.5
 
 - Allow `built_value_generator` to use `analyzer 7.0.0`.

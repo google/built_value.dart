@@ -13,7 +13,7 @@ environment:
   sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
-  analyzer: '>=7.2.0 <8.0.0'
+  analyzer: '>=7.3.0 <8.0.0'
   build: '>=1.0.0 <3.0.0'
   build_config: '>=0.3.1 <2.0.0'
   built_collection: ^5.0.0
@@ -28,9 +28,18 @@ dev_dependencies:
   test: ^1.0.0
 
 dependency_overrides:
+  _fe_analyzer_shared:
+    git:
+      url: https://github.com/dart-lang/sdk.git
+      path: pkg/_fe_analyzer_shared
+      ref: 3.8.0-158.0.dev
+  analyzer:
+    git:
+      url: https://github.com/dart-lang/sdk.git
+      path: pkg/analyzer
+      ref: 3.8.0-158.0.dev
   built_value:
     path: ../built_value
-  analyzer: ^7.2.0
   build:
    git:
      url: https://github.com/dart-lang/build.git
@@ -40,6 +49,11 @@ dependency_overrides:
     git:
       url: https://github.com/dart-lang/build.git
       path: build_resolvers
+      ref: resolver-2-methods
+  build_runner:
+    git:
+      url: https://github.com/dart-lang/build.git
+      path: build_runner
       ref: resolver-2-methods
   source_gen:
     git:
