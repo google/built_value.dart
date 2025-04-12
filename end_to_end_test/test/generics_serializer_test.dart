@@ -67,12 +67,63 @@ void main() {
     });
   });
 
+  group('GenericValue with known specifiedType, correct builder and null', () {
+    var data = GenericValue<int?>();
+    var specifiedType = const FullType(GenericValue, [FullType.nullable(int)]);
+    var serializersWithBuilder = (serializers.toBuilder()
+          ..addBuilderFactory(specifiedType, () => GenericValueBuilder<int?>()))
+        .build();
+    var serialized = json.decode(json.encode([])) as Object;
+
+    test('can be serialized', () {
+      expect(
+          serializersWithBuilder.serialize(data, specifiedType: specifiedType),
+          serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(
+          serializersWithBuilder.deserialize(serialized,
+              specifiedType: specifiedType),
+          data);
+    });
+
+    test('keeps generic type on deserialization', () {
+      expect(
+          serializersWithBuilder
+              .deserialize(serialized, specifiedType: specifiedType)
+              .runtimeType
+              .toString(),
+          r'_$GenericValue<int?>');
+    });
+  });
+
   group('GenericValue with unknown specifiedType', () {
     var data = GenericValue<int>((b) => b..value = 1);
     var serialized = json.decode(json.encode([
       'GenericValue',
       'value',
       ['int', 1],
+    ])) as Object;
+
+    test('can be serialized', () {
+      expect(serializers.serialize(data), serialized);
+    });
+
+    test('can be deserialized', () {
+      expect(serializers.deserialize(serialized), data);
+    });
+
+    test('loses generic type on deserialization', () {
+      expect(serializers.deserialize(serialized).runtimeType.toString(),
+          r'_$GenericValue<Object?>');
+    });
+  });
+
+  group('GenericValue with unknown specifiedType null value', () {
+    var data = GenericValue<int?>();
+    var serialized = json.decode(json.encode([
+      'GenericValue',
     ])) as Object;
 
     test('can be serialized', () {

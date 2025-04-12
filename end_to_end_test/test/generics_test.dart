@@ -18,6 +18,10 @@ void main() {
           throwsA(const TypeMatcher<BuiltValueNullFieldError>()));
     });
 
+    test('does not throw on null for nullable fields on build', () {
+      GenericValue<int?>();
+    });
+
     test('fields can be set via build constructor', () {
       final value = GenericValue<int>((b) => b..value = 1);
       expect(value.value, 1);

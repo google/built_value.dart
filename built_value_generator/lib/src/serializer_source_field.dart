@@ -87,6 +87,10 @@ abstract class SerializerSourceField
       NullabilitySuffix.question;
 
   @memoized
+  bool get hasGenericType =>
+      element.getter?.returnType is TypeParameterType;
+
+  @memoized
   bool get isNullable => hasNullableAnnotation || hasNullableType;
 
   @memoized
