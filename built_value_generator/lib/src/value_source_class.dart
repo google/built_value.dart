@@ -768,12 +768,12 @@ abstract class ValueSourceClass
     if (hasBuilder) {
       result.writeln('factory $implName(['
           'void Function(${name}Builder$_generics)? updates]) '
-          '=> (new ${name}Builder$_generics()..update(updates)).build()'
+          '=> (${name}Builder$_generics()..update(updates)).build()'
           ' as $implName$_generics;');
     } else {
       result.writeln('factory $implName(['
           'void Function(${name}Builder$_generics)? updates]) '
-          '=> (new ${name}Builder$_generics()..update(updates))._build();');
+          '=> (${name}Builder$_generics()..update(updates))._build();');
     }
 
     result.writeln();
@@ -802,7 +802,7 @@ abstract class ValueSourceClass
       if (genericParameters.isNotEmpty) {
         for (var genericParameter in genericParameters) {
           result.writeln('if ($genericParameter == dynamic) {');
-          result.writeln('throw new BuiltValueMissingGenericsError('
+          result.writeln('throw BuiltValueMissingGenericsError('
               "r'$name', '$genericParameter');");
           result.writeln('}');
         }
@@ -842,10 +842,10 @@ abstract class ValueSourceClass
     result.writeln('@override');
     if (hasBuilder) {
       result.writeln('${implName}Builder$_generics toBuilder() '
-          '=> new ${implName}Builder$_generics()..replace(this);');
+          '=> ${implName}Builder$_generics()..replace(this);');
     } else {
       result.writeln('${name}Builder$_generics toBuilder() '
-          '=> new ${name}Builder$_generics()..replace(this);');
+          '=> ${name}Builder$_generics()..replace(this);');
     }
     result.writeln();
 
@@ -939,7 +939,7 @@ abstract class ValueSourceClass
       }
       result.write(' $trackedVariable');
       if (isNullableNestedBuilder) {
-        result.write('??= new $type()');
+        result.write('??= $type()');
       }
       result.writeln(';');
       if (hasBuilder) result.writeln('}');
@@ -1103,7 +1103,7 @@ abstract class ValueSourceClass
       result.write('final ');
     }
     result.writeln('_\$result = _\$v ?? ');
-    result.writeln('new $implName$_generics._(');
+    result.writeln('$implName$_generics._(');
     result.write(fieldBuilders.keys
         .map((field) {
           final fieldBuilder = fieldBuilders[field];
@@ -1137,7 +1137,7 @@ abstract class ValueSourceClass
       }).join('\n'));
 
       result.writeln('} catch (e) {');
-      result.writeln('throw new BuiltValueNestedFieldError('
+      result.writeln('throw BuiltValueNestedFieldError('
           "r'$name', _\$failedField, e.toString());");
       result.writeln('}');
       result.writeln('rethrow;');

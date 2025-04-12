@@ -6,16 +6,16 @@ part of 'values.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<SimpleValue> _$simpleValueSerializer = new _$SimpleValueSerializer();
+Serializer<SimpleValue> _$simpleValueSerializer = _$SimpleValueSerializer();
 Serializer<VerySimpleValue> _$verySimpleValueSerializer =
-    new _$VerySimpleValueSerializer();
+    _$VerySimpleValueSerializer();
 Serializer<CompoundValue> _$compoundValueSerializer =
-    new _$CompoundValueSerializer();
+    _$CompoundValueSerializer();
 Serializer<ValidatedValue> _$validatedValueSerializer =
-    new _$ValidatedValueSerializer();
-Serializer<Account> _$accountSerializer = new _$AccountSerializer();
+    _$ValidatedValueSerializer();
+Serializer<Account> _$accountSerializer = _$AccountSerializer();
 Serializer<WireNameValue> _$wireNameValueSerializer =
-    new _$WireNameValueSerializer();
+    _$WireNameValueSerializer();
 
 class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
@@ -44,7 +44,7 @@ class _$SimpleValueSerializer implements StructuredSerializer<SimpleValue> {
   @override
   SimpleValue deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new SimpleValueBuilder();
+    final result = SimpleValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -89,7 +89,7 @@ class _$VerySimpleValueSerializer
   VerySimpleValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new VerySimpleValueBuilder();
+    final result = VerySimpleValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -137,7 +137,7 @@ class _$CompoundValueSerializer implements StructuredSerializer<CompoundValue> {
   CompoundValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new CompoundValueBuilder();
+    final result = CompoundValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -190,7 +190,7 @@ class _$ValidatedValueSerializer
   ValidatedValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ValidatedValueBuilder();
+    final result = ValidatedValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -239,7 +239,7 @@ class _$AccountSerializer implements StructuredSerializer<Account> {
   @override
   Account deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new AccountBuilder();
+    final result = AccountBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -290,7 +290,7 @@ class _$WireNameValueSerializer implements StructuredSerializer<WireNameValue> {
   WireNameValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new WireNameValueBuilder();
+    final result = WireNameValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -316,7 +316,7 @@ class _$SimpleValue extends SimpleValue {
   final String? aString;
 
   factory _$SimpleValue([void Function(SimpleValueBuilder)? updates]) =>
-      (new SimpleValueBuilder()..update(updates))._build();
+      (SimpleValueBuilder()..update(updates))._build();
 
   _$SimpleValue._({required this.anInt, this.aString}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'SimpleValue', 'anInt');
@@ -327,7 +327,7 @@ class _$SimpleValue extends SimpleValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  SimpleValueBuilder toBuilder() => new SimpleValueBuilder()..replace(this);
+  SimpleValueBuilder toBuilder() => SimpleValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -394,7 +394,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   _$SimpleValue _build() {
     final _$result = _$v ??
-        new _$SimpleValue._(
+        _$SimpleValue._(
           anInt: BuiltValueNullFieldError.checkNotNull(
               anInt, r'SimpleValue', 'anInt'),
           aString: aString,
@@ -409,7 +409,7 @@ class _$VerySimpleValue extends VerySimpleValue {
   final int value;
 
   factory _$VerySimpleValue([void Function(VerySimpleValueBuilder)? updates]) =>
-      (new VerySimpleValueBuilder()..update(updates))._build();
+      (VerySimpleValueBuilder()..update(updates))._build();
 
   _$VerySimpleValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, r'VerySimpleValue', 'value');
@@ -420,8 +420,7 @@ class _$VerySimpleValue extends VerySimpleValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  VerySimpleValueBuilder toBuilder() =>
-      new VerySimpleValueBuilder()..replace(this);
+  VerySimpleValueBuilder toBuilder() => VerySimpleValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -480,7 +479,7 @@ class VerySimpleValueBuilder
 
   _$VerySimpleValue _build() {
     final _$result = _$v ??
-        new _$VerySimpleValue._(
+        _$VerySimpleValue._(
           value: BuiltValueNullFieldError.checkNotNull(
               value, r'VerySimpleValue', 'value'),
         );
@@ -496,7 +495,7 @@ class _$CompoundValue extends CompoundValue {
   final ValidatedValue? validatedValue;
 
   factory _$CompoundValue([void Function(CompoundValueBuilder)? updates]) =>
-      (new CompoundValueBuilder()..update(updates))._build();
+      (CompoundValueBuilder()..update(updates))._build();
 
   _$CompoundValue._({required this.simpleValue, this.validatedValue})
       : super._() {
@@ -509,7 +508,7 @@ class _$CompoundValue extends CompoundValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  CompoundValueBuilder toBuilder() => new CompoundValueBuilder()..replace(this);
+  CompoundValueBuilder toBuilder() => CompoundValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -543,13 +542,13 @@ class CompoundValueBuilder
 
   SimpleValueBuilder? _simpleValue;
   SimpleValueBuilder get simpleValue =>
-      _$this._simpleValue ??= new SimpleValueBuilder();
+      _$this._simpleValue ??= SimpleValueBuilder();
   set simpleValue(SimpleValueBuilder? simpleValue) =>
       _$this._simpleValue = simpleValue;
 
   ValidatedValueBuilder? _validatedValue;
   ValidatedValueBuilder get validatedValue =>
-      _$this._validatedValue ??= new ValidatedValueBuilder();
+      _$this._validatedValue ??= ValidatedValueBuilder();
   set validatedValue(ValidatedValueBuilder? validatedValue) =>
       _$this._validatedValue = validatedValue;
 
@@ -583,7 +582,7 @@ class CompoundValueBuilder
     _$CompoundValue _$result;
     try {
       _$result = _$v ??
-          new _$CompoundValue._(
+          _$CompoundValue._(
             simpleValue: simpleValue.build(),
             validatedValue: _validatedValue?.build(),
           );
@@ -595,7 +594,7 @@ class CompoundValueBuilder
         _$failedField = 'validatedValue';
         _validatedValue?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'CompoundValue', _$failedField, e.toString());
       }
       rethrow;
@@ -612,7 +611,7 @@ class _$ValidatedValue extends ValidatedValue {
   final String? aString;
 
   factory _$ValidatedValue([void Function(ValidatedValueBuilder)? updates]) =>
-      (new ValidatedValueBuilder()..update(updates))._build();
+      (ValidatedValueBuilder()..update(updates))._build();
 
   _$ValidatedValue._({required this.anInt, this.aString}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'ValidatedValue', 'anInt');
@@ -623,8 +622,7 @@ class _$ValidatedValue extends ValidatedValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  ValidatedValueBuilder toBuilder() =>
-      new ValidatedValueBuilder()..replace(this);
+  ValidatedValueBuilder toBuilder() => ValidatedValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -692,7 +690,7 @@ class ValidatedValueBuilder
 
   _$ValidatedValue _build() {
     final _$result = _$v ??
-        new _$ValidatedValue._(
+        _$ValidatedValue._(
           anInt: BuiltValueNullFieldError.checkNotNull(
               anInt, r'ValidatedValue', 'anInt'),
           aString: aString,
@@ -709,7 +707,7 @@ class _$ValueWithCode extends ValueWithCode {
   final String? aString;
 
   factory _$ValueWithCode([void Function(ValueWithCodeBuilder)? updates]) =>
-      (new ValueWithCodeBuilder()..update(updates))._build();
+      (ValueWithCodeBuilder()..update(updates))._build();
 
   _$ValueWithCode._({required this.anInt, this.aString}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithCode', 'anInt');
@@ -720,7 +718,7 @@ class _$ValueWithCode extends ValueWithCode {
       (toBuilder()..update(updates)).build();
 
   @override
-  ValueWithCodeBuilder toBuilder() => new ValueWithCodeBuilder()..replace(this);
+  ValueWithCodeBuilder toBuilder() => ValueWithCodeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -788,7 +786,7 @@ class ValueWithCodeBuilder
 
   _$ValueWithCode _build() {
     final _$result = _$v ??
-        new _$ValueWithCode._(
+        _$ValueWithCode._(
           anInt: BuiltValueNullFieldError.checkNotNull(
               anInt, r'ValueWithCode', 'anInt'),
           aString: aString,
@@ -806,7 +804,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 
   factory _$ValueWithDefaults(
           [void Function(ValueWithDefaultsBuilder)? updates]) =>
-      (new ValueWithDefaultsBuilder()..update(updates)).build()
+      (ValueWithDefaultsBuilder()..update(updates)).build()
           as _$ValueWithDefaults;
 
   _$ValueWithDefaults._({required this.anInt, this.aString}) : super._() {
@@ -819,7 +817,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
 
   @override
   _$ValueWithDefaultsBuilder toBuilder() =>
-      new _$ValueWithDefaultsBuilder()..replace(this);
+      _$ValueWithDefaultsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -902,7 +900,7 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   _$ValueWithDefaults _build() {
     final _$result = _$v ??
-        new _$ValueWithDefaults._(
+        _$ValueWithDefaults._(
           anInt: BuiltValueNullFieldError.checkNotNull(
               anInt, r'ValueWithDefaults', 'anInt'),
           aString: aString,
@@ -919,7 +917,7 @@ class _$DerivedValue extends DerivedValue {
   Iterable<String>? __derivedString;
 
   factory _$DerivedValue([void Function(DerivedValueBuilder)? updates]) =>
-      (new DerivedValueBuilder()..update(updates))._build();
+      (DerivedValueBuilder()..update(updates))._build();
 
   _$DerivedValue._({required this.anInt}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'DerivedValue', 'anInt');
@@ -936,7 +934,7 @@ class _$DerivedValue extends DerivedValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  DerivedValueBuilder toBuilder() => new DerivedValueBuilder()..replace(this);
+  DerivedValueBuilder toBuilder() => DerivedValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -994,7 +992,7 @@ class DerivedValueBuilder
 
   _$DerivedValue _build() {
     final _$result = _$v ??
-        new _$DerivedValue._(
+        _$DerivedValue._(
           anInt: BuiltValueNullFieldError.checkNotNull(
               anInt, r'DerivedValue', 'anInt'),
         );
@@ -1012,7 +1010,7 @@ class _$Account extends Account {
   final BuiltMap<String, JsonObject> keyValues;
 
   factory _$Account([void Function(AccountBuilder)? updates]) =>
-      (new AccountBuilder()..update(updates))._build();
+      (AccountBuilder()..update(updates))._build();
 
   _$Account._({required this.id, required this.name, required this.keyValues})
       : super._() {
@@ -1026,7 +1024,7 @@ class _$Account extends Account {
       (toBuilder()..update(updates)).build();
 
   @override
-  AccountBuilder toBuilder() => new AccountBuilder()..replace(this);
+  AccountBuilder toBuilder() => AccountBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1070,7 +1068,7 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
 
   MapBuilder<String, JsonObject>? _keyValues;
   MapBuilder<String, JsonObject> get keyValues =>
-      _$this._keyValues ??= new MapBuilder<String, JsonObject>();
+      _$this._keyValues ??= MapBuilder<String, JsonObject>();
   set keyValues(MapBuilder<String, JsonObject>? keyValues) =>
       _$this._keyValues = keyValues;
 
@@ -1105,7 +1103,7 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
     _$Account _$result;
     try {
       _$result = _$v ??
-          new _$Account._(
+          _$Account._(
             id: BuiltValueNullFieldError.checkNotNull(id, r'Account', 'id'),
             name:
                 BuiltValueNullFieldError.checkNotNull(name, r'Account', 'name'),
@@ -1117,7 +1115,7 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
         _$failedField = 'keyValues';
         keyValues.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'Account', _$failedField, e.toString());
       }
       rethrow;
@@ -1132,7 +1130,7 @@ class _$WireNameValue extends WireNameValue {
   final int value;
 
   factory _$WireNameValue([void Function(WireNameValueBuilder)? updates]) =>
-      (new WireNameValueBuilder()..update(updates))._build();
+      (WireNameValueBuilder()..update(updates))._build();
 
   _$WireNameValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, r'WireNameValue', 'value');
@@ -1143,7 +1141,7 @@ class _$WireNameValue extends WireNameValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  WireNameValueBuilder toBuilder() => new WireNameValueBuilder()..replace(this);
+  WireNameValueBuilder toBuilder() => WireNameValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1201,7 +1199,7 @@ class WireNameValueBuilder
 
   _$WireNameValue _build() {
     final _$result = _$v ??
-        new _$WireNameValue._(
+        _$WireNameValue._(
           value: BuiltValueNullFieldError.checkNotNull(
               value, r'WireNameValue', 'value'),
         );

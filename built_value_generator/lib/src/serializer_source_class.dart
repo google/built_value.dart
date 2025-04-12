@@ -295,7 +295,7 @@ abstract class SerializerSourceClass
   }
 
   String generateSerializerDeclaration() =>
-      'Serializer<$genericName> $serializerInstanceName = new $serializerImplName();';
+      'Serializer<$genericName> $serializerInstanceName = $serializerImplName();';
 
   /// Returns the class name for the generated implementation. If the manually
   /// maintained class is private then we ignore the underscore here, to avoid
@@ -441,10 +441,10 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
   String _generateNewBuilder() {
     var parameters = _genericParametersUsedInFields;
     if (parameters.isEmpty) {
-      return 'new ${name}Builder$genericBoundsOrObjectString()';
+      return '${name}Builder$genericBoundsOrObjectString()';
     }
     return 'isUnderspecified ? '
-        'new ${name}Builder$genericBoundsOrObjectString() : '
+        '${name}Builder$genericBoundsOrObjectString() : '
         'serializers.newBuilder(specifiedType) as '
         '${name}Builder$genericBoundsOrObjectString';
   }

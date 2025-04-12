@@ -45,11 +45,11 @@ TestEnum _$valueOf(String name) {
     case 'maybe':
       return _$maybe;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
-final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const <TestEnum>[
+final BuiltSet<TestEnum> _$values = BuiltSet<TestEnum>(const <TestEnum>[
   _$yes,
   _$no,
   _$maybe,
@@ -482,11 +482,11 @@ TestEnum _$valueOf(String name) {
     case 'maybe':
       return _$yes;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
-final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const <TestEnum>[
+final BuiltSet<TestEnum> _$values = BuiltSet<TestEnum>(const <TestEnum>[
   _$no,
   _$maybe,
   _$yes,
@@ -526,11 +526,11 @@ TestEnum _$vlOf(String name) {
     case 'maybe':
       return _$maybe;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
-final BuiltSet<TestEnum> _$vls = new BuiltSet<TestEnum>(const <TestEnum>[
+final BuiltSet<TestEnum> _$vls = BuiltSet<TestEnum>(const <TestEnum>[
   _$yes,
   _$no,
   _$maybe,

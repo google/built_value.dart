@@ -19,12 +19,11 @@ StatusType _$stValueOf(String name) {
     case 'offline':
       return _$offline;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
-final BuiltSet<StatusType> _$stValues =
-    new BuiltSet<StatusType>(const <StatusType>[
+final BuiltSet<StatusType> _$stValues = BuiltSet<StatusType>(const <StatusType>[
   _$online,
   _$away,
   _$offline,
@@ -43,28 +42,28 @@ LoginResponse _$lrValueOf(String name) {
     case 'reset':
       return _$reset;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<LoginResponse> _$lrValues =
-    new BuiltSet<LoginResponse>(const <LoginResponse>[
+    BuiltSet<LoginResponse>(const <LoginResponse>[
   _$success,
   _$badPassword,
   _$reset,
 ]);
 
-Serializer<Chat> _$chatSerializer = new _$ChatSerializer();
-Serializer<Login> _$loginSerializer = new _$LoginSerializer();
-Serializer<Status> _$statusSerializer = new _$StatusSerializer();
-Serializer<StatusType> _$statusTypeSerializer = new _$StatusTypeSerializer();
-Serializer<ListUsers> _$listUsersSerializer = new _$ListUsersSerializer();
+Serializer<Chat> _$chatSerializer = _$ChatSerializer();
+Serializer<Login> _$loginSerializer = _$LoginSerializer();
+Serializer<Status> _$statusSerializer = _$StatusSerializer();
+Serializer<StatusType> _$statusTypeSerializer = _$StatusTypeSerializer();
+Serializer<ListUsers> _$listUsersSerializer = _$ListUsersSerializer();
 Serializer<LoginResponse> _$loginResponseSerializer =
-    new _$LoginResponseSerializer();
-Serializer<ShowChat> _$showChatSerializer = new _$ShowChatSerializer();
-Serializer<Welcome> _$welcomeSerializer = new _$WelcomeSerializer();
+    _$LoginResponseSerializer();
+Serializer<ShowChat> _$showChatSerializer = _$ShowChatSerializer();
+Serializer<Welcome> _$welcomeSerializer = _$WelcomeSerializer();
 Serializer<ListUsersResponse> _$listUsersResponseSerializer =
-    new _$ListUsersResponseSerializer();
+    _$ListUsersResponseSerializer();
 
 class _$ChatSerializer implements StructuredSerializer<Chat> {
   @override
@@ -90,7 +89,7 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
   @override
   Chat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ChatBuilder();
+    final result = ChatBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -139,7 +138,7 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
   @override
   Login deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new LoginBuilder();
+    final result = LoginBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -186,7 +185,7 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
   @override
   Status deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new StatusBuilder();
+    final result = StatusBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -248,7 +247,7 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
   @override
   ListUsers deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ListUsersBuilder();
+    final result = ListUsersBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -312,7 +311,7 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
   @override
   ShowChat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ShowChatBuilder();
+    final result = ShowChatBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -364,7 +363,7 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
   @override
   Welcome deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new WelcomeBuilder();
+    final result = WelcomeBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -413,7 +412,7 @@ class _$ListUsersResponseSerializer
   ListUsersResponse deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ListUsersResponseBuilder();
+    final result = ListUsersResponseBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -440,7 +439,7 @@ class _$Chat extends Chat {
   final BuiltSet<String> targets;
 
   factory _$Chat([void Function(ChatBuilder)? updates]) =>
-      (new ChatBuilder()..update(updates))._build();
+      (ChatBuilder()..update(updates))._build();
 
   _$Chat._({required this.text, required this.targets}) : super._() {
     BuiltValueNullFieldError.checkNotNull(text, r'Chat', 'text');
@@ -452,7 +451,7 @@ class _$Chat extends Chat {
       (toBuilder()..update(updates)).build();
 
   @override
-  ChatBuilder toBuilder() => new ChatBuilder()..replace(this);
+  ChatBuilder toBuilder() => ChatBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -486,8 +485,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   set text(String? text) => _$this._text = text;
 
   SetBuilder<String>? _targets;
-  SetBuilder<String> get targets =>
-      _$this._targets ??= new SetBuilder<String>();
+  SetBuilder<String> get targets => _$this._targets ??= SetBuilder<String>();
   set targets(SetBuilder<String>? targets) => _$this._targets = targets;
 
   ChatBuilder();
@@ -520,7 +518,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
     _$Chat _$result;
     try {
       _$result = _$v ??
-          new _$Chat._(
+          _$Chat._(
             text: BuiltValueNullFieldError.checkNotNull(text, r'Chat', 'text'),
             targets: targets.build(),
           );
@@ -530,8 +528,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
         _$failedField = 'targets';
         targets.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'Chat', _$failedField, e.toString());
+        throw BuiltValueNestedFieldError(r'Chat', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -547,7 +544,7 @@ class _$Login extends Login {
   final String password;
 
   factory _$Login([void Function(LoginBuilder)? updates]) =>
-      (new LoginBuilder()..update(updates))._build();
+      (LoginBuilder()..update(updates))._build();
 
   _$Login._({required this.username, required this.password}) : super._() {
     BuiltValueNullFieldError.checkNotNull(username, r'Login', 'username');
@@ -559,7 +556,7 @@ class _$Login extends Login {
       (toBuilder()..update(updates)).build();
 
   @override
-  LoginBuilder toBuilder() => new LoginBuilder()..replace(this);
+  LoginBuilder toBuilder() => LoginBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -626,7 +623,7 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
 
   _$Login _build() {
     final _$result = _$v ??
-        new _$Login._(
+        _$Login._(
           username: BuiltValueNullFieldError.checkNotNull(
               username, r'Login', 'username'),
           password: BuiltValueNullFieldError.checkNotNull(
@@ -644,7 +641,7 @@ class _$Status extends Status {
   final StatusType type;
 
   factory _$Status([void Function(StatusBuilder)? updates]) =>
-      (new StatusBuilder()..update(updates))._build();
+      (StatusBuilder()..update(updates))._build();
 
   _$Status._({required this.message, required this.type}) : super._() {
     BuiltValueNullFieldError.checkNotNull(message, r'Status', 'message');
@@ -656,7 +653,7 @@ class _$Status extends Status {
       (toBuilder()..update(updates)).build();
 
   @override
-  StatusBuilder toBuilder() => new StatusBuilder()..replace(this);
+  StatusBuilder toBuilder() => StatusBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -721,7 +718,7 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
 
   _$Status _build() {
     final _$result = _$v ??
-        new _$Status._(
+        _$Status._(
           message: BuiltValueNullFieldError.checkNotNull(
               message, r'Status', 'message'),
           type: BuiltValueNullFieldError.checkNotNull(type, r'Status', 'type'),
@@ -736,7 +733,7 @@ class _$ListUsers extends ListUsers {
   final BuiltSet<StatusType> statusTypes;
 
   factory _$ListUsers([void Function(ListUsersBuilder)? updates]) =>
-      (new ListUsersBuilder()..update(updates))._build();
+      (ListUsersBuilder()..update(updates))._build();
 
   _$ListUsers._({required this.statusTypes}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -748,7 +745,7 @@ class _$ListUsers extends ListUsers {
       (toBuilder()..update(updates)).build();
 
   @override
-  ListUsersBuilder toBuilder() => new ListUsersBuilder()..replace(this);
+  ListUsersBuilder toBuilder() => ListUsersBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -777,7 +774,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 
   SetBuilder<StatusType>? _statusTypes;
   SetBuilder<StatusType> get statusTypes =>
-      _$this._statusTypes ??= new SetBuilder<StatusType>();
+      _$this._statusTypes ??= SetBuilder<StatusType>();
   set statusTypes(SetBuilder<StatusType>? statusTypes) =>
       _$this._statusTypes = statusTypes;
 
@@ -810,7 +807,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
     _$ListUsers _$result;
     try {
       _$result = _$v ??
-          new _$ListUsers._(
+          _$ListUsers._(
             statusTypes: statusTypes.build(),
           );
     } catch (_) {
@@ -819,7 +816,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
         _$failedField = 'statusTypes';
         statusTypes.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'ListUsers', _$failedField, e.toString());
       }
       rethrow;
@@ -838,7 +835,7 @@ class _$ShowChat extends ShowChat {
   final String text;
 
   factory _$ShowChat([void Function(ShowChatBuilder)? updates]) =>
-      (new ShowChatBuilder()..update(updates))._build();
+      (ShowChatBuilder()..update(updates))._build();
 
   _$ShowChat._(
       {required this.username, required this.private, required this.text})
@@ -853,7 +850,7 @@ class _$ShowChat extends ShowChat {
       (toBuilder()..update(updates)).build();
 
   @override
-  ShowChatBuilder toBuilder() => new ShowChatBuilder()..replace(this);
+  ShowChatBuilder toBuilder() => ShowChatBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -928,7 +925,7 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
 
   _$ShowChat _build() {
     final _$result = _$v ??
-        new _$ShowChat._(
+        _$ShowChat._(
           username: BuiltValueNullFieldError.checkNotNull(
               username, r'ShowChat', 'username'),
           private: BuiltValueNullFieldError.checkNotNull(
@@ -948,7 +945,7 @@ class _$Welcome extends Welcome {
   final String message;
 
   factory _$Welcome([void Function(WelcomeBuilder)? updates]) =>
-      (new WelcomeBuilder()..update(updates))._build();
+      (WelcomeBuilder()..update(updates))._build();
 
   _$Welcome._({required this.log, required this.message}) : super._() {
     BuiltValueNullFieldError.checkNotNull(log, r'Welcome', 'log');
@@ -960,7 +957,7 @@ class _$Welcome extends Welcome {
       (toBuilder()..update(updates)).build();
 
   @override
-  WelcomeBuilder toBuilder() => new WelcomeBuilder()..replace(this);
+  WelcomeBuilder toBuilder() => WelcomeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -990,7 +987,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   _$Welcome? _$v;
 
   ListBuilder<Response>? _log;
-  ListBuilder<Response> get log => _$this._log ??= new ListBuilder<Response>();
+  ListBuilder<Response> get log => _$this._log ??= ListBuilder<Response>();
   set log(ListBuilder<Response>? log) => _$this._log = log;
 
   String? _message;
@@ -1027,7 +1024,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
     _$Welcome _$result;
     try {
       _$result = _$v ??
-          new _$Welcome._(
+          _$Welcome._(
             log: log.build(),
             message: BuiltValueNullFieldError.checkNotNull(
                 message, r'Welcome', 'message'),
@@ -1038,7 +1035,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
         _$failedField = 'log';
         log.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'Welcome', _$failedField, e.toString());
       }
       rethrow;
@@ -1054,7 +1051,7 @@ class _$ListUsersResponse extends ListUsersResponse {
 
   factory _$ListUsersResponse(
           [void Function(ListUsersResponseBuilder)? updates]) =>
-      (new ListUsersResponseBuilder()..update(updates))._build();
+      (ListUsersResponseBuilder()..update(updates))._build();
 
   _$ListUsersResponse._({required this.statuses}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -1067,7 +1064,7 @@ class _$ListUsersResponse extends ListUsersResponse {
 
   @override
   ListUsersResponseBuilder toBuilder() =>
-      new ListUsersResponseBuilder()..replace(this);
+      ListUsersResponseBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1097,7 +1094,7 @@ class ListUsersResponseBuilder
 
   MapBuilder<String, Status>? _statuses;
   MapBuilder<String, Status> get statuses =>
-      _$this._statuses ??= new MapBuilder<String, Status>();
+      _$this._statuses ??= MapBuilder<String, Status>();
   set statuses(MapBuilder<String, Status>? statuses) =>
       _$this._statuses = statuses;
 
@@ -1130,7 +1127,7 @@ class ListUsersResponseBuilder
     _$ListUsersResponse _$result;
     try {
       _$result = _$v ??
-          new _$ListUsersResponse._(
+          _$ListUsersResponse._(
             statuses: statuses.build(),
           );
     } catch (_) {
@@ -1139,7 +1136,7 @@ class ListUsersResponseBuilder
         _$failedField = 'statuses';
         statuses.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'ListUsersResponse', _$failedField, e.toString());
       }
       rethrow;

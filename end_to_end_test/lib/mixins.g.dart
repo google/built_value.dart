@@ -7,7 +7,7 @@ part of 'mixins.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<UsesMixin> _$usesMixinSerializer = new _$UsesMixinSerializer();
+Serializer<UsesMixin> _$usesMixinSerializer = _$UsesMixinSerializer();
 
 class _$UsesMixinSerializer implements StructuredSerializer<UsesMixin> {
   @override
@@ -24,7 +24,7 @@ class _$UsesMixinSerializer implements StructuredSerializer<UsesMixin> {
   @override
   UsesMixin deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    return new UsesMixinBuilder().build();
+    return UsesMixinBuilder().build();
   }
 }
 
@@ -33,7 +33,7 @@ class _$UsesMixin extends UsesMixin {
   final String Function(String) typeDef;
 
   factory _$UsesMixin([void Function(UsesMixinBuilder)? updates]) =>
-      (new UsesMixinBuilder()..update(updates))._build();
+      (UsesMixinBuilder()..update(updates))._build();
 
   _$UsesMixin._({required this.typeDef}) : super._() {
     BuiltValueNullFieldError.checkNotNull(typeDef, r'UsesMixin', 'typeDef');
@@ -44,7 +44,7 @@ class _$UsesMixin extends UsesMixin {
       (toBuilder()..update(updates)).build();
 
   @override
-  UsesMixinBuilder toBuilder() => new UsesMixinBuilder()..replace(this);
+  UsesMixinBuilder toBuilder() => UsesMixinBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -102,7 +102,7 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
 
   _$UsesMixin _build() {
     final _$result = _$v ??
-        new _$UsesMixin._(
+        _$UsesMixin._(
           typeDef: BuiltValueNullFieldError.checkNotNull(
               typeDef, r'UsesMixin', 'typeDef'),
         );
@@ -117,7 +117,7 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
 
   factory _$GetsCorrectFieldsViaMixins(
           [void Function(GetsCorrectFieldsViaMixinsBuilder)? updates]) =>
-      (new GetsCorrectFieldsViaMixinsBuilder()..update(updates))._build();
+      (GetsCorrectFieldsViaMixinsBuilder()..update(updates))._build();
 
   _$GetsCorrectFieldsViaMixins._({required this.shouldBeAField}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -131,7 +131,7 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
 
   @override
   GetsCorrectFieldsViaMixinsBuilder toBuilder() =>
-      new GetsCorrectFieldsViaMixinsBuilder()..replace(this);
+      GetsCorrectFieldsViaMixinsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -193,7 +193,7 @@ class GetsCorrectFieldsViaMixinsBuilder
 
   _$GetsCorrectFieldsViaMixins _build() {
     final _$result = _$v ??
-        new _$GetsCorrectFieldsViaMixins._(
+        _$GetsCorrectFieldsViaMixins._(
           shouldBeAField: BuiltValueNullFieldError.checkNotNull(
               shouldBeAField, r'GetsCorrectFieldsViaMixins', 'shouldBeAField'),
         );

@@ -205,7 +205,7 @@ abstract class EnumSourceClass
 
     var fallback = fields.firstWhereOrNull((field) => field.settings.fallback);
     if (fallback == null) {
-      result.writeln('default: throw new ArgumentError(name);');
+      result.writeln('default: throw ArgumentError(name);');
     } else {
       result.writeln('default: return ${fallback.generatedIdentifier};');
     }
@@ -214,7 +214,7 @@ abstract class EnumSourceClass
     result.writeln('');
 
     result.writeln('final BuiltSet<$name> $valuesIdentifier ='
-        'new BuiltSet<$name>(const <$name>[');
+        'BuiltSet<$name>(const <$name>[');
     for (var field in fields) {
       result.writeln('${field.generatedIdentifier},');
     }

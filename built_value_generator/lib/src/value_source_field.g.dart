@@ -38,7 +38,7 @@ class _$ValueSourceField extends ValueSourceField {
 
   factory _$ValueSourceField(
           [void Function(ValueSourceFieldBuilder)? updates]) =>
-      (new ValueSourceFieldBuilder()..update(updates))._build();
+      (ValueSourceFieldBuilder()..update(updates))._build();
 
   _$ValueSourceField._(
       {required this.parsedLibraryResults,
@@ -126,7 +126,7 @@ class _$ValueSourceField extends ValueSourceField {
 
   @override
   ValueSourceFieldBuilder toBuilder() =>
-      new ValueSourceFieldBuilder()..replace(this);
+      ValueSourceFieldBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -222,7 +222,7 @@ class ValueSourceFieldBuilder
 
   _$ValueSourceField _build() {
     final _$result = _$v ??
-        new _$ValueSourceField._(
+        _$ValueSourceField._(
           parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
               parsedLibraryResults,
               r'ValueSourceField',

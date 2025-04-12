@@ -7,7 +7,7 @@ part of 'records.dart';
 // **************************************************************************
 
 Serializer<SerializableRecordValue> _$serializableRecordValueSerializer =
-    new _$SerializableRecordValueSerializer();
+    _$SerializableRecordValueSerializer();
 
 class _$SerializableRecordValueSerializer
     implements StructuredSerializer<SerializableRecordValue> {
@@ -49,7 +49,7 @@ class _$SerializableRecordValueSerializer
   SerializableRecordValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new SerializableRecordValueBuilder();
+    final result = SerializableRecordValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -83,7 +83,7 @@ class _$SimpleRecordValue extends SimpleRecordValue {
 
   factory _$SimpleRecordValue(
           [void Function(SimpleRecordValueBuilder)? updates]) =>
-      (new SimpleRecordValueBuilder()..update(updates))._build();
+      (SimpleRecordValueBuilder()..update(updates))._build();
 
   _$SimpleRecordValue._({required this.record}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -96,7 +96,7 @@ class _$SimpleRecordValue extends SimpleRecordValue {
 
   @override
   SimpleRecordValueBuilder toBuilder() =>
-      new SimpleRecordValueBuilder()..replace(this);
+      SimpleRecordValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -156,7 +156,7 @@ class SimpleRecordValueBuilder
 
   _$SimpleRecordValue _build() {
     final _$result = _$v ??
-        new _$SimpleRecordValue._(
+        _$SimpleRecordValue._(
           record: BuiltValueNullFieldError.checkNotNull(
               record, r'SimpleRecordValue', 'record'),
         );
@@ -199,7 +199,7 @@ class _$ComplexRecordValue extends ComplexRecordValue {
 
   factory _$ComplexRecordValue(
           [void Function(ComplexRecordValueBuilder)? updates]) =>
-      (new ComplexRecordValueBuilder()..update(updates))._build();
+      (ComplexRecordValueBuilder()..update(updates))._build();
 
   _$ComplexRecordValue._(
       {required this.record2,
@@ -247,7 +247,7 @@ class _$ComplexRecordValue extends ComplexRecordValue {
 
   @override
   ComplexRecordValueBuilder toBuilder() =>
-      new ComplexRecordValueBuilder()..replace(this);
+      ComplexRecordValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -425,7 +425,7 @@ class ComplexRecordValueBuilder
 
   _$ComplexRecordValue _build() {
     final _$result = _$v ??
-        new _$ComplexRecordValue._(
+        _$ComplexRecordValue._(
           record2: BuiltValueNullFieldError.checkNotNull(
               record2, r'ComplexRecordValue', 'record2'),
           record2p: BuiltValueNullFieldError.checkNotNull(
@@ -467,7 +467,7 @@ class _$SerializableRecordValue extends SerializableRecordValue {
 
   factory _$SerializableRecordValue(
           [void Function(SerializableRecordValueBuilder)? updates]) =>
-      (new SerializableRecordValueBuilder()..update(updates))._build();
+      (SerializableRecordValueBuilder()..update(updates))._build();
 
   _$SerializableRecordValue._(
       {required this.value, this.record, this.intOrList})
@@ -483,7 +483,7 @@ class _$SerializableRecordValue extends SerializableRecordValue {
 
   @override
   SerializableRecordValueBuilder toBuilder() =>
-      new SerializableRecordValueBuilder()..replace(this);
+      SerializableRecordValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -561,7 +561,7 @@ class SerializableRecordValueBuilder
 
   _$SerializableRecordValue _build() {
     final _$result = _$v ??
-        new _$SerializableRecordValue._(
+        _$SerializableRecordValue._(
           value: BuiltValueNullFieldError.checkNotNull(
               value, r'SerializableRecordValue', 'value'),
           record: record,

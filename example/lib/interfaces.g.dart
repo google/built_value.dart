@@ -19,20 +19,19 @@ EnumWithInt _$valueOf(String name) {
     case 'three':
       return _$three;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<EnumWithInt> _$values =
-    new BuiltSet<EnumWithInt>(const <EnumWithInt>[
+    BuiltSet<EnumWithInt>(const <EnumWithInt>[
   _$one,
   _$two,
   _$three,
 ]);
 
-Serializer<ValueWithInt> _$valueWithIntSerializer =
-    new _$ValueWithIntSerializer();
-Serializer<EnumWithInt> _$enumWithIntSerializer = new _$EnumWithIntSerializer();
+Serializer<ValueWithInt> _$valueWithIntSerializer = _$ValueWithIntSerializer();
+Serializer<EnumWithInt> _$enumWithIntSerializer = _$EnumWithIntSerializer();
 
 class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   @override
@@ -57,7 +56,7 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   ValueWithInt deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ValueWithIntBuilder();
+    final result = ValueWithIntBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -104,7 +103,7 @@ class _$ValueWithInt extends ValueWithInt {
   final String note;
 
   factory _$ValueWithInt([void Function(ValueWithIntBuilder)? updates]) =>
-      (new ValueWithIntBuilder()..update(updates)).build() as _$ValueWithInt;
+      (ValueWithIntBuilder()..update(updates)).build() as _$ValueWithInt;
 
   _$ValueWithInt._({required this.anInt, required this.note}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithInt', 'anInt');
@@ -116,8 +115,7 @@ class _$ValueWithInt extends ValueWithInt {
       (toBuilder()..update(updates)).build();
 
   @override
-  _$ValueWithIntBuilder toBuilder() =>
-      new _$ValueWithIntBuilder()..replace(this);
+  _$ValueWithIntBuilder toBuilder() => _$ValueWithIntBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -198,7 +196,7 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
 
   _$ValueWithInt _build() {
     final _$result = _$v ??
-        new _$ValueWithInt._(
+        _$ValueWithInt._(
           anInt: BuiltValueNullFieldError.checkNotNull(
               anInt, r'ValueWithInt', 'anInt'),
           note: BuiltValueNullFieldError.checkNotNull(

@@ -19,7 +19,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
 
   factory _$EnumSourceLibrary(
           [void Function(EnumSourceLibraryBuilder)? updates]) =>
-      (new EnumSourceLibraryBuilder()..update(updates))._build();
+      (EnumSourceLibraryBuilder()..update(updates))._build();
 
   _$EnumSourceLibrary._(
       {required this.parsedLibraryResults, required this.element})
@@ -52,7 +52,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
 
   @override
   EnumSourceLibraryBuilder toBuilder() =>
-      new EnumSourceLibraryBuilder()..replace(this);
+      EnumSourceLibraryBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -122,7 +122,7 @@ class EnumSourceLibraryBuilder
 
   _$EnumSourceLibrary _build() {
     final _$result = _$v ??
-        new _$EnumSourceLibrary._(
+        _$EnumSourceLibrary._(
           parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
               parsedLibraryResults,
               r'EnumSourceLibrary',

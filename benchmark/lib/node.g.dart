@@ -15,7 +15,7 @@ class _$Node extends Node {
   final Node? right;
 
   factory _$Node([void Function(NodeBuilder)? updates]) =>
-      (new NodeBuilder()..update(updates))._build();
+      (NodeBuilder()..update(updates))._build();
 
   _$Node._({this.label, this.left, this.right}) : super._();
 
@@ -24,7 +24,7 @@ class _$Node extends Node {
       (toBuilder()..update(updates)).build();
 
   @override
-  NodeBuilder toBuilder() => new NodeBuilder()..replace(this);
+  NodeBuilder toBuilder() => NodeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -63,11 +63,11 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
   set label(String? label) => _$this._label = label;
 
   NodeBuilder? _left;
-  NodeBuilder get left => _$this._left ??= new NodeBuilder();
+  NodeBuilder get left => _$this._left ??= NodeBuilder();
   set left(NodeBuilder? left) => _$this._left = left;
 
   NodeBuilder? _right;
-  NodeBuilder get right => _$this._right ??= new NodeBuilder();
+  NodeBuilder get right => _$this._right ??= NodeBuilder();
   set right(NodeBuilder? right) => _$this._right = right;
 
   NodeBuilder();
@@ -101,7 +101,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
     _$Node _$result;
     try {
       _$result = _$v ??
-          new _$Node._(
+          _$Node._(
             label: label,
             left: _left?.build(),
             right: _right?.build(),
@@ -114,8 +114,7 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
         _$failedField = 'right';
         _right?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'Node', _$failedField, e.toString());
+        throw BuiltValueNestedFieldError(r'Node', _$failedField, e.toString());
       }
       rethrow;
     }

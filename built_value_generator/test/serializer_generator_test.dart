@@ -200,7 +200,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
   static Serializer<Value> get serializer => _$valueSerializer;
   Function() get function;
 
-  factory Value() => new _$Value();
+  factory Value() => _$Value();
   Value._();
 }
 '''),
