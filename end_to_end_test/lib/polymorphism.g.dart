@@ -385,11 +385,7 @@ class _$Cat extends Cat {
   factory _$Cat([void Function(CatBuilder)? updates]) =>
       (CatBuilder()..update(updates))._build();
 
-  _$Cat._({required this.tail, required this.legs}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail');
-    BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs');
-  }
-
+  _$Cat._({required this.tail, required this.legs}) : super._();
   @override
   Cat rebuild(void Function(CatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -446,7 +442,6 @@ class CatBuilder implements Builder<Cat, CatBuilder>, MammalBuilder {
 
   @override
   void replace(covariant Cat other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Cat;
   }
 
@@ -478,11 +473,7 @@ class _$Fish extends Fish {
   factory _$Fish([void Function(FishBuilder)? updates]) =>
       (FishBuilder()..update(updates))._build();
 
-  _$Fish._({required this.fins, required this.legs}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins');
-    BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs');
-  }
-
+  _$Fish._({required this.fins, required this.legs}) : super._();
   @override
   Fish rebuild(void Function(FishBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -539,7 +530,6 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   @override
   void replace(covariant Fish other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Fish;
   }
 
@@ -571,11 +561,7 @@ class _$Robot extends Robot {
   factory _$Robot([void Function(RobotBuilder)? updates]) =>
       (RobotBuilder()..update(updates))._build();
 
-  _$Robot._({required this.fins, required this.legs}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(fins, r'Robot', 'fins');
-    BuiltValueNullFieldError.checkNotNull(legs, r'Robot', 'legs');
-  }
-
+  _$Robot._({required this.fins, required this.legs}) : super._();
   @override
   Robot rebuild(void Function(RobotBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -632,7 +618,6 @@ class RobotBuilder implements Builder<Robot, RobotBuilder> {
 
   @override
   void replace(Robot other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Robot;
   }
 
@@ -665,12 +650,7 @@ class _$Cage extends Cage {
       (CageBuilder()..update(updates))._build();
 
   _$Cage._({required this.inhabitant, required this.otherInhabitants})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(inhabitant, r'Cage', 'inhabitant');
-    BuiltValueNullFieldError.checkNotNull(
-        otherInhabitants, r'Cage', 'otherInhabitants');
-  }
-
+      : super._();
   @override
   Cage rebuild(void Function(CageBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -731,7 +711,6 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
 
   @override
   void replace(Cage other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Cage;
   }
 
@@ -774,10 +753,7 @@ class _$StandardCat extends StandardCat {
   factory _$StandardCat([void Function(StandardCatBuilder)? updates]) =>
       (StandardCatBuilder()..update(updates))._build();
 
-  _$StandardCat._({required this.tail}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(tail, r'StandardCat', 'tail');
-  }
-
+  _$StandardCat._({required this.tail}) : super._();
   @override
   StandardCat rebuild(void Function(StandardCatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -826,7 +802,6 @@ class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
 
   @override
   void replace(StandardCat other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$StandardCat;
   }
 
@@ -863,10 +838,7 @@ class _$HasString extends HasString {
   factory _$HasString([void Function(HasStringBuilder)? updates]) =>
       (HasStringBuilder()..update(updates))._build();
 
-  _$HasString._({required this.field}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(field, r'HasString', 'field');
-  }
-
+  _$HasString._({required this.field}) : super._();
   @override
   HasString rebuild(void Function(HasStringBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -916,7 +888,6 @@ class HasStringBuilder
 
   @override
   void replace(covariant HasString other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$HasString;
   }
 
@@ -946,10 +917,7 @@ class _$HasDouble extends HasDouble {
   factory _$HasDouble([void Function(HasDoubleBuilder)? updates]) =>
       (HasDoubleBuilder()..update(updates))._build();
 
-  _$HasDouble._({required this.field}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(field, r'HasDouble', 'field');
-  }
-
+  _$HasDouble._({required this.field}) : super._();
   @override
   HasDouble rebuild(void Function(HasDoubleBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -999,7 +967,6 @@ class HasDoubleBuilder
 
   @override
   void replace(covariant HasDouble other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$HasDouble;
   }
 
@@ -1032,11 +999,7 @@ class _$UsesChainedInterface extends UsesChainedInterface {
           [void Function(UsesChainedInterfaceBuilder)? updates]) =>
       (UsesChainedInterfaceBuilder()..update(updates))._build();
 
-  _$UsesChainedInterface._({required this.bar, required this.foo}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(bar, r'UsesChainedInterface', 'bar');
-    BuiltValueNullFieldError.checkNotNull(foo, r'UsesChainedInterface', 'foo');
-  }
-
+  _$UsesChainedInterface._({required this.bar, required this.foo}) : super._();
   @override
   UsesChainedInterface rebuild(
           void Function(UsesChainedInterfaceBuilder) updates) =>
@@ -1098,7 +1061,6 @@ class UsesChainedInterfaceBuilder
 
   @override
   void replace(UsesChainedInterface other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$UsesChainedInterface;
   }
 
@@ -1130,11 +1092,7 @@ class _$UsesHandCoded extends UsesHandCoded {
   factory _$UsesHandCoded([void Function(UsesHandCodedBuilder)? updates]) =>
       (UsesHandCodedBuilder()..update(updates))._build();
 
-  _$UsesHandCoded._({required this.fieldInBaseBuilder}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        fieldInBaseBuilder, r'UsesHandCoded', 'fieldInBaseBuilder');
-  }
-
+  _$UsesHandCoded._({required this.fieldInBaseBuilder}) : super._();
   @override
   UsesHandCoded rebuild(void Function(UsesHandCodedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1187,7 +1145,6 @@ class UsesHandCodedBuilder
 
   @override
   void replace(covariant UsesHandCoded other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$UsesHandCoded;
   }
 
@@ -1225,7 +1182,6 @@ class _$ImplementsTwo extends ImplementsTwo {
       (ImplementsTwoBuilder()..update(updates))._build();
 
   _$ImplementsTwo._() : super._();
-
   @override
   ImplementsTwo rebuild(void Function(ImplementsTwoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1262,7 +1218,6 @@ class ImplementsTwoBuilder
   @override
 // ignore: override_on_non_overriding_method
   void replace(covariant ImplementsTwo other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImplementsTwo;
   }
 
@@ -1297,11 +1252,7 @@ class _$Car extends Car {
   factory _$Car([void Function(CarBuilder)? updates]) =>
       (CarBuilder()..update(updates))._build();
 
-  _$Car._({required this.seatsCount, required this.color}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(seatsCount, r'Car', 'seatsCount');
-    BuiltValueNullFieldError.checkNotNull(color, r'Car', 'color');
-  }
-
+  _$Car._({required this.seatsCount, required this.color}) : super._();
   @override
   Car rebuild(void Function(CarBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1360,7 +1311,6 @@ class CarBuilder implements Builder<Car, CarBuilder>, VehicleBuilder {
 
   @override
   void replace(covariant Car other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Car;
   }
 
@@ -1405,12 +1355,7 @@ class _$MixinCar extends MixinCar {
   factory _$MixinCar([void Function(MixinCarBuilder)? updates]) =>
       (MixinCarBuilder()..update(updates))._build();
 
-  _$MixinCar._({required this.seatsCount, required this.color}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        seatsCount, r'MixinCar', 'seatsCount');
-    BuiltValueNullFieldError.checkNotNull(color, r'MixinCar', 'color');
-  }
-
+  _$MixinCar._({required this.seatsCount, required this.color}) : super._();
   @override
   MixinCar rebuild(void Function(MixinCarBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1471,7 +1416,6 @@ class MixinCarBuilder
 
   @override
   void replace(covariant MixinCar other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$MixinCar;
   }
 
@@ -1515,10 +1459,7 @@ class _$VehicleColor extends VehicleColor {
   factory _$VehicleColor([void Function(VehicleColorBuilder)? updates]) =>
       (VehicleColorBuilder()..update(updates))._build();
 
-  _$VehicleColor._({required this.label}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(label, r'VehicleColor', 'label');
-  }
-
+  _$VehicleColor._({required this.label}) : super._();
   @override
   VehicleColor rebuild(void Function(VehicleColorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1568,7 +1509,6 @@ class VehicleColorBuilder
 
   @override
   void replace(VehicleColor other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$VehicleColor;
   }
 

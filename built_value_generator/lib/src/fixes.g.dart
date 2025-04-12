@@ -21,11 +21,7 @@ class _$GeneratorError extends GeneratorError {
 
   _$GeneratorError._(
       {required this.message, this.offset, this.length, this.fix})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        message, r'GeneratorError', 'message');
-  }
-
+      : super._();
   @override
   GeneratorError rebuild(void Function(GeneratorErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -101,7 +97,6 @@ class GeneratorErrorBuilder
 
   @override
   void replace(GeneratorError other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GeneratorError;
   }
 

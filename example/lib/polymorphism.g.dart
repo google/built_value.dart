@@ -115,11 +115,7 @@ class _$Cat extends Cat {
   factory _$Cat([void Function(CatBuilder)? updates]) =>
       (CatBuilder()..update(updates))._build();
 
-  _$Cat._({required this.tail, required this.legs}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail');
-    BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs');
-  }
-
+  _$Cat._({required this.tail, required this.legs}) : super._();
   @override
   Cat rebuild(void Function(CatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -176,7 +172,6 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
 
   @override
   void replace(covariant Cat other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Cat;
   }
 
@@ -208,11 +203,7 @@ class _$Fish extends Fish {
   factory _$Fish([void Function(FishBuilder)? updates]) =>
       (FishBuilder()..update(updates))._build();
 
-  _$Fish._({required this.fins, required this.legs}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins');
-    BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs');
-  }
-
+  _$Fish._({required this.fins, required this.legs}) : super._();
   @override
   Fish rebuild(void Function(FishBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -269,7 +260,6 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   @override
   void replace(covariant Fish other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Fish;
   }
 

@@ -35,10 +35,7 @@ class _$UsesMixin extends UsesMixin {
   factory _$UsesMixin([void Function(UsesMixinBuilder)? updates]) =>
       (UsesMixinBuilder()..update(updates))._build();
 
-  _$UsesMixin._({required this.typeDef}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(typeDef, r'UsesMixin', 'typeDef');
-  }
-
+  _$UsesMixin._({required this.typeDef}) : super._();
   @override
   UsesMixin rebuild(void Function(UsesMixinBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -88,7 +85,6 @@ class UsesMixinBuilder implements Builder<UsesMixin, UsesMixinBuilder> {
 
   @override
   void replace(UsesMixin other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$UsesMixin;
   }
 
@@ -119,11 +115,7 @@ class _$GetsCorrectFieldsViaMixins extends GetsCorrectFieldsViaMixins {
           [void Function(GetsCorrectFieldsViaMixinsBuilder)? updates]) =>
       (GetsCorrectFieldsViaMixinsBuilder()..update(updates))._build();
 
-  _$GetsCorrectFieldsViaMixins._({required this.shouldBeAField}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        shouldBeAField, r'GetsCorrectFieldsViaMixins', 'shouldBeAField');
-  }
-
+  _$GetsCorrectFieldsViaMixins._({required this.shouldBeAField}) : super._();
   @override
   GetsCorrectFieldsViaMixins rebuild(
           void Function(GetsCorrectFieldsViaMixinsBuilder) updates) =>
@@ -179,7 +171,6 @@ class GetsCorrectFieldsViaMixinsBuilder
 
   @override
   void replace(GetsCorrectFieldsViaMixins other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GetsCorrectFieldsViaMixins;
   }
 

@@ -23,13 +23,7 @@ class _$EnumSourceField extends EnumSourceField {
       (EnumSourceFieldBuilder()..update(updates))._build();
 
   _$EnumSourceField._({required this.parsedLibrary, required this.element})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        parsedLibrary, r'EnumSourceField', 'parsedLibrary');
-    BuiltValueNullFieldError.checkNotNull(
-        element, r'EnumSourceField', 'element');
-  }
-
+      : super._();
   @override
   String get name => __name ??= super.name;
 
@@ -115,7 +109,6 @@ class EnumSourceFieldBuilder
 
   @override
   void replace(EnumSourceField other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$EnumSourceField;
   }
 

@@ -318,10 +318,7 @@ class _$SimpleValue extends SimpleValue {
   factory _$SimpleValue([void Function(SimpleValueBuilder)? updates]) =>
       (SimpleValueBuilder()..update(updates))._build();
 
-  _$SimpleValue._({required this.anInt, this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, r'SimpleValue', 'anInt');
-  }
-
+  _$SimpleValue._({required this.anInt, this.aString}) : super._();
   @override
   SimpleValue rebuild(void Function(SimpleValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -380,7 +377,6 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SimpleValue;
   }
 
@@ -411,10 +407,7 @@ class _$VerySimpleValue extends VerySimpleValue {
   factory _$VerySimpleValue([void Function(VerySimpleValueBuilder)? updates]) =>
       (VerySimpleValueBuilder()..update(updates))._build();
 
-  _$VerySimpleValue._({required this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, r'VerySimpleValue', 'value');
-  }
-
+  _$VerySimpleValue._({required this.value}) : super._();
   @override
   VerySimpleValue rebuild(void Function(VerySimpleValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -465,7 +458,6 @@ class VerySimpleValueBuilder
 
   @override
   void replace(VerySimpleValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$VerySimpleValue;
   }
 
@@ -498,11 +490,7 @@ class _$CompoundValue extends CompoundValue {
       (CompoundValueBuilder()..update(updates))._build();
 
   _$CompoundValue._({required this.simpleValue, this.validatedValue})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        simpleValue, r'CompoundValue', 'simpleValue');
-  }
-
+      : super._();
   @override
   CompoundValue rebuild(void Function(CompoundValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -566,7 +554,6 @@ class CompoundValueBuilder
 
   @override
   void replace(CompoundValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CompoundValue;
   }
 
@@ -613,10 +600,7 @@ class _$ValidatedValue extends ValidatedValue {
   factory _$ValidatedValue([void Function(ValidatedValueBuilder)? updates]) =>
       (ValidatedValueBuilder()..update(updates))._build();
 
-  _$ValidatedValue._({required this.anInt, this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, r'ValidatedValue', 'anInt');
-  }
-
+  _$ValidatedValue._({required this.anInt, this.aString}) : super._();
   @override
   ValidatedValue rebuild(void Function(ValidatedValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -676,7 +660,6 @@ class ValidatedValueBuilder
 
   @override
   void replace(ValidatedValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValidatedValue;
   }
 
@@ -709,10 +692,7 @@ class _$ValueWithCode extends ValueWithCode {
   factory _$ValueWithCode([void Function(ValueWithCodeBuilder)? updates]) =>
       (ValueWithCodeBuilder()..update(updates))._build();
 
-  _$ValueWithCode._({required this.anInt, this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithCode', 'anInt');
-  }
-
+  _$ValueWithCode._({required this.anInt, this.aString}) : super._();
   @override
   ValueWithCode rebuild(void Function(ValueWithCodeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -772,7 +752,6 @@ class ValueWithCodeBuilder
 
   @override
   void replace(ValueWithCode other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithCode;
   }
 
@@ -807,10 +786,7 @@ class _$ValueWithDefaults extends ValueWithDefaults {
       (ValueWithDefaultsBuilder()..update(updates)).build()
           as _$ValueWithDefaults;
 
-  _$ValueWithDefaults._({required this.anInt, this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithDefaults', 'anInt');
-  }
-
+  _$ValueWithDefaults._({required this.anInt, this.aString}) : super._();
   @override
   ValueWithDefaults rebuild(void Function(ValueWithDefaultsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -886,7 +862,6 @@ class _$ValueWithDefaultsBuilder extends ValueWithDefaultsBuilder {
 
   @override
   void replace(ValueWithDefaults other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithDefaults;
   }
 
@@ -919,10 +894,7 @@ class _$DerivedValue extends DerivedValue {
   factory _$DerivedValue([void Function(DerivedValueBuilder)? updates]) =>
       (DerivedValueBuilder()..update(updates))._build();
 
-  _$DerivedValue._({required this.anInt}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, r'DerivedValue', 'anInt');
-  }
-
+  _$DerivedValue._({required this.anInt}) : super._();
   @override
   int get derivedValue => __derivedValue ??= super.derivedValue;
 
@@ -978,7 +950,6 @@ class DerivedValueBuilder
 
   @override
   void replace(DerivedValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$DerivedValue;
   }
 
@@ -1013,12 +984,7 @@ class _$Account extends Account {
       (AccountBuilder()..update(updates))._build();
 
   _$Account._({required this.id, required this.name, required this.keyValues})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, r'Account', 'id');
-    BuiltValueNullFieldError.checkNotNull(name, r'Account', 'name');
-    BuiltValueNullFieldError.checkNotNull(keyValues, r'Account', 'keyValues');
-  }
-
+      : super._();
   @override
   Account rebuild(void Function(AccountBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1087,7 +1053,6 @@ class AccountBuilder implements Builder<Account, AccountBuilder> {
 
   @override
   void replace(Account other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Account;
   }
 
@@ -1132,10 +1097,7 @@ class _$WireNameValue extends WireNameValue {
   factory _$WireNameValue([void Function(WireNameValueBuilder)? updates]) =>
       (WireNameValueBuilder()..update(updates))._build();
 
-  _$WireNameValue._({required this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, r'WireNameValue', 'value');
-  }
-
+  _$WireNameValue._({required this.value}) : super._();
   @override
   WireNameValue rebuild(void Function(WireNameValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1185,7 +1147,6 @@ class WireNameValueBuilder
 
   @override
   void replace(WireNameValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$WireNameValue;
   }
 

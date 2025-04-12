@@ -296,26 +296,7 @@ class _$StandardJsonValue extends StandardJsonValue {
       required this.nullsInMap,
       this.object,
       required this.objects})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        number, r'StandardJsonValue', 'number');
-    BuiltValueNullFieldError.checkNotNull(text, r'StandardJsonValue', 'text');
-    BuiltValueNullFieldError.checkNotNull(value, r'StandardJsonValue', 'value');
-    BuiltValueNullFieldError.checkNotNull(
-        keyValues, r'StandardJsonValue', 'keyValues');
-    BuiltValueNullFieldError.checkNotNull(zoo, r'StandardJsonValue', 'zoo');
-    BuiltValueNullFieldError.checkNotNull(
-        uniqueZoo, r'StandardJsonValue', 'uniqueZoo');
-    BuiltValueNullFieldError.checkNotNull(
-        nullsInList, r'StandardJsonValue', 'nullsInList');
-    BuiltValueNullFieldError.checkNotNull(
-        nullsInSet, r'StandardJsonValue', 'nullsInSet');
-    BuiltValueNullFieldError.checkNotNull(
-        nullsInMap, r'StandardJsonValue', 'nullsInMap');
-    BuiltValueNullFieldError.checkNotNull(
-        objects, r'StandardJsonValue', 'objects');
-  }
-
+      : super._();
   @override
   StandardJsonValue rebuild(void Function(StandardJsonValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -465,7 +446,6 @@ class StandardJsonValueBuilder
 
   @override
   void replace(StandardJsonValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$StandardJsonValue;
   }
 
@@ -554,12 +534,7 @@ class _$ComplexValue extends ComplexValue {
       required this.value,
       this.nullableValue,
       this.nullableValueDoNotUse})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        primitive, r'ComplexValue', 'primitive');
-    BuiltValueNullFieldError.checkNotNull(value, r'ComplexValue', 'value');
-  }
-
+      : super._();
   @override
   ComplexValue rebuild(void Function(ComplexValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -657,7 +632,6 @@ class ComplexValueBuilder
 
   @override
   void replace(ComplexValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ComplexValue;
   }
 

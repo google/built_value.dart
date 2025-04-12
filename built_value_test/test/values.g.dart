@@ -30,16 +30,7 @@ class _$SimpleValue extends SimpleValue {
       required this.map,
       required this.aSet,
       required this.setMultimap})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, r'SimpleValue', 'anInt');
-    BuiltValueNullFieldError.checkNotNull(list, r'SimpleValue', 'list');
-    BuiltValueNullFieldError.checkNotNull(multimap, r'SimpleValue', 'multimap');
-    BuiltValueNullFieldError.checkNotNull(map, r'SimpleValue', 'map');
-    BuiltValueNullFieldError.checkNotNull(aSet, r'SimpleValue', 'aSet');
-    BuiltValueNullFieldError.checkNotNull(
-        setMultimap, r'SimpleValue', 'setMultimap');
-  }
-
+      : super._();
   @override
   SimpleValue rebuild(void Function(SimpleValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -134,7 +125,6 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SimpleValue;
   }
 
@@ -192,11 +182,7 @@ class _$CompoundValue extends CompoundValue {
   factory _$CompoundValue([void Function(CompoundValueBuilder)? updates]) =>
       (CompoundValueBuilder()..update(updates))._build();
 
-  _$CompoundValue._({required this.simpleValue, this.string}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        simpleValue, r'CompoundValue', 'simpleValue');
-  }
-
+  _$CompoundValue._({required this.simpleValue, this.string}) : super._();
   @override
   CompoundValue rebuild(void Function(CompoundValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -258,7 +244,6 @@ class CompoundValueBuilder
 
   @override
   void replace(CompoundValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CompoundValue;
   }
 
@@ -303,12 +288,7 @@ class _$ComparedValue extends ComparedValue {
   factory _$ComparedValue([void Function(ComparedValueBuilder)? updates]) =>
       (ComparedValueBuilder()..update(updates))._build();
 
-  _$ComparedValue._({required this.name, required this.onChanged}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, r'ComparedValue', 'name');
-    BuiltValueNullFieldError.checkNotNull(
-        onChanged, r'ComparedValue', 'onChanged');
-  }
-
+  _$ComparedValue._({required this.name, required this.onChanged}) : super._();
   @override
   ComparedValue rebuild(void Function(ComparedValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -365,7 +345,6 @@ class ComparedValueBuilder
 
   @override
   void replace(ComparedValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ComparedValue;
   }
 

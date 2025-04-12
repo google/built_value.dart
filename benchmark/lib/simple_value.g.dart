@@ -15,11 +15,7 @@ class _$SimpleValue extends SimpleValue {
   factory _$SimpleValue([void Function(SimpleValueBuilder)? updates]) =>
       (SimpleValueBuilder()..update(updates))._build();
 
-  _$SimpleValue._({required this.anInt, required this.aString}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, r'SimpleValue', 'anInt');
-    BuiltValueNullFieldError.checkNotNull(aString, r'SimpleValue', 'aString');
-  }
-
+  _$SimpleValue._({required this.anInt, required this.aString}) : super._();
   @override
   SimpleValue rebuild(void Function(SimpleValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -78,7 +74,6 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   @override
   void replace(SimpleValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SimpleValue;
   }
 

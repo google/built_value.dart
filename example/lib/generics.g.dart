@@ -262,13 +262,7 @@ class _$GenericValue<T> extends GenericValue<T> {
   factory _$GenericValue([void Function(GenericValueBuilder<T>)? updates]) =>
       (GenericValueBuilder<T>()..update(updates))._build();
 
-  _$GenericValue._({required this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, r'GenericValue', 'value');
-    if (T == dynamic) {
-      throw BuiltValueMissingGenericsError(r'GenericValue', 'T');
-    }
-  }
-
+  _$GenericValue._({required this.value}) : super._();
   @override
   GenericValue<T> rebuild(void Function(GenericValueBuilder<T>) updates) =>
       (toBuilder()..update(updates)).build();
@@ -318,7 +312,6 @@ class GenericValueBuilder<T>
 
   @override
   void replace(GenericValue<T> other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GenericValue<T>;
   }
 
@@ -349,13 +342,7 @@ class _$BoundGenericValue<T extends num> extends BoundGenericValue<T> {
           [void Function(BoundGenericValueBuilder<T>)? updates]) =>
       (BoundGenericValueBuilder<T>()..update(updates))._build();
 
-  _$BoundGenericValue._({required this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, r'BoundGenericValue', 'value');
-    if (T == dynamic) {
-      throw BuiltValueMissingGenericsError(r'BoundGenericValue', 'T');
-    }
-  }
-
+  _$BoundGenericValue._({required this.value}) : super._();
   @override
   BoundGenericValue<T> rebuild(
           void Function(BoundGenericValueBuilder<T>) updates) =>
@@ -408,7 +395,6 @@ class BoundGenericValueBuilder<T extends num>
 
   @override
   void replace(BoundGenericValue<T> other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$BoundGenericValue<T>;
   }
 
@@ -439,14 +425,7 @@ class _$CollectionGenericValue<T> extends CollectionGenericValue<T> {
           [void Function(CollectionGenericValueBuilder<T>)? updates]) =>
       (CollectionGenericValueBuilder<T>()..update(updates))._build();
 
-  _$CollectionGenericValue._({required this.values}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        values, r'CollectionGenericValue', 'values');
-    if (T == dynamic) {
-      throw BuiltValueMissingGenericsError(r'CollectionGenericValue', 'T');
-    }
-  }
-
+  _$CollectionGenericValue._({required this.values}) : super._();
   @override
   CollectionGenericValue<T> rebuild(
           void Function(CollectionGenericValueBuilder<T>) updates) =>
@@ -500,7 +479,6 @@ class CollectionGenericValueBuilder<T>
 
   @override
   void replace(CollectionGenericValue<T> other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$CollectionGenericValue<T>;
   }
 
@@ -551,15 +529,7 @@ class _$GenericContainer extends GenericContainer {
       {required this.genericValue,
       required this.boundGenericValue,
       required this.collectionGenericValue})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        genericValue, r'GenericContainer', 'genericValue');
-    BuiltValueNullFieldError.checkNotNull(
-        boundGenericValue, r'GenericContainer', 'boundGenericValue');
-    BuiltValueNullFieldError.checkNotNull(
-        collectionGenericValue, r'GenericContainer', 'collectionGenericValue');
-  }
-
+      : super._();
   @override
   GenericContainer rebuild(void Function(GenericContainerBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -636,7 +606,6 @@ class GenericContainerBuilder
 
   @override
   void replace(GenericContainer other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$GenericContainer;
   }
 

@@ -105,11 +105,7 @@ class _$ValueWithInt extends ValueWithInt {
   factory _$ValueWithInt([void Function(ValueWithIntBuilder)? updates]) =>
       (ValueWithIntBuilder()..update(updates)).build() as _$ValueWithInt;
 
-  _$ValueWithInt._({required this.anInt, required this.note}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithInt', 'anInt');
-    BuiltValueNullFieldError.checkNotNull(note, r'ValueWithInt', 'note');
-  }
-
+  _$ValueWithInt._({required this.anInt, required this.note}) : super._();
   @override
   ValueWithInt rebuild(void Function(ValueWithIntBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -182,7 +178,6 @@ class _$ValueWithIntBuilder extends ValueWithIntBuilder {
 
   @override
   void replace(ValueWithInt other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithInt;
   }
 
