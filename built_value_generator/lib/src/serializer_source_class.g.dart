@@ -37,7 +37,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   factory _$SerializerSourceClass(
           [void Function(SerializerSourceClassBuilder)? updates]) =>
-      (new SerializerSourceClassBuilder()..update(updates))._build();
+      (SerializerSourceClassBuilder()..update(updates))._build();
 
   _$SerializerSourceClass._(
       {required this.parsedLibraryResults,
@@ -133,7 +133,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
 
   @override
   SerializerSourceClassBuilder toBuilder() =>
-      new SerializerSourceClassBuilder()..replace(this);
+      SerializerSourceClassBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -212,7 +212,7 @@ class SerializerSourceClassBuilder
 
   _$SerializerSourceClass _build() {
     final _$result = _$v ??
-        new _$SerializerSourceClass._(
+        _$SerializerSourceClass._(
           parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
               parsedLibraryResults,
               r'SerializerSourceClass',

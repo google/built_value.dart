@@ -195,7 +195,7 @@ abstract class SerializerSourceLibrary
 
   String _generateSerializersTopLevelFields() => serializersForAnnotations.keys
       .map((field) =>
-          'Serializers _\$$field = (new Serializers().toBuilder()' +
+          'Serializers _\$$field = (Serializers().toBuilder()' +
           (serializeForTransitiveClasses[field]!
                   .map((sourceClass) =>
                       sourceClass.generateTransitiveSerializerAdder())

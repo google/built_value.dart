@@ -20,7 +20,7 @@ class _$EnumSourceField extends EnumSourceField {
   bool? __isStatic;
 
   factory _$EnumSourceField([void Function(EnumSourceFieldBuilder)? updates]) =>
-      (new EnumSourceFieldBuilder()..update(updates))._build();
+      (EnumSourceFieldBuilder()..update(updates))._build();
 
   _$EnumSourceField._({required this.parsedLibrary, required this.element})
       : super._() {
@@ -60,8 +60,7 @@ class _$EnumSourceField extends EnumSourceField {
       (toBuilder()..update(updates)).build();
 
   @override
-  EnumSourceFieldBuilder toBuilder() =>
-      new EnumSourceFieldBuilder()..replace(this);
+  EnumSourceFieldBuilder toBuilder() => EnumSourceFieldBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -130,7 +129,7 @@ class EnumSourceFieldBuilder
 
   _$EnumSourceField _build() {
     final _$result = _$v ??
-        new _$EnumSourceField._(
+        _$EnumSourceField._(
           parsedLibrary: BuiltValueNullFieldError.checkNotNull(
               parsedLibrary, r'EnumSourceField', 'parsedLibrary'),
           element: BuiltValueNullFieldError.checkNotNull(

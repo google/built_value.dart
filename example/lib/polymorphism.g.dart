@@ -6,8 +6,8 @@ part of 'polymorphism.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Cat> _$catSerializer = new _$CatSerializer();
-Serializer<Fish> _$fishSerializer = new _$FishSerializer();
+Serializer<Cat> _$catSerializer = _$CatSerializer();
+Serializer<Fish> _$fishSerializer = _$FishSerializer();
 
 class _$CatSerializer implements StructuredSerializer<Cat> {
   @override
@@ -31,7 +31,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   @override
   Cat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new CatBuilder();
+    final result = CatBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -76,7 +76,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   @override
   Fish deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new FishBuilder();
+    final result = FishBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -113,7 +113,7 @@ class _$Cat extends Cat {
   final int legs;
 
   factory _$Cat([void Function(CatBuilder)? updates]) =>
-      (new CatBuilder()..update(updates))._build();
+      (CatBuilder()..update(updates))._build();
 
   _$Cat._({required this.tail, required this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail');
@@ -125,7 +125,7 @@ class _$Cat extends Cat {
       (toBuilder()..update(updates)).build();
 
   @override
-  CatBuilder toBuilder() => new CatBuilder()..replace(this);
+  CatBuilder toBuilder() => CatBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -190,7 +190,7 @@ class CatBuilder implements Builder<Cat, CatBuilder>, AnimalBuilder {
 
   _$Cat _build() {
     final _$result = _$v ??
-        new _$Cat._(
+        _$Cat._(
           tail: BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail'),
           legs: BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs'),
         );
@@ -206,7 +206,7 @@ class _$Fish extends Fish {
   final int legs;
 
   factory _$Fish([void Function(FishBuilder)? updates]) =>
-      (new FishBuilder()..update(updates))._build();
+      (FishBuilder()..update(updates))._build();
 
   _$Fish._({required this.fins, required this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins');
@@ -218,7 +218,7 @@ class _$Fish extends Fish {
       (toBuilder()..update(updates)).build();
 
   @override
-  FishBuilder toBuilder() => new FishBuilder()..replace(this);
+  FishBuilder toBuilder() => FishBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -283,7 +283,7 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   _$Fish _build() {
     final _$result = _$v ??
-        new _$Fish._(
+        _$Fish._(
           fins: BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins'),
           legs: BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs'),
         );

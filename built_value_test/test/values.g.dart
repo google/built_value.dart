@@ -21,7 +21,7 @@ class _$SimpleValue extends SimpleValue {
   final BuiltSetMultimap<int, bool> setMultimap;
 
   factory _$SimpleValue([void Function(SimpleValueBuilder)? updates]) =>
-      (new SimpleValueBuilder()..update(updates))._build();
+      (SimpleValueBuilder()..update(updates))._build();
 
   _$SimpleValue._(
       {required this.anInt,
@@ -45,7 +45,7 @@ class _$SimpleValue extends SimpleValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  SimpleValueBuilder toBuilder() => new SimpleValueBuilder()..replace(this);
+  SimpleValueBuilder toBuilder() => SimpleValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -93,27 +93,26 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
   set anInt(int? anInt) => _$this._anInt = anInt;
 
   ListBuilder<String>? _list;
-  ListBuilder<String> get list => _$this._list ??= new ListBuilder<String>();
+  ListBuilder<String> get list => _$this._list ??= ListBuilder<String>();
   set list(ListBuilder<String>? list) => _$this._list = list;
 
   ListMultimapBuilder<int, bool>? _multimap;
   ListMultimapBuilder<int, bool> get multimap =>
-      _$this._multimap ??= new ListMultimapBuilder<int, bool>();
+      _$this._multimap ??= ListMultimapBuilder<int, bool>();
   set multimap(ListMultimapBuilder<int, bool>? multimap) =>
       _$this._multimap = multimap;
 
   MapBuilder<String, int>? _map;
-  MapBuilder<String, int> get map =>
-      _$this._map ??= new MapBuilder<String, int>();
+  MapBuilder<String, int> get map => _$this._map ??= MapBuilder<String, int>();
   set map(MapBuilder<String, int>? map) => _$this._map = map;
 
   SetBuilder<int>? _aSet;
-  SetBuilder<int> get aSet => _$this._aSet ??= new SetBuilder<int>();
+  SetBuilder<int> get aSet => _$this._aSet ??= SetBuilder<int>();
   set aSet(SetBuilder<int>? aSet) => _$this._aSet = aSet;
 
   SetMultimapBuilder<int, bool>? _setMultimap;
   SetMultimapBuilder<int, bool> get setMultimap =>
-      _$this._setMultimap ??= new SetMultimapBuilder<int, bool>();
+      _$this._setMultimap ??= SetMultimapBuilder<int, bool>();
   set setMultimap(SetMultimapBuilder<int, bool>? setMultimap) =>
       _$this._setMultimap = setMultimap;
 
@@ -151,7 +150,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
     _$SimpleValue _$result;
     try {
       _$result = _$v ??
-          new _$SimpleValue._(
+          _$SimpleValue._(
             anInt: BuiltValueNullFieldError.checkNotNull(
                 anInt, r'SimpleValue', 'anInt'),
             list: list.build(),
@@ -174,7 +173,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
         _$failedField = 'setMultimap';
         setMultimap.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'SimpleValue', _$failedField, e.toString());
       }
       rethrow;
@@ -191,7 +190,7 @@ class _$CompoundValue extends CompoundValue {
   final String? string;
 
   factory _$CompoundValue([void Function(CompoundValueBuilder)? updates]) =>
-      (new CompoundValueBuilder()..update(updates))._build();
+      (CompoundValueBuilder()..update(updates))._build();
 
   _$CompoundValue._({required this.simpleValue, this.string}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -203,7 +202,7 @@ class _$CompoundValue extends CompoundValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  CompoundValueBuilder toBuilder() => new CompoundValueBuilder()..replace(this);
+  CompoundValueBuilder toBuilder() => CompoundValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -237,7 +236,7 @@ class CompoundValueBuilder
 
   SimpleValueBuilder? _simpleValue;
   SimpleValueBuilder get simpleValue =>
-      _$this._simpleValue ??= new SimpleValueBuilder();
+      _$this._simpleValue ??= SimpleValueBuilder();
   set simpleValue(SimpleValueBuilder? simpleValue) =>
       _$this._simpleValue = simpleValue;
 
@@ -275,7 +274,7 @@ class CompoundValueBuilder
     _$CompoundValue _$result;
     try {
       _$result = _$v ??
-          new _$CompoundValue._(
+          _$CompoundValue._(
             simpleValue: simpleValue.build(),
             string: string,
           );
@@ -285,7 +284,7 @@ class CompoundValueBuilder
         _$failedField = 'simpleValue';
         simpleValue.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'CompoundValue', _$failedField, e.toString());
       }
       rethrow;
@@ -302,7 +301,7 @@ class _$ComparedValue extends ComparedValue {
   final Function onChanged;
 
   factory _$ComparedValue([void Function(ComparedValueBuilder)? updates]) =>
-      (new ComparedValueBuilder()..update(updates))._build();
+      (ComparedValueBuilder()..update(updates))._build();
 
   _$ComparedValue._({required this.name, required this.onChanged}) : super._() {
     BuiltValueNullFieldError.checkNotNull(name, r'ComparedValue', 'name');
@@ -315,7 +314,7 @@ class _$ComparedValue extends ComparedValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  ComparedValueBuilder toBuilder() => new ComparedValueBuilder()..replace(this);
+  ComparedValueBuilder toBuilder() => ComparedValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -380,7 +379,7 @@ class ComparedValueBuilder
 
   _$ComparedValue _build() {
     final _$result = _$v ??
-        new _$ComparedValue._(
+        _$ComparedValue._(
           name: BuiltValueNullFieldError.checkNotNull(
               name, r'ComparedValue', 'name'),
           onChanged: BuiltValueNullFieldError.checkNotNull(

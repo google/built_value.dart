@@ -54,7 +54,7 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   factory _$ValueSourceClass(
           [void Function(ValueSourceClassBuilder)? updates]) =>
-      (new ValueSourceClassBuilder()..update(updates))._build();
+      (ValueSourceClassBuilder()..update(updates))._build();
 
   _$ValueSourceClass._(
       {required this.parsedLibraryResults, required this.element})
@@ -223,7 +223,7 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   @override
   ValueSourceClassBuilder toBuilder() =>
-      new ValueSourceClassBuilder()..replace(this);
+      ValueSourceClassBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -293,7 +293,7 @@ class ValueSourceClassBuilder
 
   _$ValueSourceClass _build() {
     final _$result = _$v ??
-        new _$ValueSourceClass._(
+        _$ValueSourceClass._(
           parsedLibraryResults: BuiltValueNullFieldError.checkNotNull(
               parsedLibraryResults,
               r'ValueSourceClass',

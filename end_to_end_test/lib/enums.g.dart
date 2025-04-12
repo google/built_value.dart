@@ -19,11 +19,11 @@ TestEnum _$valueOf(String name) {
     case 'maybe':
       return _$maybe;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
-final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const <TestEnum>[
+final BuiltSet<TestEnum> _$values = BuiltSet<TestEnum>(const <TestEnum>[
   _$yes,
   _$no,
   _$maybe,
@@ -56,12 +56,12 @@ SecondTestEnum _$vlOf(String name) {
     case 'definitely':
       return _$definitely;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<SecondTestEnum> _$vls =
-    new BuiltSet<SecondTestEnum>(const <SecondTestEnum>[
+    BuiltSet<SecondTestEnum>(const <SecondTestEnum>[
   _$ys,
   _$n,
   _$definitely,
@@ -80,12 +80,12 @@ WireNameEnum _$wireValueOf(String name) {
     case 'definitely':
       return _$wireDefinitely;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<WireNameEnum> _$wireValues =
-    new BuiltSet<WireNameEnum>(const <WireNameEnum>[
+    BuiltSet<WireNameEnum>(const <WireNameEnum>[
   _$wireYes,
   _$wireNo,
   _$wireDefinitely,
@@ -105,12 +105,12 @@ WireNumberEnum _$wireNumberValueOf(String name) {
     case 'definitely':
       return _$wireNumberDefinitely;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<WireNumberEnum> _$wireNumberValues =
-    new BuiltSet<WireNumberEnum>(const <WireNumberEnum>[
+    BuiltSet<WireNumberEnum>(const <WireNumberEnum>[
   _$wireNumberYes,
   _$wireNumberNo,
   _$wireNumberDefinitely,
@@ -126,12 +126,12 @@ DollarValueEnum _$dollarValueOf(String name) {
     case '\$value':
       return _$value;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<DollarValueEnum> _$dollarValues =
-    new BuiltSet<DollarValueEnum>(const <DollarValueEnum>[
+    BuiltSet<DollarValueEnum>(const <DollarValueEnum>[
   _$value$,
   _$value,
 ]);
@@ -151,7 +151,7 @@ FallbackEnum _$fbValueOf(String name) {
 }
 
 final BuiltSet<FallbackEnum> _$fbValues =
-    new BuiltSet<FallbackEnum>(const <FallbackEnum>[
+    BuiltSet<FallbackEnum>(const <FallbackEnum>[
   _$fbYes,
   _$fbNo,
 ]);
@@ -171,7 +171,7 @@ FallbackNumberEnum _$fbNumberValueOf(String name) {
 }
 
 final BuiltSet<FallbackNumberEnum> _$fbNumberValues =
-    new BuiltSet<FallbackNumberEnum>(const <FallbackNumberEnum>[
+    BuiltSet<FallbackNumberEnum>(const <FallbackNumberEnum>[
   _$fbNumberYes,
   _$fbNumberNo,
 ]);
@@ -193,24 +193,22 @@ EnumWith$Dollar_UnderScore _$enum$Dollar_UnderScoreValueOf(String name) {
 }
 
 final BuiltSet<EnumWith$Dollar_UnderScore> _$enum$Dollar_UnderScoreValues =
-    new BuiltSet<EnumWith$Dollar_UnderScore>(const <EnumWith$Dollar_UnderScore>[
+    BuiltSet<EnumWith$Dollar_UnderScore>(const <EnumWith$Dollar_UnderScore>[
   _$dollar_UnderScoreEnum$Value,
   _$dollar_UnderScoreEnumValue$,
 ]);
 
-Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
-Serializer<WireNameEnum> _$wireNameEnumSerializer =
-    new _$WireNameEnumSerializer();
+Serializer<TestEnum> _$testEnumSerializer = _$TestEnumSerializer();
+Serializer<WireNameEnum> _$wireNameEnumSerializer = _$WireNameEnumSerializer();
 Serializer<WireNumberEnum> _$wireNumberEnumSerializer =
-    new _$WireNumberEnumSerializer();
+    _$WireNumberEnumSerializer();
 Serializer<DollarValueEnum> _$dollarValueEnumSerializer =
-    new _$DollarValueEnumSerializer();
-Serializer<FallbackEnum> _$fallbackEnumSerializer =
-    new _$FallbackEnumSerializer();
+    _$DollarValueEnumSerializer();
+Serializer<FallbackEnum> _$fallbackEnumSerializer = _$FallbackEnumSerializer();
 Serializer<FallbackNumberEnum> _$fallbackNumberEnumSerializer =
-    new _$FallbackNumberEnumSerializer();
+    _$FallbackNumberEnumSerializer();
 Serializer<EnumWith$Dollar_UnderScore> _$enumWith$DollarUnderScoreSerializer =
-    new _$EnumWith$Dollar_UnderScoreSerializer();
+    _$EnumWith$Dollar_UnderScoreSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   @override

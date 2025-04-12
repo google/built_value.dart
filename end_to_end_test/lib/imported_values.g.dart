@@ -8,11 +8,11 @@ part of 'imported_values.dart';
 // **************************************************************************
 
 Serializer<ImportedValue> _$importedValueSerializer =
-    new _$ImportedValueSerializer();
+    _$ImportedValueSerializer();
 Serializer<ImportedCustomValue> _$importedCustomValueSerializer =
-    new _$ImportedCustomValueSerializer();
+    _$ImportedCustomValueSerializer();
 Serializer<ImportedCustomNestedValue> _$importedCustomNestedValueSerializer =
-    new _$ImportedCustomNestedValueSerializer();
+    _$ImportedCustomNestedValueSerializer();
 
 class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
   @override
@@ -40,7 +40,7 @@ class _$ImportedValueSerializer implements StructuredSerializer<ImportedValue> {
   ImportedValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ImportedValueBuilder();
+    final result = ImportedValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -97,7 +97,7 @@ class _$ImportedCustomValueSerializer
   ImportedCustomValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ImportedCustomValueBuilder();
+    final result = ImportedCustomValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -154,7 +154,7 @@ class _$ImportedCustomNestedValueSerializer
   ImportedCustomNestedValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ImportedCustomNestedValueBuilder();
+    final result = ImportedCustomNestedValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -187,7 +187,7 @@ class _$ImportedValue extends ImportedValue {
   final BuiltList<prefix.SimpleValue> simpleValues;
 
   factory _$ImportedValue([void Function(ImportedValueBuilder)? updates]) =>
-      (new ImportedValueBuilder()..update(updates))._build();
+      (ImportedValueBuilder()..update(updates))._build();
 
   _$ImportedValue._({required this.simpleValue, required this.simpleValues})
       : super._() {
@@ -202,7 +202,7 @@ class _$ImportedValue extends ImportedValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  ImportedValueBuilder toBuilder() => new ImportedValueBuilder()..replace(this);
+  ImportedValueBuilder toBuilder() => ImportedValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -236,13 +236,13 @@ class ImportedValueBuilder
 
   prefix.SimpleValueBuilder? _simpleValue;
   prefix.SimpleValueBuilder get simpleValue =>
-      _$this._simpleValue ??= new prefix.SimpleValueBuilder();
+      _$this._simpleValue ??= prefix.SimpleValueBuilder();
   set simpleValue(prefix.SimpleValueBuilder? simpleValue) =>
       _$this._simpleValue = simpleValue;
 
   ListBuilder<prefix.SimpleValue>? _simpleValues;
   ListBuilder<prefix.SimpleValue> get simpleValues =>
-      _$this._simpleValues ??= new ListBuilder<prefix.SimpleValue>();
+      _$this._simpleValues ??= ListBuilder<prefix.SimpleValue>();
   set simpleValues(ListBuilder<prefix.SimpleValue>? simpleValues) =>
       _$this._simpleValues = simpleValues;
 
@@ -276,7 +276,7 @@ class ImportedValueBuilder
     _$ImportedValue _$result;
     try {
       _$result = _$v ??
-          new _$ImportedValue._(
+          _$ImportedValue._(
             simpleValue: simpleValue.build(),
             simpleValues: simpleValues.build(),
           );
@@ -288,7 +288,7 @@ class ImportedValueBuilder
         _$failedField = 'simpleValues';
         simpleValues.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'ImportedValue', _$failedField, e.toString());
       }
       rethrow;
@@ -306,7 +306,7 @@ class _$ImportedCustomValue extends ImportedCustomValue {
 
   factory _$ImportedCustomValue(
           [void Function(ImportedCustomValueBuilder)? updates]) =>
-      (new ImportedCustomValueBuilder()..update(updates)).build()
+      (ImportedCustomValueBuilder()..update(updates)).build()
           as _$ImportedCustomValue;
 
   _$ImportedCustomValue._(
@@ -325,7 +325,7 @@ class _$ImportedCustomValue extends ImportedCustomValue {
 
   @override
   _$ImportedCustomValueBuilder toBuilder() =>
-      new _$ImportedCustomValueBuilder()..replace(this);
+      _$ImportedCustomValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -408,7 +408,7 @@ class _$ImportedCustomValueBuilder extends ImportedCustomValueBuilder {
 
   _$ImportedCustomValue _build() {
     final _$result = _$v ??
-        new _$ImportedCustomValue._(
+        _$ImportedCustomValue._(
           simpleValue: BuiltValueNullFieldError.checkNotNull(
               simpleValue, r'ImportedCustomValue', 'simpleValue'),
           simpleValues: BuiltValueNullFieldError.checkNotNull(
@@ -427,7 +427,7 @@ class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
 
   factory _$ImportedCustomNestedValue(
           [void Function(ImportedCustomNestedValueBuilder)? updates]) =>
-      (new ImportedCustomNestedValueBuilder()..update(updates)).build()
+      (ImportedCustomNestedValueBuilder()..update(updates)).build()
           as _$ImportedCustomNestedValue;
 
   _$ImportedCustomNestedValue._(
@@ -446,7 +446,7 @@ class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
 
   @override
   _$ImportedCustomNestedValueBuilder toBuilder() =>
-      new _$ImportedCustomNestedValueBuilder()..replace(this);
+      _$ImportedCustomNestedValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -532,7 +532,7 @@ class _$ImportedCustomNestedValueBuilder
     _$ImportedCustomNestedValue _$result;
     try {
       _$result = _$v ??
-          new _$ImportedCustomNestedValue._(
+          _$ImportedCustomNestedValue._(
             simpleValue: simpleValue.build(),
             simpleValues: simpleValues.build(),
           );
@@ -544,7 +544,7 @@ class _$ImportedCustomNestedValueBuilder
         _$failedField = 'simpleValues';
         simpleValues.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'ImportedCustomNestedValue', _$failedField, e.toString());
       }
       rethrow;

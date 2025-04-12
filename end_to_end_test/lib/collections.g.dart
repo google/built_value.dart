@@ -7,7 +7,7 @@ part of 'collections.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Collections> _$collectionsSerializer = new _$CollectionsSerializer();
+Serializer<Collections> _$collectionsSerializer = _$CollectionsSerializer();
 
 class _$CollectionsSerializer implements StructuredSerializer<Collections> {
   @override
@@ -120,7 +120,7 @@ class _$CollectionsSerializer implements StructuredSerializer<Collections> {
   @override
   Collections deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new CollectionsBuilder();
+    final result = CollectionsBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -272,7 +272,7 @@ class _$Collections extends Collections {
   final BuiltList<BuiltList<int?>?> nestedNullablesList;
 
   factory _$Collections([void Function(CollectionsBuilder)? updates]) =>
-      (new CollectionsBuilder()..update(updates))._build();
+      (CollectionsBuilder()..update(updates))._build();
 
   _$Collections._(
       {required this.list,
@@ -321,7 +321,7 @@ class _$Collections extends Collections {
       (toBuilder()..update(updates)).build();
 
   @override
-  CollectionsBuilder toBuilder() => new CollectionsBuilder()..replace(this);
+  CollectionsBuilder toBuilder() => CollectionsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -398,103 +398,102 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
   _$Collections? _$v;
 
   ListBuilder<int>? _list;
-  ListBuilder<int> get list => _$this._list ??= new ListBuilder<int>();
+  ListBuilder<int> get list => _$this._list ??= ListBuilder<int>();
   set list(ListBuilder<int>? list) => _$this._list = list;
 
   SetBuilder<String>? _set;
-  SetBuilder<String> get set => _$this._set ??= new SetBuilder<String>();
+  SetBuilder<String> get set => _$this._set ??= SetBuilder<String>();
   set set(SetBuilder<String>? set) => _$this._set = set;
 
   MapBuilder<String, int>? _map;
-  MapBuilder<String, int> get map =>
-      _$this._map ??= new MapBuilder<String, int>();
+  MapBuilder<String, int> get map => _$this._map ??= MapBuilder<String, int>();
   set map(MapBuilder<String, int>? map) => _$this._map = map;
 
   ListMultimapBuilder<int, bool>? _listMultimap;
   ListMultimapBuilder<int, bool> get listMultimap =>
-      _$this._listMultimap ??= new ListMultimapBuilder<int, bool>();
+      _$this._listMultimap ??= ListMultimapBuilder<int, bool>();
   set listMultimap(ListMultimapBuilder<int, bool>? listMultimap) =>
       _$this._listMultimap = listMultimap;
 
   SetMultimapBuilder<String, bool>? _setMultimap;
   SetMultimapBuilder<String, bool> get setMultimap =>
-      _$this._setMultimap ??= new SetMultimapBuilder<String, bool>();
+      _$this._setMultimap ??= SetMultimapBuilder<String, bool>();
   set setMultimap(SetMultimapBuilder<String, bool>? setMultimap) =>
       _$this._setMultimap = setMultimap;
 
   ListBuilder<int?>? _nullsInList;
   ListBuilder<int?> get nullsInList =>
-      _$this._nullsInList ??= new ListBuilder<int?>();
+      _$this._nullsInList ??= ListBuilder<int?>();
   set nullsInList(ListBuilder<int?>? nullsInList) =>
       _$this._nullsInList = nullsInList;
 
   SetBuilder<String?>? _nullsInSet;
   SetBuilder<String?> get nullsInSet =>
-      _$this._nullsInSet ??= new SetBuilder<String?>();
+      _$this._nullsInSet ??= SetBuilder<String?>();
   set nullsInSet(SetBuilder<String?>? nullsInSet) =>
       _$this._nullsInSet = nullsInSet;
 
   MapBuilder<String?, int?>? _nullsInMap;
   MapBuilder<String?, int?> get nullsInMap =>
-      _$this._nullsInMap ??= new MapBuilder<String?, int?>();
+      _$this._nullsInMap ??= MapBuilder<String?, int?>();
   set nullsInMap(MapBuilder<String?, int?>? nullsInMap) =>
       _$this._nullsInMap = nullsInMap;
 
   ListMultimapBuilder<int?, bool>? _nullsInListMultimap;
   ListMultimapBuilder<int?, bool> get nullsInListMultimap =>
-      _$this._nullsInListMultimap ??= new ListMultimapBuilder<int?, bool>();
+      _$this._nullsInListMultimap ??= ListMultimapBuilder<int?, bool>();
   set nullsInListMultimap(
           ListMultimapBuilder<int?, bool>? nullsInListMultimap) =>
       _$this._nullsInListMultimap = nullsInListMultimap;
 
   SetMultimapBuilder<String, bool?>? _nullsInSetMultimap;
   SetMultimapBuilder<String, bool?> get nullsInSetMultimap =>
-      _$this._nullsInSetMultimap ??= new SetMultimapBuilder<String, bool?>();
+      _$this._nullsInSetMultimap ??= SetMultimapBuilder<String, bool?>();
   set nullsInSetMultimap(
           SetMultimapBuilder<String, bool?>? nullsInSetMultimap) =>
       _$this._nullsInSetMultimap = nullsInSetMultimap;
 
   ListBuilder<int>? _nullableList;
   ListBuilder<int> get nullableList =>
-      _$this._nullableList ??= new ListBuilder<int>();
+      _$this._nullableList ??= ListBuilder<int>();
   set nullableList(ListBuilder<int>? nullableList) =>
       _$this._nullableList = nullableList;
 
   SetBuilder<String>? _nullableSet;
   SetBuilder<String> get nullableSet =>
-      _$this._nullableSet ??= new SetBuilder<String>();
+      _$this._nullableSet ??= SetBuilder<String>();
   set nullableSet(SetBuilder<String>? nullableSet) =>
       _$this._nullableSet = nullableSet;
 
   MapBuilder<String, int>? _nullableMap;
   MapBuilder<String, int> get nullableMap =>
-      _$this._nullableMap ??= new MapBuilder<String, int>();
+      _$this._nullableMap ??= MapBuilder<String, int>();
   set nullableMap(MapBuilder<String, int>? nullableMap) =>
       _$this._nullableMap = nullableMap;
 
   ListMultimapBuilder<int, bool>? _nullableListMultimap;
   ListMultimapBuilder<int, bool> get nullableListMultimap =>
-      _$this._nullableListMultimap ??= new ListMultimapBuilder<int, bool>();
+      _$this._nullableListMultimap ??= ListMultimapBuilder<int, bool>();
   set nullableListMultimap(
           ListMultimapBuilder<int, bool>? nullableListMultimap) =>
       _$this._nullableListMultimap = nullableListMultimap;
 
   SetMultimapBuilder<String, bool>? _nullableSetMultimap;
   SetMultimapBuilder<String, bool> get nullableSetMultimap =>
-      _$this._nullableSetMultimap ??= new SetMultimapBuilder<String, bool>();
+      _$this._nullableSetMultimap ??= SetMultimapBuilder<String, bool>();
   set nullableSetMultimap(
           SetMultimapBuilder<String, bool>? nullableSetMultimap) =>
       _$this._nullableSetMultimap = nullableSetMultimap;
 
   ListBuilder<Foo<int?>>? _nullableInGenericsList;
   ListBuilder<Foo<int?>> get nullableInGenericsList =>
-      _$this._nullableInGenericsList ??= new ListBuilder<Foo<int?>>();
+      _$this._nullableInGenericsList ??= ListBuilder<Foo<int?>>();
   set nullableInGenericsList(ListBuilder<Foo<int?>>? nullableInGenericsList) =>
       _$this._nullableInGenericsList = nullableInGenericsList;
 
   ListBuilder<BuiltList<int?>?>? _nestedNullablesList;
   ListBuilder<BuiltList<int?>?> get nestedNullablesList =>
-      _$this._nestedNullablesList ??= new ListBuilder<BuiltList<int?>?>();
+      _$this._nestedNullablesList ??= ListBuilder<BuiltList<int?>?>();
   set nestedNullablesList(ListBuilder<BuiltList<int?>?>? nestedNullablesList) =>
       _$this._nestedNullablesList = nestedNullablesList;
 
@@ -543,7 +542,7 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
     _$Collections _$result;
     try {
       _$result = _$v ??
-          new _$Collections._(
+          _$Collections._(
             list: list.build(),
             set: set.build(),
             map: map.build(),
@@ -600,7 +599,7 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
         _$failedField = 'nestedNullablesList';
         nestedNullablesList.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'Collections', _$failedField, e.toString());
       }
       rethrow;

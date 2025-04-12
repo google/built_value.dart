@@ -19,11 +19,11 @@ TestEnum _$valueOf(String name) {
     case 'maybe':
       return _$maybe;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
-final BuiltSet<TestEnum> _$values = new BuiltSet<TestEnum>(const <TestEnum>[
+final BuiltSet<TestEnum> _$values = BuiltSet<TestEnum>(const <TestEnum>[
   _$yes,
   _$no,
   _$maybe,
@@ -42,12 +42,12 @@ SecondTestEnum _$vlOf(String name) {
     case 'definitely':
       return _$definitely;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<SecondTestEnum> _$vls =
-    new BuiltSet<SecondTestEnum>(const <SecondTestEnum>[
+    BuiltSet<SecondTestEnum>(const <SecondTestEnum>[
   _$ys,
   _$n,
   _$definitely,
@@ -66,20 +66,19 @@ WireNameEnum _$wireValueOf(String name) {
     case 'definitely':
       return _$wireDefinitely;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<WireNameEnum> _$wireValues =
-    new BuiltSet<WireNameEnum>(const <WireNameEnum>[
+    BuiltSet<WireNameEnum>(const <WireNameEnum>[
   _$wireYes,
   _$wireNo,
   _$wireDefinitely,
 ]);
 
-Serializer<TestEnum> _$testEnumSerializer = new _$TestEnumSerializer();
-Serializer<WireNameEnum> _$wireNameEnumSerializer =
-    new _$WireNameEnumSerializer();
+Serializer<TestEnum> _$testEnumSerializer = _$TestEnumSerializer();
+Serializer<WireNameEnum> _$wireNameEnumSerializer = _$WireNameEnumSerializer();
 
 class _$TestEnumSerializer implements PrimitiveSerializer<TestEnum> {
   @override

@@ -17,7 +17,7 @@ class _$GeneratorError extends GeneratorError {
   final String? fix;
 
   factory _$GeneratorError([void Function(GeneratorErrorBuilder)? updates]) =>
-      (new GeneratorErrorBuilder()..update(updates))._build();
+      (GeneratorErrorBuilder()..update(updates))._build();
 
   _$GeneratorError._(
       {required this.message, this.offset, this.length, this.fix})
@@ -31,8 +31,7 @@ class _$GeneratorError extends GeneratorError {
       (toBuilder()..update(updates)).build();
 
   @override
-  GeneratorErrorBuilder toBuilder() =>
-      new GeneratorErrorBuilder()..replace(this);
+  GeneratorErrorBuilder toBuilder() => GeneratorErrorBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -116,7 +115,7 @@ class GeneratorErrorBuilder
 
   _$GeneratorError _build() {
     final _$result = _$v ??
-        new _$GeneratorError._(
+        _$GeneratorError._(
           message: BuiltValueNullFieldError.checkNotNull(
               message, r'GeneratorError', 'message'),
           offset: offset,

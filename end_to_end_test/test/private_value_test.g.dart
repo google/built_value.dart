@@ -11,7 +11,7 @@ class _$PrivateValue extends _PrivateValue {
   final int value;
 
   factory _$PrivateValue([void Function(_PrivateValueBuilder)? updates]) =>
-      (new _PrivateValueBuilder()..update(updates))._build();
+      (_PrivateValueBuilder()..update(updates))._build();
 
   _$PrivateValue._({required this.value}) : super._() {
     BuiltValueNullFieldError.checkNotNull(value, r'_PrivateValue', 'value');
@@ -22,7 +22,7 @@ class _$PrivateValue extends _PrivateValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  _PrivateValueBuilder toBuilder() => new _PrivateValueBuilder()..replace(this);
+  _PrivateValueBuilder toBuilder() => _PrivateValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -80,7 +80,7 @@ class _PrivateValueBuilder
 
   _$PrivateValue _build() {
     final _$result = _$v ??
-        new _$PrivateValue._(
+        _$PrivateValue._(
           value: BuiltValueNullFieldError.checkNotNull(
               value, r'_PrivateValue', 'value'),
         );

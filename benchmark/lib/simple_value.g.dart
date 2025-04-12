@@ -13,7 +13,7 @@ class _$SimpleValue extends SimpleValue {
   final String aString;
 
   factory _$SimpleValue([void Function(SimpleValueBuilder)? updates]) =>
-      (new SimpleValueBuilder()..update(updates))._build();
+      (SimpleValueBuilder()..update(updates))._build();
 
   _$SimpleValue._({required this.anInt, required this.aString}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'SimpleValue', 'anInt');
@@ -25,7 +25,7 @@ class _$SimpleValue extends SimpleValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  SimpleValueBuilder toBuilder() => new SimpleValueBuilder()..replace(this);
+  SimpleValueBuilder toBuilder() => SimpleValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -92,7 +92,7 @@ class SimpleValueBuilder implements Builder<SimpleValue, SimpleValueBuilder> {
 
   _$SimpleValue _build() {
     final _$result = _$v ??
-        new _$SimpleValue._(
+        _$SimpleValue._(
           anInt: BuiltValueNullFieldError.checkNotNull(
               anInt, r'SimpleValue', 'anInt'),
           aString: BuiltValueNullFieldError.checkNotNull(

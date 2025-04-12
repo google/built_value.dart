@@ -20,22 +20,21 @@ EnumWithInt _$valueOf(String name) {
     case 'three':
       return _$three;
     default:
-      throw new ArgumentError(name);
+      throw ArgumentError(name);
   }
 }
 
 final BuiltSet<EnumWithInt> _$values =
-    new BuiltSet<EnumWithInt>(const <EnumWithInt>[
+    BuiltSet<EnumWithInt>(const <EnumWithInt>[
   _$one,
   _$two,
   _$three,
 ]);
 
-Serializer<ValueWithInt> _$valueWithIntSerializer =
-    new _$ValueWithIntSerializer();
-Serializer<EnumWithInt> _$enumWithIntSerializer = new _$EnumWithIntSerializer();
+Serializer<ValueWithInt> _$valueWithIntSerializer = _$ValueWithIntSerializer();
+Serializer<EnumWithInt> _$enumWithIntSerializer = _$EnumWithIntSerializer();
 Serializer<ValueWithHasInt> _$valueWithHasIntSerializer =
-    new _$ValueWithHasIntSerializer();
+    _$ValueWithHasIntSerializer();
 
 class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   @override
@@ -60,7 +59,7 @@ class _$ValueWithIntSerializer implements StructuredSerializer<ValueWithInt> {
   ValueWithInt deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ValueWithIntBuilder();
+    final result = ValueWithIntBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -123,7 +122,7 @@ class _$ValueWithHasIntSerializer
   ValueWithHasInt deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ValueWithHasIntBuilder();
+    final result = ValueWithHasIntBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -149,7 +148,7 @@ class _$ValueWithInt extends ValueWithInt {
   final String note;
 
   factory _$ValueWithInt([void Function(ValueWithIntBuilder)? updates]) =>
-      (new ValueWithIntBuilder()..update(updates))._build();
+      (ValueWithIntBuilder()..update(updates))._build();
 
   _$ValueWithInt._({required this.anInt, required this.note}) : super._() {
     BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithInt', 'anInt');
@@ -161,7 +160,7 @@ class _$ValueWithInt extends ValueWithInt {
       (toBuilder()..update(updates)).build();
 
   @override
-  ValueWithIntBuilder toBuilder() => new ValueWithIntBuilder()..replace(this);
+  ValueWithIntBuilder toBuilder() => ValueWithIntBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -227,7 +226,7 @@ class ValueWithIntBuilder
 
   _$ValueWithInt _build() {
     final _$result = _$v ??
-        new _$ValueWithInt._(
+        _$ValueWithInt._(
           anInt: BuiltValueNullFieldError.checkNotNull(
               anInt, r'ValueWithInt', 'anInt'),
           note: BuiltValueNullFieldError.checkNotNull(
@@ -243,7 +242,7 @@ class _$ValueWithHasInt extends ValueWithHasInt {
   final HasInt hasInt;
 
   factory _$ValueWithHasInt([void Function(ValueWithHasIntBuilder)? updates]) =>
-      (new ValueWithHasIntBuilder()..update(updates))._build();
+      (ValueWithHasIntBuilder()..update(updates))._build();
 
   _$ValueWithHasInt._({required this.hasInt}) : super._() {
     BuiltValueNullFieldError.checkNotNull(hasInt, r'ValueWithHasInt', 'hasInt');
@@ -254,8 +253,7 @@ class _$ValueWithHasInt extends ValueWithHasInt {
       (toBuilder()..update(updates)).build();
 
   @override
-  ValueWithHasIntBuilder toBuilder() =>
-      new ValueWithHasIntBuilder()..replace(this);
+  ValueWithHasIntBuilder toBuilder() => ValueWithHasIntBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -314,7 +312,7 @@ class ValueWithHasIntBuilder
 
   _$ValueWithHasInt _build() {
     final _$result = _$v ??
-        new _$ValueWithHasInt._(
+        _$ValueWithHasInt._(
           hasInt: BuiltValueNullFieldError.checkNotNull(
               hasInt, r'ValueWithHasInt', 'hasInt'),
         );

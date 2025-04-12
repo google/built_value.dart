@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.10.0
+
+- Stop generating unnecessary `new` keywords.
+
 # 8.9.5
 
 - Allow `built_value_generator` to use `analyzer 7.0.0`.

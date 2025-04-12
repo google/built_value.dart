@@ -15,7 +15,7 @@ class _$MemoizedGetter extends MemoizedGetter {
   final String name;
 
   factory _$MemoizedGetter([void Function(MemoizedGetterBuilder)? updates]) =>
-      (new MemoizedGetterBuilder()..update(updates))._build();
+      (MemoizedGetterBuilder()..update(updates))._build();
 
   _$MemoizedGetter._(
       {required this.returnType,
@@ -34,8 +34,7 @@ class _$MemoizedGetter extends MemoizedGetter {
       (toBuilder()..update(updates)).build();
 
   @override
-  MemoizedGetterBuilder toBuilder() =>
-      new MemoizedGetterBuilder()..replace(this);
+  MemoizedGetterBuilder toBuilder() => MemoizedGetterBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -112,7 +111,7 @@ class MemoizedGetterBuilder
 
   _$MemoizedGetter _build() {
     final _$result = _$v ??
-        new _$MemoizedGetter._(
+        _$MemoizedGetter._(
           returnType: BuiltValueNullFieldError.checkNotNull(
               returnType, r'MemoizedGetter', 'returnType'),
           nullabilitySuffix: BuiltValueNullFieldError.checkNotNull(

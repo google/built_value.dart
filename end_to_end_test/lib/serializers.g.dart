@@ -6,7 +6,7 @@ part of 'serializers.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializers _$serializers = (new Serializers().toBuilder()
+Serializers _$serializers = (Serializers().toBuilder()
       ..add($ValueSpecial.serializer)
       ..add(BoundGenericValue.serializer)
       ..add(Cage.serializer)
@@ -67,138 +67,138 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(WireNumberEnum.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Animal)]),
-          () => new ListBuilder<Animal>())
+          () => ListBuilder<Animal>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SimpleValue)]),
-          () => new ListBuilder<SimpleValue>())
+          () => ListBuilder<SimpleValue>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SimpleValue)]),
-          () => new ListBuilder<SimpleValue>())
+          () => ListBuilder<SimpleValue>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SimpleValue)]),
-          () => new ListBuilder<SimpleValue>())
+          () => ListBuilder<SimpleValue>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(ThirdDiscoverableValue)]),
-          () => new ListBuilder<ThirdDiscoverableValue>())
+          () => ListBuilder<ThirdDiscoverableValue>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
-          () => new ListBuilder<int>())
+          () => ListBuilder<int>())
       ..addBuilderFactory(
           const FullType(
               BuiltMap, const [const FullType(int), const FullType(String)]),
-          () => new MapBuilder<int, String>())
+          () => MapBuilder<int, String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
-          () => new ListBuilder<int>())
+          () => ListBuilder<int>())
       ..addBuilderFactory(
           const FullType(BuiltSet, const [const FullType(String)]),
-          () => new SetBuilder<String>())
+          () => SetBuilder<String>())
       ..addBuilderFactory(
           const FullType(
               BuiltMap, const [const FullType(String), const FullType(int)]),
-          () => new MapBuilder<String, int>())
+          () => MapBuilder<String, int>())
       ..addBuilderFactory(
           const FullType(BuiltListMultimap,
               const [const FullType(int), const FullType(bool)]),
-          () => new ListMultimapBuilder<int, bool>())
+          () => ListMultimapBuilder<int, bool>())
       ..addBuilderFactory(
           const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType(bool)]),
-          () => new SetMultimapBuilder<String, bool>())
+          () => SetMultimapBuilder<String, bool>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType.nullable(int)]),
-          () => new ListBuilder<int?>())
+          () => ListBuilder<int?>())
       ..addBuilderFactory(
           const FullType(BuiltSet, const [const FullType.nullable(String)]),
-          () => new SetBuilder<String?>())
+          () => SetBuilder<String?>())
       ..addBuilderFactory(
           const FullType(BuiltMap, const [
             const FullType.nullable(String),
             const FullType.nullable(int)
           ]),
-          () => new MapBuilder<String?, int?>())
+          () => MapBuilder<String?, int?>())
       ..addBuilderFactory(
           const FullType(BuiltListMultimap,
               const [const FullType.nullable(int), const FullType(bool)]),
-          () => new ListMultimapBuilder<int?, bool>())
+          () => ListMultimapBuilder<int?, bool>())
       ..addBuilderFactory(
           const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType.nullable(bool)]),
-          () => new SetMultimapBuilder<String, bool?>())
+          () => SetMultimapBuilder<String, bool?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
-          () => new ListBuilder<int>())
+          () => ListBuilder<int>())
       ..addBuilderFactory(
           const FullType(BuiltSet, const [const FullType(String)]),
-          () => new SetBuilder<String>())
+          () => SetBuilder<String>())
       ..addBuilderFactory(
           const FullType(
               BuiltMap, const [const FullType(String), const FullType(int)]),
-          () => new MapBuilder<String, int>())
+          () => MapBuilder<String, int>())
       ..addBuilderFactory(
           const FullType(BuiltListMultimap,
               const [const FullType(int), const FullType(bool)]),
-          () => new ListMultimapBuilder<int, bool>())
+          () => ListMultimapBuilder<int, bool>())
       ..addBuilderFactory(
           const FullType(BuiltSetMultimap,
               const [const FullType(String), const FullType(bool)]),
-          () => new SetMultimapBuilder<String, bool>())
+          () => SetMultimapBuilder<String, bool>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType(Foo, const [const FullType.nullable(int)])
           ]),
-          () => new ListBuilder<Foo<int?>>())
+          () => ListBuilder<Foo<int?>>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(
                 BuiltList, const [const FullType.nullable(int)])
           ]),
-          () => new ListBuilder<BuiltList<int?>?>())
+          () => ListBuilder<BuiltList<int?>?>())
       ..addBuilderFactory(
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(JsonObject)]),
-          () => new MapBuilder<String, JsonObject>())
+          () => MapBuilder<String, JsonObject>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Animal)]),
-          () => new ListBuilder<Animal>())
+          () => ListBuilder<Animal>())
       ..addBuilderFactory(
           const FullType(BuiltSet, const [const FullType(Animal)]),
-          () => new SetBuilder<Animal>())
+          () => SetBuilder<Animal>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
-          () => new ListBuilder<String>())
+          () => ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType.nullable(int)]),
-          () => new ListBuilder<int?>())
+          () => ListBuilder<int?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType.nullable(String)]),
-          () => new ListBuilder<String?>())
+          () => ListBuilder<String?>())
       ..addBuilderFactory(
           const FullType(BuiltMap,
               const [const FullType(String), const FullType.nullable(int)]),
-          () => new MapBuilder<String, int?>())
+          () => MapBuilder<String, int?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Object)]),
-          () => new ListBuilder<Object>())
+          () => ListBuilder<Object>())
       ..addBuilderFactory(
           const FullType(GenericValue, const [
             const FullType(
                 BuiltMap, const [const FullType(int), const FullType(String)])
           ]),
-          () => new GenericValueBuilder<BuiltMap<int, String>>())
+          () => GenericValueBuilder<BuiltMap<int, String>>())
       ..addBuilderFactory(
           const FullType(GenericValue, const [const FullType(String)]),
-          () => new GenericValueBuilder<String>())
+          () => GenericValueBuilder<String>())
       ..addBuilderFactory(
           const FullType(BoundGenericValue, const [const FullType(double)]),
-          () => new BoundGenericValueBuilder<double>())
+          () => BoundGenericValueBuilder<double>())
       ..addBuilderFactory(
           const FullType(
               CollectionGenericValue, const [const FullType(String)]),
-          () => new CollectionGenericValueBuilder<String>()))
+          () => CollectionGenericValueBuilder<String>()))
     .build();
 Serializers _$moreSerializers =
-    (new Serializers().toBuilder()..add(Cat.serializer)).build();
+    (Serializers().toBuilder()..add(Cat.serializer)).build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

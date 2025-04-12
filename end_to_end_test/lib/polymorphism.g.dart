@@ -7,15 +7,15 @@ part of 'polymorphism.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Cat> _$catSerializer = new _$CatSerializer();
-Serializer<Fish> _$fishSerializer = new _$FishSerializer();
-Serializer<Robot> _$robotSerializer = new _$RobotSerializer();
-Serializer<Cage> _$cageSerializer = new _$CageSerializer();
-Serializer<StandardCat> _$standardCatSerializer = new _$StandardCatSerializer();
-Serializer<HasString> _$hasStringSerializer = new _$HasStringSerializer();
-Serializer<HasDouble> _$hasDoubleSerializer = new _$HasDoubleSerializer();
+Serializer<Cat> _$catSerializer = _$CatSerializer();
+Serializer<Fish> _$fishSerializer = _$FishSerializer();
+Serializer<Robot> _$robotSerializer = _$RobotSerializer();
+Serializer<Cage> _$cageSerializer = _$CageSerializer();
+Serializer<StandardCat> _$standardCatSerializer = _$StandardCatSerializer();
+Serializer<HasString> _$hasStringSerializer = _$HasStringSerializer();
+Serializer<HasDouble> _$hasDoubleSerializer = _$HasDoubleSerializer();
 Serializer<UsesHandCoded> _$usesHandCodedSerializer =
-    new _$UsesHandCodedSerializer();
+    _$UsesHandCodedSerializer();
 
 class _$CatSerializer implements StructuredSerializer<Cat> {
   @override
@@ -39,7 +39,7 @@ class _$CatSerializer implements StructuredSerializer<Cat> {
   @override
   Cat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new CatBuilder();
+    final result = CatBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -84,7 +84,7 @@ class _$FishSerializer implements StructuredSerializer<Fish> {
   @override
   Fish deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new FishBuilder();
+    final result = FishBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -129,7 +129,7 @@ class _$RobotSerializer implements StructuredSerializer<Robot> {
   @override
   Robot deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new RobotBuilder();
+    final result = RobotBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -177,7 +177,7 @@ class _$CageSerializer implements StructuredSerializer<Cage> {
   @override
   Cage deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new CageBuilder();
+    final result = CageBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -222,7 +222,7 @@ class _$StandardCatSerializer implements StructuredSerializer<StandardCat> {
   @override
   StandardCat deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new StandardCatBuilder();
+    final result = StandardCatBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -262,7 +262,7 @@ class _$HasStringSerializer implements StructuredSerializer<HasString> {
   @override
   HasString deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new HasStringBuilder();
+    final result = HasStringBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -302,7 +302,7 @@ class _$HasDoubleSerializer implements StructuredSerializer<HasDouble> {
   @override
   HasDouble deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new HasDoubleBuilder();
+    final result = HasDoubleBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -343,7 +343,7 @@ class _$UsesHandCodedSerializer implements StructuredSerializer<UsesHandCoded> {
   UsesHandCoded deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new UsesHandCodedBuilder();
+    final result = UsesHandCodedBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -383,7 +383,7 @@ class _$Cat extends Cat {
   final int legs;
 
   factory _$Cat([void Function(CatBuilder)? updates]) =>
-      (new CatBuilder()..update(updates))._build();
+      (CatBuilder()..update(updates))._build();
 
   _$Cat._({required this.tail, required this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail');
@@ -395,7 +395,7 @@ class _$Cat extends Cat {
       (toBuilder()..update(updates)).build();
 
   @override
-  CatBuilder toBuilder() => new CatBuilder()..replace(this);
+  CatBuilder toBuilder() => CatBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -460,7 +460,7 @@ class CatBuilder implements Builder<Cat, CatBuilder>, MammalBuilder {
 
   _$Cat _build() {
     final _$result = _$v ??
-        new _$Cat._(
+        _$Cat._(
           tail: BuiltValueNullFieldError.checkNotNull(tail, r'Cat', 'tail'),
           legs: BuiltValueNullFieldError.checkNotNull(legs, r'Cat', 'legs'),
         );
@@ -476,7 +476,7 @@ class _$Fish extends Fish {
   final int legs;
 
   factory _$Fish([void Function(FishBuilder)? updates]) =>
-      (new FishBuilder()..update(updates))._build();
+      (FishBuilder()..update(updates))._build();
 
   _$Fish._({required this.fins, required this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins');
@@ -488,7 +488,7 @@ class _$Fish extends Fish {
       (toBuilder()..update(updates)).build();
 
   @override
-  FishBuilder toBuilder() => new FishBuilder()..replace(this);
+  FishBuilder toBuilder() => FishBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -553,7 +553,7 @@ class FishBuilder implements Builder<Fish, FishBuilder>, AnimalBuilder {
 
   _$Fish _build() {
     final _$result = _$v ??
-        new _$Fish._(
+        _$Fish._(
           fins: BuiltValueNullFieldError.checkNotNull(fins, r'Fish', 'fins'),
           legs: BuiltValueNullFieldError.checkNotNull(legs, r'Fish', 'legs'),
         );
@@ -569,7 +569,7 @@ class _$Robot extends Robot {
   final int legs;
 
   factory _$Robot([void Function(RobotBuilder)? updates]) =>
-      (new RobotBuilder()..update(updates))._build();
+      (RobotBuilder()..update(updates))._build();
 
   _$Robot._({required this.fins, required this.legs}) : super._() {
     BuiltValueNullFieldError.checkNotNull(fins, r'Robot', 'fins');
@@ -581,7 +581,7 @@ class _$Robot extends Robot {
       (toBuilder()..update(updates)).build();
 
   @override
-  RobotBuilder toBuilder() => new RobotBuilder()..replace(this);
+  RobotBuilder toBuilder() => RobotBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -646,7 +646,7 @@ class RobotBuilder implements Builder<Robot, RobotBuilder> {
 
   _$Robot _build() {
     final _$result = _$v ??
-        new _$Robot._(
+        _$Robot._(
           fins: BuiltValueNullFieldError.checkNotNull(fins, r'Robot', 'fins'),
           legs: BuiltValueNullFieldError.checkNotNull(legs, r'Robot', 'legs'),
         );
@@ -662,7 +662,7 @@ class _$Cage extends Cage {
   final BuiltList<Animal> otherInhabitants;
 
   factory _$Cage([void Function(CageBuilder)? updates]) =>
-      (new CageBuilder()..update(updates))._build();
+      (CageBuilder()..update(updates))._build();
 
   _$Cage._({required this.inhabitant, required this.otherInhabitants})
       : super._() {
@@ -676,7 +676,7 @@ class _$Cage extends Cage {
       (toBuilder()..update(updates)).build();
 
   @override
-  CageBuilder toBuilder() => new CageBuilder()..replace(this);
+  CageBuilder toBuilder() => CageBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -713,7 +713,7 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
 
   ListBuilder<Animal>? _otherInhabitants;
   ListBuilder<Animal> get otherInhabitants =>
-      _$this._otherInhabitants ??= new ListBuilder<Animal>();
+      _$this._otherInhabitants ??= ListBuilder<Animal>();
   set otherInhabitants(ListBuilder<Animal>? otherInhabitants) =>
       _$this._otherInhabitants = otherInhabitants;
 
@@ -747,7 +747,7 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
     _$Cage _$result;
     try {
       _$result = _$v ??
-          new _$Cage._(
+          _$Cage._(
             inhabitant: BuiltValueNullFieldError.checkNotNull(
                 inhabitant, r'Cage', 'inhabitant'),
             otherInhabitants: otherInhabitants.build(),
@@ -758,8 +758,7 @@ class CageBuilder implements Builder<Cage, CageBuilder> {
         _$failedField = 'otherInhabitants';
         otherInhabitants.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'Cage', _$failedField, e.toString());
+        throw BuiltValueNestedFieldError(r'Cage', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -773,7 +772,7 @@ class _$StandardCat extends StandardCat {
   final bool tail;
 
   factory _$StandardCat([void Function(StandardCatBuilder)? updates]) =>
-      (new StandardCatBuilder()..update(updates))._build();
+      (StandardCatBuilder()..update(updates))._build();
 
   _$StandardCat._({required this.tail}) : super._() {
     BuiltValueNullFieldError.checkNotNull(tail, r'StandardCat', 'tail');
@@ -784,7 +783,7 @@ class _$StandardCat extends StandardCat {
       (toBuilder()..update(updates)).build();
 
   @override
-  StandardCatBuilder toBuilder() => new StandardCatBuilder()..replace(this);
+  StandardCatBuilder toBuilder() => StandardCatBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -841,7 +840,7 @@ class StandardCatBuilder implements Builder<StandardCat, StandardCatBuilder> {
 
   _$StandardCat _build() {
     final _$result = _$v ??
-        new _$StandardCat._(
+        _$StandardCat._(
           tail: BuiltValueNullFieldError.checkNotNull(
               tail, r'StandardCat', 'tail'),
         );
@@ -862,7 +861,7 @@ class _$HasString extends HasString {
   final String field;
 
   factory _$HasString([void Function(HasStringBuilder)? updates]) =>
-      (new HasStringBuilder()..update(updates))._build();
+      (HasStringBuilder()..update(updates))._build();
 
   _$HasString._({required this.field}) : super._() {
     BuiltValueNullFieldError.checkNotNull(field, r'HasString', 'field');
@@ -873,7 +872,7 @@ class _$HasString extends HasString {
       (toBuilder()..update(updates)).build();
 
   @override
-  HasStringBuilder toBuilder() => new HasStringBuilder()..replace(this);
+  HasStringBuilder toBuilder() => HasStringBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -931,7 +930,7 @@ class HasStringBuilder
 
   _$HasString _build() {
     final _$result = _$v ??
-        new _$HasString._(
+        _$HasString._(
           field: BuiltValueNullFieldError.checkNotNull(
               field, r'HasString', 'field'),
         );
@@ -945,7 +944,7 @@ class _$HasDouble extends HasDouble {
   final double field;
 
   factory _$HasDouble([void Function(HasDoubleBuilder)? updates]) =>
-      (new HasDoubleBuilder()..update(updates))._build();
+      (HasDoubleBuilder()..update(updates))._build();
 
   _$HasDouble._({required this.field}) : super._() {
     BuiltValueNullFieldError.checkNotNull(field, r'HasDouble', 'field');
@@ -956,7 +955,7 @@ class _$HasDouble extends HasDouble {
       (toBuilder()..update(updates)).build();
 
   @override
-  HasDoubleBuilder toBuilder() => new HasDoubleBuilder()..replace(this);
+  HasDoubleBuilder toBuilder() => HasDoubleBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1014,7 +1013,7 @@ class HasDoubleBuilder
 
   _$HasDouble _build() {
     final _$result = _$v ??
-        new _$HasDouble._(
+        _$HasDouble._(
           field: BuiltValueNullFieldError.checkNotNull(
               field, r'HasDouble', 'field'),
         );
@@ -1031,7 +1030,7 @@ class _$UsesChainedInterface extends UsesChainedInterface {
 
   factory _$UsesChainedInterface(
           [void Function(UsesChainedInterfaceBuilder)? updates]) =>
-      (new UsesChainedInterfaceBuilder()..update(updates))._build();
+      (UsesChainedInterfaceBuilder()..update(updates))._build();
 
   _$UsesChainedInterface._({required this.bar, required this.foo}) : super._() {
     BuiltValueNullFieldError.checkNotNull(bar, r'UsesChainedInterface', 'bar');
@@ -1045,7 +1044,7 @@ class _$UsesChainedInterface extends UsesChainedInterface {
 
   @override
   UsesChainedInterfaceBuilder toBuilder() =>
-      new UsesChainedInterfaceBuilder()..replace(this);
+      UsesChainedInterfaceBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1113,7 +1112,7 @@ class UsesChainedInterfaceBuilder
 
   _$UsesChainedInterface _build() {
     final _$result = _$v ??
-        new _$UsesChainedInterface._(
+        _$UsesChainedInterface._(
           bar: BuiltValueNullFieldError.checkNotNull(
               bar, r'UsesChainedInterface', 'bar'),
           foo: BuiltValueNullFieldError.checkNotNull(
@@ -1129,7 +1128,7 @@ class _$UsesHandCoded extends UsesHandCoded {
   final int fieldInBaseBuilder;
 
   factory _$UsesHandCoded([void Function(UsesHandCodedBuilder)? updates]) =>
-      (new UsesHandCodedBuilder()..update(updates))._build();
+      (UsesHandCodedBuilder()..update(updates))._build();
 
   _$UsesHandCoded._({required this.fieldInBaseBuilder}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -1141,7 +1140,7 @@ class _$UsesHandCoded extends UsesHandCoded {
       (toBuilder()..update(updates)).build();
 
   @override
-  UsesHandCodedBuilder toBuilder() => new UsesHandCodedBuilder()..replace(this);
+  UsesHandCodedBuilder toBuilder() => UsesHandCodedBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1202,7 +1201,7 @@ class UsesHandCodedBuilder
 
   _$UsesHandCoded _build() {
     final _$result = _$v ??
-        new _$UsesHandCoded._(
+        _$UsesHandCoded._(
           fieldInBaseBuilder: BuiltValueNullFieldError.checkNotNull(
               fieldInBaseBuilder, r'UsesHandCoded', 'fieldInBaseBuilder'),
         );
@@ -1223,7 +1222,7 @@ abstract class TwoBuilder {
 
 class _$ImplementsTwo extends ImplementsTwo {
   factory _$ImplementsTwo([void Function(ImplementsTwoBuilder)? updates]) =>
-      (new ImplementsTwoBuilder()..update(updates))._build();
+      (ImplementsTwoBuilder()..update(updates))._build();
 
   _$ImplementsTwo._() : super._();
 
@@ -1232,7 +1231,7 @@ class _$ImplementsTwo extends ImplementsTwo {
       (toBuilder()..update(updates)).build();
 
   @override
-  ImplementsTwoBuilder toBuilder() => new ImplementsTwoBuilder()..replace(this);
+  ImplementsTwoBuilder toBuilder() => ImplementsTwoBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1276,7 +1275,7 @@ class ImplementsTwoBuilder
   ImplementsTwo build() => _build();
 
   _$ImplementsTwo _build() {
-    final _$result = _$v ?? new _$ImplementsTwo._();
+    final _$result = _$v ?? _$ImplementsTwo._();
     replace(_$result);
     return _$result;
   }
@@ -1296,7 +1295,7 @@ class _$Car extends Car {
   final VehicleColor color;
 
   factory _$Car([void Function(CarBuilder)? updates]) =>
-      (new CarBuilder()..update(updates))._build();
+      (CarBuilder()..update(updates))._build();
 
   _$Car._({required this.seatsCount, required this.color}) : super._() {
     BuiltValueNullFieldError.checkNotNull(seatsCount, r'Car', 'seatsCount');
@@ -1308,7 +1307,7 @@ class _$Car extends Car {
       (toBuilder()..update(updates)).build();
 
   @override
-  CarBuilder toBuilder() => new CarBuilder()..replace(this);
+  CarBuilder toBuilder() => CarBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1344,7 +1343,7 @@ class CarBuilder implements Builder<Car, CarBuilder>, VehicleBuilder {
   set seatsCount(covariant int? seatsCount) => _$this._seatsCount = seatsCount;
 
   VehicleColorBuilder? _color;
-  VehicleColorBuilder get color => _$this._color ??= new VehicleColorBuilder();
+  VehicleColorBuilder get color => _$this._color ??= VehicleColorBuilder();
   set color(covariant VehicleColorBuilder? color) => _$this._color = color;
 
   CarBuilder();
@@ -1377,7 +1376,7 @@ class CarBuilder implements Builder<Car, CarBuilder>, VehicleBuilder {
     _$Car _$result;
     try {
       _$result = _$v ??
-          new _$Car._(
+          _$Car._(
             seatsCount: BuiltValueNullFieldError.checkNotNull(
                 seatsCount, r'Car', 'seatsCount'),
             color: color.build(),
@@ -1388,8 +1387,7 @@ class CarBuilder implements Builder<Car, CarBuilder>, VehicleBuilder {
         _$failedField = 'color';
         color.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'Car', _$failedField, e.toString());
+        throw BuiltValueNestedFieldError(r'Car', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -1405,7 +1403,7 @@ class _$MixinCar extends MixinCar {
   final VehicleColor color;
 
   factory _$MixinCar([void Function(MixinCarBuilder)? updates]) =>
-      (new MixinCarBuilder()..update(updates))._build();
+      (MixinCarBuilder()..update(updates))._build();
 
   _$MixinCar._({required this.seatsCount, required this.color}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -1418,7 +1416,7 @@ class _$MixinCar extends MixinCar {
       (toBuilder()..update(updates)).build();
 
   @override
-  MixinCarBuilder toBuilder() => new MixinCarBuilder()..replace(this);
+  MixinCarBuilder toBuilder() => MixinCarBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1456,7 +1454,7 @@ class MixinCarBuilder
   set seatsCount(covariant int? seatsCount) => _$this._seatsCount = seatsCount;
 
   VehicleColorBuilder? _color;
-  VehicleColorBuilder get color => _$this._color ??= new VehicleColorBuilder();
+  VehicleColorBuilder get color => _$this._color ??= VehicleColorBuilder();
   set color(covariant VehicleColorBuilder? color) => _$this._color = color;
 
   MixinCarBuilder();
@@ -1489,7 +1487,7 @@ class MixinCarBuilder
     _$MixinCar _$result;
     try {
       _$result = _$v ??
-          new _$MixinCar._(
+          _$MixinCar._(
             seatsCount: BuiltValueNullFieldError.checkNotNull(
                 seatsCount, r'MixinCar', 'seatsCount'),
             color: color.build(),
@@ -1500,7 +1498,7 @@ class MixinCarBuilder
         _$failedField = 'color';
         color.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'MixinCar', _$failedField, e.toString());
       }
       rethrow;
@@ -1515,7 +1513,7 @@ class _$VehicleColor extends VehicleColor {
   final String label;
 
   factory _$VehicleColor([void Function(VehicleColorBuilder)? updates]) =>
-      (new VehicleColorBuilder()..update(updates))._build();
+      (VehicleColorBuilder()..update(updates))._build();
 
   _$VehicleColor._({required this.label}) : super._() {
     BuiltValueNullFieldError.checkNotNull(label, r'VehicleColor', 'label');
@@ -1526,7 +1524,7 @@ class _$VehicleColor extends VehicleColor {
       (toBuilder()..update(updates)).build();
 
   @override
-  VehicleColorBuilder toBuilder() => new VehicleColorBuilder()..replace(this);
+  VehicleColorBuilder toBuilder() => VehicleColorBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1584,7 +1582,7 @@ class VehicleColorBuilder
 
   _$VehicleColor _build() {
     final _$result = _$v ??
-        new _$VehicleColor._(
+        _$VehicleColor._(
           label: BuiltValueNullFieldError.checkNotNull(
               label, r'VehicleColor', 'label'),
         );

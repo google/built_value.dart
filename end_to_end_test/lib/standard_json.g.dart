@@ -8,9 +8,8 @@ part of 'standard_json.dart';
 // **************************************************************************
 
 Serializer<StandardJsonValue> _$standardJsonValueSerializer =
-    new _$StandardJsonValueSerializer();
-Serializer<ComplexValue> _$complexValueSerializer =
-    new _$ComplexValueSerializer();
+    _$StandardJsonValueSerializer();
+Serializer<ComplexValue> _$complexValueSerializer = _$ComplexValueSerializer();
 
 class _$StandardJsonValueSerializer
     implements StructuredSerializer<StandardJsonValue> {
@@ -82,7 +81,7 @@ class _$StandardJsonValueSerializer
   StandardJsonValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new StandardJsonValueBuilder();
+    final result = StandardJsonValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -215,7 +214,7 @@ class _$ComplexValueSerializer implements StructuredSerializer<ComplexValue> {
   ComplexValue deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ComplexValueBuilder();
+    final result = ComplexValueBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -282,7 +281,7 @@ class _$StandardJsonValue extends StandardJsonValue {
 
   factory _$StandardJsonValue(
           [void Function(StandardJsonValueBuilder)? updates]) =>
-      (new StandardJsonValueBuilder()..update(updates))._build();
+      (StandardJsonValueBuilder()..update(updates))._build();
 
   _$StandardJsonValue._(
       {required this.number,
@@ -323,7 +322,7 @@ class _$StandardJsonValue extends StandardJsonValue {
 
   @override
   StandardJsonValueBuilder toBuilder() =>
-      new StandardJsonValueBuilder()..replace(this);
+      StandardJsonValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -394,44 +393,43 @@ class StandardJsonValueBuilder
   set text(String? text) => _$this._text = text;
 
   ComplexValueBuilder? _value;
-  ComplexValueBuilder get value => _$this._value ??= new ComplexValueBuilder();
+  ComplexValueBuilder get value => _$this._value ??= ComplexValueBuilder();
   set value(ComplexValueBuilder? value) => _$this._value = value;
 
   MapBuilder<String, JsonObject>? _keyValues;
   MapBuilder<String, JsonObject> get keyValues =>
-      _$this._keyValues ??= new MapBuilder<String, JsonObject>();
+      _$this._keyValues ??= MapBuilder<String, JsonObject>();
   set keyValues(MapBuilder<String, JsonObject>? keyValues) =>
       _$this._keyValues = keyValues;
 
   ListBuilder<Animal>? _zoo;
-  ListBuilder<Animal> get zoo => _$this._zoo ??= new ListBuilder<Animal>();
+  ListBuilder<Animal> get zoo => _$this._zoo ??= ListBuilder<Animal>();
   set zoo(ListBuilder<Animal>? zoo) => _$this._zoo = zoo;
 
   SetBuilder<Animal>? _uniqueZoo;
   SetBuilder<Animal> get uniqueZoo =>
-      _$this._uniqueZoo ??= new SetBuilder<Animal>();
+      _$this._uniqueZoo ??= SetBuilder<Animal>();
   set uniqueZoo(SetBuilder<Animal>? uniqueZoo) => _$this._uniqueZoo = uniqueZoo;
 
   ListBuilder<String>? _strings;
-  ListBuilder<String> get strings =>
-      _$this._strings ??= new ListBuilder<String>();
+  ListBuilder<String> get strings => _$this._strings ??= ListBuilder<String>();
   set strings(ListBuilder<String>? strings) => _$this._strings = strings;
 
   ListBuilder<int?>? _nullsInList;
   ListBuilder<int?> get nullsInList =>
-      _$this._nullsInList ??= new ListBuilder<int?>();
+      _$this._nullsInList ??= ListBuilder<int?>();
   set nullsInList(ListBuilder<int?>? nullsInList) =>
       _$this._nullsInList = nullsInList;
 
   ListBuilder<String?>? _nullsInSet;
   ListBuilder<String?> get nullsInSet =>
-      _$this._nullsInSet ??= new ListBuilder<String?>();
+      _$this._nullsInSet ??= ListBuilder<String?>();
   set nullsInSet(ListBuilder<String?>? nullsInSet) =>
       _$this._nullsInSet = nullsInSet;
 
   MapBuilder<String, int?>? _nullsInMap;
   MapBuilder<String, int?> get nullsInMap =>
-      _$this._nullsInMap ??= new MapBuilder<String, int?>();
+      _$this._nullsInMap ??= MapBuilder<String, int?>();
   set nullsInMap(MapBuilder<String, int?>? nullsInMap) =>
       _$this._nullsInMap = nullsInMap;
 
@@ -440,8 +438,7 @@ class StandardJsonValueBuilder
   set object(ComplexValueInterface? object) => _$this._object = object;
 
   ListBuilder<Object>? _objects;
-  ListBuilder<Object> get objects =>
-      _$this._objects ??= new ListBuilder<Object>();
+  ListBuilder<Object> get objects => _$this._objects ??= ListBuilder<Object>();
   set objects(ListBuilder<Object>? objects) => _$this._objects = objects;
 
   StandardJsonValueBuilder();
@@ -484,7 +481,7 @@ class StandardJsonValueBuilder
     _$StandardJsonValue _$result;
     try {
       _$result = _$v ??
-          new _$StandardJsonValue._(
+          _$StandardJsonValue._(
             number: BuiltValueNullFieldError.checkNotNull(
                 number, r'StandardJsonValue', 'number'),
             text: BuiltValueNullFieldError.checkNotNull(
@@ -523,7 +520,7 @@ class StandardJsonValueBuilder
         _$failedField = 'objects';
         objects.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'StandardJsonValue', _$failedField, e.toString());
       }
       rethrow;
@@ -548,7 +545,7 @@ class _$ComplexValue extends ComplexValue {
   final SimpleValue? nullableValueDoNotUse;
 
   factory _$ComplexValue([void Function(ComplexValueBuilder)? updates]) =>
-      (new ComplexValueBuilder()..update(updates))._build();
+      (ComplexValueBuilder()..update(updates))._build();
 
   _$ComplexValue._(
       {required this.primitive,
@@ -568,7 +565,7 @@ class _$ComplexValue extends ComplexValue {
       (toBuilder()..update(updates)).build();
 
   @override
-  ComplexValueBuilder toBuilder() => new ComplexValueBuilder()..replace(this);
+  ComplexValueBuilder toBuilder() => ComplexValueBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -627,18 +624,18 @@ class ComplexValueBuilder
       _$this._nullablePrimitiveDoNotUse = nullablePrimitiveDoNotUse;
 
   SimpleValueBuilder? _value;
-  SimpleValueBuilder get value => _$this._value ??= new SimpleValueBuilder();
+  SimpleValueBuilder get value => _$this._value ??= SimpleValueBuilder();
   set value(SimpleValueBuilder? value) => _$this._value = value;
 
   SimpleValueBuilder? _nullableValue;
   SimpleValueBuilder get nullableValue =>
-      _$this._nullableValue ??= new SimpleValueBuilder();
+      _$this._nullableValue ??= SimpleValueBuilder();
   set nullableValue(SimpleValueBuilder? nullableValue) =>
       _$this._nullableValue = nullableValue;
 
   SimpleValueBuilder? _nullableValueDoNotUse;
   SimpleValueBuilder get nullableValueDoNotUse =>
-      _$this._nullableValueDoNotUse ??= new SimpleValueBuilder();
+      _$this._nullableValueDoNotUse ??= SimpleValueBuilder();
   set nullableValueDoNotUse(SimpleValueBuilder? nullableValueDoNotUse) =>
       _$this._nullableValueDoNotUse = nullableValueDoNotUse;
 
@@ -676,7 +673,7 @@ class ComplexValueBuilder
     _$ComplexValue _$result;
     try {
       _$result = _$v ??
-          new _$ComplexValue._(
+          _$ComplexValue._(
             primitive: BuiltValueNullFieldError.checkNotNull(
                 primitive, r'ComplexValue', 'primitive'),
             nullablePrimitive: nullablePrimitive,
@@ -695,7 +692,7 @@ class ComplexValueBuilder
         _$failedField = 'nullableValueDoNotUse';
         _nullableValueDoNotUse?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'ComplexValue', _$failedField, e.toString());
       }
       rethrow;

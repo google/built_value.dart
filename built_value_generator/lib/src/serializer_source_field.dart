@@ -236,9 +236,9 @@ abstract class SerializerSourceField
   String generateBuilder() {
     var bareType = _getBareType(type);
     if (typesWithBuilder.containsKey(bareType)) {
-      return 'new ${typesWithBuilder[bareType]}<${_getGenerics(type)}>()';
+      return '${typesWithBuilder[bareType]}<${_getGenerics(type)}>()';
     } else {
-      return 'new ${bareType}Builder<${_getGenerics(type)}>()';
+      return '${bareType}Builder<${_getGenerics(type)}>()';
     }
   }
 
@@ -262,10 +262,9 @@ abstract class SerializerSourceField
           includeNullability: true));
       final canUseConst =
           parameterFullTypes.every((param) => param.startsWith('const '));
-      final constOrNew = canUseConst ? 'const' : 'new';
-      final constOrEmpty = canUseConst ? 'const' : '';
-      return '$constOrNew FullType$maybeNullability('
-          '$bareType, $constOrEmpty [${parameterFullTypes.join(', ')}])';
+      final constOrEmpty = canUseConst ? 'const ' : '';
+      return '${constOrEmpty}FullType$maybeNullability('
+          '$bareType, $constOrEmpty[${parameterFullTypes.join(', ')}])';
     }
   }
 
