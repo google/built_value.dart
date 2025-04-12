@@ -43,13 +43,7 @@ class _$SerializerSourceClass extends SerializerSourceClass {
       {required this.parsedLibraryResults,
       required this.element,
       this.builderElement})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        parsedLibraryResults, r'SerializerSourceClass', 'parsedLibraryResults');
-    BuiltValueNullFieldError.checkNotNull(
-        element, r'SerializerSourceClass', 'element');
-  }
-
+      : super._();
   @override
   ParsedLibraryResult get parsedLibrary =>
       __parsedLibrary ??= super.parsedLibrary;
@@ -198,7 +192,6 @@ class SerializerSourceClassBuilder
 
   @override
   void replace(SerializerSourceClass other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SerializerSourceClass;
   }
 

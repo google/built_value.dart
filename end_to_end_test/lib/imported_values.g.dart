@@ -190,13 +190,7 @@ class _$ImportedValue extends ImportedValue {
       (ImportedValueBuilder()..update(updates))._build();
 
   _$ImportedValue._({required this.simpleValue, required this.simpleValues})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        simpleValue, r'ImportedValue', 'simpleValue');
-    BuiltValueNullFieldError.checkNotNull(
-        simpleValues, r'ImportedValue', 'simpleValues');
-  }
-
+      : super._();
   @override
   ImportedValue rebuild(void Function(ImportedValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -260,7 +254,6 @@ class ImportedValueBuilder
 
   @override
   void replace(ImportedValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImportedValue;
   }
 
@@ -311,13 +304,7 @@ class _$ImportedCustomValue extends ImportedCustomValue {
 
   _$ImportedCustomValue._(
       {required this.simpleValue, required this.simpleValues})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        simpleValue, r'ImportedCustomValue', 'simpleValue');
-    BuiltValueNullFieldError.checkNotNull(
-        simpleValues, r'ImportedCustomValue', 'simpleValues');
-  }
-
+      : super._();
   @override
   ImportedCustomValue rebuild(
           void Function(ImportedCustomValueBuilder) updates) =>
@@ -394,7 +381,6 @@ class _$ImportedCustomValueBuilder extends ImportedCustomValueBuilder {
 
   @override
   void replace(ImportedCustomValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImportedCustomValue;
   }
 
@@ -432,13 +418,7 @@ class _$ImportedCustomNestedValue extends ImportedCustomNestedValue {
 
   _$ImportedCustomNestedValue._(
       {required this.simpleValue, required this.simpleValues})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        simpleValue, r'ImportedCustomNestedValue', 'simpleValue');
-    BuiltValueNullFieldError.checkNotNull(
-        simpleValues, r'ImportedCustomNestedValue', 'simpleValues');
-  }
-
+      : super._();
   @override
   ImportedCustomNestedValue rebuild(
           void Function(ImportedCustomNestedValueBuilder) updates) =>
@@ -516,7 +496,6 @@ class _$ImportedCustomNestedValueBuilder
 
   @override
   void replace(ImportedCustomNestedValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ImportedCustomNestedValue;
   }
 

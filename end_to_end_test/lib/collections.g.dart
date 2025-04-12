@@ -292,30 +292,7 @@ class _$Collections extends Collections {
       this.nullableSetMultimap,
       required this.nullableInGenericsList,
       required this.nestedNullablesList})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(list, r'Collections', 'list');
-    BuiltValueNullFieldError.checkNotNull(set, r'Collections', 'set');
-    BuiltValueNullFieldError.checkNotNull(map, r'Collections', 'map');
-    BuiltValueNullFieldError.checkNotNull(
-        listMultimap, r'Collections', 'listMultimap');
-    BuiltValueNullFieldError.checkNotNull(
-        setMultimap, r'Collections', 'setMultimap');
-    BuiltValueNullFieldError.checkNotNull(
-        nullsInList, r'Collections', 'nullsInList');
-    BuiltValueNullFieldError.checkNotNull(
-        nullsInSet, r'Collections', 'nullsInSet');
-    BuiltValueNullFieldError.checkNotNull(
-        nullsInMap, r'Collections', 'nullsInMap');
-    BuiltValueNullFieldError.checkNotNull(
-        nullsInListMultimap, r'Collections', 'nullsInListMultimap');
-    BuiltValueNullFieldError.checkNotNull(
-        nullsInSetMultimap, r'Collections', 'nullsInSetMultimap');
-    BuiltValueNullFieldError.checkNotNull(
-        nullableInGenericsList, r'Collections', 'nullableInGenericsList');
-    BuiltValueNullFieldError.checkNotNull(
-        nestedNullablesList, r'Collections', 'nestedNullablesList');
-  }
-
+      : super._();
   @override
   Collections rebuild(void Function(CollectionsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -526,7 +503,6 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
 
   @override
   void replace(Collections other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Collections;
   }
 

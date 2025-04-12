@@ -30,13 +30,7 @@ class _$EnumSourceClass extends EnumSourceClass {
 
   _$EnumSourceClass._(
       {required this.parsedLibraryResults, required this.element})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        parsedLibraryResults, r'EnumSourceClass', 'parsedLibraryResults');
-    BuiltValueNullFieldError.checkNotNull(
-        element, r'EnumSourceClass', 'element');
-  }
-
+      : super._();
   @override
   ParsedLibraryResult get parsedLibrary =>
       __parsedLibrary ??= super.parsedLibrary;
@@ -144,7 +138,6 @@ class EnumSourceClassBuilder
 
   @override
   void replace(EnumSourceClass other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$EnumSourceClass;
   }
 

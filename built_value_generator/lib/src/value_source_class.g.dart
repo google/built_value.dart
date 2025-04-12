@@ -58,13 +58,7 @@ class _$ValueSourceClass extends ValueSourceClass {
 
   _$ValueSourceClass._(
       {required this.parsedLibraryResults, required this.element})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        parsedLibraryResults, r'ValueSourceClass', 'parsedLibraryResults');
-    BuiltValueNullFieldError.checkNotNull(
-        element, r'ValueSourceClass', 'element');
-  }
-
+      : super._();
   @override
   ParsedLibraryResult get parsedLibrary =>
       __parsedLibrary ??= super.parsedLibrary;
@@ -279,7 +273,6 @@ class ValueSourceClassBuilder
 
   @override
   void replace(ValueSourceClass other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueSourceClass;
   }
 

@@ -21,14 +21,7 @@ class _$MemoizedGetter extends MemoizedGetter {
       {required this.returnType,
       required this.nullabilitySuffix,
       required this.name})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        returnType, r'MemoizedGetter', 'returnType');
-    BuiltValueNullFieldError.checkNotNull(
-        nullabilitySuffix, r'MemoizedGetter', 'nullabilitySuffix');
-    BuiltValueNullFieldError.checkNotNull(name, r'MemoizedGetter', 'name');
-  }
-
+      : super._();
   @override
   MemoizedGetter rebuild(void Function(MemoizedGetterBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -97,7 +90,6 @@ class MemoizedGetterBuilder
 
   @override
   void replace(MemoizedGetter other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$MemoizedGetter;
   }
 

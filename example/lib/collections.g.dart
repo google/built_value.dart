@@ -191,16 +191,7 @@ class _$Collections extends Collections {
       this.nullableMap,
       this.nullableListMultimap,
       this.nullableSetMultimap})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(list, r'Collections', 'list');
-    BuiltValueNullFieldError.checkNotNull(set, r'Collections', 'set');
-    BuiltValueNullFieldError.checkNotNull(map, r'Collections', 'map');
-    BuiltValueNullFieldError.checkNotNull(
-        listMultimap, r'Collections', 'listMultimap');
-    BuiltValueNullFieldError.checkNotNull(
-        setMultimap, r'Collections', 'setMultimap');
-  }
-
+      : super._();
   @override
   Collections rebuild(void Function(CollectionsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -339,7 +330,6 @@ class CollectionsBuilder implements Builder<Collections, CollectionsBuilder> {
 
   @override
   void replace(Collections other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Collections;
   }
 

@@ -46,17 +46,7 @@ class _$SerializerSourceField extends SerializerSourceField {
       required this.parsedLibrary,
       required this.element,
       this.builderElement})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        parsedLibraryResults, r'SerializerSourceField', 'parsedLibraryResults');
-    BuiltValueNullFieldError.checkNotNull(
-        settings, r'SerializerSourceField', 'settings');
-    BuiltValueNullFieldError.checkNotNull(
-        parsedLibrary, r'SerializerSourceField', 'parsedLibrary');
-    BuiltValueNullFieldError.checkNotNull(
-        element, r'SerializerSourceField', 'element');
-  }
-
+      : super._();
   @override
   bool get isSerializable => __isSerializable ??= super.isSerializable;
 
@@ -211,7 +201,6 @@ class SerializerSourceFieldBuilder
 
   @override
   void replace(SerializerSourceField other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SerializerSourceField;
   }
 

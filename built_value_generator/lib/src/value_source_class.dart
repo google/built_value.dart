@@ -779,36 +779,14 @@ abstract class ValueSourceClass
     result.writeln();
 
     if (fields.isEmpty) {
-      result.write('$implName._() : super._()');
+      result.write('$implName._() : super._();');
     } else {
       result.write('$implName._({');
       result.write(fields.map((field) {
         var maybeRequired = field.isNullable ? '' : 'required ';
         return '${maybeRequired}this.${field.name}';
       }).join(', '));
-      result.write('}) : super._()');
-    }
-    var requiredFields = fields
-        .where((field) => !field.isNullable && !field.hasNullableGenericType);
-    if (requiredFields.isEmpty && genericParameters.isEmpty) {
-      result.writeln(';');
-    } else {
-      result.writeln('{');
-      for (var field in requiredFields) {
-        result.writeln('BuiltValueNullFieldError.checkNotNull(${field.name}, '
-            "r'$name', '${escapeString(field.name)}');");
-      }
-      // If there are generic parameters, check they are not "dynamic".
-      if (genericParameters.isNotEmpty) {
-        for (var genericParameter in genericParameters) {
-          result.writeln('if ($genericParameter == dynamic) {');
-          result.writeln('throw BuiltValueMissingGenericsError('
-              "r'$name', '$genericParameter');");
-          result.writeln('}');
-        }
-      }
-      result.writeln();
-      result.writeln('}');
+      result.write('}) : super._();');
     }
     result.writeln();
 
@@ -1034,7 +1012,6 @@ abstract class ValueSourceClass
       result.writeln('void replace($name$_generics other) {');
     }
 
-    result.writeln("ArgumentError.checkNotNull(other, 'other');");
     result.writeln('_\$v = other as $implName$_generics;');
     result.writeln('}');
 

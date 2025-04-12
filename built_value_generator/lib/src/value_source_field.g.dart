@@ -46,17 +46,7 @@ class _$ValueSourceField extends ValueSourceField {
       required this.parsedLibrary,
       required this.element,
       this.builderElement})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        parsedLibraryResults, r'ValueSourceField', 'parsedLibraryResults');
-    BuiltValueNullFieldError.checkNotNull(
-        settings, r'ValueSourceField', 'settings');
-    BuiltValueNullFieldError.checkNotNull(
-        parsedLibrary, r'ValueSourceField', 'parsedLibrary');
-    BuiltValueNullFieldError.checkNotNull(
-        element, r'ValueSourceField', 'element');
-  }
-
+      : super._();
   @override
   String get name => __name ??= super.name;
 
@@ -208,7 +198,6 @@ class ValueSourceFieldBuilder
 
   @override
   void replace(ValueSourceField other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueSourceField;
   }
 

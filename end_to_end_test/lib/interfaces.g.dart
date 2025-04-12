@@ -150,11 +150,7 @@ class _$ValueWithInt extends ValueWithInt {
   factory _$ValueWithInt([void Function(ValueWithIntBuilder)? updates]) =>
       (ValueWithIntBuilder()..update(updates))._build();
 
-  _$ValueWithInt._({required this.anInt, required this.note}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(anInt, r'ValueWithInt', 'anInt');
-    BuiltValueNullFieldError.checkNotNull(note, r'ValueWithInt', 'note');
-  }
-
+  _$ValueWithInt._({required this.anInt, required this.note}) : super._();
   @override
   ValueWithInt rebuild(void Function(ValueWithIntBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -212,7 +208,6 @@ class ValueWithIntBuilder
 
   @override
   void replace(ValueWithInt other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithInt;
   }
 
@@ -244,10 +239,7 @@ class _$ValueWithHasInt extends ValueWithHasInt {
   factory _$ValueWithHasInt([void Function(ValueWithHasIntBuilder)? updates]) =>
       (ValueWithHasIntBuilder()..update(updates))._build();
 
-  _$ValueWithHasInt._({required this.hasInt}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(hasInt, r'ValueWithHasInt', 'hasInt');
-  }
-
+  _$ValueWithHasInt._({required this.hasInt}) : super._();
   @override
   ValueWithHasInt rebuild(void Function(ValueWithHasIntBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -298,7 +290,6 @@ class ValueWithHasIntBuilder
 
   @override
   void replace(ValueWithHasInt other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ValueWithHasInt;
   }
 

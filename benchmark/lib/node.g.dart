@@ -18,7 +18,6 @@ class _$Node extends Node {
       (NodeBuilder()..update(updates))._build();
 
   _$Node._({this.label, this.left, this.right}) : super._();
-
   @override
   Node rebuild(void Function(NodeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -85,7 +84,6 @@ class NodeBuilder implements Builder<Node, NodeBuilder> {
 
   @override
   void replace(Node other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Node;
   }
 

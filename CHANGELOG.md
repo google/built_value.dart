@@ -3,6 +3,10 @@
 # 8.10.0
 
 - Stop generating unnecessary `new` keywords.
+- Stop generating explicit null checks in constructors: these are not needed
+  with sound null safety.
+- Stop generating checks for `dynamic` in generics in constructors: accidental
+  use of `dynamic` is better avoided with lints than a runtime check.
 
 # 8.9.5
 

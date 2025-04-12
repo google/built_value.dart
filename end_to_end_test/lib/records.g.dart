@@ -85,11 +85,7 @@ class _$SimpleRecordValue extends SimpleRecordValue {
           [void Function(SimpleRecordValueBuilder)? updates]) =>
       (SimpleRecordValueBuilder()..update(updates))._build();
 
-  _$SimpleRecordValue._({required this.record}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        record, r'SimpleRecordValue', 'record');
-  }
-
+  _$SimpleRecordValue._({required this.record}) : super._();
   @override
   SimpleRecordValue rebuild(void Function(SimpleRecordValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -142,7 +138,6 @@ class SimpleRecordValueBuilder
 
   @override
   void replace(SimpleRecordValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SimpleRecordValue;
   }
 
@@ -217,29 +212,7 @@ class _$ComplexRecordValue extends ComplexRecordValue {
       required this.record6,
       required this.record6p,
       this.record6n})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        record2, r'ComplexRecordValue', 'record2');
-    BuiltValueNullFieldError.checkNotNull(
-        record2p, r'ComplexRecordValue', 'record2p');
-    BuiltValueNullFieldError.checkNotNull(
-        record3, r'ComplexRecordValue', 'record3');
-    BuiltValueNullFieldError.checkNotNull(
-        record3p, r'ComplexRecordValue', 'record3p');
-    BuiltValueNullFieldError.checkNotNull(
-        record4, r'ComplexRecordValue', 'record4');
-    BuiltValueNullFieldError.checkNotNull(
-        record4p, r'ComplexRecordValue', 'record4p');
-    BuiltValueNullFieldError.checkNotNull(
-        record5, r'ComplexRecordValue', 'record5');
-    BuiltValueNullFieldError.checkNotNull(
-        record5p, r'ComplexRecordValue', 'record5p');
-    BuiltValueNullFieldError.checkNotNull(
-        record6, r'ComplexRecordValue', 'record6');
-    BuiltValueNullFieldError.checkNotNull(
-        record6p, r'ComplexRecordValue', 'record6p');
-  }
-
+      : super._();
   @override
   ComplexRecordValue rebuild(
           void Function(ComplexRecordValueBuilder) updates) =>
@@ -411,7 +384,6 @@ class ComplexRecordValueBuilder
 
   @override
   void replace(ComplexRecordValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ComplexRecordValue;
   }
 
@@ -471,11 +443,7 @@ class _$SerializableRecordValue extends SerializableRecordValue {
 
   _$SerializableRecordValue._(
       {required this.value, this.record, this.intOrList})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        value, r'SerializableRecordValue', 'value');
-  }
-
+      : super._();
   @override
   SerializableRecordValue rebuild(
           void Function(SerializableRecordValueBuilder) updates) =>
@@ -547,7 +515,6 @@ class SerializableRecordValueBuilder
 
   @override
   void replace(SerializableRecordValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$SerializableRecordValue;
   }
 

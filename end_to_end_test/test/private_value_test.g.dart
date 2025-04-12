@@ -13,10 +13,7 @@ class _$PrivateValue extends _PrivateValue {
   factory _$PrivateValue([void Function(_PrivateValueBuilder)? updates]) =>
       (_PrivateValueBuilder()..update(updates))._build();
 
-  _$PrivateValue._({required this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(value, r'_PrivateValue', 'value');
-  }
-
+  _$PrivateValue._({required this.value}) : super._();
   @override
   _PrivateValue rebuild(void Function(_PrivateValueBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -66,7 +63,6 @@ class _PrivateValueBuilder
 
   @override
   void replace(_PrivateValue other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PrivateValue;
   }
 

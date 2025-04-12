@@ -441,11 +441,7 @@ class _$Chat extends Chat {
   factory _$Chat([void Function(ChatBuilder)? updates]) =>
       (ChatBuilder()..update(updates))._build();
 
-  _$Chat._({required this.text, required this.targets}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(text, r'Chat', 'text');
-    BuiltValueNullFieldError.checkNotNull(targets, r'Chat', 'targets');
-  }
-
+  _$Chat._({required this.text, required this.targets}) : super._();
   @override
   Chat rebuild(void Function(ChatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -502,7 +498,6 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
 
   @override
   void replace(Chat other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Chat;
   }
 
@@ -546,11 +541,7 @@ class _$Login extends Login {
   factory _$Login([void Function(LoginBuilder)? updates]) =>
       (LoginBuilder()..update(updates))._build();
 
-  _$Login._({required this.username, required this.password}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(username, r'Login', 'username');
-    BuiltValueNullFieldError.checkNotNull(password, r'Login', 'password');
-  }
-
+  _$Login._({required this.username, required this.password}) : super._();
   @override
   Login rebuild(void Function(LoginBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -609,7 +600,6 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
 
   @override
   void replace(Login other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Login;
   }
 
@@ -643,11 +633,7 @@ class _$Status extends Status {
   factory _$Status([void Function(StatusBuilder)? updates]) =>
       (StatusBuilder()..update(updates))._build();
 
-  _$Status._({required this.message, required this.type}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(message, r'Status', 'message');
-    BuiltValueNullFieldError.checkNotNull(type, r'Status', 'type');
-  }
-
+  _$Status._({required this.message, required this.type}) : super._();
   @override
   Status rebuild(void Function(StatusBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -704,7 +690,6 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
 
   @override
   void replace(Status other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Status;
   }
 
@@ -735,11 +720,7 @@ class _$ListUsers extends ListUsers {
   factory _$ListUsers([void Function(ListUsersBuilder)? updates]) =>
       (ListUsersBuilder()..update(updates))._build();
 
-  _$ListUsers._({required this.statusTypes}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        statusTypes, r'ListUsers', 'statusTypes');
-  }
-
+  _$ListUsers._({required this.statusTypes}) : super._();
   @override
   ListUsers rebuild(void Function(ListUsersBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -791,7 +772,6 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
 
   @override
   void replace(ListUsers other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ListUsers;
   }
 
@@ -839,12 +819,7 @@ class _$ShowChat extends ShowChat {
 
   _$ShowChat._(
       {required this.username, required this.private, required this.text})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(username, r'ShowChat', 'username');
-    BuiltValueNullFieldError.checkNotNull(private, r'ShowChat', 'private');
-    BuiltValueNullFieldError.checkNotNull(text, r'ShowChat', 'text');
-  }
-
+      : super._();
   @override
   ShowChat rebuild(void Function(ShowChatBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -911,7 +886,6 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
 
   @override
   void replace(ShowChat other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ShowChat;
   }
 
@@ -947,11 +921,7 @@ class _$Welcome extends Welcome {
   factory _$Welcome([void Function(WelcomeBuilder)? updates]) =>
       (WelcomeBuilder()..update(updates))._build();
 
-  _$Welcome._({required this.log, required this.message}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(log, r'Welcome', 'log');
-    BuiltValueNullFieldError.checkNotNull(message, r'Welcome', 'message');
-  }
-
+  _$Welcome._({required this.log, required this.message}) : super._();
   @override
   Welcome rebuild(void Function(WelcomeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1008,7 +978,6 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
 
   @override
   void replace(Welcome other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Welcome;
   }
 
@@ -1053,11 +1022,7 @@ class _$ListUsersResponse extends ListUsersResponse {
           [void Function(ListUsersResponseBuilder)? updates]) =>
       (ListUsersResponseBuilder()..update(updates))._build();
 
-  _$ListUsersResponse._({required this.statuses}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        statuses, r'ListUsersResponse', 'statuses');
-  }
-
+  _$ListUsersResponse._({required this.statuses}) : super._();
   @override
   ListUsersResponse rebuild(void Function(ListUsersResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -1111,7 +1076,6 @@ class ListUsersResponseBuilder
 
   @override
   void replace(ListUsersResponse other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ListUsersResponse;
   }
 
