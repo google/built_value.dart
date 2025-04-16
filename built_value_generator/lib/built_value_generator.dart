@@ -26,8 +26,8 @@ class BuiltValueGenerator extends Generator {
     var attempts = 0;
     while (true) {
       try {
-        libraryElement = await buildStep.resolver.libraryFor2(
-            await buildStep.resolver.assetIdForElement2(library.element));
+        libraryElement = await buildStep.resolver.libraryFor(
+            await buildStep.resolver.assetIdForElement(library.element));
         parsedLibraryResults.parsedLibraryResultOrThrowingMock(libraryElement);
         break;
       } catch (_) {
