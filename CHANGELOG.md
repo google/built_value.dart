@@ -2,6 +2,10 @@
 
 # 8.10.0
 
+- Add mutable collection serializers: `List`, `Set`, `Map`. These let you
+  easily serialize mutable collections of immutable value types; it's still
+  recommended to avoid mutable collections inside value types, as they break
+  hashing, comparison and caching.
 - Stop generating unnecessary `new` keywords.
 - Stop generating explicit null checks in constructors: these are not needed
   with sound null safety.
