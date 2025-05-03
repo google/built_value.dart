@@ -109,12 +109,8 @@ abstract class ValueSourceField
       NullabilitySuffix.question;
 
   @memoized
-  bool get hasNullableGenericType =>
-      element.getter?.returnType is TypeParameterType &&
-      (element.getter!.returnType as TypeParameterType)
-              .bound
-              .nullabilitySuffix ==
-          NullabilitySuffix.question;
+  bool get hasGenericType =>
+      element.getter?.returnType is TypeParameterType;
 
   @memoized
   bool get isNullable => hasNullableAnnotation || hasNullableType;
