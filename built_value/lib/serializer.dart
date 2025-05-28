@@ -10,7 +10,10 @@ import 'package:built_value/src/duration_serializer.dart';
 import 'package:built_value/src/int32_serializer.dart';
 import 'package:built_value/src/int64_serializer.dart';
 import 'package:built_value/src/json_object_serializer.dart';
+import 'package:built_value/src/list_serializer.dart';
+import 'package:built_value/src/map_serializer.dart';
 import 'package:built_value/src/num_serializer.dart';
+import 'package:built_value/src/set_serializer.dart';
 import 'package:built_value/src/uint8_list_serializer.dart';
 import 'package:built_value/src/uri_serializer.dart';
 
@@ -59,6 +62,9 @@ abstract class Serializers {
     return (SerializersBuilder()
           ..add(BigIntSerializer())
           ..add(BoolSerializer())
+          ..add(ListSerializer())
+          ..add(MapSerializer())
+          ..add(SetSerializer())
           ..add(BuiltListSerializer())
           ..add(BuiltListMultimapSerializer())
           ..add(BuiltMapSerializer())
