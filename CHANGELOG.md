@@ -2,10 +2,11 @@
 
 # 8.10.1
 
-- Add mutable collection serializers: `List`, `Set`, `Map`. These let you
-  easily serialize mutable collections of immutable value types; it's still
-  recommended to avoid mutable collections inside value types, as they break
-  hashing, comparison and caching.
+- Add mutable collection serializers so `built_value` can serialize `List`,
+  `Set` and `Map`. It's still recommended to avoid mutable collections inside
+  value types as they break hashing, comparison and caching; the intended use
+  case is that you have one top level mutable collection of your immutable
+  value types.
 
 # 8.10.0
 
