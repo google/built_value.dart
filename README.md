@@ -53,21 +53,14 @@ built_value.
 Simple examples are
 [here](https://github.com/google/built_value.dart/tree/master/example/lib/example.dart).
 
-Since `v5.2.0` codegen is triggered by running `pub run build_runner build` to
-do a one-off build or `pub run build_runner watch` to continuously watch your
-source and update the generated output when it changes. Note that you need a
-dev dependency on `built_value_generator` and `build_runner`. See the example
+## Codegen
+
+Codegen is done using `dart run build_runner build` for one-off builds. 
+
+To continuously watch your source and update the generated output when it changes, use `dart run build_runner watch`.
+
+Note that you need a dev dependency on `built_value_generator` and `build_runner`. See the example
 [pubspec.yaml](https://github.com/google/built_value.dart/blob/master/example/pubspec.yaml).
-
-If using Flutter, the equivalent command is `flutter packages pub run build_runner build`.
-Alternatively, put your `built_value` classes in a separate Dart package with no dependency
-on Flutter. You can then use `built_value` as normal.
-
-If using a version before v5.2.0, codegen is triggered via either a
-[build.dart](https://github.com/google/built_value.dart/blob/92783c27a08ac3c73f28bb08736b9d4a30fa3b7e/example/tool/build.dart)
-to do a one-off build or a
-[watch.dart](https://github.com/google/built_value.dart/blob/92783c27a08ac3c73f28bb08736b9d4a30fa3b7e/example/tool/watch.dart)
-to continuously watch your source and update generated output.
 
 ## Value Types
 
