@@ -10,6 +10,9 @@
 
 # 8.10.0
 
+- Allow `null` values in generic types when the type argument is nullable. For
+  example, if a class `Value<T>` has a field of type `T`, a `Value<int?>` can
+  now hold a `null` value.
 - Stop generating unnecessary `new` keywords.
 - Stop generating explicit null checks in constructors: these are not needed
   with sound null safety.
