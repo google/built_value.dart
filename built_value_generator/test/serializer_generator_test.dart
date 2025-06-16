@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:built_value_generator/built_value_generator.dart';
+import 'package:logging/logging.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
@@ -136,7 +137,8 @@ abstract class Value implements Built<Value, ValueBuilder> {
     });
 
     test('does not crash for incorrect builder getter', () async {
-      expect(await generate(r'''
+      expect(
+          await generate(r'''
 library value;
 
 import 'package:test_support/test_support.dart';
@@ -153,8 +155,13 @@ abstract class Value implements Built<Value, ValueBuilder> {
 
 abstract class ValueBuilder implements Builder<Value, ValueBuilder> {
   set aBool(bool aBool);
+
+  ValueBuilder._();
+  factory ValueBuilder() = _$ValueBuilder;
 }
-'''), contains('implements StructuredSerializer<Value>'));
+'''),
+          contains(
+              'Make builder field aBool a normal field or a getter/setter pair.'));
     });
 
     test('checks serializer declarations use correct values', () async {
@@ -265,19 +272,20 @@ Future<String> generate(String source) async {
   // Capture any error from generation; if there is one, return that instead of
   // the generated output.
   String? error;
-  void captureError(dynamic logRecord) {
-    if (logRecord.error is InvalidGenerationSourceError) {
-      if (error != null) throw StateError('Expected at most one error.');
-      error = logRecord.error.toString();
-    }
+  void captureError(LogRecord logRecord) {
+    if (logRecord.level != Level.SEVERE) return;
+    if (error != null) throw StateError('Expected at most one error.');
+    error = logRecord.message;
   }
 
-  var writer = InMemoryAssetWriter();
-  await testBuilder(builder, srcs,
-      rootPackage: pkgName, writer: writer, onLog: captureError);
+  final id =
+      AssetId(pkgName, '.dart_tool/build/generated/$pkgName/lib/value.g.dart');
+  final result = await testBuilder(builder, srcs,
+      rootPackage: pkgName, onLog: captureError);
   return error ??
-      String.fromCharCodes(
-          writer.assets[AssetId(pkgName, 'lib/value.g.dart')] ?? []);
+      (result.readerWriter.testing.exists(id)
+          ? result.readerWriter.testing.readString(id)
+          : '');
 }
 
 // Classes mentioned in the test input need to exist, but we don't need the
@@ -286,6 +294,8 @@ const String testSupportSource = r'''
 const String nullable = 'nullable';
 
 class Built<V, B> {}
+
+class Builder<V, B> {}
 
 class BuiltList<E> {}
 
