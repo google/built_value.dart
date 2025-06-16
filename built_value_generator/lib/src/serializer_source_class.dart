@@ -475,7 +475,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
 
   String _generateRequiredFieldSerializers() {
     return fields
-        .where((field) => !field.isNullable)
+        .where((field) => !field.isNullable && !field.hasGenericType)
         .map((field) => "'${escapeString(field.wireName)}', "
             'serializers.serialize(object.${field.name}, '
             'specifiedType: '
@@ -484,7 +484,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
   }
 
   String _generateNullableFieldSerializers() {
-    var nullableFields = fields.where((field) => field.isNullable).toList();
+    var nullableFields = fields.where((field) => field.isNullable || field.hasGenericType).toList();
     if (nullableFields.isEmpty) return '';
 
     return 'Object? value;' +

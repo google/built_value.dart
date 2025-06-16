@@ -1048,7 +1048,7 @@ abstract class ValueSourceClass
         if (!field.isNullable) {
           needsNullCheck.add(name);
         }
-        if (field.hasNullableGenericType) {
+        if (field.hasGenericType) {
           genericFields[name] =
               field.element.getter!.returnType.element!.displayName;
         }

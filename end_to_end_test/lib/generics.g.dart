@@ -49,11 +49,14 @@ class _$GenericValueSerializer
     final parameterT =
         isUnderspecified ? FullType.object : specifiedType.parameters[0];
 
-    final result = <Object?>[
-      'value',
-      serializers.serialize(object.value, specifiedType: parameterT),
-    ];
-
+    final result = <Object?>[];
+    Object? value;
+    value = object.value;
+    if (value != null) {
+      result
+        ..add('value')
+        ..add(serializers.serialize(value, specifiedType: parameterT));
+    }
     return result;
   }
 
@@ -105,11 +108,14 @@ class _$BoundGenericValueSerializer
     final parameterT =
         isUnderspecified ? FullType.object : specifiedType.parameters[0];
 
-    final result = <Object?>[
-      'value',
-      serializers.serialize(object.value, specifiedType: parameterT),
-    ];
+    final result = <Object?>[];
     Object? value;
+    value = object.value;
+    if (value != null) {
+      result
+        ..add('value')
+        ..add(serializers.serialize(value, specifiedType: parameterT));
+    }
     value = object.nullableValue;
     if (value != null) {
       result
@@ -175,11 +181,14 @@ class _$BoundNullableGenericValueSerializer
     final parameterT =
         isUnderspecified ? FullType.object : specifiedType.parameters[0];
 
-    final result = <Object?>[
-      'value',
-      serializers.serialize(object.value, specifiedType: parameterT),
-    ];
+    final result = <Object?>[];
     Object? value;
+    value = object.value;
+    if (value != null) {
+      result
+        ..add('value')
+        ..add(serializers.serialize(value, specifiedType: parameterT));
+    }
     value = object.nullableValue;
     if (value != null) {
       result
@@ -713,8 +722,10 @@ class GenericValueBuilder<T>
   _$GenericValue<T> _build() {
     final _$result = _$v ??
         _$GenericValue<T>._(
-          value: BuiltValueNullFieldError.checkNotNull(
-              value, r'GenericValue', 'value'),
+          value: null is T
+              ? value as T
+              : BuiltValueNullFieldError.checkNotNull(
+                  value, r'GenericValue', 'value'),
         );
     replace(_$result);
     return _$result;
@@ -799,8 +810,10 @@ class InitializeGenericValueBuilder<T>
   _$InitializeGenericValue<T> _build() {
     final _$result = _$v ??
         _$InitializeGenericValue<T>._(
-          value: BuiltValueNullFieldError.checkNotNull(
-              value, r'InitializeGenericValue', 'value'),
+          value: null is T
+              ? value as T
+              : BuiltValueNullFieldError.checkNotNull(
+                  value, r'InitializeGenericValue', 'value'),
         );
     replace(_$result);
     return _$result;
@@ -893,8 +906,10 @@ class BoundGenericValueBuilder<T extends num>
   _$BoundGenericValue<T> _build() {
     final _$result = _$v ??
         _$BoundGenericValue<T>._(
-          value: BuiltValueNullFieldError.checkNotNull(
-              value, r'BoundGenericValue', 'value'),
+          value: null is T
+              ? value as T
+              : BuiltValueNullFieldError.checkNotNull(
+                  value, r'BoundGenericValue', 'value'),
           nullableValue: nullableValue,
         );
     replace(_$result);
@@ -1614,8 +1629,10 @@ class _$CustomBuilderGenericValueBuilder<T>
   _$CustomBuilderGenericValue<T> _build() {
     final _$result = _$v ??
         _$CustomBuilderGenericValue<T>._(
-          value: BuiltValueNullFieldError.checkNotNull(
-              value, r'CustomBuilderGenericValue', 'value'),
+          value: null is T
+              ? value as T
+              : BuiltValueNullFieldError.checkNotNull(
+                  value, r'CustomBuilderGenericValue', 'value'),
         );
     replace(_$result);
     return _$result;
