@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:built_value_generator/built_value_generator.dart';
+import 'package:logging/logging.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
 
@@ -125,7 +126,7 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''), contains(r'''Please make the following changes to use EnumClass:
 
 1. Make field "yes" const.
 2. Make field "no" const.
@@ -150,7 +151,7 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''), contains(r'''Please make the following changes to use EnumClass:
 
 1. Make field "yes" static const.
 2. Make field "no" static const.
@@ -175,7 +176,7 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''), contains(r'''Please make the following changes to use EnumClass:
 
 1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.'''));
       });
@@ -198,7 +199,7 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$no;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''), contains(r'''Please make the following changes to use EnumClass:
 
 1. Generated identifier "_$no" is used multiple times in test_enum, change to something else.'''));
       });
@@ -221,7 +222,7 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''),
-            endsWith(r'''Please make the following changes to use EnumClass:
+            contains(r'''Please make the following changes to use EnumClass:
 
 1. Have exactly one constructor: const TestEnum._(String name) : super(name); '''
                 'or in Dart>=2.17: const TestEnum._(super.name);'));
@@ -247,7 +248,7 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''),
-            endsWith(r'''Please make the following changes to use EnumClass:
+            contains(r'''Please make the following changes to use EnumClass:
 
 1. Have exactly one constructor: const TestEnum._(String name) : super(name); '''
                 'or in Dart>=2.17: const TestEnum._(super.name);'));
@@ -277,7 +278,7 @@ class TestEnum extends EnumClass {
 abstract class BuiltSet<T> {
 }
 '''),
-            endsWith(r'''Please make the following changes to use EnumClass:
+            contains(r'''Please make the following changes to use EnumClass:
 
 1. Have exactly one constructor: const TestEnum._(String name) : super(name); '''
                 'or in Dart>=2.17: const TestEnum._(super.name);'));
@@ -300,7 +301,7 @@ class TestEnum extends EnumClass {
 
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''), contains(r'''Please make the following changes to use EnumClass:
 
 1. Add getter: static BuiltSet<TestEnum> get values => _$values'''));
       });
@@ -322,7 +323,7 @@ class TestEnum extends EnumClass {
 
   static BuiltSet<TestEnum> get values => _$values;
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''), contains(r'''Please make the following changes to use EnumClass:
 
 1. Add method: static TestEnum valueOf(String name) => _$valueOf(name)'''));
       });
@@ -343,7 +344,7 @@ abstract class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''), contains(r'''Please make the following changes to use EnumClass:
 
 1. Make TestEnum concrete; remove "abstract".'''));
       });
@@ -369,7 +370,7 @@ class TestEnum extends EnumClass {
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
 '''),
-            endsWith(r'''Please make the following changes to use EnumClass:
+            contains(r'''Please make the following changes to use EnumClass:
 
 1. Remove `fallback = true` so that at most one constant is the fallback.'''
                 ' Currently on "TestEnum" fields "yes", "no".'));
@@ -393,7 +394,7 @@ class TestEnum extends EnumClass {
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
 }
-'''), endsWith(r'''Please make the following changes to use EnumClass:
+'''), contains(r'''Please make the following changes to use EnumClass:
 
 1. Specify either `wireName` or `wireNumber`, not both, on field "yes".'''));
       });
@@ -608,19 +609,17 @@ Future<String> generate(String source) async {
   // Capture any error from generation; if there is one, return that instead of
   // the generated output.
   String? error;
-  void captureError(dynamic logRecord) {
-    if (logRecord.error is InvalidGenerationSourceError) {
-      if (error != null) throw StateError('Expected at most one error.');
-      error = logRecord.error.toString();
-    }
+  void captureError(LogRecord logRecord) {
+    if (logRecord.level != Level.SEVERE) return;
+    if (error != null) throw StateError('Expected at most one error.');
+    error = logRecord.message;
   }
 
-  final writer = InMemoryAssetWriter();
-  await testBuilder(builder, srcs,
-      rootPackage: pkgName, writer: writer, onLog: captureError);
+  final result = await testBuilder(builder, srcs,
+      rootPackage: pkgName, onLog: captureError);
   return error ??
-      String.fromCharCodes(
-          writer.assets[AssetId(pkgName, 'lib/test_enum.g.dart')] ?? []);
+      result.readerWriter.testing.readString(AssetId(
+          pkgName, '.dart_tool/build/generated/$pkgName/lib/test_enum.g.dart'));
 }
 
 Future<String> generateTwo(String source, String source2) async {
@@ -630,12 +629,11 @@ Future<String> generateTwo(String source, String source2) async {
     '$pkgName|lib/test_enum_two.dart': '// @dart=2.19\n$source2',
   };
 
-  final writer = InMemoryAssetWriter();
-  await testBuilder(builder, srcs, rootPackage: pkgName, writer: writer);
-  return String.fromCharCodes(
-          writer.assets[AssetId(pkgName, 'lib/test_enum.g.dart')]!) +
-      String.fromCharCodes(
-          writer.assets[AssetId(pkgName, 'lib/test_enum_two.g.dart')]!);
+  final result = await testBuilder(builder, srcs, rootPackage: pkgName);
+  return result.readerWriter.testing.readString(AssetId(pkgName,
+          '.dart_tool/build/generated/$pkgName/lib/test_enum.g.dart')) +
+      result.readerWriter.testing.readString(AssetId(pkgName,
+          '.dart_tool/build/generated/$pkgName/lib/test_enum_two.g.dart'));
 }
 
 const String builtValueSource = r'''
