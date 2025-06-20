@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/build.dart';
 import 'package:built_value_generator/src/enum_source_library.dart';
 import 'package:built_value_generator/src/parsed_library_results.dart';
@@ -22,12 +22,13 @@ class BuiltValueGenerator extends Generator {
     var parsedLibraryResults = ParsedLibraryResults();
 
     // Workaround for https://github.com/google/built_value.dart/issues/941.
-    LibraryElement libraryElement;
+    LibraryElement2 libraryElement;
     var attempts = 0;
     while (true) {
       try {
         libraryElement = await buildStep.resolver.libraryFor(
-            await buildStep.resolver.assetIdForElement(library.element));
+          await buildStep.resolver.assetIdForElement(library.element),
+        );
         parsedLibraryResults.parsedLibraryResultOrThrowingMock(libraryElement);
         break;
       } catch (_) {
@@ -41,11 +42,15 @@ class BuiltValueGenerator extends Generator {
 
     var result = StringBuffer();
     try {
-      final enumCode = EnumSourceLibrary(parsedLibraryResults, libraryElement)
-          .generateCode();
+      final enumCode = EnumSourceLibrary(
+        parsedLibraryResults,
+        libraryElement,
+      ).generateCode();
       if (enumCode != null) result.writeln(enumCode);
-      final serializerSourceLibrary =
-          SerializerSourceLibrary(parsedLibraryResults, libraryElement);
+      final serializerSourceLibrary = SerializerSourceLibrary(
+        parsedLibraryResults,
+        libraryElement,
+      );
       if (serializerSourceLibrary.needsBuiltJson ||
           serializerSourceLibrary.hasSerializers) {
         result.writeln(serializerSourceLibrary.generateCode());
@@ -53,24 +58,27 @@ class BuiltValueGenerator extends Generator {
     } on InvalidGenerationSourceError catch (e, st) {
       result.writeln(_error(e.message));
       log.severe(
-          'Error in BuiltValueGenerator for '
-          '${libraryElement.source.fullName}.',
-          e,
-          st);
+        'Error in BuiltValueGenerator for '
+        '${libraryElement.firstFragment.source.fullName}.',
+        e,
+        st,
+      );
     } catch (e, st) {
       result.writeln(_error(e.toString()));
       log.severe(
-          'Unknown error in BuiltValueGenerator for '
-          '${libraryElement.source.fullName}.',
-          e,
-          st);
+        'Unknown error in BuiltValueGenerator for '
+        '${libraryElement.firstFragment.source.fullName}.',
+        e,
+        st,
+      );
     }
 
-    for (var element in libraryElement.units.expand((unit) => unit.classes)) {
+    for (var element in libraryElement.classes) {
       if (ValueSourceClass.needsBuiltValue(element)) {
         try {
           result.writeln(
-              ValueSourceClass(parsedLibraryResults, element).generateCode());
+            ValueSourceClass(parsedLibraryResults, element).generateCode(),
+          );
         } catch (e, st) {
           result.writeln(_error(e));
           log.severe('Error in BuiltValueGenerator for $element.', e, st);

@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.11.0-dev
+
+- Use `build ^3.0.0-dev`.
+- Use `source_gen ^3.0.0-dev`.
+
 # 8.10.1
 
 - Add mutable collection serializers so `built_value` can serialize `List`,
