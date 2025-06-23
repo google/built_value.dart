@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 /// Data model for the built_value chat example.
-library data_model;
+library;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -58,7 +58,7 @@ class StatusType extends EnumClass {
   static const StatusType away = _$away;
   static const StatusType offline = _$offline;
 
-  const StatusType._(String name) : super(name);
+  const StatusType._(super.name);
 
   static BuiltSet<StatusType> get values => _$stValues;
   static StatusType valueOf(String name) => _$stValueOf(name);
@@ -88,7 +88,7 @@ class LoginResponse extends EnumClass implements Response {
   static const LoginResponse badPassword = _$badPassword;
   static const LoginResponse reset = _$reset;
 
-  const LoginResponse._(String name) : super(name);
+  const LoginResponse._(super.name);
 
   static BuiltSet<LoginResponse> get values => _$lrValues;
   static LoginResponse valueOf(String name) => _$lrValueOf(name);
@@ -140,7 +140,7 @@ abstract class Welcome implements Built<Welcome, WelcomeBuilder>, Response {
 
   @override
   String render() =>
-      log.map((response) => response.render()).join('\n') + '\n' + message;
+      '${log.map((response) => response.render()).join('\n')}\n$message';
 }
 
 /// Displays a list of users and their status messages.

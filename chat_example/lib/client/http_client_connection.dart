@@ -19,7 +19,7 @@ class HttpClientConnection implements ClientConnection {
 
   HttpClientConnection._(this._websocket) {
     _websocket.onMessage.listen((message) {
-      _streamController.add(message.data as String);
+      _streamController.add((message.data as JSString).toDart);
     });
   }
 

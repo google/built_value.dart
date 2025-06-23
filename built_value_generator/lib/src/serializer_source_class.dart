@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library built_value_generator.source_class;
+library;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
@@ -34,7 +34,7 @@ abstract class SerializerSourceClass
           parsedLibraryResults: parsedLibraryResults,
           element: element,
           builderElement:
-              element.library.getClass(element.displayName + 'Builder'));
+              element.library.getClass('${element.displayName}Builder'));
 
   SerializerSourceClass._();
 
@@ -126,11 +126,9 @@ abstract class SerializerSourceClass
   @memoized
   String get genericBoundsOrObjectString => genericBounds.isEmpty
       ? ''
-      : '<' +
-          genericBounds
+      : '<${genericBounds
               .map((bound) => bound.isEmpty ? 'Object?' : bound)
-              .join(', ') +
-          '>';
+              .join(', ')}>';
 
   String get genericName => '$name$genericBoundsOrObjectString';
 
@@ -487,8 +485,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
     var nullableFields = fields.where((field) => field.isNullable).toList();
     if (nullableFields.isEmpty) return '';
 
-    return 'Object? value;' +
-        nullableFields.map((field) {
+    return 'Object? value;${nullableFields.map((field) {
           var serializeField = '''serializers.serialize(
           value,
           specifiedType:
@@ -501,7 +498,7 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
               ..add('${escapeString(field.wireName)}')
               ..add($serializeField);
           ${serializerSettings.serializeNulls ? '' : '}'}''';
-        }).join('');
+        }).join('')}';
   }
 
   /// Gets a map from generic parameter to its bound.

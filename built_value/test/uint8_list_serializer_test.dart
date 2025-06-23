@@ -36,9 +36,9 @@ void main() {
     var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {
-      var serialized_by =
+      var serializedBy =
           serializers.serialize(data, specifiedType: specifiedType);
-      expect(serialized_by, serialized);
+      expect(serializedBy, serialized);
     });
 
     test('can be deserialized', () {

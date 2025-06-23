@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library built_value_generator.source_class;
+library;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
@@ -64,7 +64,7 @@ abstract class ValueSourceClass
 
   @memoized
   ClassElement? get builderElement {
-    var result = element.library.getClass(name + 'Builder');
+    var result = element.library.getClass('${name}Builder');
     if (result == null) return null;
     // If the builder is in a generated file, then we're analyzing _after_ code
     // generation. Ignore it. This happens when running as an analyzer plugin.
@@ -331,11 +331,9 @@ abstract class ValueSourceClass
 
   String _parentBuilderInterfaceName(InterfaceType interface) {
     final displayName = DartTypes.getName(interface);
-    if (!displayName.contains('<')) return displayName + 'Builder';
+    if (!displayName.contains('<')) return '${displayName}Builder';
     final index = displayName.indexOf('<');
-    return displayName.substring(0, index) +
-        'Builder' +
-        displayName.substring(index);
+    return '${displayName.substring(0, index)}Builder${displayName.substring(index)}';
   }
 
   bool get _implementsParentBuilder =>
@@ -600,7 +598,7 @@ abstract class ValueSourceClass
               'Make class have exactly one constructor: $expectedConstructor'
           ..offset = valueClassConstructors.single.offset
           ..length = valueClassConstructors.single.length
-          ..fix = expectedConstructor + ';'));
+          ..fix = '$expectedConstructor;'));
       }
     } else {
       if (valueClassConstructors.isNotEmpty) {
@@ -707,24 +705,21 @@ abstract class ValueSourceClass
     return fields.any((field) => !field.builderFieldExists)
         ? [
             GeneratorError((b) => b
-              ..message = 'Make builder have exactly these fields: ' +
-                  fields.map((field) => field.name).join(', '))
+              ..message = 'Make builder have exactly these fields: ${fields.map((field) => field.name).join(', ')}')
           ]
         : [];
   }
 
   String get _generics =>
-      genericParameters.isEmpty ? '' : '<' + genericParameters.join(', ') + '>';
+      genericParameters.isEmpty ? '' : '<${genericParameters.join(', ')}>';
 
   String get _boundedGenerics => genericParameters.isEmpty
       ? ''
-      : '<' +
-          IterableZip([genericParameters, genericBounds]).map((zipped) {
+      : '<${IterableZip([genericParameters, genericBounds]).map((zipped) {
             final parameter = zipped[0];
             final bound = zipped[1];
             return bound.isEmpty ? parameter : '$parameter extends $bound';
-          }).join(', ') +
-          '>';
+          }).join(', ')}>';
 
   String generateCode() {
     var errors = computeErrors();
@@ -1041,7 +1036,7 @@ abstract class ValueSourceClass
     var fieldBuilders = <String, String>{};
     var needsNullCheck = <String>{};
     var genericFields = <String, String>{};
-    fields.forEach((field) {
+    for (var field in fields) {
       final name = field.name;
       if (!field.isNestedBuilder) {
         fieldBuilders[name] = name;
@@ -1066,7 +1061,7 @@ abstract class ValueSourceClass
         fieldBuilders[name] = '_$name?.build()';
         if (!field.isNullable) needsNullCheck.add(name);
       }
-    });
+    }
 
     // If there are nested builders then wrap the build in a try/catch so we
     // can add information should a nested builder fail.
@@ -1223,7 +1218,7 @@ abstract class ValueSourceClass
           'implements ${builderImplements.join(", ")} {');
     } else {
       result.writeln('abstract $_class ${name}Builder$_boundedGenerics '
-          '${interfaces.isEmpty ? '' : 'implements ' + interfaces.join(', ')}'
+          '${interfaces.isEmpty ? '' : 'implements ${interfaces.join(', ')}'}'
           '{');
 
       // Add `covariant` if we're implementing one or more parent builders.
