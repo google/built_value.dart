@@ -23,16 +23,13 @@ class HtmlDisplay implements Display {
 
   @override
   void addLocal(String text) {
-    _element.textContent = _element.textContent! +
-        '<div class="local">'
-            '${_htmlEscape.convert(text).replaceAll('\n', '<br>')}</div>';
+    _element.textContent = '${_element.textContent!}<div class="local">${_htmlEscape.convert(text).replaceAll('\n', '<br>')}</div>';
     window.scrollTo(0.toJS, document.body!.scrollHeight);
   }
 
   @override
   void add(String text) {
-    _element.textContent = _element.textContent! +
-        '${_htmlEscape.convert(text).replaceAll('\n', '<br>')}<br>';
+    _element.textContent = '${_element.textContent!}${_htmlEscape.convert(text).replaceAll('\n', '<br>')}<br>';
     window.scrollTo(0.toJS, document.body!.scrollHeight);
   }
 }

@@ -26,5 +26,5 @@ class YesNoEnum extends EnumClass {
   static const YesNoEnum yes = YesNoEnum._('yes');
   static const YesNoEnum no = YesNoEnum._('no');
 
-  const YesNoEnum._(String name) : super(name);
+  const YesNoEnum._(super.name);
 }

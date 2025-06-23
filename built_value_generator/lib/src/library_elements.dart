@@ -4,6 +4,7 @@
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor.dart';
+// ignore: implementation_imports
 import 'package:analyzer/src/dart/analysis/experiments.dart';
 import 'package:built_collection/built_collection.dart';
 

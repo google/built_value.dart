@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library built_value_generator.enum_source_class;
+library;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
@@ -103,9 +103,9 @@ abstract class EnumSourceClass
 
   @memoized
   bool get usesMixin =>
-      element.library.getClass(name + 'Mixin') != null ||
+      element.library.getClass('${name}Mixin') != null ||
       element.library.definingCompilationUnit.typeAliases
-          .any((a) => a.name == name + 'Mixin');
+          .any((a) => a.name == '${name}Mixin');
 
   @memoized
   Iterable<String> get identifiers {

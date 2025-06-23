@@ -40,7 +40,7 @@ void main() {
 
   group('Duration with known specifiedType', () {
     final specifiedType = const FullType(Duration);
-    testTable.forEach((testValue) {
+    for (var testValue in testTable) {
       test('can be serialized', () {
         expect(
             serializers.serialize(testValue[#d]!, specifiedType: specifiedType),
@@ -53,19 +53,19 @@ void main() {
                 specifiedType: specifiedType),
             testValue[#d]);
       });
-    });
-    badOnes.forEach((badOne) {
+    }
+    for (var badOne in badOnes) {
       test('deserialize throws if not ISO format', () {
         expect(
             () => serializers.deserialize(badOne, specifiedType: specifiedType),
             throwsA(const TypeMatcher<FormatException>()));
       });
-    });
+    }
   });
 
   group('Duration with unknown specifiedType', () {
     final specifiedType = FullType.unspecified;
-    testTable.forEach((testValue) {
+    for (var testValue in testTable) {
       test('can be serialized', () {
         expect(
             serializers.serialize(testValue[#d]!, specifiedType: specifiedType),
@@ -78,7 +78,7 @@ void main() {
                 specifiedType: specifiedType),
             testValue[#d]);
       });
-    });
+    }
 
     group('Duration with subsecond data', () {
       final data = Duration(seconds: 2, milliseconds: 4);

@@ -14,7 +14,7 @@ class MapSerializer implements StructuredSerializer<Map> {
   final String wireName = 'Map';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, Map Map,
+  Iterable<Object?> serialize(Serializers serializers, Map map,
       {FullType specifiedType = FullType.unspecified}) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
@@ -28,9 +28,9 @@ class MapSerializer implements StructuredSerializer<Map> {
         : specifiedType.parameters[1];
 
     var result = <Object?>[];
-    for (var key in Map.keys) {
+    for (var key in map.keys) {
       result.add(serializers.serialize(key, specifiedType: keyType));
-      final value = Map[key];
+      final value = map[key];
       result.add(serializers.serialize(value, specifiedType: valueType));
     }
     return result;

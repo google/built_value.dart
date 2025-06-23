@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library built_value_generator.source_field;
+library;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
@@ -330,10 +330,10 @@ abstract class ValueSourceField
       if (builderElementTypeIsNullable) builderElementTypeOrNull += '?';
       final builderType =
           _toBuilderType(parsedLibraryResults, element.type, type);
-      if (builderElementTypeOrNull != type + '?' &&
+      if (builderElementTypeOrNull != '$type?' &&
           (builderType == null ||
               (builderElementTypeOrNull != builderType &&
-                  builderElementTypeOrNull != builderType + '?'))) {
+                  builderElementTypeOrNull != '$builderType?'))) {
         result.add(GeneratorError((b) => b
           ..message = 'Make builder field $name have type: '
               '$type? (or, if applicable, builder)'));

@@ -777,6 +777,7 @@ abstract class MemoizedHashcodeValue
 
   @override
   @memoized
+  // ignore: hash_and_equals
   int get hashCode;
 
   MemoizedHashcodeValue._();

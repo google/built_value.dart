@@ -99,7 +99,7 @@ class DartTypes {
         parameters.write('}');
       }
 
-      return getName(dartType.returnType) + ' Function($parameters)$suffix';
+      return '${getName(dartType.returnType)} Function($parameters)$suffix';
     } else if (dartType is InterfaceType) {
       var typeArguments = dartType.typeArguments;
       if (typeArguments.isEmpty) {
@@ -117,7 +117,7 @@ class DartTypes {
     } else if (dartType is VoidType) {
       return 'void';
     } else if (dartType.isBottom) {
-      return 'Never' + suffix;
+      return 'Never$suffix';
     } else {
       throw UnimplementedError('(${dartType.runtimeType}) $dartType');
     }

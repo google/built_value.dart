@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library built_value_generator.source_library;
+library;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
@@ -195,21 +195,18 @@ abstract class SerializerSourceLibrary
 
   String _generateSerializersTopLevelFields() => serializersForAnnotations.keys
       .map((field) =>
-          'Serializers _\$$field = (Serializers().toBuilder()' +
-          (serializeForTransitiveClasses[field]!
+          'Serializers _\$$field = (Serializers().toBuilder()${(serializeForTransitiveClasses[field]!
                   .map((sourceClass) =>
                       sourceClass.generateTransitiveSerializerAdder())
                   .toList()
                 ..sort())
-              .join('\n') +
-          (serializeForTransitiveClasses[field]!
+              .join('\n')}${(serializeForTransitiveClasses[field]!
                   .map((sourceClass) =>
                       sourceClass.generateBuilderFactoryAdders(
                           element.definingCompilationUnit))
                   .toList()
                 ..sort())
-              .join('\n') +
-          ').build();')
+              .join('\n')}).build();')
       .join('\n');
 }
 
