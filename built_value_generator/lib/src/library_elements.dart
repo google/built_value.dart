@@ -2,37 +2,14 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/visitor.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/src/dart/analysis/experiments.dart';
-import 'package:built_collection/built_collection.dart';
 
-/// Tools for [LibraryElement]s.
+/// Tools for [LibraryElement2]s.
 class LibraryElements {
-  static BuiltList<ClassElement> getClassElements(
-      LibraryElement libraryElement) {
-    var result = _GetClassesVisitor();
-    libraryElement.visitChildren(result);
-    return BuiltList<ClassElement>(result.classElements);
-  }
-
-  static bool areClassMixinsEnabled(LibraryElement element) =>
+  static bool areClassMixinsEnabled(LibraryElement2 element) =>
       ExperimentStatus.knownFeatures.containsKey('class-modifiers') &&
-      element.featureSet
-          .isEnabled(ExperimentStatus.knownFeatures['class-modifiers']!);
-}
-
-/// Visitor that gets all [ClassElement]s.
-class _GetClassesVisitor extends SimpleElementVisitor {
-  final List<ClassElement> classElements = [];
-
-  @override
-  void visitClassElement(ClassElement element) {
-    classElements.add(element);
-  }
-
-  @override
-  void visitCompilationUnitElement(CompilationUnitElement element) {
-    element.visitChildren(this);
-  }
+      element.featureSet.isEnabled(
+        ExperimentStatus.knownFeatures['class-modifiers']!,
+      );
 }

@@ -5,7 +5,7 @@
 library built_value_generator.enum_source_class;
 
 import 'package:analyzer/dart/analysis/results.dart';
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
@@ -22,26 +22,30 @@ abstract class EnumSourceClass
     implements Built<EnumSourceClass, EnumSourceClassBuilder> {
   ParsedLibraryResults get parsedLibraryResults;
 
-  InterfaceElement get element;
+  InterfaceElement2 get element;
 
-  factory EnumSourceClass(ParsedLibraryResults parsedLibraryResults,
-          InterfaceElement element) =>
+  factory EnumSourceClass(
+    ParsedLibraryResults parsedLibraryResults,
+    InterfaceElement2 element,
+  ) =>
       _$EnumSourceClass._(
-          parsedLibraryResults: parsedLibraryResults, element: element);
+        parsedLibraryResults: parsedLibraryResults,
+        element: element,
+      );
   EnumSourceClass._();
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library2);
 
   @memoized
-  String get name => element.name;
+  String get name => element.name3!;
 
   /// Returns `mixin` if class modifiers are available, `abstract class`
   /// otherwise.
   ///
   /// The two are equivalent as class modifiers change the meaning of `class`.
-  String get _mixin => LibraryElements.areClassMixinsEnabled(element.library)
+  String get _mixin => LibraryElements.areClassMixinsEnabled(element.library2)
       ? 'mixin'
       : 'abstract class';
 
@@ -50,20 +54,22 @@ abstract class EnumSourceClass
 
   @memoized
   BuiltValueEnum get settings {
-    var annotations = element.metadata
+    var annotations = element.metadata2.annotations
         .map((annotation) => annotation.computeConstantValue())
         .where(
-            (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueEnum');
+          (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueEnum',
+        );
     if (annotations.isEmpty) return const BuiltValueEnum();
     var annotation = annotations.single!;
     return BuiltValueEnum(
-        wireName: annotation.getField('wireName')?.toStringValue());
+      wireName: annotation.getField('wireName')?.toStringValue(),
+    );
   }
 
   @memoized
   bool get isAbstract {
     final element = this.element;
-    return element is ClassElement && element.isAbstract;
+    return element is ClassElement2 && element.isAbstract;
   }
 
   @memoized
@@ -71,41 +77,53 @@ abstract class EnumSourceClass
       EnumSourceField.fromClassElement(parsedLibrary, element);
 
   @memoized
-  BuiltList<String> get constructors =>
-      BuiltList<String>(element.constructors.map((element) {
-        final declaration = parsedLibrary.getElementDeclaration(element);
-        return declaration?.node.toSource() ?? '';
-      }));
+  BuiltList<String> get constructors => BuiltList<String>(
+        element.constructors2.map((element) {
+          final declaration = parsedLibrary.getFragmentDeclaration(
+            element.firstFragment,
+          );
+          return declaration?.node.toSource() ?? '';
+        }),
+      );
 
   @memoized
   String? get valuesIdentifier {
-    var getter = element.getGetter('values');
+    var getter = element.getGetter2('values');
     if (getter == null) return null;
-    var source = parsedLibrary.getElementDeclaration(getter)!.node.toSource();
-    var matches = RegExp(r'static BuiltSet<' +
-            RegExp.escape(element.displayName) +
-            r'> get values => (_\$[\w$]+)\;')
-        .allMatches(source);
+    var source = parsedLibrary
+        .getFragmentDeclaration(getter.firstFragment)!
+        .node
+        .toSource();
+    var matches = RegExp(
+      r'static BuiltSet<' +
+          RegExp.escape(element.displayName) +
+          r'> get values => (_\$[\w$]+)\;',
+    ).allMatches(source);
     return matches.isEmpty ? null : matches.first.group(1);
   }
 
   @memoized
   String? get valueOfIdentifier {
-    var getter = element.getMethod('valueOf');
+    var getter = element.getMethod2('valueOf');
     if (getter == null) return null;
-    var source = parsedLibrary.getElementDeclaration(getter)!.node.toSource();
-    var matches = RegExp(r'static ' +
-            RegExp.escape(element.displayName) +
-            r' valueOf\((?:final )?String name\) \=\> (\_\$[\w$]+)\(name\)\;')
-        .allMatches(source);
+    var source = parsedLibrary
+        .getFragmentDeclaration(getter.firstFragment)!
+        .node
+        .toSource();
+    var matches = RegExp(
+      r'static ' +
+          RegExp.escape(element.displayName) +
+          r' valueOf\((?:final )?String name\) \=\> (\_\$[\w$]+)\(name\)\;',
+    ).allMatches(source);
     return matches.isEmpty ? null : matches.first.group(1);
   }
 
   @memoized
   bool get usesMixin =>
-      element.library.getClass(name + 'Mixin') != null ||
-      element.library.definingCompilationUnit.typeAliases
-          .any((a) => a.name == name + 'Mixin');
+      element.library2.getClass2(name + 'Mixin') != null ||
+      element.library2.firstFragment.typeAliases2.any(
+        (a) => a.name2 == name + 'Mixin',
+      );
 
   @memoized
   Iterable<String> get identifiers {
@@ -116,7 +134,7 @@ abstract class EnumSourceClass
     ].nonNulls.toList();
   }
 
-  static bool needsEnumClass(ClassElement classElement) {
+  static bool needsEnumClass(ClassElement2 classElement) {
     // `Object` and mixins return `null` for `supertype`.
     return DartTypes.tryGetName(classElement.supertype) == 'EnumClass';
   }
@@ -146,26 +164,30 @@ abstract class EnumSourceClass
     var fallbackFields =
         fields.where((field) => field.settings.fallback).toList();
     if (fallbackFields.length > 1) {
-      result.add('Remove `fallback = true` '
-          'so that at most one constant is the fallback. '
-          'Currently on "$name" fields '
-          '${fallbackFields.map((field) => '"${field.name}"').join(', ')}.');
+      result.add(
+        'Remove `fallback = true` '
+        'so that at most one constant is the fallback. '
+        'Currently on "$name" fields '
+        '${fallbackFields.map((field) => '"${field.name}"').join(', ')}.',
+      );
     }
     return result;
   }
 
   Iterable<String> _checkConstructor() {
     var expectedCode = RegExp(
-        'const ${RegExp.escape(name)}._\\((?:final )?String name\\) : super\\(name\\);');
-    var expectedCode217 =
-        RegExp('const ${RegExp.escape(name)}._\\(super.name\\);');
+      'const ${RegExp.escape(name)}._\\((?:final )?String name\\) : super\\(name\\);',
+    );
+    var expectedCode217 = RegExp(
+      'const ${RegExp.escape(name)}._\\(super.name\\);',
+    );
     return constructors.length == 1 &&
             (constructors.single.contains(expectedCode) ||
                 constructors.single.contains(expectedCode217))
         ? <String>[]
         : <String>[
             'Have exactly one constructor: '
-                'const $name._(String name) : super(name); or in Dart>=2.17: const $name._(super.name);'
+                'const $name._(String name) : super(name); or in Dart>=2.17: const $name._(super.name);',
           ];
   }
 
@@ -180,8 +202,10 @@ abstract class EnumSourceClass
   Iterable<String> _checkValueOf() {
     var result = <String>[];
     if (valueOfIdentifier == null) {
-      result.add('Add method: '
-          'static $name valueOf(String name) => _\$valueOf(name)');
+      result.add(
+        'Add method: '
+        'static $name valueOf(String name) => _\$valueOf(name)',
+      );
     }
     return result;
   }
@@ -190,17 +214,23 @@ abstract class EnumSourceClass
     var result = StringBuffer();
 
     for (var field in fields) {
-      result.writeln('const $name ${field.generatedIdentifier} = '
-          'const $name._(\'${escapeString(field.name)}\');');
+      result.writeln(
+        'const $name ${field.generatedIdentifier} = '
+        'const $name._(\'${escapeString(field.name)}\');',
+      );
     }
 
     result.writeln('');
 
-    result.writeln('$name $valueOfIdentifier(String name) {'
-        'switch (name) {');
+    result.writeln(
+      '$name $valueOfIdentifier(String name) {'
+      'switch (name) {',
+    );
     for (var field in fields) {
-      result.writeln("case '${escapeString(field.name)}':"
-          ' return ${field.generatedIdentifier};');
+      result.writeln(
+        "case '${escapeString(field.name)}':"
+        ' return ${field.generatedIdentifier};',
+      );
     }
 
     var fallback = fields.firstWhereOrNull((field) => field.settings.fallback);
@@ -213,8 +243,10 @@ abstract class EnumSourceClass
 
     result.writeln('');
 
-    result.writeln('final BuiltSet<$name> $valuesIdentifier ='
-        'BuiltSet<$name>(const <$name>[');
+    result.writeln(
+      'final BuiltSet<$name> $valuesIdentifier ='
+      'BuiltSet<$name>(const <$name>[',
+    );
     for (var field in fields) {
       result.writeln('${field.generatedIdentifier},');
     }
@@ -234,8 +266,9 @@ abstract class EnumSourceClass
       ..writeln('class _\$${name}Meta {')
       ..writeln('const _\$${name}Meta();');
     for (var field in fields) {
-      result
-          .writeln('$name get ${field.name} => ${field.generatedIdentifier};');
+      result.writeln(
+        '$name get ${field.name} => ${field.generatedIdentifier};',
+      );
     }
     result
       ..writeln('$name valueOf(String name) => $valueOfIdentifier(name);')

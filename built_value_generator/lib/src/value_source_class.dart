@@ -6,7 +6,7 @@ library built_value_generator.source_class;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
@@ -33,17 +33,21 @@ const String _importWithDoubleQuotes =
 abstract class ValueSourceClass
     implements Built<ValueSourceClass, ValueSourceClassBuilder> {
   ParsedLibraryResults get parsedLibraryResults;
-  InterfaceElement get element;
+  InterfaceElement2 get element;
 
-  factory ValueSourceClass(ParsedLibraryResults parsedLibraryResults,
-          InterfaceElement element) =>
+  factory ValueSourceClass(
+    ParsedLibraryResults parsedLibraryResults,
+    InterfaceElement2 element,
+  ) =>
       _$ValueSourceClass._(
-          parsedLibraryResults: parsedLibraryResults, element: element);
+        parsedLibraryResults: parsedLibraryResults,
+        element: element,
+      );
   ValueSourceClass._();
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library2);
 
   @memoized
   String get name => element.displayName;
@@ -51,7 +55,7 @@ abstract class ValueSourceClass
   /// Returns `mixin class` if class modifiers are available, `class` otherwise.
   ///
   /// The two are equivalent as class modifiers change the meaning of `class`.
-  String get _class => LibraryElements.areClassMixinsEnabled(element.library)
+  String get _class => LibraryElements.areClassMixinsEnabled(element.library2)
       ? 'mixin class'
       : 'class';
 
@@ -63,18 +67,21 @@ abstract class ValueSourceClass
       name.startsWith('_') ? '_\$${name.substring(1)}' : '_\$$name';
 
   @memoized
-  ClassElement? get builderElement {
-    var result = element.library.getClass(name + 'Builder');
+  ClassElement2? get builderElement {
+    var result = element.library2.getClass2(name + 'Builder');
     if (result == null) return null;
     // If the builder is in a generated file, then we're analyzing _after_ code
     // generation. Ignore it. This happens when running as an analyzer plugin.
-    if (result.source.fullName.endsWith('.g.dart')) return null;
+    if (result.library2.firstFragment.source.fullName.endsWith('.g.dart')) {
+      return null;
+    }
     return result;
   }
 
   @memoized
-  bool get implementsBuilt => element.allSupertypes
-      .any((interfaceType) => interfaceType.element.name == 'Built');
+  bool get implementsBuilt => element.allSupertypes.any(
+        (interfaceType) => interfaceType.element3.name3 == 'Built',
+      );
 
   @memoized
   bool get extendsIsAllowed {
@@ -92,32 +99,34 @@ abstract class ValueSourceClass
 
     for (var supertype in [
       element.supertype,
-      ...element.supertype!.element.allSupertypes
+      ...element.supertype!.element3.allSupertypes,
     ]) {
       if (DartTypes.tryGetName(supertype) == 'Object') continue;
 
       // Base class must be abstract.
-      final superElement = supertype!.element;
-      if (superElement is! ClassElement || !superElement.isAbstract) {
+      final superElement = supertype!.element3;
+      if (superElement is! ClassElement2 || !superElement.isAbstract) {
         return false;
       }
 
       // Base class must have no fields.
-      if (supertype.element.fields
-          .any((field) => !field.isStatic && !field.isSynthetic)) {
+      if (supertype.element3.fields2.any(
+        (field) => !field.isStatic && !field.isSynthetic,
+      )) {
         return false;
       }
 
       // Base class must have no abstract getters.
-      if (supertype.accessors.any((accessor) =>
-          !accessor.isStatic && accessor.isGetter && accessor.isAbstract)) {
+      if (supertype.getters.any(
+        (accessor) => !accessor.isStatic && accessor.isAbstract,
+      )) {
         return false;
       }
 
       // Base class must not implement operator==, hashCode or toString.
-      if (supertype.element.getMethod('hashCode') != null) return false;
-      if (supertype.element.getMethod('==') != null) return false;
-      if (supertype.element.getMethod('toString') != null) return false;
+      if (supertype.element3.getMethod2('hashCode') != null) return false;
+      if (supertype.element3.getMethod2('==') != null) return false;
+      if (supertype.element3.getMethod2('toString') != null) return false;
     }
 
     return true;
@@ -125,7 +134,7 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltValue get settings {
-    var annotations = element.metadata
+    var annotations = element.metadata2.annotations
         .map((annotation) => annotation.computeConstantValue())
         .where((value) => DartTypes.tryGetName(value?.type) == 'BuiltValue');
     if (annotations.isEmpty) return const BuiltValue();
@@ -133,43 +142,44 @@ abstract class ValueSourceClass
     // If a field does not exist, that means an old `built_value` version; use
     // the default.
     return BuiltValue(
-        comparableBuilders:
-            annotation.getField('comparableBuilders')?.toBoolValue() ?? false,
-        instantiable:
-            annotation.getField('instantiable')?.toBoolValue() ?? true,
-        nestedBuilders:
-            annotation.getField('nestedBuilders')?.toBoolValue() ?? true,
-        autoCreateNestedBuilders:
-            annotation.getField('autoCreateNestedBuilders')?.toBoolValue() ??
-                true,
-        generateBuilderOnSetField:
-            annotation.getField('generateBuilderOnSetField')?.toBoolValue() ??
-                false,
-        defaultCompare:
-            annotation.getField('defaultCompare')?.toBoolValue() ?? true,
-        defaultSerialize:
-            annotation.getField('defaultSerialize')?.toBoolValue() ?? true,
-        wireName: annotation.getField('wireName')?.toStringValue());
+      comparableBuilders:
+          annotation.getField('comparableBuilders')?.toBoolValue() ?? false,
+      instantiable: annotation.getField('instantiable')?.toBoolValue() ?? true,
+      nestedBuilders:
+          annotation.getField('nestedBuilders')?.toBoolValue() ?? true,
+      autoCreateNestedBuilders:
+          annotation.getField('autoCreateNestedBuilders')?.toBoolValue() ??
+              true,
+      generateBuilderOnSetField:
+          annotation.getField('generateBuilderOnSetField')?.toBoolValue() ??
+              false,
+      defaultCompare:
+          annotation.getField('defaultCompare')?.toBoolValue() ?? true,
+      defaultSerialize:
+          annotation.getField('defaultSerialize')?.toBoolValue() ?? true,
+      wireName: annotation.getField('wireName')?.toStringValue(),
+    );
   }
 
   @memoized
   BuiltList<String> get genericParameters =>
-      BuiltList<String>(element.typeParameters.map((e) => e.name));
+      BuiltList<String>(element.typeParameters2.map((e) => e.name3));
 
   @memoized
-  BuiltList<String> get genericBounds =>
-      BuiltList<String>(element.typeParameters.map((element) {
-        var bound = element.bound;
-        if (bound == null) return '';
-        return DartTypes.getName(bound) +
-            (element.bound!.nullabilitySuffix == NullabilitySuffix.question
-                ? '?'
-                : '');
-      }));
+  BuiltList<String> get genericBounds => BuiltList<String>(
+        element.typeParameters2.map((element) {
+          var bound = element.bound;
+          if (bound == null) return '';
+          return DartTypes.getName(bound) +
+              (element.bound!.nullabilitySuffix == NullabilitySuffix.question
+                  ? '?'
+                  : '');
+        }),
+      );
 
   @memoized
   ClassDeclaration get classDeclaration {
-    return parsedLibrary.getElementDeclaration(element)!.node
+    return parsedLibrary.getFragmentDeclaration(element.firstFragment)!.node
         as ClassDeclaration;
   }
 
@@ -182,32 +192,35 @@ abstract class ValueSourceClass
   bool get hasBuilderInitializer => builderInitializer != null;
 
   @memoized
-  MethodElement? get builderInitializer =>
-      element.getMethod('_initializeBuilder');
+  MethodElement2? get builderInitializer =>
+      element.getMethod2('_initializeBuilder');
 
   @memoized
   bool get hasBuilderFinalizer => builderFinalizer != null;
 
   @memoized
-  MethodElement? get builderFinalizer => element.getMethod('_finalizeBuilder');
+  MethodElement2? get builderFinalizer =>
+      element.getMethod2('_finalizeBuilder');
 
   @memoized
   BuiltMap<String, BuiltValueHook> get hooks {
     var result = MapBuilder<String, BuiltValueHook>();
-    for (var method in element.methods) {
-      var annotations = method.metadata
+    for (var method in element.methods2) {
+      var annotations = method.metadata2.annotations
           .map((annotation) => annotation.computeConstantValue())
           .where(
-              (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueHook');
+            (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueHook',
+          );
       if (annotations.isEmpty) continue;
       var annotation = annotations.single!;
       // If a field does not exist, that means an old `built_value` version; use
       // the default.
-      result[method.name] = BuiltValueHook(
-          initializeBuilder:
-              annotation.getField('initializeBuilder')?.toBoolValue() ?? false,
-          finalizeBuilder:
-              annotation.getField('finalizeBuilder')?.toBoolValue() ?? true);
+      result[method.name3!] = BuiltValueHook(
+        initializeBuilder:
+            annotation.getField('initializeBuilder')?.toBoolValue() ?? false,
+        finalizeBuilder:
+            annotation.getField('finalizeBuilder')?.toBoolValue() ?? true,
+      );
     }
     return result.build();
   }
@@ -215,7 +228,7 @@ abstract class ValueSourceClass
   @memoized
   String get builderParameters {
     return builderElement!.allSupertypes
-        .where((interfaceType) => interfaceType.element.name == 'Builder')
+        .where((interfaceType) => interfaceType.element3.name3 == 'Builder')
         .single
         .typeArguments
         .map((type) => DartTypes.getName(type))
@@ -224,15 +237,22 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltList<ValueSourceField> get fields => ValueSourceField.fromClassElements(
-      parsedLibraryResults, settings, parsedLibrary, element, builderElement);
+        parsedLibraryResults,
+        settings,
+        parsedLibrary,
+        element,
+        builderElement,
+      );
 
   @memoized
-  String get source =>
-      element.library.definingCompilationUnit.source.contents.data;
+  String get source => element.library2.firstFragment.source.contents.data;
 
   @memoized
   String get partStatement {
-    var fileName = element.library.source.shortName.replaceAll('.dart', '');
+    var fileName = element.library2.firstFragment.source.shortName.replaceAll(
+      '.dart',
+      '',
+    );
     return "part '$fileName.g.dart';";
   }
 
@@ -263,44 +283,63 @@ abstract class ValueSourceClass
   @memoized
   bool get valueClassIsAbstract {
     final element = this.element;
-    return element is ClassElement && element.isAbstract;
+    return element is ClassElement2 && element.isAbstract;
   }
 
   @memoized
   BuiltList<ConstructorDeclaration> get valueClassConstructors =>
-      BuiltList<ConstructorDeclaration>(element.constructors
-          .where((constructor) =>
-              !constructor.isFactory && !constructor.isSynthetic)
-          .map((constructor) => parsedLibrary
-              .getElementDeclaration(constructor)!
-              .node as ConstructorDeclaration));
+      BuiltList<ConstructorDeclaration>(
+        element.constructors2
+            .where(
+              (constructor) =>
+                  !constructor.isFactory && !constructor.isSynthetic,
+            )
+            .map(
+              (constructor) => parsedLibrary
+                  .getFragmentDeclaration(constructor.firstFragment)!
+                  .node as ConstructorDeclaration,
+            ),
+      );
 
   @memoized
   BuiltList<ConstructorDeclaration> get valueClassFactories =>
-      BuiltList<ConstructorDeclaration>(element.constructors
-          .where((constructor) => constructor.isFactory)
-          .map((factory) => parsedLibrary.getElementDeclaration(factory)!.node
-              as ConstructorDeclaration));
+      BuiltList<ConstructorDeclaration>(
+        element.constructors2.where((constructor) => constructor.isFactory).map(
+              (factory) => parsedLibrary
+                  .getFragmentDeclaration(factory.firstFragment)!
+                  .node as ConstructorDeclaration,
+            ),
+      );
 
   @memoized
   bool get builderClassIsAbstract => builderElement!.isAbstract;
 
   @memoized
-  BuiltList<String> get builderClassConstructors =>
-      BuiltList<String>(builderElement!.constructors
-          .where((constructor) =>
-              !constructor.isFactory && !constructor.isSynthetic)
-          .map((constructor) => parsedLibrary
-              .getElementDeclaration(constructor)!
-              .node
-              .toSource()));
+  BuiltList<String> get builderClassConstructors => BuiltList<String>(
+        builderElement!.constructors2
+            .where(
+              (constructor) =>
+                  !constructor.isFactory && !constructor.isSynthetic,
+            )
+            .map(
+              (constructor) => parsedLibrary
+                  .getFragmentDeclaration(constructor.firstFragment)!
+                  .node
+                  .toSource(),
+            ),
+      );
 
   @memoized
-  BuiltList<String> get builderClassFactories =>
-      BuiltList<String>(builderElement!.constructors
-          .where((constructor) => constructor.isFactory)
-          .map((factory) =>
-              parsedLibrary.getElementDeclaration(factory)!.node.toSource()));
+  BuiltList<String> get builderClassFactories => BuiltList<String>(
+        builderElement!.constructors2
+            .where((constructor) => constructor.isFactory)
+            .map(
+              (factory) => parsedLibrary
+                  .getFragmentDeclaration(factory.firstFragment)!
+                  .node
+                  .toSource(),
+            ),
+      );
 
   @memoized
   BuiltList<MemoizedGetter> get memoizedGetters =>
@@ -313,11 +352,15 @@ abstract class ValueSourceClass
   /// Additionally, if the value class implements other value classes, the
   /// builder implements the corresponding builders.
   @memoized
-  BuiltList<String> get builderImplements => BuiltList<String>.build((b) => b
-    ..add('Builder<$name$_generics, ${name}Builder$_generics>')
-    ..addAll(element.interfaces
-        .where((interface) => needsBuiltValue(interface.element))
-        .map(_parentBuilderInterfaceName)));
+  BuiltList<String> get builderImplements => BuiltList<String>.build(
+        (b) => b
+          ..add('Builder<$name$_generics, ${name}Builder$_generics>')
+          ..addAll(
+            element.interfaces
+                .where((interface) => needsBuiltValue(interface.element3))
+                .map(_parentBuilderInterfaceName),
+          ),
+      );
 
   /// Returns the `with` clause for the builder.
   ///
@@ -325,7 +368,7 @@ abstract class ValueSourceClass
   /// the corresponding builders.
   @memoized
   BuiltList<String> get builderMixins => element.mixins
-      .where((interface) => needsBuiltValue(interface.element))
+      .where((interface) => needsBuiltValue(interface.element3))
       .map(_parentBuilderInterfaceName)
       .toBuiltList();
 
@@ -343,44 +386,46 @@ abstract class ValueSourceClass
 
   @memoized
   bool get implementsHashCode {
-    var getter = element.getGetter('hashCode');
+    var getter = element.getGetter2('hashCode');
     return getter != null && !getter.isAbstract;
   }
 
   @memoized
   bool get declaresMemoizedHashCode {
-    var getter = element.getGetter('hashCode');
+    var getter = element.getGetter2('hashCode');
     return getter != null &&
         getter.isAbstract &&
-        getter.metadata
-            .any((metadata) => metadataToStringValue(metadata) == 'memoized');
+        getter.metadata2.annotations.any(
+          (metadata) => metadataToStringValue(metadata) == 'memoized',
+        );
   }
 
   @memoized
-  bool get implementsOperatorEquals => element.getMethod('==') != null;
+  bool get implementsOperatorEquals => element.getMethod2('==') != null;
 
   @memoized
   bool get implementsToString {
     // Check for any `toString` implementation apart from the one defined on
     // `Object`.
-    var method = element.lookUpConcreteMethod('toString', element.library)!;
-    var clazz = method.enclosingElement3;
-    return clazz is! ClassElement || clazz.name != 'Object';
+    var method = element.lookUpConcreteMethod('toString', element.library2)!;
+    var clazz = method.enclosingElement2;
+    return clazz is! ClassElement2 || clazz.name3 != 'Object';
   }
 
   @memoized
-  CompilationUnitElement get compilationUnit =>
-      element.library.definingCompilationUnit;
+  LibraryFragment get libraryFragment => element.library2.firstFragment;
 
-  static bool needsBuiltValue(InterfaceElement classElement) {
+  static bool needsBuiltValue(InterfaceElement2 classElement) {
     // TODO(davidmorgan): more exact type check.
     return !classElement.displayName.startsWith('_\$') &&
         (classElement.allSupertypes.any(
-                (interfaceType) => interfaceType.element.name == 'Built') ||
-            classElement.metadata
+              (interfaceType) => interfaceType.element3.name3 == 'Built',
+            ) ||
+            classElement.metadata2.annotations
                 .map((annotation) => annotation.computeConstantValue())
-                .any((value) =>
-                    DartTypes.tryGetName(value?.type) == 'BuiltValue'));
+                .any(
+                  (value) => DartTypes.tryGetName(value?.type) == 'BuiltValue',
+                ));
   }
 
   Iterable<GeneratorError> computeErrors() {
@@ -390,7 +435,7 @@ abstract class ValueSourceClass
       ..._checkValueClass(),
       ..._checkBuilderClass(),
       ..._checkFieldList(),
-      for (var field in fields) ...field.computeErrors()
+      for (var field in fields) ...field.computeErrors(),
     ];
   }
 
@@ -400,19 +445,23 @@ abstract class ValueSourceClass
     var directives = (classDeclaration.parent as CompilationUnit).directives;
     if (directives.isEmpty) {
       return [
-        GeneratorError((b) => b
-          ..message = 'Import generated part: $partStatement'
-          ..offset = 0
-          ..length = 0
-          ..fix = '$partStatement\n\n')
+        GeneratorError(
+          (b) => b
+            ..message = 'Import generated part: $partStatement'
+            ..offset = 0
+            ..length = 0
+            ..fix = '$partStatement\n\n',
+        ),
       ];
     } else {
       return [
-        GeneratorError((b) => b
-          ..message = 'Import generated part: $partStatement'
-          ..offset = directives.last.offset + directives.last.length
-          ..length = 0
-          ..fix = '\n\n$partStatement\n\n')
+        GeneratorError(
+          (b) => b
+            ..message = 'Import generated part: $partStatement'
+            ..offset = directives.last.offset + directives.last.length
+            ..length = 0
+            ..fix = '\n\n$partStatement\n\n',
+        ),
       ];
     }
   }
@@ -423,9 +472,11 @@ abstract class ValueSourceClass
     // (Collection builders, in particularly, are definitely not comparable).
     if (settings.comparableBuilders && settings.nestedBuilders) {
       return [
-        GeneratorError((b) => b
-          ..message = 'Set `nestedBuilders: false`'
-              ' in order to use `comparableBuilders: true`.')
+        GeneratorError(
+          (b) => b
+            ..message = 'Set `nestedBuilders: false`'
+                ' in order to use `comparableBuilders: true`.',
+        ),
       ];
     } else {
       return [];
@@ -436,33 +487,46 @@ abstract class ValueSourceClass
     var result = <GeneratorError>[];
 
     if (!valueClassIsAbstract) {
-      result.add(GeneratorError((b) => b
-        ..message = 'Make class abstract.'
-        ..offset = classDeclaration.offset
-        ..length = 0
-        ..fix = 'abstract '));
+      result.add(
+        GeneratorError(
+          (b) => b
+            ..message = 'Make class abstract.'
+            ..offset = classDeclaration.offset
+            ..length = 0
+            ..fix = 'abstract ',
+        ),
+      );
     }
 
     if (hasBuiltValueImportWithShow) {
-      result.add(GeneratorError((b) => b
-        ..message = 'Stop using "show" when importing '
-            '"package:built_value/built_value.dart". It prevents the '
-            'generated code from finding helper methods.'));
+      result.add(
+        GeneratorError(
+          (b) => b
+            ..message = 'Stop using "show" when importing '
+                '"package:built_value/built_value.dart". It prevents the '
+                'generated code from finding helper methods.',
+        ),
+      );
     }
 
     if (hasBuiltValueImportWithAs) {
-      result.add(GeneratorError((b) => b
-        ..message = 'Stop using "as" when importing '
-            '"package:built_value/built_value.dart". It prevents the generated '
-            'code from finding helper methods.'));
+      result.add(
+        GeneratorError(
+          (b) => b
+            ..message = 'Stop using "as" when importing '
+                '"package:built_value/built_value.dart". It prevents the generated '
+                'code from finding helper methods.',
+        ),
+      );
     }
 
     var implementsClause = classDeclaration.implementsClause;
     var expectedInterface = 'Built<$name$_generics, ${name}Builder$_generics>';
 
     var implementsClauseIsCorrect = implementsClause != null &&
-        implementsClause.interfaces
-            .any((type) => type.toSource() == expectedInterface);
+        implementsClause.interfaces.any(
+          (type) => type.toSource() == expectedInterface,
+        );
 
     // Built parameters need fixing if they are not as expected, unless 1) the
     // class is marked `@BuiltValue(instantiable: false)` and 2) there is no
@@ -471,17 +535,23 @@ abstract class ValueSourceClass
     // same interface twice with different type parameters.
     var implementsClauseIsAllowedToBeIncorrect = !settings.instantiable &&
         (implementsClause == null ||
-            !implementsClause.interfaces.any((type) =>
-                type.toSource() == 'Built' ||
-                type.toSource().startsWith('Built<')));
+            !implementsClause.interfaces.any(
+              (type) =>
+                  type.toSource() == 'Built' ||
+                  type.toSource().startsWith('Built<'),
+            ));
 
     if (!implementsClauseIsCorrect && !implementsClauseIsAllowedToBeIncorrect) {
       if (implementsClause == null) {
-        result.add(GeneratorError((b) => b
-          ..message = 'Make class implement $expectedInterface.'
-          ..offset = classDeclaration.leftBracket.offset - 1
-          ..length = 0
-          ..fix = 'implements $expectedInterface'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message = 'Make class implement $expectedInterface.'
+              ..offset = classDeclaration.leftBracket.offset - 1
+              ..length = 0
+              ..fix = 'implements $expectedInterface',
+          ),
+        );
       } else {
         var found = false;
         final interfaces = implementsClause.interfaces.map((type) {
@@ -494,153 +564,227 @@ abstract class ValueSourceClass
         }).toList();
         if (!found) interfaces.add(expectedInterface);
 
-        result.add(GeneratorError((b) => b
-          ..message = 'Make class implement $expectedInterface.'
-          ..offset = implementsClause.offset
-          ..length = implementsClause.length
-          ..fix = 'implements ${interfaces.join(", ")}'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message = 'Make class implement $expectedInterface.'
+              ..offset = implementsClause.offset
+              ..length = implementsClause.length
+              ..fix = 'implements ${interfaces.join(", ")}',
+          ),
+        );
       }
     }
 
     if (!extendsIsAllowed) {
-      result.add(GeneratorError((b) => b
-        ..message = 'Stop class extending other classes. '
-            'Only "implements" and "extends Object with" are allowed.'));
+      result.add(
+        GeneratorError(
+          (b) => b
+            ..message = 'Stop class extending other classes. '
+                'Only "implements" and "extends Object with" are allowed.',
+        ),
+      );
     }
 
-    bool isStaticBuilderHook(MethodElement method) {
+    bool isStaticBuilderHook(MethodElement2 method) {
       return method.isStatic &&
           method.returnType is VoidType &&
-          method.parameters.length == 1 &&
-          parsedLibrary.getElementDeclaration(method.parameters[0])!.node
-              is SimpleFormalParameter &&
-          DartTypes.stripGenerics((parsedLibrary
-                      .getElementDeclaration(method.parameters[0])!
-                      .node as SimpleFormalParameter)
-                  .type!
-                  .toSource()) ==
+          method.formalParameters.length == 1 &&
+          parsedLibrary
+              .getFragmentDeclaration(
+                method.formalParameters[0].firstFragment,
+              )!
+              .node is SimpleFormalParameter &&
+          DartTypes.stripGenerics(
+                (parsedLibrary
+                        .getFragmentDeclaration(
+                          method.formalParameters[0].firstFragment,
+                        )!
+                        .node as SimpleFormalParameter)
+                    .type!
+                    .toSource(),
+              ) ==
               '${name}Builder';
     }
 
     if (settings.instantiable) {
       if (hasBuilderInitializer) {
         if (!isStaticBuilderHook(builderInitializer!)) {
-          result.add(GeneratorError((b) => b
-            ..message = 'Fix _initializeBuilder signature: '
-                'static void _initializeBuilder(${name}Builder b)'));
+          result.add(
+            GeneratorError(
+              (b) => b
+                ..message = 'Fix _initializeBuilder signature: '
+                    'static void _initializeBuilder(${name}Builder b)',
+            ),
+          );
         }
         if (hooks.containsKey('_initializeBuilder')) {
-          result.add(GeneratorError((b) => b
-            ..message = 'Remove @BuiltValueHook from _initializeBuilder. '
-                'It is a magic method name that is always a hook. '
-                'Or, to use the annotation, please rename the method.'));
+          result.add(
+            GeneratorError(
+              (b) => b
+                ..message = 'Remove @BuiltValueHook from _initializeBuilder. '
+                    'It is a magic method name that is always a hook. '
+                    'Or, to use the annotation, please rename the method.',
+            ),
+          );
         }
       }
       if (hasBuilderFinalizer) {
         if (!isStaticBuilderHook(builderFinalizer!)) {
-          result.add(GeneratorError((b) => b
-            ..message = 'Fix _finalizeBuilder signature: '
-                'static void _finalizeBuilder(${name}Builder b)'));
+          result.add(
+            GeneratorError(
+              (b) => b
+                ..message = 'Fix _finalizeBuilder signature: '
+                    'static void _finalizeBuilder(${name}Builder b)',
+            ),
+          );
         }
         if (hooks.containsKey('_finalizeBuilder')) {
-          result.add(GeneratorError((b) => b
-            ..message = 'Remove @BuiltValueHook from _finalizeBuilder. '
-                'It is a magic method name that is always a hook. '
-                'Or, to use the annotation, please rename the method.'));
+          result.add(
+            GeneratorError(
+              (b) => b
+                ..message = 'Remove @BuiltValueHook from _finalizeBuilder. '
+                    'It is a magic method name that is always a hook. '
+                    'Or, to use the annotation, please rename the method.',
+            ),
+          );
         }
       }
-      for (var hook in hooks.entries.where((hook) =>
-          hook.value.initializeBuilder || hook.value.finalizeBuilder)) {
+      for (var hook in hooks.entries.where(
+        (hook) => hook.value.initializeBuilder || hook.value.finalizeBuilder,
+      )) {
         if (hook.key == '_initializeBuilder') continue;
         if (hook.key == '_finalizeBuilder') continue;
         var method =
-            element.methods.where((method) => method.name == hook.key).single;
+            element.methods2.where((method) => method.name3 == hook.key).single;
         if (!isStaticBuilderHook(method)) {
-          result.add(GeneratorError((b) => b
-            ..message =
-                'Fix ${hook.key} signature to use it with @BuiltValueHook: '
-                    'static void ${hook.key}(${name}Builder b)'));
+          result.add(
+            GeneratorError(
+              (b) => b
+                ..message =
+                    'Fix ${hook.key} signature to use it with @BuiltValueHook: '
+                        'static void ${hook.key}(${name}Builder b)',
+            ),
+          );
         }
       }
 
       final expectedConstructor = '$name._()';
       if (valueClassConstructors.isEmpty) {
-        result.add(GeneratorError((b) => b
-          ..message =
-              'Make class have exactly one constructor: $expectedConstructor;'
-          ..offset = classDeclaration.rightBracket.offset
-          ..length = 0
-          ..fix = '  $expectedConstructor;\n'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message =
+                  'Make class have exactly one constructor: $expectedConstructor;'
+              ..offset = classDeclaration.rightBracket.offset
+              ..length = 0
+              ..fix = '  $expectedConstructor;\n',
+          ),
+        );
       } else if (valueClassConstructors.length > 1) {
         var found = false;
         for (var constructor in valueClassConstructors) {
           if (constructor.toSource().contains(expectedConstructor)) {
             found = true;
           } else {
-            result.add(GeneratorError((b) => b
-              ..message = 'Remove invalid constructor.'
-              ..offset = constructor.offset
-              ..length = constructor.length
-              ..fix = ''));
+            result.add(
+              GeneratorError(
+                (b) => b
+                  ..message = 'Remove invalid constructor.'
+                  ..offset = constructor.offset
+                  ..length = constructor.length
+                  ..fix = '',
+              ),
+            );
           }
         }
         if (!found) {
-          result.add(GeneratorError((b) => b
-            ..message =
-                'Make class have exactly one constructor: $expectedConstructor;'
-            ..offset = classDeclaration.rightBracket.offset
-            ..length = 0
-            ..fix = '  $expectedConstructor;\n'));
+          result.add(
+            GeneratorError(
+              (b) => b
+                ..message =
+                    'Make class have exactly one constructor: $expectedConstructor;'
+                ..offset = classDeclaration.rightBracket.offset
+                ..length = 0
+                ..fix = '  $expectedConstructor;\n',
+            ),
+          );
         }
-      } else if (!(valueClassConstructors.single
-          .toSource()
-          .contains(expectedConstructor))) {
-        result.add(GeneratorError((b) => b
-          ..message =
-              'Make class have exactly one constructor: $expectedConstructor'
-          ..offset = valueClassConstructors.single.offset
-          ..length = valueClassConstructors.single.length
-          ..fix = expectedConstructor + ';'));
+      } else if (!(valueClassConstructors.single.toSource().contains(
+            expectedConstructor,
+          ))) {
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message =
+                  'Make class have exactly one constructor: $expectedConstructor'
+              ..offset = valueClassConstructors.single.offset
+              ..length = valueClassConstructors.single.length
+              ..fix = expectedConstructor + ';',
+          ),
+        );
       }
     } else {
       if (valueClassConstructors.isNotEmpty) {
-        result.add(GeneratorError((b) => b
-          ..message =
-              'Remove all constructors or remove "instantiable: false".'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message =
+                  'Remove all constructors or remove "instantiable: false".',
+          ),
+        );
       }
     }
 
     if (settings.instantiable) {
       if (!valueClassFactories.any(
-          (factory) => factory.toSource().contains('$implName$_generics'))) {
+        (factory) => factory.toSource().contains('$implName$_generics'),
+      )) {
         final exampleFactory = 'factory $name('
             '[void Function(${name}Builder$_generics)? updates]) = '
             '$implName$_generics;';
-        result.add(GeneratorError((b) => b
-          ..message =
-              'Add a factory so your class can be instantiated. Example:\n\n'
-                  '$exampleFactory'
-          ..offset = classDeclaration.rightBracket.offset
-          ..length = 0
-          ..fix = '  $exampleFactory\n'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message =
+                  'Add a factory so your class can be instantiated. Example:\n\n'
+                      '$exampleFactory'
+              ..offset = classDeclaration.rightBracket.offset
+              ..length = 0
+              ..fix = '  $exampleFactory\n',
+          ),
+        );
       }
     } else {
       if (valueClassFactories.isNotEmpty) {
-        result.add(GeneratorError((b) => b
-          ..message = 'Remove all factories or remove "instantiable: false".'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message =
+                  'Remove all factories or remove "instantiable: false".',
+          ),
+        );
       }
     }
 
     if (implementsHashCode) {
-      result.add(GeneratorError((b) => b
-        ..message =
-            'Stop implementing hashCode; it will be generated for you.'));
+      result.add(
+        GeneratorError(
+          (b) => b
+            ..message =
+                'Stop implementing hashCode; it will be generated for you.',
+        ),
+      );
     }
 
     if (implementsOperatorEquals) {
-      result.add(GeneratorError((b) => b
-        ..message =
-            'Stop implementing operator==; it will be generated for you.'));
+      result.add(
+        GeneratorError(
+          (b) => b
+            ..message =
+                'Stop implementing operator==; it will be generated for you.',
+        ),
+      );
     }
 
     return result;
@@ -652,17 +796,22 @@ abstract class ValueSourceClass
 
     if (!builderClassIsAbstract) {
       result.add(
-          GeneratorError((b) => b..message = 'Make builder class abstract.'));
+        GeneratorError((b) => b..message = 'Make builder class abstract.'),
+      );
     }
 
     if (settings.instantiable) {
       final expectedBuilderParameters =
           '$name$_generics, ${name}Builder$_generics';
       if (builderParameters != expectedBuilderParameters) {
-        result.add(GeneratorError((b) => b
-          ..message =
-              'Make builder class implement Builder<$expectedBuilderParameters>. '
-                  'Currently: Builder<$builderParameters>'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message =
+                  'Make builder class implement Builder<$expectedBuilderParameters>. '
+                      'Currently: Builder<$builderParameters>',
+          ),
+        );
       }
     }
 
@@ -670,15 +819,23 @@ abstract class ValueSourceClass
       final expectedConstructor = '${name}Builder._()';
       if (builderClassConstructors.length != 1 ||
           !(builderClassConstructors.single.contains(expectedConstructor))) {
-        result.add(GeneratorError((b) => b
-          ..message =
-              'Make builder class have exactly one constructor: $expectedConstructor;'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message =
+                  'Make builder class have exactly one constructor: $expectedConstructor;',
+          ),
+        );
       }
     } else {
       if (builderClassConstructors.isNotEmpty) {
-        result.add(GeneratorError((b) => b
-          ..message = 'Remove all builder constructors '
-              'or remove "instantiable: false".'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message = 'Remove all builder constructors '
+                  'or remove "instantiable: false".',
+          ),
+        );
       }
     }
 
@@ -687,15 +844,23 @@ abstract class ValueSourceClass
           'factory ${name}Builder() = ${implName}Builder$_generics;';
       if (builderClassFactories.length != 1 ||
           !builderClassFactories.single.contains(expectedFactory)) {
-        result.add(GeneratorError((b) => b
-          ..message =
-              'Make builder class have exactly one factory: $expectedFactory'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message =
+                  'Make builder class have exactly one factory: $expectedFactory',
+          ),
+        );
       }
     } else {
       if (builderClassFactories.isNotEmpty) {
-        result.add(GeneratorError((b) => b
-          ..message =
-              'Remove all builder factories or remove "instantiable: false".'));
+        result.add(
+          GeneratorError(
+            (b) => b
+              ..message =
+                  'Remove all builder factories or remove "instantiable: false".',
+          ),
+        );
       }
     }
 
@@ -706,9 +871,11 @@ abstract class ValueSourceClass
     if (!hasBuilder || !settings.instantiable) return <GeneratorError>[];
     return fields.any((field) => !field.builderFieldExists)
         ? [
-            GeneratorError((b) => b
-              ..message = 'Make builder have exactly these fields: ' +
-                  fields.map((field) => field.name).join(', '))
+            GeneratorError(
+              (b) => b
+                ..message = 'Make builder have exactly these fields: ' +
+                    fields.map((field) => field.name).join(', '),
+            ),
           ]
         : [];
   }
@@ -743,13 +910,16 @@ abstract class ValueSourceClass
   /// Generates the value class implementation.
   String _generateImpl() {
     var result = StringBuffer();
-    result.writeln('class $implName$_boundedGenerics '
-        'extends $name$_generics {');
+    result.writeln(
+      'class $implName$_boundedGenerics '
+      'extends $name$_generics {',
+    );
     for (var field in fields) {
-      final type = field.typeInCompilationUnit(compilationUnit);
+      final type = field.typeInLibraryFragment(libraryFragment);
       result.writeln('@override');
-      result
-          .writeln('final $type${field.isNullable ? '?' : ''} ${field.name};');
+      result.writeln(
+        'final $type${field.isNullable ? '?' : ''} ${field.name};',
+      );
     }
     for (var memoizedGetter in memoizedGetters) {
       result.writeln('${memoizedGetter.returnType}? __${memoizedGetter.name};');
@@ -766,14 +936,18 @@ abstract class ValueSourceClass
     // returns the right type directly in private `_build` so there is no need
     // to cast.
     if (hasBuilder) {
-      result.writeln('factory $implName(['
-          'void Function(${name}Builder$_generics)? updates]) '
-          '=> (${name}Builder$_generics()..update(updates)).build()'
-          ' as $implName$_generics;');
+      result.writeln(
+        'factory $implName(['
+        'void Function(${name}Builder$_generics)? updates]) '
+        '=> (${name}Builder$_generics()..update(updates)).build()'
+        ' as $implName$_generics;',
+      );
     } else {
-      result.writeln('factory $implName(['
-          'void Function(${name}Builder$_generics)? updates]) '
-          '=> (${name}Builder$_generics()..update(updates))._build();');
+      result.writeln(
+        'factory $implName(['
+        'void Function(${name}Builder$_generics)? updates]) '
+        '=> (${name}Builder$_generics()..update(updates))._build();',
+      );
     }
 
     result.writeln();
@@ -782,10 +956,12 @@ abstract class ValueSourceClass
       result.write('$implName._() : super._();');
     } else {
       result.write('$implName._({');
-      result.write(fields.map((field) {
-        var maybeRequired = field.isNullable ? '' : 'required ';
-        return '${maybeRequired}this.${field.name}';
-      }).join(', '));
+      result.write(
+        fields.map((field) {
+          var maybeRequired = field.isNullable ? '' : 'required ';
+          return '${maybeRequired}this.${field.name}';
+        }).join(', '),
+      );
       result.write('}) : super._();');
     }
     result.writeln();
@@ -794,36 +970,45 @@ abstract class ValueSourceClass
       result.writeln('@override');
       if (memoizedGetter.isNullable) {
         result.writeln(
-            '${memoizedGetter.returnType}? get ${memoizedGetter.name} {');
+          '${memoizedGetter.returnType}? get ${memoizedGetter.name} {',
+        );
         result.writeln('if (!___${memoizedGetter.name}) {');
         result.writeln(
-            '__${memoizedGetter.name} = super.${memoizedGetter.name};');
+          '__${memoizedGetter.name} = super.${memoizedGetter.name};',
+        );
         result.writeln('___${memoizedGetter.name} = true;');
         result.writeln('}');
         result.writeln('return __${memoizedGetter.name};');
         result.writeln('}');
       } else {
         result.writeln(
-            '${memoizedGetter.returnType} get ${memoizedGetter.name} =>');
+          '${memoizedGetter.returnType} get ${memoizedGetter.name} =>',
+        );
         result.writeln(
-            '__${memoizedGetter.name} ??= super.${memoizedGetter.name};');
+          '__${memoizedGetter.name} ??= super.${memoizedGetter.name};',
+        );
       }
       result.writeln();
     }
 
     result.writeln('@override');
     result.writeln(
-        '$name$_generics rebuild(void Function(${name}Builder$_generics) updates) '
-        '=> (toBuilder()..update(updates)).build();');
+      '$name$_generics rebuild(void Function(${name}Builder$_generics) updates) '
+      '=> (toBuilder()..update(updates)).build();',
+    );
     result.writeln();
 
     result.writeln('@override');
     if (hasBuilder) {
-      result.writeln('${implName}Builder$_generics toBuilder() '
-          '=> ${implName}Builder$_generics()..replace(this);');
+      result.writeln(
+        '${implName}Builder$_generics toBuilder() '
+        '=> ${implName}Builder$_generics()..replace(this);',
+      );
     } else {
-      result.writeln('${name}Builder$_generics toBuilder() '
-          '=> ${name}Builder$_generics()..replace(this);');
+      result.writeln(
+        '${name}Builder$_generics toBuilder() '
+        '=> ${name}Builder$_generics()..replace(this);',
+      );
     }
     result.writeln();
 
@@ -835,13 +1020,18 @@ abstract class ValueSourceClass
       result.writeln('String toString() {');
       if (fields.isEmpty) {
         result.writeln(
-            "return newBuiltValueToStringHelper(r'$name').toString();");
+          "return newBuiltValueToStringHelper(r'$name').toString();",
+        );
       } else {
         result.writeln("return (newBuiltValueToStringHelper(r'$name')");
-        result.writeln(fields
-            .map((field) =>
-                "..add('${escapeString(field.name)}',  ${field.name})")
-            .join(''));
+        result.writeln(
+          fields
+              .map(
+                (field) =>
+                    "..add('${escapeString(field.name)}',  ${field.name})",
+              )
+              .join(''),
+        );
         result.writeln(').toString();');
       }
       result.writeln('}');
@@ -856,15 +1046,21 @@ abstract class ValueSourceClass
   String _generateBuilder() {
     var result = StringBuffer();
     if (hasBuilder) {
-      result.writeln('class ${implName}Builder$_boundedGenerics '
-          'extends ${name}Builder$_generics {');
+      result.writeln(
+        'class ${implName}Builder$_boundedGenerics '
+        'extends ${name}Builder$_generics {',
+      );
     } else if (builderMixins.isNotEmpty) {
-      result.writeln('class ${name}Builder$_boundedGenerics '
-          'with ${builderMixins.join(", ")} '
-          'implements ${builderImplements.join(", ")} {');
+      result.writeln(
+        'class ${name}Builder$_boundedGenerics '
+        'with ${builderMixins.join(", ")} '
+        'implements ${builderImplements.join(", ")} {',
+      );
     } else {
-      result.writeln('class ${name}Builder$_boundedGenerics '
-          'implements ${builderImplements.join(", ")} {');
+      result.writeln(
+        'class ${name}Builder$_boundedGenerics '
+        'implements ${builderImplements.join(", ")} {',
+      );
     }
 
     // Builder holds a reference to a value, copies from it lazily.
@@ -877,9 +1073,9 @@ abstract class ValueSourceClass
       if (field.isNestedBuilder) {
         type = hasBuilder
             ? field.builderElementTypeWithPrefix
-            : field.typeInBuilder(compilationUnit)!;
+            : field.typeInBuilder(libraryFragment)!;
       } else {
-        type = field.typeInCompilationUnit(compilationUnit);
+        type = field.typeInLibraryFragment(libraryFragment);
       }
 
       final name = field.name;
@@ -985,7 +1181,9 @@ abstract class ValueSourceClass
         if (field.isNestedBuilder) {
           var maybeOrNull = field.isNullable ? '?' : '';
           result.writeln(
-              '$nameInBuilder = ' '\$v.$name$maybeOrNull.toBuilder();');
+            '$nameInBuilder = '
+            '\$v.$name$maybeOrNull.toBuilder();',
+          );
         } else {
           result.writeln('$nameInBuilder = \$v.$name;');
         }
@@ -1017,8 +1215,9 @@ abstract class ValueSourceClass
 
     result.writeln('@override');
     result.writeln(
-        'void update(void Function(${name}Builder$_generics)? updates) {'
-        ' if (updates != null) updates(this); }');
+      'void update(void Function(${name}Builder$_generics)? updates) {'
+      ' if (updates != null) updates(this); }',
+    );
     result.writeln();
 
     result.writeln('@override');
@@ -1050,7 +1249,7 @@ abstract class ValueSourceClass
         }
         if (field.hasNullableGenericType) {
           genericFields[name] =
-              field.element.getter!.returnType.element!.displayName;
+              field.element.getter2!.returnType.element3!.displayName;
         }
       } else if (!field.isNullable && field.isAutoCreateNestedBuilder) {
         // If not nullable, go via the public accessor, which instantiates
@@ -1070,8 +1269,9 @@ abstract class ValueSourceClass
 
     // If there are nested builders then wrap the build in a try/catch so we
     // can add information should a nested builder fail.
-    var needsTryCatchOnBuild =
-        fieldBuilders.keys.any((field) => fieldBuilders[field] != field);
+    var needsTryCatchOnBuild = fieldBuilders.keys.any(
+      (field) => fieldBuilders[field] != field,
+    );
 
     if (needsTryCatchOnBuild) {
       result.writeln('$implName$_generics _\$result;');
@@ -1081,23 +1281,25 @@ abstract class ValueSourceClass
     }
     result.writeln('_\$result = _\$v ?? ');
     result.writeln('$implName$_generics._(');
-    result.write(fieldBuilders.keys
-        .map((field) {
-          final fieldBuilder = fieldBuilders[field];
-          if (needsNullCheck.contains(field)) {
-            if (genericFields.containsKey(field)) {
-              final genericType = genericFields[field];
-              return '$field: null is $genericType ? $fieldBuilder as $genericType '
-                  ': BuiltValueNullFieldError.checkNotNull($fieldBuilder'
-                  ", r'$name', '${escapeString(field)}')";
+    result.write(
+      fieldBuilders.keys
+          .map((field) {
+            final fieldBuilder = fieldBuilders[field];
+            if (needsNullCheck.contains(field)) {
+              if (genericFields.containsKey(field)) {
+                final genericType = genericFields[field];
+                return '$field: null is $genericType ? $fieldBuilder as $genericType '
+                    ': BuiltValueNullFieldError.checkNotNull($fieldBuilder'
+                    ", r'$name', '${escapeString(field)}')";
+              }
+              return '$field: BuiltValueNullFieldError.checkNotNull($fieldBuilder, '
+                  "r'$name', '${escapeString(field)}')";
             }
-            return '$field: BuiltValueNullFieldError.checkNotNull($fieldBuilder, '
-                "r'$name', '${escapeString(field)}')";
-          }
-          return '$field: $fieldBuilder';
-        })
-        .map((fieldBuilder) => '$fieldBuilder,')
-        .join(''));
+            return '$field: $fieldBuilder';
+          })
+          .map((fieldBuilder) => '$fieldBuilder,')
+          .join(''),
+    );
     result.writeln(');');
 
     if (needsTryCatchOnBuild) {
@@ -1107,15 +1309,19 @@ abstract class ValueSourceClass
       result.writeln('} catch (_) {');
       result.writeln('late String _\$failedField;');
       result.writeln('try {');
-      result.write(fieldBuilders.keys.map((field) {
-        final fieldBuilder = fieldBuilders[field];
-        if (fieldBuilder == field) return '';
-        return "_\$failedField = '${escapeString(field)}'; $fieldBuilder;";
-      }).join('\n'));
+      result.write(
+        fieldBuilders.keys.map((field) {
+          final fieldBuilder = fieldBuilders[field];
+          if (fieldBuilder == field) return '';
+          return "_\$failedField = '${escapeString(field)}'; $fieldBuilder;";
+        }).join('\n'),
+      );
 
       result.writeln('} catch (e) {');
-      result.writeln('throw BuiltValueNestedFieldError('
-          "r'$name', _\$failedField, e.toString());");
+      result.writeln(
+        'throw BuiltValueNestedFieldError('
+        "r'$name', _\$failedField, e.toString());",
+      );
       result.writeln('}');
       result.writeln('rethrow;');
       result.writeln('}');
@@ -1140,7 +1346,8 @@ abstract class ValueSourceClass
 
     var comparedFields = fields
         .where(
-            (field) => field.builtValueField.compare ?? settings.defaultCompare)
+          (field) => field.builtValueField.compare ?? settings.defaultCompare,
+        )
         .toList();
     var comparedFunctionFields =
         comparedFields.where((field) => field.isFunctionType).toList();
@@ -1154,13 +1361,15 @@ abstract class ValueSourceClass
     result.writeln('  return other is $name${forBuilder ? 'Builder' : ''}');
     if (comparedFields.isNotEmpty) {
       result.writeln('&&');
-      result.writeln(comparedFields.map((field) {
-        var nameOrThisDotName =
-            field.name == 'other' ? 'this.other' : field.name;
-        return field.isFunctionType
-            ? '$nameOrThisDotName == _\$dynamicOther.${field.name}'
-            : '$nameOrThisDotName == other.${field.name}';
-      }).join('&&'));
+      result.writeln(
+        comparedFields.map((field) {
+          var nameOrThisDotName =
+              field.name == 'other' ? 'this.other' : field.name;
+          return field.isFunctionType
+              ? '$nameOrThisDotName == _\$dynamicOther.${field.name}'
+              : '$nameOrThisDotName == other.${field.name}';
+        }).join('&&'),
+      );
     }
     result.writeln(';');
     result.writeln('}');
@@ -1213,30 +1422,34 @@ abstract class ValueSourceClass
     // https://github.com/dart-lang/sdk/issues/14729. So, we can't implement
     // "Builder". Add the methods explicitly. We can however implement any
     // other built_value interfaces.
-    var interfaces = [
-      ...builderImplements.skip(1),
-      ...builderMixins,
-    ];
+    var interfaces = [...builderImplements.skip(1), ...builderMixins];
 
     if (implementsBuilt) {
-      result.writeln('abstract $_class ${name}Builder$_boundedGenerics '
-          'implements ${builderImplements.join(", ")} {');
+      result.writeln(
+        'abstract $_class ${name}Builder$_boundedGenerics '
+        'implements ${builderImplements.join(", ")} {',
+      );
     } else {
-      result.writeln('abstract $_class ${name}Builder$_boundedGenerics '
-          '${interfaces.isEmpty ? '' : 'implements ' + interfaces.join(', ')}'
-          '{');
+      result.writeln(
+        'abstract $_class ${name}Builder$_boundedGenerics '
+        '${interfaces.isEmpty ? '' : 'implements ' + interfaces.join(', ')}'
+        '{',
+      );
 
       // Add `covariant` if we're implementing one or more parent builders.
-      result.writeln('void replace(${interfaces.isEmpty ? '' : 'covariant '}'
-          '$name$_generics other);');
       result.writeln(
-          'void update(void Function(${name}Builder$_generics) updates);');
+        'void replace(${interfaces.isEmpty ? '' : 'covariant '}'
+        '$name$_generics other);',
+      );
+      result.writeln(
+        'void update(void Function(${name}Builder$_generics) updates);',
+      );
     }
 
     for (var field in fields) {
       var type = field.isNestedBuilder
-          ? field.typeInBuilder(compilationUnit)
-          : field.typeInCompilationUnit(compilationUnit);
+          ? field.typeInBuilder(libraryFragment)
+          : field.typeInLibraryFragment(libraryFragment);
       final name = field.name;
 
       final autoCreatedNestedBuilder =
@@ -1245,8 +1458,10 @@ abstract class ValueSourceClass
 
       result.writeln('$type$maybeOrNull get $name;');
       // Add `covariant` if we're implementing one or more parent builders.
-      result.writeln('set $name(${interfaces.isEmpty ? '' : 'covariant '} '
-          '$type? $name);');
+      result.writeln(
+        'set $name(${interfaces.isEmpty ? '' : 'covariant '} '
+        '$type? $name);',
+      );
 
       result.writeln();
     }
@@ -1257,8 +1472,9 @@ abstract class ValueSourceClass
 }
 
 InvalidGenerationSourceError _makeError(Iterable<GeneratorError> todos) {
-  var message =
-      StringBuffer('Please make the following changes to use BuiltValue:\n');
+  var message = StringBuffer(
+    'Please make the following changes to use BuiltValue:\n',
+  );
   for (var i = 0; i != todos.length; ++i) {
     message.write('\n${i + 1}. ${todos.elementAt(i).message}');
   }

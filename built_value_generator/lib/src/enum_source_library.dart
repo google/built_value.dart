@@ -5,11 +5,10 @@
 library built_value_generator.enum_source_library;
 
 import 'package:analyzer/dart/analysis/results.dart';
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/enum_source_class.dart';
-import 'package:built_value_generator/src/library_elements.dart';
 import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -18,32 +17,37 @@ part 'enum_source_library.g.dart';
 abstract class EnumSourceLibrary
     implements Built<EnumSourceLibrary, EnumSourceLibraryBuilder> {
   ParsedLibraryResults get parsedLibraryResults;
-  LibraryElement get element;
+  LibraryElement2 get element;
 
   factory EnumSourceLibrary(
-          ParsedLibraryResults parsedLibraryResults, LibraryElement element) =>
+    ParsedLibraryResults parsedLibraryResults,
+    LibraryElement2 element,
+  ) =>
       _$EnumSourceLibrary._(
-          parsedLibraryResults: parsedLibraryResults, element: element);
+        parsedLibraryResults: parsedLibraryResults,
+        element: element,
+      );
   EnumSourceLibrary._();
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library2);
 
   @memoized
-  String get name => element.name;
+  String get name => element.name3!;
 
   @memoized
-  String get fileName => element.source.shortName.replaceAll('.dart', '');
+  String get fileName =>
+      element.firstFragment.source.shortName.replaceAll('.dart', '');
 
   @memoized
-  String get source => element.source.contents.data;
+  String get source => element.firstFragment.source.contents.data;
 
   @memoized
   BuiltList<EnumSourceClass> get classes {
     var result = ListBuilder<EnumSourceClass>();
 
-    for (var classElement in LibraryElements.getClassElements(element)) {
+    for (var classElement in element.classes) {
       if (EnumSourceClass.needsEnumClass(classElement)) {
         result.add(EnumSourceClass(parsedLibraryResults, classElement));
       }
@@ -88,8 +92,9 @@ abstract class EnumSourceLibrary
             !reportedIdentifiers.contains(identifier)) {
           reportedIdentifiers.add(identifier);
           result.add(
-              'Generated identifier "$identifier" is used multiple times in'
-              ' $name, change to something else.');
+            'Generated identifier "$identifier" is used multiple times in'
+            ' $name, change to something else.',
+          );
         }
         seenIdentifiers.add(identifier);
       }
@@ -100,8 +105,9 @@ abstract class EnumSourceLibrary
 }
 
 InvalidGenerationSourceError _makeError(Iterable<String> todos) {
-  final message =
-      StringBuffer('Please make the following changes to use EnumClass:\n');
+  final message = StringBuffer(
+    'Please make the following changes to use EnumClass:\n',
+  );
   for (var i = 0; i != todos.length; ++i) {
     message.write('\n${i + 1}. ${todos.elementAt(i)}');
   }

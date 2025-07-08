@@ -14,9 +14,9 @@ class _$SerializerSourceField extends SerializerSourceField {
   @override
   final ParsedLibraryResult parsedLibrary;
   @override
-  final FieldElement element;
+  final PropertyInducingElement2 element;
   @override
-  final FieldElement? builderElement;
+  final PropertyInducingElement2? builderElement;
   bool? __isSerializable;
   BuiltValueField? __builtValueField;
   bool? __hasNullableAnnotation;
@@ -175,13 +175,13 @@ class SerializerSourceFieldBuilder
   set parsedLibrary(ParsedLibraryResult? parsedLibrary) =>
       _$this._parsedLibrary = parsedLibrary;
 
-  FieldElement? _element;
-  FieldElement? get element => _$this._element;
-  set element(FieldElement? element) => _$this._element = element;
+  PropertyInducingElement2? _element;
+  PropertyInducingElement2? get element => _$this._element;
+  set element(PropertyInducingElement2? element) => _$this._element = element;
 
-  FieldElement? _builderElement;
-  FieldElement? get builderElement => _$this._builderElement;
-  set builderElement(FieldElement? builderElement) =>
+  PropertyInducingElement2? _builderElement;
+  PropertyInducingElement2? get builderElement => _$this._builderElement;
+  set builderElement(PropertyInducingElement2? builderElement) =>
       _$this._builderElement = builderElement;
 
   SerializerSourceFieldBuilder();

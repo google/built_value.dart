@@ -2,8 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/constant/value.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:source_gen/source_gen.dart';
 
 DartObject getConstantValueFromAnnotation(ElementAnnotation annotation) {
@@ -11,7 +11,8 @@ DartObject getConstantValueFromAnnotation(ElementAnnotation annotation) {
   if (value == null) {
     throw InvalidGenerationSourceError(
         'Can’t process annotation “${annotation.toSource()}” in '
-        '“${annotation.librarySource?.uri}”. Please check for a missing import.');
+        '“${annotation.libraryFragment.source.uri}”. '
+        'Please check for a missing import.');
   }
   return value;
 }

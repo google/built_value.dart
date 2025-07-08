@@ -10,11 +10,11 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   final ParsedLibraryResults parsedLibraryResults;
   @override
-  final InterfaceElement element;
+  final InterfaceElement2 element;
   ParsedLibraryResult? __parsedLibrary;
   String? __name;
   String? __implName;
-  ClassElement? __builderElement;
+  ClassElement2? __builderElement;
   bool ___builderElement = false;
   bool? __implementsBuilt;
   bool? __extendsIsAllowed;
@@ -24,10 +24,10 @@ class _$ValueSourceClass extends ValueSourceClass {
   ClassDeclaration? __classDeclaration;
   bool? __hasBuilder;
   bool? __hasBuilderInitializer;
-  MethodElement? __builderInitializer;
+  MethodElement2? __builderInitializer;
   bool ___builderInitializer = false;
   bool? __hasBuilderFinalizer;
-  MethodElement? __builderFinalizer;
+  MethodElement2? __builderFinalizer;
   bool ___builderFinalizer = false;
   BuiltMap<String, BuiltValueHook>? __hooks;
   String? __builderParameters;
@@ -50,7 +50,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   bool? __declaresMemoizedHashCode;
   bool? __implementsOperatorEquals;
   bool? __implementsToString;
-  CompilationUnitElement? __compilationUnit;
+  LibraryFragment? __libraryFragment;
 
   factory _$ValueSourceClass(
           [void Function(ValueSourceClassBuilder)? updates]) =>
@@ -70,7 +70,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   String get implName => __implName ??= super.implName;
 
   @override
-  ClassElement? get builderElement {
+  ClassElement2? get builderElement {
     if (!___builderElement) {
       __builderElement = super.builderElement;
       ___builderElement = true;
@@ -107,7 +107,7 @@ class _$ValueSourceClass extends ValueSourceClass {
       __hasBuilderInitializer ??= super.hasBuilderInitializer;
 
   @override
-  MethodElement? get builderInitializer {
+  MethodElement2? get builderInitializer {
     if (!___builderInitializer) {
       __builderInitializer = super.builderInitializer;
       ___builderInitializer = true;
@@ -120,7 +120,7 @@ class _$ValueSourceClass extends ValueSourceClass {
       __hasBuilderFinalizer ??= super.hasBuilderFinalizer;
 
   @override
-  MethodElement? get builderFinalizer {
+  MethodElement2? get builderFinalizer {
     if (!___builderFinalizer) {
       __builderFinalizer = super.builderFinalizer;
       ___builderFinalizer = true;
@@ -208,8 +208,8 @@ class _$ValueSourceClass extends ValueSourceClass {
       __implementsToString ??= super.implementsToString;
 
   @override
-  CompilationUnitElement get compilationUnit =>
-      __compilationUnit ??= super.compilationUnit;
+  LibraryFragment get libraryFragment =>
+      __libraryFragment ??= super.libraryFragment;
 
   @override
   ValueSourceClass rebuild(void Function(ValueSourceClassBuilder) updates) =>
@@ -255,9 +255,9 @@ class ValueSourceClassBuilder
   set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
       _$this._parsedLibraryResults = parsedLibraryResults;
 
-  InterfaceElement? _element;
-  InterfaceElement? get element => _$this._element;
-  set element(InterfaceElement? element) => _$this._element = element;
+  InterfaceElement2? _element;
+  InterfaceElement2? get element => _$this._element;
+  set element(InterfaceElement2? element) => _$this._element = element;
 
   ValueSourceClassBuilder();
 

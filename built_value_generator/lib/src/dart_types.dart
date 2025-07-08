@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
@@ -19,27 +19,34 @@ BuiltSet<String> _builtCollectionNames = BuiltSet<String>([
 
 class DartTypes {
   static bool needsNestedBuilder(
-      ParsedLibraryResults parsedLibraryResults, DartType type) {
+    ParsedLibraryResults parsedLibraryResults,
+    DartType type,
+  ) {
     return isInstantiableBuiltValue(parsedLibraryResults, type) ||
         isBuiltCollection(type);
   }
 
   static bool isInstantiableBuiltValue(
-      ParsedLibraryResults parsedLibraryResults, DartType type) {
+    ParsedLibraryResults parsedLibraryResults,
+    DartType type,
+  ) {
     return isBuiltValue(type) &&
-        ValueSourceClass(parsedLibraryResults, type.element as ClassElement)
-            .settings
-            .instantiable;
+        ValueSourceClass(
+          parsedLibraryResults,
+          type.element3 as ClassElement2,
+        ).settings.instantiable;
   }
 
   static bool isBuiltValue(DartType type) =>
       type is InterfaceType &&
-      type.element.allSupertypes
-          .any((interfaceType) => interfaceType.element.name == 'Built');
+      type.element3.allSupertypes.any(
+        (interfaceType) => interfaceType.element3.name3 == 'Built',
+      );
 
   static bool isBuiltCollection(DartType type) {
-    return _builtCollectionNames
-        .any((name) => getName(type).startsWith('$name<'));
+    return _builtCollectionNames.any(
+      (name) => getName(type).startsWith('$name<'),
+    );
   }
 
   static bool isBuilt(DartType type) =>
@@ -51,8 +58,10 @@ class DartTypes {
   /// As [getName] but allows `dartType` to be `null`.
   ///
   /// If it's `null`, returns `null`.
-  static String? tryGetName(DartType? dartType,
-      {bool withNullabilitySuffix = false}) {
+  static String? tryGetName(
+    DartType? dartType, {
+    bool withNullabilitySuffix = false,
+  }) {
     if (dartType == null) {
       return null;
     }
@@ -61,8 +70,10 @@ class DartTypes {
 
   /// Gets the name of a `DartType`. Supports `Function` types, which will
   /// be returned using the `Function()` syntax.
-  static String getName(DartType dartType,
-      {bool withNullabilitySuffix = false}) {
+  static String getName(
+    DartType dartType, {
+    bool withNullabilitySuffix = false,
+  }) {
     var suffix = withNullabilitySuffix &&
             dartType.nullabilitySuffix == NullabilitySuffix.question
         ? '?'
@@ -78,24 +89,30 @@ class DartTypes {
       final parameters = StringBuffer();
 
       parameters.write(
-          dartType.normalParameterTypes.map((t) => getName(t)).join(', '));
+        dartType.normalParameterTypes.map((t) => getName(t)).join(', '),
+      );
 
       if (dartType.optionalParameterTypes.isNotEmpty) {
         if (parameters.isNotEmpty) parameters.write(', ');
         parameters.write('[');
         parameters.write(
-            dartType.optionalParameterTypes.map((t) => getName(t)).join(', '));
+          dartType.optionalParameterTypes.map((t) => getName(t)).join(', '),
+        );
         parameters.write(']');
       }
 
       if (dartType.namedParameterTypes.isNotEmpty) {
         if (parameters.isNotEmpty) parameters.write(', ');
         parameters.write('{');
-        parameters.write(dartType.parameters
-            .where((p) => p.isOptionalNamed || p.isRequiredNamed)
-            .map((p) => '${p.isRequiredNamed ? 'required ' : ''}'
-                '${getName(p.type)} ${p.name}')
-            .join(', '));
+        parameters.write(
+          dartType.formalParameters
+              .where((p) => p.isOptionalNamed || p.isRequiredNamed)
+              .map(
+                (p) => '${p.isRequiredNamed ? 'required ' : ''}'
+                    '${getName(p.type)} ${p.name3}',
+              )
+              .join(', '),
+        );
         parameters.write('}');
       }
 
@@ -103,15 +120,15 @@ class DartTypes {
     } else if (dartType is InterfaceType) {
       var typeArguments = dartType.typeArguments;
       if (typeArguments.isEmpty) {
-        return dartType.element.name + suffix;
+        return dartType.element3.name3! + suffix;
       } else {
         final typeArgumentsStr = typeArguments
             .map((type) => getName(type, withNullabilitySuffix: true))
             .join(', ');
-        return '${dartType.element.name}<$typeArgumentsStr>$suffix';
+        return '${dartType.element3.name3}<$typeArgumentsStr>$suffix';
       }
     } else if (dartType is TypeParameterType) {
-      return dartType.element.name + suffix;
+      return dartType.element3.name3! + suffix;
     } else if (dartType is RecordType) {
       return dartType.getDisplayString();
     } else if (dartType is VoidType) {
