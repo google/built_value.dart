@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.11.0
+
+- Use `build ^3.0.0`.
+- Use `source_gen ^3.0.0`.
+
 # 8.11.0-dev
 
 - Use `build ^3.0.0-dev`.
