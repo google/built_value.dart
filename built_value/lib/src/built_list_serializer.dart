@@ -26,10 +26,9 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
 
-    var elementType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[0];
+    var elementType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[0];
 
     return map.map(
       (item) => serializers.serialize(item, specifiedType: elementType),
@@ -45,15 +44,13 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 
-    var elementType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[0];
+    var elementType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[0];
 
-    var result =
-        isUnderspecified
-            ? ListBuilder<Object>()
-            : serializers.newBuilder(specifiedType) as ListBuilder;
+    var result = isUnderspecified
+        ? ListBuilder<Object>()
+        : serializers.newBuilder(specifiedType) as ListBuilder;
 
     result.replace(
       serialized.map(

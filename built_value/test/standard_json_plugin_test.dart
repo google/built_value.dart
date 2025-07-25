@@ -12,8 +12,8 @@ import 'package:test/test.dart';
 void main() {
   var serializers = (Serializers().toBuilder()
         ..addPlugin(StandardJsonPlugin())
-        ..addBuilderFactory(const FullType(BuiltList, [FullType(int)]),
-            ListBuilder<int>.new)
+        ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(int)]), ListBuilder<int>.new)
         ..addBuilderFactory(
             const FullType(BuiltList, [
               FullType(BuiltList, [FullType(int)])

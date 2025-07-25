@@ -41,10 +41,9 @@ class BuiltJsonSerializers implements Serializers {
   @override
   T? deserializeWith<T>(Serializer<T> serializer, Object? serialized) {
     return deserialize(
-          serialized,
-          specifiedType: FullType(serializer.types.first),
-        )
-        as T?;
+      serialized,
+      specifiedType: FullType(serializer.types.first),
+    ) as T?;
   }
 
   @override
@@ -195,10 +194,10 @@ class BuiltJsonSerializers implements Serializers {
           return object == null
               ? null
               : serializer.deserialize(
-                this,
-                object as Iterable<Object?>,
-                specifiedType: specifiedType,
-              );
+                  this,
+                  object as Iterable<Object?>,
+                  specifiedType: specifiedType,
+                );
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
@@ -207,10 +206,10 @@ class BuiltJsonSerializers implements Serializers {
           return object == null
               ? null
               : serializer.deserialize(
-                this,
-                object,
-                specifiedType: specifiedType,
-              );
+                  this,
+                  object,
+                  specifiedType: specifiedType,
+                );
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
@@ -277,12 +276,12 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   final ListBuilder<SerializerPlugin> _plugins;
 
   factory BuiltJsonSerializersBuilder() => BuiltJsonSerializersBuilder._(
-    MapBuilder<Type, Serializer>(),
-    MapBuilder<String, Serializer>(),
-    MapBuilder<String, Serializer>(),
-    MapBuilder<FullType, Object Function()>(),
-    ListBuilder<SerializerPlugin>(),
-  );
+        MapBuilder<Type, Serializer>(),
+        MapBuilder<String, Serializer>(),
+        MapBuilder<String, Serializer>(),
+        MapBuilder<FullType, Object Function()>(),
+        ListBuilder<SerializerPlugin>(),
+      );
 
   BuiltJsonSerializersBuilder._(
     this._typeToSerializer,
@@ -359,10 +358,9 @@ String _getRawName(Type? type) {
 }
 
 String _noSerializerMessageFor(String typeName) {
-  final maybeRecordAdvice =
-      typeName.contains('(')
-          ? ' Note that record types are not automatically serializable, '
-              'please write and install your own `Serializer`.'
-          : '';
+  final maybeRecordAdvice = typeName.contains('(')
+      ? ' Note that record types are not automatically serializable, '
+          'please write and install your own `Serializer`.'
+      : '';
   return "No serializer for '$typeName'.$maybeRecordAdvice";
 }

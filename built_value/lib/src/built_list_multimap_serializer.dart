@@ -27,14 +27,12 @@ class BuiltListMultimapSerializer
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
 
-    var keyType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[0];
-    var valueType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[1];
+    var keyType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[0];
+    var valueType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[1];
 
     var result = <Object?>[];
     for (var key in map.keys) {
@@ -59,19 +57,16 @@ class BuiltListMultimapSerializer
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 
-    var keyType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[0];
-    var valueType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[1];
+    var keyType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[0];
+    var valueType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[1];
 
-    var result =
-        isUnderspecified
-            ? ListMultimapBuilder<Object, Object>()
-            : serializers.newBuilder(specifiedType) as ListMultimapBuilder;
+    var result = isUnderspecified
+        ? ListMultimapBuilder<Object, Object>()
+        : serializers.newBuilder(specifiedType) as ListMultimapBuilder;
 
     if (serialized.length.isOdd) {
       throw ArgumentError('odd length');

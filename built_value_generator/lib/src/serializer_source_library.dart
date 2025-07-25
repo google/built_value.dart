@@ -228,22 +228,14 @@ abstract class SerializerSourceLibrary
   String _generateSerializersTopLevelFields() => serializersForAnnotations.keys
       .map(
         (field) =>
-            'Serializers _\$$field = (Serializers().toBuilder()${(serializeForTransitiveClasses[field]!
-                    .map(
-                      (sourceClass) =>
-                          sourceClass.generateTransitiveSerializerAdder(),
-                    )
-                    .toList()
-                  ..sort())
-                .join('\n')}${(serializeForTransitiveClasses[field]!
-                    .map(
-                      (sourceClass) => sourceClass.generateBuilderFactoryAdders(
-                        element.library2.firstFragment,
-                      ),
-                    )
-                    .toList()
-                  ..sort())
-                .join('\n')}).build();',
+            'Serializers _\$$field = (Serializers().toBuilder()${(serializeForTransitiveClasses[field]!.map(
+                  (sourceClass) =>
+                      sourceClass.generateTransitiveSerializerAdder(),
+                ).toList()..sort()).join('\n')}${(serializeForTransitiveClasses[field]!.map(
+                  (sourceClass) => sourceClass.generateBuilderFactoryAdders(
+                    element.library2.firstFragment,
+                  ),
+                ).toList()..sort()).join('\n')}).build();',
       )
       .join('\n');
 }

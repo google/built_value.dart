@@ -40,11 +40,11 @@ class StandardJsonPlugin implements SerializerPlugin {
     this.valueKey = '',
     Iterable<Type>? typesToLeaveAsList,
   }) : typesToLeaveAsList = BuiltSet<Type>({
-         BuiltList,
-         BuiltSet,
-         JsonObject,
-         ...?typesToLeaveAsList,
-       });
+          BuiltList,
+          BuiltSet,
+          JsonObject,
+          ...?typesToLeaveAsList,
+        });
 
   @override
   Object? beforeSerialize(Object? object, FullType specifiedType) {
@@ -144,10 +144,9 @@ class StandardJsonPlugin implements SerializerPlugin {
 
     var result = <String, Object?>{discriminator: type};
     for (var i = 0; i != (list.length - 1) ~/ 2; ++i) {
-      final key =
-          needToEncodeKeys
-              ? _encodeKey(list[i * 2 + 1])
-              : list[i * 2 + 1] as String;
+      final key = needToEncodeKeys
+          ? _encodeKey(list[i * 2 + 1])
+          : list[i * 2 + 1] as String;
       final value = list[i * 2 + 2];
       result[key] = value as Object;
     }

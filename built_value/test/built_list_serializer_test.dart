@@ -65,10 +65,9 @@ void main() {
       FullType(BuiltList, [FullType(int)])
     ]);
     var serializers = (Serializers().toBuilder()
+          ..addBuilderFactory(specifiedType, ListBuilder<BuiltList<int>>.new)
           ..addBuilderFactory(
-              specifiedType, ListBuilder<BuiltList<int>>.new)
-          ..addBuilderFactory(const FullType(BuiltList, [FullType(int)]),
-              ListBuilder<int>.new))
+              const FullType(BuiltList, [FullType(int)]), ListBuilder<int>.new))
         .build();
     var serialized = json.decode(json.encode([
       [1, 2, 3],

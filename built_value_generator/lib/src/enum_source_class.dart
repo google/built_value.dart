@@ -27,10 +27,11 @@ abstract class EnumSourceClass
   factory EnumSourceClass(
     ParsedLibraryResults parsedLibraryResults,
     InterfaceElement2 element,
-  ) => _$EnumSourceClass._(
-    parsedLibraryResults: parsedLibraryResults,
-    element: element,
-  );
+  ) =>
+      _$EnumSourceClass._(
+        parsedLibraryResults: parsedLibraryResults,
+        element: element,
+      );
   EnumSourceClass._();
 
   @memoized
@@ -44,10 +45,9 @@ abstract class EnumSourceClass
   /// otherwise.
   ///
   /// The two are equivalent as class modifiers change the meaning of `class`.
-  String get _mixin =>
-      LibraryElements.areClassMixinsEnabled(element.library2)
-          ? 'mixin'
-          : 'abstract class';
+  String get _mixin => LibraryElements.areClassMixinsEnabled(element.library2)
+      ? 'mixin'
+      : 'abstract class';
 
   @memoized
   String get wireName => settings.wireName ?? name;
@@ -78,23 +78,22 @@ abstract class EnumSourceClass
 
   @memoized
   BuiltList<String> get constructors => BuiltList<String>(
-    element.constructors2.map((element) {
-      final declaration = parsedLibrary.getFragmentDeclaration(
-        element.firstFragment,
+        element.constructors2.map((element) {
+          final declaration = parsedLibrary.getFragmentDeclaration(
+            element.firstFragment,
+          );
+          return declaration?.node.toSource() ?? '';
+        }),
       );
-      return declaration?.node.toSource() ?? '';
-    }),
-  );
 
   @memoized
   String? get valuesIdentifier {
     var getter = element.getGetter2('values');
     if (getter == null) return null;
-    var source =
-        parsedLibrary
-            .getFragmentDeclaration(getter.firstFragment)!
-            .node
-            .toSource();
+    var source = parsedLibrary
+        .getFragmentDeclaration(getter.firstFragment)!
+        .node
+        .toSource();
     var matches = RegExp(
       r'static BuiltSet<' +
           RegExp.escape(element.displayName) +
@@ -107,11 +106,10 @@ abstract class EnumSourceClass
   String? get valueOfIdentifier {
     var getter = element.getMethod2('valueOf');
     if (getter == null) return null;
-    var source =
-        parsedLibrary
-            .getFragmentDeclaration(getter.firstFragment)!
-            .node
-            .toSource();
+    var source = parsedLibrary
+        .getFragmentDeclaration(getter.firstFragment)!
+        .node
+        .toSource();
     var matches = RegExp(
       r'static ' +
           RegExp.escape(element.displayName) +
@@ -188,10 +186,10 @@ abstract class EnumSourceClass
                 constructors.single.contains(expectedCode217))
         ? <String>[]
         : <String>[
-          'Have exactly one constructor: '
-              'const $name._(String name) : super(name); or in Dart>=2.17: '
-              'const $name._(super.name);',
-        ];
+            'Have exactly one constructor: '
+                'const $name._(String name) : super(name); or in Dart>=2.17: '
+                'const $name._(super.name);',
+          ];
   }
 
   Iterable<String> _checkValuesGetter() {

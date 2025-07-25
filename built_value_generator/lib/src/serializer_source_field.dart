@@ -13,8 +13,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'dart_types.dart';
 import 'field_mixin.dart';
-import 'metadata.dart'
-    show metadataToStringValue;
+import 'metadata.dart' show metadataToStringValue;
 import 'parsed_library_results.dart';
 import 'strings.dart';
 

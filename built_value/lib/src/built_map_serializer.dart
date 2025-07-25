@@ -26,14 +26,12 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
 
-    var keyType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[0];
-    var valueType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[1];
+    var keyType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[0];
+    var valueType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[1];
 
     var result = <Object?>[];
     for (var key in map.keys) {
@@ -53,19 +51,16 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 
-    var keyType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[0];
-    var valueType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[1];
+    var keyType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[0];
+    var valueType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[1];
 
-    var result =
-        isUnderspecified
-            ? MapBuilder<Object, Object>()
-            : serializers.newBuilder(specifiedType) as MapBuilder;
+    var result = isUnderspecified
+        ? MapBuilder<Object, Object>()
+        : serializers.newBuilder(specifiedType) as MapBuilder;
 
     if (serialized.length.isOdd) {
       throw ArgumentError('odd length');

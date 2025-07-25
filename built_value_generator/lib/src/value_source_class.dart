@@ -871,7 +871,8 @@ abstract class ValueSourceClass
         ? [
             GeneratorError(
               (b) => b
-                ..message = 'Make builder have exactly these fields: ${fields.map((field) => field.name).join(', ')}',
+                ..message =
+                    'Make builder have exactly these fields: ${fields.map((field) => field.name).join(', ')}',
             ),
           ]
         : [];
@@ -883,10 +884,10 @@ abstract class ValueSourceClass
   String get _boundedGenerics => genericParameters.isEmpty
       ? ''
       : '<${IterableZip([genericParameters, genericBounds]).map((zipped) {
-            final parameter = zipped[0];
-            final bound = zipped[1];
-            return bound.isEmpty ? parameter : '$parameter extends $bound';
-          }).join(', ')}>';
+          final parameter = zipped[0];
+          final bound = zipped[1];
+          return bound.isEmpty ? parameter : '$parameter extends $bound';
+        }).join(', ')}>';
 
   String generateCode() {
     var errors = computeErrors();

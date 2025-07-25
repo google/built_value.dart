@@ -23,10 +23,9 @@ class SetSerializer implements StructuredSerializer<Set> {
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
 
-    var elementType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[0];
+    var elementType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[0];
 
     return map.map(
       (item) => serializers.serialize(item, specifiedType: elementType),
@@ -42,15 +41,13 @@ class SetSerializer implements StructuredSerializer<Set> {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 
-    var elementType =
-        specifiedType.parameters.isEmpty
-            ? FullType.unspecified
-            : specifiedType.parameters[0];
+    var elementType = specifiedType.parameters.isEmpty
+        ? FullType.unspecified
+        : specifiedType.parameters[0];
 
-    var result =
-        isUnderspecified
-            ? <Object>{}
-            : serializers.newBuilder(specifiedType) as Set;
+    var result = isUnderspecified
+        ? <Object>{}
+        : serializers.newBuilder(specifiedType) as Set;
 
     for (final item in serialized) {
       result.add(serializers.deserialize(item, specifiedType: elementType));

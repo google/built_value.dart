@@ -46,13 +46,14 @@ abstract class ValueSourceField
     ParsedLibraryResult parsedLibrary,
     PropertyInducingElement2 element,
     PropertyInducingElement2? builderElement,
-  ) => _$ValueSourceField._(
-    parsedLibraryResults: parsedLibraryResults,
-    settings: settings,
-    parsedLibrary: parsedLibrary,
-    element: element,
-    builderElement: builderElement,
-  );
+  ) =>
+      _$ValueSourceField._(
+        parsedLibraryResults: parsedLibraryResults,
+        settings: settings,
+        parsedLibrary: parsedLibrary,
+        element: element,
+        builderElement: builderElement,
+      );
   ValueSourceField._();
 
   @memoized
@@ -67,11 +68,9 @@ abstract class ValueSourceField
   /// The [type] plus any import prefix, without any nullability suffix.
   @memoized
   String get typeWithPrefix {
-    var typeFromAst =
-        (parsedLibrary
-                    .getFragmentDeclaration(element.getter2!.firstFragment)!
-                    .node
-                as MethodDeclaration)
+    var typeFromAst = (parsedLibrary
+                .getFragmentDeclaration(element.getter2!.firstFragment)!
+                .node as MethodDeclaration)
             .returnType
             ?.toSource() ??
         'dynamic';
@@ -104,8 +103,8 @@ abstract class ValueSourceField
 
   @memoized
   bool get hasNullableAnnotation => element.getter2!.metadata2.annotations.any(
-    (metadata) => metadataToStringValue(metadata) == 'nullable',
-  );
+        (metadata) => metadataToStringValue(metadata) == 'nullable',
+      );
 
   @memoized
   bool get hasNullableType =>
@@ -189,32 +188,29 @@ abstract class ValueSourceField
     if (result == null || result == 'dynamic') {
       // Go via AST to allow use of unresolvable types not yet generated;
       // this includes generated Builder types.
-      result =
-          parsedLibrary
-              .getFragmentDeclaration(builderElement!.firstFragment)
-              ?.node
-              .parent
-              ?.childEntities
-              .first
-              .toString();
+      result = parsedLibrary
+          .getFragmentDeclaration(builderElement!.firstFragment)
+          ?.node
+          .parent
+          ?.childEntities
+          .first
+          .toString();
     }
 
     if (result == null || result == 'dynamic') {
-      result =
-          builderElement!.setter2 != null
-              ? (parsedLibrary
-                          .getFragmentDeclaration(
-                            builderElement!.setter2!.firstFragment,
-                          )
-                          ?.node
-                      as MethodDeclaration?)
-                  ?.parameters!
-                  .parameters
-                  .first
-                  .childEntities
-                  .first
-                  .toString()
-              : null;
+      result = builderElement!.setter2 != null
+          ? (parsedLibrary
+                  .getFragmentDeclaration(
+                    builderElement!.setter2!.firstFragment,
+                  )
+                  ?.node as MethodDeclaration?)
+              ?.parameters!
+              .parameters
+              .first
+              .childEntities
+              .first
+              .toString()
+          : null;
     }
 
     return result?.endsWith('?') ?? false;
@@ -240,11 +236,10 @@ abstract class ValueSourceField
       // Otherwise it's an explicit getter/setter pair; get the type from the getter.
       return _removeNullabilitySuffix(
         (parsedLibrary
-                        .getFragmentDeclaration(
-                          builderElement!.getter2!.firstFragment,
-                        )!
-                        .node
-                    as MethodDeclaration)
+                    .getFragmentDeclaration(
+                      builderElement!.getter2!.firstFragment,
+                    )!
+                    .node as MethodDeclaration)
                 .returnType
                 ?.toSource() ??
             'dynamic',
@@ -259,24 +254,22 @@ abstract class ValueSourceField
   /// Gets the type name for the builder. Specify the library fragment to
   /// get the name for as [libraryFragment]; this affects whether an import
   /// prefix is used. Pass `null` for [libraryFragment] to just omit the prefix.
-  String? typeInBuilder(LibraryFragment? libraryFragment) =>
-      builderFieldExists
-          ? buildElementType
-          : _toBuilderType(
-            parsedLibraryResults,
-            element.getter2!.returnType,
-            typeInLibraryFragment(libraryFragment),
-          );
+  String? typeInBuilder(LibraryFragment? libraryFragment) => builderFieldExists
+      ? buildElementType
+      : _toBuilderType(
+          parsedLibraryResults,
+          element.getter2!.returnType,
+          typeInLibraryFragment(libraryFragment),
+        );
 
   @memoized
-  bool get isNestedBuilder =>
-      builderFieldExists
-          ? typeInBuilder(null)?.contains('Builder') ?? false
-          : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
-              DartTypes.needsNestedBuilder(
-                parsedLibraryResults,
-                element.getter2!.returnType,
-              );
+  bool get isNestedBuilder => builderFieldExists
+      ? typeInBuilder(null)?.contains('Builder') ?? false
+      : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
+          DartTypes.needsNestedBuilder(
+            parsedLibraryResults,
+            element.getter2!.returnType,
+          );
 
   @memoized
   bool get isAutoCreateNestedBuilder =>
@@ -342,12 +335,10 @@ abstract class ValueSourceField
     if (type == 'dynamic') {
       result.add(
         GeneratorError(
-          (b) =>
-              b
-                ..message =
-                    'Make field $name have non-dynamic type. '
-                    'If you are already specifying a type, '
-                    'please make sure the type is correctly imported.',
+          (b) => b
+            ..message = 'Make field $name have non-dynamic type. '
+                'If you are already specifying a type, '
+                'please make sure the type is correctly imported.',
         ),
       );
     }
@@ -364,11 +355,9 @@ abstract class ValueSourceField
     if (_suggestedTypes.keys.contains(type)) {
       result.add(
         GeneratorError(
-          (b) =>
-              b
-                ..message =
-                    'Make field "$name" have type "${_suggestedTypes[type]}". '
-                    'The current type, "$type", is not allowed because it is mutable.',
+          (b) => b
+            ..message = 'Make field "$name" have type "${_suggestedTypes[type]}". '
+                'The current type, "$type", is not allowed because it is mutable.',
         ),
       );
     }
@@ -376,11 +365,9 @@ abstract class ValueSourceField
     if (hasNullableAnnotation) {
       result.add(
         GeneratorError(
-          (b) =>
-              b
-                ..message =
-                    'Remove "@nullable" from field "$name". '
-                    'Add "?" to the field type instead.',
+          (b) => b
+            ..message = 'Remove "@nullable" from field "$name". '
+                'Add "?" to the field type instead.',
         ),
       );
     }
@@ -399,11 +386,9 @@ abstract class ValueSourceField
                   builderElementTypeOrNull != '$builderType?'))) {
         result.add(
           GeneratorError(
-            (b) =>
-                b
-                  ..message =
-                      'Make builder field $name have type: '
-                      '$type? (or, if applicable, builder)',
+            (b) => b
+              ..message = 'Make builder field $name have type: '
+                  '$type? (or, if applicable, builder)',
           ),
         );
       }
@@ -414,10 +399,9 @@ abstract class ValueSourceField
         !builderFieldIsGetterSetterPair) {
       result.add(
         GeneratorError(
-          (b) =>
-              b
-                ..message =
-                    'Make builder field $name a normal field or a getter/setter '
+          (b) => b
+            ..message =
+                'Make builder field $name a normal field or a getter/setter '
                     'pair.',
         ),
       );
@@ -438,11 +422,9 @@ abstract class ValueSourceField
     if (settings.comparableBuilders && builtValueField.nestedBuilder == true) {
       result.add(
         GeneratorError(
-          (b) =>
-              b
-                ..message =
-                    'Make builder field $name have `nestedBuilder: false`'
-                    ' in order to use `comparableBuilders: true`.',
+          (b) => b
+            ..message = 'Make builder field $name have `nestedBuilder: false`'
+                ' in order to use `comparableBuilders: true`.',
         ),
       );
     }

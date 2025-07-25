@@ -70,10 +70,8 @@ abstract class CompoundValueNoAutoNesting
 @BuiltValue(nestedBuilders: false, comparableBuilders: true)
 abstract class CompoundValueComparableBuilders
     implements
-        Built<
-          CompoundValueComparableBuilders,
-          CompoundValueComparableBuildersBuilder
-        > {
+        Built<CompoundValueComparableBuilders,
+            CompoundValueComparableBuildersBuilder> {
   static Serializer<CompoundValueComparableBuilders> get serializer =>
       _$compoundValueComparableBuildersSerializer;
 
@@ -146,10 +144,8 @@ abstract class CompoundValueNestingField
 // Class using auto create builder nesting by default.
 abstract class CompoundValueNoAutoNestingField
     implements
-        Built<
-          CompoundValueNoAutoNestingField,
-          CompoundValueNoAutoNestingFieldBuilder
-        > {
+        Built<CompoundValueNoAutoNestingField,
+            CompoundValueNoAutoNestingFieldBuilder> {
   static Serializer<CompoundValueNoAutoNestingField> get serializer =>
       _$compoundValueNoAutoNestingFieldSerializer;
 
@@ -170,10 +166,8 @@ abstract class CompoundValueNoAutoNestingField
 // Class not using auto create builder nesting by default.
 abstract class CompoundValueAutoNestingField
     implements
-        Built<
-          CompoundValueAutoNestingField,
-          CompoundValueAutoNestingFieldBuilder
-        > {
+        Built<CompoundValueAutoNestingField,
+            CompoundValueAutoNestingFieldBuilder> {
   static Serializer<CompoundValueAutoNestingField> get serializer =>
       _$compoundValueAutoNestingFieldSerializer;
 
@@ -193,10 +187,8 @@ abstract class CompoundValueAutoNestingField
 
 abstract class CompoundValueExplicitNoNesting
     implements
-        Built<
-          CompoundValueExplicitNoNesting,
-          CompoundValueExplicitNoNestingBuilder
-        > {
+        Built<CompoundValueExplicitNoNesting,
+            CompoundValueExplicitNoNestingBuilder> {
   static Serializer<CompoundValueExplicitNoNesting> get serializer =>
       _$compoundValueExplicitNoNestingSerializer;
 
@@ -211,10 +203,8 @@ abstract class CompoundValueExplicitNoNesting
 
 abstract class CompoundValueExplicitNoNestingBuilder
     implements
-        Builder<
-          CompoundValueExplicitNoNesting,
-          CompoundValueExplicitNoNestingBuilder
-        > {
+        Builder<CompoundValueExplicitNoNesting,
+            CompoundValueExplicitNoNestingBuilder> {
   // One field using nesting.
   SimpleValueBuilder simpleValue = SimpleValueBuilder();
   // One field not using nesting.
@@ -246,10 +236,8 @@ abstract class ExplicitNestedListBuilder
 
 abstract class ExplicitNonNullBuilderNullableSetter
     implements
-        Built<
-          ExplicitNonNullBuilderNullableSetter,
-          ExplicitNonNullBuilderNullableSetterBuilder
-        > {
+        Built<ExplicitNonNullBuilderNullableSetter,
+            ExplicitNonNullBuilderNullableSetterBuilder> {
   SimpleValue? get simpleValue;
 
   factory ExplicitNonNullBuilderNullableSetter([
@@ -260,10 +248,8 @@ abstract class ExplicitNonNullBuilderNullableSetter
 
 abstract class ExplicitNonNullBuilderNullableSetterBuilder
     implements
-        Builder<
-          ExplicitNonNullBuilderNullableSetter,
-          ExplicitNonNullBuilderNullableSetterBuilder
-        > {
+        Builder<ExplicitNonNullBuilderNullableSetter,
+            ExplicitNonNullBuilderNullableSetterBuilder> {
   SimpleValueBuilder get simpleValue;
   set simpleValue(SimpleValueBuilder? value);
 
@@ -274,10 +260,8 @@ abstract class ExplicitNonNullBuilderNullableSetterBuilder
 
 abstract class ExplicitNonNullBuilderNullableField
     implements
-        Built<
-          ExplicitNonNullBuilderNullableField,
-          ExplicitNonNullBuilderNullableFieldBuilder
-        > {
+        Built<ExplicitNonNullBuilderNullableField,
+            ExplicitNonNullBuilderNullableFieldBuilder> {
   SimpleValue? get simpleValue;
 
   factory ExplicitNonNullBuilderNullableField([
@@ -288,10 +272,8 @@ abstract class ExplicitNonNullBuilderNullableField
 
 abstract class ExplicitNonNullBuilderNullableFieldBuilder
     implements
-        Builder<
-          ExplicitNonNullBuilderNullableField,
-          ExplicitNonNullBuilderNullableFieldBuilder
-        > {
+        Builder<ExplicitNonNullBuilderNullableField,
+            ExplicitNonNullBuilderNullableFieldBuilder> {
   SimpleValueBuilder? simpleValue;
 
   factory ExplicitNonNullBuilderNullableFieldBuilder() =
@@ -349,11 +331,10 @@ abstract class ValueWithCode
   ValueWithCode._();
 
   factory ValueWithCode.fromCustomFactory(int anInt) => ValueWithCode(
-    (b) =>
-        b
+        (b) => b
           ..anInt = anInt
           ..aString = 'two',
-  );
+      );
 }
 
 abstract class ValueWithDefaults
@@ -637,9 +618,9 @@ class ValueWithCustomSerializerSerializer
     implements PrimitiveSerializer<ValueWithCustomSerializer> {
   @override
   Iterable<Type> get types => [
-    ValueWithCustomSerializer,
-    _$ValueWithCustomSerializer,
-  ];
+        ValueWithCustomSerializer,
+        _$ValueWithCustomSerializer,
+      ];
 
   const ValueWithCustomSerializerSerializer();
 
@@ -703,10 +684,8 @@ abstract class OtherValue implements Built<OtherValue, OtherValueBuilder> {
 @BuiltValue(defaultCompare: false, defaultSerialize: false)
 abstract class DefaultsForFieldSettingsValue
     implements
-        Built<
-          DefaultsForFieldSettingsValue,
-          DefaultsForFieldSettingsValueBuilder
-        > {
+        Built<DefaultsForFieldSettingsValue,
+            DefaultsForFieldSettingsValueBuilder> {
   static Serializer<DefaultsForFieldSettingsValue> get serializer =>
       _$defaultsForFieldSettingsValueSerializer;
 
@@ -731,12 +710,11 @@ abstract class ValueWithBuilderInitializer
   static Serializer<ValueWithBuilderInitializer> get serializer =>
       _$valueWithBuilderInitializerSerializer;
 
-  static void _initializeBuilder(ValueWithBuilderInitializerBuilder b) =>
-      b
-        ..anIntWithDefault = 7
-        ..nullableIntWithDefault = 8
-        ..nestedValueWithDefault.anInt = 9
-        ..nullableNestedValueWithDefault.anInt = 10;
+  static void _initializeBuilder(ValueWithBuilderInitializerBuilder b) => b
+    ..anIntWithDefault = 7
+    ..nullableIntWithDefault = 8
+    ..nestedValueWithDefault.anInt = 9
+    ..nullableNestedValueWithDefault.anInt = 10;
 
   int get anInt;
   int get anIntWithDefault;
@@ -775,10 +753,8 @@ abstract class ValueWithBuilderFinalizer
 
 abstract class ValueWithGenericBuilderInitializer<T>
     implements
-        Built<
-          ValueWithGenericBuilderInitializer<T>,
-          ValueWithGenericBuilderInitializerBuilder<T>
-        > {
+        Built<ValueWithGenericBuilderInitializer<T>,
+            ValueWithGenericBuilderInitializerBuilder<T>> {
   static void _initializeBuilder<TT>(
     ValueWithGenericBuilderInitializerBuilder<TT> b,
   ) {
@@ -934,10 +910,8 @@ abstract class $ValueSpecial
 @BuiltValue()
 abstract class ValueWithAwkwardNestedBuilder
     implements
-        Built<
-          ValueWithAwkwardNestedBuilder,
-          ValueWithAwkwardNestedBuilderBuilder
-        > {
+        Built<ValueWithAwkwardNestedBuilder,
+            ValueWithAwkwardNestedBuilderBuilder> {
   @BuiltValueSerializer(serializeNulls: true)
   static Serializer<ValueWithAwkwardNestedBuilder> get serializer =>
       _$valueWithAwkwardNestedBuilderSerializer;
@@ -956,10 +930,8 @@ abstract class ValueWithAwkwardNestedBuilder
 
 abstract class ValueWithAwkwardNestedBuilderBuilder
     implements
-        Builder<
-          ValueWithAwkwardNestedBuilder,
-          ValueWithAwkwardNestedBuilderBuilder
-        > {
+        Builder<ValueWithAwkwardNestedBuilder,
+            ValueWithAwkwardNestedBuilderBuilder> {
   SimpleValueBuilder? value1;
   SimpleValueBuilder? _value2;
   SimpleValueBuilder? get value2 => _value2 ??= SimpleValueBuilder();
@@ -973,18 +945,19 @@ abstract class ValueWithAwkwardNestedBuilderBuilder
 }
 
 abstract class VariousFunctionsValue
-        // Functions declared in a different file are rendered via DartType
-        // insteadof using the AST, so check those too.
-        with
+    // Functions declared in a different file are rendered via DartType
+    // insteadof using the AST, so check those too.
+    with
         FunctionMixin
-    implements Built<VariousFunctionsValue, VariousFunctionsValueBuilder> {
+    implements
+        Built<VariousFunctionsValue, VariousFunctionsValueBuilder> {
   Function get bareFunction;
   Future<void> Function(int, double) get positionalFunction;
   Future<void> Function(int, [double]) get optionalFunction;
   Future<void> Function(int x, double y) get positionalNamedFunction;
   Future<void> Function(int x, {int y, double z}) get namedFunction;
   Future<void> Function(int x, {required int y, required double z})
-  get requiredNamedFunction;
+      get requiredNamedFunction;
 
   factory VariousFunctionsValue([
     void Function(VariousFunctionsValueBuilder) updates,

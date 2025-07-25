@@ -322,8 +322,8 @@ int $jf(int hash) {
 }
 
 /// Function that returns a [BuiltValueToStringHelper].
-typedef BuiltValueToStringHelperProvider =
-    BuiltValueToStringHelper Function(String className);
+typedef BuiltValueToStringHelperProvider = BuiltValueToStringHelper Function(
+    String className);
 
 /// Function used by generated code to get a [BuiltValueToStringHelper].
 /// Set this to change built_value class toString() output. Built-in examples

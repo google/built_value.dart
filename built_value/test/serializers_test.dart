@@ -10,11 +10,10 @@ import 'package:test/test.dart';
 
 void main() {
   var serializers = Serializers();
-  final moreSerializers =
-      (serializers.toBuilder()
-            ..addAll([TestSerializer()])
-            ..addBuilderFactory(const FullType(TestSerializer), Object.new))
-          .build();
+  final moreSerializers = (serializers.toBuilder()
+        ..addAll([TestSerializer()])
+        ..addBuilderFactory(const FullType(TestSerializer), Object.new))
+      .build();
   final serializersWithPlugin =
       (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
 

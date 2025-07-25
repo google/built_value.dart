@@ -4,8 +4,7 @@ import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:built_value/built_value.dart';
 import 'dart_types.dart';
-import 'metadata.dart'
-    show metadataToStringValue;
+import 'metadata.dart' show metadataToStringValue;
 
 part 'memoized_getter.g.dart';
 

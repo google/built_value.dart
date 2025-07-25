@@ -100,8 +100,7 @@ void main() {
     var specifiedType =
         const FullType(BuiltMap, [FullType(int), innerTypeRight]);
     var serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(
-              innerTypeRight, MapBuilder<String, String>.new)
+          ..addBuilderFactory(innerTypeRight, MapBuilder<String, String>.new)
           ..addBuilderFactory(
               specifiedType, MapBuilder<int, BuiltMap<String, String>>.new))
         .build();
@@ -137,8 +136,8 @@ void main() {
     var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(
               builtMapOfIntIntGenericType, MapBuilder<int, int>.new)
-          ..addBuilderFactory(builtMapOfStringStringGenericType,
-              MapBuilder<String, String>.new)
+          ..addBuilderFactory(
+              builtMapOfStringStringGenericType, MapBuilder<String, String>.new)
           ..addBuilderFactory(specifiedType,
               MapBuilder<BuiltMap<int, int>, BuiltMap<String, String>>.new))
         .build();
@@ -161,8 +160,7 @@ void main() {
 
     test('keeps generic type on deserialization', () {
       final genericSerializer = (serializers.toBuilder()
-            ..addBuilderFactory(
-                specifiedType,
+            ..addBuilderFactory(specifiedType,
                 MapBuilder<BuiltMap<int, int>, BuiltMap<String, String>>.new)
             ..addBuilderFactory(
                 builtMapOfIntIntGenericType, MapBuilder<int, int>.new)
@@ -210,8 +208,7 @@ void main() {
     var specifiedType =
         const FullType(BuiltMap, [FullType.unspecified, FullType(String)]);
     var serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(
-              specifiedType, MapBuilder<Object, String>.new))
+          ..addBuilderFactory(specifiedType, MapBuilder<Object, String>.new))
         .build();
     var serialized = json.decode(json.encode([
       ['int', 1],

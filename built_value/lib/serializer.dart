@@ -282,14 +282,13 @@ class FullType {
 
   const FullType(this.root, [this.parameters = const []]) : nullable = false;
   const FullType.nullable(this.root, [this.parameters = const []])
-    : nullable = true;
+      : nullable = true;
 
   bool get isUnspecified => identical(root, null);
 
-  FullType withNullability(bool nullability) =>
-      nullability
-          ? FullType.nullable(root, parameters)
-          : FullType(root, parameters);
+  FullType withNullability(bool nullability) => nullability
+      ? FullType.nullable(root, parameters)
+      : FullType(root, parameters);
 
   @override
   bool operator ==(Object other) {
@@ -310,13 +309,12 @@ class FullType {
   }
 
   @override
-  String toString() =>
-      isUnspecified
-          ? 'unspecified'
-          : (parameters.isEmpty
-                  ? _getRawName(root)
-                  : '${_getRawName(root)}<${parameters.join(", ")}>') +
-              _nullabilitySuffix;
+  String toString() => isUnspecified
+      ? 'unspecified'
+      : (parameters.isEmpty
+              ? _getRawName(root)
+              : '${_getRawName(root)}<${parameters.join(", ")}>') +
+          _nullabilitySuffix;
 
   String get _nullabilitySuffix => nullable ? '?' : '';
 

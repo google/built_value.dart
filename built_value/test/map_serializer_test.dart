@@ -33,10 +33,9 @@ void main() {
   group('Map with known specifiedType and correct builder', () {
     var data = <int, String>{1: 'one', 2: 'two', 3: 'three'};
     var specifiedType = const FullType(Map, [FullType(int), FullType(String)]);
-    var serializers =
-        (Serializers().toBuilder()
-              ..addBuilderFactory(specifiedType, () => <int, String>{}))
-            .build();
+    var serializers = (Serializers().toBuilder()
+          ..addBuilderFactory(specifiedType, () => <int, String>{}))
+        .build();
     var serialized =
         json.decode(json.encode([1, 'one', 2, 'two', 3, 'three'])) as Object;
 
@@ -71,24 +70,21 @@ void main() {
     };
     const innerTypeLeft = FullType(Map, [FullType(int), FullType(String)]);
     var specifiedType = const FullType(Map, [innerTypeLeft, FullType(String)]);
-    var serializers =
-        (Serializers().toBuilder()
-              ..addBuilderFactory(innerTypeLeft, () => <int, String>{})
-              ..addBuilderFactory(
-                specifiedType,
-                () => <Map<int, String>, String>{},
-              ))
-            .build();
-    var serialized =
-        json.decode(
-              json.encode([
-                [1, 'one'],
-                'one!',
-                [2, 'two'],
-                'two!',
-              ]),
-            )
-            as Object;
+    var serializers = (Serializers().toBuilder()
+          ..addBuilderFactory(innerTypeLeft, () => <int, String>{})
+          ..addBuilderFactory(
+            specifiedType,
+            () => <Map<int, String>, String>{},
+          ))
+        .build();
+    var serialized = json.decode(
+      json.encode([
+        [1, 'one'],
+        'one!',
+        [2, 'two'],
+        'two!',
+      ]),
+    ) as Object;
 
     test('can be serialized', () {
       expect(
@@ -116,24 +112,21 @@ void main() {
     };
     const innerTypeRight = FullType(Map, [FullType(String), FullType(String)]);
     var specifiedType = const FullType(Map, [FullType(int), innerTypeRight]);
-    var serializers =
-        (Serializers().toBuilder()
-              ..addBuilderFactory(innerTypeRight, () => <String, String>{})
-              ..addBuilderFactory(
-                specifiedType,
-                () => <int, Map<String, String>>{},
-              ))
-            .build();
-    var serialized =
-        json.decode(
-              json.encode([
-                1,
-                ['one', 'one!'],
-                2,
-                ['two', 'two!'],
-              ]),
-            )
-            as Object;
+    var serializers = (Serializers().toBuilder()
+          ..addBuilderFactory(innerTypeRight, () => <String, String>{})
+          ..addBuilderFactory(
+            specifiedType,
+            () => <int, Map<String, String>>{},
+          ))
+        .build();
+    var serialized = json.decode(
+      json.encode([
+        1,
+        ['one', 'one!'],
+        2,
+        ['two', 'two!'],
+      ]),
+    ) as Object;
 
     test('can be serialized', () {
       expect(
@@ -167,28 +160,25 @@ void main() {
       mapOfIntIntGenericType,
       mapOfStringStringGenericType,
     ]);
-    var serializers =
-        (Serializers().toBuilder()
-              ..addBuilderFactory(mapOfIntIntGenericType, () => <int, int>{})
-              ..addBuilderFactory(
-                mapOfStringStringGenericType,
-                () => <String, String>{},
-              )
-              ..addBuilderFactory(
-                specifiedType,
-                () => <Map<int, int>, Map<String, String>>{},
-              ))
-            .build();
-    var serialized =
-        json.decode(
-              json.encode([
-                [1, 1],
-                ['one', 'one!'],
-                [2, 2],
-                ['two', 'two!'],
-              ]),
-            )
-            as Object;
+    var serializers = (Serializers().toBuilder()
+          ..addBuilderFactory(mapOfIntIntGenericType, () => <int, int>{})
+          ..addBuilderFactory(
+            mapOfStringStringGenericType,
+            () => <String, String>{},
+          )
+          ..addBuilderFactory(
+            specifiedType,
+            () => <Map<int, int>, Map<String, String>>{},
+          ))
+        .build();
+    var serialized = json.decode(
+      json.encode([
+        [1, 1],
+        ['one', 'one!'],
+        [2, 2],
+        ['two', 'two!'],
+      ]),
+    ) as Object;
 
     test('can be serialized', () {
       expect(
@@ -209,18 +199,17 @@ void main() {
     });
 
     test('keeps generic type on deserialization', () {
-      final genericSerializer =
-          (serializers.toBuilder()
-                ..addBuilderFactory(
-                  specifiedType,
-                  () => <Map<int, int>, Map<String, String>>{},
-                )
-                ..addBuilderFactory(mapOfIntIntGenericType, () => <int, int>{})
-                ..addBuilderFactory(
-                  mapOfStringStringGenericType,
-                  () => <String, String>{},
-                ))
-              .build();
+      final genericSerializer = (serializers.toBuilder()
+            ..addBuilderFactory(
+              specifiedType,
+              () => <Map<int, int>, Map<String, String>>{},
+            )
+            ..addBuilderFactory(mapOfIntIntGenericType, () => <int, int>{})
+            ..addBuilderFactory(
+              mapOfStringStringGenericType,
+              () => <String, String>{},
+            ))
+          .build();
 
       expect(
         genericSerializer
@@ -237,22 +226,19 @@ void main() {
       FullType(int),
       FullType.unspecified,
     ]);
-    var serializers =
-        (Serializers().toBuilder()
-              ..addBuilderFactory(specifiedType, () => <int, Object>{}))
-            .build();
-    var serialized =
-        json.decode(
-              json.encode([
-                1,
-                ['String', 'one'],
-                2,
-                ['int', 2],
-                3,
-                ['String', 'three'],
-              ]),
-            )
-            as Object;
+    var serializers = (Serializers().toBuilder()
+          ..addBuilderFactory(specifiedType, () => <int, Object>{}))
+        .build();
+    var serialized = json.decode(
+      json.encode([
+        1,
+        ['String', 'one'],
+        2,
+        ['int', 2],
+        3,
+        ['String', 'three'],
+      ]),
+    ) as Object;
 
     test('can be serialized', () {
       expect(
@@ -275,22 +261,19 @@ void main() {
       FullType.unspecified,
       FullType(String),
     ]);
-    var serializers =
-        (Serializers().toBuilder()
-              ..addBuilderFactory(specifiedType, () => <Object, String>{}))
-            .build();
-    var serialized =
-        json.decode(
-              json.encode([
-                ['int', 1],
-                'one',
-                ['String', 'two'],
-                'two',
-                ['int', 3],
-                'three',
-              ]),
-            )
-            as Object;
+    var serializers = (Serializers().toBuilder()
+          ..addBuilderFactory(specifiedType, () => <Object, String>{}))
+        .build();
+    var serialized = json.decode(
+      json.encode([
+        ['int', 1],
+        'one',
+        ['String', 'two'],
+        'two',
+        ['int', 3],
+        'three',
+      ]),
+    ) as Object;
 
     test('can be serialized', () {
       expect(
@@ -311,18 +294,16 @@ void main() {
     var data = <Object, Object>{1: 'one', 'two': 2, 3: 'three'};
     var specifiedType = const FullType(Map);
     var serializers = Serializers();
-    var serialized =
-        json.decode(
-              json.encode([
-                ['int', 1],
-                ['String', 'one'],
-                ['String', 'two'],
-                ['int', 2],
-                ['int', 3],
-                ['String', 'three'],
-              ]),
-            )
-            as Object;
+    var serialized = json.decode(
+      json.encode([
+        ['int', 1],
+        ['String', 'one'],
+        ['String', 'two'],
+        ['int', 2],
+        ['int', 3],
+        ['String', 'three'],
+      ]),
+    ) as Object;
 
     test('can be serialized', () {
       expect(
@@ -343,19 +324,17 @@ void main() {
     var data = <Object, Object>{1: 'one', 'two': 2, 3: 'three'};
     var specifiedType = FullType.unspecified;
     var serializers = Serializers();
-    var serialized =
-        json.decode(
-              json.encode([
-                'Map',
-                ['int', 1],
-                ['String', 'one'],
-                ['String', 'two'],
-                ['int', 2],
-                ['int', 3],
-                ['String', 'three'],
-              ]),
-            )
-            as Object;
+    var serialized = json.decode(
+      json.encode([
+        'Map',
+        ['int', 1],
+        ['String', 'one'],
+        ['String', 'two'],
+        ['int', 2],
+        ['int', 3],
+        ['String', 'three'],
+      ]),
+    ) as Object;
 
     test('can be serialized', () {
       expect(

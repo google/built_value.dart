@@ -12,10 +12,9 @@ void benchmark() {
 
 void benchmarkHashCode() {
   final value = SimpleValue(
-    (b) =>
-        b
-          ..anInt = 0
-          ..aString = 'zero',
+    (b) => b
+      ..anInt = 0
+      ..aString = 'zero',
   );
   _benchmark('hashCode', () => value.hashCode);
 }
