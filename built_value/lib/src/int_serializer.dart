@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/serializer.dart';
+import '../serializer.dart';
 
 class IntSerializer implements PrimitiveSerializer<int> {
   final bool structured = false;

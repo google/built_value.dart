@@ -72,7 +72,7 @@ void main() {
     test('can be compared', () {
       // Generic functions have troublesome behaviour when casting. Check that
       // operator== does not throw due to a disallowed cast.
-      final function = (int x) {};
+      void function(int x) {}
       expect(
           GenericFunction<int>((b) => b..function = function) ==
               GenericFunction<int>((b) => b..function = function),

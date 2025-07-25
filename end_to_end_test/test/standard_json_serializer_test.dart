@@ -43,7 +43,7 @@ void main() {
       ..objects.add(ComplexValue((b) => b
         ..primitive = 8
         ..value.anInt = 9)));
-    var specifiedType = FullType(StandardJsonValue);
+    var specifiedType = const FullType(StandardJsonValue);
     var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
     var serialized = json.decode(json.encode({
@@ -118,7 +118,7 @@ void main() {
       ..keyValues['three'] = JsonObject(true)
       ..keyValues['four'] = JsonObject([1, 2, 3])
       ..keyValues['five'] = JsonObject({'one': 1, 'two': 2}));
-    var specifiedType = FullType(StandardJsonValue);
+    var specifiedType = const FullType(StandardJsonValue);
     var serializersWithPlugin =
         (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
     var serialized = json.decode(json.encode({

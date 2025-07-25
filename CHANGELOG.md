@@ -1,5 +1,12 @@
 # Changelog
 
+# 9.0.0
+
+- Tighten some types that were missing and inferred as `dynamic`. In particular,
+  `updates` are now `void Function` instead of `Function`, and builder factories
+  are now `Object Function()` instead of `Function`.
+- Use `dart_flutter_team_lints` instead of `pedantic`, fix lint violations.
+
 # 8.11.0
 
 - Use `build ^3.0.0`.

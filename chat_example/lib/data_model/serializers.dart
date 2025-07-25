@@ -2,11 +2,11 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library serializers;
+library;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
-import 'package:chat_example/data_model/data_model.dart';
+import 'data_model.dart';
 
 part 'serializers.g.dart';
 

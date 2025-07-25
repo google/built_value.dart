@@ -4,7 +4,7 @@
 
 import 'dart:async';
 
-import 'package:chat_example/server/server_connection.dart';
+import '../server/server_connection.dart';
 
 /// Fake [ServerConnection] that exposes stream controllers.
 class FakeServerConnection implements ServerConnection {

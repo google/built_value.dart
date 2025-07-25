@@ -13,37 +13,47 @@ void main() {
 
   group('Uint8List with known specifiedType', () {
     var serialized =
-        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBA'
+        'ScY42YAAAAASUVORK5CYII=';
     var data = base64Decode(serialized);
     var specifiedType = const FullType(Uint8List);
 
     test('can be serialized', () {
-      expect(serializers.serialize(data, specifiedType: specifiedType),
-          serialized);
+      expect(
+        serializers.serialize(data, specifiedType: specifiedType),
+        serialized,
+      );
     });
 
     test('can be deserialized', () {
-      expect(serializers.deserialize(serialized, specifiedType: specifiedType),
-          data);
+      expect(
+        serializers.deserialize(serialized, specifiedType: specifiedType),
+        data,
+      );
     });
   });
 
   group('UInt8List with unknown specifiedType', () {
     var rawData =
-        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBA'
+        'ScY42YAAAAASUVORK5CYII=';
     var serialized = json.decode(json.encode(['UInt8List', rawData])) as Object;
     var data = base64Decode(rawData.toString());
     var specifiedType = FullType.unspecified;
 
     test('can be serialized', () {
-      var serialized_by =
-          serializers.serialize(data, specifiedType: specifiedType);
-      expect(serialized_by, serialized);
+      var serializedBy = serializers.serialize(
+        data,
+        specifiedType: specifiedType,
+      );
+      expect(serializedBy, serialized);
     });
 
     test('can be deserialized', () {
-      expect(serializers.deserialize(serialized, specifiedType: specifiedType),
-          data);
+      expect(
+        serializers.deserialize(serialized, specifiedType: specifiedType),
+        data,
+      );
     });
   });
 }

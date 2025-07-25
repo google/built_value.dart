@@ -2,15 +2,16 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library built_value_generator.enum_source_library;
+library;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/enum_source_class.dart';
-import 'package:built_value_generator/src/parsed_library_results.dart';
 import 'package:source_gen/source_gen.dart';
+
+import 'enum_source_class.dart';
+import 'parsed_library_results.dart';
 
 part 'enum_source_library.g.dart';
 

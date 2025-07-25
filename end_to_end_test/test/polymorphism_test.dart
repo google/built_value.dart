@@ -122,6 +122,7 @@ void main() {
       ];
 
       final modifiedHasFields = hasFields
+          // ignore: avoid_dynamic_calls
           .map((hasField) => hasField.rebuild((b) => b..field += b.field));
 
       final expectedHasFields = [
@@ -151,6 +152,7 @@ void main() {
     test('nested builder getter is not nullable', () {
       // This is purely a static check, the function isn't actually called.
       // Access `b.color` without `!` to ensure the getter is not nullable.
+      // ignore: unnecessary_statements
       (Vehicle vehicle) {
         return vehicle.rebuild((b) => b.color.replace(VehicleColor()));
       };
@@ -161,6 +163,7 @@ void main() {
     test('does not nest builders', () {
       // This is purely a static check, the function isn't actually called.
       // Check that the builder field is not a nested builder.
+      // ignore: unnecessary_statements
       (NotInstantiableNotNested value) =>
           value.rebuild((b) => b..list = BuiltList());
     });

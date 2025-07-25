@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:analyzer/dart/element/element2.dart';
+// ignore: implementation_imports
 import 'package:analyzer/src/dart/analysis/experiments.dart';
 
 /// Tools for [LibraryElement2]s.

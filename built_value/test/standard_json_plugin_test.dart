@@ -5,34 +5,34 @@
 import 'dart:convert';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/standard_json_plugin.dart';
 import 'package:built_value/serializer.dart';
+import 'package:built_value/standard_json_plugin.dart';
 import 'package:test/test.dart';
 
 void main() {
   var serializers = (Serializers().toBuilder()
         ..addPlugin(StandardJsonPlugin())
-        ..addBuilderFactory(const FullType(BuiltList, [FullType(int)]),
-            () => ListBuilder<int>())
+        ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(int)]), ListBuilder<int>.new)
         ..addBuilderFactory(
             const FullType(BuiltList, [
               FullType(BuiltList, [FullType(int)])
             ]),
-            () => ListBuilder<BuiltList<int>>())
+            ListBuilder<BuiltList<int>>.new)
         ..addBuilderFactory(
-            const FullType(BuiltSet, [FullType(int)]), () => SetBuilder<int>())
+            const FullType(BuiltSet, [FullType(int)]), SetBuilder<int>.new)
         ..addBuilderFactory(
             const FullType(BuiltMap, [FullType(int), FullType(String)]),
-            () => MapBuilder<int, String>())
+            MapBuilder<int, String>.new)
         ..addBuilderFactory(
             const FullType(BuiltMap, [FullType(String), FullType(String)]),
-            () => MapBuilder<String, String>())
+            MapBuilder<String, String>.new)
         ..addBuilderFactory(
             const FullType(BuiltMap, [
               FullType(BuiltMap, [FullType(int), FullType(String)]),
               FullType(BuiltMap, [FullType(int), FullType(String)])
             ]),
-            () => MapBuilder<BuiltMap<int, String>, BuiltMap<int, String>>()))
+            MapBuilder<BuiltMap<int, String>, BuiltMap<int, String>>.new))
       .build();
 
   group('Serializers with StandardJsonPlugin', () {

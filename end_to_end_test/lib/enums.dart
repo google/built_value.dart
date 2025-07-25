@@ -1,7 +1,7 @@
 // Copyright (c) 2017, Google Inc. Please see the AUTHORS file for details.
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-library enums_nnbd;
+library;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -29,7 +29,7 @@ class SecondTestEnum extends EnumClass {
   static const SecondTestEnum no = _$n;
   static const SecondTestEnum definitely = _$definitely;
 
-  const SecondTestEnum._(String name) : super(name);
+  const SecondTestEnum._(super.name);
 
   static BuiltSet<SecondTestEnum> get values => _$vls;
   static SecondTestEnum valueOf(String name) => _$vlOf(name);
@@ -48,7 +48,7 @@ class WireNameEnum extends EnumClass {
   @BuiltValueEnumConst(wireName: 'd')
   static const WireNameEnum definitely = _$wireDefinitely;
 
-  const WireNameEnum._(String name) : super(name);
+  const WireNameEnum._(super.name);
 
   static BuiltSet<WireNameEnum> get values => _$wireValues;
   static WireNameEnum valueOf(String name) => _$wireValueOf(name);
@@ -68,7 +68,7 @@ class WireNumberEnum extends EnumClass {
   @BuiltValueEnumConst(wireName: '3')
   static const WireNumberEnum definitely = _$wireNumberDefinitely;
 
-  const WireNumberEnum._(String name) : super(name);
+  const WireNumberEnum._(super.name);
 
   static BuiltSet<WireNumberEnum> get values => _$wireNumberValues;
   static WireNumberEnum valueOf(String name) => _$wireNumberValueOf(name);
@@ -84,7 +84,7 @@ class DollarValueEnum extends EnumClass {
   @BuiltValueEnumConst(wireName: 'value')
   static const DollarValueEnum $value = _$value;
 
-  const DollarValueEnum._(String name) : super(name);
+  const DollarValueEnum._(super.name);
 
   static BuiltSet<DollarValueEnum> get values => _$dollarValues;
   static DollarValueEnum valueOf(String name) => _$dollarValueOf(name);
@@ -98,7 +98,7 @@ class FallbackEnum extends EnumClass {
   @BuiltValueEnumConst(fallback: true)
   static const FallbackEnum no = _$fbNo;
 
-  const FallbackEnum._(String name) : super(name);
+  const FallbackEnum._(super.name);
 
   static BuiltSet<FallbackEnum> get values => _$fbValues;
   static FallbackEnum valueOf(String name) => _$fbValueOf(name);
@@ -114,12 +114,13 @@ class FallbackNumberEnum extends EnumClass {
   @BuiltValueEnumConst(wireNumber: -1, fallback: true)
   static const FallbackNumberEnum no = _$fbNumberNo;
 
-  const FallbackNumberEnum._(String name) : super(name);
+  const FallbackNumberEnum._(super.name);
 
   static BuiltSet<FallbackNumberEnum> get values => _$fbNumberValues;
   static FallbackNumberEnum valueOf(String name) => _$fbNumberValueOf(name);
 }
 
+// ignore: camel_case_types
 class EnumWith$Dollar_UnderScore extends EnumClass {
   static Serializer<EnumWith$Dollar_UnderScore> get serializer =>
       _$enumWith$DollarUnderScoreSerializer;
@@ -132,7 +133,7 @@ class EnumWith$Dollar_UnderScore extends EnumClass {
   static const EnumWith$Dollar_UnderScore value$ =
       _$dollar_UnderScoreEnumValue$;
 
-  const EnumWith$Dollar_UnderScore._(String name) : super(name);
+  const EnumWith$Dollar_UnderScore._(super.name);
 
   static BuiltSet<EnumWith$Dollar_UnderScore> get values =>
       _$enum$Dollar_UnderScoreValues;
