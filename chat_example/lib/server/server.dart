@@ -6,9 +6,9 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:chat_example/data_model/data_model.dart';
-import 'package:chat_example/data_model/serializers.dart';
-import 'package:chat_example/server/server_connection.dart';
+import '../data_model/data_model.dart';
+import '../data_model/serializers.dart';
+import 'server_connection.dart';
 
 /// Server-side logic for the built_value chat example.
 class Server {

@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 /// Data model for the built_value chat example.
-library data_model;
+library;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -24,7 +24,7 @@ abstract class Chat implements Built<Chat, ChatBuilder>, Command {
   /// Set of usernames to send the chat to, or empty to send to everyone.
   BuiltSet<String> get targets;
 
-  factory Chat([Function(ChatBuilder) updates]) = _$Chat;
+  factory Chat([void Function(ChatBuilder) updates]) = _$Chat;
   Chat._();
 }
 
@@ -34,7 +34,7 @@ abstract class Login implements Built<Login, LoginBuilder>, Command {
   String get username;
   String get password;
 
-  factory Login([Function(LoginBuilder) updates]) = _$Login;
+  factory Login([void Function(LoginBuilder) updates]) = _$Login;
   Login._();
 }
 
@@ -46,7 +46,7 @@ abstract class Status implements Built<Status, StatusBuilder>, Command {
   String get message;
   StatusType get type;
 
-  factory Status([Function(StatusBuilder) updates]) = _$Status;
+  factory Status([void Function(StatusBuilder) updates]) = _$Status;
   Status._();
 }
 
@@ -58,7 +58,7 @@ class StatusType extends EnumClass {
   static const StatusType away = _$away;
   static const StatusType offline = _$offline;
 
-  const StatusType._(String name) : super(name);
+  const StatusType._(super.name);
 
   static BuiltSet<StatusType> get values => _$stValues;
   static StatusType valueOf(String name) => _$stValueOf(name);
@@ -72,7 +72,7 @@ abstract class ListUsers
   /// Set of statuses to filter by.
   BuiltSet<StatusType> get statusTypes;
 
-  factory ListUsers([Function(ListUsersBuilder) updates]) = _$ListUsers;
+  factory ListUsers([void Function(ListUsersBuilder) updates]) = _$ListUsers;
   ListUsers._();
 }
 
@@ -88,7 +88,7 @@ class LoginResponse extends EnumClass implements Response {
   static const LoginResponse badPassword = _$badPassword;
   static const LoginResponse reset = _$reset;
 
-  const LoginResponse._(String name) : super(name);
+  const LoginResponse._(super.name);
 
   static BuiltSet<LoginResponse> get values => _$lrValues;
   static LoginResponse valueOf(String name) => _$lrValueOf(name);
@@ -121,7 +121,7 @@ abstract class ShowChat implements Built<ShowChat, ShowChatBuilder>, Response {
   /// Message text.
   String get text;
 
-  factory ShowChat([Function(ShowChatBuilder) updates]) = _$ShowChat;
+  factory ShowChat([void Function(ShowChatBuilder) updates]) = _$ShowChat;
   ShowChat._();
 
   @override
@@ -135,12 +135,12 @@ abstract class Welcome implements Built<Welcome, WelcomeBuilder>, Response {
 
   String get message;
 
-  factory Welcome([Function(WelcomeBuilder) updates]) = _$Welcome;
+  factory Welcome([void Function(WelcomeBuilder) updates]) = _$Welcome;
   Welcome._();
 
   @override
   String render() =>
-      log.map((response) => response.render()).join('\n') + '\n' + message;
+      '${log.map((response) => response.render()).join('\n')}\n$message';
 }
 
 /// Displays a list of users and their status messages.
@@ -152,7 +152,7 @@ abstract class ListUsersResponse
   /// Map from username to status.
   BuiltMap<String, Status> get statuses;
 
-  factory ListUsersResponse([Function(ListUsersResponseBuilder) updates]) =
+  factory ListUsersResponse([void Function(ListUsersResponseBuilder) updates]) =
       _$ListUsersResponse;
   ListUsersResponse._();
 
@@ -162,7 +162,8 @@ abstract class ListUsersResponse
     for (final username in statuses.keys) {
       final status = statuses[username]!;
       result.write(
-          status.message.isEmpty ? username : '$username ${status.message}');
+        status.message.isEmpty ? username : '$username ${status.message}',
+      );
       result.write('\n');
     }
     return result.toString();

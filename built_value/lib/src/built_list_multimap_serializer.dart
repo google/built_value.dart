@@ -20,7 +20,7 @@ class BuiltListMultimapSerializer
   @override
   Iterable<Object?> serialize(
     Serializers serializers,
-    BuiltListMultimap builtListMultimap, {
+    BuiltListMultimap map, {
     FullType specifiedType = FullType.unspecified,
   }) {
     var isUnderspecified =
@@ -37,10 +37,10 @@ class BuiltListMultimapSerializer
             : specifiedType.parameters[1];
 
     var result = <Object?>[];
-    for (var key in builtListMultimap.keys) {
+    for (var key in map.keys) {
       result.add(serializers.serialize(key, specifiedType: keyType));
       result.add(
-        builtListMultimap[key]
+        map[key]
             .map(
               (value) => serializers.serialize(value, specifiedType: valueType),
             )

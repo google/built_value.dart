@@ -2,10 +2,10 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library value_test;
+library;
 
-import 'package:test/test.dart';
 import 'package:built_value/built_value.dart';
+import 'package:test/test.dart';
 
 part 'private_value_test.g.dart';
 
@@ -14,7 +14,7 @@ abstract class _PrivateValue
     implements Built<_PrivateValue, _PrivateValueBuilder> {
   int get value;
 
-  factory _PrivateValue(Function(_PrivateValueBuilder) updates) =
+  factory _PrivateValue(void Function(_PrivateValueBuilder) updates) =
       _$PrivateValue;
 
   _PrivateValue._();

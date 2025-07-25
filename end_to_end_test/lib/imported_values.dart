@@ -6,7 +6,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:end_to_end_test/values.dart' as prefix;
+import 'values.dart' as prefix;
 
 part 'imported_values.g.dart';
 

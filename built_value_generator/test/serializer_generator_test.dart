@@ -261,7 +261,7 @@ abstract class Value implements Built<Value, ValueBuilder> {
 
 final String pkgName = 'pkg';
 
-final Builder builder = PartBuilder([BuiltValueGenerator()], '.g.dart');
+final Builder builder = PartBuilder([const BuiltValueGenerator()], '.g.dart');
 
 Future<String> generate(String source) async {
   var srcs = <String, String>{

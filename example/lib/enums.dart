@@ -2,8 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library enums;
-
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -31,7 +29,7 @@ class TestEnum extends EnumClass {
   static const TestEnum no = _$no;
   static const TestEnum maybe = _$maybe;
 
-  const TestEnum._(String name) : super(name);
+  const TestEnum._(super.name);
 
   static BuiltSet<TestEnum> get values => _$values;
   static TestEnum valueOf(String name) => _$valueOf(name);
@@ -47,7 +45,7 @@ class SecondTestEnum extends EnumClass {
   static const SecondTestEnum no = _$n;
   static const SecondTestEnum definitely = _$definitely;
 
-  const SecondTestEnum._(String name) : super(name);
+  const SecondTestEnum._(super.name);
 
   static BuiltSet<SecondTestEnum> get values => _$vls;
   static SecondTestEnum valueOf(String name) => _$vlOf(name);
@@ -68,7 +66,7 @@ class WireNameEnum extends EnumClass {
   @BuiltValueEnumConst(wireName: 'd')
   static const WireNameEnum definitely = _$wireDefinitely;
 
-  const WireNameEnum._(String name) : super(name);
+  const WireNameEnum._(super.name);
 
   static BuiltSet<WireNameEnum> get values => _$wireValues;
   static WireNameEnum valueOf(String name) => _$wireValueOf(name);

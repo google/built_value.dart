@@ -78,20 +78,20 @@ void main() {
     var serializersWithCustomSerializer = (serializers.toBuilder()
           ..addPlugin(
               StandardJsonPlugin(typesToLeaveAsList: {RecordOfIntOrList}))
-          ..add(RecordOfIntOrListSerializer()))
+          ..add(const RecordOfIntOrListSerializer()))
         .build();
 
     test('can be serialized with custom serializer', () {
       expect(
           serializersWithCustomSerializer.serialize(data,
-              specifiedType: FullType(SerializableRecordValue)),
+              specifiedType: const FullType(SerializableRecordValue)),
           serialized);
     });
 
     test('can be deserialized with custom deserializer', () {
       expect(
           serializersWithCustomSerializer.deserialize(serialized,
-              specifiedType: FullType(SerializableRecordValue)),
+              specifiedType: const FullType(SerializableRecordValue)),
           data);
     });
   });

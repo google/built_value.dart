@@ -20,7 +20,7 @@ void main() {
 
     test('can be customized', () {
       newBuiltValueToStringHelper =
-          (className) => FlatBuiltValueToStringHelper(className);
+          FlatBuiltValueToStringHelper.new;
       final value = CompoundValue((b) => b..simpleValue.anInt = 1);
 
       expect(value.toString(),

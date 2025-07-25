@@ -6,8 +6,8 @@ import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value_generator/src/parsed_library_results.dart';
-import 'package:built_value_generator/src/value_source_class.dart';
+import 'parsed_library_results.dart';
+import 'value_source_class.dart';
 
 BuiltSet<String> _builtCollectionNames = BuiltSet<String>([
   'BuiltList',
@@ -89,14 +89,14 @@ class DartTypes {
       final parameters = StringBuffer();
 
       parameters.write(
-        dartType.normalParameterTypes.map((t) => getName(t)).join(', '),
+        dartType.normalParameterTypes.map(getName).join(', '),
       );
 
       if (dartType.optionalParameterTypes.isNotEmpty) {
         if (parameters.isNotEmpty) parameters.write(', ');
         parameters.write('[');
         parameters.write(
-          dartType.optionalParameterTypes.map((t) => getName(t)).join(', '),
+          dartType.optionalParameterTypes.map(getName).join(', '),
         );
         parameters.write(']');
       }
@@ -116,7 +116,7 @@ class DartTypes {
         parameters.write('}');
       }
 
-      return getName(dartType.returnType) + ' Function($parameters)$suffix';
+      return '${getName(dartType.returnType)} Function($parameters)$suffix';
     } else if (dartType is InterfaceType) {
       var typeArguments = dartType.typeArguments;
       if (typeArguments.isEmpty) {
@@ -134,7 +134,7 @@ class DartTypes {
     } else if (dartType is VoidType) {
       return 'void';
     } else if (dartType.isBottom) {
-      return 'Never' + suffix;
+      return 'Never$suffix';
     } else {
       throw UnimplementedError('(${dartType.runtimeType}) $dartType');
     }

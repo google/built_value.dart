@@ -19,7 +19,7 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
   @override
   Iterable<Object?> serialize(
     Serializers serializers,
-    BuiltList builtList, {
+    BuiltList map, {
     FullType specifiedType = FullType.unspecified,
   }) {
     var isUnderspecified =
@@ -31,7 +31,7 @@ class BuiltListSerializer implements StructuredSerializer<BuiltList> {
             ? FullType.unspecified
             : specifiedType.parameters[0];
 
-    return builtList.map(
+    return map.map(
       (item) => serializers.serialize(item, specifiedType: elementType),
     );
   }

@@ -123,7 +123,7 @@ abstract class Serializers {
   Iterable<Serializer> get serializers;
 
   /// The installed builder factories.
-  BuiltMap<FullType, Function> get builderFactories;
+  BuiltMap<FullType, Object Function()> get builderFactories;
 
   /// The installed serializer plugins.
   Iterable<SerializerPlugin> get serializerPlugins;
@@ -251,7 +251,7 @@ abstract class SerializersBuilder {
   ///       ))
   ///     .build();
   /// ```
-  void addBuilderFactory(FullType specifiedType, Function function);
+  void addBuilderFactory(FullType specifiedType, Object Function() function);
 
   /// Installs a [SerializerPlugin] that applies to all serialization and
   /// deserialization.
@@ -383,7 +383,7 @@ abstract class PrimitiveSerializer<T> implements Serializer<T> {
 /// A [Serializer] that serializes to and from an [Iterable] of primitive JSON
 /// values.
 abstract class StructuredSerializer<T> implements Serializer<T> {
-  /// Serializes [object].
+  /// Serializes [map].
   ///
   /// Use [serializers] as needed for nested serialization. Information about
   /// the type being serialized is provided in [specifiedType].
@@ -394,7 +394,7 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
   /// TODO(davidmorgan): document the wire format.
   Iterable<Object?> serialize(
     Serializers serializers,
-    T object, {
+    T map, {
     FullType specifiedType = FullType.unspecified,
   });
 

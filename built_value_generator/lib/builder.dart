@@ -3,9 +3,9 @@
 // license that can be found in the LICENSE file.
 
 import 'package:build/build.dart';
-
-import 'package:built_value_generator/built_value_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'built_value_generator.dart';
+
 Builder builtValue(BuilderOptions _) =>
-    SharedPartBuilder([BuiltValueGenerator()], 'built_value');
+    SharedPartBuilder([const BuiltValueGenerator()], 'built_value');

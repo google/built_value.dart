@@ -19,7 +19,7 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
   @override
   Iterable<Object?> serialize(
     Serializers serializers,
-    BuiltMap builtMap, {
+    BuiltMap map, {
     FullType specifiedType = FullType.unspecified,
   }) {
     var isUnderspecified =
@@ -36,9 +36,9 @@ class BuiltMapSerializer implements StructuredSerializer<BuiltMap> {
             : specifiedType.parameters[1];
 
     var result = <Object?>[];
-    for (var key in builtMap.keys) {
+    for (var key in map.keys) {
       result.add(serializers.serialize(key, specifiedType: keyType));
-      final value = builtMap[key];
+      final value = map[key];
       result.add(serializers.serialize(value, specifiedType: valueType));
     }
     return result;
