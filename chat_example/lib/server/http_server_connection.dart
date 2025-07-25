@@ -4,8 +4,9 @@
 
 import 'dart:async';
 
-import 'package:chat_example/server/server_connection.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+
+import 'server_connection.dart';
 
 /// [ServerConnection] using a web socket.
 class HttpServerConnection implements ServerConnection {

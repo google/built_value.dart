@@ -12,66 +12,97 @@ void main() {
   var serializers = Serializers();
   final moreSerializers = (serializers.toBuilder()
         ..addAll([TestSerializer()])
-        ..addBuilderFactory(FullType(TestSerializer), () => null))
+        ..addBuilderFactory(const FullType(TestSerializer), Object.new))
       .build();
   final serializersWithPlugin =
       (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
 
   group(Serializers, () {
     test('exposes iterable of serializer', () {
-      expect(serializers.serializers, contains(TypeMatcher<IntSerializer>()));
+      expect(
+        serializers.serializers,
+        contains(const TypeMatcher<IntSerializer>()),
+      );
     });
 
     test('can be added to', () {
       expect(
-          moreSerializers.serializers, contains(TypeMatcher<TestSerializer>()));
+        moreSerializers.serializers,
+        contains(const TypeMatcher<TestSerializer>()),
+      );
     });
 
     test('can be merged', () {
       var mergedSerializers =
           (serializers.toBuilder()..mergeAll([moreSerializers])).build();
-      expect(mergedSerializers.serializers,
-          contains(TypeMatcher<TestSerializer>()));
-      expect(mergedSerializers.builderFactories.keys,
-          contains(FullType(TestSerializer)));
+      expect(
+        mergedSerializers.serializers,
+        contains(const TypeMatcher<TestSerializer>()),
+      );
+      expect(
+        mergedSerializers.builderFactories.keys,
+        contains(const FullType(TestSerializer)),
+      );
     });
 
     test('can be merged by static method', () {
       var mergedSerializers = Serializers.merge([serializers, moreSerializers]);
-      expect(mergedSerializers.serializers,
-          contains(TypeMatcher<TestSerializer>()));
-      expect(mergedSerializers.builderFactories.keys,
-          contains(FullType(TestSerializer)));
+      expect(
+        mergedSerializers.serializers,
+        contains(const TypeMatcher<TestSerializer>()),
+      );
+      expect(
+        mergedSerializers.builderFactories.keys,
+        contains(const FullType(TestSerializer)),
+      );
     });
 
     test('provides convenience toJson method', () {
-      expect(serializers.toJson(DateTimeSerializer(), DateTime.utc(2020, 1, 1)),
-          '1577836800000000');
+      expect(
+        serializers.toJson(DateTimeSerializer(), DateTime.utc(2020, 1, 1)),
+        '1577836800000000',
+      );
     });
 
     test('provides convenience fromJson method', () {
-      expect(serializers.fromJson(DateTimeSerializer(), '1577836800000000'),
-          DateTime.utc(2020, 1, 1));
+      expect(
+        serializers.fromJson(DateTimeSerializer(), '1577836800000000'),
+        DateTime.utc(2020, 1, 1),
+      );
     });
 
     test('serializes null int to null', () {
-      expect(serializers.serialize(null, specifiedType: FullType(int)), null);
+      expect(
+        serializers.serialize(null, specifiedType: const FullType(int)),
+        null,
+      );
     });
 
     test('deserializes null int from null', () {
-      expect(serializers.deserialize(null, specifiedType: FullType(int)), null);
+      expect(
+        serializers.deserialize(null, specifiedType: const FullType(int)),
+        null,
+      );
     });
 
     test('serializes null int to null when plugin is installed', () {
       expect(
-          serializersWithPlugin.serialize(null, specifiedType: FullType(int)),
-          null);
+        serializersWithPlugin.serialize(
+          null,
+          specifiedType: const FullType(int),
+        ),
+        null,
+      );
     });
 
     test('deserializes null int from null when plugin is installed', () {
       expect(
-          serializersWithPlugin.deserialize(null, specifiedType: FullType(int)),
-          null);
+        serializersWithPlugin.deserialize(
+          null,
+          specifiedType: const FullType(int),
+        ),
+        null,
+      );
     });
 
     test('serializes unknown type null to null', () {
@@ -86,10 +117,15 @@ void main() {
       expect(serializersWithPlugin.serialize(null), {r'$': 'Null', '': null});
     });
 
-    test('deserializes null from unknown type null when plugin is installed',
-        () {
-      expect(serializersWithPlugin.deserialize({r'$': 'Null', '': null}), null);
-    });
+    test(
+      'deserializes null from unknown type null when plugin is installed',
+      () {
+        expect(
+          serializersWithPlugin.deserialize({r'$': 'Null', '': null}),
+          null,
+        );
+      },
+    );
   });
 }
 
@@ -101,14 +137,20 @@ class TestSerializer implements PrimitiveSerializer<Object?> {
   String get wireName => '';
 
   @override
-  Object? deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  Object? deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     return null;
   }
 
   @override
-  Object serialize(Serializers serializers, Object? object,
-      {FullType specifiedType = FullType.unspecified}) {
+  Object serialize(
+    Serializers serializers,
+    Object? object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     return '';
   }
 }

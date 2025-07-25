@@ -14,7 +14,7 @@ void main() {
     var data = BuiltList<int>([1, 2, 3]);
     var specifiedType = const FullType(BuiltList, [FullType(int)]);
     var serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(specifiedType, () => ListBuilder<int>()))
+          ..addBuilderFactory(specifiedType, ListBuilder<int>.new))
         .build();
     var serialized = json.decode(json.encode([1, 2, 3])) as Iterable;
 

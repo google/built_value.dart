@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library values;
+library;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -17,7 +17,8 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
   BuiltSet<int> get aSet;
   BuiltSetMultimap<int, bool> get setMultimap;
 
-  factory SimpleValue([Function(SimpleValueBuilder) updates]) = _$SimpleValue;
+  factory SimpleValue([void Function(SimpleValueBuilder) updates]) =
+      _$SimpleValue;
   SimpleValue._();
 }
 
@@ -26,7 +27,7 @@ abstract class CompoundValue
   SimpleValue get simpleValue;
   String? get string;
 
-  factory CompoundValue([Function(CompoundValueBuilder) updates]) =
+  factory CompoundValue([void Function(CompoundValueBuilder) updates]) =
       _$CompoundValue;
   CompoundValue._();
 }
@@ -38,7 +39,7 @@ abstract class ComparedValue
   @BuiltValueField(compare: false)
   Function get onChanged;
 
-  factory ComparedValue([Function(ComparedValueBuilder) updates]) =
+  factory ComparedValue([void Function(ComparedValueBuilder) updates]) =
       _$ComparedValue;
   ComparedValue._();
 }

@@ -7,8 +7,8 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
-import 'package:end_to_end_test/polymorphism.dart';
-import 'package:end_to_end_test/values.dart';
+import 'polymorphism.dart';
+import 'values.dart';
 
 part 'standard_json.g.dart';
 

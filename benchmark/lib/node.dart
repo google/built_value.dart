@@ -2,8 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library node;
-
 import 'package:built_value/built_value.dart';
 
 part 'node.g.dart';
@@ -15,6 +13,6 @@ abstract class Node implements Built<Node, NodeBuilder> {
 
   Node? get right;
 
-  factory Node([Function(NodeBuilder) updates]) = _$Node;
+  factory Node([void Function(NodeBuilder) updates]) = _$Node;
   Node._();
 }

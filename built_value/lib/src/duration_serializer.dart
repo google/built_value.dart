@@ -3,7 +3,8 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/serializer.dart';
+
+import '../serializer.dart';
 
 /// Serializer for [Duration].
 ///
@@ -17,14 +18,20 @@ class DurationSerializer implements PrimitiveSerializer<Duration> {
   final String wireName = 'Duration';
 
   @override
-  Object serialize(Serializers serializers, Duration duration,
-      {FullType specifiedType = FullType.unspecified}) {
+  Object serialize(
+    Serializers serializers,
+    Duration duration, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     return duration.inMicroseconds;
   }
 
   @override
-  Duration deserialize(Serializers serializers, Object? serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  Duration deserialize(
+    Serializers serializers,
+    Object? serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     return Duration(microseconds: serialized as int);
   }
 }

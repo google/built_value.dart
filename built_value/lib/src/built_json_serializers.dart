@@ -5,7 +5,7 @@
 import 'dart:convert';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/serializer.dart';
+import '../serializer.dart';
 
 /// Default implementation of [Serializers].
 class BuiltJsonSerializers implements Serializers {
@@ -22,25 +22,28 @@ class BuiltJsonSerializers implements Serializers {
   final BuiltMap<String, Serializer> _typeNameToSerializer;
 
   @override
-  final BuiltMap<FullType, Function> builderFactories;
+  final BuiltMap<FullType, Object Function()> builderFactories;
 
   @override
   final BuiltList<SerializerPlugin> serializerPlugins;
 
   BuiltJsonSerializers._(
-      this._typeToSerializer,
-      this._wireNameToSerializer,
-      this._typeNameToSerializer,
-      this.builderFactories,
-      this.serializerPlugins);
+    this._typeToSerializer,
+    this._wireNameToSerializer,
+    this._typeNameToSerializer,
+    this.builderFactories,
+    this.serializerPlugins,
+  );
 
   @override
   Iterable<Serializer> get serializers => _wireNameToSerializer.values;
 
   @override
   T? deserializeWith<T>(Serializer<T> serializer, Object? serialized) {
-    return deserialize(serialized,
-        specifiedType: FullType(serializer.types.first)) as T?;
+    return deserialize(
+      serialized,
+      specifiedType: FullType(serializer.types.first),
+    ) as T?;
   }
 
   @override
@@ -59,12 +62,16 @@ class BuiltJsonSerializers implements Serializers {
   }
 
   @override
-  Object? serialize(Object? object,
-      {FullType specifiedType = FullType.unspecified}) {
+  Object? serialize(
+    Object? object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     var transformedObject = object;
     for (var plugin in serializerPlugins) {
-      transformedObject =
-          plugin.beforeSerialize(transformedObject, specifiedType);
+      transformedObject = plugin.beforeSerialize(
+        transformedObject,
+        specifiedType,
+      );
     }
     var result = _serialize(transformedObject, specifiedType);
     for (var plugin in serializerPlugins) {
@@ -78,7 +85,8 @@ class BuiltJsonSerializers implements Serializers {
       final serializer = serializerForType(object.runtimeType);
       if (serializer == null) {
         throw StateError(
-            _noSerializerMessageFor(object.runtimeType.toString()));
+          _noSerializerMessageFor(object.runtimeType.toString()),
+        );
       }
       if (serializer is StructuredSerializer) {
         final result = <Object?>[serializer.wireName];
@@ -89,7 +97,8 @@ class BuiltJsonSerializers implements Serializers {
             : <Object>[serializer.wireName, serializer.serialize(this, object)];
       } else {
         throw StateError(
-            'serializer must be StructuredSerializer or PrimitiveSerializer');
+          'serializer must be StructuredSerializer or PrimitiveSerializer',
+        );
       }
     } else {
       final serializer = serializerForType(specifiedType.root);
@@ -109,18 +118,23 @@ class BuiltJsonSerializers implements Serializers {
             : serializer.serialize(this, object, specifiedType: specifiedType);
       } else {
         throw StateError(
-            'serializer must be StructuredSerializer or PrimitiveSerializer');
+          'serializer must be StructuredSerializer or PrimitiveSerializer',
+        );
       }
     }
   }
 
   @override
-  Object? deserialize(Object? object,
-      {FullType specifiedType = FullType.unspecified}) {
+  Object? deserialize(
+    Object? object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     var transformedObject = object;
     for (var plugin in serializerPlugins) {
-      transformedObject =
-          plugin.beforeDeserialize(transformedObject, specifiedType);
+      transformedObject = plugin.beforeDeserialize(
+        transformedObject,
+        specifiedType,
+      );
     }
     var result = _deserialize(object, transformedObject, specifiedType);
     for (var plugin in serializerPlugins) {
@@ -130,7 +144,10 @@ class BuiltJsonSerializers implements Serializers {
   }
 
   Object? _deserialize(
-      Object? objectBeforePlugins, Object? object, FullType specifiedType) {
+    Object? objectBeforePlugins,
+    Object? object,
+    FullType specifiedType,
+  ) {
     if (specifiedType.isUnspecified) {
       final wireName = (object as List<Object?>).first as String;
 
@@ -156,7 +173,8 @@ class BuiltJsonSerializers implements Serializers {
         }
       } else {
         throw StateError(
-            'serializer must be StructuredSerializer or PrimitiveSerializer');
+          'serializer must be StructuredSerializer or PrimitiveSerializer',
+        );
       }
     } else {
       final serializer = serializerForType(specifiedType.root);
@@ -166,7 +184,8 @@ class BuiltJsonSerializers implements Serializers {
           return deserialize(objectBeforePlugins);
         } else {
           throw StateError(
-              _noSerializerMessageFor(specifiedType.root.toString()));
+            _noSerializerMessageFor(specifiedType.root.toString()),
+          );
         }
       }
 
@@ -174,8 +193,11 @@ class BuiltJsonSerializers implements Serializers {
         try {
           return object == null
               ? null
-              : serializer.deserialize(this, object as Iterable<Object?>,
-                  specifiedType: specifiedType);
+              : serializer.deserialize(
+                  this,
+                  object as Iterable<Object?>,
+                  specifiedType: specifiedType,
+                );
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
@@ -183,14 +205,18 @@ class BuiltJsonSerializers implements Serializers {
         try {
           return object == null
               ? null
-              : serializer.deserialize(this, object,
-                  specifiedType: specifiedType);
+              : serializer.deserialize(
+                  this,
+                  object,
+                  specifiedType: specifiedType,
+                );
         } on Error catch (error) {
           throw DeserializationError(object, specifiedType, error);
         }
       } else {
         throw StateError(
-            'serializer must be StructuredSerializer or PrimitiveSerializer');
+          'serializer must be StructuredSerializer or PrimitiveSerializer',
+        );
       }
     }
   }
@@ -216,8 +242,10 @@ class BuiltJsonSerializers implements Serializers {
   }
 
   Never _throwMissingBuilderFactory(FullType fullType) {
-    throw StateError('No builder factory for $fullType. '
-        'Fix by adding one, see SerializersBuilder.addBuilderFactory.');
+    throw StateError(
+      'No builder factory for $fullType. '
+      'Fix by adding one, see SerializersBuilder.addBuilderFactory.',
+    );
   }
 
   @override
@@ -228,11 +256,12 @@ class BuiltJsonSerializers implements Serializers {
   @override
   SerializersBuilder toBuilder() {
     return BuiltJsonSerializersBuilder._(
-        _typeToSerializer.toBuilder(),
-        _wireNameToSerializer.toBuilder(),
-        _typeNameToSerializer.toBuilder(),
-        builderFactories.toBuilder(),
-        serializerPlugins.toBuilder());
+      _typeToSerializer.toBuilder(),
+      _wireNameToSerializer.toBuilder(),
+      _typeNameToSerializer.toBuilder(),
+      builderFactories.toBuilder(),
+      serializerPlugins.toBuilder(),
+    );
   }
 }
 
@@ -242,30 +271,33 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   final MapBuilder<String, Serializer> _wireNameToSerializer;
   final MapBuilder<String, Serializer> _typeNameToSerializer;
 
-  final MapBuilder<FullType, Function> _builderFactories;
+  final MapBuilder<FullType, Object Function()> _builderFactories;
 
   final ListBuilder<SerializerPlugin> _plugins;
 
   factory BuiltJsonSerializersBuilder() => BuiltJsonSerializersBuilder._(
-      MapBuilder<Type, Serializer>(),
-      MapBuilder<String, Serializer>(),
-      MapBuilder<String, Serializer>(),
-      MapBuilder<FullType, Function>(),
-      ListBuilder<SerializerPlugin>());
+        MapBuilder<Type, Serializer>(),
+        MapBuilder<String, Serializer>(),
+        MapBuilder<String, Serializer>(),
+        MapBuilder<FullType, Object Function()>(),
+        ListBuilder<SerializerPlugin>(),
+      );
 
   BuiltJsonSerializersBuilder._(
-      this._typeToSerializer,
-      this._wireNameToSerializer,
-      this._typeNameToSerializer,
-      this._builderFactories,
-      this._plugins);
+    this._typeToSerializer,
+    this._wireNameToSerializer,
+    this._typeNameToSerializer,
+    this._builderFactories,
+    this._plugins,
+  );
 
   @override
   void add(Serializer serializer) {
     if (serializer is! StructuredSerializer &&
         serializer is! PrimitiveSerializer) {
       throw ArgumentError(
-          'serializer must be StructuredSerializer or PrimitiveSerializer');
+        'serializer must be StructuredSerializer or PrimitiveSerializer',
+      );
     }
 
     _wireNameToSerializer[serializer.wireName] = serializer;
@@ -281,7 +313,7 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   }
 
   @override
-  void addBuilderFactory(FullType types, Function function) {
+  void addBuilderFactory(FullType types, Object Function() function) {
     _builderFactories[types] = function;
     // Nullability of the top level type is irrelevant to serialization, but
     // lookup might be done with either nullable or not nullable depending
@@ -310,11 +342,12 @@ class BuiltJsonSerializersBuilder implements SerializersBuilder {
   @override
   Serializers build() {
     return BuiltJsonSerializers._(
-        _typeToSerializer.build(),
-        _wireNameToSerializer.build(),
-        _typeNameToSerializer.build(),
-        _builderFactories.build(),
-        _plugins.build());
+      _typeToSerializer.build(),
+      _wireNameToSerializer.build(),
+      _typeNameToSerializer.build(),
+      _builderFactories.build(),
+      _plugins.build(),
+    );
   }
 }
 

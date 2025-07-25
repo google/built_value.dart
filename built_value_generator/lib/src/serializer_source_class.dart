@@ -2,22 +2,20 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library built_value_generator.source_class;
-
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/enum_source_class.dart';
-import 'package:built_value_generator/src/enum_source_field.dart';
-import 'package:built_value_generator/src/fields.dart' show collectFields;
-import 'package:built_value_generator/src/parsed_library_results.dart';
-import 'package:built_value_generator/src/serializer_source_field.dart';
-import 'package:built_value_generator/src/strings.dart';
-import 'package:built_value_generator/src/value_source_class.dart';
 
 import 'dart_types.dart';
+import 'enum_source_class.dart';
+import 'enum_source_field.dart';
+import 'fields.dart' show collectFields;
+import 'parsed_library_results.dart';
+import 'serializer_source_field.dart';
+import 'strings.dart';
+import 'value_source_class.dart';
 
 part 'serializer_source_class.g.dart';
 
@@ -36,7 +34,7 @@ abstract class SerializerSourceClass
         parsedLibraryResults: parsedLibraryResults,
         element: element,
         builderElement:
-            element.library2.getClass2(element.displayName + 'Builder'),
+            element.library2.getClass2('${element.displayName}Builder'),
       );
 
   SerializerSourceClass._();
@@ -133,11 +131,7 @@ abstract class SerializerSourceClass
   @memoized
   String get genericBoundsOrObjectString => genericBounds.isEmpty
       ? ''
-      : '<' +
-          genericBounds
-              .map((bound) => bound.isEmpty ? 'Object?' : bound)
-              .join(', ') +
-          '>';
+      : '<${genericBounds.map((bound) => bound.isEmpty ? 'Object?' : bound).join(', ')}>';
 
   String get genericName => '$name$genericBoundsOrObjectString';
 
@@ -526,21 +520,20 @@ class $serializerImplName implements PrimitiveSerializer<$genericName> {
     var nullableFields = fields.where((field) => field.isNullable).toList();
     if (nullableFields.isEmpty) return '';
 
-    return 'Object? value;' +
-        nullableFields.map((field) {
-          var serializeField = '''serializers.serialize(
+    return 'Object? value;${nullableFields.map((field) {
+      var serializeField = '''serializers.serialize(
           value,
           specifiedType:
           ${field.generateFullType(libraryFragment, genericParameters.toBuiltSet())})''';
 
-          return '''
+      return '''
           value = object.${field.name};
           ${serializerSettings.serializeNulls ? '' : 'if (value != null) {'}
             result
               ..add('${escapeString(field.wireName)}')
               ..add($serializeField);
           ${serializerSettings.serializeNulls ? '' : '}'}''';
-        }).join('');
+    }).join('')}';
   }
 
   /// Gets a map from generic parameter to its bound.

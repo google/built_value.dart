@@ -3,19 +3,25 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/serializer.dart';
+
+import '../serializer.dart';
 
 class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
   final bool structured = true;
   @override
-  final Iterable<Type> types =
-      BuiltList<Type>([BuiltSet, BuiltSet<Object>().runtimeType]);
+  final Iterable<Type> types = BuiltList<Type>([
+    BuiltSet,
+    BuiltSet<Object>().runtimeType,
+  ]);
   @override
   final String wireName = 'set';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, BuiltSet builtSet,
-      {FullType specifiedType = FullType.unspecified}) {
+  Iterable<Object?> serialize(
+    Serializers serializers,
+    BuiltSet map, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -24,13 +30,17 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
         ? FullType.unspecified
         : specifiedType.parameters[0];
 
-    return builtSet
-        .map((item) => serializers.serialize(item, specifiedType: elementType));
+    return map.map(
+      (item) => serializers.serialize(item, specifiedType: elementType),
+    );
   }
 
   @override
-  BuiltSet deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  BuiltSet deserialize(
+    Serializers serializers,
+    Iterable serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 
@@ -41,8 +51,11 @@ class BuiltSetSerializer implements StructuredSerializer<BuiltSet> {
         ? SetBuilder<Object>()
         : serializers.newBuilder(specifiedType) as SetBuilder;
 
-    result.replace(serialized.map(
-        (item) => serializers.deserialize(item, specifiedType: elementType)));
+    result.replace(
+      serialized.map(
+        (item) => serializers.deserialize(item, specifiedType: elementType),
+      ),
+    );
     return result.build();
   }
 }

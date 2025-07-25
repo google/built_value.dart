@@ -1,11 +1,10 @@
-library built_value_generator.memoized_getter;
+library;
 
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/dart_types.dart';
-import 'package:built_value_generator/src/metadata.dart'
-    show metadataToStringValue;
+import 'dart_types.dart';
+import 'metadata.dart' show metadataToStringValue;
 
 part 'memoized_getter.g.dart';
 

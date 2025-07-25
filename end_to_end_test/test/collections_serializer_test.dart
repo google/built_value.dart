@@ -77,7 +77,8 @@ void main() {
       ],
     ])) as Object;
     var serializersWithBuilder = (serializers.toBuilder()
-          ..addBuilderFactory(FullType(BuiltList, [FullType.nullable(int)]),
+          ..addBuilderFactory(
+              const FullType(BuiltList, [FullType.nullable(int)]),
               () => ListBuilder<int?>()))
         .build();
 

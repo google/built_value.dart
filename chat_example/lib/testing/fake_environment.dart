@@ -4,12 +4,12 @@
 
 import 'dart:async';
 
-import 'package:chat_example/client/client.dart';
-import 'package:chat_example/server/server.dart';
-import 'package:chat_example/testing/fake_client_connection.dart';
-import 'package:chat_example/testing/fake_display.dart';
-import 'package:chat_example/testing/fake_server_connection.dart';
-import 'package:chat_example/testing/test_user.dart';
+import '../client/client.dart';
+import '../server/server.dart';
+import 'fake_client_connection.dart';
+import 'fake_display.dart';
+import 'fake_server_connection.dart';
+import 'test_user.dart';
 
 /// Environment for testing server and client logic together.
 ///
@@ -31,12 +31,12 @@ class FakeEnvironment {
     final clientConnection = FakeClientConnection();
     final serverConnection = FakeServerConnection();
 
-    clientConnection.toServerStreamController.stream.listen((string) {
-      serverConnection.fromClientStreamController.add(string);
-    });
-    serverConnection.toClientStreamController.stream.listen((string) {
-      clientConnection.fromServerStreamController.add(string);
-    });
+    clientConnection.toServerStreamController.stream.listen(
+      serverConnection.fromClientStreamController.add,
+    );
+    serverConnection.toClientStreamController.stream.listen(
+      clientConnection.fromServerStreamController.add,
+    );
 
     final keyboardInputController = StreamController<String>(sync: true);
     final display = FakeDisplay();

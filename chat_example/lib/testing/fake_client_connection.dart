@@ -4,7 +4,7 @@
 
 import 'dart:async';
 
-import 'package:chat_example/client/client_connection.dart';
+import '../client/client_connection.dart';
 
 /// Fake [ClientConnection] that exposes stream controllers.
 class FakeClientConnection implements ClientConnection {

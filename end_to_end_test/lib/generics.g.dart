@@ -1704,7 +1704,7 @@ class ConcreteGenericBuilder
 
 class _$GenericFunction<T> extends GenericFunction<T> {
   @override
-  final Function(T) function;
+  final void Function(T) function;
 
   factory _$GenericFunction(
           [void Function(GenericFunctionBuilder<T>)? updates]) =>
@@ -1747,9 +1747,9 @@ class GenericFunctionBuilder<T>
     implements Builder<GenericFunction<T>, GenericFunctionBuilder<T>> {
   _$GenericFunction<T>? _$v;
 
-  Function(T)? _function;
-  Function(T)? get function => _$this._function;
-  set function(Function(T)? function) => _$this._function = function;
+  void Function(T)? _function;
+  void Function(T)? get function => _$this._function;
+  set function(void Function(T)? function) => _$this._function = function;
 
   GenericFunctionBuilder();
 

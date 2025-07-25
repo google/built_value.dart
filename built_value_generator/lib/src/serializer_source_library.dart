@@ -2,17 +2,17 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library built_value_generator.source_library;
+library;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/parsed_library_results.dart';
-import 'package:built_value_generator/src/serializer_source_class.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'dart_types.dart';
+import 'parsed_library_results.dart';
+import 'serializer_source_class.dart';
 
 part 'serializer_source_library.g.dart';
 
@@ -228,25 +228,14 @@ abstract class SerializerSourceLibrary
   String _generateSerializersTopLevelFields() => serializersForAnnotations.keys
       .map(
         (field) =>
-            'Serializers _\$$field = (Serializers().toBuilder()' +
-            (serializeForTransitiveClasses[field]!
-                    .map(
-                      (sourceClass) =>
-                          sourceClass.generateTransitiveSerializerAdder(),
-                    )
-                    .toList()
-                  ..sort())
-                .join('\n') +
-            (serializeForTransitiveClasses[field]!
-                    .map(
-                      (sourceClass) => sourceClass.generateBuilderFactoryAdders(
-                        element.library2.firstFragment,
-                      ),
-                    )
-                    .toList()
-                  ..sort())
-                .join('\n') +
-            ').build();',
+            'Serializers _\$$field = (Serializers().toBuilder()${(serializeForTransitiveClasses[field]!.map(
+                  (sourceClass) =>
+                      sourceClass.generateTransitiveSerializerAdder(),
+                ).toList()..sort()).join('\n')}${(serializeForTransitiveClasses[field]!.map(
+                  (sourceClass) => sourceClass.generateBuilderFactoryAdders(
+                    element.library2.firstFragment,
+                  ),
+                ).toList()..sort()).join('\n')}).build();',
       )
       .join('\n');
 }

@@ -18,7 +18,7 @@ abstract class Built<V extends Built<V, B>, B extends Builder<V, B>> {
   ///
   /// The implementation of this method will be generated for you by the
   /// built_value generator.
-  V rebuild(Function(B) updates);
+  V rebuild(void Function(B) updates);
 
   /// Converts the instance to a builder [B].
   ///
@@ -43,7 +43,7 @@ abstract class Builder<V extends Built<V, B>, B extends Builder<V, B>> {
   /// Applies updates.
   ///
   /// [updates] is a function that takes a builder [B].
-  void update(Function(B)? updates);
+  void update(void Function(B)? updates);
 
   /// Builds.
   ///
@@ -117,15 +117,16 @@ class BuiltValue {
   /// to serialize with `@BuiltValueField(serialize: true)`.
   final bool defaultSerialize;
 
-  const BuiltValue(
-      {this.instantiable = true,
-      this.nestedBuilders = true,
-      this.autoCreateNestedBuilders = true,
-      this.comparableBuilders = false,
-      this.generateBuilderOnSetField = false,
-      this.wireName,
-      this.defaultCompare = true,
-      this.defaultSerialize = true});
+  const BuiltValue({
+    this.instantiable = true,
+    this.nestedBuilders = true,
+    this.autoCreateNestedBuilders = true,
+    this.comparableBuilders = false,
+    this.generateBuilderOnSetField = false,
+    this.wireName,
+    this.defaultCompare = true,
+    this.defaultSerialize = true,
+  });
 }
 
 /// Annotation that was used to mark nullable Built Value fields.
@@ -156,20 +157,23 @@ class BuiltValueField {
   /// indicates the name is to be taken from the literal field name.
   final String? wireName;
 
-  /// Whether the field overrides the `nestedBuilders` setting from the class. Defaults to `null` which
-  /// indicates the setting is to be taken from the `nestedBuilders` setting on the class.
+  /// Whether the field overrides the `nestedBuilders` setting from the class.
+  /// Defaults to `null` which indicates the setting is to be taken from the
+  /// `nestedBuilders` setting on the class.
   final bool? nestedBuilder;
 
-  /// Whether the field overrides the `autoCreateNestedBuilders` setting from the class. Defaults to `null` which
-  /// indicates the setting is to be taken from the `autoCreateNestedBuilders` setting on the class.
+  /// Whether the field overrides the `autoCreateNestedBuilders` setting from
+  /// the class. Defaults to `null` which indicates the setting is to be taken
+  /// from the `autoCreateNestedBuilders` setting on the class.
   final bool? autoCreateNestedBuilder;
 
-  const BuiltValueField(
-      {this.compare,
-      this.serialize,
-      this.wireName,
-      this.nestedBuilder,
-      this.autoCreateNestedBuilder});
+  const BuiltValueField({
+    this.compare,
+    this.serialize,
+    this.wireName,
+    this.nestedBuilder,
+    this.autoCreateNestedBuilder,
+  });
 }
 
 /// Optionally, annotate a Built Value `Serializer` getters with this to
@@ -187,8 +191,10 @@ class BuiltValueSerializer {
 
   final bool serializeNulls;
 
-  const BuiltValueSerializer(
-      {this.custom = false, this.serializeNulls = false});
+  const BuiltValueSerializer({
+    this.custom = false,
+    this.serializeNulls = false,
+  });
 }
 
 /// Memoized annotation for Built Value getters.
@@ -235,8 +241,11 @@ class BuiltValueEnumConst {
   /// the fallback, if available, rather than throwing an exception.
   final bool fallback;
 
-  const BuiltValueEnumConst(
-      {this.wireName, this.wireNumber, this.fallback = false});
+  const BuiltValueEnumConst({
+    this.wireName,
+    this.wireNumber,
+    this.fallback = false,
+  });
 }
 
 /// Optionally, annotate methods with this to cause them to be called by
@@ -275,8 +284,10 @@ class BuiltValueHook {
   /// ```
   final bool finalizeBuilder;
 
-  const BuiltValueHook(
-      {this.initializeBuilder = false, this.finalizeBuilder = false});
+  const BuiltValueHook({
+    this.initializeBuilder = false,
+    this.finalizeBuilder = false,
+  });
 }
 
 /// Enum Class base class.
@@ -319,7 +330,7 @@ typedef BuiltValueToStringHelperProvider = BuiltValueToStringHelper Function(
 /// are [IndentingBuiltValueToStringHelper], which is the default, and
 /// [FlatBuiltValueToStringHelper].
 BuiltValueToStringHelperProvider newBuiltValueToStringHelper =
-    (String className) => IndentingBuiltValueToStringHelper(className);
+    IndentingBuiltValueToStringHelper.new;
 
 /// Interface for built_value toString() output helpers.
 ///
@@ -422,7 +433,8 @@ class BuiltValueNullFieldError extends Error {
 
   @override
   String toString() =>
-      'Tried to construct class "$type" with null for non-nullable field "$field".';
+      'Tried to construct class "$type" with null for non-nullable field '
+      '"$field".';
 }
 
 /// [Error] indicating that a built_value class constructor was called with

@@ -35,7 +35,7 @@ void main() {
     var specifiedType =
         const FullType(BuiltMap, [FullType(int), FullType(String)]);
     var serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(specifiedType, () => MapBuilder<int, String>()))
+          ..addBuilderFactory(specifiedType, MapBuilder<int, String>.new))
         .build();
     var serialized =
         json.decode(json.encode([1, 'one', 2, 'two', 3, 'three'])) as Object;
@@ -68,9 +68,9 @@ void main() {
     var specifiedType =
         const FullType(BuiltMap, [innerTypeLeft, FullType(String)]);
     var serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(innerTypeLeft, () => MapBuilder<int, String>())
+          ..addBuilderFactory(innerTypeLeft, MapBuilder<int, String>.new)
           ..addBuilderFactory(
-              specifiedType, () => MapBuilder<BuiltMap<int, String>, String>()))
+              specifiedType, MapBuilder<BuiltMap<int, String>, String>.new))
         .build();
     var serialized = json.decode(json.encode([
       [1, 'one'],
@@ -100,10 +100,9 @@ void main() {
     var specifiedType =
         const FullType(BuiltMap, [FullType(int), innerTypeRight]);
     var serializers = (Serializers().toBuilder()
+          ..addBuilderFactory(innerTypeRight, MapBuilder<String, String>.new)
           ..addBuilderFactory(
-              innerTypeRight, () => MapBuilder<String, String>())
-          ..addBuilderFactory(
-              specifiedType, () => MapBuilder<int, BuiltMap<String, String>>()))
+              specifiedType, MapBuilder<int, BuiltMap<String, String>>.new))
         .build();
     var serialized = json.decode(json.encode([
       1,
@@ -136,11 +135,11 @@ void main() {
         [builtMapOfIntIntGenericType, builtMapOfStringStringGenericType]);
     var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(
-              builtMapOfIntIntGenericType, () => MapBuilder<int, int>())
-          ..addBuilderFactory(builtMapOfStringStringGenericType,
-              () => MapBuilder<String, String>())
+              builtMapOfIntIntGenericType, MapBuilder<int, int>.new)
+          ..addBuilderFactory(
+              builtMapOfStringStringGenericType, MapBuilder<String, String>.new)
           ..addBuilderFactory(specifiedType,
-              () => MapBuilder<BuiltMap<int, int>, BuiltMap<String, String>>()))
+              MapBuilder<BuiltMap<int, int>, BuiltMap<String, String>>.new))
         .build();
     var serialized = json.decode(json.encode([
       [1, 1],
@@ -161,14 +160,12 @@ void main() {
 
     test('keeps generic type on deserialization', () {
       final genericSerializer = (serializers.toBuilder()
+            ..addBuilderFactory(specifiedType,
+                MapBuilder<BuiltMap<int, int>, BuiltMap<String, String>>.new)
             ..addBuilderFactory(
-                specifiedType,
-                () =>
-                    MapBuilder<BuiltMap<int, int>, BuiltMap<String, String>>())
-            ..addBuilderFactory(
-                builtMapOfIntIntGenericType, () => MapBuilder<int, int>())
+                builtMapOfIntIntGenericType, MapBuilder<int, int>.new)
             ..addBuilderFactory(builtMapOfStringStringGenericType,
-                () => MapBuilder<String, String>()))
+                MapBuilder<String, String>.new))
           .build();
 
       expect(
@@ -184,7 +181,7 @@ void main() {
     var specifiedType =
         const FullType(BuiltMap, [FullType(int), FullType.unspecified]);
     var serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(specifiedType, () => MapBuilder<int, Object>()))
+          ..addBuilderFactory(specifiedType, MapBuilder<int, Object>.new))
         .build();
     var serialized = json.decode(json.encode([
       1,
@@ -211,8 +208,7 @@ void main() {
     var specifiedType =
         const FullType(BuiltMap, [FullType.unspecified, FullType(String)]);
     var serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(
-              specifiedType, () => MapBuilder<Object, String>()))
+          ..addBuilderFactory(specifiedType, MapBuilder<Object, String>.new))
         .build();
     var serialized = json.decode(json.encode([
       ['int', 1],
