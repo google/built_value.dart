@@ -11,9 +11,11 @@ void benchmark() {
 }
 
 void benchmarkHashCode() {
-  final value = SimpleValue((b) => b
-    ..anInt = 0
-    ..aString = 'zero');
+  final value = SimpleValue(
+    (b) => b
+      ..anInt = 0
+      ..aString = 'zero',
+  );
   _benchmark('hashCode', () => value.hashCode);
 }
 
@@ -42,7 +44,7 @@ void _buildNested(NodeBuilder nodeBuilder, int depth) {
   }
 }
 
-void _benchmark(String name, Function() function) {
+void _benchmark(String name, void Function() function) {
   // Warm up.
   for (var i = 0; i != 1000; ++i) {
     function();

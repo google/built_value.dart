@@ -3,7 +3,8 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/serializer.dart';
+
+import '../serializer.dart';
 
 /// Serializer for [DateTime].
 ///
@@ -17,21 +18,32 @@ class DateTimeSerializer implements PrimitiveSerializer<DateTime> {
   final String wireName = 'DateTime';
 
   @override
-  Object serialize(Serializers serializers, DateTime dateTime,
-      {FullType specifiedType = FullType.unspecified}) {
+  Object serialize(
+    Serializers serializers,
+    DateTime dateTime, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     if (!dateTime.isUtc) {
       throw ArgumentError.value(
-          dateTime, 'dateTime', 'Must be in utc for serialization.');
+        dateTime,
+        'dateTime',
+        'Must be in utc for serialization.',
+      );
     }
 
     return dateTime.microsecondsSinceEpoch;
   }
 
   @override
-  DateTime deserialize(Serializers serializers, Object? serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  DateTime deserialize(
+    Serializers serializers,
+    Object? serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     var microsecondsSinceEpoch = serialized as int;
-    return DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
-        isUtc: true);
+    return DateTime.fromMicrosecondsSinceEpoch(
+      microsecondsSinceEpoch,
+      isUtc: true,
+    );
   }
 }

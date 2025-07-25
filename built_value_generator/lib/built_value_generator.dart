@@ -91,7 +91,8 @@ class BuiltValueGenerator extends Generator {
           '\n'
           '// ignore_for_file: '
           'deprecated_member_use_from_same_package,'
-          'type=lint';
+          'type=lint'
+          '\n// hi 2';
     } else {
       return null;
     }

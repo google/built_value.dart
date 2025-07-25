@@ -3,7 +3,8 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/serializer.dart';
+
+import '../serializer.dart';
 
 class DoubleSerializer implements PrimitiveSerializer<double> {
   // Constant names match those in [double].
@@ -19,8 +20,11 @@ class DoubleSerializer implements PrimitiveSerializer<double> {
   final String wireName = 'double';
 
   @override
-  Object serialize(Serializers serializers, double aDouble,
-      {FullType specifiedType = FullType.unspecified}) {
+  Object serialize(
+    Serializers serializers,
+    double aDouble, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     if (aDouble.isNaN) {
       return nan;
     } else if (aDouble.isInfinite) {
@@ -31,8 +35,11 @@ class DoubleSerializer implements PrimitiveSerializer<double> {
   }
 
   @override
-  double deserialize(Serializers serializers, Object? serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  double deserialize(
+    Serializers serializers,
+    Object? serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     if (serialized == nan) {
       return double.nan;
     } else if (serialized == negativeInfinity) {

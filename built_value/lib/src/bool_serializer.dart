@@ -3,7 +3,8 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/serializer.dart';
+
+import '../serializer.dart';
 
 class BoolSerializer implements PrimitiveSerializer<bool> {
   final bool structured = false;
@@ -13,14 +14,20 @@ class BoolSerializer implements PrimitiveSerializer<bool> {
   final String wireName = 'bool';
 
   @override
-  Object serialize(Serializers serializers, bool boolean,
-      {FullType specifiedType = FullType.unspecified}) {
+  Object serialize(
+    Serializers serializers,
+    bool boolean, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     return boolean;
   }
 
   @override
-  bool deserialize(Serializers serializers, Object? serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  bool deserialize(
+    Serializers serializers,
+    Object? serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     return serialized as bool;
   }
 }
