@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.11.1
+
+- Allow `built_value_generator` to use `analyzer 8.0.0`.
+
 # 8.11.0
 
 - Use `build ^3.0.0`.
