@@ -35,7 +35,7 @@ void main() {
     var data = BuiltSet<int>([1, 2, 3]);
     var specifiedType = const FullType(BuiltSet, [FullType(int)]);
     var serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(specifiedType, () => SetBuilder<int>()))
+          ..addBuilderFactory(specifiedType, SetBuilder<int>.new))
         .build();
     var serialized = json.decode(json.encode([1, 2, 3])) as Object;
 
@@ -68,9 +68,9 @@ void main() {
       FullType(BuiltSet, [FullType(int)])
     ]);
     var serializers = (Serializers().toBuilder()
-          ..addBuilderFactory(specifiedType, () => SetBuilder<BuiltSet<int>>())
-          ..addBuilderFactory(const FullType(BuiltSet, [FullType(int)]),
-              () => SetBuilder<int>()))
+          ..addBuilderFactory(specifiedType, SetBuilder<BuiltSet<int>>.new)
+          ..addBuilderFactory(
+              const FullType(BuiltSet, [FullType(int)]), SetBuilder<int>.new))
         .build();
     var serialized = json.decode(json.encode([
       [1, 2, 3],

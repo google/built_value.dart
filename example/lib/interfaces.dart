@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library interfaces;
+library;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -62,7 +62,7 @@ class EnumWithInt extends EnumClass implements HasInt {
   static const EnumWithInt two = _$two;
   static const EnumWithInt three = _$three;
 
-  const EnumWithInt._(String name) : super(name);
+  const EnumWithInt._(super.name);
 
   static BuiltSet<EnumWithInt> get values => _$values;
 

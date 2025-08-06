@@ -11,7 +11,7 @@ void main() {
   var serializers = Serializers();
 
   group('Duration with known specifiedType', () {
-    var data = Duration(
+    var data = const Duration(
         days: 1,
         hours: 2,
         minutes: 3,
@@ -38,7 +38,7 @@ void main() {
   });
 
   group('Duration with unknown specifiedType', () {
-    var data = Duration(
+    var data = const Duration(
         days: 1,
         hours: 2,
         minutes: 3,

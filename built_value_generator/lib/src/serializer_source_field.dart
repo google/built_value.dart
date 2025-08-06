@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library built_value_generator.source_field;
+library;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
@@ -11,12 +11,11 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/dart_types.dart';
-import 'package:built_value_generator/src/field_mixin.dart';
-import 'package:built_value_generator/src/metadata.dart'
-    show metadataToStringValue;
-import 'package:built_value_generator/src/parsed_library_results.dart';
-import 'package:built_value_generator/src/strings.dart';
+import 'dart_types.dart';
+import 'field_mixin.dart';
+import 'metadata.dart' show metadataToStringValue;
+import 'parsed_library_results.dart';
+import 'strings.dart';
 
 part 'serializer_source_field.g.dart';
 

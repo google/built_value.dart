@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/serializer.dart';
+import '../serializer.dart';
 
 class Uint8ListSerializer implements PrimitiveSerializer<Uint8List> {
   @override

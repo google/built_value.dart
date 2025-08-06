@@ -3,20 +3,10 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
+// ignore: implementation_imports
 import 'package:built_collection/src/internal/hash.dart';
-import 'package:built_value/src/big_int_serializer.dart';
-import 'package:built_value/src/date_time_serializer.dart';
-import 'package:built_value/src/duration_serializer.dart';
-import 'package:built_value/src/int32_serializer.dart';
-import 'package:built_value/src/int64_serializer.dart';
-import 'package:built_value/src/json_object_serializer.dart';
-import 'package:built_value/src/list_serializer.dart';
-import 'package:built_value/src/map_serializer.dart';
-import 'package:built_value/src/num_serializer.dart';
-import 'package:built_value/src/set_serializer.dart';
-import 'package:built_value/src/uint8_list_serializer.dart';
-import 'package:built_value/src/uri_serializer.dart';
 
+import 'src/big_int_serializer.dart';
 import 'src/bool_serializer.dart';
 import 'src/built_json_serializers.dart';
 import 'src/built_list_multimap_serializer.dart';
@@ -24,11 +14,22 @@ import 'src/built_list_serializer.dart';
 import 'src/built_map_serializer.dart';
 import 'src/built_set_multimap_serializer.dart';
 import 'src/built_set_serializer.dart';
+import 'src/date_time_serializer.dart';
 import 'src/double_serializer.dart';
+import 'src/duration_serializer.dart';
+import 'src/int32_serializer.dart';
+import 'src/int64_serializer.dart';
 import 'src/int_serializer.dart';
+import 'src/json_object_serializer.dart';
+import 'src/list_serializer.dart';
+import 'src/map_serializer.dart';
 import 'src/null_serializer.dart';
+import 'src/num_serializer.dart';
 import 'src/regexp_serializer.dart';
+import 'src/set_serializer.dart';
 import 'src/string_serializer.dart';
+import 'src/uint8_list_serializer.dart';
+import 'src/uri_serializer.dart';
 
 /// Annotation to trigger code generation of a [Serializers] instance.
 ///
@@ -83,21 +84,32 @@ abstract class Serializers {
           ..add(StringSerializer())
           ..add(Uint8ListSerializer())
           ..add(UriSerializer())
-          ..addBuilderFactory(const FullType(BuiltList, [FullType.object]),
-              () => ListBuilder<Object>())
           ..addBuilderFactory(
-              const FullType(
-                  BuiltListMultimap, [FullType.object, FullType.object]),
-              () => ListMultimapBuilder<Object, Object>())
+            const FullType(BuiltList, [FullType.object]),
+            ListBuilder<Object>.new,
+          )
           ..addBuilderFactory(
-              const FullType(BuiltMap, [FullType.object, FullType.object]),
-              () => MapBuilder<Object, Object>())
-          ..addBuilderFactory(const FullType(BuiltSet, [FullType.object]),
-              () => SetBuilder<Object>())
+            const FullType(BuiltListMultimap, [
+              FullType.object,
+              FullType.object,
+            ]),
+            ListMultimapBuilder<Object, Object>.new,
+          )
           ..addBuilderFactory(
-              const FullType(
-                  BuiltSetMultimap, [FullType.object, FullType.object]),
-              () => SetMultimapBuilder<Object, Object>()))
+            const FullType(BuiltMap, [FullType.object, FullType.object]),
+            MapBuilder<Object, Object>.new,
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType.object]),
+            SetBuilder<Object>.new,
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSetMultimap, [
+              FullType.object,
+              FullType.object,
+            ]),
+            SetMultimapBuilder<Object, Object>.new,
+          ))
         .build();
   }
 
@@ -111,7 +123,7 @@ abstract class Serializers {
   Iterable<Serializer> get serializers;
 
   /// The installed builder factories.
-  BuiltMap<FullType, Function> get builderFactories;
+  BuiltMap<FullType, Object Function()> get builderFactories;
 
   /// The installed serializer plugins.
   Iterable<SerializerPlugin> get serializerPlugins;
@@ -127,8 +139,10 @@ abstract class Serializers {
   /// Create one using [SerializersBuilder].
   ///
   /// TODO(davidmorgan): document the wire format.
-  Object? serialize(Object? object,
-      {FullType specifiedType = FullType.unspecified});
+  Object? serialize(
+    Object? object, {
+    FullType specifiedType = FullType.unspecified,
+  });
 
   /// Convenience method for when you know the type you're serializing.
   /// Specify the type by specifying its [Serializer] class. Equivalent to
@@ -147,8 +161,10 @@ abstract class Serializers {
   ///
   /// If [serialized] was produced by calling [serialize] with [specifiedType],
   /// the exact same [specifiedType] must be provided to deserialize.
-  Object? deserialize(Object? serialized,
-      {FullType specifiedType = FullType.unspecified});
+  Object? deserialize(
+    Object? serialized, {
+    FullType specifiedType = FullType.unspecified,
+  });
 
   /// Convenience method for when you know the type you're deserializing.
   /// Specify the type by specifying its [Serializer] class. Equivalent to
@@ -235,7 +251,7 @@ abstract class SerializersBuilder {
   ///       ))
   ///     .build();
   /// ```
-  void addBuilderFactory(FullType specifiedType, Function function);
+  void addBuilderFactory(FullType specifiedType, Object Function() function);
 
   /// Installs a [SerializerPlugin] that applies to all serialization and
   /// deserialization.
@@ -343,8 +359,11 @@ abstract class PrimitiveSerializer<T> implements Serializer<T> {
   /// an integer, a double, a String or a List.
   ///
   /// TODO(davidmorgan): document the wire format.
-  Object serialize(Serializers serializers, T object,
-      {FullType specifiedType = FullType.unspecified});
+  Object serialize(
+    Serializers serializers,
+    T object, {
+    FullType specifiedType = FullType.unspecified,
+  });
 
   /// Deserializes [serialized].
   ///
@@ -352,14 +371,17 @@ abstract class PrimitiveSerializer<T> implements Serializer<T> {
   ///
   /// Use [serializers] as needed for nested deserialization. Information about
   /// the type being deserialized is provided in [specifiedType].
-  T deserialize(Serializers serializers, Object serialized,
-      {FullType specifiedType = FullType.unspecified});
+  T deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  });
 }
 
 /// A [Serializer] that serializes to and from an [Iterable] of primitive JSON
 /// values.
 abstract class StructuredSerializer<T> implements Serializer<T> {
-  /// Serializes [object].
+  /// Serializes [map].
   ///
   /// Use [serializers] as needed for nested serialization. Information about
   /// the type being serialized is provided in [specifiedType].
@@ -368,8 +390,11 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
   /// JSON: booleans, integers, doubles, Strings and [Iterable]s.
   ///
   /// TODO(davidmorgan): document the wire format.
-  Iterable<Object?> serialize(Serializers serializers, T object,
-      {FullType specifiedType = FullType.unspecified});
+  Iterable<Object?> serialize(
+    Serializers serializers,
+    T map, {
+    FullType specifiedType = FullType.unspecified,
+  });
 
   /// Deserializes [serialized].
   ///
@@ -378,14 +403,17 @@ abstract class StructuredSerializer<T> implements Serializer<T> {
   ///
   /// Use [serializers] as needed for nested deserialization. Information about
   /// the type being deserialized is provided in [specifiedType].
-  T deserialize(Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified});
+  T deserialize(
+    Serializers serializers,
+    Iterable<Object?> serialized, {
+    FullType specifiedType = FullType.unspecified,
+  });
 }
 
 /// [Error] conveying why deserialization failed.
 ///
-/// The Object that failed to deseralize is included as [json] but is not displayed
-/// in the error message to prevent accidental inclusion in logs.
+/// The Object that failed to deseralize is included as [json] but is not
+/// displayed in the error message to prevent accidental inclusion in logs.
 class DeserializationError extends Error {
   final String? json;
   final FullType type;

@@ -2,8 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library simple_value;
-
 import 'package:built_value/built_value.dart';
 
 part 'simple_value.g.dart';
@@ -13,6 +11,7 @@ abstract class SimpleValue implements Built<SimpleValue, SimpleValueBuilder> {
 
   String get aString;
 
-  factory SimpleValue([Function(SimpleValueBuilder) updates]) = _$SimpleValue;
+  factory SimpleValue([void Function(SimpleValueBuilder) updates]) =
+      _$SimpleValue;
   SimpleValue._();
 }

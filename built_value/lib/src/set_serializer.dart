@@ -3,7 +3,8 @@
 // license that can be found in the LICENSE file.
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/serializer.dart';
+
+import '../serializer.dart';
 
 class SetSerializer implements StructuredSerializer<Set> {
   final bool structured = true;
@@ -13,8 +14,11 @@ class SetSerializer implements StructuredSerializer<Set> {
   final String wireName = 'Set';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, Set set,
-      {FullType specifiedType = FullType.unspecified}) {
+  Iterable<Object?> serialize(
+    Serializers serializers,
+    Set map, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
     if (!isUnderspecified) serializers.expectBuilder(specifiedType);
@@ -23,13 +27,17 @@ class SetSerializer implements StructuredSerializer<Set> {
         ? FullType.unspecified
         : specifiedType.parameters[0];
 
-    return set
-        .map((item) => serializers.serialize(item, specifiedType: elementType));
+    return map.map(
+      (item) => serializers.serialize(item, specifiedType: elementType),
+    );
   }
 
   @override
-  Set deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  Set deserialize(
+    Serializers serializers,
+    Iterable serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     var isUnderspecified =
         specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
 

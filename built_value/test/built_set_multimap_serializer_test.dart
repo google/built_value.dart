@@ -19,7 +19,7 @@ void main() {
         const FullType(BuiltSetMultimap, [FullType(int), FullType(String)]);
     var serializers = (Serializers().toBuilder()
           ..addBuilderFactory(
-              specifiedType, () => SetMultimapBuilder<int, String>()))
+              specifiedType, SetMultimapBuilder<int, String>.new))
         .build();
     var serialized = json.decode(json.encode([
       1,

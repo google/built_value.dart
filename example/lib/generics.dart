@@ -2,8 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library generics;
-
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -26,7 +24,7 @@ abstract class GenericValue<T>
 
   T get value;
 
-  factory GenericValue([Function(GenericValueBuilder<T>) updates]) =
+  factory GenericValue([void Function(GenericValueBuilder<T>) updates]) =
       _$GenericValue<T>;
   GenericValue._();
 }
@@ -43,8 +41,9 @@ abstract class BoundGenericValue<T extends num>
 
   T get value;
 
-  factory BoundGenericValue([Function(BoundGenericValueBuilder<T>) updates]) =
-      _$BoundGenericValue<T>;
+  factory BoundGenericValue([
+    void Function(BoundGenericValueBuilder<T>) updates,
+  ]) = _$BoundGenericValue<T>;
   BoundGenericValue._();
 }
 
@@ -61,9 +60,9 @@ abstract class CollectionGenericValue<T>
 
   BuiltList<T> get values;
 
-  factory CollectionGenericValue(
-          [Function(CollectionGenericValueBuilder<T>) updates]) =
-      _$CollectionGenericValue<T>;
+  factory CollectionGenericValue([
+    void Function(CollectionGenericValueBuilder<T>) updates,
+  ]) = _$CollectionGenericValue<T>;
   CollectionGenericValue._();
 }
 

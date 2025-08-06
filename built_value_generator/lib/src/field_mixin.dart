@@ -2,7 +2,7 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value_generator/src/dart_types.dart';
+import 'dart_types.dart';
 
 /// Common logic between `ValueSourceField` and `SerializerSourceField`.
 mixin FieldMixin {

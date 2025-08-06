@@ -4,11 +4,12 @@
 
 import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/build.dart';
-import 'package:built_value_generator/src/enum_source_library.dart';
-import 'package:built_value_generator/src/parsed_library_results.dart';
-import 'package:built_value_generator/src/serializer_source_library.dart';
-import 'package:built_value_generator/src/value_source_class.dart';
 import 'package:source_gen/source_gen.dart';
+
+import 'src/enum_source_library.dart';
+import 'src/parsed_library_results.dart';
+import 'src/serializer_source_library.dart';
+import 'src/value_source_class.dart';
 
 /// Generator for Enum Class and Built Values.
 ///

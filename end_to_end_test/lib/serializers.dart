@@ -2,20 +2,21 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-library serializers_nnbd;
+library;
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
-import 'package:end_to_end_test/collections.dart';
-import 'package:end_to_end_test/enums.dart';
-import 'package:end_to_end_test/generics.dart';
-import 'package:end_to_end_test/imported_values.dart';
-import 'package:end_to_end_test/interfaces.dart';
-import 'package:end_to_end_test/polymorphism.dart';
-import 'package:end_to_end_test/records.dart';
-import 'package:end_to_end_test/standard_json.dart';
-import 'package:end_to_end_test/values.dart';
+
+import 'collections.dart';
+import 'enums.dart';
+import 'generics.dart';
+import 'imported_values.dart';
+import 'interfaces.dart';
+import 'polymorphism.dart';
+import 'records.dart';
+import 'standard_json.dart';
+import 'values.dart';
 
 part 'serializers.g.dart';
 
@@ -77,12 +78,11 @@ part 'serializers.g.dart';
 final Serializers serializers = _$serializers;
 
 // Check that multiple `Serializers` can be declared in one file.
-@SerializersFor([
-  Cat,
-])
+@SerializersFor([Cat])
 final Serializers moreSerializers = _$moreSerializers;
 
 // Check that generation does not fail due to new type `Never`.
+// ignore: only_throw_errors
 Never get never => throw 'Never!';
 
 // Check that generation does not fail due to new type `Record`.
