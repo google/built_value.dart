@@ -6,7 +6,7 @@ library built_value_generator.source_class;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
@@ -33,11 +33,11 @@ const String _importWithDoubleQuotes =
 abstract class ValueSourceClass
     implements Built<ValueSourceClass, ValueSourceClassBuilder> {
   ParsedLibraryResults get parsedLibraryResults;
-  InterfaceElement2 get element;
+  InterfaceElement get element;
 
   factory ValueSourceClass(
     ParsedLibraryResults parsedLibraryResults,
-    InterfaceElement2 element,
+    InterfaceElement element,
   ) =>
       _$ValueSourceClass._(
         parsedLibraryResults: parsedLibraryResults,
@@ -47,7 +47,7 @@ abstract class ValueSourceClass
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library2);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   @memoized
   String get name => element.displayName;
@@ -55,7 +55,7 @@ abstract class ValueSourceClass
   /// Returns `mixin class` if class modifiers are available, `class` otherwise.
   ///
   /// The two are equivalent as class modifiers change the meaning of `class`.
-  String get _class => LibraryElements.areClassMixinsEnabled(element.library2)
+  String get _class => LibraryElements.areClassMixinsEnabled(element.library)
       ? 'mixin class'
       : 'class';
 
@@ -67,12 +67,12 @@ abstract class ValueSourceClass
       name.startsWith('_') ? '_\$${name.substring(1)}' : '_\$$name';
 
   @memoized
-  ClassElement2? get builderElement {
-    var result = element.library2.getClass2(name + 'Builder');
+  ClassElement? get builderElement {
+    var result = element.library.getClass(name + 'Builder');
     if (result == null) return null;
     // If the builder is in a generated file, then we're analyzing _after_ code
     // generation. Ignore it. This happens when running as an analyzer plugin.
-    if (result.library2.firstFragment.source.fullName.endsWith('.g.dart')) {
+    if (result.library.firstFragment.source.fullName.endsWith('.g.dart')) {
       return null;
     }
     return result;
@@ -80,7 +80,7 @@ abstract class ValueSourceClass
 
   @memoized
   bool get implementsBuilt => element.allSupertypes.any(
-        (interfaceType) => interfaceType.element3.name3 == 'Built',
+        (interfaceType) => interfaceType.element.name == 'Built',
       );
 
   @memoized
@@ -99,18 +99,18 @@ abstract class ValueSourceClass
 
     for (var supertype in [
       element.supertype,
-      ...element.supertype!.element3.allSupertypes,
+      ...element.supertype!.element.allSupertypes,
     ]) {
       if (DartTypes.tryGetName(supertype) == 'Object') continue;
 
       // Base class must be abstract.
-      final superElement = supertype!.element3;
-      if (superElement is! ClassElement2 || !superElement.isAbstract) {
+      final superElement = supertype!.element;
+      if (superElement is! ClassElement || !superElement.isAbstract) {
         return false;
       }
 
       // Base class must have no fields.
-      if (supertype.element3.fields2.any(
+      if (supertype.element.fields.any(
         (field) => !field.isStatic && !field.isSynthetic,
       )) {
         return false;
@@ -124,9 +124,9 @@ abstract class ValueSourceClass
       }
 
       // Base class must not implement operator==, hashCode or toString.
-      if (supertype.element3.getMethod2('hashCode') != null) return false;
-      if (supertype.element3.getMethod2('==') != null) return false;
-      if (supertype.element3.getMethod2('toString') != null) return false;
+      if (supertype.element.getMethod('hashCode') != null) return false;
+      if (supertype.element.getMethod('==') != null) return false;
+      if (supertype.element.getMethod('toString') != null) return false;
     }
 
     return true;
@@ -134,7 +134,7 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltValue get settings {
-    var annotations = element.metadata2.annotations
+    var annotations = element.metadata.annotations
         .map((annotation) => annotation.computeConstantValue())
         .where((value) => DartTypes.tryGetName(value?.type) == 'BuiltValue');
     if (annotations.isEmpty) return const BuiltValue();
@@ -163,11 +163,11 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltList<String> get genericParameters =>
-      BuiltList<String>(element.typeParameters2.map((e) => e.name3));
+      BuiltList<String>(element.typeParameters.map((e) => e.name));
 
   @memoized
   BuiltList<String> get genericBounds => BuiltList<String>(
-        element.typeParameters2.map((element) {
+        element.typeParameters.map((element) {
           var bound = element.bound;
           if (bound == null) return '';
           return DartTypes.getName(bound) +
@@ -192,21 +192,20 @@ abstract class ValueSourceClass
   bool get hasBuilderInitializer => builderInitializer != null;
 
   @memoized
-  MethodElement2? get builderInitializer =>
-      element.getMethod2('_initializeBuilder');
+  MethodElement? get builderInitializer =>
+      element.getMethod('_initializeBuilder');
 
   @memoized
   bool get hasBuilderFinalizer => builderFinalizer != null;
 
   @memoized
-  MethodElement2? get builderFinalizer =>
-      element.getMethod2('_finalizeBuilder');
+  MethodElement? get builderFinalizer => element.getMethod('_finalizeBuilder');
 
   @memoized
   BuiltMap<String, BuiltValueHook> get hooks {
     var result = MapBuilder<String, BuiltValueHook>();
-    for (var method in element.methods2) {
-      var annotations = method.metadata2.annotations
+    for (var method in element.methods) {
+      var annotations = method.metadata.annotations
           .map((annotation) => annotation.computeConstantValue())
           .where(
             (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueHook',
@@ -215,7 +214,7 @@ abstract class ValueSourceClass
       var annotation = annotations.single!;
       // If a field does not exist, that means an old `built_value` version; use
       // the default.
-      result[method.name3!] = BuiltValueHook(
+      result[method.name!] = BuiltValueHook(
         initializeBuilder:
             annotation.getField('initializeBuilder')?.toBoolValue() ?? false,
         finalizeBuilder:
@@ -228,7 +227,7 @@ abstract class ValueSourceClass
   @memoized
   String get builderParameters {
     return builderElement!.allSupertypes
-        .where((interfaceType) => interfaceType.element3.name3 == 'Builder')
+        .where((interfaceType) => interfaceType.element.name == 'Builder')
         .single
         .typeArguments
         .map((type) => DartTypes.getName(type))
@@ -245,11 +244,11 @@ abstract class ValueSourceClass
       );
 
   @memoized
-  String get source => element.library2.firstFragment.source.contents.data;
+  String get source => element.library.firstFragment.source.contents.data;
 
   @memoized
   String get partStatement {
-    var fileName = element.library2.firstFragment.source.shortName.replaceAll(
+    var fileName = element.library.firstFragment.source.shortName.replaceAll(
       '.dart',
       '',
     );
@@ -283,13 +282,13 @@ abstract class ValueSourceClass
   @memoized
   bool get valueClassIsAbstract {
     final element = this.element;
-    return element is ClassElement2 && element.isAbstract;
+    return element is ClassElement && element.isAbstract;
   }
 
   @memoized
   BuiltList<ConstructorDeclaration> get valueClassConstructors =>
       BuiltList<ConstructorDeclaration>(
-        element.constructors2
+        element.constructors
             .where(
               (constructor) =>
                   !constructor.isFactory && !constructor.isSynthetic,
@@ -304,7 +303,7 @@ abstract class ValueSourceClass
   @memoized
   BuiltList<ConstructorDeclaration> get valueClassFactories =>
       BuiltList<ConstructorDeclaration>(
-        element.constructors2.where((constructor) => constructor.isFactory).map(
+        element.constructors.where((constructor) => constructor.isFactory).map(
               (factory) => parsedLibrary
                   .getFragmentDeclaration(factory.firstFragment)!
                   .node as ConstructorDeclaration,
@@ -316,7 +315,7 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltList<String> get builderClassConstructors => BuiltList<String>(
-        builderElement!.constructors2
+        builderElement!.constructors
             .where(
               (constructor) =>
                   !constructor.isFactory && !constructor.isSynthetic,
@@ -331,7 +330,7 @@ abstract class ValueSourceClass
 
   @memoized
   BuiltList<String> get builderClassFactories => BuiltList<String>(
-        builderElement!.constructors2
+        builderElement!.constructors
             .where((constructor) => constructor.isFactory)
             .map(
               (factory) => parsedLibrary
@@ -357,7 +356,7 @@ abstract class ValueSourceClass
           ..add('Builder<$name$_generics, ${name}Builder$_generics>')
           ..addAll(
             element.interfaces
-                .where((interface) => needsBuiltValue(interface.element3))
+                .where((interface) => needsBuiltValue(interface.element))
                 .map(_parentBuilderInterfaceName),
           ),
       );
@@ -368,7 +367,7 @@ abstract class ValueSourceClass
   /// the corresponding builders.
   @memoized
   BuiltList<String> get builderMixins => element.mixins
-      .where((interface) => needsBuiltValue(interface.element3))
+      .where((interface) => needsBuiltValue(interface.element))
       .map(_parentBuilderInterfaceName)
       .toBuiltList();
 
@@ -386,42 +385,42 @@ abstract class ValueSourceClass
 
   @memoized
   bool get implementsHashCode {
-    var getter = element.getGetter2('hashCode');
+    var getter = element.getGetter('hashCode');
     return getter != null && !getter.isAbstract;
   }
 
   @memoized
   bool get declaresMemoizedHashCode {
-    var getter = element.getGetter2('hashCode');
+    var getter = element.getGetter('hashCode');
     return getter != null &&
         getter.isAbstract &&
-        getter.metadata2.annotations.any(
+        getter.metadata.annotations.any(
           (metadata) => metadataToStringValue(metadata) == 'memoized',
         );
   }
 
   @memoized
-  bool get implementsOperatorEquals => element.getMethod2('==') != null;
+  bool get implementsOperatorEquals => element.getMethod('==') != null;
 
   @memoized
   bool get implementsToString {
     // Check for any `toString` implementation apart from the one defined on
     // `Object`.
-    var method = element.lookUpConcreteMethod('toString', element.library2)!;
-    var clazz = method.enclosingElement2;
-    return clazz is! ClassElement2 || clazz.name3 != 'Object';
+    var method = element.lookUpConcreteMethod('toString', element.library)!;
+    var clazz = method.enclosingElement;
+    return clazz is! ClassElement || clazz.name != 'Object';
   }
 
   @memoized
-  LibraryFragment get libraryFragment => element.library2.firstFragment;
+  LibraryFragment get libraryFragment => element.library.firstFragment;
 
-  static bool needsBuiltValue(InterfaceElement2 classElement) {
+  static bool needsBuiltValue(InterfaceElement classElement) {
     // TODO(davidmorgan): more exact type check.
     return !classElement.displayName.startsWith('_\$') &&
         (classElement.allSupertypes.any(
-              (interfaceType) => interfaceType.element3.name3 == 'Built',
+              (interfaceType) => interfaceType.element.name == 'Built',
             ) ||
-            classElement.metadata2.annotations
+            classElement.metadata.annotations
                 .map((annotation) => annotation.computeConstantValue())
                 .any(
                   (value) => DartTypes.tryGetName(value?.type) == 'BuiltValue',
@@ -555,7 +554,7 @@ abstract class ValueSourceClass
       } else {
         var found = false;
         final interfaces = implementsClause.interfaces.map((type) {
-          if (type.name2.lexeme == 'Built') {
+          if (type.name.lexeme == 'Built') {
             found = true;
             return expectedInterface;
           } else {
@@ -586,7 +585,7 @@ abstract class ValueSourceClass
       );
     }
 
-    bool isStaticBuilderHook(MethodElement2 method) {
+    bool isStaticBuilderHook(MethodElement method) {
       return method.isStatic &&
           method.returnType is VoidType &&
           method.formalParameters.length == 1 &&
@@ -656,7 +655,7 @@ abstract class ValueSourceClass
         if (hook.key == '_initializeBuilder') continue;
         if (hook.key == '_finalizeBuilder') continue;
         var method =
-            element.methods2.where((method) => method.name3 == hook.key).single;
+            element.methods.where((method) => method.name == hook.key).single;
         if (!isStaticBuilderHook(method)) {
           result.add(
             GeneratorError(
@@ -1249,7 +1248,7 @@ abstract class ValueSourceClass
         }
         if (field.hasNullableGenericType) {
           genericFields[name] =
-              field.element.getter2!.returnType.element3!.displayName;
+              field.element.getter!.returnType.element!.displayName;
         }
       } else if (!field.isNullable && field.isAutoCreateNestedBuilder) {
         // If not nullable, go via the public accessor, which instantiates

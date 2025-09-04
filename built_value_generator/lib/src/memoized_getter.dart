@@ -1,6 +1,6 @@
 library built_value_generator.memoized_getter;
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
@@ -22,22 +22,22 @@ abstract class MemoizedGetter
   bool get isNullable => nullabilitySuffix == NullabilitySuffix.question;
 
   static Iterable<MemoizedGetter> fromClassElement(
-    InterfaceElement2 classElement,
+    InterfaceElement classElement,
   ) {
-    return classElement.fields2
+    return classElement.fields
         .where(
           (field) =>
-              field.getter2 != null &&
-              !field.getter2!.isAbstract &&
-              field.getter2!.metadata2.annotations.any(
+              field.getter != null &&
+              !field.getter!.isAbstract &&
+              field.getter!.metadata.annotations.any(
                 (metadata) => metadataToStringValue(metadata) == 'memoized',
               ),
         )
         .map(
           (field) => MemoizedGetter(
             (b) => b
-              ..returnType = DartTypes.getName(field.getter2!.returnType)
-              ..nullabilitySuffix = field.getter2!.returnType.nullabilitySuffix
+              ..returnType = DartTypes.getName(field.getter!.returnType)
+              ..nullabilitySuffix = field.getter!.returnType.nullabilitySuffix
               ..name = field.displayName,
           ),
         )

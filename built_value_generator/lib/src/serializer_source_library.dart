@@ -5,7 +5,7 @@
 library built_value_generator.source_library;
 
 import 'package:analyzer/dart/analysis/results.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/parsed_library_results.dart';
@@ -19,11 +19,11 @@ part 'serializer_source_library.g.dart';
 abstract class SerializerSourceLibrary
     implements Built<SerializerSourceLibrary, SerializerSourceLibraryBuilder> {
   ParsedLibraryResults get parsedLibraryResults;
-  LibraryElement2 get element;
+  LibraryElement get element;
 
   factory SerializerSourceLibrary(
     ParsedLibraryResults parsedLibraryResults,
-    LibraryElement2 element,
+    LibraryElement element,
   ) =>
       _$SerializerSourceLibrary._(
         parsedLibraryResults: parsedLibraryResults,
@@ -33,7 +33,7 @@ abstract class SerializerSourceLibrary
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library2);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   @memoized
   bool get hasSerializers => serializersForAnnotations.isNotEmpty;
@@ -43,16 +43,16 @@ abstract class SerializerSourceLibrary
   @memoized
   BuiltMap<String, ElementAnnotation> get serializersForAnnotations {
     var result = MapBuilder<String, ElementAnnotation>();
-    var accessors = element.library2.topLevelVariables
+    var accessors = element.library.topLevelVariables
         .where(
           (element) =>
-              element.getter2 != null &&
-              DartTypes.getName(element.getter2!.returnType) == 'Serializers',
+              element.getter != null &&
+              DartTypes.getName(element.getter!.returnType) == 'Serializers',
         )
         .toList();
 
     for (var accessor in accessors) {
-      final annotations = accessor.metadata2.annotations
+      final annotations = accessor.metadata.annotations
           .where(
             (annotation) =>
                 DartTypes.tryGetName(
@@ -63,7 +63,7 @@ abstract class SerializerSourceLibrary
           .toList();
       if (annotations.isEmpty) continue;
 
-      result[accessor.name3!] = annotations.single;
+      result[accessor.name!] = annotations.single;
     }
 
     return result.build();
@@ -77,13 +77,13 @@ abstract class SerializerSourceLibrary
     var accessors = element.topLevelVariables
         .where(
           (element) =>
-              element.getter2 != null &&
-              DartTypes.getName(element.getter2!.returnType) != 'Serializers',
+              element.getter != null &&
+              DartTypes.getName(element.getter!.returnType) != 'Serializers',
         )
         .toList();
 
     for (var accessor in accessors) {
-      final annotations = accessor.metadata2.annotations
+      final annotations = accessor.metadata.annotations
           .where(
             (annotation) =>
                 DartTypes.tryGetName(
@@ -94,7 +94,7 @@ abstract class SerializerSourceLibrary
           .toList();
       if (annotations.isEmpty) continue;
 
-      result.add(accessor.name3!);
+      result.add(accessor.name!);
     }
 
     return result.build();
@@ -146,7 +146,7 @@ abstract class SerializerSourceLibrary
         types.map(
           (type) => SerializerSourceClass(
             parsedLibraryResults,
-            type!.element3 as InterfaceElement2,
+            type!.element as InterfaceElement,
           ),
         ),
       );
@@ -240,7 +240,7 @@ abstract class SerializerSourceLibrary
             (serializeForTransitiveClasses[field]!
                     .map(
                       (sourceClass) => sourceClass.generateBuilderFactoryAdders(
-                        element.library2.firstFragment,
+                        element.library.firstFragment,
                       ),
                     )
                     .toList()

@@ -1,12 +1,12 @@
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
 
 /// Common logic between `ValueSourceField` and `SerializerSourceField`.
 mixin FieldMixin {
-  PropertyInducingElement2? get builderElement;
+  PropertyInducingElement? get builderElement;
   ParsedLibraryResult get parsedLibrary;
 
   bool get builderFieldExists => builderElement != null;
@@ -24,7 +24,7 @@ mixin FieldMixin {
 
     // Try to get a resolved type first, it's faster.
     var result = DartTypes.tryGetName(
-      builderElement!.getter2?.returnType,
+      builderElement!.getter?.returnType,
       withNullabilitySuffix: true,
     );
 
@@ -41,10 +41,10 @@ mixin FieldMixin {
 
     if (result != null) return result;
 
-    result = builderElement!.getter2 != null
+    result = builderElement!.getter != null
         ? (parsedLibrary
                 .getFragmentDeclaration(
-                  builderElement!.getter2!.firstFragment,
+                  builderElement!.getter!.firstFragment,
                 )
                 ?.node as MethodDeclaration?)
             ?.returnType

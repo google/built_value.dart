@@ -6,7 +6,7 @@ library built_value_generator.source_field;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
@@ -36,16 +36,16 @@ abstract class ValueSourceField
   BuiltValue get settings;
   @override
   ParsedLibraryResult get parsedLibrary;
-  PropertyInducingElement2 get element;
+  PropertyInducingElement get element;
   @override
-  PropertyInducingElement2? get builderElement;
+  PropertyInducingElement? get builderElement;
 
   factory ValueSourceField(
     ParsedLibraryResults parsedLibraryResults,
     BuiltValue settings,
     ParsedLibraryResult parsedLibrary,
-    PropertyInducingElement2 element,
-    PropertyInducingElement2? builderElement,
+    PropertyInducingElement element,
+    PropertyInducingElement? builderElement,
   ) =>
       _$ValueSourceField._(
         parsedLibraryResults: parsedLibraryResults,
@@ -60,7 +60,7 @@ abstract class ValueSourceField
   String get name => element.displayName;
 
   @memoized
-  String get type => DartTypes.getName(element.getter2!.returnType);
+  String get type => DartTypes.getName(element.getter!.returnType);
 
   @memoized
   bool get isFunctionType => type.contains('(');
@@ -69,7 +69,7 @@ abstract class ValueSourceField
   @memoized
   String get typeWithPrefix {
     var typeFromAst = (parsedLibrary
-                .getFragmentDeclaration(element.getter2!.firstFragment)!
+                .getFragmentDeclaration(element.getter!.firstFragment)!
                 .node as MethodDeclaration)
             .returnType
             ?.toSource() ??
@@ -93,28 +93,28 @@ abstract class ValueSourceField
   /// Returns the type with import prefix if the library fragment matches,
   /// otherwise the type with no import prefix.
   String typeInLibraryFragment(LibraryFragment? libraryFragment) {
-    return libraryFragment == element.library2.firstFragment
+    return libraryFragment == element.library.firstFragment
         ? typeWithPrefix
         : type;
   }
 
   @memoized
-  bool get isGetter => element.getter2 != null && !element.getter2!.isSynthetic;
+  bool get isGetter => element.getter != null && !element.getter!.isSynthetic;
 
   @memoized
-  bool get hasNullableAnnotation => element.getter2!.metadata2.annotations.any(
+  bool get hasNullableAnnotation => element.getter!.metadata.annotations.any(
         (metadata) => metadataToStringValue(metadata) == 'nullable',
       );
 
   @memoized
   bool get hasNullableType =>
-      element.getter2?.returnType.nullabilitySuffix ==
+      element.getter?.returnType.nullabilitySuffix ==
       NullabilitySuffix.question;
 
   @memoized
   bool get hasNullableGenericType =>
-      element.getter2?.returnType is TypeParameterType &&
-      (element.getter2!.returnType as TypeParameterType)
+      element.getter?.returnType is TypeParameterType &&
+      (element.getter!.returnType as TypeParameterType)
               .bound
               .nullabilitySuffix ==
           NullabilitySuffix.question;
@@ -124,7 +124,7 @@ abstract class ValueSourceField
 
   @memoized
   BuiltValueField get builtValueField {
-    var annotations = element.getter2!.metadata2.annotations
+    var annotations = element.getter!.metadata.annotations
         .map((annotation) => annotation.computeConstantValue())
         .where(
           (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueField',
@@ -144,20 +144,20 @@ abstract class ValueSourceField
   @memoized
   bool get builderFieldIsNormalField =>
       builderFieldExists &&
-      builderElement!.getter2 != null &&
-      !builderElement!.getter2!.isAbstract &&
-      builderElement!.getter2!.isSynthetic;
+      builderElement!.getter != null &&
+      !builderElement!.getter!.isAbstract &&
+      builderElement!.getter!.isSynthetic;
 
   @memoized
   bool get builderFieldIsGetterSetterPair =>
       builderFieldExists &&
-      (builderElement!.getter2 != null && builderElement!.setter2 != null);
+      (builderElement!.getter != null && builderElement!.setter != null);
 
   @memoized
   bool get builderFieldIsAbstract =>
       builderFieldExists &&
-      builderElement!.getter2 != null &&
-      builderElement!.getter2!.isAbstract;
+      builderElement!.getter != null &&
+      builderElement!.getter!.isAbstract;
 
   @memoized
   @override
@@ -181,7 +181,7 @@ abstract class ValueSourceField
 
     // Try to get a resolved type first, it's faster.
     var result = DartTypes.tryGetName(
-      builderElement!.setter2?.formalParameters.first.type,
+      builderElement!.setter?.formalParameters.first.type,
       withNullabilitySuffix: true,
     );
 
@@ -198,10 +198,10 @@ abstract class ValueSourceField
     }
 
     if (result == null || result == 'dynamic') {
-      result = builderElement!.setter2 != null
+      result = builderElement!.setter != null
           ? (parsedLibrary
                   .getFragmentDeclaration(
-                    builderElement!.setter2!.firstFragment,
+                    builderElement!.setter!.firstFragment,
                   )
                   ?.node as MethodDeclaration?)
               ?.parameters!
@@ -237,7 +237,7 @@ abstract class ValueSourceField
       return _removeNullabilitySuffix(
         (parsedLibrary
                     .getFragmentDeclaration(
-                      builderElement!.getter2!.firstFragment,
+                      builderElement!.getter!.firstFragment,
                     )!
                     .node as MethodDeclaration)
                 .returnType
@@ -258,7 +258,7 @@ abstract class ValueSourceField
       ? buildElementType
       : _toBuilderType(
           parsedLibraryResults,
-          element.getter2!.returnType,
+          element.getter!.returnType,
           typeInLibraryFragment(libraryFragment),
         );
 
@@ -268,7 +268,7 @@ abstract class ValueSourceField
       : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
           DartTypes.needsNestedBuilder(
             parsedLibraryResults,
-            element.getter2!.returnType,
+            element.getter!.returnType,
           );
 
   @memoized
@@ -280,16 +280,16 @@ abstract class ValueSourceField
     ParsedLibraryResults parsedLibraryResults,
     BuiltValue settings,
     ParsedLibraryResult parsedLibrary,
-    InterfaceElement2 classElement,
-    ClassElement2? builderClassElement,
+    InterfaceElement classElement,
+    ClassElement? builderClassElement,
   ) {
     var result = ListBuilder<ValueSourceField>();
 
     for (var field in collectFields(classElement)) {
       if (!field.isStatic &&
-          field.getter2 != null &&
-          (field.getter2!.isAbstract || field.getter2!.isSynthetic)) {
-        final builderField = builderClassElement?.getField2(field.name3!);
+          field.getter != null &&
+          (field.getter!.isAbstract || field.getter!.isSynthetic)) {
+        final builderField = builderClassElement?.getField(field.name!);
         result.add(
           ValueSourceField(
             parsedLibraryResults,
@@ -409,8 +409,8 @@ abstract class ValueSourceField
 
     if (builderFieldExists &&
         builderFieldIsGetterSetterPair &&
-        (builderElement!.getter2!.isAbstract ^
-            builderElement!.setter2!.isAbstract)) {
+        (builderElement!.getter!.isAbstract ^
+            builderElement!.setter!.isAbstract)) {
       result.add(
         GeneratorError(
           (b) =>

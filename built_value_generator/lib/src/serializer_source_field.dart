@@ -6,7 +6,7 @@ library built_value_generator.source_field;
 
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
@@ -35,16 +35,16 @@ abstract class SerializerSourceField
   BuiltValue get settings;
   @override
   ParsedLibraryResult get parsedLibrary;
-  PropertyInducingElement2 get element;
+  PropertyInducingElement get element;
   @override
-  PropertyInducingElement2? get builderElement;
+  PropertyInducingElement? get builderElement;
 
   factory SerializerSourceField(
     ParsedLibraryResults parsedLibraryResults,
     BuiltValue settings,
     ParsedLibraryResult parsedLibrary,
-    PropertyInducingElement2 element,
-    PropertyInducingElement2? builderElement,
+    PropertyInducingElement element,
+    PropertyInducingElement? builderElement,
   ) =>
       _$SerializerSourceField._(
         parsedLibraryResults: parsedLibraryResults,
@@ -57,14 +57,14 @@ abstract class SerializerSourceField
 
   @memoized
   bool get isSerializable =>
-      element.getter2 != null &&
-      element.getter2!.isAbstract &&
+      element.getter != null &&
+      element.getter!.isAbstract &&
       !element.isStatic &&
       (builtValueField.serialize ?? settings.defaultSerialize);
 
   @memoized
   BuiltValueField get builtValueField {
-    var annotations = element.getter2!.metadata2.annotations
+    var annotations = element.getter!.metadata.annotations
         .map((annotation) => annotation.computeConstantValue())
         .where(
           (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueField',
@@ -82,13 +82,13 @@ abstract class SerializerSourceField
   }
 
   @memoized
-  bool get hasNullableAnnotation => element.getter2!.metadata2.annotations.any(
+  bool get hasNullableAnnotation => element.getter!.metadata.annotations.any(
         (metadata) => metadataToStringValue(metadata) == 'nullable',
       );
 
   @memoized
   bool get hasNullableType =>
-      element.getter2?.returnType.nullabilitySuffix ==
+      element.getter?.returnType.nullabilitySuffix ==
       NullabilitySuffix.question;
 
   @memoized
@@ -105,7 +105,7 @@ abstract class SerializerSourceField
 
   @memoized
   String get typeWithNullabilitySuffix => DartTypes.getName(
-        element.getter2!.returnType,
+        element.getter!.returnType,
         withNullabilitySuffix: true,
       );
 
@@ -118,7 +118,7 @@ abstract class SerializerSourceField
   @memoized
   String get typeWithPrefixAndNullabilitySuffix {
     var declaration =
-        parsedLibrary.getFragmentDeclaration(element.getter2!.firstFragment)!;
+        parsedLibrary.getFragmentDeclaration(element.getter!.firstFragment)!;
     var typeFromAst =
         (declaration.node as MethodDeclaration).returnType?.toString() ??
             'dynamic';
@@ -147,14 +147,14 @@ abstract class SerializerSourceField
   String typeInLibraryFragmentWithNullabilitySuffix(
     LibraryFragment libraryFragment,
   ) {
-    return libraryFragment == element.library2.firstFragment
+    return libraryFragment == element.library.firstFragment
         ? typeWithPrefixAndNullabilitySuffix
         : typeWithNullabilitySuffix;
   }
 
   @memoized
   bool get builderFieldElementIsValid =>
-      (builderElement?.getter2?.isAbstract == false) &&
+      (builderElement?.getter?.isAbstract == false) &&
       !builderElement!.isStatic;
 
   @memoized
@@ -163,12 +163,12 @@ abstract class SerializerSourceField
     // builder is needed. Otherwise, use the same logic as built_value when
     // it decides whether to use a nested builder.
     return builderFieldElementIsValid
-        ? DartTypes.getName(element.getter2!.returnType) !=
-            DartTypes.getName(builderElement!.getter2!.returnType)
+        ? DartTypes.getName(element.getter!.returnType) !=
+            DartTypes.getName(builderElement!.getter!.returnType)
         : (builtValueField.nestedBuilder ?? settings.nestedBuilders) &&
             DartTypes.needsNestedBuilder(
               parsedLibraryResults,
-              element.getter2!.returnType,
+              element.getter!.returnType,
             );
   }
 
@@ -204,11 +204,11 @@ abstract class SerializerSourceField
 
   @memoized
   bool get needsBuilder =>
-      DartTypes.getName(element.getter2!.returnType).contains('<') &&
-      DartTypes.isBuilt(element.getter2!.returnType);
+      DartTypes.getName(element.getter!.returnType).contains('<') &&
+      DartTypes.isBuilt(element.getter!.returnType);
 
   Iterable<String> computeErrors() {
-    if (isSerializable && element.getter2!.returnType is FunctionType) {
+    if (isSerializable && element.getter!.returnType is FunctionType) {
       return [
         'Function fields are not serializable. '
             'Remove "$name" or mark it "@BuiltValueField(serialize: false)".',
@@ -216,7 +216,7 @@ abstract class SerializerSourceField
     }
 
     if (isSerializable &&
-        element.getter2!.returnType is RecordType &&
+        element.getter!.returnType is RecordType &&
         typeWithPrefix.contains('(')) {
       return [
         'Fields declared with record types are not automatically serializable. '

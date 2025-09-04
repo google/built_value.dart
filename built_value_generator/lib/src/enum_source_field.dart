@@ -5,7 +5,7 @@
 library built_value_generator.enum_source_field;
 
 import 'package:analyzer/dart/analysis/results.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 
@@ -16,11 +16,11 @@ part 'enum_source_field.g.dart';
 abstract class EnumSourceField
     implements Built<EnumSourceField, EnumSourceFieldBuilder> {
   ParsedLibraryResult get parsedLibrary;
-  FieldElement2 get element;
+  FieldElement get element;
 
   factory EnumSourceField(
     ParsedLibraryResult parsedLibrary,
-    FieldElement2 element,
+    FieldElement element,
   ) =>
       _$EnumSourceField._(parsedLibrary: parsedLibrary, element: element);
   EnumSourceField._();
@@ -29,11 +29,11 @@ abstract class EnumSourceField
   String get name => element.displayName;
 
   @memoized
-  String? get type => DartTypes.tryGetName(element.getter2?.returnType);
+  String? get type => DartTypes.tryGetName(element.getter?.returnType);
 
   @memoized
   BuiltValueEnumConst get settings {
-    var annotations = element.metadata2.annotations
+    var annotations = element.metadata.annotations
         .map((annotation) => annotation.computeConstantValue())
         .where(
           (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueEnumConst',
@@ -66,13 +66,13 @@ abstract class EnumSourceField
 
   static BuiltList<EnumSourceField> fromClassElement(
     ParsedLibraryResult parsedLibrary,
-    InterfaceElement2 classElement,
+    InterfaceElement classElement,
   ) {
     var result = ListBuilder<EnumSourceField>();
 
     var enumName = classElement.displayName;
-    for (var fieldElement in classElement.fields2) {
-      final type = DartTypes.tryGetName(fieldElement.getter2?.returnType);
+    for (var fieldElement in classElement.fields) {
+      final type = DartTypes.tryGetName(fieldElement.getter?.returnType);
       if (!fieldElement.isSynthetic &&
           (type == enumName || type == 'dynamic')) {
         result.add(EnumSourceField(parsedLibrary, fieldElement));

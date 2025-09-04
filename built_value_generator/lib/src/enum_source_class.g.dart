@@ -10,7 +10,7 @@ class _$EnumSourceClass extends EnumSourceClass {
   @override
   final ParsedLibraryResults parsedLibraryResults;
   @override
-  final InterfaceElement2 element;
+  final InterfaceElement element;
   ParsedLibraryResult? __parsedLibrary;
   String? __name;
   String? __wireName;
@@ -120,9 +120,9 @@ class EnumSourceClassBuilder
   set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
       _$this._parsedLibraryResults = parsedLibraryResults;
 
-  InterfaceElement2? _element;
-  InterfaceElement2? get element => _$this._element;
-  set element(InterfaceElement2? element) => _$this._element = element;
+  InterfaceElement? _element;
+  InterfaceElement? get element => _$this._element;
+  set element(InterfaceElement? element) => _$this._element = element;
 
   EnumSourceClassBuilder();
 

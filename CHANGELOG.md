@@ -1,5 +1,11 @@
 # Changelog
 
+# 8.11.2
+
+- Require `analyzer ^8.0.0`.
+- Allow `built_value_generator` to use `build 4.0.0`.
+- Allow `built_value_generator` to use `source_gen 4.0.0`.
+
 # 8.11.1
 
 - Allow `built_value_generator` to use `analyzer 8.0.0`.
