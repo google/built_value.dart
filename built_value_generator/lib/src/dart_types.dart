@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
@@ -33,14 +33,14 @@ class DartTypes {
     return isBuiltValue(type) &&
         ValueSourceClass(
           parsedLibraryResults,
-          type.element3 as ClassElement2,
+          type.element as ClassElement,
         ).settings.instantiable;
   }
 
   static bool isBuiltValue(DartType type) =>
       type is InterfaceType &&
-      type.element3.allSupertypes.any(
-        (interfaceType) => interfaceType.element3.name3 == 'Built',
+      type.element.allSupertypes.any(
+        (interfaceType) => interfaceType.element.name == 'Built',
       );
 
   static bool isBuiltCollection(DartType type) {
@@ -109,7 +109,7 @@ class DartTypes {
               .where((p) => p.isOptionalNamed || p.isRequiredNamed)
               .map(
                 (p) => '${p.isRequiredNamed ? 'required ' : ''}'
-                    '${getName(p.type)} ${p.name3}',
+                    '${getName(p.type)} ${p.name}',
               )
               .join(', '),
         );
@@ -120,15 +120,15 @@ class DartTypes {
     } else if (dartType is InterfaceType) {
       var typeArguments = dartType.typeArguments;
       if (typeArguments.isEmpty) {
-        return dartType.element3.name3! + suffix;
+        return dartType.element.name! + suffix;
       } else {
         final typeArgumentsStr = typeArguments
             .map((type) => getName(type, withNullabilitySuffix: true))
             .join(', ');
-        return '${dartType.element3.name3}<$typeArgumentsStr>$suffix';
+        return '${dartType.element.name}<$typeArgumentsStr>$suffix';
       }
     } else if (dartType is TypeParameterType) {
-      return dartType.element3.name3! + suffix;
+      return dartType.element.name! + suffix;
     } else if (dartType is RecordType) {
       return dartType.getDisplayString();
     } else if (dartType is VoidType) {

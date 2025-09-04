@@ -5,7 +5,7 @@
 library built_value_generator.enum_source_library;
 
 import 'package:analyzer/dart/analysis/results.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/enum_source_class.dart';
@@ -17,11 +17,11 @@ part 'enum_source_library.g.dart';
 abstract class EnumSourceLibrary
     implements Built<EnumSourceLibrary, EnumSourceLibraryBuilder> {
   ParsedLibraryResults get parsedLibraryResults;
-  LibraryElement2 get element;
+  LibraryElement get element;
 
   factory EnumSourceLibrary(
     ParsedLibraryResults parsedLibraryResults,
-    LibraryElement2 element,
+    LibraryElement element,
   ) =>
       _$EnumSourceLibrary._(
         parsedLibraryResults: parsedLibraryResults,
@@ -31,10 +31,10 @@ abstract class EnumSourceLibrary
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library2);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   @memoized
-  String get name => element.name3!;
+  String get name => element.name!;
 
   @memoized
   String get fileName =>

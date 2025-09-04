@@ -5,7 +5,7 @@
 library built_value_generator.source_class;
 
 import 'package:analyzer/dart/analysis/results.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -24,26 +24,26 @@ part 'serializer_source_class.g.dart';
 abstract class SerializerSourceClass
     implements Built<SerializerSourceClass, SerializerSourceClassBuilder> {
   ParsedLibraryResults get parsedLibraryResults;
-  InterfaceElement2 get element;
+  InterfaceElement get element;
 
-  ClassElement2? get builderElement;
+  ClassElement? get builderElement;
 
   factory SerializerSourceClass(
     ParsedLibraryResults parsedLibraryResults,
-    InterfaceElement2 element,
+    InterfaceElement element,
   ) =>
       _$SerializerSourceClass._(
         parsedLibraryResults: parsedLibraryResults,
         element: element,
         builderElement:
-            element.library2.getClass2(element.displayName + 'Builder'),
+            element.library.getClass(element.displayName + 'Builder'),
       );
 
   SerializerSourceClass._();
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library2);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   // TODO(davidmorgan): share common code in a nicer way.
   @memoized
@@ -56,12 +56,12 @@ abstract class SerializerSourceClass
   @memoized
   BuiltValueSerializer get serializerSettings {
     var serializerFields =
-        element.fields2.where((field) => field.name3 == 'serializer').toList();
+        element.fields.where((field) => field.name == 'serializer').toList();
     if (serializerFields.isEmpty) return const BuiltValueSerializer();
     var serializerField = serializerFields.single;
-    if (serializerField.getter2 == null) return const BuiltValueSerializer();
+    if (serializerField.getter == null) return const BuiltValueSerializer();
 
-    var annotations = serializerField.getter2!.metadata2.annotations
+    var annotations = serializerField.getter!.metadata.annotations
         .map((annotation) => annotation.computeConstantValue())
         .where(
           (value) =>
@@ -85,7 +85,7 @@ abstract class SerializerSourceClass
       EnumSourceClass(parsedLibraryResults, element).settings;
 
   @memoized
-  String get name => element.name3!;
+  String get name => element.name!;
 
   @memoized
   String get wireName {
@@ -101,11 +101,11 @@ abstract class SerializerSourceClass
   @memoized
   String get serializerDeclaration {
     var serializerFields =
-        element.fields2.where((field) => field.name3 == 'serializer').toList();
+        element.fields.where((field) => field.name == 'serializer').toList();
     if (serializerFields.isEmpty) return '';
     var serializerField = serializerFields.single;
     var result = parsedLibrary
-            .getFragmentDeclaration(serializerField.getter2!.firstFragment)
+            .getFragmentDeclaration(serializerField.getter!.firstFragment)
             ?.node
             .toSource() ??
         '';
@@ -121,11 +121,11 @@ abstract class SerializerSourceClass
 
   @memoized
   BuiltList<String> get genericParameters =>
-      BuiltList<String>(element.typeParameters2.map((e) => e.name3!));
+      BuiltList<String>(element.typeParameters.map((e) => e.name!));
 
   @memoized
   BuiltList<String> get genericBounds => BuiltList<String>(
-        element.typeParameters2.map(
+        element.typeParameters.map(
           (element) => DartTypes.tryGetName(element.bound) ?? '',
         ),
       );
@@ -145,25 +145,25 @@ abstract class SerializerSourceClass
   @memoized
   bool get isBuiltValue =>
       element.allSupertypes
-          .map((type) => type.element3.name3!)
+          .map((type) => type.element.name!)
           .any((name) => name.startsWith('Built')) &&
-      !element.name3!.startsWith(r'_$') &&
-      element.fields2.any((field) => field.name3 == 'serializer');
+      !element.name!.startsWith(r'_$') &&
+      element.fields.any((field) => field.name == 'serializer');
 
   // TODO(davidmorgan): better check.
   @memoized
   bool get isEnumClass =>
       element.allSupertypes
-          .map((type) => type.element3.name3)
+          .map((type) => type.element.name)
           .any((name) => name == 'EnumClass') &&
-      !element.name3!.startsWith(r'_$') &&
-      element.fields2.any((field) => field.name3 == 'serializer');
+      !element.name!.startsWith(r'_$') &&
+      element.fields.any((field) => field.name == 'serializer');
 
   @memoized
   BuiltList<SerializerSourceField> get fields {
     var result = ListBuilder<SerializerSourceField>();
     for (var fieldElement in collectFields(element)) {
-      final builderFieldElement = builderElement?.getField2(
+      final builderFieldElement = builderElement?.getField(
         fieldElement.displayName,
       );
       final sourceField = SerializerSourceField(
@@ -199,22 +199,22 @@ abstract class SerializerSourceClass
     var result = initialClasses.toBuilder();
     for (var fieldElement in collectFields(element)) {
       if (fieldElement.isStatic) continue;
-      if (fieldElement.setter2 != null) continue;
+      if (fieldElement.setter != null) continue;
 
       final fieldType = fieldElement.type;
-      final fieldTypeElement = fieldType.element3;
+      final fieldTypeElement = fieldType.element;
 
       // Type is not fully specified, ignore.
-      if (fieldTypeElement is! ClassElement2) continue;
+      if (fieldTypeElement is! ClassElement) continue;
 
       // Also find classes used as generic parameters; for example a field
       // of type List<Foo> means we need to be able to serialize Foo.
       if (fieldType is ParameterizedType) {
         for (final type in fieldType.typeArguments) {
-          final typeElement = type.element3;
+          final typeElement = type.element;
 
           // Type is not fully specified, ignore.
-          if (typeElement is! ClassElement2) continue;
+          if (typeElement is! ClassElement) continue;
 
           final sourceClass = SerializerSourceClass(
             parsedLibraryResults,
@@ -246,7 +246,7 @@ abstract class SerializerSourceClass
   }
 
   @memoized
-  LibraryFragment get libraryFragment => element.library2.firstFragment;
+  LibraryFragment get libraryFragment => element.library.firstFragment;
 
   /// Returns the serializer class name for the generated implementation.
   @memoized
@@ -386,14 +386,14 @@ class $serializerImplName implements StructuredSerializer<$genericName> {
 ''';
     } else if (isEnumClass) {
       final wireNameMapping = BuiltMap<String, Object>.build(
-        (b) => element.fields2
+        (b) => element.fields
             .where((field) => field.isConst && field.isStatic)
             .forEach((field) {
           final enumSourceField = EnumSourceField(parsedLibrary, field);
           if (enumSourceField.settings.wireName != null) {
-            b[field.name3!] = enumSourceField.settings.wireName!;
+            b[field.name!] = enumSourceField.settings.wireName!;
           } else if (enumSourceField.settings.wireNumber != null) {
-            b[field.name3!] = enumSourceField.settings.wireNumber!;
+            b[field.name!] = enumSourceField.settings.wireNumber!;
           }
         }),
       );

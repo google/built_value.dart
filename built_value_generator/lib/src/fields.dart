@@ -4,7 +4,7 @@
 
 import 'dart:collection';
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:built_collection/built_collection.dart';
 
@@ -13,7 +13,7 @@ import 'package:built_collection/built_collection.dart';
 ///
 /// If a field is overridden then just the closest (overriding) field is
 /// returned.
-BuiltList<PropertyInducingElement2> collectFields(InterfaceElement2 element) =>
+BuiltList<PropertyInducingElement> collectFields(InterfaceElement element) =>
     collectFieldsForType(element.thisType);
 
 /// Gets fields, including from interfaces. Fields from interfaces are only
@@ -21,8 +21,8 @@ BuiltList<PropertyInducingElement2> collectFields(InterfaceElement2 element) =>
 ///
 /// If a field is overridden then just the closest (overriding) field is
 /// returned.
-BuiltList<PropertyInducingElement2> collectFieldsForType(InterfaceType type) {
-  var fields = <PropertyInducingElement2>[];
+BuiltList<PropertyInducingElement> collectFieldsForType(InterfaceType type) {
+  var fields = <PropertyInducingElement>[];
   // Add fields from this class before interfaces, so they're added to the set
   // first below. Re-added fields from interfaces are ignored.
   fields.addAll(_fieldElementsForType(type));
@@ -33,22 +33,22 @@ BuiltList<PropertyInducingElement2> collectFieldsForType(InterfaceType type) {
 
   // Overridden fields have multiple declarations, so deduplicate by adding
   // to a set that compares on field name.
-  var fieldSet = LinkedHashSet<PropertyInducingElement2>(
+  var fieldSet = LinkedHashSet<PropertyInducingElement>(
     equals: (a, b) => a.displayName == b.displayName,
     hashCode: (a) => a.displayName.hashCode,
   );
   fieldSet.addAll(fields);
 
   // Filter to fields that are not implemented by a mixin.
-  return BuiltList<PropertyInducingElement2>.build(
+  return BuiltList<PropertyInducingElement>.build(
     (b) => b
       ..addAll(fieldSet)
       ..where(
         (field) =>
             type
-                .lookUpGetter3(
-                  field.name3!,
-                  field.library2,
+                .lookUpGetter(
+                  field.name!,
+                  field.library,
                   inherited: true,
                   concrete: true,
                 )
@@ -58,10 +58,10 @@ BuiltList<PropertyInducingElement2> collectFieldsForType(InterfaceType type) {
   );
 }
 
-BuiltList<PropertyInducingElement2> _fieldElementsForType(InterfaceType type) {
-  var result = ListBuilder<PropertyInducingElement2>();
+BuiltList<PropertyInducingElement> _fieldElementsForType(InterfaceType type) {
+  var result = ListBuilder<PropertyInducingElement>();
   for (var accessor in type.getters) {
-    result.add(accessor.variable3!);
+    result.add(accessor.variable);
   }
   return result.build();
 }

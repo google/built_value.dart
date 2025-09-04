@@ -10,7 +10,7 @@ class _$EnumSourceField extends EnumSourceField {
   @override
   final ParsedLibraryResult parsedLibrary;
   @override
-  final FieldElement2 element;
+  final FieldElement element;
   String? __name;
   String? __type;
   bool ___type = false;
@@ -91,9 +91,9 @@ class EnumSourceFieldBuilder
   set parsedLibrary(ParsedLibraryResult? parsedLibrary) =>
       _$this._parsedLibrary = parsedLibrary;
 
-  FieldElement2? _element;
-  FieldElement2? get element => _$this._element;
-  set element(FieldElement2? element) => _$this._element = element;
+  FieldElement? _element;
+  FieldElement? get element => _$this._element;
+  set element(FieldElement? element) => _$this._element = element;
 
   EnumSourceFieldBuilder();
 

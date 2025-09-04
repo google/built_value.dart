@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:built_value_generator/src/enum_source_library.dart';
 import 'package:built_value_generator/src/parsed_library_results.dart';
@@ -22,7 +22,7 @@ class BuiltValueGenerator extends Generator {
     var parsedLibraryResults = ParsedLibraryResults();
 
     // Workaround for https://github.com/google/built_value.dart/issues/941.
-    LibraryElement2 libraryElement;
+    LibraryElement libraryElement;
     var attempts = 0;
     while (true) {
       try {

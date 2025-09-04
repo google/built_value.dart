@@ -10,11 +10,11 @@ class _$ValueSourceClass extends ValueSourceClass {
   @override
   final ParsedLibraryResults parsedLibraryResults;
   @override
-  final InterfaceElement2 element;
+  final InterfaceElement element;
   ParsedLibraryResult? __parsedLibrary;
   String? __name;
   String? __implName;
-  ClassElement2? __builderElement;
+  ClassElement? __builderElement;
   bool ___builderElement = false;
   bool? __implementsBuilt;
   bool? __extendsIsAllowed;
@@ -24,10 +24,10 @@ class _$ValueSourceClass extends ValueSourceClass {
   ClassDeclaration? __classDeclaration;
   bool? __hasBuilder;
   bool? __hasBuilderInitializer;
-  MethodElement2? __builderInitializer;
+  MethodElement? __builderInitializer;
   bool ___builderInitializer = false;
   bool? __hasBuilderFinalizer;
-  MethodElement2? __builderFinalizer;
+  MethodElement? __builderFinalizer;
   bool ___builderFinalizer = false;
   BuiltMap<String, BuiltValueHook>? __hooks;
   String? __builderParameters;
@@ -70,7 +70,7 @@ class _$ValueSourceClass extends ValueSourceClass {
   String get implName => __implName ??= super.implName;
 
   @override
-  ClassElement2? get builderElement {
+  ClassElement? get builderElement {
     if (!___builderElement) {
       __builderElement = super.builderElement;
       ___builderElement = true;
@@ -107,7 +107,7 @@ class _$ValueSourceClass extends ValueSourceClass {
       __hasBuilderInitializer ??= super.hasBuilderInitializer;
 
   @override
-  MethodElement2? get builderInitializer {
+  MethodElement? get builderInitializer {
     if (!___builderInitializer) {
       __builderInitializer = super.builderInitializer;
       ___builderInitializer = true;
@@ -120,7 +120,7 @@ class _$ValueSourceClass extends ValueSourceClass {
       __hasBuilderFinalizer ??= super.hasBuilderFinalizer;
 
   @override
-  MethodElement2? get builderFinalizer {
+  MethodElement? get builderFinalizer {
     if (!___builderFinalizer) {
       __builderFinalizer = super.builderFinalizer;
       ___builderFinalizer = true;
@@ -255,9 +255,9 @@ class ValueSourceClassBuilder
   set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
       _$this._parsedLibraryResults = parsedLibraryResults;
 
-  InterfaceElement2? _element;
-  InterfaceElement2? get element => _$this._element;
-  set element(InterfaceElement2? element) => _$this._element = element;
+  InterfaceElement? _element;
+  InterfaceElement? get element => _$this._element;
+  set element(InterfaceElement? element) => _$this._element = element;
 
   ValueSourceClassBuilder();
 

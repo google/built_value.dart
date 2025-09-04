@@ -10,9 +10,9 @@ class _$SerializerSourceClass extends SerializerSourceClass {
   @override
   final ParsedLibraryResults parsedLibraryResults;
   @override
-  final InterfaceElement2 element;
+  final InterfaceElement element;
   @override
-  final ClassElement2? builderElement;
+  final ClassElement? builderElement;
   ParsedLibraryResult? __parsedLibrary;
   BuiltValue? __builtValueSettings;
   bool? __hasBuilder;
@@ -168,13 +168,13 @@ class SerializerSourceClassBuilder
   set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
       _$this._parsedLibraryResults = parsedLibraryResults;
 
-  InterfaceElement2? _element;
-  InterfaceElement2? get element => _$this._element;
-  set element(InterfaceElement2? element) => _$this._element = element;
+  InterfaceElement? _element;
+  InterfaceElement? get element => _$this._element;
+  set element(InterfaceElement? element) => _$this._element = element;
 
-  ClassElement2? _builderElement;
-  ClassElement2? get builderElement => _$this._builderElement;
-  set builderElement(ClassElement2? builderElement) =>
+  ClassElement? _builderElement;
+  ClassElement? get builderElement => _$this._builderElement;
+  set builderElement(ClassElement? builderElement) =>
       _$this._builderElement = builderElement;
 
   SerializerSourceClassBuilder();

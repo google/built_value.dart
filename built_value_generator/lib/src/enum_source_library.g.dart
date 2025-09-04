@@ -10,7 +10,7 @@ class _$EnumSourceLibrary extends EnumSourceLibrary {
   @override
   final ParsedLibraryResults parsedLibraryResults;
   @override
-  final LibraryElement2 element;
+  final LibraryElement element;
   ParsedLibraryResult? __parsedLibrary;
   String? __name;
   String? __fileName;
@@ -84,9 +84,9 @@ class EnumSourceLibraryBuilder
   set parsedLibraryResults(ParsedLibraryResults? parsedLibraryResults) =>
       _$this._parsedLibraryResults = parsedLibraryResults;
 
-  LibraryElement2? _element;
-  LibraryElement2? get element => _$this._element;
-  set element(LibraryElement2? element) => _$this._element = element;
+  LibraryElement? _element;
+  LibraryElement? get element => _$this._element;
+  set element(LibraryElement? element) => _$this._element = element;
 
   EnumSourceLibraryBuilder();
 

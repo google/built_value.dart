@@ -5,7 +5,7 @@
 library built_value_generator.enum_source_class;
 
 import 'package:analyzer/dart/analysis/results.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value_generator/src/dart_types.dart';
@@ -22,11 +22,11 @@ abstract class EnumSourceClass
     implements Built<EnumSourceClass, EnumSourceClassBuilder> {
   ParsedLibraryResults get parsedLibraryResults;
 
-  InterfaceElement2 get element;
+  InterfaceElement get element;
 
   factory EnumSourceClass(
     ParsedLibraryResults parsedLibraryResults,
-    InterfaceElement2 element,
+    InterfaceElement element,
   ) =>
       _$EnumSourceClass._(
         parsedLibraryResults: parsedLibraryResults,
@@ -36,16 +36,16 @@ abstract class EnumSourceClass
 
   @memoized
   ParsedLibraryResult get parsedLibrary =>
-      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library2);
+      parsedLibraryResults.parsedLibraryResultOrThrowingMock(element.library);
 
   @memoized
-  String get name => element.name3!;
+  String get name => element.name!;
 
   /// Returns `mixin` if class modifiers are available, `abstract class`
   /// otherwise.
   ///
   /// The two are equivalent as class modifiers change the meaning of `class`.
-  String get _mixin => LibraryElements.areClassMixinsEnabled(element.library2)
+  String get _mixin => LibraryElements.areClassMixinsEnabled(element.library)
       ? 'mixin'
       : 'abstract class';
 
@@ -54,7 +54,7 @@ abstract class EnumSourceClass
 
   @memoized
   BuiltValueEnum get settings {
-    var annotations = element.metadata2.annotations
+    var annotations = element.metadata.annotations
         .map((annotation) => annotation.computeConstantValue())
         .where(
           (value) => DartTypes.tryGetName(value?.type) == 'BuiltValueEnum',
@@ -69,7 +69,7 @@ abstract class EnumSourceClass
   @memoized
   bool get isAbstract {
     final element = this.element;
-    return element is ClassElement2 && element.isAbstract;
+    return element is ClassElement && element.isAbstract;
   }
 
   @memoized
@@ -78,7 +78,7 @@ abstract class EnumSourceClass
 
   @memoized
   BuiltList<String> get constructors => BuiltList<String>(
-        element.constructors2.map((element) {
+        element.constructors.map((element) {
           final declaration = parsedLibrary.getFragmentDeclaration(
             element.firstFragment,
           );
@@ -88,7 +88,7 @@ abstract class EnumSourceClass
 
   @memoized
   String? get valuesIdentifier {
-    var getter = element.getGetter2('values');
+    var getter = element.getGetter('values');
     if (getter == null) return null;
     var source = parsedLibrary
         .getFragmentDeclaration(getter.firstFragment)!
@@ -104,7 +104,7 @@ abstract class EnumSourceClass
 
   @memoized
   String? get valueOfIdentifier {
-    var getter = element.getMethod2('valueOf');
+    var getter = element.getMethod('valueOf');
     if (getter == null) return null;
     var source = parsedLibrary
         .getFragmentDeclaration(getter.firstFragment)!
@@ -120,9 +120,9 @@ abstract class EnumSourceClass
 
   @memoized
   bool get usesMixin =>
-      element.library2.getClass2(name + 'Mixin') != null ||
-      element.library2.firstFragment.typeAliases2.any(
-        (a) => a.name2 == name + 'Mixin',
+      element.library.getClass(name + 'Mixin') != null ||
+      element.library.firstFragment.typeAliases.any(
+        (a) => a.name == name + 'Mixin',
       );
 
   @memoized
@@ -134,7 +134,7 @@ abstract class EnumSourceClass
     ].nonNulls.toList();
   }
 
-  static bool needsEnumClass(ClassElement2 classElement) {
+  static bool needsEnumClass(ClassElement classElement) {
     // `Object` and mixins return `null` for `supertype`.
     return DartTypes.tryGetName(classElement.supertype) == 'EnumClass';
   }
