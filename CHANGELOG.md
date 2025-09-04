@@ -1,5 +1,16 @@
 # Changelog
 
+# 8.12.0
+
+- Enable `build_runner 2.7.0` "triggers" optimization.
+- `built_value` will now only run in libraries that directly import
+  `package:built_value/built_value.dart` or use an annotation called
+  `@SerializersFor`. Other files will be quickly skipped and show in
+  `build_runner` output as "not triggered" or "skipped".
+- If you need to run `built_value` on other source files, see
+  https://pub.dev/packages/build_config#triggers for how to configure your own
+  additional triggers for `built_value`.
+
 # 8.11.2
 
 - Require `analyzer ^8.0.0`.

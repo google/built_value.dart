@@ -13,3 +13,11 @@ builders:
     auto_apply: dependents
     build_to: cache
     applies_builders: ["source_gen|combining_builder"]
+    defaults:
+      options:
+        run_only_if_triggered: true
+
+triggers:
+  built_value_generator:built_value:
+    - import built_value/built_value.dart
+    - annotation SerializersFor
