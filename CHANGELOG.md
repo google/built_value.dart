@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.12.1
+
+- Allow `analyzer 9.0.0`.
+
 # 8.12.0
 
 - Enable `build_runner 2.7.0` "triggers" optimization.
