@@ -99,6 +99,8 @@ abstract class ValueSourceField
   }
 
   @memoized
+  // TODO(davidmorgan): update when support for analyzer 9 is removed.
+  // ignore: deprecated_member_use
   bool get isGetter => element.getter != null && !element.getter!.isSynthetic;
 
   @memoized
@@ -146,6 +148,8 @@ abstract class ValueSourceField
       builderFieldExists &&
       builderElement!.getter != null &&
       !builderElement!.getter!.isAbstract &&
+      // TODO(davidmorgan): update when support for analyzer 9 is removed.
+      // ignore: deprecated_member_use
       builderElement!.getter!.isSynthetic;
 
   @memoized
@@ -288,6 +292,8 @@ abstract class ValueSourceField
     for (var field in collectFields(classElement)) {
       if (!field.isStatic &&
           field.getter != null &&
+          // TODO(davidmorgan): update when support for analyzer 9 is removed.
+          // ignore: deprecated_member_use
           (field.getter!.isAbstract || field.getter!.isSynthetic)) {
         final builderField = builderClassElement?.getField(field.name!);
         result.add(
