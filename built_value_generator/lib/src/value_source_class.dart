@@ -111,6 +111,8 @@ abstract class ValueSourceClass
 
       // Base class must have no fields.
       if (supertype.element.fields.any(
+        // TODO(davidmorgan): update when support for analyzer 9 is removed.
+        // ignore: deprecated_member_use
         (field) => !field.isStatic && !field.isSynthetic,
       )) {
         return false;
@@ -291,6 +293,8 @@ abstract class ValueSourceClass
         element.constructors
             .where(
               (constructor) =>
+                  // TODO(davidmorgan): update when support for analyzer 9 is removed.
+                  // ignore: deprecated_member_use
                   !constructor.isFactory && !constructor.isSynthetic,
             )
             .map(
@@ -318,6 +322,8 @@ abstract class ValueSourceClass
         builderElement!.constructors
             .where(
               (constructor) =>
+                  // TODO(davidmorgan): update when support for analyzer 9 is removed.
+                  // ignore: deprecated_member_use
                   !constructor.isFactory && !constructor.isSynthetic,
             )
             .map(
@@ -546,6 +552,8 @@ abstract class ValueSourceClass
           GeneratorError(
             (b) => b
               ..message = 'Make class implement $expectedInterface.'
+              // TODO(davidmorgan): update when support for analyzer 8 is removed.
+              // ignore: deprecated_member_use
               ..offset = classDeclaration.leftBracket.offset - 1
               ..length = 0
               ..fix = 'implements $expectedInterface',
@@ -675,6 +683,8 @@ abstract class ValueSourceClass
             (b) => b
               ..message =
                   'Make class have exactly one constructor: $expectedConstructor;'
+              // TODO(davidmorgan): update when support for analyzer 8 is removed.
+              // ignore: deprecated_member_use
               ..offset = classDeclaration.rightBracket.offset
               ..length = 0
               ..fix = '  $expectedConstructor;\n',
@@ -703,6 +713,8 @@ abstract class ValueSourceClass
               (b) => b
                 ..message =
                     'Make class have exactly one constructor: $expectedConstructor;'
+                // TODO(davidmorgan): update when support for analyzer 8 is removed.
+                // ignore: deprecated_member_use
                 ..offset = classDeclaration.rightBracket.offset
                 ..length = 0
                 ..fix = '  $expectedConstructor;\n',
@@ -748,6 +760,8 @@ abstract class ValueSourceClass
               ..message =
                   'Add a factory so your class can be instantiated. Example:\n\n'
                       '$exampleFactory'
+              // TODO(davidmorgan): update when support for analyzer 8 is removed.
+              // ignore: deprecated_member_use
               ..offset = classDeclaration.rightBracket.offset
               ..length = 0
               ..fix = '  $exampleFactory\n',

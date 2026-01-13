@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.12.2
+
+- Allow `analyzer 10.0.0`.
+
 # 8.12.1
 
 - Allow `analyzer 9.0.0`.
