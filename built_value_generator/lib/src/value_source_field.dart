@@ -99,9 +99,8 @@ abstract class ValueSourceField
   }
 
   @memoized
-  // TODO(davidmorgan): update when support for analyzer 9 is removed.
-  // ignore: deprecated_member_use
-  bool get isGetter => element.getter != null && !element.getter!.isSynthetic;
+  bool get isGetter =>
+      element.getter != null && element.getter!.isOriginDeclaration;
 
   @memoized
   bool get hasNullableAnnotation => element.getter!.metadata.annotations.any(
@@ -148,9 +147,7 @@ abstract class ValueSourceField
       builderFieldExists &&
       builderElement!.getter != null &&
       !builderElement!.getter!.isAbstract &&
-      // TODO(davidmorgan): update when support for analyzer 9 is removed.
-      // ignore: deprecated_member_use
-      builderElement!.getter!.isSynthetic;
+      !builderElement!.getter!.isOriginDeclaration;
 
   @memoized
   bool get builderFieldIsGetterSetterPair =>
@@ -292,9 +289,7 @@ abstract class ValueSourceField
     for (var field in collectFields(classElement)) {
       if (!field.isStatic &&
           field.getter != null &&
-          // TODO(davidmorgan): update when support for analyzer 9 is removed.
-          // ignore: deprecated_member_use
-          (field.getter!.isAbstract || field.getter!.isSynthetic)) {
+          (field.getter!.isAbstract || !field.getter!.isOriginDeclaration)) {
         final builderField = builderClassElement?.getField(field.name!);
         result.add(
           ValueSourceField(

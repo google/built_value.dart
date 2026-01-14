@@ -73,9 +73,7 @@ abstract class EnumSourceField
     var enumName = classElement.displayName;
     for (var fieldElement in classElement.fields) {
       final type = DartTypes.tryGetName(fieldElement.getter?.returnType);
-      // TODO(davidmorgan): update when support for analyzer 9 is removed.
-      // ignore: deprecated_member_use
-      if (!fieldElement.isSynthetic &&
+      if (fieldElement.isOriginDeclaration &&
           (type == enumName || type == 'dynamic')) {
         result.add(EnumSourceField(parsedLibrary, fieldElement));
       }

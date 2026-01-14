@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.12.3
+
+- Require `analyzer ^10.0.0`, stop using removed and deprecated methods from
+  earlier versions.
+
 # 8.12.2
 
 - Allow `analyzer 10.0.0`.
