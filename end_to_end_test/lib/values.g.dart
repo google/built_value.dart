@@ -4316,8 +4316,7 @@ class _$FunctionValue extends FunctionValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final dynamic _$dynamicOther = other;
-    return other is FunctionValue && function == _$dynamicOther.function;
+    return other is FunctionValue && function == other.function;
   }
 
   @override
@@ -4400,9 +4399,7 @@ class _$ListOfFunctionValue extends ListOfFunctionValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final dynamic _$dynamicOther = other;
-    return other is ListOfFunctionValue &&
-        functions == _$dynamicOther.functions;
+    return other is ListOfFunctionValue && functions == other.functions;
   }
 
   @override
@@ -7035,21 +7032,19 @@ class _$VariousFunctionsValue extends VariousFunctionsValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final dynamic _$dynamicOther = other;
     return other is VariousFunctionsValue &&
         bareFunction == other.bareFunction &&
-        positionalFunction == _$dynamicOther.positionalFunction &&
-        optionalFunction == _$dynamicOther.optionalFunction &&
-        positionalNamedFunction == _$dynamicOther.positionalNamedFunction &&
-        namedFunction == _$dynamicOther.namedFunction &&
-        requiredNamedFunction == _$dynamicOther.requiredNamedFunction &&
+        positionalFunction == other.positionalFunction &&
+        optionalFunction == other.optionalFunction &&
+        positionalNamedFunction == other.positionalNamedFunction &&
+        namedFunction == other.namedFunction &&
+        requiredNamedFunction == other.requiredNamedFunction &&
         mixinBareFunction == other.mixinBareFunction &&
-        mixinPositionalFunction == _$dynamicOther.mixinPositionalFunction &&
-        mixinOptionalFunction == _$dynamicOther.mixinOptionalFunction &&
-        mixinPositionalNamedFunction ==
-            _$dynamicOther.mixinPositionalNamedFunction &&
-        mixinNamedFunction == _$dynamicOther.mixinNamedFunction &&
-        mixinRequiredNamedFunction == _$dynamicOther.mixinRequiredNamedFunction;
+        mixinPositionalFunction == other.mixinPositionalFunction &&
+        mixinOptionalFunction == other.mixinOptionalFunction &&
+        mixinPositionalNamedFunction == other.mixinPositionalNamedFunction &&
+        mixinNamedFunction == other.mixinNamedFunction &&
+        mixinRequiredNamedFunction == other.mixinRequiredNamedFunction;
   }
 
   @override

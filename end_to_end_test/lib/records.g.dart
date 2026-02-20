@@ -97,8 +97,7 @@ class _$SimpleRecordValue extends SimpleRecordValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final dynamic _$dynamicOther = other;
-    return other is SimpleRecordValue && record == _$dynamicOther.record;
+    return other is SimpleRecordValue && record == other.record;
   }
 
   @override
@@ -225,20 +224,19 @@ class _$ComplexRecordValue extends ComplexRecordValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final dynamic _$dynamicOther = other;
     return other is ComplexRecordValue &&
-        record2 == _$dynamicOther.record2 &&
-        record2p == _$dynamicOther.record2p &&
-        record2n == _$dynamicOther.record2n &&
-        record3 == _$dynamicOther.record3 &&
-        record3p == _$dynamicOther.record3p &&
-        record3n == _$dynamicOther.record3n &&
-        record4 == _$dynamicOther.record4 &&
-        record4p == _$dynamicOther.record4p &&
-        record4n == _$dynamicOther.record4n &&
-        record5 == _$dynamicOther.record5 &&
-        record5p == _$dynamicOther.record5p &&
-        record5n == _$dynamicOther.record5n;
+        record2 == other.record2 &&
+        record2p == other.record2p &&
+        record2n == other.record2n &&
+        record3 == other.record3 &&
+        record3p == other.record3p &&
+        record3n == other.record3n &&
+        record4 == other.record4 &&
+        record4p == other.record4p &&
+        record4n == other.record4n &&
+        record5 == other.record5 &&
+        record5p == other.record5p &&
+        record5n == other.record5n;
   }
 
   @override
@@ -456,11 +454,10 @@ class _$SerializableRecordValue extends SerializableRecordValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    final dynamic _$dynamicOther = other;
     return other is SerializableRecordValue &&
         value == other.value &&
-        record == _$dynamicOther.record &&
-        intOrList == _$dynamicOther.intOrList;
+        record == other.record &&
+        intOrList == other.intOrList;
   }
 
   @override

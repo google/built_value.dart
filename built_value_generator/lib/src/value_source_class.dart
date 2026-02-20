@@ -1354,7 +1354,10 @@ abstract class ValueSourceClass
     result.writeln('bool operator==(Object other) {');
     result.writeln('  if (identical(other, this)) return true;');
 
-    if (comparedFunctionFields.isNotEmpty) {
+    var needsDynamic =
+        comparedFunctionFields.isNotEmpty && genericParameters.isNotEmpty;
+
+    if (needsDynamic) {
       result.writeln('  final dynamic _\$dynamicOther = other;');
     }
     result.writeln('  return other is $name${forBuilder ? 'Builder' : ''}');
@@ -1364,7 +1367,7 @@ abstract class ValueSourceClass
         comparedFields.map((field) {
           var nameOrThisDotName =
               field.name == 'other' ? 'this.other' : field.name;
-          return field.isFunctionType
+          return needsDynamic && field.isFunctionType
               ? '$nameOrThisDotName == _\$dynamicOther.${field.name}'
               : '$nameOrThisDotName == other.${field.name}';
         }).join('&&'),
