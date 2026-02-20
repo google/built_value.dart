@@ -1,5 +1,10 @@
 # Changelog
 
+# 8.12.4
+
+- Reduce use of dynamic calls in generated `operator==` when there are
+  functions: only use dynamic calls if the class also has type parameters.
+
 # 8.12.3
 
 - Require `analyzer ^10.0.0`, stop using removed and deprecated methods from
