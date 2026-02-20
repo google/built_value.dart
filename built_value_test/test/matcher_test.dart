@@ -103,7 +103,14 @@ void main() {
         ..name = 'foo'
         ..onChanged = () => 'Change happened!');
 
-      expect(value, otherValue);
+      expect(value, isNot(equalsBuilt(otherValue)));
+      expect(
+        value,
+        equalsBuilt(
+          otherValue,
+          onlyCheckComparable: true,
+        ),
+      );
     });
 
     test('compared value matcher with different onChanged outcomes', () {
@@ -114,7 +121,14 @@ void main() {
         ..name = 'foo'
         ..onChanged = () => 'Change did not happen!');
 
-      expect(value, otherValue);
+      expect(value, isNot(equalsBuilt(otherValue)));
+      expect(
+        value,
+        equalsBuilt(
+          otherValue,
+          onlyCheckComparable: true,
+        ),
+      );
     });
 
     test('compared value matcher with different names', () {
