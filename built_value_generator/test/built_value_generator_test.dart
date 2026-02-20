@@ -880,6 +880,37 @@ abstract class NestedValue implements Built<NestedValue, NestedValueBuilder> {
               '1. Make builder field nestedValue have `nestedBuilder: false` in order to use `comparableBuilders: true`.'));
     });
 
+    test('uses dynamic for equality check on function fields with generics',
+        () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value<T> implements Built<Value<T>, ValueBuilder<T>> {
+  Value._();
+  factory Value([void Function(ValueBuilder<T>) updates]) = _\$Value<T>;
+  void Function(T) get callback;
+}
+'''),
+          contains(r'final dynamic _$dynamicOther = other;'));
+    });
+
+    test(
+        'does not use dynamic for equality check on function fields without generics',
+        () async {
+      expect(
+          await generate('''library value;
+import 'package:built_value/built_value.dart';
+part 'value.g.dart';
+abstract class Value implements Built<Value, ValueBuilder> {
+  Value._();
+  factory Value([void Function(ValueBuilder) updates]) = _\$Value;
+  void Function(int) get callback;
+}
+'''),
+          isNot(contains(r'dynamicOther')));
+    });
+
     test('cleans generated class names for private classes', () async {
       expect(
           await generate('''library value;
