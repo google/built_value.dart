@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.12.5
+
+- Allow `analyzer 11.0.0` and `analyzer 12.0.0`.
+
 # 8.12.4
 
 - Reduce use of dynamic calls in generated `operator==` when there are
