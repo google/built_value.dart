@@ -593,13 +593,13 @@ abstract class ValueSourceClass
               .getFragmentDeclaration(
                 method.formalParameters[0].firstFragment,
               )!
-              .node is SimpleFormalParameter &&
+              .node is RegularFormalParameter &&
           DartTypes.stripGenerics(
                 (parsedLibrary
                         .getFragmentDeclaration(
                           method.formalParameters[0].firstFragment,
                         )!
-                        .node as SimpleFormalParameter)
+                        .node as RegularFormalParameter)
                     .type!
                     .toSource(),
               ) ==
