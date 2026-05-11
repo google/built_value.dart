@@ -9,8 +9,12 @@ import 'package:matcher/matcher.dart';
 /// Returns a matcher that matches if the value is structurally equal to
 /// [expected].
 ///
+/// When [onlyCheckComparable] fields that are not comparable are ignored for
+/// the equality check.
+///
 /// Improves on a simple equality test by offering a detailed mismatch message.
-Matcher equalsBuilt(Built expected) => _BuiltValueMatcher(expected);
+Matcher equalsBuilt(Built expected, {bool onlyCheckComparable = false}) =>
+    _BuiltValueMatcher(expected, onlyCheckComparable);
 
 /// Matcher for [Built] instances.
 ///
@@ -19,8 +23,10 @@ Matcher equalsBuilt(Built expected) => _BuiltValueMatcher(expected);
 class _BuiltValueMatcher implements Matcher {
   final Built _expected;
   final Matcher _delegate;
+  final bool _onlyCheckComparable;
 
-  _BuiltValueMatcher(this._expected) : _delegate = equals(_toMap(_expected));
+  _BuiltValueMatcher(this._expected, this._onlyCheckComparable)
+      : _delegate = equals(_toMap(_expected));
 
   @override
   Description describe(Description description) =>
@@ -40,6 +46,8 @@ class _BuiltValueMatcher implements Matcher {
   @override
   bool matches(dynamic item, Map matchState) {
     if (_expected.runtimeType != item.runtimeType) return false;
+
+    if (_onlyCheckComparable && _expected == item) return true;
 
     return _delegate.matches(_toMap(item), matchState);
   }
