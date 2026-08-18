@@ -1,5 +1,9 @@
 # Changelog
 
+# 8.12.8
+
+- Support generating from classes using primary constructors.
+
 # 8.12.7
 
 - Allow `analyzer 13.0.0` and `analyzer 14.0.0`
@@ -200,7 +204,7 @@
 
 # 8.3.1
 
-- Fix generation support for optional generic bounds, e.g. 
+- Fix generation support for optional generic bounds, e.g.
   `class Foo<T extends Object?>`.
 - Fix generation for classes with names starting `$`.
 - Ignore lint `unnecessary_lambdas` in generated code.

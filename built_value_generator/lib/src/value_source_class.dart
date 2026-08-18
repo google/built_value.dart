@@ -669,6 +669,11 @@ abstract class ValueSourceClass
       }
 
       final expectedConstructor = '$name._()';
+      bool constructorCheck(ConstructorDeclaration c) {
+        final check = c.typeName != null ? expectedConstructor : '_()';
+        return c.toSource().contains(check);
+      }
+
       if (valueClassConstructors.isEmpty) {
         result.add(
           GeneratorError(
@@ -683,7 +688,7 @@ abstract class ValueSourceClass
       } else if (valueClassConstructors.length > 1) {
         var found = false;
         for (var constructor in valueClassConstructors) {
-          if (constructor.toSource().contains(expectedConstructor)) {
+          if (constructorCheck(constructor)) {
             found = true;
           } else {
             result.add(
@@ -709,9 +714,7 @@ abstract class ValueSourceClass
             ),
           );
         }
-      } else if (!(valueClassConstructors.single.toSource().contains(
-            expectedConstructor,
-          ))) {
+      } else if (!constructorCheck(valueClassConstructors.single)) {
         result.add(
           GeneratorError(
             (b) => b
