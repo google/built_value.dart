@@ -103,8 +103,8 @@ class StandardJsonPlugin implements SerializerPlugin {
   Map _toMapWithDiscriminator(List list) {
     var type = list[0];
 
-    if (type == 'list') {
-      // Embed the list in the map.
+    if (type == 'list' || type == 'set') {
+      // Embed the list or set in the map.
       return <String, Object>{discriminator: type, valueKey: list.sublist(1)};
     }
 
@@ -181,7 +181,7 @@ class StandardJsonPlugin implements SerializerPlugin {
           'Need either specifiedType or discriminator field.');
     }
 
-    if (type == 'list') {
+    if (type == 'list' || type == 'set') {
       return [type, ...(map[valueKey] as Iterable)];
     }
 

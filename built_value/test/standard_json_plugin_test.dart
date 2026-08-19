@@ -254,6 +254,26 @@ void main() {
         });
       });
 
+      group('can take a set and', () {
+        final data = BuiltSet<int>([1, 2, 3]);
+        final serialized = {
+          r'$': 'set',
+          '': [
+            {r'$': 'int', '': 1},
+            {r'$': 'int', '': 2},
+            {r'$': 'int', '': 3}
+          ]
+        };
+
+        test('serialize it', () {
+          expect(serializers.serialize(data), serialized);
+        });
+
+        test('deserialize it', () {
+          expect(serializers.deserialize(serialized), data);
+        });
+      });
+
       group('can take a nested list and', () {
         final data = BuiltList<BuiltList<int>>([
           BuiltList<int>([1, 2, 3]),
