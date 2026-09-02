@@ -1,6 +1,6 @@
 # Changelog
 
-## 8.12.8-wip
+## 8.13.0
 
 - Support generating from classes and enums that use the `new` syntax for
   constructors.
