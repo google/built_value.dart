@@ -18,7 +18,7 @@ abstract class Built<V extends Built<V, B>, B extends Builder<V, B>> {
   ///
   /// The implementation of this method will be generated for you by the
   /// built_value generator.
-  V rebuild(Function(B) updates);
+  V rebuild(void Function(B) updates);
 
   /// Converts the instance to a builder [B].
   ///
